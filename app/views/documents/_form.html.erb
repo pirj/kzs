@@ -41,7 +41,7 @@
 	
 	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема письма' %>
 	
-	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:400px', :'data-placeholder' => "Организация-получатель"}) %>
+	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Организация-получатель"}) %>
 	<%= f.collection_select(:approver_id, @approvers, :id, :first_name_with_last_name) %>
 	<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name, :prompt => t('choose_executor')) %>
 	

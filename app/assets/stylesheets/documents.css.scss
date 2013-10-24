@@ -287,6 +287,7 @@ display: inline-block;
 .exp_type{
 	text-transform: uppercase;
 	font-weight: bold;
+	font-size: 11px;
 	font-family: 'open_sanssemibold';
 	letter-spacing: -1px;
 }
@@ -343,6 +344,9 @@ display: inline-block;
 .tab_right{
 	float: right;
 	text-align: right;
+	& span{
+		min-width: 80px;
+	}
 }
 tr {
 	border-bottom: 1px solid #ccc;
