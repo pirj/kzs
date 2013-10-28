@@ -3,9 +3,10 @@ class Document < ActiveRecord::Base
                   :title, :user_id, :approver_id, :opened, :for_approve, 
                   :deleted, :archived, :callback, :prepared, :document_type,
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
-                  :document_ids, :organization_ids, :document_attachments, :document_conversation_id, :sender_organization_id
+                  :document_ids, :organization_ids, :document_attachments, 
+                  :document_conversation_id, :sender_organization_id, :executor_ids, :approver_ids
                   
-  attr_accessor :organization_ids
+  attr_accessor :organization_ids, :executor_ids, :approver_ids
                   
   belongs_to :project
   belongs_to :document_conversation

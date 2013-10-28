@@ -21,8 +21,8 @@
 
 	<div class="btn-toolbar">
 			<%= link_to "Назад", :back, :class => "btn" %>
-			<%= link_to "Шаблоны", "#", :class => "btn" %>
-			<%= link_to "Черновики", drafts_documents_path, :class => "btn" %>
+      <!-- <%= link_to "Шаблоны", "#", :class => "btn" %>
+      <%= link_to "Черновики", drafts_documents_path, :class => "btn" %> -->
 	</div>
 	
 	<%= form_for(@document) do |f| %>
@@ -41,15 +41,12 @@
 	
 	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема письма' %>
 	
-	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Организация-получатель"}) %>
-	<%= f.collection_select(:approver_id, @approvers, :id, :first_name_with_last_name) %>
-	<%= f.collection_select(:executor_id, @executors.all, :id, :first_name_with_last_name, :prompt => t('choose_executor')) %>
+	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px;', :'data-placeholder' => "Организация-получатель"}) %>
+	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Контрольное-лицо"}) %>
+	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>
+	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
 	
-	
-	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Организация-получатель' %> -->
-	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Контрольное-лицо' %> -->
-	<!-- <%= f.text_field :title, :class => 'input-xxlarge lupe', :placeholder => 'Исполнитель' %> -->
-	<%= f.text_area :title, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
+	<%= render 'actions_form', :f => f %>
 
 	<% end %>
 </div>

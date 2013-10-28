@@ -153,6 +153,8 @@ class DocumentsController < ApplicationController
       document.organization_id = organization
       document.user_id = current_user.id
       document.sender_organization_id = current_user.organization_id
+      document.executor_id = params[:document][:executor_ids].second
+      document.approver_id = params[:document][:approver_ids].second
       if params[:prepare]
         document.prepared = true
         document.draft = false
@@ -165,6 +167,8 @@ class DocumentsController < ApplicationController
   def update
     @document = Document.find(params[:id])
     @document.user_id = current_user.id
+    @document.executor_id = params[:document][:executor_ids].second
+    @document.approver_id = params[:document][:approver_ids].second
     
     if params[:prepare]
       @document.prepared = true
