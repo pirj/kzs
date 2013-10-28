@@ -5,3 +5,32 @@
 .chosen-container-multi .chosen-choices {
 	background: none;
 }
+
+.chosen-container-multi .chosen-choices {
+  border: 1px solid #cccccc;
+/*  background-color: #fff;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: -o-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);*/
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  margin: 1px 0;
+  padding: 5px;
+  height: 15px;
+  outline: 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none;
+  color: #999999;
+  font-size: 14px;
+  font-family: "open_sansregular", "Segoe WP", "Helvetica Neue", sans-serif;
+  line-height: normal;
+  border-radius: 0;
+}
+
+.chosen-container-multi .chosen-choices li.search-field .default {
+  color: #999999;
+}
