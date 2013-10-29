@@ -64,6 +64,9 @@ ru:
         one: "Группа"
         other: "Группы"
       vehicle: "ТС"
+      permit:
+        one: "Пропуск"
+        other: "Пропуска"
     attributes:
       user:
         first_name: "Имя"
