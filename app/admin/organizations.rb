@@ -15,6 +15,11 @@ ActiveAdmin.register Organization do
      end
 
      form do |f|  
+       f.inputs t('required_fields') do
+         f.input :short_title
+         f.input :inn
+         f.input :admin_id, :as => :select, :collection => User.all
+       end
        f.inputs t('properties') do
          f.input :title
          f.input :parent_id, :as => :select, :collection => Organization.all
@@ -29,6 +34,11 @@ ActiveAdmin.register Organization do
 
     show do
       attributes_table do
+        row :short_title
+        row :inn
+        row :admin_id do |row|
+          User.find(row.admin_id).first_name_with_last_name
+        end
         row :title
         row :parent_id
         row :logo do |row|

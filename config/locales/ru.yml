@@ -41,6 +41,7 @@ ru:
   documents_updated: "Документы изменены"
   only_mails_from_other_organizations_could_be_answered: "Отвечать можно только на письма из сторонних организаций"
   approved_document_couldnt_be_edited: "Подписанные документы нельзя редактировать"
+  required_fields: "Обязательные поля"
   activerecord:
     models: 
       permission:
@@ -78,7 +79,11 @@ ru:
         title: "Название"  
         permissions: "Права"
       organization:
-        title: "Название"
+        title: "Полное название"
+        short_title: "Краткое название"
+        inn: "ИНН"
+        admin_id: "Администратор"
+        admin: "Администратор"
         parent_id: "Руководящая организация"
         logo: "Логотип"
         address: "Адрес"
