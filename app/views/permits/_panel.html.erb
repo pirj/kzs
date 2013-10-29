@@ -2,12 +2,25 @@
 
 <% if current_user.has_permission?(6) %>
 <div class="btn-group">	
-	<%= link_to "Создать заявку на пропуск", new_permit_path, :class=> "btn btn-success" %>	
+	<%= link_to "Новая заявка", new_permit_path, :class=> "btn btn-success" %>	
 </div>
 <% end %>
 
 <div class="btn-group">	
-	<a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('refresh.png') %></a>
+	<%= link_to "Текущие заявки", new_permit_path, :class=> "btn btn-primary" %>	
 </div>
+
+<div class="btn-group">	
+	<%= link_to "Все пропуска организации", new_permit_path, :class=> "btn btn-disabled" %>	
+</div>
+
+<div class="btn-group">	
+	<%= link_to "Просроченные", new_permit_path, :class=> "btn btn-disabled" %>	
+</div>
+
+
+<!-- <div class="btn-group">  
+  <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('refresh.png') %></a>
+</div> -->
 
 </div>
