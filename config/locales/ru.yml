@@ -45,6 +45,10 @@ ru:
   special_car: "Спец. техника"
   truck: "Грузовой автомобиль"
   passenger_car: "Легковой автомобиль"
+  user: "Сотрудник"
+  vehicle: "ТС"
+  standart: "Стандартный"
+  vip: "VIP"
   activerecord:
     models: 
       permission:
@@ -116,3 +120,11 @@ ru:
         vehicle_body: "Тип ТС"
         register_document: "Номер свидетельства регистрации"
         register_sn: "Госудраственной регистрационный номер"
+      permit:
+        number: "Номер"
+        permit_type: "Тип пропуска"
+        permit_class: "Класс пропуска"
+        user_id: "Сотрудник"
+        vehicle_id: "ТС"
+        start_date: "Дата выпуска"
+        expiration_date: "Дата окончания"
