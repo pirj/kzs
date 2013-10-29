@@ -16,11 +16,21 @@ ActiveAdmin.register User do
    end
 
    form do |f|  
-     f.inputs t('properties') do
+     f.inputs t('required_fields') do
        f.input :username
+       f.input :password
+       f.input :password_confirmation
        f.input :first_name
-       f.input :last_name
        f.input :middle_name
+       f.input :last_name
+       f.input :id_type
+       f.input :id_sn
+       f.input :id_issue_date
+       f.input :id_issuer
+     end
+     
+     f.inputs t('properties') do
+       f.input :alt_name
        f.input :phone, :as => :string
        f.input :position
        f.input :division
@@ -29,10 +39,7 @@ ActiveAdmin.register User do
        f.input :email
        f.input :organization_id, :as => :select, :collection => Organization.all
        f.input :work_status, :as => :select, :collection => User::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
-       f.input :password
-       f.input :password_confirmation
        f.input :groups, :as => :check_boxes
-       
      end
      f.actions
    end

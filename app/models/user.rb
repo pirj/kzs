@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
                   :work_status, :organization_id, :email, :password, :password_confirmation, 
                   :avatar, :first_name, :last_name, :middle_name, :username, :right_ids, :remember_me,
-                  :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids
+                  :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids,
+                  :id_type, :id_sn, :id_issue_date, :id_issuer, :alt_name
                   
   has_many :user_permissions
   has_many :permissions, through: :user_permissions, :uniq => true
@@ -24,8 +25,8 @@ class User < ActiveRecord::Base
                               
   WORK_STATUSES = %w[at_work ooo]
   
-  validates :username, :first_name, :last_name, :middle_name, :phone, :position,
-            :division, :dob, :organization_id, :work_status, :presence => true
+  validates :username, :first_name, :last_name, :middle_name,
+            :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
             
   validates :username, uniqueness: true
   

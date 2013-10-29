@@ -42,6 +42,9 @@ ru:
   only_mails_from_other_organizations_could_be_answered: "Отвечать можно только на письма из сторонних организаций"
   approved_document_couldnt_be_edited: "Подписанные документы нельзя редактировать"
   required_fields: "Обязательные поля"
+  special_car: "Спец. техника"
+  truck: "Грузовой автомобиль"
+  passenger_car: "Легковой автомобиль"
   activerecord:
     models: 
       permission:
@@ -56,6 +59,7 @@ ru:
       group:
         one: "Группа"
         other: "Группы"
+      vehicle: "ТС"
     attributes:
       user:
         first_name: "Имя"
@@ -68,10 +72,16 @@ ru:
         avatar: "Фото"
         organization_id: "Организация"
         work_status: "Статус работы"
+        usernamr: "Системное имя"
         permissions: "Права"
         groups: "Группы"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
+        id_type: "Тип документа"
+        id_sn: "Номер документа"
+        id_issue_date: "Дата выдачи докумета"
+        id_issuer: "Организация выдавшая документ"
+        alt_name: "Альтернативное имя"
       permission:
         title: "Название"
         description: "Описание"
@@ -100,3 +110,9 @@ ru:
         granted_area: "Сектор зоны действия"
         granted_object: "Объект посещения"
         permit_type: "Тип пропуска"
+      vehicle:
+        brand: "Марка"
+        model: "Модель"
+        vehicle_body: "Тип ТС"
+        register_document: "Номер свидетельства регистрации"
+        register_sn: "Госудраственной регистрационный номер"
