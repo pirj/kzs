@@ -2,3 +2,19 @@
 .table-striped tbody > tr:nth-child(even) > th {
   background-color: #f9f9f9;
 }
+
+.control.radio .radio-label {
+  padding-left: 30px;
+}
+
+.radio {
+	padding-left: 0px;
+}
+
+.control.radio .radio-label:before {
+	border: 2px #1abc9c solid;
+}
+
+.control.radio input[type="radio"]:checked ~ .radio-label:after {
+  background-color: #e6737e;
+}

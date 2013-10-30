@@ -1,20 +1,60 @@
-
+  
+  
+  <label class="control radio">
+    <%= f.radio_button :permit_type, "user", :checked => true  %>
+    <span id="user_type" class="radio-label">Для сотрудника</span>
+  </label>
+  
+  <label class="control radio">
+    <%= f.radio_button :permit_type, "vehicle"  %>
+    <span id="vehicle_type" class="radio-label">на транспортное средство</span>
+  </label>
+  
+  <div id="permit_user_fields">
+  <h3>1. Личные данные</h3>
+  <%= f.collection_select(:user_id, User.all, :id, :first_name_with_last_name, { include_blank: true }) %>
+  </div>
+  
+  <div id="permit_vehicle_fields">
+  <h3>1. Данные техсредства</h3>
+  <%= f.fields_for :vehicle do |v| %>
+    Тип <%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
+    Марка<%= v.collection_select(:brand, CarBrand.all, :title, :title) %>
+  <% end %>
+  </div>
+  
+  <h3>2. Условия посещения</h3>
+  
+  <label class="control radio">
+    <input type="radio" name="radio" checked="checked">
+    <span id="permanent" class="radio-label">постоянный пропуск</span>
+  </label>
+  
+  <label class="control radio">
+    <input type="radio" name="radio">
+    <span id="temporary" class="radio-label">разовый пропуск</span>
+  </label>
+  
   <div class="control-group">
 	  <div class="controls">
-		<%= f.text_field :number, :placeholder => 'номер' %>
-		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+		
+		<div id="permanent_fields">
+		Пропуск действителен с <%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала' %>
+		по <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
+		</div>
+		
+		<div id="temoporary_fields">
+		Пропуск действителен <%= f.text_field :date, :placeholder => 'Дата' %>
+		</div>
+		
+		
+		
+		
+		
 		<br>
-		<%= f.text_field :start_date, :placeholder => 'начало действия' %>
-		<%= f.text_field :expiration_date, :placeholder => 'окончание действия' %>
-		
-		
-		
-		<%= label_tag "Тип пропуска" %>
-		<%= f.select(:permit_type, Permit::TYPES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
-		
-    <%= f.collection_select(:user_id, User.all, :id, :first_name_with_last_name) %>
-    <%= f.collection_select(:vehicle_id, Vehicle.all, :id, :vehicle_title) %>
-    
+		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+
+    <!-- <%= f.text_field :number, :placeholder => 'номер пропуска' %> -->
 	  </div>
 	</div>
 

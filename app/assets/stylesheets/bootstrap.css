@@ -896,9 +896,9 @@ input[type="color"],
   font-size: 14px;
   line-height: 25px;
   color: #555555;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   vertical-align: middle;
 }
 input,
@@ -5030,7 +5030,7 @@ a.badge:hover {
 .hero-unit {
   padding: 20px;
   margin-bottom: 30px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 200;
   line-height: 37.5px;
   color: inherit;

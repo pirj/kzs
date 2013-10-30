@@ -20,6 +20,21 @@ namespace :csv do
   end
 end
 
+namespace :csv do
+  desc "Import car brans"
+  task :import_car_brands => :environment do
+    CarBrand.destroy_all
+    CarBrand.reset_pk_sequence
+    csv_file_path = 'db/car_brands.csv'
+    CSV.foreach(csv_file_path) do |row|
+      row = CarBrand.create!({
+        :title => row[0]      
+      })
+      puts "Car brands imported!"
+    end
+  end
+end
+
 namespace :users do
   task :create => :environment do
     User.destroy_all

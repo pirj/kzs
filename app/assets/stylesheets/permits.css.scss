@@ -2,6 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#permit_user_id, #permit_vehicle_id {
+#permit_vehicle_id, #temoporary_fields, #permit_vehicle_fields {
 	display: none;
+}
+
+#permit_start_date {
+	width: 103px;
+	font-size: 13px;
+	text-indent: 6px;
+}
+
+#permit_expiration_date {
+	width: 130px;
+	font-size: 13px;
+	text-indent: 8px;
+}
+
+#permit_date {
+	width: 80px;
+	font-size: 13px;
+	text-indent: 6px;
 }
