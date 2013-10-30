@@ -1,23 +1,50 @@
-<h2>Заявка на новый пропуск</h2>
+<div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		<%= render 'shared/user' %>
+		<h1 class="doc_header">Новый пропуск<span class="caret"></span></h1>
+		
+		  <div class="btn-toolbar">
 
-<%= form_for @permit do |f| %>
+        <div class="btn-group">	
+        	<%= link_to "Шаблоны", "#", :class=> "btn btn-disabled" %>	
+        </div>
 
-  <% if @permit.errors.any? %>
-    <div id="error_explanation">
-      <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
-      <ul>
-      <% @permit.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <div class="btn-group">	
+        	<%= link_to "Черновики", "#", :class=> "btn btn-disabled" %>	
+        </div>
+
+      </div>
+      
+      <%= form_for @permit do |f| %>
+
+        <% if @permit.errors.any? %>
+          <div id="error_explanation">
+            <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
+            <ul>
+            <% @permit.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= render 'permit_form_fields', f: f %>
+
+
+
+          <%= f.submit 'На подпись', :class => 'btn btn-success' %>
+          <%= f.submit 'Сохранить в черновики', :class => 'btn btn-disabled' %>
+          <%= link_to "Отмена", :back, :class => 'btn btn-disabled' %>
+
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+		
+		
+	</div>
+	
+	
+</div>
 
-  <%= render 'permit_form_fields', f: f %>
 
 
-  <div class="actions">
-    <%= f.submit 'Создать', :class => 'btn btn-primary' %>
-  </div>
 
-<% end %>

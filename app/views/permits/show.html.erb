@@ -1,63 +1,83 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		<%= render 'shared/user' %>
+		<h1 class="doc_header">Новый пропуск<span class="caret"></span></h1>
+		  <%= render 'panel' %>
+      
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Номер:</b>
-  <%= @permit.number %>
-</p>
+      <p>
+        <b>Номер:</b>
+        <%= @permit.number %>
+      </p>
 
-<p>
-  <b>Тип пропуска:</b>
-  <%= t(@permit.permit_type) %>
-</p>
+      <p>
+        <b>Тип пропуска:</b>
+        <%= t(@permit.permit_type) %>
+      </p>
 
-<p>
-  <b>Должность получателя пропуска:</b>
-  <%= user(@permit.user_id).position  %>
-</p>
+      <p>
+        <b>Должность получателя пропуска:</b>
+        <%= user(@permit.user_id).position  %>
+      </p>
 
-<p>
-  <b>ФИО получателя:</b>
-  <%= user(@permit.user_id).first_name_with_last_name  %>
-</p>
+      <p>
+        <b>ФИО получателя:</b>
+        <%= user(@permit.user_id).first_name_with_last_name  %>
+      </p>
 
-<p>
-  <b>Дата рождения получателя:</b>
-  <%= user(@permit.user_id).dob  %>
-</p>
+      <p>
+        <b>Дата рождения получателя:</b>
+        <%= user(@permit.user_id).dob  %>
+      </p>
 
-<p>
-  <b>Телефон получателя:</b>
-  <%= user(@permit.user_id).phone  %>
-</p>
+      <p>
+        <b>Телефон получателя:</b>
+        <%= user(@permit.user_id).phone  %>
+      </p>
 
-<p>
-  <b>Цель пребывания:</b>
-  <%= @permit.purpose %>
-</p>
+      <p>
+        <b>Цель пребывания:</b>
+        <%= @permit.purpose %>
+      </p>
 
-<p>
-  <b>Начало срока действия:</b>
-  <%= @permit.start_date %>
-</p>
+      <p>
+        <b>Начало срока действия:</b>
+        <%= @permit.start_date %>
+      </p>
 
-<p>
-  <b>Окончание срока действия:</b>
-  <%= @permit.expiration_date %>
-</p>
+      <p>
+        <b>Окончание срока действия:</b>
+        <%= @permit.expiration_date %>
+      </p>
 
-<p>
-  <b>Запрошенный временной интервал действия пропуска:</b>
-  <%= @permit.requested_duration %>
-</p>
+      <p>
+        <b>Запрошенный временной интервал действия пропуска:</b>
+        <%= @permit.requested_duration %>
+      </p>
 
-<p>
-  <b>Сектор зоны действия пропуска:</b>
-  <%= @permit.granted_area %>
-</p>
+      <p>
+        <b>Сектор зоны действия пропуска:</b>
+        <%= @permit.granted_area %>
+      </p>
 
-<p>
-  <b>Объект посещения:</b>
-  <%= @permit.granted_object %>
-</p>
+      <p>
+        <b>Объект посещения:</b>
+        <%= @permit.granted_object %>
+      </p>
 
-<%= render 'actions' %>
+      <%= render 'actions' %>
+		
+		
+	</div>
+	
+	
+</div>
+
+
+
+
+
+
+

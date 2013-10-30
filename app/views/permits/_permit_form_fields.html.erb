@@ -1,29 +1,21 @@
-<div class="field">
-  <%= f.label :permit_type, "Тип" %>
-  <%= f.select :permit_type, Permit::TYPES.map { |a| [ t(a), a ] } %>	
 
-  <%= f.label :number, "Номер" %>
-  <%= f.text_field :number %>
+  <div class="control-group">
+	  <div class="controls">
+		<%= f.text_field :number, :placeholder => 'номер' %>
+		<%= f.text_field :start_date, :placeholder => 'начало действия' %>
+		<%= f.text_field :expiration_date, :placeholder => 'окончание действия' %>
+		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+		
+		
+		<%= label_tag "Тип пропуска" %>
+		<%= f.select(:permit_type, Permit::TYPES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+		
+    <%= f.collection_select(:user_id, User.all, :id, :first_name_with_last_name) %>
+    <%= f.collection_select(:vehicle_id, Vehicle.all, :id, :vehicle_title) %>
+    
+	  </div>
+	</div>
 
-  <%= f.label :user_id, "Пользователь" %>
-  <%= f.collection_select(:user_id, User.all, :id, :first_name_with_last_name) %>
+	
 
-  <%= f.label :purpose, "Цель пребывания" %>
-  <%= f.text_field :purpose %>
 
-  <%= f.label :start_date, "Начало срока действия" %>
-  <%= f.text_field :start_date %>
-
-  <%= f.label :expiration_date, "Окончание срока действия" %>
-  <%= f.text_field :expiration_date %>
-
-  <%= f.label :requested_duration, "Запрашиваемый временной интервал действия пропуска" %>
-  <%= f.text_field :requested_duration %>
-
-  <%= f.label :granted_area, "Сектор зоны действия" %>
-  <%= f.text_field :granted_area %>
-
-  <%= f.label :granted_object, "Объект посещения" %>
-  <%= f.text_field :granted_object %>
-
-</div>
