@@ -2,9 +2,11 @@
   <div class="control-group">
 	  <div class="controls">
 		<%= f.text_field :number, :placeholder => 'номер' %>
+		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+		<br>
 		<%= f.text_field :start_date, :placeholder => 'начало действия' %>
 		<%= f.text_field :expiration_date, :placeholder => 'окончание действия' %>
-		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+		
 		
 		
 		<%= label_tag "Тип пропуска" %>
