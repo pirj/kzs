@@ -19,7 +19,9 @@
   <h3>1. Данные техсредства</h3>
   <%= f.fields_for :vehicle do |v| %>
     Тип <%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
-    Марка<%= v.collection_select(:brand, CarBrand.all, :title, :title) %>
+    Марка<%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
+    Номер СТС <%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
+    Номер ГРЗ <%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %>
   <% end %>
   </div>
   

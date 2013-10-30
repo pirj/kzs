@@ -11,10 +11,11 @@ class PermitsController < ApplicationController
   
   def create
     @permit = Permit.new(params[:permit])
+    @permit.number = ("P" + @permit.id.to_s)
 
     respond_to do |format|
       if @permit.save && 
-        format.html { redirect_to permits_path, notice: t('permit_request_created') }
+        format.html { redirect_to @permit, notice: t('permit_request_created') }
         format.json { render json: @permit, status: :created, location: @permit }
       else
         format.html { render action: "new" }
