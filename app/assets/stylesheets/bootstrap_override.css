@@ -18,3 +18,7 @@
 .control.radio input[type="radio"]:checked ~ .radio-label:after {
   background-color: #e6737e;
 }
+
+input[type="text"], select {
+	margin-right: 40px;
+}

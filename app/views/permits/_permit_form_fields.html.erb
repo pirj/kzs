@@ -18,10 +18,10 @@
   <div id="permit_vehicle_fields">
   <h3>1. Данные техсредства</h3>
   <%= f.fields_for :vehicle do |v| %>
-    Тип <%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
-    Марка<%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
-    Номер СТС <%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
-    Номер ГРЗ <%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %>
+    <span class="permit_label">Тип</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
+    <span class="permit_label">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
+    <span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
+    <span class="permit_label">Номер ГРЗ</span><%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %>
   <% end %>
   </div>
   
@@ -41,12 +41,12 @@
 	  <div class="controls">
 		
 		<div id="permanent_fields">
-		Пропуск действителен с <%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала' %>
-		по <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
+		<span class="permit_label">Пропуск действителен с</span><%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала' %>
+		<span class="permit_label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
 		</div>
 		
 		<div id="temoporary_fields">
-		Пропуск действителен <%= f.text_field :date, :placeholder => 'Дата' %>
+		<span class="permit_label">Пропуск действителен</span> <%= f.text_field :date, :placeholder => 'Дата' %>
 		</div>
 		
 		
