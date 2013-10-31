@@ -11,15 +11,18 @@ class PermitPdf < Prawn::Document
     @permit = permit
     @view = view
     russian_font
+    
 
     float {image "#{Rails.root}/app/assets/images/propusk_back.jpg"}
 
     move_down 140
     
+    font "Verdana"
     draw_text "№#{@permit.number}", :size => 25, :at => [484,262]
     
-    draw_text "#{@permit.vehicle.register_sn}", :size => 50, :at => [40,110]
-    draw_text "#{@permit.vehicle.sn_region}", :size => 45, :at => [275,120]
+    font "RoadNumbers"
+    draw_text "#{@permit.vehicle.register_sn}", :size => 80, :at => [44,100]
+    draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [288,117]
 
     # text "#{@permit.vehicle.vehicle_title}", :size => 15
     # text "#{@permit.start_date.strftime('%d.%m.%y')} - #{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 15
@@ -35,6 +38,6 @@ class PermitPdf < Prawn::Document
         :normal  => "#{Rails.root}/app/assets/fonts/verdana.ttf" },
       "RoadNumbers" => {
             :normal  => "#{Rails.root}/app/assets/fonts/RoadNumbers2.0.ttf" })
-    font "Verdana"
+    
   end
 end
