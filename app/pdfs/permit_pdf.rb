@@ -10,6 +10,8 @@ class PermitPdf < Prawn::Document
     super(margin: 0, :page_size => [595, 420])
     @permit = permit
     @view = view
+    @drivers = @permit.vehicle.users
+    @driver = @drivers.first
     russian_font
     
 
@@ -24,8 +26,17 @@ class PermitPdf < Prawn::Document
     draw_text "#{@permit.vehicle.register_sn}", :size => 80, :at => [44,100]
     draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [288,117]
     
+    start_new_page
+    font "Verdana"
     float {image "#{Rails.root}/app/assets/images/пропуск_front.jpg"}
-
+    draw_text "#{@driver.last_name}", :size => 20, :at => [160,360]
+    draw_text "#{@driver.first_name}   #{@driver.middle_name}", :size => 20, :at => [160,300]
+    draw_text "#{@driver.position}", :size => 20, :at => [160,237]
+    draw_text "#{Organization.find(@driver.organization_id).title}", :size => 20, :at => [160,180]
+    draw_text "#{@permit.vehicle.register_sn} #{@permit.vehicle.sn_region}", :size => 20, :at => [240,120]
+    draw_text "#{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 20, :at => [165,65]
+    
+    
     # text "#{@permit.vehicle.vehicle_title}", :size => 15
     # text "#{@permit.start_date.strftime('%d.%m.%y')} - #{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 15
   end
