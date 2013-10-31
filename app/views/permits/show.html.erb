@@ -15,7 +15,10 @@
     Класс пропуска: <%= t(@permit.permit_class) %><br>
     Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
     <br>
+    
+    <% if @permit.permit_type == 'vehicle' %>
     <%= link_to "Печать", permit_path(@permit, :format => :pdf) %>
+    <% end %>
     	
 	</div>
 	
