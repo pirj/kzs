@@ -28,7 +28,7 @@ class PermitPdf < Prawn::Document
     
     start_new_page
     font "Verdana"
-    float {image "#{Rails.root}/app/assets/images/пропуск_front.jpg"}
+    float {image "#{Rails.root}/app/assets/images/propusk_front.jpg"}
     draw_text "#{@driver.last_name}", :size => 20, :at => [160,360]
     draw_text "#{@driver.first_name}   #{@driver.middle_name}", :size => 20, :at => [160,300]
     draw_text "#{@driver.position}", :size => 20, :at => [160,237]
