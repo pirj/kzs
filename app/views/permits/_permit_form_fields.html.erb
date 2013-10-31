@@ -22,7 +22,17 @@
     <span class="permit_label">Тип</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
     <span class="permit_label">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
     <span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
-    <span class="permit_label">Номер ГРЗ</span><%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %>
+    
+    
+    <br>
+    <span class="permit_label">Номер ГРЗ</span>
+    <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
+    <%= v.number_field(:sn_number, :placeholder => 'Номер') %>
+    <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
+    <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
+    <%= v.number_field(:sn_region, :placeholder => 'Регион') %>
+    
+    <!-- <%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %> -->
   <% end %>
   </div>
   

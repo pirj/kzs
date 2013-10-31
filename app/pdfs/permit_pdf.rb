@@ -18,7 +18,8 @@ class PermitPdf < Prawn::Document
     
     draw_text "№#{@permit.number}", :size => 25, :at => [484,262]
     
-    draw_text "#{@permit.vehicle.register_sn}", :size => 45, :at => [40,110]
+    draw_text "#{@permit.vehicle.register_sn}", :size => 50, :at => [40,110]
+    draw_text "#{@permit.vehicle.sn_region}", :size => 45, :at => [275,120]
 
     # text "#{@permit.vehicle.vehicle_title}", :size => 15
     # text "#{@permit.start_date.strftime('%d.%m.%y')} - #{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 15
