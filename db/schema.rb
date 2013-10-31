@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031121200) do
+ActiveRecord::Schema.define(:version => 20131031135350) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -328,6 +328,13 @@ ActiveRecord::Schema.define(:version => 20131031121200) do
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vehicle_users", :force => true do |t|
+    t.integer  "vehicle_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "vehicles", :force => true do |t|
     t.string   "brand"

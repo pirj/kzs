@@ -1,9 +1,12 @@
 # coding: utf-8
 
 class Vehicle < ActiveRecord::Base
-  attr_accessible :brand, :model, :register_document, :vehicle_body, :register_sn, :permit_id, :first_letter, :second_letter, :third_letter, :sn_number, :sn_region
+  attr_accessible :brand, :model, :register_document, :vehicle_body, :register_sn, :permit_id, :first_letter, :second_letter, :third_letter, :sn_number, :sn_region, :user_ids
   attr_accessor :first_letter, :second_letter, :third_letter, :sn_number
   belongs_to :permit
+  
+  has_many :vehicle_users
+  has_many :users, :through => :vehicle_users
   
   before_save :create_register_sn
   

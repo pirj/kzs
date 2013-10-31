@@ -49,6 +49,7 @@ ru:
   vehicle: "ТС"
   standart: "Стандартный"
   vip: "VIP"
+  drivers: "Водители"
   activerecord:
     models: 
       permission:
@@ -123,6 +124,11 @@ ru:
         vehicle_body: "Тип ТС"
         register_document: "Номер свидетельства регистрации"
         register_sn: "Госудраственной регистрационный номер"
+        sn_region: "Регион"
+        first_letter: "Первая буква номера"
+        second_letter: "Вторая буква номера"
+        third_letter: "Третья буква номера"
+        sn_number: "Номер ГРЗ"
       permit:
         number: "Номер"
         permit_type: "Тип пропуска"

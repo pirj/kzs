@@ -13,16 +13,15 @@ class PermitsController < ApplicationController
     @permit = Permit.new(params[:permit])
     last = Permit.last ? Permit.last.id + 1 : 1
     @permit.number = (last).to_s
-
-    respond_to do |format|
-      if @permit.save && 
-        format.html { redirect_to @permit, notice: t('permit_request_created') }
-        format.json { render json: @permit, status: :created, location: @permit }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @permit.errors, status: :unprocessable_entity }
-      end
-    end
+    drivers = params[:permit][:drivers]
+    drivers = drivers.delete_if{ |x| x.empty? }
+    @permit.save
+    
+    vehicle = @permit.vehicle
+    vehicle.user_ids = drivers
+    vehicle.save!
+    
+    redirect_to @permit, notice: t('permit_request_created')
   end
 
   def show

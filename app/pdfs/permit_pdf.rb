@@ -23,6 +23,8 @@ class PermitPdf < Prawn::Document
     font "RoadNumbers"
     draw_text "#{@permit.vehicle.register_sn}", :size => 80, :at => [44,100]
     draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [288,117]
+    
+    float {image "#{Rails.root}/app/assets/images/пропуск_front.jpg"}
 
     # text "#{@permit.vehicle.vehicle_title}", :size => 15
     # text "#{@permit.start_date.strftime('%d.%m.%y')} - #{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 15

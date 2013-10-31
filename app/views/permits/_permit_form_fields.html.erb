@@ -22,8 +22,6 @@
     <span class="permit_label">Тип</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
     <span class="permit_label">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
     <span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
-    
-    
     <br>
     <span class="permit_label">Номер ГРЗ</span>
     <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
@@ -31,9 +29,10 @@
     <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
     <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
     <%= v.number_field(:sn_region, :placeholder => 'Регион') %>
-    
-    <!-- <%= v.text_field :register_sn, :placeholder => 'Номер ГРЗ' %> -->
   <% end %>
+  
+  <h3>1. Водители</h3>
+    <%= f.collection_select(:drivers, User.all, :id, :first_name_with_last_name, {:selected => @permit.vehicle.users}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %>
   </div>
   
   <h3>2. Условия посещения</h3>

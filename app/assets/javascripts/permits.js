@@ -26,6 +26,8 @@ $(document).ready(function(){
 		$('#permit_date').val('');
 	});
 	
+	$('#permit_drivers').chosen({max_selected_options: 3});
+	
 	
 	
 	
