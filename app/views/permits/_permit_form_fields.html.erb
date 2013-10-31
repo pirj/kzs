@@ -1,14 +1,15 @@
   
-  
   <label class="control radio">
-    <%= f.radio_button :permit_type, "user", :checked => true  %>
-    <span id="user_type" class="radio-label">Для сотрудника</span>
-  </label>
-  
-  <label class="control radio">
-    <%= f.radio_button :permit_type, "vehicle"  %>
+    <%= f.radio_button :permit_type, "vehicle", :checked => true  %>
     <span id="vehicle_type" class="radio-label">на транспортное средство</span>
   </label>
+  
+  
+  <label class="control radio">
+    <%= f.radio_button :permit_type, "user"  %>
+    <span id="user_type" class="radio-label">Для сотрудника</span>
+  </label>
+
   
   <div id="permit_user_fields">
   <h3>1. Личные данные</h3>
