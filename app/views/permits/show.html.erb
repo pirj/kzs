@@ -10,10 +10,13 @@
     <% if @permit.permit_type == 'vehicle' %>
     ТС: <%= @permit.vehicle.vehicle_title %><br>
     <% else %>
-      <%= @permit.user_id %><br>
+      Персона: <%= user(@permit.user_id).first_name_with_last_name %><br>
     <% end %>
     Класс пропуска: <%= t(@permit.permit_class) %><br>
-    Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>		
+    Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
+    <br>
+    <%= link_to "Печать", permit_path(@permit, :format => :pdf) %>
+    	
 	</div>
 	
 	

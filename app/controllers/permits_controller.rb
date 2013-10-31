@@ -11,7 +11,8 @@ class PermitsController < ApplicationController
   
   def create
     @permit = Permit.new(params[:permit])
-    @permit.number = ("P" + @permit.id.to_s)
+    @last = Permit.last
+    @permit.number = ("P" + (@last.id + 1).to_s)
 
     respond_to do |format|
       if @permit.save && 

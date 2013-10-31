@@ -16,11 +16,11 @@ class PermitPdf < Prawn::Document
     if @permit.permit_type == 'vehicle'
     text "#{@permit.vehicle.vehicle_title}", :size => 15
     else
-    text "#{@permit.user_id}", :size => 15
+    @user = User.find(@permit.user_id).first_name_with_last_name
+    text "#{@user}", :size => 15
     end
-    #    Класс пропуска: <%= t(@permit.permit_class) %><br>
-    #    Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>
-    #    
+    text "#{I18n.t(@permit.permit_class)}", :size => 15
+    text "#{@permit.start_date.strftime('%d.%m.%y')} - #{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 15 
   end
   
 
