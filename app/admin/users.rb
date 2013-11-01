@@ -48,7 +48,9 @@ ActiveAdmin.register User do
     attributes_table do
       row :username
       row :organization_id do |row|
-        Organization.find(user.organization_id).title
+        if Organization.exists?(user.organization_id)
+          Organization.find(user.organization_id).title
+        end
       end
       row :phone
       row :position

@@ -15,4 +15,13 @@ class Permit < ActiveRecord::Base
   
   TYPES = %w[user vehicle]
   PERMIT_CLASSES = %w[standart vip]
+  
+  def temporary
+    if self.start_date == self.expiration_date
+      true
+    else
+      false
+    end
+  end
+  
 end

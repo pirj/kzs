@@ -13,6 +13,10 @@ class PermitsController < ApplicationController
     @permit = Permit.new(params[:permit])
     last = Permit.last ? Permit.last.id + 1 : 1
     @permit.number = (last).to_s
+    if params[:permit][:date]
+      @permit.start_date = Date.parse(params[:permit][:date])
+      @permit.expiration_date = Date.parse(params[:permit][:date])
+    end
     drivers = params[:permit][:drivers]
     drivers = drivers.delete_if{ |x| x.empty? }
     @permit.save

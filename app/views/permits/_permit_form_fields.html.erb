@@ -25,10 +25,10 @@
     <br>
     <span class="permit_label">Номер ГРЗ</span>
     <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
-    <%= v.number_field(:sn_number, :placeholder => 'Номер') %>
+    <%= v.text_field(:sn_number, :placeholder => 'Номер') %>
     <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
     <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
-    <%= v.number_field(:sn_region, :placeholder => 'Регион') %>
+    <%= v.text_field(:sn_region, :placeholder => 'Регион') %>
   <% end %>
   
   <h3>1. Водители</h3>
