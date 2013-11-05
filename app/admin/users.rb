@@ -107,20 +107,23 @@ ActiveAdmin.register User do
      def update
        @user = User.find(params[:id])
        
-       @user.groups.clear
-       @user.permissions.clear
+       if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+           params[:user].delete(:password)
+           params[:user].delete(:password_confirmation)
+       end
+       
         
        group_ids = params[:user][:group_ids]
        permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)
         
-           
-        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-            params[:user].delete(:password)
-            params[:user].delete(:password_confirmation)
-        end
+       @user.groups.clear
+       @user.permissions.clear
+       @user.permissions << permission_ids
+
        
        respond_to do |format|
-         if @user.update_attributes(params[:user]) && @user.permissions << permission_ids
+         if @user.update_attributes(params[:user])
+
            format.html { redirect_to admin_user_path(@user), notice: t('user_successfully_updated') }
            format.json { head :no_content }
          else

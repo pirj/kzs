@@ -54,7 +54,7 @@ namespace :users do
       user.email = Faker::Internet.free_email
       user.encrypted_password = User.new(:password => "password").encrypted_password
     end
-    User.create!(:username => 'tester', :first_name => 'tester', :last_name => 'tester', :middle_name => 'tester', :phone => '7777777', :position => 'tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'tester', :password_confirmation => 'tester')
+    User.create!(:username => 'tester', :first_name => 'tester', :last_name => 'tester', :middle_name => 'tester', :phone => '7777777', :position => 'tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'tester', :password_confirmation => 'tester', :id_type => 'Паспорт', :id_sn => '400812342', :id_issue_date => Date.today, :id_issuer => 'ОТП 29')
     User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'avatars', '*')).sample); user.save! }
     puts "Users create!"
   end

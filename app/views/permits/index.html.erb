@@ -4,7 +4,7 @@
 		<%= render 'shared/user' %>
 		<h1 class="doc_header">Заявки на пропуск<span class="caret"></span></h1>
 		  <%= render 'panel' %>
-		<table class="table" style="font-size: 12px; width: 900px;">
+		<table class="table permits_table" style="font-size: 12px; width: 900px;">
 		  	 <tr>
 			    <th>ID</th>
 			    <th>№</th>
@@ -19,7 +19,7 @@
 			  </tr>
 
 			<% @permits.each do |permit| %>
-			  <tr>
+			  <tr id="<%= permit.id %>">
 				<td><%= permit.id %></td>
 				<td><%= permit.number %></td>
 				<th><%= t(permit.permit_type) %></th>

@@ -24,11 +24,10 @@
       <% end %>
     </ul>
     
-    <% if @permit.permit_type == 'vehicle' %>
-    <%= link_to "Печать", permit_path(@permit, :format => :pdf) %>
-    <% end %>
+    
+    <%= render 'actions' %>
     	
-	</div>
+
 	
 	
 </div>

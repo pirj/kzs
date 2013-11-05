@@ -1,23 +1,35 @@
-<h2>Редактирование пропуска</h2>
+<div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		<%= render 'shared/user' %>
+		<h1 class="doc_header">Редактирование <span class="caret"></span></h1>
+      
+    <%= form_for @permit do |f| %>
 
-<%= form_for @permit do |f| %>
-
-  <% if @permit.errors.any? %>
-    <div id="error_explanation">
-      <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
-      <ul>
-      <% @permit.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% if @permit.errors.any? %>
+        <div id="error_explanation">
+          <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
+          <ul>
+          <% @permit.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <%= render 'permit_form_fields', f: f %>
+      <%= render 'permit_form_fields', f: f %>
 
 
-  <div class="actions">
-    <%= f.submit 'Внести изменения', :class => 'btn btn-primary' %>
-  </div>
+      <div class="actions">
+        <%= f.submit 'Внести изменения', :class => 'btn btn-primary' %>
+      </div>
 
-<% end %>
+    <% end %>
+		
+		
+	</div>
+	
+	
+</div>
+
+

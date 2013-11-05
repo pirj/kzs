@@ -1,21 +1,27 @@
 <div class="btn-toolbar">
-
+  
+  <% unless action?('index') %>
+  <div class="btn-group">	
+		<%= link_to " назад", :back, :class => "btn" %>
+	</div>
+	<% end %>
+  
   <% if current_user.has_permission?(6) %>
   <div class="btn-group">	
   	<%= link_to "Новая заявка", new_permit_path, :class=> "btn btn-success" %>	
   </div>
   <% end %>
-
+  
   <div class="btn-group">	
-  	<%= link_to "Текущие заявки", new_permit_path, :class=> "btn btn-primary" %>	
+  	<%= link_to "Все пропуска", permits_path, :class=> "btn btn-disabled" %>	
   </div>
 
   <div class="btn-group">	
-  	<%= link_to "Все пропуска организации", new_permit_path, :class=> "btn btn-disabled" %>	
+  	<%= link_to "Текущие заявки", permits_path(:scope => :application), :class=> "btn btn-primary" %>	
   </div>
 
   <div class="btn-group">	
-  	<%= link_to "Просроченные", new_permit_path, :class=> "btn btn-disabled" %>	
+  	<%= link_to "Просроченные", permits_path(:scope => :expired), :class=> "btn btn-disabled" %>	
   </div>
 
 </div>

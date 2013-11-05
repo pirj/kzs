@@ -48,5 +48,13 @@
 <% end %>
 <% end %>
 
+<% if @permit.released == true && @permit.issued == true %>
+<% if @permit.permit_type == 'vehicle' %>
+<div class="btn-group">	
+  <%= link_to "Печать", permit_path(@permit, :format => :pdf), :class=> "btn btn-primary" %>
+</div>
+<% end %>
+<% end %>
+
 
 </div>

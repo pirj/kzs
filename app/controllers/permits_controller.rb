@@ -1,6 +1,12 @@
 class PermitsController < ApplicationController
   def index
-    @permits = Permit.all
+    if params[:scope] == "expired"
+      @permits = Permit.expired
+    elsif params[:scope] == "application"
+      @permits = Permit.applications
+    else
+      @permits = Permit.all
+    end
   end
 
   def new
@@ -13,10 +19,12 @@ class PermitsController < ApplicationController
     @permit = Permit.new(params[:permit])
     last = Permit.last ? Permit.last.id + 1 : 1
     @permit.number = (last).to_s
-    if params[:permit][:date]
+    if params[:permit][:date] && params[:permit][:date] != ''
       @permit.start_date = Date.parse(params[:permit][:date])
       @permit.expiration_date = Date.parse(params[:permit][:date])
     end
+    
+    
     drivers = params[:permit][:drivers]
     drivers = drivers.delete_if{ |x| x.empty? }
     @permit.save
@@ -48,8 +56,17 @@ class PermitsController < ApplicationController
   def update
     @permit = Permit.find(params[:id])
     
+    drivers = params[:permit][:drivers]
+    drivers = drivers.delete_if{ |x| x.empty? }
+    
+
+    
+    
     respond_to do |format|
       if @permit.update_attributes(params[:permit])
+        vehicle = @permit.vehicle
+        vehicle.user_ids = drivers
+        vehicle.save!
         format.html { redirect_to permit_path(@permit), notice: t('permit_successfully_updated') }
         format.json { head :no_content }
       else

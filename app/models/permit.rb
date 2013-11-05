@@ -6,8 +6,11 @@ class Permit < ActiveRecord::Base
 
   
   belongs_to :user
-  has_one :vehicle, :dependent => :destroy
+  has_one :vehicle
   accepts_nested_attributes_for :vehicle
+  
+  scope :expired, lambda { where("expiration_date < ?", Date.today ) }
+  scope :applications, -> { where(agreed: false) }
   
   attr_accessor :date, :drivers
 

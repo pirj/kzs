@@ -24,15 +24,24 @@
     <span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
     <br>
     <span class="permit_label">Номер ГРЗ</span>
+    <% if @permit.new_record? %>
     <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
     <%= v.text_field(:sn_number, :placeholder => 'Номер') %>
     <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
     <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
+    <% else %>
+    <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[0] }, {:style=>'width:50px'}) %>
+    <%= v.text_field(:sn_number, :placeholder => 'Номер', :value => @permit.vehicle.register_sn[1..3]) %>
+    <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[4] }, {:style=>'width:50px'}) %>
+    <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[5] }, {:style=>'width:50px'}) %>
+    <% end %>
+    
+    
     <%= v.text_field(:sn_region, :placeholder => 'Регион') %>
   <% end %>
   
   <h3>1. Водители</h3>
-    <%= f.collection_select(:drivers, User.all, :id, :first_name_with_last_name, {:selected => @permit.vehicle.users}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %>
+    <%= f.collection_select(:drivers, User.all, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %>
   </div>
   
   <h3>2. Условия посещения</h3>
@@ -58,10 +67,6 @@
 		<div id="temoporary_fields">
 		<span class="permit_label">Пропуск действителен</span> <%= f.text_field :date, :placeholder => 'Дата' %>
 		</div>
-		
-		
-		
-		
 		
 		<br>
 		<%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
