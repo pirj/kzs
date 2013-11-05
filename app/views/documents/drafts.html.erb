@@ -1,9 +1,16 @@
 <div class="row">
-  <%= render 'left' %>
-  <div class="span8">
+  <%= render 'shared/left' %>
+  <div class="span12">
+  
+  <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+  <%= render 'shared/user' %>
+  <h1 class="doc_header">Все документы<span class="caret"></span></h1>
+	
+
+	<% end %>
 	<%= form_tag documents_batch_path, method: :put do %>
 	<%= render 'panel' %>
-	<%= render 'table'%>
+	<div id="document_table"><%= render 'table'%></div>
 	<% end %>
   </div>
 </div>

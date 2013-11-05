@@ -5,7 +5,7 @@
 		<%= link_to documents_path, :class => (controller?("documents") ? 'doc active' : 'doc') do %>
 	    <span class="badge badge-important">7</span>
 	  <% end %>
-	  <a href="#" class="az"></a>
+	  <a href="/documents/drafts" class="az"></a>
 	  <a href="#" class="chat"><span class="badge badge-warning big">88</span></a>
 	  <a href="/permits" class="security"></a>
 	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'objects' %>

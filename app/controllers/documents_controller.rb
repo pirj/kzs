@@ -88,7 +88,9 @@ class DocumentsController < ApplicationController
     @sender_organization = Organization.find(@document.sender_organization_id).title
     @organization = Organization.find(@document.organization_id).title
     @sender = User.find(@document.user_id).first_name_with_last_name
-    @executor = User.find(@document.executor_id).first_name_with_last_name
+    if @document.executor_id
+      @executor = User.find(@document.executor_id).first_name_with_last_name
+    end
 
     respond_to do |format|
       format.html # show.html.erb
