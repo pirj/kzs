@@ -4,38 +4,8 @@
 		<%= render 'shared/user' %>
 		<h1 class="doc_header">Заявки на пропуск<span class="caret"></span></h1>
 		  <%= render 'panel' %>
-		<table class="table permits_table" style="font-size: 12px; width: 900px;">
-		  	 <tr>
-			    <th>ID</th>
-			    <th>№</th>
-				<th>Тип</th>
-				<th>Цель пребывания</th>
-				<th>Начало срока действия</th>
-				<th>Окончание срока действия</th>
-				<th>Сектор зоны посещения</th>
-				<th>Объект посещения</th>
-				<th>Статус</th>
-			    <th>Детали</th>
-			  </tr>
-
-			<% @permits.each do |permit| %>
-			  <tr id="<%= permit.id %>">
-				<td><%= permit.id %></td>
-				<td><%= permit.number %></td>
-				<th><%= t(permit.permit_type) %></th>
-				<th><%= permit.purpose %></th>
-				<th><%= permit.start_date.strftime("%d.%m.%y") %></th>
-				<th><%= permit.expiration_date.strftime("%d.%m.%y") %></th>
-				<th><%= permit.granted_area %></th>
-				<th><%= permit.granted_object %></th>
-				<td><%= permit_status(permit) %></td>
-			    <td><%= link_to "Подробнее", permit %></td>
-			  </tr>
-			<% end %>
-		</table>
+		  
+		  <div id="permits_table"><%= render 'table' %></div>
 		
-		
-	</div>
-	
-	
+	</div>	
 </div>

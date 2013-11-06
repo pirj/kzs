@@ -1,12 +1,25 @@
 class PermitsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+  
   def index
-    if params[:scope] == "expired"
-      @permits = Permit.expired
-    elsif params[:scope] == "application"
-      @permits = Permit.applications
+    
+    if params[:status_sort]
+      direction = params[:direction]
+      sort_type = "canceled #{direction}", "rejected #{direction}", "issued #{direction}", "released #{direction}", "agreed #{direction}"
     else
-      @permits = Permit.all
+      sort_type = sort_column + " " + sort_direction
     end
+    
+    @permits = Permit.order(sort_type)
+    
+    if params[:scope] == "expired"
+      @permits = @permits.expired
+    elsif params[:scope] == "application"
+      @permits = @permits.applications
+    else
+      @permits = @permits
+    end
+    
   end
 
   def new
@@ -131,6 +144,17 @@ class PermitsController < ApplicationController
       format.html { redirect_to permit_path(@permit), notice: t('permit_issued') } 
       format.json 
     end
+  end
+  
+  
+  private
+  
+  def sort_column
+    Permit.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
   
 end

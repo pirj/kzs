@@ -28,9 +28,9 @@ $(document).ready(function(){
 	
 	$('#permit_drivers').chosen({max_selected_options: 3});
 	
-	$(".permits_table tr").on("click", function() {
-		permit_id = $(this).attr('id');
-		window.location = "/permits/" + permit_id;
-	});
+	// $(".permits_table tr").on("click", function() {
+	// 	permit_id = $(this).attr('id');
+	// 	window.location = "/permits/" + permit_id;
+	// });
 	
 });
