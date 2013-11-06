@@ -72,8 +72,8 @@ $(document).ready(function(){
 });
 
 
-	$(".documents_table tr").click(appendTr);
-	$(".documents_table td.not_this").click(function(e){
+	$(".documents_table tbody tr").click(appendTr);
+	$(".documents_table tbody td.not_this").click(function(e){
 	    e.stopPropagation()
 	})
 	
