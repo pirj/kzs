@@ -50,6 +50,7 @@ ru:
   standart: "Стандартный"
   vip: "VIP"
   drivers: "Водители"
+  permission_denied: "У вас нет прав на совершение данного действия"
   activerecord:
     models: 
       permission:

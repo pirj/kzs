@@ -254,14 +254,17 @@ class DocumentsController < ApplicationController
   
   def delete
     @document = Document.find(params[:id])
-    if @document.draft?
-      @document.destroy
+    if current_user.organization_id = @document.sender_organization_id && @document.sent == false
+      if @document.draft?
+        @document.destroy
+      else
+        @document.deleted = true
+        @document.save
+      end
+      redirect_to documents_path, notice: t('document_deleted')
     else
-      @document.deleted = true
-      @document.save
+      redirect_to :back, notice: t('permission_denied')
     end
-    
-    redirect_to documents_path, notice: t('document_deleted')
   end
   
   def copy

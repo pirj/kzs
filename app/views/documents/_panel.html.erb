@@ -31,7 +31,7 @@
 </div>
 <% end %>
 
-<% if can? :approve, Document %>
+<% if current_user.has_permission?(1) %>
 <div class="btn-group">				
   <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %>
 </div>
@@ -45,7 +45,7 @@
 	<%= link_to "ответить", "#", :class => "btn disabled", :id => 'reply_link' %>
 </div>
 <div class="btn-group"> 
-  <%= link_to "удалить", "#", :class => "btn disabled", :id => 'reply_link' %>
+  <%= link_to "удалить", "#", :class => "btn disabled", :id => 'delete_link' %>
 </div>
 
 </div>
