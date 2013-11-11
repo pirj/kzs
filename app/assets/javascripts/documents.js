@@ -2,8 +2,18 @@
 	function jsonTr() {
 		current_row.hide();
 		$.getJSON( "/documents/" + document_id + ".json", function(data) {
+			
+			
+			
+			if (data.sn){
+			  doc_serial = "<p class='exp_date'><a href='#'>" + data.sn + "</a> / " + data.date + "</p>"
+			}
+			else {
+			  doc_serial = "отсутсвует"
+			}
+			
 			$("<tr class='inform'><td colspan='9'><ul class='expanded'></ul></td></tr>").insertAfter(current_row);
-			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span><p class='exp_date'><a href='#'>" + data.sn + "</a> / " + data.date + "</p></li>").appendTo('.inform td ul');
+			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
 			$("<li><span>Тема:</span><p class='exp_title'><a href='/documents/" + document_id + "'>" + data.title + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><span>Исполнитель:</span><p class='exp_exec'><a href='#'>" + data.executor + "</a></p></li>").appendTo('.inform td ul');

@@ -114,7 +114,7 @@ class DocumentsController < ApplicationController
                                     :organization_id => @organization_id,
                                     :title => @document.title,
                                     :sn => @document.sn,
-                                    :date => @document.date,
+                                    :date => @document.date ? @document.date.strftime('%d.%m.%Y') : @document.date,
                                     :type => t(@document.document_type),
                                     :executor => @executor,
                                     :sender => @sender,
