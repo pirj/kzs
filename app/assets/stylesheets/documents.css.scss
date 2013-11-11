@@ -324,10 +324,16 @@ display: inline-block;
 	min-width: 80px;
 	}
 }
+
+.inform-wrap {
+	position: relative;
+}
+
  .doc_sample{
  	position: absolute;
  	right: 173px;
  	top: 50px;
+	display: block;
  }
  .inform td ul{
  	min-height: 350px;
