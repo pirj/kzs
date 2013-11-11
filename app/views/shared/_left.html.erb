@@ -6,7 +6,7 @@
 	    <span class="badge badge-important"><% unless indox(current_user) < 1  %> <%= indox(current_user) %> <% end %></span>
 	  <% end %>
 	  <a href="/documents/drafts" class="az"></a>
-	  <a href="#" class="chat"><!-- <span class="badge badge-warning big">88</span> --></a>
+	  <a href="/statements" class="chat"><!-- <span class="badge badge-warning big">88</span> --></a>
 	  <a href="/permits" class="security"></a>
 	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'objects' %>
 	</div>

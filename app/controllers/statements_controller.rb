@@ -24,7 +24,9 @@ class StatementsController < ApplicationController
     
     @statement.user_id = current_user.id
     @statement.sender_organization_id = current_user.organization_id
+    @statement.document_id = params[:statement][:document_ids].second
     @statement.organization_id = @statement.document.sender_organization_id
+    
     
     if params[:prepare]
       @statement.prepared = true
