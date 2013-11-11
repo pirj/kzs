@@ -44,7 +44,7 @@ class DocumentsController < ApplicationController
       @documents = documents
     end  
     
-    @documents = @documents.paginate(:per_page => 20, :page => params[:page])
+    # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
     
     respond_to do |format|
       format.html
