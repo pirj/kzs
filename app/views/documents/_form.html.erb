@@ -8,13 +8,13 @@
   
 		<h1 class="doc_header">
 		  <% if action?('new') %>
-			  <% if params[:type == 'mail'] %>
+			  <% if params[:type] == 'mail' %>
 				Новое письмо
-			  <% elsif params[:type == 'writ'] %>
+			  <% elsif params[:type] == 'writ' %>
 				Новое распоряжение
-			  <% else%>
-			    Новое письмо
-			  <% end %>
+				<% end %>
+			<% else %>
+			  ФСО
 			<% end %>
 		<span class="caret"></span></h1>
 

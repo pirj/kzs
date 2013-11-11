@@ -2,6 +2,8 @@ class DocumentsController < ApplicationController
   helper_method :sort_column, :sort_direction
   # collection
   
+  before_filter :authorize, :only => :edit
+  
   def index
     # check if user can view confindetnial documents
     if current_user.has_permission?(5)
@@ -51,7 +53,17 @@ class DocumentsController < ApplicationController
   def batch
     documents_ids = params[:document_ids]
     if params[:prepare]
-      Document.update_all({prepared: true, draft: false}, {id: documents_ids})
+      Document.where(:id => documents_ids).each do |d|
+        if for_approve?(d)
+          d.prepared = true
+          d.draft = false
+          d.save!
+          flash[:notice] = t('documents_updated')
+        else
+          d.reject
+          flash[:notice] = t('access_denied')
+        end
+      end
     elsif params[:approve]
       Document.where(:id => documents_ids).each do |d|
         d.draft = false
@@ -60,11 +72,13 @@ class DocumentsController < ApplicationController
         d.date = Time.now
         d.sn = "D" + d.id.to_s
         d.save!
+        flash[:notice] = t('documents_updated')
       end
     elsif params[:send]
         Document.update_all({sent: true, sent_date: Time.now}, {id: documents_ids})
+        flash[:notice] = t('documents_updated')
     end
-    redirect_to documents_path, notice: t('documents_updated')
+    redirect_to documents_path
   end
   
   # member
@@ -133,16 +147,17 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
+    @document.restrict!(current_user)
     @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
     
-    if @document.user_id != current_user.id && @document.approver_id != current_user.id
-      redirect_to :back, :alert => t('access_denied')
-    elsif @document.approved
-      redirect_to :back, :alert => t('approved_document_couldnt_be_edited')
-    end
+    # if @document.user_id != current_user.id && @document.approver_id != current_user.id
+    #   redirect_to :back, :alert => t('access_denied')
+    # elsif @document.approved
+    #   redirect_to :back, :alert => t('approved_document_couldnt_be_edited')
+    # end
     
       
   end
@@ -335,6 +350,11 @@ class DocumentsController < ApplicationController
   
   def check_edit_permission
   end
+  
+  def authorize
+    
+  end
+    
   
   
 end
