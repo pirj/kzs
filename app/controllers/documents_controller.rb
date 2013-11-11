@@ -28,7 +28,7 @@ class DocumentsController < ApplicationController
                 .where{(sent == true) & (organization_id == organization) | 
                   (sender_organization_id == organization) & (user_id == current_user_id) | 
                   (sender_organization_id == organization) & (approver_id == current_user_id) | 
-                  (prepared == true) & (sender_organization_id == organization) 
+                  (approved == true) & (sender_organization_id == organization) 
                   }
     
     # mails

@@ -3,8 +3,6 @@
 		current_row.hide();
 		$.getJSON( "/documents/" + document_id + ".json", function(data) {
 			
-			
-			
 			if (data.sn){
 			  doc_serial = "<p class='exp_date'><a href='#'>" + data.sn + "</a> / " + data.date + "</p>"
 			}
@@ -12,11 +10,18 @@
 			  doc_serial = "отсутсвует"
 			}
 			
+			if (data.executor){
+			  document_executor = data.executor
+			}
+			else {
+			  document_executor = "отсутсвует"
+			}
+			
 			$("<tr class='inform'><td colspan='9'><div class='inform-wrap'><ul class='expanded'></ul></div></td></tr>").insertAfter(current_row);
 			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
 			$("<li><span>Тема:</span><p class='exp_title'><a href='/documents/" + document_id + "'>" + data.title + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span>Исполнитель:</span><p class='exp_exec'><a href='#'>" + data.executor + "</a></p></li>").appendTo('.inform td ul');
+			$("<li><span>Исполнитель:</span><p class='exp_exec'><a href='#'>" + document_executor + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><span>Отправитель:</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
 			if (data.attachments.length != 0){
 				$("<li class='attach'><span>Приложения:</span></li>").appendTo('.inform td ul');
