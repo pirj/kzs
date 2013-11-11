@@ -29,8 +29,8 @@
 						$("<p class='exp_attach'>" + data.attachments[i].attachment_file_name + "</p></li>").appendTo('.attach');
 				});
 			}
-			$("<img class='doc_sample' src='assets/blanc-sample.png'>").appendTo('.inform td div');
-			$("<input class='btn btn-success btn-large' data-confirm='Вы уверены?' id='send_link' name='send' type='submit' value='Отправить'>").appendTo('.inform td');
+			$('<iframe class="doc_sample" src="/documents/' + document_id + '.pdf"/></iframe>').appendTo('.inform td div');
+			// $("<input class='btn btn-success btn-large' data-confirm='Вы уверены?' id='send_link' name='send' type='submit' value='Отправить'>").appendTo('.inform td');
 			// $('<a href="/documents/' + document_id + '" class="btn btn-disabled" data-method="delete" data-confirm="Вы уверены?">Удалить</a>').appendTo('.inform td');
 			$('<a href="/documents/' + document_id + '" class="btn btn-success">Открыть</a>').appendTo('.inform td');
 			$('.label').filter(":hidden").clone().appendTo(".inform td div");
