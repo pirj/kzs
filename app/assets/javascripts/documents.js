@@ -30,6 +30,13 @@
 			$('<a href="/documents/' + document_id + '" class="btn btn-success">Открыть</a>').appendTo('.inform td');
 			$('.label').filter(":hidden").clone().appendTo(".inform td div");
 			$('.control').filter(":hidden").clone().prependTo(".inform td");
+			
+			$('.inform').on("click", function() {	
+				$(this).hide();
+				current_row.show();
+			});
+			
+			
 	});
 	};
 
