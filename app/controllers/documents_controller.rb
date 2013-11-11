@@ -22,11 +22,14 @@ class DocumentsController < ApplicationController
       sort_type = sort_column + " " + sort_direction
     end
     
-    documents = Document
-                .text_search(params[:query])
-                .not_deleted.not_archived
+    documents = Document.text_search(params[:query])
+                .not_deleted.not_archived.not_draft
                 .order(sort_type)
-                .where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization) & (user_id == current_user_id)}
+                .where{(sent == true) & (organization_id == organization) | 
+                  (sender_organization_id == organization) & (user_id == current_user_id) | 
+                  (sender_organization_id == organization) & (approver_id == current_user_id) | 
+                  (prepared == true) & (sender_organization_id == organization) 
+                  }
     
     # mails
     if params[:type] == "mails"

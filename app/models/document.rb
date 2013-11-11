@@ -22,6 +22,8 @@ class Document < ActiveRecord::Base
   belongs_to :parent_document, class_name: "Document"
   
   scope :draft, -> { where(draft: true) }   
+  scope :not_draft, -> { where(draft: false) } 
+  
   scope :prepared, -> { where(prepared: true) }    
   scope :approved, -> { where(approved: true) }
   scope :not_approved, -> { where(approved: false) }
