@@ -12,6 +12,7 @@ class DocumentsController < ApplicationController
       documents = Document.not_confidential
     end
     organization = current_user.organization_id
+    current_user_id = current_user.id
     
     #default scope
     if params[:status_sort]
@@ -21,7 +22,11 @@ class DocumentsController < ApplicationController
       sort_type = sort_column + " " + sort_direction
     end
     
-    documents = Document.text_search(params[:query]).not_deleted.not_archived.order(sort_type).where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization)}
+    documents = Document
+                .text_search(params[:query])
+                .not_deleted.not_archived
+                .order(sort_type)
+                .where{(sent == true) & (organization_id == organization) | (draft == false) & (sender_organization_id == organization) & (user_id == current_user_id)}
     
     # mails
     if params[:type] == "mails"

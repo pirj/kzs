@@ -35,6 +35,22 @@ namespace :csv do
   end
 end
 
+namespace :csv do
+  desc "Import user document types"
+  task :import_user_document_types => :environment do
+    UserDocumentType.destroy_all
+    UserDocumentType.reset_pk_sequence
+    csv_file_path = 'db/user_document_types.csv'
+    CSV.foreach(csv_file_path) do |row|
+      row = UserDocumentType.create!({
+        :id => row[0],
+        :title => row[1]   
+      })
+      puts "User Document Type!"
+    end
+  end
+end
+
 namespace :users do
   task :create => :environment do
     User.destroy_all

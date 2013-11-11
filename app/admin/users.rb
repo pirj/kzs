@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
   config.batch_actions = false
   filter :username
+  filter :organization_id, :as => :check_boxes, :collection => Organization.all, :include_blank => false
   
    index do 
      column :id
@@ -23,7 +24,7 @@ ActiveAdmin.register User do
        f.input :first_name
        f.input :middle_name
        f.input :last_name
-       f.input :id_type
+       f.input :id_type, :as => :select, :collection => UserDocumentType.all, :include_blank => false
        f.input :id_sn
        f.input :id_issue_date
        f.input :id_issuer
