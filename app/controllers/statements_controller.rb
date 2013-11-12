@@ -1,4 +1,5 @@
 class StatementsController < ApplicationController
+  helper_method :sort_column, :sort_direction
   
   def index
     @statements = Statement.all
@@ -99,5 +100,15 @@ class StatementsController < ApplicationController
       format.html { redirect_to statements_path, notice: t('statement_refused') }
       format.json { render json: @statement }
     end
+  end
+  
+  private
+  
+  def sort_column
+    Statement.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 end

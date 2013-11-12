@@ -1,37 +1,11 @@
 <div class="row">
-	
 	<%= render 'shared/left' %>
-	
-	<div class="span8">
-		
+	<div class="span12">
 		<%= render 'shared/user' %>
+		<h1 class="doc_header">Акты<span class="caret"></span></h1>
+		  <%= render 'panel' %>
+		  
+		  <div id="permits_table"><%= render 'table' %></div>
 		
-		<table class="table table-striped">
-		  	 <tr>
-				<th>№</th>
-			    <th>Отправитель</th>
-				<th>Статус</th>
-			    <th>Тип</th>
-			    <th>Тема письма</th>
-			    <th>Детали</th>
-			    <th style="width: 110px">Дата/Время</th>
-			  </tr>
-
-			<% @statements.each do |statement| %>
-			  <tr>
-				<td><%= statement.id %></td>
-			    <td><%= doc_user(statement.user_id) %></td>
-				<td><%= statement_status(statement) %></td>
-			    <td><span class="label label-warning">Акт</span></td>
-			    <td><%= statement.title %></td>
-			    <td><%= link_to "Подробнее", statement %></td>
-			    <td><%= Russian::strftime(statement.created_at, "%d %B %Y %H:%M") %></td>
-			  </tr>
-			<% end %>
-		</table>
-		
-		
-	</div>
-	
-	
+	</div>	
 </div>
