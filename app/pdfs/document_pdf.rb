@@ -26,7 +26,11 @@ class DocumentPdf < Prawn::Document
     text "<color rgb='989898'>тел/факс: #{@organization.phone}", :align => :left, :size => 10, :inline_format => true
     text "<color rgb='989898'>#{@organization.mail}", :align => :left, :size => 10, :inline_format => true
     move_down 30
-    text "Письмо", :align => :center, :size => 20
+    if @document.document_type == 'mail'
+      text "Письмо", :align => :center, :size => 20
+    elsif @document.document_type == 'writ'
+      text "Распоряжение", :align => :center, :size => 20
+    end
     move_down 10
     float {text "<color rgb='989898'>Номер документа: #{@document.sn}</color>", :size => 10, :inline_format => true}
     text "<color rgb='989898'>г. Санкт-Петербург</color>", :align => :right, :size => 10, :inline_format => true
