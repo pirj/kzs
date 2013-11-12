@@ -1,30 +1,18 @@
 <%= form_for(@statement) do |f| %>
-<div class="new-header">
-	<span class="header"><%= @statement.title %> | <%= Russian::strftime(@statement.created_at, "%d %B %Y, %H:%M") %></span>
-	<span class="label label-warning" style="float: right; margin-top: 7px">Акт</span>
-</div>
+  <h3><%= @statement.title %></h3>
+  <%= statement_status(@statement) %><br>
+  <%= Russian::strftime(@statement.created_at, "%d %B %Y, %H:%M") %><br>
+	Организация-отправитель: <%= organzation_title_by_user_id(@statement.user_id) %><br>
 
-<div class="new-title">
-	<b>Организация-отправитель: </b><%= organzation_title_by_user_id(@statement.user_id) %>
-</div>
+	
 
-<div class="new-title">
-	<b>Тип документа:</b> Акт
-</div>
+  <% if @statement.organization_id? %>
+  <b>Организация-получатель: </b><%= organization(@statement.organization_id) %>
+  <% end %>
 
-<div class="new-title">
-	<b>Статус:</b>
-	<%= statement_status(@statement) %>
-</div>
-
-<% if @statement.organization_id? %>
-<div class="new-title"><b>Организация-получатель: </b><%= organization(@statement.organization_id) %><!--<span style="margin-left: 60px;">Исходящий №</span><input class="input-medium" type="text" placeholder=".input-medium">--></div>
-<% end %>
-
-<div class="new-text-wrap">
 	<%= @statement.text.html_safe %>
-</div>
 
-<%= render 'actions' %>
+  <%= render 'actions' %>
 
 <% end %>
+
