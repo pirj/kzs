@@ -5,18 +5,16 @@
 	<div class="span8">
 
   <%= render 'shared/user' %>
-  
+    
+    <% if action?('new') %>
 		<h1 class="doc_header">
-		  <% if action?('new') %>
-			  <% if params[:type] == 'mail' %>
-				Новое письмо
-			  <% elsif params[:type] == 'writ' %>
-				Новое распоряжение
-				<% end %>
-			<% else %>
-			  ФСО
+		  <% if params[:type] == 'mail' %>
+			Новое письмо
+		  <% elsif params[:type] == 'writ' %>
+			Новое распоряжение
 			<% end %>
 		<span class="caret"></span></h1>
+		<% end %>
 
 
 	<div class="btn-toolbar">

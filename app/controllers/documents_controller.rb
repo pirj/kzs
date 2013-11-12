@@ -155,7 +155,6 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.find(params[:id])
-    @document.restrict!(current_user)
     @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
@@ -334,7 +333,7 @@ class DocumentsController < ApplicationController
     @document.draft = true
     @document.user_id = current_user.id
     @document.save
-    redirect_to documents_url, notice: t('document_prepared')
+    redirect_to documents_url, notice: t('document_moved_to_drafts')
   end
   
   # misc

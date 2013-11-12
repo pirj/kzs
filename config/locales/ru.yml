@@ -51,6 +51,7 @@ ru:
   vip: "VIP"
   drivers: "Водители"
   permission_denied: "У вас нет прав на совершение данного действия"
+  document_moved_to_drafts: "Документ помещен в черновики"
   activerecord:
     models: 
       permission:

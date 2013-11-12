@@ -4,7 +4,8 @@
 		<%= f.submit "подготовить", :class => "btn btn-success", :name => "prepare" %>
 	</div>
 	
-	<% if @document.user_id == current_user.id %>
+	
+	<% if @document.user_id == current_user.id || action?('new') %>
 	<div class="btn-group" style="margin-left: 10px;">	
 		<%= f.submit "в черновики", :class => "btn btn-primary", :name => "to_draft" %>
 	</div>

@@ -48,7 +48,7 @@ module DocumentsHelper
   end
   
   def for_approve(document)
-    if document.approver_id == current_user.id && document.approved != true then true end
+    if document.approver_id == current_user.id && document.prepared? && document.approved != true then true end
   end
   
   def for_send(document)
