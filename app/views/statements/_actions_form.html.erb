@@ -1,0 +1,14 @@
+<div class="btn-toolbar">
+	
+	
+	<div class="btn-group">	
+		<%= f.submit "подготовить", :class => "btn btn-success", :name => "prepare" %>
+	</div>
+	
+	<% if action?('new') %>
+	<div class="btn-group">	
+		<%= f.submit "в черновики", :class => "btn btn-primary" %>
+	</div>
+	<% end %>
+
+  </div>

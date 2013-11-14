@@ -4,4 +4,7 @@ class Statement < ActiveRecord::Base
   belongs_to :document
   has_many :statement_approvers
   has_many :users, through: :statement_approvers
+  
+  scope :prepared, -> { where(prepared: true) }
+  scope :drafts, -> { where(draft: true) }
 end

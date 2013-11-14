@@ -20,7 +20,7 @@ module StatementsHelper
   end
   
   def for_accept(statement)
-    if statement.not_accepted? == false && statement.accepted == false && current_user.permissions.exists?('2') then true end
+    if statement.organization_id == current_user.organization_id && statement.sent == true then true end
   end
   
 end

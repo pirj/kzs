@@ -2,7 +2,13 @@ class StatementsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
-    @statements = Statement.all
+    current_user_id = current_user.id
+    organization = current_user.organization_id
+    
+    @statements = Statement.where{(sent == true) & (organization_id == organization) | 
+                                (sender_organization_id == organization) & (user_id == current_user_id) | 
+                                (prepared == true) & (sender_organization_id == organization) 
+                                }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +16,15 @@ class StatementsController < ApplicationController
     end
   end
   
+  def drafts    
+    @statements = Statement.drafts.where(:user_id => current_user.id)
+    render :index
+  end
+  
   def new
     @statement = Statement.new
+    organization = current_user.organization_id
+    @writs = Document.writs.where{(sent == true) & (organization_id == organization)}
     @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id = #{current_user.organization_id}")
 
     respond_to do |format|
@@ -45,6 +58,22 @@ class StatementsController < ApplicationController
     end
   end
   
+  def edit
+    @statement = Statement.find(params[:id])
+    organization = current_user.organization_id
+    @writs = Document.writs.where{(sent == true) & (organization_id == organization)}
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id = #{current_user.organization_id}")
+    
+    respond_to do |format|
+      if @statement.user_id == current_user.id && @statement.sent == false
+        format.html
+      else
+        format.html { redirect_to :back, notice: t('access_denied') }
+      end
+    end
+
+  end
+  
   def update
     @statement = Statement.find(params[:id])
     
@@ -66,6 +95,27 @@ class StatementsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @document }
     end
+  end
+  
+  def prepare
+    @statement = Statement.find(params[:id])
+    
+    if current_user.id == @statement.user_id    
+      @statement.prepared = true
+      @statement.draft = false
+      @statement.save
+      redirect_to statements_path, notice: t('statement_prepared')
+    else
+      redirect_to :back, notice: t('access_denied')
+    end
+      
+  end
+  
+  def send_statement
+    @statement = Statement.find(params[:id])
+    @statement.sent = true
+    @statement.save
+    redirect_to statements_path, :notice => 'statement_sent'
   end
   
   def accept

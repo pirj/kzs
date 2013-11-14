@@ -1,9 +1,29 @@
 <div class="btn-toolbar">
+  
+  <% if current_user.id == @statement.user_id && @statement.sent != true %>
+  <div class="btn-group"   style="margin-right: 10px;">	
+		<%= link_to 'Отправить', send_statement_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
+	</div>
+	<% end %>  
+	
+	<% if current_user.id == @statement.user_id && @statement.draft == true %>
+  <div class="btn-group"   style="margin-right: 10px;">	
+		<%= link_to 'Подготовить', prepare_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
+	</div>
+	<% end %>
+	
+	<% if current_user.id == @statement.user_id && @statement.sent == false %>
+  <div class="btn-group"   style="margin-right: 10px;">	
+		<%= link_to 'Редактировать', edit_statement_path(@statement), :class => "btn btn-success" %>
+	</div>
+	<% end %>
+	
+	
 	
 	<% if for_accept(@statement) %>
 
 	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Подписать', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
+		<%= link_to 'Принять', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
 	</div>
 	
 	<div class="btn-group"   style="margin-right: 10px;">	

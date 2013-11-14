@@ -1,7 +1,7 @@
 <div class="left_menu">
 	
 	<div class="doc-left">
-		<a href="#" class="main"></a>
+		<a href="/statements/drafts" class="main"></a>
 		<%= link_to documents_path, :class => (controller?("documents") ? 'doc active' : 'doc') do %>
 	    <span class="badge badge-important"><% unless indox(current_user) < 1  %> <%= indox(current_user) %> <% end %></span>
 	  <% end %>

@@ -2,9 +2,6 @@ Kzs::Application.routes.draw do
 
   get "/users/sign_out" => "sessions#destroy"
   devise_for :users
-  get "statements/new"
-
-  get "statements/show"
 
   mount Ckeditor::Engine => '/ckeditor'
   
@@ -43,9 +40,14 @@ Kzs::Application.routes.draw do
   end
   
   resources :statements do
+    collection do
+      get 'drafts'
+    end
     member do 
+      get 'prepare'
       get 'accept'
       get 'refuse'
+      get 'send_statement'
     end
   end
 
