@@ -99,7 +99,7 @@ $(document).ready(function(){
 	    e.stopPropagation()
 	})
 	
-	$('#document_organization_ids').chosen();
+	$('#document_organization_ids, #statement_approver_ids').chosen();
 	$('#document_approver_ids, #document_executor_ids, #statement_document_ids').chosen({max_selected_options: 1});
 	
 	$('#select_all_organizations').click(function(){

@@ -11,6 +11,15 @@
   <% end %>
 
 	<%= @statement.text.html_safe %>
+	
+	<h4>Согласование</h4>
+	<ul>
+	  <% @statement.statement_approvers.each do |approver| %>
+	    <li><%= statement_approver(approver) %>: <%= statement_approver_status(approver) %></li>
+	  <% end %>
+	</ul>
+	
+	    
 
   <%= render 'actions' %>
 

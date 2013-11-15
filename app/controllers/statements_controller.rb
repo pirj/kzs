@@ -24,8 +24,11 @@ class StatementsController < ApplicationController
   def new
     @statement = Statement.new
     organization = current_user.organization_id
-    @writs = Document.writs.where{(sent == true) & (organization_id == organization)}
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id = #{current_user.organization_id}")
+    @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+                                
+                                
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +37,18 @@ class StatementsController < ApplicationController
   end
   
   def create
+
     @statement = Statement.new(params[:statement])
+    
+    document_id = params[:statement][:document_ids].second
     
     @statement.user_id = current_user.id
     @statement.sender_organization_id = current_user.organization_id
-    @statement.document_id = params[:statement][:document_ids].second
-    @statement.organization_id = @statement.document.sender_organization_id
+    @statement.document_id = document_id
+    document = Document.find(document_id)
+    organization_id = document.sender_organization_id
     
+    @statement.organization_id = organization_id
     
     if params[:prepare]
       @statement.prepared = true
@@ -49,7 +57,7 @@ class StatementsController < ApplicationController
 
     respond_to do |format|
       if @statement.save && 
-        format.html { redirect_to documents_path, notice: t('document_successfully_created') }
+        format.html { redirect_to statement_path(@statement), notice: t('document_successfully_created') }
         format.json { render json: @statement, status: :created, location: @statement }
       else
         format.html { render action: "new" }
@@ -60,9 +68,11 @@ class StatementsController < ApplicationController
   
   def edit
     @statement = Statement.find(params[:id])
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+
+    
     organization = current_user.organization_id
-    @writs = Document.writs.where{(sent == true) & (organization_id == organization)}
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id = #{current_user.organization_id}")
+    @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
     
     respond_to do |format|
       if @statement.user_id == current_user.id && @statement.sent == false
@@ -79,7 +89,7 @@ class StatementsController < ApplicationController
     
     respond_to do |format|
       if @statement.update_attributes(params[:statement])
-        format.html { redirect_to statements_path, notice: t('statement_successfully_updated') }
+        format.html { redirect_to statement_path(@statement), notice: t('statement_successfully_updated') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -90,6 +100,11 @@ class StatementsController < ApplicationController
 
   def show
     @statement = Statement.find(params[:id])
+    
+    if @statement.organization_id == current_user.organization_id && current_user.has_permission?(2)
+      @statement.opened = true
+      @statement.save
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -115,18 +130,25 @@ class StatementsController < ApplicationController
     @statement = Statement.find(params[:id])
     @statement.sent = true
     @statement.save
-    redirect_to statements_path, :notice => 'statement_sent'
+    redirect_to statements_path, :notice => t('statement_sent')
   end
   
   def accept
     @statement = Statement.find(params[:id])
-    @statement.accepted = true
-    @statement.not_accepted = false
-    @statement.save
     
-    document = Document.find(@statement.document)
-    document.executed = true
-    document.save    
+    if @statement.user_ids.include?(current_user.id) && current_user.has_permission?(2)
+      statement_approver = @statement.statement_approvers.find_by_user_id(current_user.id)
+      statement_approver.accepted = true
+      statement_approver.save
+    end
+    
+    if @statement.statement_approvers.pluck(:accepted).exclude?(nil)    
+      document = Document.find(@statement.document)
+      document.executed = true
+      document.save  
+      @statement.accepted = true
+      @statement.save
+    end
 
     respond_to do |format|
       format.html { redirect_to statements_path, notice: t('statement_accepted') }

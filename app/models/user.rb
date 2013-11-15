@@ -23,8 +23,11 @@ class User < ActiveRecord::Base
   has_many :vehicle_users
   has_many :vehicles, :through => :vehicle_users
   
+  belongs_to :organization
+  
   scope :superuser, -> { where(is_superuser: true) }
   scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
+  scope :statement_approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '2'")
                               
   WORK_STATUSES = %w[at_work ooo]
   

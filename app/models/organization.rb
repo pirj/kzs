@@ -5,4 +5,10 @@ class Organization < ActiveRecord::Base
   
   validates :short_title, :inn, :admin_id, :presence => true
   has_attached_file :logo, :styles => { :pdf => "120x70#" } 
+  
+  has_many :users
+  
+  def users_statement
+    self.users.statement_approvers
+  end
 end

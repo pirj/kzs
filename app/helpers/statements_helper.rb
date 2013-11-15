@@ -20,7 +20,26 @@ module StatementsHelper
   end
   
   def for_accept(statement)
-    if statement.organization_id == current_user.organization_id && statement.sent == true then true end
+    
+    if statement.user_ids.include?(current_user.id) && current_user.has_permission?(2) && 
+       statement.statement_approvers.find_by_user_id(current_user.id).accepted != true then true end
+    
+    
+      
+  end
+  
+  def statement_approver(approver)
+    User.find(approver.user_id).first_name_with_last_name
+  end
+  
+  def statement_approver_status(approver)
+    if approver.accepted == true
+      status = "Принят"
+    elsif approver.accepted == false
+      status = "Не принят"
+    else
+      status = "Ожидание"
+    end
   end
   
 end
