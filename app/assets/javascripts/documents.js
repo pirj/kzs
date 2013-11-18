@@ -36,9 +36,23 @@
 			$('.label').filter(":hidden").clone().appendTo(".inform td div");
 			$('.control').filter(":hidden").clone().prependTo(".inform td");
 			
-			$('.inform').on("click", function() {	
+			full_control = $(".inform td").find(':checkbox')
+			$(document).find(':checkbox').not(full_control).prop('checked', null);
+			full_control.prop('checked', true);
+			$('.inform').on("click", function() {
+
+				// short_control = current_row.find('.control');
+				// short_control.html(full_control.html());
+				// short_label = current_row.find('.label');
+				// short_label.html(full_label.html());
+				
 				$(this).hide();
 				current_row.show();
+				// control = current_row.find('.control');
+				// label = current_row.find('.lavel');
+				// control.attr('checked', true);
+				// short_control = current_row.find('.control');
+				// short_control.html(full_control.html());
 			});
 			
 			
@@ -170,12 +184,13 @@ $(document).ready(function(){
 		$("#document_organization_ids").trigger("chosen:updated");
 	});
 	
-	$('#select_all_documents').on("click", function() {	
-		$(document).find(':checkbox').prop('checked', this.checked);
-		myFunction();
-	});
+	// $('#select_all_documents').on("click", function() {	
+	// 	$(document).find(':checkbox').prop('checked', this.checked);
+	// 	myFunction();
+	// });
 	
 	$('.document_operation').on("change", function() {
+		$(document).find(':checkbox').not(this).prop('checked', null);
 		elem = $(this)
 		myFunction(elem);
 	});
