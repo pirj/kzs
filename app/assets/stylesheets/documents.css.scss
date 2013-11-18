@@ -406,3 +406,19 @@ td {
 .sign_in{
 	margin-left: -40px;
 }
+
+.list_to_add_documents {
+	display: none;
+}
+
+.add_fields, .add_documents {
+  font-family: "open_sanslight", "Helvetica Neue", "Segoe UI", "Segoe WP", sans-serif;
+  font-weight: 100;
+	font-size: 14px;
+	font-weight: 100;
+	color: #1ba0e1;
+	padding: 0;
+	display: block;
+	margin: 0;
+	clear: both;
+}

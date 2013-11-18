@@ -199,6 +199,13 @@ $(document).ready(function(){
 		$('#text-search').submit();
 	});
 	
+	$('.add_documents').on("click", function() {	
+		$('.list_to_add_documents').toggle();
+		return false
+	});
+	
+	
+	
 	
 });
 

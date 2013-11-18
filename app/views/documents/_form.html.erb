@@ -45,15 +45,14 @@
 	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
 	
 	
-  <div class="new-title">
     <%= f.fields_for :document_attachments do |builder| %>
       <%= render 'document_attachment_fields', f: builder %>
     <% end %>
-    <%= link_to_add_fields "Добавить приложение", f, :document_attachments         %>
-  </div>
+    <%= link_to_add_fields "Добавить приложение", f, :document_attachments   %>
       
-  <div class="new-title">
-    <label style="text-indent: 0px; font-weight: bold;">Документы:</label>
+
+    <a href="#" class="add_documents">Прикрепить документы</a>
+    <div class="list_to_add_documents">
     <%= hidden_field_tag "document[document_ids][]", nil %>
     <% @documents.each do |document| %>
     <label class="checkbox">
@@ -63,7 +62,7 @@
     <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
     </label>
     <% end %>
-  </div>
+    </div>
 
 	
 	
