@@ -44,6 +44,29 @@
 	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>
 	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
 	
+	
+  <div class="new-title">
+    <%= f.fields_for :document_attachments do |builder| %>
+      <%= render 'document_attachment_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Добавить приложение", f, :document_attachments         %>
+  </div>
+      
+  <div class="new-title">
+    <label style="text-indent: 0px; font-weight: bold;">Документы:</label>
+    <%= hidden_field_tag "document[document_ids][]", nil %>
+    <% @documents.each do |document| %>
+    <label class="checkbox">
+    <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
+    <b><%= document.title %></b> ||
+    <%= t(document.document_type) %> ||
+    <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
+    </label>
+    <% end %>
+  </div>
+
+	
+	
 	<%= render 'actions_form', :f => f %>
 
 	<% end %>
