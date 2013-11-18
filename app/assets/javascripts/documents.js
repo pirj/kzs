@@ -65,7 +65,57 @@
 
 $(document).ready(function(){
 	
+	$('#new_document').validate({
+		
+	   ignore: ":hidden:not(select)", 
+		
+       rules:{
+            "document[title]":{
+                required: true,
+            },	
+            "document[organization_ids][]":{
+                required: true,
+            },
 
+			"document[approver_ids][]":{
+                required: true,
+            },
+
+			"document[executor_ids][]":{
+                required: true,
+            },
+
+			"document[text]":{
+                required: true,
+            },
+
+       },
+
+       messages:{
+
+            "document[title]":{
+                required: "Укажите тему письма"
+            },
+
+            "document[organization_ids][]":{
+                required: "Укажите тему организацию-получателя",
+            },
+
+			"document[approver_ids][]":{
+                required: "Укажите контрольное лицо",
+            },
+
+			"document[executor_ids][]":{
+                required: "Укажите исполнителя",
+            },
+
+			"document[text]":{
+                required: "Заполните текс письма",
+            },
+
+       }
+
+    });
 	
 
 	
@@ -99,8 +149,21 @@ $(document).ready(function(){
 	    e.stopPropagation()
 	})
 	
-	$('#document_organization_ids, #statement_approver_ids').chosen();
-	$('#document_approver_ids, #document_executor_ids, #statement_document_ids').chosen({max_selected_options: 1});
+	$('#document_organization_ids').chosen();
+	
+	
+	$("#document_organization_ids").chosen().change(function() {
+	        $("#new_document").validate().element("#document_organization_ids");
+	});
+	
+	$("#document_approver_ids").chosen({max_selected_options: 1}).change(function() {
+	        $("#new_document").validate().element("#document_approver_ids");
+	});
+	
+	$("#document_executor_ids").chosen({max_selected_options: 1}).change(function() {
+	        $("#new_document").validate().element("#document_executor_ids");
+	});
+	
 	
 	$('#select_all_organizations').click(function(){
 		$('#document_organization_ids').find("option").attr('selected', 'selected');

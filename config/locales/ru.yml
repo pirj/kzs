@@ -141,3 +141,7 @@ ru:
         vehicle_id: "ТС"
         start_date: "Дата выпуска"
         expiration_date: "Дата окончания"
+      statement:
+        title: "Заголовок"
+        text: "Содержимое"
+        document_id: "Распоряжение"

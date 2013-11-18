@@ -9,11 +9,6 @@ class StatementsController < ApplicationController
                                 (sender_organization_id == organization) & (user_id == current_user_id) | 
                                 (prepared == true) & (sender_organization_id == organization) 
                                 }
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @statements }
-    end
   end
   
   def drafts    
@@ -26,29 +21,26 @@ class StatementsController < ApplicationController
     organization = current_user.organization_id
     @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
     @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
-                                
-                                
-
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @statement }
-    end
   end
   
   def create
-
+    organization = current_user.organization_id
+    @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
     @statement = Statement.new(params[:statement])
     
     document_id = params[:statement][:document_ids].second
     
     @statement.user_id = current_user.id
     @statement.sender_organization_id = current_user.organization_id
-    @statement.document_id = document_id
-    document = Document.find(document_id)
-    organization_id = document.sender_organization_id
     
-    @statement.organization_id = organization_id
+    if document_id
+      @statement.document_id = document_id
+      document = Document.find(document_id)
+      organization_id = document.sender_organization_id
+      @statement.organization_id = organization_id
+    end
+    
     
     if params[:prepare]
       @statement.prepared = true
@@ -56,7 +48,7 @@ class StatementsController < ApplicationController
     end
 
     respond_to do |format|
-      if @statement.save && 
+      if @statement.save
         format.html { redirect_to statement_path(@statement), notice: t('document_successfully_created') }
         format.json { render json: @statement, status: :created, location: @statement }
       else
@@ -122,8 +114,7 @@ class StatementsController < ApplicationController
       redirect_to statements_path, notice: t('statement_prepared')
     else
       redirect_to :back, notice: t('access_denied')
-    end
-      
+    end    
   end
   
   def send_statement

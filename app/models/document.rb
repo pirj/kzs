@@ -7,6 +7,8 @@ class Document < ActiveRecord::Base
                   :document_conversation_id, :sender_organization_id, :executor_ids, :approver_ids
                   
   attr_accessor :organization_ids, :executor_ids, :approver_ids
+  
+  validates :title, :organization_id, :approver_id, :executor_id, :text, :presence => true
                   
   belongs_to :project
   belongs_to :document_conversation

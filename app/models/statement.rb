@@ -5,6 +5,9 @@ class Statement < ActiveRecord::Base
   has_many :statement_approvers
   has_many :users, through: :statement_approvers
   
+  
+  validates :document_id, :approver_ids, :title, :text, :presence => true
+  
   scope :prepared, -> { where(prepared: true) }
   scope :drafts, -> { where(draft: true) }
   
