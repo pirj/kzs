@@ -160,13 +160,9 @@ class DocumentsController < ApplicationController
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.where('id != ?', @document.id)
     
-    # if @document.user_id != current_user.id && @document.approver_id != current_user.id
-    #   redirect_to :back, :alert => t('access_denied')
-    # elsif @document.approved
-    #   redirect_to :back, :alert => t('approved_document_couldnt_be_edited')
-    # end
-    
-      
+    if @document.user_id != current_user.id || @document.approved == true || @document.approver_id != current_user.id
+      redirect_to :back, :alert => t('permission_denied')
+    end
   end
 
   def create
@@ -228,7 +224,7 @@ class DocumentsController < ApplicationController
   def approve
     @document = Document.find(params[:id])
     
-    if current_user.id == @document.approver_id    
+    if current_user.id == @document.approver_id && @document.approved == false  
       @document.draft = false
       @document.approved = true
       @document.approved_date = Time.now
@@ -237,15 +233,19 @@ class DocumentsController < ApplicationController
       @document.save
       redirect_to documents_path, notice: t('document_approved')
     else
-      redirect_to :back, notice: t('permission_denied')
+      redirect_to :back, alert: t('permission_denied')
     end
   end
   
   def send_document
     @document = Document.find(params[:id])
-    @document.sent = true
-    @document.save
-    redirect_to documents_url, notice: t('document_successfully_sent')
+    if current_user.id == @document.approver_id && @document.sent == false || current_user.id == @document.user_id && @document.sent == false
+      @document.sent = true
+      @document.save
+      redirect_to documents_url, notice: t('document_successfully_sent')
+    else
+      redirect_to :back, alert: t('permission_denied')
+    end
   end
   
   def callback
@@ -286,25 +286,29 @@ class DocumentsController < ApplicationController
       end
       redirect_to documents_path, notice: t('document_deleted')
     else
-      redirect_to :back, notice: t('permission_denied')
+      redirect_to :back, alert: t('permission_denied')
     end
   end
   
   def copy
     @original_document = Document.find(params[:id]) # find original object
-    @document = Document.new(:organization_id => @original_document.organization_id,
-                             :approver_id => @original_document.approver_id,
-                             :executor_id => @original_document.executor_id,
-                             :title => @original_document.title,
-                             :text => @original_document.text,
-                             :document_type => @original_document.document_type,
-                             :document_attachments => @original_document.document_attachments,
-                             :document_ids => @original_document.document_ids)
-    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
-    @executors = User.where(:organization_id => current_user.organization_id)
-    @recipients = User.where('organization_id != ?', current_user.organization_id)
-    @documents = Document.all
-    render :new # render same view as "new", but with @prescription attributes already filled in
+    if @original_document.sender_organization_id == current_user.organization.id    
+      @document = Document.new(:organization_id => @original_document.organization_id,
+                               :approver_id => @original_document.approver_id,
+                               :executor_id => @original_document.executor_id,
+                               :title => @original_document.title,
+                               :text => @original_document.text,
+                               :document_type => @original_document.document_type,
+                               :document_attachments => @original_document.document_attachments,
+                               :document_ids => @original_document.document_ids)
+      @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+      @executors = User.where(:organization_id => current_user.organization_id)
+      @recipients = User.where('organization_id != ?', current_user.organization_id)
+      @documents = Document.all
+      render :new
+    else
+      redirect_to :back, alert: t('permission_denied')
+    end
   end
   
   def reply

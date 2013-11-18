@@ -27,18 +27,18 @@
 
 <% if action?('drafts') %>
 <div class="btn-group">				
-  <%= submit_tag "подготовить", :class => "btn disabled", :name => "prepare", data: { confirm: "Вы уверены?" } %>
+  <%= link_to "подготовить", "#", :class => "btn disabled", :name => "prepare", data: { confirm: "Вы уверены?" } %>
 </div>
 <% end %>
 
 <% if current_user.has_permission?(1) %>
 <div class="btn-group">				
-  <%= submit_tag "подписать", :class => "btn disabled", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %>
+  <%= link_to "подписать", "#", :class => "btn disabled", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %>
 </div>
 <% end %>
 
 <div class="btn-group">				
-  <%= submit_tag "отправить", :class => "btn disabled", :name => "send", :id => 'send_link', data: { confirm: "Вы уверены?" } %>
+  <%= link_to "отправить", "#", :class => "btn disabled", :name => "send", :id => 'send_link', data: { confirm: "Вы уверены?" } %>
 </div>
 
 <div class="btn-group">	

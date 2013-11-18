@@ -208,20 +208,36 @@ $(function() {
     $( "#datepicker" ).datepicker();
 });
 
+// function myFunction(elem) {
+//   	if ($('.document_operation:checked').length == 1) {
+// 	$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('btn-success');
+// 	$("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
+// 	$("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
+// 	$("#reply_link").attr("href", "/documents/" + elem.val() + "/reply");
+// 	$("#delete_link").attr("href", "/documents/" + elem.val() + "/delete");
+//   } else if ($('.document_operation:checked').length > 1)  {
+// 	$( "input[name$='prepare'], #approve_link, #send_link" ).removeClass('disabled').addClass('btn-success');
+// 	$( "#create_copy_link, #edit_link, #reply_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
+//   } else {
+//     $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
+//   }
+// };
+
 function myFunction(elem) {
   	if ($('.document_operation:checked').length == 1) {
 	$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('btn-success');
-	$("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
+	
 	$("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
+	$("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
+	$("#approve_link").attr("href", "/documents/" + elem.val() + "/approve");
+	$("#send_link").attr("href", "/documents/" + elem.val() + "/send_document");
 	$("#reply_link").attr("href", "/documents/" + elem.val() + "/reply");
-	$("#delete_link").attr("href", "/documents/" + elem.val() + "/delete");
-  } else if ($('.document_operation:checked').length > 1)  {
-	$( "input[name$='prepare'], #approve_link, #send_link" ).removeClass('disabled').addClass('btn-success');
-	$( "#create_copy_link, #edit_link, #reply_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
+	
   } else {
     $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
   }
 };
+
 $('#delete_link').click(function() {
     $.post(this.href, { _method: 'delete' }, null, "script");
     return false;
