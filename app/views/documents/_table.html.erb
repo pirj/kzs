@@ -8,7 +8,8 @@
 		<% end %>
 	    <th><%= sortable "id", "Номер / Дата" %></th>
 	    <th><%= sortable "sender_organization_id", "Отправитель" %></th>
-		<th><%= sortable "organization_id", "Получатель" %></th> 
+		  <th><%= sortable "organization_id", "Получатель" %></th> 
+		  <th style="width: 100px;"><%= sortable "title", "Тема" %></th> 
 	    <th><%= sortable "document_type", "Тип" %></th>
 	    <th style="width: 30px"></th>
 	    <th class="tab_right"><%= sortable_status %></th>
@@ -24,7 +25,8 @@
 		<% end %>
 		<td><a class="document_id"><%= document.id %></a> / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
-		<td><%= organization(document.organization_id) %></td>
+		  <td><%= organization(document.organization_id) %></td>
+		  <td><%= truncate(document.title, length: 13) %></td>
 	    <td class="exp_type">
 		  <% if document.document_type == 'mail' %>
 		    Письмо
