@@ -93,6 +93,7 @@ class StatementsController < ApplicationController
   def show
     @statement = Statement.find(params[:id])
     @task_list = @statement.task_list
+    @writ = Document.find(@statement.document_id)
     
     if @statement.organization_id == current_user.organization_id && current_user.has_permission?(2)
       @statement.opened = true
