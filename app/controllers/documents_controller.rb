@@ -170,7 +170,7 @@ class DocumentsController < ApplicationController
     organizations = organizations.delete_if{ |x| x.empty? }
     organizations.each do |organization|
       document = Document.new(params[:document])
-      document.document_type = params[:type] ? params[:type] : 'mail'
+      # document.document_type = params[:type] ? params[:type] : 'mail'
       document.organization_id = organization
       document.user_id = current_user.id
       document.sender_organization_id = current_user.organization_id
