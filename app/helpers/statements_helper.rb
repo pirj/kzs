@@ -7,9 +7,9 @@ module StatementsHelper
     elsif document.not_accepted?
         '<span class="label label-important">Отклонен</span>'.html_safe     
     elsif document.opened?
-      '<span class="label">Прочитан</span>'.html_safe
+      '<span class="label">Получен</span>'.html_safe
     elsif document.sent?
-       '<span class="label label-info">Не прочитан</span>'.html_safe   
+       '<span class="label label-info">Отправлен</span>'.html_safe   
      elsif document.prepared?
        '<span class="label">Подготовлен</span>'.html_safe
     elsif document.draft?
@@ -20,12 +20,10 @@ module StatementsHelper
   end
   
   def for_accept(statement)
-    
     if statement.user_ids.include?(current_user.id) && current_user.has_permission?(2) && 
-       statement.statement_approvers.find_by_user_id(current_user.id).accepted != true then true end
-    
-    
-      
+       statement.statement_approvers.find_by_user_id(current_user.id).accepted != true &&
+       statement.task_list.nil? then true 
+    end
   end
   
   def statement_approver(approver)

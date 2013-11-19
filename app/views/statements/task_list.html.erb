@@ -1,0 +1,22 @@
+<div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		<%= render 'shared/user' %>
+		<h1 class="doc_header">Лист замечаний</h1>
+		<h3>К акту #<%= @statement.id %> к распоряжению #<%= @writ.sn %> </h3>
+		
+		<%= form_for @task_list do |f| %>
+		<%= f.hidden_field :statement_id, :value => params[:id] %>
+		<%= f.fields_for :tasks do |builder| %>
+      <%= render 'task_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Добавить задач", f, :tasks %>
+		
+		
+		
+		<%= f.submit "Создать" %>
+		<% end %>
+		
+		  <%= render 'panel' %>
+      
+</div>

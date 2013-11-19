@@ -92,6 +92,7 @@ class StatementsController < ApplicationController
 
   def show
     @statement = Statement.find(params[:id])
+    @task_list = @statement.task_list
     
     if @statement.organization_id == current_user.organization_id && current_user.has_permission?(2)
       @statement.opened = true
@@ -119,8 +120,11 @@ class StatementsController < ApplicationController
   
   def send_statement
     @statement = Statement.find(params[:id])
+    document = Document.find(@statement.document_id)
+    document.for_confirmation = true
+    document.save!
     @statement.sent = true
-    @statement.save
+    @statement.save!
     redirect_to statements_path, :notice => t('statement_sent')
   end
   
@@ -145,6 +149,12 @@ class StatementsController < ApplicationController
       format.html { redirect_to statements_path, notice: t('statement_accepted') }
       format.json { render json: @statement }
     end
+  end
+  
+  def task_list
+    @statement = Statement.find(params[:id])
+    @writ = Document.find(@statement.document_id)
+    @task_list = @statement.build_task_list
   end
   
   def refuse

@@ -1,5 +1,7 @@
 Kzs::Application.routes.draw do
 
+  get "task_lists/create"
+
   get "/users/sign_out" => "sessions#destroy"
   devise_for :users
 
@@ -48,6 +50,7 @@ Kzs::Application.routes.draw do
       get 'accept'
       get 'refuse'
       get 'send_statement'
+      get 'task_list'
     end
   end
 
@@ -57,9 +60,10 @@ Kzs::Application.routes.draw do
   resources :groups
   resources :organizations
   resources :projects
-  resources :statements
   resources :document_attachments
-
+  resources :task_lists
+  
+  match '/dashboard' => 'users#dashboard'
   root :to => 'documents#index'
   
   ActiveAdmin.routes(self)

@@ -4,9 +4,10 @@ class Statement < ActiveRecord::Base
   belongs_to :document
   has_many :statement_approvers
   has_many :users, through: :statement_approvers
+  has_one :task_list, :dependent => :destroy
   
   
-  validates :document_id, :approver_ids, :title, :text, :presence => true
+  validates :document_id, :title, :text, :presence => true
   
   scope :prepared, -> { where(prepared: true) }
   scope :drafts, -> { where(draft: true) }
