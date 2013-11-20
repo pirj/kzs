@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to users_path, notice: t("user_successfully_created") }

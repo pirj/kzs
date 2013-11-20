@@ -1,13 +1,14 @@
 class Permit < ActiveRecord::Base
-  attr_accessible :number, :user_id, :purpose, :start_date, :expiration_date, :requested_duration,
+  attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled, 
-                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, :drivers
+                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, :drivers, :user_attributes
   
 
   
   has_one :user
   has_one :vehicle
   accepts_nested_attributes_for :vehicle
+  accepts_nested_attributes_for :user
   
   scope :expired, lambda { where("expiration_date < ?", Date.today ) }
   scope :applications, -> { where(agreed: false) }

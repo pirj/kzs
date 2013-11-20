@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
          
   attr_accessor :login
 
-  attr_accessible :phone, :position, :division, :info, :dob, :permit, :phone, 
+  attr_accessible :phone, :position, :division, :info, :dob, :phone, 
                   :work_status, :organization_id, :email, :password, :password_confirmation, 
                   :avatar, :first_name, :last_name, :middle_name, :username, :right_ids, :remember_me,
                   :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids,
@@ -31,10 +31,12 @@ class User < ActiveRecord::Base
                               
   WORK_STATUSES = %w[at_work ooo]
   
+  before_save :save_with_empty_password
+  
   # validates :username, :first_name, :last_name, :middle_name,
   #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
             
-  validates :username, uniqueness: true
+  # validates :username, uniqueness: true
   
   has_attached_file :avatar, :styles => { :small => "48x48#", :large => "100x100#" } 
   
@@ -69,6 +71,10 @@ class User < ActiveRecord::Base
   
   def has_permission?(permission_id)
     permissions.exists?(permission_id)
+  end
+  
+
+  def save_with_empty_password    
   end
 
   

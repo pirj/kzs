@@ -41,7 +41,7 @@ class PermitsController < ApplicationController
     
     drivers = params[:permit][:drivers]
     drivers = drivers.delete_if{ |x| x.empty? }
-    @permit.save
+    @permit.save!
     
     vehicle = @permit.vehicle
     vehicle.user_ids = drivers
@@ -52,6 +52,7 @@ class PermitsController < ApplicationController
 
   def show
     @permit = Permit.find(params[:id])
+    @user = @permit.user
     respond_to do |format|
       format.html
       format.pdf do

@@ -4,25 +4,42 @@
 		<%= render 'shared/user' %>
 		<h1 class="doc_header">Заявки на пропуск<span class="caret"></span></h1>
 		  <%= render 'panel' %>
+		  
+		  
+	<% if @permit.permit_type == 'user' %>
+	  <h3>Пропуск на пеший проход</h3>
+	  
+	  Номер: <%= @permit.number %><br>
+	  
+	  <%= @user.last_name %><br>
+	  <%= @user.first_name %><br>
+	  <%= @user.middle_name %><br>
+	  
+	  <%= organization(@user.organization_id) %> <%= @user.position %><br>
+	  
+	  Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
     
-    <h3>Пропуск</h3>
+	  
+	<% elsif @permit.permit_type == 'vehicle' %>
+    <h3>Пропуск на транспортное средство</h3>
+    
     Номер: <%= @permit.number %><br>
-    Тип пропуска: <%= t(@permit.permit_type) %><br>
-    <% if @permit.permit_type == 'vehicle' %>
-    ТС: <%= @permit.vehicle.vehicle_title %><br>
-    <% else %>
-      Персона: <%= user(@permit.user_id).first_name_with_last_name %><br>
-    <% end %>
+    
     Класс пропуска: <%= t(@permit.permit_class) %><br>
+    
     Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
     <br>
-    
+
     <h3>Водители</h3>
     <ul>
       <% @permit.vehicle.users.each do |user| %>
         <li><%= user.first_name %></li>
       <% end %>
     </ul>
+  
+  <% end %>
+    
+
     
     
     <%= render 'actions' %>
