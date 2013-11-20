@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :statement_approvers
   has_many :statements, through: :statement_approvers
   has_many :open_notices
-  has_one :permit
+  belongs_to :permit
   
   has_many :vehicle_users
   has_many :vehicles, :through => :vehicle_users
@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
                               
   WORK_STATUSES = %w[at_work ooo]
   
-  validates :username, :first_name, :last_name, :middle_name,
-            :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
+  # validates :username, :first_name, :last_name, :middle_name,
+  #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
             
   validates :username, uniqueness: true
   

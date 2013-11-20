@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131119135602) do
+ActiveRecord::Schema.define(:version => 20131120090048) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -345,6 +345,7 @@ ActiveRecord::Schema.define(:version => 20131119135602) do
     t.date     "id_issue_date"
     t.string   "id_issuer"
     t.string   "alt_name"
+    t.integer  "permit_id"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

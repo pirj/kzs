@@ -8,9 +8,10 @@ $(document).ready(function(){
 	});
 	
 	$('#vehicle_type').on("click", function() {
-	    $('#permit_user_fields').hide();
+	  $('#permit_user_fields').hide();
 		$('#permit_vehicle_fields').show();
 		$('#permit_user_id').val('');
+		$('#permit_drivers').chosen({max_selected_options: 3});
 	});
 	
 	$('#temporary').on("click", function() {
@@ -26,7 +27,7 @@ $(document).ready(function(){
 		$('#permit_date').val('');
 	});
 	
-	$('#permit_drivers').chosen({max_selected_options: 3});
+	
 	
 	// $(".permits_table tr").on("click", function() {
 	// 	permit_id = $(this).attr('id');
