@@ -5,6 +5,10 @@ $(document).ready(function(){
 		$('#permit_user_fields').show();
 		$('#permit_vehicle_fields').hide();
 		$('#permit_vehicle_vehicle_body, #permit_vehicle_brand').val('');
+		inputs = $('#permit_vehicle_fields :input')	
+		inputs.each(function() {
+		  $(this).val('');
+		});
 	});
 	
 	$('#vehicle_type').on("click", function() {
@@ -12,6 +16,10 @@ $(document).ready(function(){
 		$('#permit_vehicle_fields').show();
 		$('#permit_user_id').val('');
 		$('#permit_drivers').chosen({max_selected_options: 3});
+		inputs = $('#permit_user_fields :input')	
+		inputs.each(function() {
+		  $(this).val('');
+		});
 	});
 	
 	$('#temporary').on("click", function() {
