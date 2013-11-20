@@ -67,6 +67,7 @@ class PermitsController < ApplicationController
   
   def edit
     @permit = Permit.find(params[:id])
+    @drivers = User.with_permit
   end
   
   def update

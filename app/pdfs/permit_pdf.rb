@@ -7,7 +7,8 @@ class PermitPdf < Prawn::Document
   end
   
   def initialize(permit, view)
-    super(margin: 0, :page_size => [595, 420])
+    super(margin: 0, :page_size => [243, 158])
+    
     @permit = permit
     @view = view
     russian_font
@@ -15,12 +16,24 @@ class PermitPdf < Prawn::Document
     if @permit.permit_type == 'user'
       
       @user = @permit.user
-      
+      @organization = Organization.find(@user.organization)
+      float {image "#{Rails.root}/app/assets/images/propusk_walker_back.jpg"}
       font "Verdana"
-      draw_text "#{@user.first_name}", :size => 30, :at => [425,285]
+      
+      draw_text "#{@organization.title}", :size => 9, :at => [90,147]
+      draw_text "#{@permit.number}", :size => 9, :at => [132,134]
+      
+      draw_text "#{@user.last_name}", :size => 9, :at => [100,120]
+      draw_text "#{@user.first_name}", :size => 9, :at => [100,105]
+      draw_text "#{@user.middle_name}", :size => 9, :at => [100,92]
+      
+      draw_text "#{@user.position}", :size => 9, :at => [135,78]
+      draw_text "#{@organization.title}", :size => 9, :at => [142,50]
+      draw_text "#{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 9, :at => [80,5]
+
       
     else
-      
+      super(margin: 0, :page_size => [595, 420])
 
       
     
