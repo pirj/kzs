@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
 
   def save_with_empty_password    
   end
+  
+  def self.with_permit
+    where{permit_id != nil}
+  end
 
   
 end

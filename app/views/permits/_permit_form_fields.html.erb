@@ -29,7 +29,18 @@
   <% end %>
   
   <h3>3. Водители</h3>
-    <%= f.collection_select(:drivers, User.all, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %>
+  
+  <label class="control checkbox">
+     <%= f.check_box :way_bill %>
+     <span class="checkbox-label">Согласно путевому листу</span>
+  </label>
+  
+  <br>
+  
+    <%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %> 
+    
+
+    
   </div>
   
   <!-- <h3>2. Условия посещения</h3> -->

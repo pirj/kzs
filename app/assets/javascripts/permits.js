@@ -35,11 +35,9 @@ $(document).ready(function(){
 		$('#permit_date').val('');
 	});
 	
+	$('#permit_way_bill').on("change", function() {
+		$('#permit_drivers_chosen').toggle();
+	});
 	
-	
-	// $(".permits_table tr").on("click", function() {
-	// 	permit_id = $(this).attr('id');
-	// 	window.location = "/permits/" + permit_id;
-	// });
 	
 });

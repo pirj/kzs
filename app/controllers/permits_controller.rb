@@ -27,6 +27,7 @@ class PermitsController < ApplicationController
     authorize! :create, @permit
     @vehicle = @permit.build_vehicle
     @user = @permit.build_user
+    @drivers = User.with_permit
   end
   
   def create

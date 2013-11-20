@@ -29,13 +29,17 @@
     
     Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
     <br>
-
+    
     <h3>Водители</h3>
-    <ul>
-      <% @permit.vehicle.users.each do |user| %>
-        <li><%= user.first_name %></li>
-      <% end %>
-    </ul>
+    <% if @permit.way_bill %>
+      Согласно путевому листу
+    <% else %>
+      <ul>
+        <% @permit.vehicle.users.each do |user| %>
+          <li><%= user.first_name %></li>
+        <% end %>
+      </ul>
+    <% end %>
   
   <% end %>
     

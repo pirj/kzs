@@ -1,7 +1,8 @@
 class Permit < ActiveRecord::Base
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled, 
-                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, :drivers, :user_attributes
+                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, 
+                  :drivers, :user_attributes, :way_bill
   
 
   
