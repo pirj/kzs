@@ -21,8 +21,9 @@
 			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
 			$("<li><span>Тема:</span><p class='exp_title'><a href='/documents/" + document_id + "'>" + data.title + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span>Исполнитель:</span><p class='exp_exec'><a href='#'>" + document_executor + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span>Отправитель:</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
+			$("<li><span>Исполнитель</span><p class='exp_exec'><a href='#'>" + document_executor + "</a></p></li>").appendTo('.inform td ul');
+			$("<li><span>Отправитель</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
+			$("<li><span style='text-align: right;'>Контрольное <br> лицо</span><p class='exp_exec'><a href='#'>" + data.approver + "</a></p></li>").appendTo('.inform td ul');
 			if (data.attachments.length != 0){
 				$("<li class='attach'><span>Приложения:</span></li>").appendTo('.inform td ul');
 				$.each(data.attachments, function(i,attachment_file_name){

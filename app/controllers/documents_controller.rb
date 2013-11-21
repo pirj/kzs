@@ -113,6 +113,11 @@ class DocumentsController < ApplicationController
     if @document.executor_id
       @executor = User.find(@document.executor_id).first_name_with_last_name
     end
+    
+    if @document.approver_id
+      @approver = User.find(@document.approver_id).first_name_with_last_name
+    end
+    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -126,6 +131,7 @@ class DocumentsController < ApplicationController
                                     :type => t(@document.document_type),
                                     :executor => @executor,
                                     :sender => @sender,
+                                    :approver => @approver,
                                     :prepared => @document.prepared,
                                     :prepared_date => @document.prepared_date,
                                     :approved => @document.approved,
