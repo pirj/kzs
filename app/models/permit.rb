@@ -18,7 +18,7 @@ class Permit < ActiveRecord::Base
   
   default_scope order('created_at DESC')
 
-  validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
+  # validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
   
   TYPES = %w[user vehicle temporary]
   PERMIT_CLASSES = %w[standart vip]
