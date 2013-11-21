@@ -1,13 +1,12 @@
 <div class="left_menu">
 	
 	<div class="doc-left">
-		<a href="/statements/drafts" class="main"></a>
-		<%= link_to documents_path, :class => (controller?("documents") ? 'doc active' : 'doc') do %>
+		<a href="#" class="main"></a>
+		<%= link_to documents_path, :class => (controller?("documents") && action?('index') ? 'doc active' : 'doc') do %>
 	    <span class="badge badge-important"><% unless indox(current_user) < 1  %> <%= indox(current_user) %> <% end %></span>
 	  <% end %>
-	  <a href="/documents/drafts" class="az"></a>
-	  <a href="/statements" class="chat"><!-- <span class="badge badge-warning big">88</span> --></a>
-	  <a href="/permits" class="security"></a>
-	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'objects' %>
+	  <%= link_to "", drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? 'ch active' : 'ch')  %>
+	  <%= link_to "", statements_path, :class => (controller?("statements") ? 'acts active' : 'acts')  %>
+	  <%= link_to "", permits_path, :class => (controller?("permits") ? 'security active' : 'security')  %>
 	</div>
 </div>

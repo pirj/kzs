@@ -104,6 +104,24 @@
 		background: #fff url('left-icon/az-3.png') no-repeat center;
 	}
 	}
+	.ch {
+	background: #fff url('left-icon/Che-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/Che-3.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/Che-2.png') no-repeat center;
+	}
+	}
+	.acts {
+	background: #fff url('left-icon/A-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/A-3.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/A-2.png') no-repeat center;
+	}
+	}
 	.security {
 	background: #fff url('left-icon/security-1.png') no-repeat center;
 	&:hover {
