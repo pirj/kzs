@@ -9,7 +9,12 @@ module StatementsHelper
     elsif document.opened?
       '<span class="label">Получен</span>'.html_safe
     elsif document.sent?
-       '<span class="label label-info">Отправлен</span>'.html_safe   
+       if document.organization_id == current_user.organization_id
+        '<span class="label">Получен</span>'.html_safe
+      else
+        '<span class="label label-info">Отправлен</span>'.html_safe   
+      end
+       
      elsif document.prepared?
        '<span class="label">Подготовлен</span>'.html_safe
     elsif document.draft?
