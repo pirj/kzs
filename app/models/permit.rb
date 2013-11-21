@@ -15,6 +15,8 @@ class Permit < ActiveRecord::Base
   scope :applications, -> { where(agreed: false) }
   
   attr_accessor :date, :drivers
+  
+  default_scope order('created_at DESC')
 
   validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
   
