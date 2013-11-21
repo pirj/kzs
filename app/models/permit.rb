@@ -20,7 +20,7 @@ class Permit < ActiveRecord::Base
 
   validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
   
-  TYPES = %w[user vehicle]
+  TYPES = %w[user vehicle temporary]
   PERMIT_CLASSES = %w[standart vip]
   
   def temporary

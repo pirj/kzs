@@ -37,12 +37,12 @@
 	<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
   <!-- end -->
 	
-	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема письма' %>
+	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема' %>
 	
 	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px;', :'data-placeholder' => "Организация-получатель"}) %>
 	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Контрольное-лицо"}) %>
 	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>
-	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст письма', :rows => "20" %>
+	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст', :rows => "20" %>
 	
 	
     <%= f.fields_for :document_attachments do |builder| %>
