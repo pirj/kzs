@@ -8,20 +8,20 @@
   
   <% if current_user.has_permission?(6) %>
   <div class="btn-group">	
-  	<%= link_to "Новая заявка", new_permit_path, :class=> "btn btn-success" %>	
+  	<%= link_to "Новая заявка", new_permit_path, :class=> "btn" %>	
   </div>
   <% end %>
   
   <div class="btn-group">	
-  	<%= link_to "Все пропуска", permits_path, :class=> "btn btn-disabled" %>	
+  	<%= link_to "Все пропуска", permits_path, :class=> "btn", :class => (params[:scope] ? 'btn' : 'btn btn-primary') %>	
   </div>
 
   <div class="btn-group">	
-  	<%= link_to "Текущие заявки", permits_path(:scope => :application), :class=> "btn btn-primary" %>	
+  	<%= link_to "Текущие заявки", permits_path(:scope => :application), :class => (params[:scope] == 'application' ? 'btn btn-primary' : 'btn') %>	
   </div>
 
   <div class="btn-group">	
-  	<%= link_to "Просроченные", permits_path(:scope => :expired), :class=> "btn btn-disabled" %>	
+  	<%= link_to "Просроченные", permits_path(:scope => :expired), :class => (params[:scope] == 'expired' ? 'btn btn-primary' : 'btn') %>	
   </div>
 
 </div>
