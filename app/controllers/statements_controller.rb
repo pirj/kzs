@@ -5,7 +5,7 @@ class StatementsController < ApplicationController
     current_user_id = current_user.id
     organization = current_user.organization_id
     
-    @statements = Statement.where{(sent == true) & (organization_id == organization) | 
+    @statements = Statement.order('created_at DESC').where{(sent == true) & (organization_id == organization) | 
                                 (sender_organization_id == organization) & (user_id == current_user_id) | 
                                 (prepared == true) & (sender_organization_id == organization) 
                                 }

@@ -24,6 +24,11 @@ module StatementsHelper
     end
   end
   
+  def statement_indox(current_user)
+    count = Statement.unopened.where(:organization_id => current_user.organization_id).count
+    count
+  end
+  
   def for_accept(statement)
     if statement.user_ids.include?(current_user.id) && current_user.has_permission?(2) && 
        statement.statement_approvers.find_by_user_id(current_user.id).accepted != true &&
