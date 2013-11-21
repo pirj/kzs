@@ -3,7 +3,7 @@ class Organization < ActiveRecord::Base
                   :address, :phone, :mail, :director_id, :short_title, :inn, :admin_id
   acts_as_nested_set
   
-  validates :short_title, :inn, :admin_id, :presence => true
+  # validates :short_title, :inn, :admin_id, :presence => true
   has_attached_file :logo, :styles => { :pdf => "120x70#" } 
   
   has_many :users
