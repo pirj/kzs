@@ -94,6 +94,7 @@ ru:
         id_issue_date: "Дата выдачи докумета"
         id_issuer: "Организация выдавшая документ"
         alt_name: "Альтернативное имя"
+        username: "Системное имя"
       permission:
         title: "Название"
         description: "Описание"
