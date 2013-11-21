@@ -37,23 +37,22 @@
 			$('.label').filter(":hidden").clone().appendTo(".inform td div");
 			$('.control').filter(":hidden").clone().prependTo(".inform td");
 			
+			$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('btn-success');
+
+			$("#create_copy_link").attr("href", "/documents/" + document_id + "/copy");
+			$("#edit_link").attr("href", "/documents/" + document_id + "/edit");
+			$("#approve_link").attr("href", "/documents/" + document_id + "/approve");
+			$("#send_link").attr("href", "/documents/" + document_id + "/send_document");
+			$("#reply_link").attr("href", "/documents/" + document_id + "/reply");
+			
 			full_control = $(".inform td").find(':checkbox')
 			$(document).find(':checkbox').not(full_control).prop('checked', null);
 			full_control.prop('checked', true);
 			$('.inform').on("click", function() {
-
-				// short_control = current_row.find('.control');
-				// short_control.html(full_control.html());
-				// short_label = current_row.find('.label');
-				// short_label.html(full_label.html());
-				
 				$(this).hide();
 				current_row.show();
-				// control = current_row.find('.control');
-				// label = current_row.find('.lavel');
-				// control.attr('checked', true);
-				// short_control = current_row.find('.control');
-				// short_control.html(full_control.html());
+				$( "#create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
+				$( "#create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).attr("href", "");
 			});
 			
 			
