@@ -73,7 +73,11 @@ module DocumentsHelper
     elsif document.opened?
       '<span class="label label-success">Получен</span>'.html_safe
     elsif document.sent?
+      if document.organization_id == current_user.organization_id
+       '<span class="label label-info">Получен</span>'.html_safe
+     else
        '<span class="label label-info">Отправлен</span>'.html_safe
+     end
      elsif document.approved?
        '<span class="label label-warning">Подписан</span>'.html_safe    
      elsif document.prepared?
