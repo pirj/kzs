@@ -70,7 +70,7 @@ namespace :users do
       user.email = Faker::Internet.free_email
       user.encrypted_password = User.new(:password => "password").encrypted_password
     end
-    User.create!(:username => 'tester', :first_name => 'tester', :last_name => 'tester', :middle_name => 'tester', :phone => '7777777', :position => 'tester', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'tester', :password_confirmation => 'tester', :id_type => 'Паспорт', :id_sn => '400812342', :id_issue_date => Date.today, :id_issuer => 'ОТП 29')
+    User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :phone => '7777777', :position => 'admin', :division => 'НТР', :info => 'НЕТ', :dob => 1998, :organization_id => '3', :work_status => 'at_work', :organization_id => '2', :email => 'babrovka@gmail.com', :password => 'admin', :password_confirmation => 'admin', :id_type => 'Паспорт', :id_sn => '400812342', :id_issue_date => Date.today, :id_issuer => 'ОТП 29')
     User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'avatars', '*')).sample); user.save! }
     puts "Users create!"
   end
@@ -78,7 +78,7 @@ end
 
 namespace :users do
   task :add_permission => :environment do
-    user = User.find_by_username('tester')
+    user = User.find_by_username('admin')
     permissions = Permission.all
     user.permissions << permissions
     user.save!
@@ -112,7 +112,6 @@ namespace :documents do
       d.title = Faker::Lorem.words(3)
       d.user_id = User.find_by_organization_id(sender_organization.id)
       d.approver_id = User.all.sample
-
     end
   end
 end

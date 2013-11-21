@@ -36,9 +36,7 @@ ActiveAdmin.register Organization do
       attributes_table do
         row :short_title
         row :inn
-        row :admin_id do |row|
-          User.find(row.admin_id).first_name_with_last_name
-        end
+        row :admin_id
         row :title
         row :parent_id
         row :logo do |row|
