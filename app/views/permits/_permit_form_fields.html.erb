@@ -8,16 +8,21 @@
     <%= f.radio_button :permit_type, "vehicle"  %>
     <span id="vehicle_type" class="radio-label">на транспортное средство</span>
   </label>
-
+  
+  <!-- <label class="control radio">
+    <%= f.radio_button :permit_type, "temporary"  %>
+    <span id="permanent_type" class="radio-label">разовый пропуск</span>
+  </label> -->
+  
+  
+  <!-- <div id="permit_temporary_fields">
+  </div> -->
   
   <div id="permit_user_fields">
   <h3>1. Личные данные</h3>
   <%= f.fields_for :user do |v| %>
     <%= render 'user_fields', v: v %>
   <% end %>
-  
-  
-  
   </div>
   
   <div id="permit_vehicle_fields">
@@ -63,9 +68,9 @@
 		<span class="permit_label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
 		</div>
 		
-		<div id="temoporary_fields">
-		<span class="permit_label">Пропуск действителен</span> <%= f.text_field :date, :placeholder => 'Дата' %>
-		</div>
+    <!-- <div id="temoporary_fields">
+    <span class="permit_label">Пропуск действителен</span> <%= f.text_field :date, :placeholder => 'Дата' %>
+    </div> -->
 		
 
 

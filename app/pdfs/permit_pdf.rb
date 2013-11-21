@@ -48,37 +48,53 @@ class PermitPdf < Prawn::Document
       
     else
       super(margin: 0, :page_size => [595, 420])
-
       
+        if @permit.permit_class == 'vip'
     
-      if @permit.start_date == @permit.expiration_date
-        float {image "#{Rails.root}/app/assets/images/propusk_temporary.jpg"}
+          float {image "#{Rails.root}/app/assets/images/propusk_back_VIP.jpg"}
       
-        font "Verdana"
-        draw_text "#{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 30, :at => [425,285]
-        draw_text "№#{@permit.number}", :size => 25, :at => [500,250]
-      
-        font "RoadNumbers"
-        draw_text "#{@permit.vehicle.register_sn}", :size => 80, :at => [228,115]
-        draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [474,130]
-      
-      
-      else
-        float {image "#{Rails.root}/app/assets/images/propusk_back.jpg"}
-      
-        move_down 140
+          move_down 140
 
-        font "Verdana"
-        draw_text "№#{@permit.number}", :size => 25, :at => [484,262]
-
-        font "RoadNumbers"
-        draw_text "#{@permit.vehicle.register_sn}", :size => 80, :at => [44,100]
-        draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [288,117]
-  
-      end
-        start_new_page
-        if @permit.way_bill
+          font "Verdana"
+          fill_color(100,83,28,13)
+          draw_text "№ #{@permit.number}", :size => 38, :at => [407,128]
+        
+          fill_color(0,0,0,100)
+          font "RoadNumbers"
+          draw_text "#{@permit.vehicle.register_sn}", :size => 74, :at => [40,58]
+          draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [255,72]
           
+        else
+        
+          float {image "#{Rails.root}/app/assets/images/propusk_back.jpg"}
+    
+          move_down 140
+
+          font "Verdana"
+          fill_color(0,0,0,0)
+          draw_text "№ #{@permit.number}", :size => 38, :at => [407,244]
+      
+          fill_color(0,0,0,100)
+          font "RoadNumbers"
+          draw_text "#{@permit.vehicle.register_sn}", :size => 74, :at => [267,76]
+          draw_text "#{@permit.vehicle.sn_region}", :size => 55, :at => [479,88]
+          
+        end
+
+      
+        start_new_page
+        
+        
+        
+        if @permit.way_bill
+          font "Verdana"
+          float {image "#{Rails.root}/app/assets/images/propusk_car_back-2.jpg"}
+          draw_text "#{@permit.vehicle.brand}", :size => 20, :at => [200,163]
+          
+          font "RoadNumbers"
+          draw_text "#{@permit.vehicle.register_sn}", :size => 52, :at => [140,93]
+          draw_text "#{@permit.vehicle.sn_region}", :size => 36, :at => [304,103]
+          draw_text "#{@permit.expiration_date.strftime('%d.%m.%Y')}", :size => 20, :at => [162,57]
         else
           @drivers = @permit.vehicle.users
           @driver = @drivers.first
