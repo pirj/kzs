@@ -134,14 +134,16 @@ $(document).ready(function(){
 	
 
 	
-	$('#select_all_documents').on("click", function() {	
-		checked = $("#document_confidential").is(':checked')
-		  if (checked == true) {
-			$('#document_recipient_id').show();
-		  } else {
-		    $('#document_recipient_id').hide();
-		  }
-	});
+	// $('#select_all_documents').on("click", function() {	
+	// 	checked = $("#document_confidential").is(':checked')
+	// 	  if (checked == true) {
+	// 		$('#document_recipient_id').show();
+	// 	  } else {
+	// 	    $('#document_recipient_id').hide();
+	// 	  }
+	// });
+	
+	
 	
 	
 	
@@ -190,7 +192,7 @@ $(document).ready(function(){
 	// 	myFunction();
 	// });
 	
-	$('.document_operation').on("change", function() {
+	$('.document_operation, #select_all_documents').on("change", function() {
 		$(document).find(':checkbox').not(this).prop('checked', null);
 		elem = $(this)
 		myFunction(elem);
