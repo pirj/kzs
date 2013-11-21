@@ -20,16 +20,20 @@ class StatementsController < ApplicationController
     @statement = Statement.new
     organization = current_user.organization_id
     @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+    @acceptors = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 1 AND organization_id = #{current_user.organization_id}")
   end
   
   def create
     organization = current_user.organization_id
     @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+    @acceptors = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 1 AND organization_id = #{current_user.organization_id}")
     @statement = Statement.new(params[:statement])
     
     document_id = params[:statement][:document_ids].second
+    
+    @statement.approver_id = params[:statement][:internal_approver_id].second
     
     @statement.user_id = current_user.id
     @statement.sender_organization_id = current_user.organization_id
@@ -60,8 +64,9 @@ class StatementsController < ApplicationController
   
   def edit
     @statement = Statement.find(params[:id])
-    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
-
+    @acceptors = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
+    @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 1 AND organization_id = #{current_user.organization_id}")
+    
     
     organization = current_user.organization_id
     @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
@@ -78,6 +83,7 @@ class StatementsController < ApplicationController
   
   def update
     @statement = Statement.find(params[:id])
+    @statement.approver_id = params[:statement][:internal_approver_id].second
     
     respond_to do |format|
       if @statement.update_attributes(params[:statement])
@@ -117,6 +123,22 @@ class StatementsController < ApplicationController
     else
       redirect_to :back, notice: t('access_denied')
     end    
+  end
+  
+  def approve
+    @statement = Statement.find(params[:id])
+    
+    if current_user.id == @statement.approver_id && @statement.approved == false  
+      @statement.draft = false
+      @statement.approved = true
+      @statement.approved_date = Time.now
+      @statement.date = Time.now
+      @statement.sn = "D" + @statement.id.to_s
+      @statement.save
+      redirect_to statements_path, notice: t('statement_approved')
+    else
+      redirect_to :back, alert: t('permission_denied')
+    end
   end
   
   def send_statement

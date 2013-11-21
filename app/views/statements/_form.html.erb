@@ -36,7 +36,9 @@
 			
 			<%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => @statement.document_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите распоряжение"}) %>
 			
-      <%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите согласующих лиц"}) %>
+			<%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите контрольное лицо"}) %>
+			
+      <%= f.collection_select(:approver_ids, @acceptors, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите согласующих лиц"}) %>
       
 			
 			<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Укажите заголовок акта..' %>

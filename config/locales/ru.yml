@@ -54,6 +54,7 @@ ru:
   document_moved_to_drafts: "Документ помещен в черновики"
   statement_sent: "Акт отправлен"
   statement_prepared: "Акт подготовлен"
+  statement_approved: "Акт подписан"
   activerecord:
     models: 
       permission:

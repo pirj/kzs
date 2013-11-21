@@ -14,7 +14,8 @@ module StatementsHelper
       else
         '<span class="label label-info">Отправлен</span>'.html_safe   
       end
-       
+    elsif document.approved?
+      '<span class="label">Подписан</span>'.html_safe
      elsif document.prepared?
        '<span class="label">Подготовлен</span>'.html_safe
     elsif document.draft?

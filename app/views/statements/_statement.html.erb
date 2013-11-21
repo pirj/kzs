@@ -12,7 +12,12 @@
 
 	<%= @statement.text.html_safe %>
 	
-	<h4>Согласование</h4>
+	<% if @statement.approver_id %>
+	<h4>Контрольное лицо</h4>
+	<%= user(@statement.approver_id).first_name_with_last_name %>
+	<% end %>
+	
+	<h4>Контролеры</h4>
 	<ul>
 	  <% @statement.statement_approvers.each do |approver| %>
 	    <li><%= statement_approver(approver) %>: <%= statement_approver_status(approver) %></li>

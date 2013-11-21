@@ -47,6 +47,7 @@ Kzs::Application.routes.draw do
     end
     member do 
       get 'prepare'
+      get 'approve'
       get 'accept'
       get 'refuse'
       get 'send_statement'
