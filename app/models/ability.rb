@@ -5,6 +5,17 @@ class Ability
     
     can :approve, Document if user.permissions.exists?('1')    
     can :create, Permit if user.permissions.exists?('6')
+    
+    
+    
+    
+    if user.sys_user
+      can :manage, User
+      can :manage, Organization
+    else
+      can :manage, User, :id => user.id
+      can :manage, Organization, :id => user.organization_id
+    end
 
     # Define abilities for the passed in user here. For example:
     #

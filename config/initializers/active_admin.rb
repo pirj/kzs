@@ -15,7 +15,7 @@ ActiveAdmin.setup do |config|
   #
   config.site_title = "Kzs"
   
-  
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
   
   config.before_filter :check_admin_role
 

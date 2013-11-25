@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131121154627) do
+ActiveRecord::Schema.define(:version => 20131125151643) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -320,12 +320,12 @@ ActiveRecord::Schema.define(:version => 20131121154627) do
     t.text     "info"
     t.string   "dob"
     t.string   "permit"
-    t.datetime "created_at",                                                            :null => false
-    t.datetime "updated_at",                                                            :null => false
+    t.datetime "created_at",                                                               :null => false
+    t.datetime "updated_at",                                                               :null => false
     t.string   "work_status"
     t.integer  "organization_id"
-    t.string   "email",                                                 :default => "", :null => false
-    t.string   "encrypted_password",                                    :default => "", :null => false
+    t.string   "email",                                                 :default => "",    :null => false
+    t.string   "encrypted_password",                                    :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -352,6 +352,7 @@ ActiveRecord::Schema.define(:version => 20131121154627) do
     t.string   "id_issuer"
     t.string   "alt_name"
     t.integer  "permit_id"
+    t.boolean  "sys_user",                                              :default => false
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
