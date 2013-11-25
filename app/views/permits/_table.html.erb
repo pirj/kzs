@@ -1,25 +1,25 @@
 <table class="table permits_table" style="font-size: 12px; width: 900px;">
   	 <tr>
+  	  <th></th>
 	    <th><%= sortable "number", "№" %></th>
 			<th><%= sortable "permit_type", "Тип" %></th>
-			<!-- <th>Цель пребывания</th> -->
 			<th><%= sortable "start_date", "Начало срока действия" %></th>
 			<th><%= sortable "expiration_date", "Окончание срока действия" %></th>
-			<!-- <th>Сектор зоны посещения</th> -->
-			<!-- <th>Объект посещения</th> -->
 			<th><%= sortable_status %></th>
 	    <th>Детали</th>
 	  </tr>
 
 	<% @permits.each do |permit| %>
 	  <tr id="<%= permit.id %>">
-			<td><%= permit.number %></td>
-			<th><%= t(permit.permit_type) %></th>
-			<!-- <th><%= permit.purpose %></th> -->
-			<th><%= permit.start_date.strftime("%d.%m.%y") %></th>
-			<th><%= permit.expiration_date.strftime("%d.%m.%y") %></th>
-			<!-- <th><%= permit.granted_area %></th> -->
-			<!-- <th><%= permit.granted_object %></th> -->
+	    <td class="not_this">
+	      <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
+	        <span class="checkbox-label"></span>
+        </label>
+      </td>
+			<td><%= permit.id %></td>
+			<td><%= t(permit.permit_type) %></th>
+			<td><%= permit.start_date.strftime("%d.%m.%y") %></th>
+			<td><%= permit.expiration_date.strftime("%d.%m.%y") %></th>
 			<td><%= permit_status(permit) %></td>
 	    <td><%= link_to "Подробнее", permit %></td>
 	  </tr>

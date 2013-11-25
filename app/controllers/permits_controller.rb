@@ -154,6 +154,14 @@ class PermitsController < ApplicationController
     end
   end
   
+  def group_print
+    @permits = Permit.where(:id => params[:permit_ids])
+    
+    pdf = PermitGroupPrintPdf.new(@permits, view_context)
+    send_data pdf.render, filename: "permits.pdf",
+                          type: "application/pdf",
+                          disposition: "inline"
+  end
   
   private
   

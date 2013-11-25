@@ -39,6 +39,9 @@ Kzs::Application.routes.draw do
       get 'issue'
       get 'reject'
     end
+    collection do
+      get 'group_print'
+    end
   end
   
   resources :statements do

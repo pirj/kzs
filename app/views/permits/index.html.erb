@@ -1,11 +1,11 @@
 <div class="row">
 	<%= render 'shared/left' %>
 	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Заявки на пропуск<!-- <span class="caret"></span> --></h1>
-		  <%= render 'panel' %>
-		  
-		  <div id="permits_table"><%= render 'table' %></div>
-		
+	  <%= form_tag group_print_permits_path, method: :get do %>
+		  <%= render 'shared/user' %>
+	    <h1 class="doc_header">Заявки на пропуск<!-- <span class="caret"></span> --></h1>
+	    <%= render 'panel' %>
+	    <div id="permits_table"><%= render 'table' %></div>
+		<% end %>
 	</div>	
 </div>
