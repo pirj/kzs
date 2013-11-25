@@ -15,14 +15,16 @@
   </label> -->
   
   
-  <!-- <div id="permit_temporary_fields">
-  </div> -->
+
   
   <div id="permit_user_fields">
   <h3>1. Личные данные</h3>
   <%= f.fields_for :user do |v| %>
     <%= render 'user_fields', v: v %>
   <% end %>
+  </div>
+  
+  <div id="temporary_permit_fields">
   </div>
   
   <div id="permit_vehicle_fields">
@@ -48,18 +50,6 @@
     
   </div>
   
-  <!-- <h3>2. Условия посещения</h3> -->
-  
-  <!-- <label class="control radio">
-    <input type="radio" name="radio" checked="checked">
-    <span id="permanent" class="radio-label">постоянный пропуск</span>
-  </label> -->
-  
-  <!-- <label class="control radio">
-    <input type="radio" name="radio">
-    <span id="temporary" class="radio-label">разовый пропуск</span>
-  </label> -->
-  
   <div class="control-group">
 	  <div class="controls">
 		
@@ -67,10 +57,6 @@
 		<span class="permit_label">Пропуск действителен с</span><%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала' %>
 		<span class="permit_label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
 		</div>
-		
-    <!-- <div id="temoporary_fields">
-    <span class="permit_label">Пропуск действителен</span> <%= f.text_field :date, :placeholder => 'Дата' %>
-    </div> -->
 		
 
 

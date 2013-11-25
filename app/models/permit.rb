@@ -12,6 +12,11 @@ class Permit < ActiveRecord::Base
   accepts_nested_attributes_for :user
   
   scope :expired, lambda { where("expiration_date < ?", Date.today ) }
+  scope :walkers, -> { where permit_type: 'user' }
+  scope :vehicles, -> { where permit_type: 'vehicle' }
+  scope :temporary, -> { where permit_type: 'temporary' }
+  
+  scope :for_print, lambda { where("issued = ? AND rejected = ? AND canceled = ? AND expiration_date > ?", true, false, false, Date.today) }
   scope :applications, -> { where(agreed: false) }
   
   attr_accessor :date, :drivers
@@ -30,5 +35,6 @@ class Permit < ActiveRecord::Base
       false
     end
   end
+
   
 end

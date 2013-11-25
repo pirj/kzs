@@ -23,5 +23,15 @@
   <div class="btn-group">	
   	<%= link_to "Просроченные", permits_path(:scope => :expired), :class => (params[:scope] == 'expired' ? 'btn btn-primary' : 'btn') %>	
   </div>
+  
+  <div class="btn-group">	
+  	<%= link_to "Групповая печать пеш пропусков", permits_path(:scope => :for_print), :class => (params[:scope] == 'for_print' ? 'btn btn-primary' : 'btn') %>	
+  </div>
+  
+  <% if params[:scope] == 'for_print' %>
+  <div class="btn-group">	
+  	<%= link_to "Печать", "#", :class => 'btn btn-success' %>	
+  </div>
+  <% end %>
 
 </div>

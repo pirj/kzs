@@ -12,10 +12,14 @@ class PermitsController < ApplicationController
     
     @permits = Permit.order(sort_type)
     
+    
+    
     if params[:scope] == "expired"
       @permits = @permits.expired
     elsif params[:scope] == "application"
       @permits = @permits.applications
+    elsif params[:scope] == "for_print"
+      @permits = @permits.for_print.walkers
     else
       @permits = @permits
     end
