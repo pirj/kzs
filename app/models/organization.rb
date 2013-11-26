@@ -1,6 +1,8 @@
 class Organization < ActiveRecord::Base
   attr_accessible :title, :parent_id, :lft, :rgt, :logo,
-                  :address, :phone, :mail, :director_id, :short_title, :inn, :admin_id
+                  :phone, :mail, :director_id, :short_title, :inn, :admin_id,
+                  :type_of_ownership, :legal_address, :actual_address
+                  
   acts_as_nested_set
   
   # validates :short_title, :inn, :admin_id, :presence => true

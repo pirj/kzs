@@ -8,6 +8,11 @@ ActiveAdmin.register User do
      column :username
      column :first_name
      column :last_name
+     column :organization_id do |user|
+       if user.organization_id
+         Organization.find(user.organization_id).title
+       end
+     end
 
      default_actions
 

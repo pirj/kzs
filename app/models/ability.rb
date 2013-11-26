@@ -13,7 +13,7 @@ class Ability
       can :manage, User
       can :manage, Organization
     else
-      can :manage, User, :id => user.id
+      can :manage, User, :organization_id => user.organization_id
       can :manage, Organization, :id => user.organization_id
     end
 

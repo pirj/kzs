@@ -114,6 +114,9 @@ ru:
         phone: "Телефон"
         mail: "Электронная почта"
         director_id: "Генеральный директор"
+        type_of_ownership: "Форма собственности"
+        legal_address: "Юридический адрес"
+        actual_address: "Физический адрес"
       permission:
         number: "Номер"
         user_id: "Пользователь"
