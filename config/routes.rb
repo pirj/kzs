@@ -70,6 +70,8 @@ Kzs::Application.routes.draw do
   match '/dashboard' => 'users#dashboard'
   root :to => 'documents#index'
   
+  match '/active_admin' => 'admin/users#index'
+  
   ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:

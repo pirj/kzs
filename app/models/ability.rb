@@ -11,7 +11,11 @@ class Ability
     
     if user.sys_user
       can :manage, User
+      can :manage, Group
+      can :manage, Permit
       can :manage, Organization
+      can :manage, User
+      can :manage, Vehicle
     else
       can :manage, User, :organization_id => user.organization_id
       can :manage, Organization, :id => user.organization_id

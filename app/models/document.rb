@@ -47,16 +47,6 @@ class Document < ActiveRecord::Base
   scope :confidential, -> { where(confidential: true) }
   scope :not_confidential, -> { where(confidential: false) }
   
-  protect do |user|                         # `user` is a context of security
-
-    if user.id == 47
-      scope { all }                         # Admins can retrieve anything
-
-      cannot :edit                            # ... and view anything
-    else
-      cannot :edit
-    end
-  end
   
   DOCUMENT_TYPES = ["mail", "writ"]
   
