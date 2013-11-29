@@ -31,6 +31,7 @@ class PermitsController < ApplicationController
     authorize! :create, @permit
     @vehicle = @permit.build_vehicle
     @user = @permit.build_user
+    @daily_pass = @permit.build_daily_pass
     @drivers = User.with_permit
   end
   
@@ -58,6 +59,7 @@ class PermitsController < ApplicationController
   def show
     @permit = Permit.find(params[:id])
     @user = @permit.user
+    @daily_pass = @permit.daily_pass
     respond_to do |format|
       format.html
       format.pdf do

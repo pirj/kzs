@@ -3,19 +3,19 @@ $(document).ready(function(){
 	if ($('#permit_permit_type_vehicle').attr('checked') == "checked"){
 	  $('#permit_user_fields').hide();
 		$('#permit_vehicle_fields').show();
-		$('#permit_temporary_fields').hide();
+		$('#temporary_permit_fields').hide();
 		$('#permit_user_id').val('');
 		$('#permit_drivers').chosen({max_selected_options: 3}); 
 	}
 	else if ($('#permit_permit_type_user').attr('checked') == "checked"){
 	  $('#permit_user_fields').show();
 		$('#permit_vehicle_fields').hide();
-		$('#permit_temporary_fields').hide();
+		$('#temporary_permit_fields').hide();
 	}
-	else if ($('#permit_permit_type_temporary').attr('checked') == "checked"){
+	else if ($('#permit_permit_type_daily').attr('checked') == "checked"){
 	  $('#permit_user_fields').hide();
 		$('#permit_vehicle_fields').hide();
-		$('#permit_temporary_fields').show();
+		$('#temporary_permit_fields').show();
 	}
 	
   $("#permit_start_date, #permit_expiration_date, #permit_date").datepicker({ dateFormat: "dd-mm-yy" });
@@ -23,35 +23,39 @@ $(document).ready(function(){
 	$('#user_type').on("click", function() {
 	  $('#permit_user_fields').show();
 		$('#permit_vehicle_fields').hide();
-		$('#permit_temporary_fields').hide();
-		$('#permit_vehicle_vehicle_body, #permit_vehicle_brand').val('');
+		$('#date_fields').show();
+		$('#temporary_permit_fields').hide();
 		inputs = $('#permit_vehicle_fields :input, #permit_temporary_fields :input')	
 		inputs.each(function() {
-		  $(this).val('');
+		  $(this).removeAttr('value');
 		});
 	});
 	
 	$('#vehicle_type').on("click", function() {
 	  $('#permit_user_fields').hide();
 		$('#permit_vehicle_fields').show();
-		$('#permit_temporary_fields').hide();
+		$('#date_fields').show();
+		$('#temporary_permit_fields').hide();
 		$('#permit_user_id').val('');
 		$('#permit_drivers').chosen({max_selected_options: 3});
 		inputs = $('#permit_user_fields :input, #permit_temporary_fields :input')	
 		inputs.each(function() {
-		  $(this).val('');
+		  $(this).removeAttr('value');
 		});
 	});
 	
-	$('#permanent_type').on("click", function() {
+	$('#daily_pass').on("click", function() {
 	  $('#permit_user_fields').hide();
 		$('#permit_vehicle_fields').hide();
-		$('#permit_temporary_fields').show();
-		inputs = $('#permit_user_fields :input, #permit_vehicle_fields :input')	
+		$('#date_fields').hide();
+		$('#temporary_permit_fields').show();
+		$('#permit_vehicle_vehicle_body, #permit_vehicle_brand').val('');
+		inputs = $('#permit_vehicle_fields :input, #permit_temporary_fields :input')	
 		inputs.each(function() {
-		  $(this).val('');
+		  $(this).removeAttr('value');
 		});
 	});
+
 	
 	// $('#temporary').on("click", function() {
 	//     $('#permanent_fields').hide();

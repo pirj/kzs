@@ -40,6 +40,21 @@
         <% end %>
       </ul>
     <% end %>
+    
+	<% elsif @permit.permit_type == 'daily' %>
+    <h3>Разовый пропуск</h3>
+
+    Имя: <%= @daily_pass.first_name %><br>
+    Фамилия: <%= @daily_pass.last_name %><br>
+    Отчество: <%= @daily_pass.middle_name %><br>
+    Наименование документа: <%= @daily_pass.id_type %><br>
+    Его серия и номер: <%= @daily_pass.id_sn %><br>
+    Гос. номер и марка автотранспортного средства: <%= @daily_pass.vehicle %><br>
+    Куда: <%= @daily_pass.object %><br>
+    К кому: <%= @daily_pass.person %><br>
+    Выдан: <%= @daily_pass.issued %><br>
+    Дата: <%= @daily_pass.date.strftime('%d.%m.%y') %><br>
+    Дежурный охранник КПП: <%= @daily_pass.guard_duty %><br>
   
   <% end %>
     

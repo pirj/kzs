@@ -2,14 +2,17 @@ class Permit < ActiveRecord::Base
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled, 
                   :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, 
-                  :drivers, :user_attributes, :way_bill
+                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes
   
 
   
   has_one :user
   has_one :vehicle
+  has_one :daily_pass
+  
   accepts_nested_attributes_for :vehicle
   accepts_nested_attributes_for :user
+  accepts_nested_attributes_for :daily_pass
   
   scope :expired, lambda { where("expiration_date < ?", Date.today ) }
   scope :walkers, -> { where permit_type: 'user' }
@@ -25,7 +28,7 @@ class Permit < ActiveRecord::Base
 
   # validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
   
-  TYPES = %w[user vehicle temporary]
+  TYPES = %w[user vehicle daily]
   PERMIT_CLASSES = %w[standart vip]
   
   def temporary

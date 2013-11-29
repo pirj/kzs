@@ -46,7 +46,7 @@ class PermitPdf < Prawn::Document
       draw_text "#{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 9, :at => [92,5], :style => :bold
 
       
-    else
+    elsif @permit.permit_type == 'vehicle'
       super(margin: 0, :page_size => [595, 420])
       
         if @permit.permit_class == 'vip'
@@ -111,6 +111,56 @@ class PermitPdf < Prawn::Document
         end
     
       end
+      
+    else
+        super(margin: 0, :page_size => [595, 420])
+        font "Verdana"
+        @daily = @permit.daily_pass
+        
+        float {image "#{Rails.root}/app/assets/images/one-entry_pass_txt.jpg"}
+        
+        draw_text "#{@permit.id}", :size => 13, :at => [230,330]
+        draw_text "#{@permit.id}", :size => 13, :at => [500,330]
+        
+        
+        draw_text "#{@daily.first_name}", :size => 13, :at => [80,290]
+        draw_text "#{@daily.first_name}", :size => 13, :at => [370,290]
+        
+        draw_text "#{@daily.last_name}", :size => 13, :at => [60,272]
+        draw_text "#{@daily.last_name}", :size => 13, :at => [350,272]
+        
+        draw_text "#{@daily.middle_name}", :size => 13, :at => [80,254]
+        draw_text "#{@daily.middle_name}", :size => 13, :at => [370,254]
+        
+        draw_text "#{@daily.id_type}", :size => 13, :at => [160,235]
+        draw_text "#{@daily.id_type}", :size => 13, :at => [450,235]
+        
+        draw_text "#{@daily.id_sn}", :size => 13, :at => [120,216]
+        draw_text "#{@daily.id_sn}", :size => 13, :at => [410,216]
+        
+        draw_text "#{@daily.vehicle}", :size => 13, :at => [25,179]
+        draw_text "#{@daily.vehicle}", :size => 13, :at => [315 ,179]
+        
+        draw_text "#{@daily.object}", :size => 13, :at => [80,143]
+        draw_text "#{@daily.object}", :size => 13, :at => [370,143]
+        
+        draw_text "#{@daily.person}", :size => 13, :at => [60,125]
+        draw_text "#{@daily.person}", :size => 13, :at => [350,125]
+        
+        draw_text "#{@daily.issued}", :size => 13, :at => [70,107]
+        draw_text "#{@daily.issued}", :size => 13, :at => [360,107]
+        
+        draw_text "#{@daily.date.strftime('%d')}", :size => 13, :at => [32,87]
+        draw_text "#{@daily.date.strftime('%d')}", :size => 13, :at => [325,87]
+        
+        draw_text "#{@daily.date.strftime('%m')}", :size => 13, :at => [80,87]
+        draw_text "#{@daily.date.strftime('%m')}", :size => 13, :at => [370,87]
+        
+        draw_text "#{@daily.date.strftime('%Y')}", :size => 13, :at => [126,87]
+        draw_text "#{@daily.date.strftime('%Y')}", :size => 13, :at => [418,87]
+        
+        draw_text "#{@daily.guard_duty}", :size => 13, :at => [150,69]
+ 
     end
     
   
