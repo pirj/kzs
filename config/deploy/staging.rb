@@ -6,7 +6,7 @@ load 'config/recipes/monit'
 
 
 server "5.178.80.26", :web, :app, :db, primary: true
-
+set :application, "kzs"
 
 
 default_run_options[:pty] = true
