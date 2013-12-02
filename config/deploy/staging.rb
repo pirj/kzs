@@ -13,12 +13,9 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 
-set :default_environment, {
-  'PATH' => "/opt/ruby-enterprise/bin/:$PATH"
-}
 
 
-
+set :rails_env, 'production'
 
 set :scm, "git"
 set :repository, "git@github.com:babrovka/kzs.git"
