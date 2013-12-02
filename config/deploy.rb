@@ -1,10 +1,11 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
+require 'rvm/capistrano'
 
 task :staging do
   
-  require 'rvm/capistrano'
+  
   
   server "5.178.80.26", :web, :app, :db, primary: true
 
