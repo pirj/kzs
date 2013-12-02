@@ -8,7 +8,9 @@ set :application, "kzs"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
-
+set :default_environment, {
+  'PATH' => "/opt/ruby-enterprise/bin/:$PATH"
+}
 
 
 
