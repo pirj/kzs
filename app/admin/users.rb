@@ -2,6 +2,7 @@ ActiveAdmin.register User do
   config.batch_actions = false
   filter :username
   filter :organization_id, :as => :check_boxes, :collection => Organization.all, :include_blank => false
+  menu :priority => 1
   
    index do 
      column :id
@@ -42,7 +43,11 @@ ActiveAdmin.register User do
        f.input :dob
        f.input :avatar
        f.input :email
-       f.input :organization_id, :as => :select, :collection => Organization.all
+       if user.sys_user
+         f.input :organization_id, :as => :select, :collection => @organiaztions
+       else
+         f.input :organization_id, :as => :hidden, :value => current_user.organization_id
+       end
        f.input :work_status, :as => :select, :collection => User::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
        f.input :groups, :as => :check_boxes
      end
@@ -106,8 +111,7 @@ ActiveAdmin.register User do
            format.json { render json: @user.errors, status: :unprocessable_entity }
          end
        end
-     end
-     
+     end  
      
      def update
        @user = User.find(params[:id])

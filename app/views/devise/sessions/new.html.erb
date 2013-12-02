@@ -22,13 +22,14 @@
 		<div class="control-group">
 		  <div class="controls">
 			<%= f.text_field :login, :placeholder => 'логин' %>
-			<%= f.submit "Вход", :class => 'btn btn-small login' %>
+			
 		  </div>
 		</div>
 
 		<div class="control-group">
 		  <div class="controls">
 		    <%= f.password_field :password, :placeholder => 'пароль' %>
+		    <%= f.submit "Вход", :class => 'btn btn-small login' %>
 			<% if flash[:alert] == "Неверный адрес e-mail или пароль." %>
 				<span class="help-inline"><%= flash[:alert] %></span>
 			<% end %>

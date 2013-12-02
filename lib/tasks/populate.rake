@@ -77,7 +77,7 @@ end
 
 namespace :users do
   task :add_permission => :environment do
-    User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :position => 'admin', :organization_id => '3', :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin', :id_type => 'Паспорт', :id_sn => '400812342', :id_issue_date => Date.today, :id_issuer => 'ОТП 29')
+    User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :password => 'admin', :password_confirmation => 'admin')
     user = User.find_by_username('admin')
     user.sys_user = true
     permissions = Permission.all

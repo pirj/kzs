@@ -3,7 +3,7 @@ ActiveAdmin.setup do |config|
   
   ActiveAdmin::ResourceController.class_eval do
     def check_admin_role
-      return if current_user.permissions.exists?('3')
+      return if current_user.permissions.exists?('3') || current_user.sys_user
       flash[:alert] = I18n.t('you_have_no_permission_to_access_administration_panel')
       redirect_to root_path
     end
