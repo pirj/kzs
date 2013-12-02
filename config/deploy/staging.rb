@@ -1,5 +1,5 @@
-require 'rvm/capistrano'
-require 'bundler/capistrano'
+require "rvm/capistrano"
+require "bundler/capistrano"
 load 'config/recipes/base'
 
 load 'deploy/assets'
