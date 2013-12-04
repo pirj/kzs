@@ -15,10 +15,10 @@ class PermitGroupPrintPdf < Prawn::Document
     @permits.each do |permit|
       @user = permit.user
       @organization = Organization.find(@user.organization)
-      float {image "#{Rails.root}/app/assets/images/propusk_walker_back.jpg"}
+      float {image "#{Rails.root}/app/assets/images/propusk_walker_back.jpg", :width => 243, :height => 158}
       font "Verdana"
       
-      draw_text "#{@organization.title}", :size => 9, :at => [90,147]
+      draw_text "#{ActionController::Base.helpers.truncate(@organization.title, :length => 27, omission: '')}", :size => 9, :at => [90,147]
       
       draw_text "Пропуск  №", :size => 9, :at => [90,134]
       draw_text "#{permit.number}", :size => 9, :at => [147,134], :style => :bold
@@ -36,7 +36,12 @@ class PermitGroupPrintPdf < Prawn::Document
       draw_text "#{@user.position}", :size => 9, :at => [150,78], :style => :bold
       
       draw_text "Организация:", :size => 9, :at => [90,50]
-      draw_text "#{@organization.title}", :size => 9, :at => [160,50], :style => :bold
+      
+      if @organization.title.length > 10
+        draw_text "#{ActionController::Base.helpers.truncate(@organization.title, :length => 37)}", :size => 9, :at => [6,35], :style => :bold
+      else
+        draw_text "#{@organization.title}", :size => 9, :at => [160,50], :style => :bold
+      end
       
       draw_text "Подпись:", :size => 9, :at => [6,21]
       
