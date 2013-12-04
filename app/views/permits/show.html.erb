@@ -27,7 +27,7 @@
     
     Класс пропуска: <%= t(@permit.permit_class) %><br>
     
-    Действителен с <%= @permit.start_date.strftime('%d.%m.%y') %> по <%= @permit.expiration_date.strftime('%d.%m.%y') %>	
+    Действителен с <%= @permit.start_date.strftime('%d.%m.%y') if @permit.start_date %> по <%= @permit.expiration_date.strftime('%d.%m.%y') if @permit.start_date %>	
     <br>
     
     <h3>Водители</h3>
