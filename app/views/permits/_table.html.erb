@@ -18,8 +18,8 @@
       </td>
 			<td><%= permit.id %></td>
 			<td><%= t(permit.permit_type) %></th>
-			<td><%= permit.start_date.strftime("%d.%m.%y") %></th>
-			<td><%= permit.expiration_date.strftime("%d.%m.%y") %></th>
+			<td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></th>
+			<td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></th>
 			<td><%= permit_status(permit) %></td>
 	    <td><%= link_to "Подробнее", permit %></td>
 	  </tr>
