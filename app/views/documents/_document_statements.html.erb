@@ -1,0 +1,10 @@
+<% if @document.statements.empty? %>
+  <h5>Акты отсутствуют</h5>
+<% else %>
+  <h5>Акты</h5>
+  <ul>
+	  <% @document.statements.each do |statement| %>
+	    <li><%= link_to statement.title, statement_path(statement) %></li>
+	  <% end %>
+	</ul>
+<% end %>

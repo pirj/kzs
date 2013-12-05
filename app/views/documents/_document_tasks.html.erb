@@ -1,0 +1,7 @@
+<% @document.tasks.each.with_index(1) do |task, i| %>
+<%= i %>)  <%= task.task %>
+  <%= task.deadline.strftime('%d.%m.%Y') %>
+  <% if task.completed? %> | Выполнено<% end %>
+  <br>
+<% end %>
+<br>

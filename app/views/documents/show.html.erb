@@ -20,8 +20,8 @@
 
 		<div class="new-wrap">
 			<iframe style="width: 400px; height: 520px;" src="/documents/<%= @document.id %>.pdf"/></iframe>
-			<%= render 'actions_show' %>
-	    </div>
+			
+	  </div>
 		
 		<% unless @document.document_attachments.blank? %>
 		<p>Прикрепленные файлы</p>
@@ -46,22 +46,14 @@
 		<% end %>
 	
 		<% if @document.document_type == 'writ' %>
-		<div class="new-wrap">
-			<% if @document.statements.empty? %>
-			  <h5>Акты отсутствуют</h5>
-			<% else %>
-			  <h5>Акты</h5>
-			  <ul>
-			  <% @document.statements.each do |statement| %>
-			  <li><%= link_to statement.title, statement_path(statement) %></li>
-			  <% end %>
-			  </ul>
-			<% end %>
-	    </div>
-		<% end %>
+		<%= render 'document_tasks' %>
+		<%= render 'document_statements' %>
+    <% end %>
 		
-	
+	  <%= render 'actions_show' %>
     </div>
+    
+    
 
 
 </div>
