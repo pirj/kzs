@@ -24,6 +24,7 @@ class PermitsController < ApplicationController
       @permits = @permits
     end
     
+    
   end
 
   def new
