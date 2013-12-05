@@ -1,24 +1,26 @@
 <table class="table permits_table" style="font-size: 12px; width: 900px;">
   	 <tr>
-  	  <th></th>
-	    <th><%= sortable "id", "№" %></th>
-	    <th>Фамилия</th>
-			<th><%= sortable "permit_type", "Тип" %></th>
-			<th><%= sortable "start_date", "Начало" %></th>
-			<th><%= sortable "expiration_date", "Конец" %></th>
-			<th><%= sortable_status %></th>
-	    <th>Детали</th>
+  	  <% if params[:scope] == 'for_print' %>
+  	    <th style="width: 5%"></th>
+  	  <% end %>
+	    <th style="width: 5%"><%= sortable "id", "№" %></th>
+	    <th style="width: 16%">Фамилия</th>
+			<th style="width: 5%"><%= sortable "permit_type", "Тип" %></th>
+			<th style="width: 6%"><%= sortable "start_date", "Начало" %></th>
+			<th style="width: 6%"><%= sortable "expiration_date", "Конец" %></th>
+			<th style="width: 8%"><%= sortable_status %></th>
+	    <th style="width: 8%">Детали</th>
 	  </tr>
 
 	<% @permits.each do |permit| %>
 	  <tr id="<%= permit.id %>">
-	    <td class="not_this">
-	      <% if params[:scope] == 'for_print' %>
-	      <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
-	        <span class="checkbox-label"></span>
+	    <% if params[:scope] == 'for_print' %>
+	    <td class="not_this">	      
+        <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
+          <span class="checkbox-label"></span>
         </label>
-        <% end %>
       </td>
+      <% end %>
 			<td><%= permit.id %></td>
 			<td><%= permit.user.try(:last_name) %></td>
 			<td>
