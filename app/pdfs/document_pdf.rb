@@ -10,7 +10,10 @@ class DocumentPdf < Prawn::Document
     super(top_margin: 30)
     @document = document
     @organization = Organization.find(@document.sender_organization_id)
-    @director = User.find(@organization.director_id)
+    
+    if User.exists?(@organization.director_id) then @director = User.find(@organization.director_id) end
+    
+
     @sender = User.find(@document.user_id)
     
     @view = view
@@ -21,7 +24,7 @@ class DocumentPdf < Prawn::Document
     move_down 5
     stroke_horizontal_rule
     move_down 5
-    float {text "<color rgb='989898'>#{@organization.address}</color>", :size => 10, :inline_format => true}
+    float {text "<color rgb='989898'>#{@organization.legal_address}</color>", :size => 10, :inline_format => true}
     text "<color rgb='989898'>В #{Organization.find(@document.organization_id).title}", :align => :right, :size => 10, :inline_format => true
     text "<color rgb='989898'>тел/факс: #{@organization.phone}", :align => :left, :size => 10, :inline_format => true
     text "<color rgb='989898'>#{@organization.mail}", :align => :left, :size => 10, :inline_format => true
@@ -41,7 +44,10 @@ class DocumentPdf < Prawn::Document
     text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 60
     float {text "Генеральный директор", :size => 10, :inline_format => true}
-    text "#{@director.last_name_with_initials}", :align => :right, :size => 10, :inline_format => true
+    move_down 10
+    if @director
+      text "#{@director.last_name_with_initials}", :align => :right, :size => 10, :inline_format => true
+    end
     text "#{@organization.title}", :size => 10
     move_down 20
     if @document.executor_id
@@ -64,6 +70,10 @@ class DocumentPdf < Prawn::Document
   end
   
   def logo
-    float {image "#{@organization.logo.path(:pdf)}", :width => 123}
+    begin
+      float {image "#{@organization.logo.path(:pdf) || ''}", :width => 123}
+    rescue
+      nil
+    end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128072314) do
+ActiveRecord::Schema.define(:version => 20131205092839) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -300,9 +300,17 @@ ActiveRecord::Schema.define(:version => 20131128072314) do
   create_table "tasks", :force => true do |t|
     t.integer  "task_list_id"
     t.text     "task"
-    t.boolean  "completed",    :default => false
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.boolean  "completed",                :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "document_id"
+    t.integer  "executor_organization_id"
+    t.integer  "sender_organization_id"
+    t.datetime "deadline"
+    t.integer  "executor_id"
+    t.integer  "creator_id"
+    t.integer  "approver_id"
+    t.text     "executor_comment"
   end
 
   create_table "user_document_types", :force => true do |t|

@@ -1,0 +1,11 @@
+<fieldset>
+
+    <%= f.text_area :task, :placeholder => 'введите задачу', :class => "input-xlarge task_input" %>
+    <%= f.text_field :deadline, :placeholder => 'срок исполнения', :class => "task_deadline" %>
+
+    
+
+
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "удалить", '#', class: "remove_fields" %>
+</fieldset>

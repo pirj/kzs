@@ -44,7 +44,14 @@
 	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>
 	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст', :rows => "20" %>
 	
-	
+	  
+	  <% if @document.document_type == 'writ' || params[:type] == 'writ' %>    
+      <%= f.fields_for :tasks do |builder| %>
+        <%= render 'task_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Добавить задачу", f, :tasks   %>
+    <% end %>
+	  
     <%= f.fields_for :document_attachments do |builder| %>
       <%= render 'document_attachment_fields', f: builder %>
     <% end %>
@@ -63,6 +70,7 @@
     </label>
     <% end %>
     </div>
+    
 
 	
 	
