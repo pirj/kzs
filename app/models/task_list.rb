@@ -4,4 +4,12 @@ class TaskList < ActiveRecord::Base
   belongs_to :document
   has_many :tasks
   accepts_nested_attributes_for :tasks, allow_destroy: true
+  
+  def progress
+    
+    
+    self.tasks.count
+    
+  end
+  
 end

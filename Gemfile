@@ -18,8 +18,6 @@ gem "ckeditor"
 gem 'activeadmin'
 gem 'awesome_nested_set'
 
-
-
 gem 'will_paginate'
 
 # gem 'texticle', "2.0", :require => 'texticle/rails'

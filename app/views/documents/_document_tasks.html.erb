@@ -1,3 +1,5 @@
+<%= @document.task_list.progress %><br>
+
 <% @document.task_list.tasks.each.with_index(1) do |task, i| %>
 <%= i %>)  <%= task.task %>
   <%= task.deadline.strftime('%d.%m.%Y') %>
