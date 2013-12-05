@@ -20,7 +20,7 @@
         <% end %>
       </td>
 			<td><%= permit.id %></td>
-			<td><%= permit.user.last_name %></td>
+			<td><%= permit.user.try(:last_name) %></td>
 			<td>
 			  <% if permit.permit_type == "user" %>
           <%= image_tag('propusk-man.png') %>
