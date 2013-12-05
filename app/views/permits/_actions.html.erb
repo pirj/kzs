@@ -16,6 +16,12 @@
 <% end %>
 <% end %>
 
+<% if @permit.agreed == true %>
+<div class="btn-group">	
+  <%= link_to "Печать", permit_path(@permit, :format => :pdf), :class=> "btn btn-primary" %>
+</div>
+<% end %>
+
 <% unless @permit.rejected == true || @permit.agreed	 == true %>
 <% if current_user.has_permission?(7) %>
 <div class="btn-group">	
@@ -32,14 +38,6 @@
 <% end %>
 <% end %>
 
-<% if @permit.released == true && @permit.issued == false %>
-<% if current_user.has_permission?(9) %>
-<div class="btn-group">	
-	<%= link_to "Выдать", issue_permit_path(@permit), :class=> "btn btn-success" %>	
-</div>
-<% end %>
-<% end %>
-
 <% if @permit.issued == true && @permit.canceled == false %>
 <% if current_user.has_permission?(7) %>
 <div class="btn-group">	
@@ -48,11 +46,7 @@
 <% end %>
 <% end %>
 
-<% if @permit.issued == true %>
-<div class="btn-group">	
-  <%= link_to "Печать", permit_path(@permit, :format => :pdf), :class=> "btn btn-primary" %>
-</div>
-<% end %>
+
 
 
 </div>
