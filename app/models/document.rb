@@ -5,7 +5,7 @@ class Document < ActiveRecord::Base
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
                   :document_ids, :organization_ids, :document_attachments, 
                   :document_conversation_id, :sender_organization_id, :executor_ids, :approver_ids, 
-                  :tasks_attributes
+                  :task_list_attributes
                   
   attr_accessor :organization_ids, :executor_ids, :approver_ids
   
@@ -15,10 +15,10 @@ class Document < ActiveRecord::Base
   belongs_to :document_conversation
   has_many :statements
   has_many :document_attachments
-  has_many :tasks
+  has_one :task_list
 
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
-  accepts_nested_attributes_for :tasks, allow_destroy: true
+  accepts_nested_attributes_for :task_list, allow_destroy: true
   
   has_and_belongs_to_many :documents, class_name: "Document", uniq: true,
                           join_table: "document_relations", 

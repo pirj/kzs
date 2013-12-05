@@ -157,6 +157,7 @@ class DocumentsController < ApplicationController
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
+    @task_list = @document.build_task_list
   end
 
   def edit

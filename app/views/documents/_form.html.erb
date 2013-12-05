@@ -46,10 +46,9 @@
 	
 	  
 	  <% if @document.document_type == 'writ' || params[:type] == 'writ' %>    
-      <%= f.fields_for :tasks do |builder| %>
-        <%= render 'task_fields', f: builder %>
+      <%= f.fields_for :task_list do |builder| %>
+        <%= render 'task_list_fields', f: builder %>
       <% end %>
-      <%= link_to_add_fields "Добавить задачу", f, :tasks   %>
     <% end %>
 	  
     <%= f.fields_for :document_attachments do |builder| %>
