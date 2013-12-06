@@ -6,10 +6,9 @@ class TaskList < ActiveRecord::Base
   accepts_nested_attributes_for :tasks, allow_destroy: true
   
   def progress
-    
-    
-    self.tasks.count
-    
+    total = 100 / self.tasks.count
+    progress = total * self.tasks.completed.count
+    progress
   end
   
 end
