@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
-require 'rvm/capistrano'
+# require 'rvm/capistrano'
 
 task :staging do
   
