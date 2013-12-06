@@ -55,6 +55,7 @@ ru:
   statement_sent: "Акт отправлен"
   statement_prepared: "Акт подготовлен"
   statement_approved: "Акт подписан"
+  task_completed: "Задача исполнена"
   activerecord:
     models: 
       permission:
