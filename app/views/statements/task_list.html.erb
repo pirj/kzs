@@ -10,11 +10,11 @@
 		<%= f.fields_for :tasks do |builder| %>
       <%= render 'task_fields', f: builder %>
     <% end %>
-    <%= link_to_add_fields "Добавить задач", f, :tasks %>
+    <%= link_to_add_fields "Добавить задачу", f, :tasks %>
 		
+		<br>
 		
-		
-		<%= f.submit "Создать" %>
+		<%= f.submit "Создать список замечаний", :class => 'btn' %>
 		<% end %>
 		
 		  <%= render 'panel' %>

@@ -33,7 +33,7 @@
 	</div>
 	
 	
-	<% unless @writ.statements.count >= 1 %>
+	<% unless @writ.statements.count > 1 %>
 	<div class="btn-group"   style="margin-right: 10px;">	
 		<%= link_to 'Отклонить', task_list_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-danger" %>
 	</div>

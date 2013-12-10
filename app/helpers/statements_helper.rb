@@ -38,7 +38,9 @@ module StatementsHelper
   end
   
   def statement_approver(approver)
-    User.find(approver.user_id).first_name_with_last_name
+    if User.exists?(approver.user_id)
+      User.find(approver.user_id).first_name_with_last_name
+    end
   end
   
   def statement_approver_status(approver)
