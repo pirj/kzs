@@ -43,8 +43,8 @@ ActiveAdmin.register User do
        f.input :dob
        f.input :avatar
        f.input :email
-       if user.sys_user
-         f.input :organization_id, :as => :select, :collection => @organiaztions
+       if current_user.sys_user
+         f.input :organization_id, :as => :select, :collection => Organization.all
        else
          f.input :organization_id, :as => :hidden, :value => current_user.organization_id
        end

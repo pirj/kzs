@@ -2,5 +2,5 @@
 <%= v.text_field(:first_name, :placeholder => 'Имя', :value => @permit.user.first_name) %><br>
 <%= v.text_field(:middle_name, :placeholder => 'Отчество', :value => @permit.user.middle_name) %><br><br>
 
-<%= v.collection_select(:organization_id, Organization.all, :id, :title) %>
+<%= v.collection_select(:organization_id, Organization.where(:id => current_user.organization_id).all, :id, :title) %>
 <%= v.text_field(:position, :placeholder => 'Должность', :value => @permit.user.position) %><br><br>
