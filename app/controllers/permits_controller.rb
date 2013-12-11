@@ -37,9 +37,11 @@ class PermitsController < ApplicationController
   end
   
   def create
+    
     @permit = Permit.new(params[:permit])
     last = Permit.last ? Permit.last.id + 1 : 1
     @permit.number = (last).to_s
+    @permit.organization_id = current_user.organization_id
     if params[:permit][:date] && params[:permit][:date] != ''
       @permit.start_date = Date.parse(params[:permit][:date])
       @permit.expiration_date = Date.parse(params[:permit][:date])
@@ -74,8 +76,10 @@ class PermitsController < ApplicationController
   
   def edit
     
-    if current_user.has_permission?(10)
-      @permit = Permit.find(params[:id])
+    @permit = Permit.find(params[:id])
+    
+    if current_user.has_permission?(10) || @permit.organization_id == current_user.organization_id
+      
       @drivers = User.with_permit
     else
       redirect_to :back, :alert => t('access_denied')
