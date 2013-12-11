@@ -62,10 +62,23 @@
 </span>
 
 
-          <% else %>
+          <% elsif permit.permit_type == "daily"  %>
+
+              <%= link_to permit do %>
+
+                  <%= permit.daily_pass.last_name %>
+                  <%= permit.daily_pass.first_name %>
+              <%end%>
+
+
+          <% elsif permit.permit_type == "user"  %>
+
               <%= link_to permit do %>
                 <%= permit.user.try(:last_name) %>
+                <%= permit.user.try(:first_name) %>
+
               <%end%>
+              <div style="font-size: 13px; color: #999999;"><%= permit.user.try(:position) %></div>
           <% end %>
 
 
