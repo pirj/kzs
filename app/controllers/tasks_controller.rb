@@ -11,6 +11,6 @@ class TasksController < ApplicationController
        task_list.save!
     end
      
-    redirect_to :back, :notice => 'task_completed'
+    redirect_to :back, :notice => t('task_completed')
   end
 end

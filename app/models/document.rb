@@ -51,6 +51,8 @@ class Document < ActiveRecord::Base
   scope :confidential, -> { where(confidential: true) }
   scope :not_confidential, -> { where(confidential: false) }
   
+  scope :with_completed_tasks, includes(:task_list).where(:task_list => {:completed => true})  
+  scope :with_completed_tasks_in_statement, includes(:statements).where(:statements => {:with_completed_task_list => true})
   
   DOCUMENT_TYPES = ["mail", "writ"]
   
@@ -62,5 +64,12 @@ class Document < ActiveRecord::Base
     end
   end
   
+  def self.with_statements
+    includes(:statements).where('documents.id in (?)',Document.writs)
+  end
+  
+  def self.without_statements
+    includes(:statements).where(:statements => {:id => nil})
+  end
 
 end

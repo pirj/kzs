@@ -7,6 +7,8 @@ class TaskList < ActiveRecord::Base
   
   scope :completed, -> { where(completed: true) }   
   
+  after_save :update_statement
+  
   def progress
     total = 100 / self.tasks.count
     progress = total * self.tasks.completed.count
@@ -20,7 +22,15 @@ class TaskList < ActiveRecord::Base
       false
     end
   end
-    
-
   
+  def update_statement
+    if self.completed
+      if self.statement
+        statement = self.statement
+        statement.with_completed_task_list = true
+        statement.save!
+      end
+    end
+  end
+    
 end
