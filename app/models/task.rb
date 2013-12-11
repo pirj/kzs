@@ -5,4 +5,12 @@ class Task < ActiveRecord::Base
   scope :not_completed, -> { where(completed: false) }  
   scope :expired, lambda { where("deadline < ?", Date.today ) }
   default_scope order('created_at DESC')
+  
+  before_create :assign_organizations
+  
+  private
+  
+  def assign_organizations
+  end
+  
 end
