@@ -42,6 +42,8 @@ class DocumentPdf < Prawn::Document
     end
     move_down 30
     text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
+    move_down 30
+    writ_tasks if @document.document_type == 'writ'
     move_down 60
     float {text "Генеральный директор", :size => 10, :inline_format => true}
     move_down 10
@@ -58,7 +60,12 @@ class DocumentPdf < Prawn::Document
     end
   end
   
-
+  def writ_tasks
+    text "Задачи", :size => 10, :inline_format => true, :indent_paragraphs => 60
+    @document.task_list.tasks.each.with_index(1) do |task, i|
+      text "#{i}) #{task.task}", :size => 10, :inline_format => true, :indent_paragraphs => 60
+    end
+  end
   
   def russian_font
     font_families.update(
