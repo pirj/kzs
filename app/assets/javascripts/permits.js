@@ -7,11 +7,12 @@ $(document).ready(function(){
     $("#permit_start_date, #permit_expiration_date, #permit_date").datepicker({ dateFormat: "dd-mm-yy" });
 
     var permit = {
+            type: '#user',
 
-        setType: function (type) {
+            setType: function (type) {
           //  console.log(type);
             document.location.hash = type;
-
+            permit.type = type;
             switch(type) {
                 case '#user':
                     $('#permit_user_fields').show();
@@ -37,7 +38,13 @@ $(document).ready(function(){
 
 
             }
+        },
+
+        getType: function() {
+            return permit.type;
         }
+
+
 
     };
 
@@ -56,22 +63,122 @@ $(document).ready(function(){
 
     (function initialization(type){
 
-        if (type == "") {
-         //   permit.setType('#user');
-            $('#user_type').click();
-        }
-        else if (type == "#user")  {
-          //  permit.setType(type);
+        if ($('#new_permit').size() == 0 ) {
 
-            $('#user_type').click();
+            //place to editing
+
         }
-        else if (type == "#vehicle"){
-            $('#vehicle_type').click();
-        }
-        else if (type == "#daily"){
-            $('#daily_pass').click();
+
+        else
+
+        {
+            if (type == "") {
+                //   permit.setType('#user');
+                $('#user_type').click();
+            }
+            else if (type == "#user")  {
+                //  permit.setType(type);
+
+                $('#user_type').click();
+            }
+            else if (type == "#vehicle"){
+                $('#vehicle_type').click();
+            }
+            else if (type == "#daily"){
+                $('#daily_pass').click();
+            };
         };
 
+
     })(document.location.hash);
+
+
+    var clear = {
+        vehicle: function() {
+            document.getElementById('permit_vehicle_attributes_model').value = '';
+            document.getElementById('permit_vehicle_attributes_register_document').value = '';
+            document.getElementById('permit_vehicle_attributes_sn_number').value = '';
+            document.getElementById('permit_vehicle_attributes_sn_region').value = '';
+        },
+        user: function() {
+            document.getElementById('permit_user_attributes_first_name').value = '';
+            document.getElementById('permit_user_attributes_middle_name').value = '';
+            document.getElementById('permit_user_attributes_last_name').value = '';
+            document.getElementById('permit_user_attributes_position').value = '';
+        },
+        daily: function() {
+            document.getElementById('permit_daily_pass_attributes_last_name').value = '';
+            document.getElementById('permit_daily_pass_attributes_first_name').value = '';
+            document.getElementById('permit_daily_pass_attributes_middle_name').value = '';
+            document.getElementById('permit_daily_pass_attributes_id_type').value = '';
+            document.getElementById('permit_daily_pass_attributes_id_sn').value = '';
+            document.getElementById('permit_daily_pass_attributes_vehicle').value = '';
+            document.getElementById('permit_daily_pass_attributes_object').value = '';
+            document.getElementById('permit_daily_pass_attributes_person').value = '';
+            document.getElementById('permit_daily_pass_attributes_issued').value = '';
+            document.getElementById('permit_daily_pass_attributes_date').value = '';
+            document.getElementById('permit_daily_pass_attributes_guard_duty').value = '';
+        }
+    }
+
+
+    $('#new_permit').submit(function( event ) {                                 //submit
+
+        function baddata(){
+            alert('Заполните необходимые поля!');
+
+        }
+
+       event.preventDefault();
+
+        var thisType = permit.getType();
+
+        switch(thisType) {
+            case '#vehicle':
+                clear.user();
+                clear.daily();
+                if (document.getElementById('permit_start_date').value && document.getElementById('permit_expiration_date').value) {
+                    document.newPermitForm.submit();
+                }
+                else {
+
+                    baddata();
+                }
+            break;
+
+            case '#daily':
+                clear.user();
+          //      clear.daily();
+                clear.vehicle();
+
+                if (document.getElementById('permit_daily_pass_attributes_middle_name').value&&document.getElementById('permit_daily_pass_attributes_first_name').value) {
+                    document.newPermitForm.submit();
+                }
+                else {
+                    baddata();
+                }
+            break;
+
+            case '#user':
+
+                clear.daily();
+                clear.vehicle();
+
+                if (document.getElementById('permit_start_date').value && document.getElementById('permit_expiration_date').value) {
+                    document.newPermitForm.submit();
+                }
+                else {
+
+                    baddata();
+                }
+
+            break;
+
+        }
+
+
+
+
+    })
 	
 });

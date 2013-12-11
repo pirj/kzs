@@ -16,7 +16,7 @@
 
       </div>
       
-      <%= form_for @permit do |f| %>
+      <%= form_for @permit, :html => {:name => 'newPermitForm'} do |f| %>
 
         <% if @permit.errors.any? %>
           <div id="error_explanation">
