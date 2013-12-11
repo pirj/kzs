@@ -10,5 +10,6 @@
 	  <% end %>
 	  <%= link_to "", drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? 'ch active' : 'ch')  %>
 	  <%= link_to "", permits_path, :class => (controller?("permits") ? 'security active' : 'security')  %>
+	  <%= link_to "", tasks_path, :class => (controller?("tasks") ? 'tasks active' : 'tasks')  %>
 	</div>
 </div>

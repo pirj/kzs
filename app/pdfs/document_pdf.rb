@@ -61,7 +61,6 @@ class DocumentPdf < Prawn::Document
   end
   
   def writ_tasks
-    text "Задачи", :size => 10, :inline_format => true, :indent_paragraphs => 60
     @document.task_list.tasks.each.with_index(1) do |task, i|
       text "#{i}) #{task.task}", :size => 10, :inline_format => true, :indent_paragraphs => 60
     end
