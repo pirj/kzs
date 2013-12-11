@@ -1,41 +1,88 @@
 <table class="table permits_table" style="font-size: 12px; width: 900px;">
-  	 <tr>
-  	  <% if params[:scope] == 'for_print' %>
-  	    <th style="width: 5%"></th>
-  	  <% end %>
-	    <th style="width: 5%"><%= sortable "id", "№" %></th>
-	    <th style="width: 16%">Фамилия</th>
-			<th style="width: 5%"><%= sortable "permit_type", "Тип" %></th>
-			<th style="width: 6%"><%= sortable "start_date", "Начало" %></th>
-			<th style="width: 6%"><%= sortable "expiration_date", "Конец" %></th>
-			<th style="width: 8%"><%= sortable_status %></th>
-	    <th style="width: 8%">Детали</th>
-	  </tr>
+  <tr>
+    <% if params[:scope] == 'for_print' %>
+        <th style="width: 5%"></th>
+    <% end %>
+    <th style="width: 5%"><%= sortable "id", "№" %></th>
+    <th style="width: 16%">Фамилия</th>
+    <th style="width: 5%"><%= sortable "permit_type", "Тип" %></th>
+    <th style="width: 6%"><%= sortable "start_date", "Начало" %></th>
+    <th style="width: 6%"><%= sortable "expiration_date", "Конец" %></th>
+    <th style="width: 8%"><%= sortable_status %></th>
+    <th style="width: 8%">Детали</th>
+  </tr>
 
-	<% @permits.each do |permit| %>
-	  <tr id="<%= permit.id %>">
-	    <% if params[:scope] == 'for_print' %>
-	    <td class="not_this">	      
-        <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
-          <span class="checkbox-label"></span>
-        </label>
-      </td>
-      <% end %>
-			<td><%= permit.id %></td>
-			<td><%= permit.user.try(:last_name) %></td>
-			<td>
-			  <% if permit.permit_type == "user" %>
-          <%= image_tag('propusk-man.png') %>
-        <% elsif permit.permit_type == "vehicle" %>
-          <%= image_tag('propusk-car.png') %>
-        <% elsif permit.permit_type == "daily" %>
-          <%= image_tag('propusk-daily.png') %>
+  <% @permits.each do |permit| %>
+      <tr id="<%= permit.id %>">
+        <% if params[:scope] == 'for_print' %>
+            <td class="not_this">
+              <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
+                <span class="checkbox-label"></span>
+              </label>
+            </td>
         <% end %>
-			</th>
-			<td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></th>
-			<td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></th>
-			<td><%= permit_status(permit) %></td>
-	    <td><%= link_to "Подробнее", permit %></td>
-	  </tr>
-	<% end %>
+        <td><%= permit.id %></td>
+        <td>
+
+          <% if permit.permit_type == "vehicle" %>
+              <%= link_to permit do %>
+                  <%= permit.vehicle.brand %>
+                <%= permit.vehicle.model %>
+                  <% end %>
+              <br>
+                <span style=" display: inline-block; font-weight: bold; border: 1px #000000 solid;">
+                     <span style=" display: inline-block;
+                             border-right: 1px #000000 solid;
+                             font-size: 16px;
+                             padding: 0 6px;
+                             padding-bottom: 4px;">
+                  <%= permit.vehicle.register_sn[0] %>
+                       <span style="font-size: 20px;">
+                         <%= permit.vehicle.register_sn[1..3] %>
+
+                         </span>
+                       <%= permit.vehicle.register_sn[4..5] %>
+                       </span>
+                   <span style="display: inline-block;
+                           font-size: 18px;
+                           background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAHCAYAAAD03kbyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjE1RUVDODk2MTgxMTFFMzkwQkRDMUUxMjU2RUMyREYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjE1RUVDOEE2MTgxMTFFMzkwQkRDMUUxMjU2RUMyREYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2MTVFRUM4NzYxODExMUUzOTBCREMxRTEyNTZFQzJERiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2MTVFRUM4ODYxODExMUUzOTBCREMxRTEyNTZFQzJERiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pg+RKX0AAAFsSURBVHjarJK9S0JRGMafI6HYXe6mLXkhCaHawiG3hBbj/gFOSi4N6v0PEh3uoODQJPi1tEprCH4g5BKSDRURenOoOzgJhZTx1rlhIS0H6oXDOe95n/P+zsM5jIjw1zi7uKHZ7F1Iu6GsABzaarUon89TuVym4XBIfK9UKllzt9ulXq/H11Sr1SibzdJgMLBq89G8vCPR4FrGD2maRk6nE5IkoV6vo91uM0VRyDAMlkqlSJZlBAIBxGIxJBIJdDodVKtVNr/9Qe6EXgWdqjtbWJonjUYDNpsNqqr+EjLG4PP54HK5oOs64vH4Qv30/AqT56kQdHt99QfKHVQqFbjdbit3OBwwTZPG4zG8Xi/6/T6CwSAKhQL8fj+SyeR3o92nWyw/joSg8nTvC8qbejwefL6pBY9Go8hkMgiHw5a7UCgEu92OYrGISCSCdDq90GjTvMfa6FoIKr29gP3H7z0+ytHEeBDS7muH+BBgAFUfyzmIBMcsAAAAAElFTkSuQmCC);
+                           background-position: bottom center;
+                           background-repeat: no-repeat;
+                           width: 30px;
+                           text-align: center;
+                           vertical-align: top;
+                           padding-bottom: 3px;
+                           position: relative;
+                           bottom: 3px;
+                           padding-right: 5px; ; min-height:28px;">
+
+                             <%= permit.vehicle.sn_region %>
+
+                    </span>
+</span>
+
+
+          <% else %>
+              <%= link_to permit do %>
+                <%= permit.user.try(:last_name) %>
+              <%end%>
+          <% end %>
+
+
+        </td>
+        <td>
+          <% if permit.permit_type == "user" %>
+              <%= image_tag('propusk-man.png') %>
+          <% elsif permit.permit_type == "vehicle" %>
+              <%= image_tag('propusk-car.png') %>
+          <% elsif permit.permit_type == "daily" %>
+              <%= image_tag('propusk-daily.png') %>
+          <% end %>
+          </th>
+        <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></th>
+        <td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></th>
+        <td><%= permit_status(permit) %></td>
+        <td><%= link_to "Подробнее", permit %></td>
+      </tr>
+  <% end %>
 </table>
