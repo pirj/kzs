@@ -73,8 +73,14 @@ class PermitsController < ApplicationController
   end
   
   def edit
-    @permit = Permit.find(params[:id])
-    @drivers = User.with_permit
+    
+    if current_user.has_permission?(10)
+      @permit = Permit.find(params[:id])
+      @drivers = User.with_permit
+    else
+      redirect_to :back, :alert => t('access_denied')
+    end
+
   end
   
   def update
