@@ -1,11 +1,11 @@
 <table class="table permits_table" style="font-size: 12px; width: 900px;">
   	 <tr>
-  	  <th>№</th>
-  	  <th>Постановщик</th>
-  	  <th>Исполнитель</th>
-  	  <th>Дата создания</th>
-	    <th>Статус</th>
-	    <th>Срок исполнения</th>
+  	  <th><%= sortable "id", "№" %></th>
+  	  <th><%= sortable "sender_organization_id", "Постановщик" %></th>
+  	  <th><%= sortable "executor_organization_id", "Исполнитель" %></th>
+  	  <th><%= sortable "created_at", "Дата создания" %></th>
+	    <th><%= sortable "completed", "Статус" %></th>
+	    <th><%= sortable "deadline", "Срок исполнения" %></th>
 	    <th>Подробнее</th>
 	    <th>Выполнить</th>
 	  </tr>

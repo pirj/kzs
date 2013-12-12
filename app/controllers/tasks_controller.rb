@@ -1,11 +1,21 @@
 class TasksController < ApplicationController
   
+  helper_method :sort_column, :sort_direction
+  
   def index 
-    @tasks = Task.all
+    
+    
+    @tasks = Task.order(sort_column + " " + sort_direction)
+    
     if params[:scope] == "expired"
-      @tasks = Task.expired
+      @tasks = @tasks.expired
     else
       @tasks = @tasks
+    end
+    
+    respond_to do |format|
+      format.html
+      format.js
     end
     
   end
@@ -25,4 +35,16 @@ class TasksController < ApplicationController
      
     redirect_to :back, :notice => t('task_completed')
   end
+  
+  private
+  
+  def sort_column
+    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
+  end
+  
+  
 end
