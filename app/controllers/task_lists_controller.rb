@@ -25,8 +25,8 @@ class TaskListsController < ApplicationController
     
   def assign_organizations_to_tasks(document)
     document.task_list.tasks.each do |task|
-      task.executor_organization_id = document.organization_id
-      task.sender_organization_id = document.sender_organization_id
+      task.executor_organization_id = document.sender_organization_id
+      task.sender_organization_id = document.organization_id
       task.save!
     end
   end
