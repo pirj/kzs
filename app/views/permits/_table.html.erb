@@ -31,7 +31,7 @@
           <% if permit.way_bill %>
             Согласно путевого листа
           <% else %>
-            <%= permit.vehicle.users.first.last_name %>
+            <%= permit.vehicle.users.first.last_name if permit.vehicle.users.present? %>
           <% end %>
         <% elsif permit.permit_type == "daily" %>
           <%= permit.daily_pass.try(:last_name) %>
