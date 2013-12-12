@@ -19,7 +19,9 @@ class StatementsController < ApplicationController
   def new
     @statement = Statement.new
     organization = current_user.organization_id
-    @writs = Document.writs.includes(:task_list).where("task_lists.completed" => true).where{(sent == true) & (organization_id == organization) & (executed == false)}
+    @writs = Document.writs.includes(:task_list).includes(:statements).where{(sent == true) & (organization_id == organization)}
+                      .where("executed = #{false} AND task_lists.completed = #{true} AND with_comments = #{false} AND statements.id IS NULL OR with_comments = #{true} AND statements.with_completed_task_list")
+                     # .where{(sent == true) & (organization_id == organization) & (executed == false)}
     # @writs = Document.writs.where{(sent == true) & (organization_id == organization) & (executed == false)}
     @acceptors = User.find( :all, :include => :permissions, :conditions => "permissions.id = 2 AND organization_id != #{current_user.organization_id}")
     @approvers = User.find( :all, :include => :permissions, :conditions => "permissions.id = 1 AND organization_id = #{current_user.organization_id}")

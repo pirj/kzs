@@ -24,11 +24,20 @@
     <h3>Пропуск на транспортное средство</h3>
     
     Номер: <%= @permit.id %><br>
-    
+    Организация: <%= organization_full_title(@permit.organization_id) %><br>
     Класс пропуска: <%= t(@permit.permit_class) %><br>
     
     Действителен с <%= @permit.start_date.strftime('%d.%m.%y') if @permit.start_date %> по <%= @permit.expiration_date.strftime('%d.%m.%y') if @permit.start_date %>	
     <br>
+    
+    <h3>Транспортное средство</h3>
+    
+      Марка: <%= @permit.vehicle.brand %><br>
+      Модель: <%= @permit.vehicle.model %><br>
+      Тип: <%= vehicle_body(@permit.vehicle) %><br>
+      Номер СТС: <%= @permit.vehicle.register_document %><br>
+      Номер ГРЗ: <%= @permit.vehicle.register_sn %><%= @permit.vehicle.sn_region %><br>
+      
     
     <h3>Водители</h3>
     <% if @permit.way_bill %>
@@ -36,7 +45,7 @@
     <% else %>
       <ul>
         <% @permit.vehicle.users.each do |user| %>
-          <li><%= user.first_name %></li>
+          <li><%= user.first_name_with_last_name %> | <%= user.position %> </li>
         <% end %>
       </ul>
     <% end %>

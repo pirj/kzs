@@ -56,6 +56,7 @@ ru:
   statement_prepared: "Акт подготовлен"
   statement_approved: "Акт подписан"
   task_completed: "Задача исполнена"
+  task_list_created: "Лист замечаний создан"
   activerecord:
     models: 
       permission:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210064305) do
+ActiveRecord::Schema.define(:version => 20131211144206) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20131210064305) do
     t.integer  "vehicle_id"
     t.string   "permit_class"
     t.boolean  "way_bill"
+    t.integer  "organization_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -275,20 +276,21 @@ ActiveRecord::Schema.define(:version => 20131210064305) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
-    t.boolean  "draft",                  :default => true
-    t.boolean  "prepared",               :default => false
-    t.boolean  "opened",                 :default => false
-    t.boolean  "accepted",               :default => false
-    t.boolean  "not_accepted",           :default => false
-    t.boolean  "sent",                   :default => false
-    t.boolean  "deleted",                :default => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
-    t.boolean  "approved",               :default => false
+    t.boolean  "draft",                    :default => true
+    t.boolean  "prepared",                 :default => false
+    t.boolean  "opened",                   :default => false
+    t.boolean  "accepted",                 :default => false
+    t.boolean  "not_accepted",             :default => false
+    t.boolean  "sent",                     :default => false
+    t.boolean  "deleted",                  :default => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.boolean  "approved",                 :default => false
     t.datetime "approved_date"
     t.datetime "date"
     t.string   "sn"
     t.integer  "approver_id"
+    t.boolean  "with_completed_task_list", :default => false
   end
 
   create_table "task_lists", :force => true do |t|

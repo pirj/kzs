@@ -25,12 +25,7 @@
 	</ul>
 	
 	<% if @statement.task_list %>
-	<h4>Лист замечания</h4>
-	<ul>
-	  <% @task_list.tasks.each do |task| %>
-	    <li><%= task.task %><!-- : <%= task_status(task) %> --></li>
-	  <% end %>
-	</ul>
+    <%= render 'statement_tasks' %>
 	<% end %>
 	
 	    

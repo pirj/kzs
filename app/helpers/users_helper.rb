@@ -29,7 +29,9 @@ module UsersHelper
   end
 	
 	def user(user_id)
-	  User.find(user_id)
+	  if User.exists?(user_id)
+      user = User.find(user_id)
+	  end
   end
   
 end

@@ -196,6 +196,7 @@ class DocumentsController < ApplicationController
         document.draft = false
       end
       document.save!
+      assign_organizations_to_tasks(document)
     end
     redirect_to documents_path, notice: t('document_successfully_created')
   end
@@ -380,6 +381,14 @@ class DocumentsController < ApplicationController
   
   def authorize
     
+  end
+  
+  def assign_organizations_to_tasks(document)
+    document.task_list.tasks.each do |task|
+      task.executor_organization_id = document.organization_id
+      task.sender_organization_id = document.sender_organization_id
+      task.save!
+    end
   end
     
   

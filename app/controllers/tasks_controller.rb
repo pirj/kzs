@@ -1,4 +1,16 @@
 class TasksController < ApplicationController
+  
+  def index 
+    @tasks = Task.all
+    if params[:scope] == "expired"
+      @tasks = Task.expired
+    else
+      @tasks = @tasks
+    end
+    
+  end
+  
+  
   def execute
     @task = Task.find(params[:id])
     @task.completed = true
@@ -11,6 +23,6 @@ class TasksController < ApplicationController
        task_list.save!
     end
      
-    redirect_to :back, :notice => 'task_completed'
+    redirect_to :back, :notice => t('task_completed')
   end
 end

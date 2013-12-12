@@ -113,6 +113,15 @@
 		background: #fff url('left-icon/Che-2.png') no-repeat center;
 	}
 	}
+	.tasks {
+	background: #fff url('left-icon/tasks-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/tasks-3.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/tasks-2.png') no-repeat center;
+	}
+	}
 	.acts {
 	background: #fff url('left-icon/A-1.png') no-repeat center;
 	&:hover {

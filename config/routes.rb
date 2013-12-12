@@ -74,7 +74,7 @@ Kzs::Application.routes.draw do
   
   
   match '/dashboard' => 'users#dashboard'
-  root :to => 'documents#index'
+  root :to => 'permits#index'
   
   match '/active_admin' => 'admin/users#index'
   

@@ -1,7 +1,7 @@
 <div class="btn-toolbar">
 
 <% unless @permit.canceled == true || @permit.agreed == true %>
-<% if current_user.has_permission?(6) %>
+<% if current_user.has_permission?(11) || current_user.organization_id == @permit.organization_id %>
 <div class="btn-group">	
 	<%= link_to "Редактировать", edit_permit_path(@permit), :class=> "btn btn-primary" %>	
 </div>

@@ -12,6 +12,8 @@ class Statement < ActiveRecord::Base
   scope :prepared, -> { where(prepared: true) }
   scope :drafts, -> { where(draft: true) }
   scope :unopened, -> { where(opened: false) }
+  scope :completed, -> { where(with_completed_task_list: true) }
+  
   
   before_save :assign_approvers
   

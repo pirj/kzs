@@ -7,6 +7,17 @@ module OrganizationsHelper
   		'-'
   	end
 	end
-
+  
+  def organization_short_title(id)
+	  if Organization.exists?(id)
+	    Organization.find(id).short_title
+    end
+  end
+  
+  def organization_full_title(id)
+	  if Organization.exists?(id)
+	    Organization.find(id).title
+    end
+  end
   
 end
