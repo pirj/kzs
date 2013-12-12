@@ -7,6 +7,11 @@
 		
 		<%= form_for @task_list do |f| %>
 		<%= f.hidden_field :statement_id, :value => params[:id] %>
+		
+		<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
+		
+		<h4>Задачи:</h4>
+		
 		<%= f.fields_for :tasks do |builder| %>
       <%= render 'task_fields', f: builder %>
     <% end %>

@@ -214,7 +214,7 @@ $(document).ready(function(){
 
 
 $(function() {
-    $( "#datepicker" ).datepicker();
+    $( "#datepicker, #document_deadline, #task_list_deadline" ).datepicker({ dateFormat: "dd-mm-yy" });
 });
 
 // function myFunction(elem) {

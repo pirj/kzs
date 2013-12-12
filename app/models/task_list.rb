@@ -1,5 +1,5 @@
 class TaskList < ActiveRecord::Base
-  attr_accessible :statement_id, :tasks_attributes
+  attr_accessible :statement_id, :tasks_attributes, :deadline
   belongs_to :statement
   belongs_to :document
   has_many :tasks
@@ -31,6 +31,11 @@ class TaskList < ActiveRecord::Base
         statement.save!
       end
     end
+  end
+  
+  def with_empty_tasks
+    1.times {tasks.build}
+    self
   end
     
 end

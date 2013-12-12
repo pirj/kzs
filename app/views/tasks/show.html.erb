@@ -22,7 +22,7 @@
 	  <p>Исполнитель: <%= user(@task.executor_id) %></p>
 	  <p>Составитель: <%= user(@task.creator_id) %></p>
 	  <p>Контрольное лицо: <%= user(@task.approver_id) %></p>
-	  <p>Задача: <%= @task.executor_comment %></p>
+	  <p>Комментарий исполнителя: <%= @task.executor_comment %></p>
 	  
                                
     <% if @task.completed %> Выполнена <% else %> <%= link_to "Выполнить", execute_task_path(@task), data: { confirm: "Вы уверены?" }, :class => 'btn' %><% end %>
