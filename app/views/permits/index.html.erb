@@ -5,7 +5,7 @@
 		  <%= render 'shared/user' %>
 	    <h1 class="doc_header">Заявки на пропуск<!-- <span class="caret"></span> --></h1>
 	    <%= render 'panel' %>
-	    <div id="permits_table"><%= render 'table' %></div>
+	    <div id="permits_table"><%= render 'table', :@permits => @permits %></div>
 	    <% if params[:scope] == 'for_print' %>
 	    <div class="btn-toolbar">
         <div class="btn-group">	

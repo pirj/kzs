@@ -21,7 +21,7 @@ class PermitsController < ApplicationController
     elsif params[:scope] == "for_print"
       @permits = @permits.for_print.walkers
     else
-      @permits = @permits
+      @permits = @permits.where{(agreed == true) || (rejected == true)}
     end
     
     
