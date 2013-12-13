@@ -32,7 +32,18 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
+    
+  end
+  
+  def edit
+    
     @organization = Organization.find(params[:id])
+    @users = User.where(:organization_id => current_user.organization_id)
+    
+    if current_user.organization_id != @organization.id
+      redirect_to :back, :alert => t('access_denied')
+    end
+
   end
 
   # POST /organizations

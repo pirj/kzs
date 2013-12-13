@@ -1,10 +1,54 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Title:</b>
-  <%= @organization.title %>
-</p>
-
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
+<div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		<%= render 'shared/user' %>
+		<h1 class="doc_header"><%= @organization.title %><span class="caret"></span></h1>
+		<div class="btn-toolbar">
+      <div class="btn-group">	
+        <%= link_to "назад", :back, :class => "btn" %>
+      </div>
+      <% if current_user.organization_id == @organization.id %>
+      <div class="btn-group">	
+        <%= link_to "редактировать", edit_organization_path(@organization), :class => "btn" %>
+      </div>
+      <% end %>
+    </div>
+		  
+    <h1>Общие данные</h1>
+    <p>Полное наименование: <%= @organization.title %></p>
+    <p>Форма собственности: <%= @organization.type_of_ownership %></p>
+    <p>Дата постановки на учет в налоговом органе: <%= @organization.date_of_registration.strftime('%d.%m.%Y') if @organization.date_of_registration %></p>
+    <p>Налоговый орган, принявший на учет: <%= @organization.tax_authority_that_registered %></p>
+    <p>Скан свидетельства о постановке на учет в налоговом органе: <%= link_to "Скачать", @organization.certificate_of_tax_registration.url(:original, false) %></p>
+    <p>Дата решения о создании организации: <%= @organization.creation_resolution_date %></p>
+    <p>Скан решения о создании: <%= link_to "Скачать", @organization.creation_resolution.url(:original, false) %></p>
+    <p>Скан Устава организации: <%= link_to "Скачать", @organization.articles_of_organization.url(:original, false) %></p>
+    <br>
+    <p>Генеральный директор: <%= user_with_full_name_with_middle_name(@organization.director_id) %></p>
+    <p>Главный бухгалтер: <%= user_with_full_name_with_middle_name(@organization.accountant_id) %></p>
+    <p>ИНН: <%= @organization.inn %></p>
+    <p>КПП: <%= @organization.kpp %></p>
+    <p>ОГРН: <%= @organization.ogrn %></p>
+    <p>БИК: <%= @organization.bik %></p>
+    <p>Дата постановки в ЕГРЮЛ: <%= @organization.egrul_registration_date %></p>
+    <p>Скан выписки из ЕГРЮЛ: <%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false) %></p>
+     
+    <h1>Реквизиты</h1>
+    <p>Полное наименование банка: <%= @organization.bank_title %></p>
+    <p>Юридический адрес банка: <%= @organization.bank_address %></p>
+    <p>Корр. счет банка: <%= @organization.bank_correspondent_account %></p>
+    <p>БИК банка: <%= @organization.bank_bik %></p>
+    <p>ИНН банка: <%= @organization.bank_inn %></p>
+    <p>КПП банка: <%= @organization.bank_kpp %></p>
+    <p>ОКВЭД банка: <%= @organization.bank_okved %></p>
+    <p>Расчетный счет организации: <%= @organization.organization_account %></p>
+    <p>Юридический адрес организации: <%= @organization.legal_address %></p>
+    <p>Физический адрес организации: <%= @organization.actual_address %></p>
+    
+    <h1>Сотрудники</h1>
+    <ul>
+      <% @organization.users.each do |user| %>
+      <li><%= user.position %>: <%= user_with_full_name_with_middle_name(user) %></li>
+      <% end %>
+    </ul>
+</div>
