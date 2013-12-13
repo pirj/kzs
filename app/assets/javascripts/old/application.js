@@ -10,14 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require old/jquery.Jcrop.js
-//= //require old/jquery-ui
-//= //require old/chosen-jquery
-//= require old/documents.js
-//= //require old/ckeditor/init
-//= //require old/jquery_ujs
-//= require old/jquery.Jcrop.min
-//= require old/shared.js
-//= //require old/ckeditor/ckeditor
+//= require jquery
+//= require jquery-ui
+//= require chosen-jquery
+//= //require documents
+//= require ckeditor/init
+//= require jquery_ujs
+
+//= //require shared
+//= require ckeditor/ckeditor
 //= require_tree .
 

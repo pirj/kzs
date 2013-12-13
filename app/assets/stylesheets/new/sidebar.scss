@@ -1,135 +1,135 @@
-/* Sidebar */
-
-#sidebar {
-  position: fixed;
-  width: 70px;
-  background-color: #ededed;
-  height: 100%;
-  left:0;
-   a {
-    font-size:0 !important;
-  }
-  .widgets {
-    display: block;
-    width: 70px;
-    height: 70px;
-    background: url("icon-sidebar-widgets.png") no-repeat scroll 0px 0px;
-    margin-bottom: 15px;
-    &:hover {
-      display: block;
-      width: 70px;
-      height: 70px;
-      background: url("icon-sidebar-widgets.png") no-repeat scroll 0px -70px #1ba0e1;
-    }
-   
-  }
-  .shortcut {
-    display: block;
-    width: 70px;
-    height: 70px;
-    background: url("background-shortcut.png") no-repeat scroll 0px 0px;
-    margin-top: -15px;
-    margin-bottom: -15px;
-    position: relative;
-    &.active {
-      background: url("background-shortcut.png") no-repeat scroll 0px -70px;
-    }
-    &:hover {
-      background: url("background-shortcut.png") no-repeat scroll -70px 0px;
-    }
-    &.active:hover {
-      background: url("background-shortcut.png") no-repeat scroll 0px -70px;
-    }
-    .events {
-      position: absolute;
-      display: block;
-      min-width: 10px;
-      min-height: 20px;
-      border-radius: 14px;
-      background-color: #e63d4d;
-      color: #ffffff;
-      text-align: center;
-      font-size: 10px;
-      font-family: "OpenSans Regular", sans-serif;
-      line-height: 20px;
-      top: 7px;
-      left: 43px;
-      padding: 0 5px;
-      white-space: nowrap;
-    }
-    &.active .events {
-      display: none;
-    }
-  }
-  .icon {
-    display: block;
-    width: 70px;
-    height: 70px;
-  }
-  .documents {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px -350px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px -350px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px -350px;
-    }
-  }
-  .messages {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px -210px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px -210px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px -210px;
-    }
-  }
-  .objects {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px -140px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px -140px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px -140px;
-    }
-  }
-  .replies {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px -70px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px -70px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px -70px;
-    }
-  }
-  .permits {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px -280px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px -280px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px -280px;
-    }
-  }
-  .library {
-    .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll 0px 0px;
-    }
-    &:hover .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -70px 0px;
-    }
-    &.active .icon {
-      background: url("icons-shortcuts.png") no-repeat scroll -140px 0px;
-    }
-  }
-}
+///* Sidebar */
+//
+//#sidebar {
+//  position: fixed;
+//  width: 70px;
+//  background-color: #ededed;
+//  height: 100%;
+//  left:0;
+//   a {
+//    font-size:0 !important;
+//  }
+//  .widgets {
+//    display: block;
+//    width: 70px;
+//    height: 70px;
+//    background: url("icon-sidebar-widgets.png") no-repeat scroll 0px 0px;
+//    margin-bottom: 15px;
+//    &:hover {
+//      display: block;
+//      width: 70px;
+//      height: 70px;
+//      background: url("icon-sidebar-widgets.png") no-repeat scroll 0px -70px #1ba0e1;
+//    }
+//
+//  }
+//  .shortcut {
+//    display: block;
+//    width: 70px;
+//    height: 70px;
+//    background: url("background-shortcut.png") no-repeat scroll 0px 0px;
+//    margin-top: -15px;
+//    margin-bottom: -15px;
+//    position: relative;
+//    &.active {
+//      background: url("background-shortcut.png") no-repeat scroll 0px -70px;
+//    }
+//    &:hover {
+//      background: url("background-shortcut.png") no-repeat scroll -70px 0px;
+//    }
+//    &.active:hover {
+//      background: url("background-shortcut.png") no-repeat scroll 0px -70px;
+//    }
+//    .events {
+//      position: absolute;
+//      display: block;
+//      min-width: 10px;
+//      min-height: 20px;
+//      border-radius: 14px;
+//      background-color: #e63d4d;
+//      color: #ffffff;
+//      text-align: center;
+//      font-size: 10px;
+//      font-family: "OpenSans Regular", sans-serif;
+//      line-height: 20px;
+//      top: 7px;
+//      left: 43px;
+//      padding: 0 5px;
+//      white-space: nowrap;
+//    }
+//    &.active .events {
+//      display: none;
+//    }
+//  }
+//  .icon {
+//    display: block;
+//    width: 70px;
+//    height: 70px;
+//  }
+//  .documents {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px -350px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px -350px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px -350px;
+//    }
+//  }
+//  .messages {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px -210px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px -210px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px -210px;
+//    }
+//  }
+//  .objects {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px -140px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px -140px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px -140px;
+//    }
+//  }
+//  .replies {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px -70px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px -70px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px -70px;
+//    }
+//  }
+//  .permits {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px -280px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px -280px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px -280px;
+//    }
+//  }
+//  .library {
+//    .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll 0px 0px;
+//    }
+//    &:hover .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -70px 0px;
+//    }
+//    &.active .icon {
+//      background: url("icons-shortcuts.png") no-repeat scroll -140px 0px;
+//    }
+//  }
+//}

@@ -17,6 +17,7 @@ gem "cancan"
 gem "ckeditor"
 gem 'activeadmin'
 gem 'awesome_nested_set'
+gem 'haml'
 
 gem 'will_paginate'
 
