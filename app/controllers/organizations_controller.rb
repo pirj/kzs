@@ -1,17 +1,15 @@
 class OrganizationsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
-  def index
-    @organizations = Organization.all
+  def index 
+    @organizations = Organization.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @organizations }
+      format.html
+      format.js
     end
   end
-
-  # GET /organizations/1
-  # GET /organizations/1.json
+  
   def show
     @organization = Organization.find(params[:id])
 

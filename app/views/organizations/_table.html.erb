@@ -1,11 +1,19 @@
 <table class="table organizations_table" style="font-size: 12px; width: 900px;">
   	 <tr>
   	  <th><%= sortable "title", "Органицация" %></th>
+  	  <th><%= sortable "director_id", "Руководитель" %></th>
+  	  <th>Штат</th>
+  	  <th>Телефон</th>
+  	  <th>Подробнее</th>
 	  </tr>
 
 	<% @organizations.each do |organization| %>
 	  <tr>
 			<td><%= organization.title %></td>
+			<td><%= user(organization.director_id) %></td>
+			<td><%= organization.users.count %></td>
+			<td><%= organization.phone %></td>
+			<td><%= link_to "Подробнее", organization_path(organization) %></td>
 	  </tr>
 	<% end %>
 </table>
