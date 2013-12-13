@@ -60,8 +60,5 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  def dashboard
-    render :layout => 'dashboard'
-  end
+
 end

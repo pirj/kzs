@@ -1,0 +1,31 @@
+
+/*icons^*/
+
+.col-md-3#exit-edit {
+  padding: 0px;
+  text-align: right;
+}
+
+#exit-edit a {
+  line-height: 29px;
+}
+
+.bottom-nav {
+  padding-right: 0;
+}
+
+.nav-pills .exit {
+  float: right;
+}
+
+.bottom-nav.nav-pills {
+  > li {
+    margin-left: 14px;
+  }
+  li:first-child {
+    margin-left: 0;
+  }
+  > li:first-child > a {
+    background: #1BBC9B;
+  }
+}

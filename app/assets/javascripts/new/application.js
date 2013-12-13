@@ -10,14 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery-ui
-//= require chosen-jquery
-//= require documents
-//= require ckeditor/init
-//= require jquery_ujs
-//= jquery.Jcrop.min
-//= require shared
-//= require ckeditor/ckeditor
+//= require new/jquery.min.js
+//= require new/docs.js
+//= require new/dropdown.js
+//= require new/html5shiv.js
+//= require new/jcarousellite_1.0.1.min
+//= require new/jquery.gridster.min.js
+//=
+//= require new/scripts-index.js
+
 //= require_tree .
 

@@ -1,1 +1,106 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kzs</title>
+    <%= stylesheet_link_tag    "/assets/new/style", :media => "all" %>
+    <%= javascript_include_tag "/assets/new/application" %>
+
+<!--
+
+  -->
+
+  <%= csrf_meta_tags %>
+  <%= yield(:head) %>
+
+</head>
+<body>
+<div class="page full">
+  <div class="page-title">
+    <a href="#" class="logo"><img src="assets/new/mkzs-logo.png" alt="Менеджер КЗС"/></a>
+  </div>
+  <div class="container">
+    <section class="main-desktop-title">
+      <h3>Главный рабочий стол</h3>
+    </section>
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <div class="gridster">
+          <ul>
+            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="widget widget-security">
+              <a href="#">
+                <span class="widget-name">Охрана</span>
+              </a>
+            </li>
+            <li data-row="1" data-col="2" data-sizex="1" data-sizey="1" class="widget widget-docs">
+              <a href="#">
+                <span class="widget-name">Документы</span>
+                <span class="notifi">11</span>
+              </a>
+            </li>
+            <li data-row="1" data-col="3" data-sizex="1" data-sizey="1" class="widget widget-profile">
+              <a href="#">
+                <img src="img/profile.jpg" alt="profile"/>
+                <span class="widget-name">Профиль</span>
+              </a>
+            </li>
+            <li data-row="2" data-col="1" data-sizex="2" data-sizey="2" class="widget widget-admission">
+              <a href="/permits">
+                <span class="widget-name">Пропуска</span>
+              </a>
+            </li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" class="widget widget-chat">
+              <a href="#">
+                <span class="widget-name">Чат</span>
+              </a>
+            </li>
+            <li data-row="2" data-col="3" data-sizex="2" data-sizey="1" class="widget widget-library">
+              <a href="#">
+                <span class="widget-name">Библиотека</span>
+              </a>
+            </li>
+            <li data-row="1" data-col="5" data-sizex="2" data-sizey="2" class="widget widget-weather">
+              <a href="#">
+                <span class="widget-name">Понедельник, 17 июля</span>
+              </a>
+            </li>
+            <li data-row="3" data-col="5" data-sizex="2" data-sizey="1" class="widget widget-org">
+              <a href="#">
+                <span class="widget-name">Организации и сотрудники</span>
+              </a>
+            </li>
+            <li data-row="2" data-col="6" data-sizex="2" data-sizey="1" class="widget widget-odject">
+              <a href="#">
+                <span class="widget-name">Объекты</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="row clearfix container">
+    <nav>
+      <ul class="col-md-9 col-md-offset-3 nav nav-pills bottom-nav clearfix">
+        <li><a href="#" class="btn btn-primary btn-sm">Главный рабочий стол</a></li>
+        <li><a href="#" class="btn btn-sm">Диспетчерская</a></li>
+        <li><a href="#" class="btn btn-sm">Общение</a></li>
+        <li class="dropdown"><a href="#" class="btn btn-sm icon-cog" data-toggle="dropdown"></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#" class="icon-plus-1">Добавить рабочий стол</a></li>
+            <li><a href="#" class="icon-pencil" id="edit-current-desktop">Редактировать текущие столы</a></li>
+            <li class="dropdown-arr"></li>
+            <li><a href="#" class="icon-block-1">Отмена</a></li>
+
+          </ul>
+        </li>
+        <li class="exit"><a href="#" class="btn btn-default btn-sm">Выйти</a></li>
+      </ul>
+    </nav>
+  </footer>
+</div>
 <%= yield %>
+</body>
+</html>

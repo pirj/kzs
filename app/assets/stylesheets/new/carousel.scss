@@ -1,0 +1,27 @@
+/*--Carousel--*/
+.attachments-carousel {
+	min-height:230px;
+	width:100% !important;
+	.icon-left-open, .icon-right-open {
+		position:absolute;
+		top:50%;
+		font-size:20px;
+		margin-top:-20px;
+		z-index:50;
+		display:none;
+		&:hover {
+			text-decoration:none;
+		}
+	}
+	.icon-left-open {
+		left:-5px;
+	}
+	.icon-right-open {
+		right:-10px;
+	}
+	&:hover {
+		.icon-left-open, .icon-right-open {
+			display:block;
+		}
+	}
+}

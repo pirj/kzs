@@ -1,5 +1,6 @@
 Kzs::Application.routes.draw do
 
+
   get "/users/sign_out" => "sessions#destroy"
   devise_for :users
 
@@ -72,9 +73,8 @@ Kzs::Application.routes.draw do
   resources :document_attachments
   resources :task_lists
   
-  
-  match '/dashboard' => 'users#dashboard'
-  root :to => 'permits#index'
+
+  root :to => 'dashboard#index'
   
   match '/active_admin' => 'admin/users#index'
   

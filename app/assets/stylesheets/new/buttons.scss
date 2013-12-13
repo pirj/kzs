@@ -1,0 +1,78 @@
+/*btns*/
+
+.btn {
+  background: #F2F2F2;
+  font-size: 13px;
+  border: none;
+}
+
+.nav-pills > li > a {
+  border-radius: 90px;
+}
+
+.default-primary {
+  background: #76d4ce;
+  color: #fff;
+  font-size: 13px;
+  &:hover, &:focus {
+    background: #1BBC9B;
+    color: #fff;
+  }
+}
+
+.add-widget-btn {
+  text-decoration: underline;
+  color: #17a488;
+  font-size: 22px;
+  position: relative;
+  &:hover, &:focus {
+    color: #17a488;
+    font-size: 22px;
+    position: relative;
+  }
+  span {
+    border-radius: 100px;
+    background: #17a488;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    left: -54px;
+    position: absolute;
+    width: 40px;
+    top: -3px;
+  }
+}
+
+.btn-primary {
+  background: #1BBC9B; 
+  &:hover, &:focus {
+    background: #1BBC9B;
+  }
+}
+
+.power-btn {
+  border-radius: 9px;
+  font-size: 16px;
+  padding: 4px;
+}
+
+.power-btn:before {
+  top: -1px;
+}
+
+.back-btn:before {
+  left: -3px;
+}
+
+.btn.btn-available {
+  background: #c4f2e4;
+  color: #00a499;
+}
+
+.icon-cog:before {
+  font-size: 18px;
+  top: 2px;
+}

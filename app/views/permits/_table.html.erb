@@ -85,11 +85,11 @@
         </td>
         <td>
           <% if permit.permit_type == "user" %>
-              <%= image_tag('propusk-man.png') %>
+              <%= image_tag('old/propusk-man.png') %>
           <% elsif permit.permit_type == "vehicle" %>
-              <%= image_tag('propusk-car.png') %>
+              <%= image_tag('old/propusk-car.png') %>
           <% elsif permit.permit_type == "daily" %>
-              <%= image_tag('propusk-daily.png') %>
+              <%= image_tag('old/propusk-daily.png') %>
           <% end %>
           </th>
         <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></th>
