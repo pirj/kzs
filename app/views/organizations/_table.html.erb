@@ -1,0 +1,11 @@
+<table class="table organizations_table" style="font-size: 12px; width: 900px;">
+  	 <tr>
+  	  <th><%= sortable "title", "Органицация" %></th>
+	  </tr>
+
+	<% @organizations.each do |organization| %>
+	  <tr>
+			<td><%= organization.title %></td>
+	  </tr>
+	<% end %>
+</table>

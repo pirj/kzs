@@ -4,8 +4,10 @@
   	  <th><%= sortable "sender_organization_id", "Постановщик" %></th>
   	  <th><%= sortable "executor_organization_id", "Исполнитель" %></th>
   	  <th><%= sortable "created_at", "Дата создания" %></th>
+  	  <th>Основание</th>
+  	  <th>Чек-лист</th>
 	    <th><%= sortable "completed", "Статус" %></th>
-	    <th><%= sortable "deadline", "Срок исполнения" %></th>
+	    <th><%= sortable "deadline", "Срок" %></th>
 	    <th>Подробнее</th>
 	    <th>Выполнить</th>
 	  </tr>
@@ -16,10 +18,12 @@
 			<td><%= organization_short_title(task.sender_organization_id) %></td>
 			<td><%= organization_short_title(task.executor_organization_id) %></td>
 			<td><%= task.created_at.strftime('%d.%m.%Y') %></td>
+			<td><%= cause(task) %></td>
+			<td><%= task_list(task) %></td>
 			<td><%= task_status(task) %></td>
 			<td><%= task_deadline(task) %></td>
 			<td><%= link_to "Подробнее", task %></td>
 			<td><% if task.completed %> Выполнена <% else %> <%= link_to "Выполнить", execute_task_path(task), data: { confirm: "Вы уверены?" } %><% end %></td>
-	  </tr>
+	  </tr> 
 	<% end %>
 </table>

@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-  # GET /organizations
-  # GET /organizations.json
+  helper_method :sort_column, :sort_direction
+  
   def index
     @organizations = Organization.all
 
@@ -79,5 +79,16 @@ class OrganizationsController < ApplicationController
       format.html { redirect_to organizations_url }
       format.json { head :no_content }
     end
+  end
+  
+  
+  private
+  
+  def sort_column
+    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 end
