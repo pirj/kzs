@@ -10,7 +10,7 @@
 	<% @organizations.each do |organization| %>
 	  <tr>
 			<td><%= organization.title %></td>
-			<td><%= user(organization.director_id) %></td>
+			<td><%= user_with_full_name(organization.director_id) %></td>
 			<td><%= organization.users.count %></td>
 			<td><%= organization.phone %></td>
 			<td><%= link_to "Подробнее", organization_path(organization) %></td>
