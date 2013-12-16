@@ -149,6 +149,15 @@
 		background: #fff url('left-icon/objects-3.png') no-repeat center;
 	}
 	}
+	.contragent {
+	background: #fff url('left-icon/contragent-1.png') no-repeat center;
+	&:hover {
+		background: #76d4ce url('left-icon/contragent-3.png') no-repeat center;
+		}
+	&.active {
+		background: #fff url('left-icon/contragent-2.png') no-repeat center;
+	}
+	}
 }
 
 	.active:after{

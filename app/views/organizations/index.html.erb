@@ -1,28 +1,10 @@
-<div class="container"><h2>Организации и структурные подразделения</h2>
-
-<table class="table table-striped">
-  <tr>
-    <th>Название</th>
-	<th>Принадлежность</th>
-	<th>Объекты</th>
-    <th>Сотрудники</th>
-    <th>Детали</th>
-    <th>#</th>
-  </tr>
-
-<% @organizations.each do |organization| %>
-  <tr>
-    <td><%= organization.title %></td>
-	<td><%= possession(organization) %></td>
-	<td></td>
-	<td></td>
-    <td><%= link_to 'Подробнее', organization %></td>
-    <td><%= link_to '#', edit_organization_path(organization) %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'Добавить организацию', new_organization_path %>
+<div class="container"><div class="row">
+	<%= render 'shared/left' %>
+	<div class="span12">
+		  <%= render 'shared/user' %>
+	    <h1 class="doc_header">Все контрагенты</h1>
+	    <%= render 'panel' %>
+	    <div id="organizations_table"><%= render 'table' %></div>
+	</div>	
+</div>
 </div>

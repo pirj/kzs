@@ -34,4 +34,20 @@ module UsersHelper
 	  end
   end
   
+  def user_with_full_name(user_id)
+	  if User.exists?(user_id)
+      user = User.find(user_id)
+      user.first_name_with_last_name
+	  end
+  end
+  
+  def user_with_full_name_with_middle_name(user_id)
+	  if User.exists?(user_id)
+      user = User.find(user_id)
+      user.first_name_with_last_name_with_middle_name
+	  end
+  end
+  
+  
+  
 end

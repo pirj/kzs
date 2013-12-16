@@ -48,6 +48,10 @@
 	
 	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема' %>
 	
+	<% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %> 
+	<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
+	<% end %>
+	
 	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px;', :'data-placeholder' => "Организация-получатель"}) %>
 	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Контрольное-лицо"}) %>
 	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>

@@ -1,17 +1,15 @@
 class OrganizationsController < ApplicationController
-  # GET /organizations
-  # GET /organizations.json
-  def index
-    @organizations = Organization.all
+  helper_method :sort_column, :sort_direction
+  
+  def index 
+    @organizations = Organization.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @organizations }
+      format.html
+      format.js
     end
   end
-
-  # GET /organizations/1
-  # GET /organizations/1.json
+  
   def show
     @organization = Organization.find(params[:id])
 
@@ -34,7 +32,18 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations/1/edit
   def edit
+    
+  end
+  
+  def edit
+    
     @organization = Organization.find(params[:id])
+    @users = User.where(:organization_id => current_user.organization_id)
+    
+    if current_user.organization_id != @organization.id
+      redirect_to :back, :alert => t('access_denied')
+    end
+
   end
 
   # POST /organizations
@@ -79,5 +88,16 @@ class OrganizationsController < ApplicationController
       format.html { redirect_to organizations_url }
       format.json { head :no_content }
     end
+  end
+  
+  
+  private
+  
+  def sort_column
+    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
 end

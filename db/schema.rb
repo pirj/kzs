@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211144206) do
+ActiveRecord::Schema.define(:version => 20131213123013) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(:version => 20131211144206) do
     t.string   "title"
     t.integer  "user_id"
     t.integer  "organization_id"
-    t.string   "deadline"
     t.text     "text"
     t.string   "file_file_name"
     t.string   "file_content_type"
@@ -164,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20131211144206) do
     t.datetime "deteled_date"
     t.datetime "prepared_date"
     t.datetime "executed_date"
+    t.datetime "deadline"
   end
 
   create_table "groups", :force => true do |t|
@@ -184,8 +184,8 @@ ActiveRecord::Schema.define(:version => 20131211144206) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -193,12 +193,44 @@ ActiveRecord::Schema.define(:version => 20131211144206) do
     t.string   "phone"
     t.string   "mail"
     t.integer  "director_id"
-    t.integer  "inn"
+    t.string   "inn"
     t.string   "short_title"
     t.integer  "admin_id"
     t.string   "type_of_ownership"
     t.string   "legal_address"
     t.string   "actual_address"
+    t.datetime "date_of_registration"
+    t.string   "tax_authority_that_registered"
+    t.string   "certificate_of_tax_registration_file_name"
+    t.string   "certificate_of_tax_registration_content_type"
+    t.integer  "certificate_of_tax_registration_file_size"
+    t.datetime "certificate_of_tax_registration_updated_at"
+    t.datetime "creation_resolution_date"
+    t.string   "creation_resolution_file_name"
+    t.string   "creation_resolution_content_type"
+    t.integer  "creation_resolution_file_size"
+    t.datetime "creation_resolution_updated_at"
+    t.string   "articles_of_organization_file_name"
+    t.string   "articles_of_organization_content_type"
+    t.integer  "articles_of_organization_file_size"
+    t.datetime "articles_of_organization_updated_at"
+    t.integer  "accountant_id"
+    t.string   "kpp"
+    t.string   "ogrn"
+    t.string   "bik"
+    t.string   "egrul_registration_date"
+    t.string   "egrul_excerpt_file_name"
+    t.string   "egrul_excerpt_content_type"
+    t.integer  "egrul_excerpt_file_size"
+    t.datetime "egrul_excerpt_updated_at"
+    t.string   "bank_title"
+    t.string   "bank_address"
+    t.string   "bank_correspondent_account"
+    t.string   "bank_bik"
+    t.string   "bank_inn"
+    t.string   "bank_kpp"
+    t.string   "bank_okved"
+    t.string   "organization_account"
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -299,6 +331,7 @@ ActiveRecord::Schema.define(:version => 20131211144206) do
     t.datetime "updated_at",                      :null => false
     t.integer  "document_id"
     t.boolean  "completed",    :default => false
+    t.datetime "deadline"
   end
 
   create_table "tasks", :force => true do |t|
