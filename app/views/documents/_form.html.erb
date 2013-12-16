@@ -39,7 +39,7 @@
 	
 	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема' %>
 	
-	<% if @document.document_type == 'writ' || action?('new') %> 
+	<% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %> 
 	<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
 	<% end %>
 	
