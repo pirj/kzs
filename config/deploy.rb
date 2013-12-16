@@ -17,7 +17,7 @@ task :staging do
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
-  set :branch, "master"
+  set :branch, "temp"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
