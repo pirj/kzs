@@ -1,3 +1,4 @@
+@import "bootstrap.min";
 @import "reset";
 @import "buttons";
 @import "icons";
@@ -6,9 +7,14 @@
 @import "sidebar";
 @import "media";
 @import "carousel";
-@import "bootstrap.min";
+
 @import "jquery.gridster";
 @import "fontello";
+
+.alert{
+  padding-left: 90px;
+}
+
 
 .page .container {
   max-width: 890px;
@@ -372,6 +378,8 @@
   }
 }
 
+
+
 /*tables*/
 .default-table {
   width: 100%;
@@ -399,40 +407,7 @@
       color: #0e84cf;
       text-decoration: none;
     }
-    &.status {
-      text-align: center;
-      .label {
-        position: relative;
-        min-width: 100px;
-        display: inline-block;
-        font-size: 12px;
-        line-height: 20px;
-        padding: 6px 10px;
-        font-weight: normal;
-        border-radius: 15px;
-        &.label-success {
-          background: #1BBC9B;
-        }
-        &.label-warning {
-          background: #dcf2ec;
-          color:#009969;
-        }
-        &.label-ready {
-          background: #f2f2f2;
-          color: #666666;
-        }
-        &:before {
-          color: #999999;
-          font-size: 18px;
-          left: -39px;
-          position: absolute;
-          top: 4px;
-        }
-        .count {
-          border-radius: 90px;
-        }
-      }
-    }
+
   }
   .sortable {
     display: inline-block;

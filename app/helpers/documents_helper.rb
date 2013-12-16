@@ -67,7 +67,7 @@ module DocumentsHelper
     if document.executed?
       '<span class="label label-success">Исполнен</span>'.html_safe
     elsif document.with_comments?
-      '<span class="label llabel-warning">С замечаниями</span>'.html_safe
+      '<span class="label label-warning">С замечаниями</span>'.html_safe
     elsif document.for_confirmation?
       '<span class="label label-success">Проверка исполнения</span>'.html_safe    
     elsif document.opened?

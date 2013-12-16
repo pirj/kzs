@@ -20,7 +20,7 @@
   	    <td><%= statement.title %></td>
   	    <td><%= link_to "Подробнее", statement %></td>
   	    <td><%= Russian::strftime(statement.created_at, "%d %B %Y %H:%M") %></td>
-  	    <td><%= statement_status(statement) %></td>
+  	    <td class="status"><%= statement_status(statement) %></td>
   	  </tr>
   	<% end %>
 </table>

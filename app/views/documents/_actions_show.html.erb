@@ -1,4 +1,4 @@
-<div class="btn-toolbar">	
+<div class="btn-toolbar">
   
   <% if @document.draft? && @document.user_id == current_user.id %>
 	<div class="btn-group">	
@@ -23,7 +23,7 @@
 		<%= link_to 'Отправить', send_document_document_path(@document), :class => "btn btn-success" %>
 	</div>
 	<% end %>
-	
+
 	
 	<% if can? :approve, @document %>
 	<% if for_approve(@document) %>

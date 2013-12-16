@@ -17,7 +17,7 @@
 			  document_executor = "отсутсвует"
 			}
 			
-			$("<tr class='inform'><td colspan='9'><div class='inform-wrap'><ul class='expanded'></ul></div></td></tr>").insertAfter(current_row);
+			$("<tr class='inform'><td colspan='9'><div class='inform-wrap status'><ul class='expanded'></ul></div></td></tr>").insertAfter(current_row);
 			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
 			$("<li><span>Тема:</span><p class='exp_title'><a href='/documents/" + document_id + "'>" + data.title + "</a></p></li>").appendTo('.inform td ul');
 			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');

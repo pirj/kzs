@@ -41,10 +41,11 @@ transition: width ease 0.1s;
     }
 
     .main {
-      margin-bottom: 20px;
+      padding-bottom: 20px;
       padding-top: 31px;
       display: block;
-      height: 45px;
+      margin-bottom: 20px;
+      height: 75px;
       text-decoration: none;
       text-align: center;
       &:hover{
@@ -225,6 +226,7 @@ transition: width ease 0.1s;
         vertical-align: super;
         color: gray;
         width: auto;
+        line-height: 18px;
       }
       &:hover{
         .text{

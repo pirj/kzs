@@ -13,7 +13,7 @@ module PermitsHelper
     elsif permit.agreed?
        '<span class="label label-info">Согласован</span>'.html_safe
     else
-       '<span class="label">Заявка</span>'.html_safe 
+       '<span class="label label-ready">Заявка</span>'.html_safe
     end
   end
 end

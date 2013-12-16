@@ -1,11 +1,21 @@
-<div class="row">
+<div class="container">
 
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Акты<!-- <span class="caret"></span> --></h1>
-		  <%= render 'panel' %>
-		  
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+      <h1 class="dropdown">Акты</h1>
+    </li>
+    <li class="col-md-3"></li>
+    <li class="col-md-4 pull-right">
+      <%= render 'shared/user' %>
+    </li>
+
+  </ul>
+  <%= render 'panel' %>
+</div>
+
+
+<div class="container">
+
 		  <div id="permits_table"><%= render 'table' %></div>
-		
-	</div>	
+
 </div>

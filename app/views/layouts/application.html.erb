@@ -17,16 +17,12 @@
 
 </head>
 <body>
-  <div class="container">
+  <div >
+  <!--class="container"-->
+
 
 	 <!-- <= render 'layouts/navbar' %> -->
 		
-	  <% if notice %>
-	    <div class="alert alert-success"><%= notice %></div>
-	  <% end %>
-	  <% if alert %>
-       <div class="alert alert-error"><%= alert %></div>
-      <% end %>
 
 
 
@@ -35,7 +31,13 @@
 
   </div>
 
-  <div class="hero-unit">
+  <div class="page">
+    <% if notice %>
+        <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+        <div class="alert alert-error"><%= alert %></div>
+    <% end %>
 
 
 	      <%= yield %>

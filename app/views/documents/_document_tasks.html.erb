@@ -1,4 +1,6 @@
-Чек-лист исполнен на: <%= @document.task_list.progress %>%<br>
+<% unless @document.task_list.tasks.blank? %>
+    Чек-лист исполнен на: <%= @document.task_list.progress  %>%<br>
+<% end %>
 
 <% @document.task_list.tasks.each.with_index(1) do |task, i| %>
   <%= i %>)  <%= task.task %>

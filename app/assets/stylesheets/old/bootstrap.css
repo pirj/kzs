@@ -6610,9 +6610,9 @@ textarea:focus {
   font-size: 16px;
   font-weight: bold;
   left: 10px;
-  margin-left: -3px;
+  margin-left: -5px;
   top: 60%;
-  margin-top: -4px;
+  margin-top: -6px;
   background-color: #1a1a1a;
   width: 10px;
   height: 10px;

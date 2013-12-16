@@ -1,27 +1,36 @@
-<div class="row">
-	
- <%= render 'shared/left' %>
-	
-	<div class="span8">
 
-  <%= render 'shared/user' %>
+<div class="container">
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+      <% if action?('new') %>
+          <h1 class="doc_header">
+            <% if params[:type] == 'mail' %>
+                Новое письмо
+            <% elsif params[:type] == 'writ' %>
+                Новое распоряжение
+            <% end %>
+            <span class="caret"></span></h1>
+      <% end %>
+    </li>
+    <li class="col-md-3"></li>
+    <li class="col-md-4 pull-right">
+      <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+          <%= render 'shared/user' %>
+      <% end %>
+    </li>
+  </ul>
+  <ul class="nav nav-pills permnavi">
+    <li class="btn"><%= link_to "Назад", :back, :class => "" %></li>
+    <!--  <li class="btn">  <%= link_to "Шаблоны", "#", :class => "" %></li>-->
+    <li class="btn"> <%= link_to "Черновики", drafts_documents_path, :class => "" %> </li>
+  </ul>
+</div>
+
     
-    <% if action?('new') %>
-		<h1 class="doc_header">
-		  <% if params[:type] == 'mail' %>
-			Новое письмо
-		  <% elsif params[:type] == 'writ' %>
-			Новое распоряжение
-			<% end %>
-		<span class="caret"></span></h1>
-		<% end %>
+<div class="container">
 
 
-	<div class="btn-toolbar">
-			<%= link_to "Назад", :back, :class => "btn" %>
-      <!-- <%= link_to "Шаблоны", "#", :class => "btn" %>
-      <%= link_to "Черновики", drafts_documents_path, :class => "btn" %> -->
-	</div>
+
 	
 	<%= form_for(@document) do |f| %>
 	

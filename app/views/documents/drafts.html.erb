@@ -1,16 +1,21 @@
-<div class="row">
-  <%= render 'shared/left' %>
+<div class="container">
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+      <h1 class="doc_header">Черновики</h1>
+    </li>
+    <li class="col-md-3"></li>
+    <li class="col-md-4 pull-right">
+      <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+          <%= render 'shared/user' %>
+      <% end %>
+    </li>
+  </ul>
+  <%= render 'panel' %>
+</div>
+<div class="container">
   <div class="span12">
-  
-  <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
-  <%= render 'shared/user' %>
-  <h1 class="doc_header">Черновики</h1>
-	
-
-	<% end %>
-	<%= form_tag documents_batch_path, method: :put do %>
-	<%= render 'panel' %>
-	<div id="document_table"><%= render 'table'%></div>
-	<% end %>
+    <%= form_tag documents_batch_path, method: :put do %>
+        <div id="document_table"><%= render 'table' %></div>
+    <% end %>
   </div>
 </div>

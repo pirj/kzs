@@ -1,16 +1,27 @@
-<div class="row">
-  <%= render 'shared/left' %>
-  <div class="span12">
-  
-  <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
-  <%= render 'shared/user' %>
-  <h1 class="doc_header">Все документы<!-- <span class="caret"></span> --></h1>
-	
 
-	<% end %>
-	<%= form_tag documents_batch_path, method: :put do %>
-	<%= render 'panel' %>
-	<div id="document_table"><%= render 'table'%></div>
-	<% end %>
-  </div>
-</div>
+  
+<%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+
+
+    <div class="container">
+      <ul class="row top-pannel clearfix">
+        <li class="col-md-5">
+          <h1 class="dropdown">Все документы<span class="caret"></span></h1>
+        </li>
+        <li class="col-md-3"></li>
+        <li class="col-md-4 pull-right">
+          <%= render 'shared/user' %>
+        </li>
+
+      </ul>
+
+
+      <%= render 'panel' %>
+    </div>
+
+<% end %>
+<%= form_tag documents_batch_path, method: :put do %>
+    <div class="container">
+    <div id="document_table" class="default-table"><%= render 'table'%></div>
+    </div>
+<% end %>

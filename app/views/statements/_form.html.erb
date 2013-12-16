@@ -1,23 +1,39 @@
-<div class="row">
-	
 
-	
-	<div class="span8">
 
-  <%= render 'shared/user' %>
+  <div class="container">
+    <ul class="row top-pannel clearfix">
+      <li class="col-md-5">
+        <h1 class="dropdown">  <h1 class="doc_header">
+          <% if action?('new') %>
+              Новый АКТ
+          <% else %>
+              ФСО
+          <% end %>
+          <span class="caret"></span></h1></h1>
+      </li>
+      <li class="col-md-3"></li>
+      <li class="col-md-4 pull-right">
+        <%= render 'shared/user' %>
+      </li>
+
+    </ul>
+    <ul class="nav nav-pills permnavi">
+      <li class="btn">
+        <%= link_to " назад", :back, :class => "" %>
+      </li>
+    </ul>
+
+
+
+    <%= render 'panel' %>
+  </div>
+	
+<div class="container">
+
+
   
-  <h1 class="doc_header">
-	  <% if action?('new') %>
-			Новый АКТ
-		<% else %>
-		  ФСО
-		<% end %>
-	<span class="caret"></span></h1>
-		<div class="btn-toolbar">
-			<div class="btn-group">	
-				<%= link_to " назад", :back, :class => "btn" %>
-			</div>
-		</div>
+
+
 		<div>
 		  
 		  <% if @statement.errors.any? %>
@@ -49,5 +65,6 @@
       <%= render 'actions_form', :f => f %>
 		
 			<% end %>
-	</div>	
+	</div>
+
 </div>

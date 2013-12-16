@@ -1,10 +1,19 @@
-<div class="row">
+<div class="container">
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+      <h1 class="dropdown">Заявки на пропуск <span class="caret"></span></h1>
+    </li>
+    <li class="col-md-3"></li>
+    <li class="col-md-4 pull-right">
+      <%= render 'shared/user' %>
+    </li>
 
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Заявки на пропуск<span class="caret"></span></h1>
-		  <%= render 'panel' %>
-		  
+  </ul>
+
+
+  <%= render 'panel' %>
+</div>
+<div class="container">
 		  
 	<% if @permit.permit_type == 'user' %>
 	  <h3>Пропуск на пеший проход</h3>
@@ -73,6 +82,5 @@
     <%= render 'actions' %>
     	
 
-	
-	
+
 </div>

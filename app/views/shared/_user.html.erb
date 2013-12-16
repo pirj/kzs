@@ -1,9 +1,9 @@
-<p class="doc_search">
-  <% if controller?('documents') %>
+
+  <%= link_to ("").html_safe, destroy_user_session_path, method: :delete, :class => 'power-btn btn' %>
+
+  <% if controller?('documentsdddddd ') %>
     <%= text_field_tag :query, params[:query], :placeholder => "Поиск по документам", :class => "lupe", :autocomplete => "off" %>
   <% end %>
   <%= hidden_field_tag :direction, params[:direction] %>
   <%= hidden_field_tag :sort, params[:sort] %>
-  <%= content_tag(:span, current_user.first_name_with_last_name, :class => "user_name") %>
-  <%= link_to ("&#xf011;").html_safe, destroy_user_session_path, method: :delete, :class => 'label logout' %>
-</p>
+  <%= content_tag(:span, current_user.first_name_with_last_name, :class => "username") %>

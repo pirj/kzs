@@ -1,31 +1,31 @@
-<div class="btn-toolbar">
+<ul class="nav nav-pills permnavi">
   
   <% unless action?('index') %>
-  <div class="btn-group">	
-		<%= link_to " назад", :back, :class => "btn" %>
-	</div>
+  <li class="btn">
+		<%= link_to " назад", :back, :class => "" %>
+	</li>
 	<% end %>
   
   <% if current_user.has_permission?(6) %>
-  <div class="btn-group">	
-  	<%= link_to "Новая заявка", new_permit_path, :class=> "btn" %>	
-  </div>
+  <li class="btn">
+  	<%= link_to "Новая заявка", new_permit_path, :class=> "" %>
+  </li>
   <% end %>
   
-  <div class="btn-group">	
-  	<%= link_to "Все пропуска", permits_path, :class=> "btn", :class => (params[:scope] ? 'btn' : 'btn btn-primary') %>	
-  </div>
+  <li class=<%= (params[:scope] ? 'btn' : 'btn btn-primary')  %>>
+  	<%= link_to "Все пропуска", permits_path, :class=> "dropdown-toggle" %>
+  </li>
 
-  <div class="btn-group">	
-  	<%= link_to "Текущие заявки", permits_path(:scope => :application), :class => (params[:scope] == 'application' ? 'btn btn-primary' : 'btn') %>	
-  </div>
+  <li class=<%= (params[:scope] == 'application' ? 'btn btn-primary' : 'btn') %>>
+  	<%= link_to "Текущие заявки", permits_path(:scope => :application)%>
+  </li>
 
-  <div class="btn-group">	
-  	<%= link_to "Просроченные", permits_path(:scope => :expired), :class => (params[:scope] == 'expired' ? 'btn btn-primary' : 'btn') %>	
-  </div>
+  <li class=<%= (params[:scope] == 'expired' ? 'btn btn-primary' : 'btn')%>>
+  	<%= link_to "Просроченные", permits_path(:scope => :expired) %>
+  </li>
   
-  <div class="btn-group">	
-  	<%= link_to "Групповая печать пеш пропусков", permits_path(:scope => :for_print), :class => (params[:scope] == 'for_print' ? 'btn btn-primary' : 'btn') %>	
-  </div>
+  <li class= <%= (params[:scope] == 'for_print' ? 'btn btn-primary' : 'btn') %> >
+  	<%= link_to "Групповая печать пеш пропусков", permits_path(:scope => :for_print) %>
+  </li>
 
-</div>
+</ul>

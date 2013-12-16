@@ -4,6 +4,8 @@ $(document).ready(function(){
         $('#permit_drivers_chosen').toggle();
     });
 
+
+
     $("#permit_start_date, #permit_expiration_date, #permit_date").datepicker({ dateFormat: "dd-mm-yy" });
 
     var permit = {

@@ -1,4 +1,4 @@
-<h2>Добавить организацию</h2>
+<div class="container"><h2>Добавить организацию</h2>
 
 <%= form_for(@organization) do |f| %>
   <% if @organization.errors.any? %>
@@ -32,3 +32,4 @@
 
 
 <%= link_to 'Back', organizations_path %>
+</div>

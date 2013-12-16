@@ -1,35 +1,46 @@
-<div class="row">
 
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Новый пропуск<span class="caret"></span></h1>
+
+	<div class="container">
+
+
+
+
 
 		  <div class="btn-toolbar">
 
-        <!-- <div class="btn-group">
-          <%= link_to "Шаблоны", "#", :class=> "btn btn-disabled" %>
-        </div>
+            <ul class="row top-pannel clearfix">
+              <li class="col-md-5">
+                <h1 class="dropdown">Новый пропуск<span class="caret"></span></h1>
+              </li>
+              <li class="col-md-3"></li>
+              <li class="col-md-4 pull-right">
+                <%= render 'shared/user' %>
+              </li>
 
-        <div class="btn-group">
-          <%= link_to "Черновики", "#", :class=> "btn btn-disabled" %>
-        </div> -->
+            </ul>
 
-      </div>
-      
+
+          </div>
+
+		
+		
+	</div>
+    <div class="container">
+
       <%= form_for @permit, :html => {:name => 'newPermitForm'} do |f| %>
 
-        <% if @permit.errors.any? %>
-          <div id="error_explanation">
-            <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
-            <ul>
-            <% @permit.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
+          <% if @permit.errors.any? %>
+              <div id="error_explanation">
+                <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
+                <ul>
+                  <% @permit.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
 
-        <%= render 'permit_form_fields', f: f %>
+          <%= render 'permit_form_fields', f: f %>
 
 
 
@@ -37,12 +48,9 @@
           <%= link_to "Отмена", :back, :class => 'btn btn-disabled' %>
 
       <% end %>
-		
-		
-	</div>
+    </div>
+
 	
-	
-</div>
 
 
 

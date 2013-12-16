@@ -2,7 +2,7 @@
   	<thead>
   	 <tr>
 		<% unless action?('show') %>
-	    <th><label class="control checkbox"><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
+	    <th><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
    <span class="checkbox-label"></span>
 </label></th>
 		<% end %>
@@ -20,12 +20,13 @@
 	
 	  <tr>
 		<% unless action?('show') %>
-		<td class="not_this"><label class="control checkbox"><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %><span class="checkbox-label"></span>
+		<td class="not_this"><label class=""><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %><span class="checkbox-label"></span>
 </label></td>
 		<% end %>
 		<td><a class="document_id"><%= document.id %></a> / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
 	    <td><%= organization(document.sender_organization_id) %></td>
-		  <td><%= organization(document.organization_id) %></td>
+		  <td><%= organization(document.organization_id) %> </td>
+
 		  <td><%= truncate(document.title, length: 13) %></td>
 	    <td class="exp_type">
 		  <% if document.document_type == 'mail' %>
@@ -38,7 +39,7 @@
 			<%= image_tag('attachement_ico.png') %>
 			<% end %>
 		</td>
-	    <td class="tab_right"><%= document_status(document) %></td>
+	    <td class="status"><%= document_status(document) %></td>
 	  </tr>
 		<%#= render 'full_element', :document => document %>
 	<% end %>

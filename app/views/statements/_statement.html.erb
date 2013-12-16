@@ -1,6 +1,6 @@
 <%= form_for(@statement) do |f| %>
   <h3><%= @statement.title %></h3>
-  <%= statement_status(@statement) %><br>
+  <div class="status"><%= statement_status(@statement) %></div><br>
   <%= Russian::strftime(@statement.created_at, "%d %B %Y, %H:%M") %><br>
 	Организация-отправитель: <%= organzation_title_by_user_id(@statement.user_id) %><br>
 

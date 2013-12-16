@@ -10,9 +10,10 @@ class TaskList < ActiveRecord::Base
   after_save :update_statement
   
   def progress
-    total = 100 / self.tasks.count
-    progress = total * self.tasks.completed.count
-    progress
+    if self.tasks.present?
+      total = 100 / self.tasks.count
+      total * self.tasks.completed.count
+    end
   end
   
   def with_completed_tasks

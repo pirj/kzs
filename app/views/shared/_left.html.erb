@@ -1,26 +1,62 @@
-
 <aside class="l-page__column left">
   <nav class="b-sidebar">
     <a href="/" class="main">
-        <div class="icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+      <div class="icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <div class="text">Виджеты</div>
     </a>
-    <a href="/statements" class="menu-link mail"><div class="icon"></div>
-      <div class="text">Документы</div>
-      <span class="bullet"></span>
-    </a>
-    <a href="/permits" class="menu-link placemark "><div class="icon"></div>
-      <div class="text">пропуска</div>
+    <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link mail active' : 'menu-link mail') do %>
+
+        <div class="icon"></div>
+        <div class="text">Документы</div>
+        <span class="bullet"></span>
+    <% end %>
+
+    <%= link_to permits_path, :class => (controller?("permits") ? 'menu-link placemark active' : 'menu-link placemark ') do %>
+
+
+        <div class="icon"></div>
+        <div class="text">пропуска</div>
+
+    <% end %>
+
+    <%= link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do %>
+
+        <div class="icon"></div>
+        <div class="text">Организации</div>
+    <% end %>
+    <%= link_to tasks_path, :class => (controller?("tasks") ? 'menu-link tasks active' : 'menu-link tasks') do %>
+        <div class="icon"></div>
+        <div class="text">Задачи</div>
+
+    <% end %>
+
+
+    <%= link_to statements_path, :class => (controller?("statements") ? 'acts active menu-link ' : 'menu-link  acts') do %>
+        <!--<span class="badge badge-important"><% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>-->
+
+        <div class="icon"></div>
+        <div class="text">Акты</div>
+    <% end %>
+
+
+    <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? 'ch active menu-link ' : 'menu-link  ch') do %>
+        <div class="icon"></div>
+        <div class="text">Черновики</div>
+
+    <% end %>
+
+
+
     </a>
   </nav>
 </aside>
 
 
 <script>
-  var a = document.location.pathname;
-        console.log(a);
+    var a = document.location.pathname;
+    console.log(a);
 </script>

@@ -1,18 +1,37 @@
-<div class="row">
+<%= form_tag group_print_permits_path, method: :get do %>
+    <div class="container">
+      <ul class="row top-pannel clearfix">
+        <li class="col-md-5">
+          <h1 class="dropdown">Заявки на пропуск <span class="caret"></span></h1>
+        </li>
+        <li class="col-md-3"></li>
+        <li class="col-md-4 pull-right">
+          <%= render 'shared/user' %>
+        </li>
 
-	<div class="span12">
-	  <%= form_tag group_print_permits_path, method: :get do %>
-		  <%= render 'shared/user' %>
-	    <h1 class="doc_header">Заявки на пропуск<!-- <span class="caret"></span> --></h1>
-	    <%= render 'panel' %>
-	    <div id="permits_table"><%= render 'table' %></div>
-	    <% if params[:scope] == 'for_print' %>
-	    <div class="btn-toolbar">
-        <div class="btn-group">	
-          <%= submit_tag "Печать", :class => "btn btn-success" %>
-        </div>
-	    </div>
-	    <% end %>
-		<% end %>
-	</div>	
-</div>
+      </ul>
+
+
+      <%= render 'panel' %>
+    </div>
+    <div class="container">
+      <div id="permits_table" class="default-table"><%= render 'table' %></div>
+      <% if params[:scope] == 'for_print' %>
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <%= submit_tag "Печать", :class => "btn btn-success" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+
+
+
+
+
+
+
+<% end %>
+
+

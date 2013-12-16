@@ -3,13 +3,13 @@
     <% if params[:scope] == 'for_print' %>
         <th style="width: 5%"></th>
     <% end %>
-    <th style="width: 5%"><%= sortable "id", "№" %></th>
-    <th style="width: 16%">Фамилия</th>
-    <th style="width: 5%"><%= sortable "permit_type", "Тип" %></th>
-    <th style="width: 6%"><%= sortable "start_date", "Начало" %></th>
-    <th style="width: 6%"><%= sortable "expiration_date", "Конец" %></th>
-    <th style="width: 8%"><%= sortable_status %></th>
-    <th style="width: 8%">Детали</th>
+    <th style="width: 9%"><%= sortable "id", "№" %></th>
+    <th style="width: 36%">Фамилия</th>
+    <th style="width: 12%"><%= sortable "permit_type", "Тип" %></th>
+    <th style="width: 12%"><%= sortable "start_date", "Начало" %></th>
+    <th style="width: 12%"><%= sortable "expiration_date", "Конец" %></th>
+    <th style="width: 12%"><%= sortable_status %></th>
+    <!--<th style="width: 8%">Детали</th>-->
   </tr>
 
   <% @permits.each do |permit| %>
@@ -91,11 +91,11 @@
           <% elsif permit.permit_type == "daily" %>
               <%= image_tag('old/propusk-daily.png') %>
           <% end %>
-          </th>
-        <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></th>
-        <td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></th>
-        <td><%= permit_status(permit) %></td>
-        <td><%= link_to "Подробнее", permit %></td>
+        </td>
+        <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></td>
+        <td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></td>
+        <td class="status "><%= permit_status(permit) %></td>
+        <!--<td><%= link_to "Подробнее", permit %></td>-->
       </tr>
   <% end %>
 </table>
