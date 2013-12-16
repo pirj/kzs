@@ -1,14 +1,14 @@
-@import "reset.scss";
-@import "buttons.scss";
-@import "icons.scss";
-@import "dropdown.scss";
-@import "widgets.scss";
-@import "sidebar.scss";
-@import "media.scss";
-@import "carousel.scss";
-@import "bootstrap.min.css";
-@import "jquery.gridster.css";
-@import "fontello.css";
+@import "reset";
+@import "buttons";
+@import "icons";
+@import "dropdown";
+@import "widgets";
+@import "sidebar";
+@import "media";
+@import "carousel";
+@import "bootstrap.min";
+@import "jquery.gridster";
+@import "fontello";
 
 .page .container {
   max-width: 890px;

@@ -118,5 +118,5 @@
 }
 @font-face {
     font-family: 'FontAwesome';
-    src: url('FontAwesome.otf') format('truetype');}
+    src: url('../fonts/FontAwesome.otf') format('truetype');}
 
