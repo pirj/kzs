@@ -18,7 +18,9 @@
   }
 }
 */
- 
+ *[class^="icon-"] {
+    text-decoration: none;
+ }
  [class^="icon-"]:before, [class*=" icon-"]:before,
  .label-success:before, .label-ready:before, 
  .back-btn:before, 

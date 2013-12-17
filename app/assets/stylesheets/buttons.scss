@@ -4,13 +4,21 @@
   background: #F2F2F2;
   font-size: 13px;
   border: none;
+  text-decoration:none;
+  .dropdown-toggle {
+    padding:0;
+    text-decoration:none;
+  }
+  a {
+    color:inherit;
+  }
+  .caret {
+    border-top-color:inherit;
+  }
 }
-
-.nav-pills > li > a {
+.bottom-nav > li > a {
   border-radius: 90px;
-
 }
-.nav-pills.permnavi > li > a {padding: 0;}
 
 .default-primary {
   background: #76d4ce;
@@ -23,7 +31,6 @@
 }
 
 .add-widget-btn {
-  text-decoration: underline;
   color: #17a488;
   font-size: 22px;
   position: relative;
@@ -54,7 +61,7 @@
     background: #1BBC9B;
   }
 }
-
+.nav .power-btn,
 .power-btn {
   border-radius: 9px;
   font-size: 16px;
@@ -69,54 +76,26 @@
   left: -3px;
 }
 
-.btn.btn-available {
-  background: #c4f2e4;
+.btn.btn-available, .btn.btn-available:hover {
+  background-color: #c4f2e4;
   color: #00a499;
 }
 
 .icon-cog:before {
   font-size: 18px;
-  top: 2px;
+  top: 0;
 }
 
-
-
-.status {
-  text-align: center;
-  .label {
-    position: relative;
-    min-width: 100px;
-    display: inline-block;
-    font-size: 12px;
-    line-height: 20px;
-    padding: 6px 10px;
-    font-weight: normal;
-    border-radius: 15px;
-    &.label-success {
-      background: #1BBC9B;
-    }
-    &.label-warning {
-      background: #dcf2ec;
-      color:#009969;
-    }
-    &.label-ready {
-      background: #f2f2f2;
-      color: #666666;
-    }
-    &:before {
-      color: #999999;
-      font-size: 18px;
-      left: -39px;
-      position: absolute;
-      top: 4px;
-    }
-    .count {
-      border-radius: 90px;
-    }
-  }
-  &.inform-wrap {
-    .label{
-      top: 0;
+.dropdown-menu {
+  .back-btn {
+    background: none;
+    color: #808080;
+    border: 3px solid #808080;
+    text-decoration: none;
+    float: left;
+    display:inline-block;
+     &:hover {
+      border-color:#fff;
     }
   }
 }

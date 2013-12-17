@@ -29,12 +29,21 @@ h4 {
 a {
   color: #989898;
   outline: none;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration:underline;
   &:hover, &:focus, &:active {
     color: #989898;
     outline: none;
   }
   &:focus, &:active {
     text-decoration: none !important;
+  }
+  &:hover {
+    text-decoration:none;
   }
 }
 
@@ -56,3 +65,13 @@ ul {
 ul {
   padding-left:0;
 }
+
+.page input:focus {
+  border-color:#1BBC9B;
+}
+
+/*Kill bootsrap styles*/
+
+/*.nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus {
+  background: none;
+}*/

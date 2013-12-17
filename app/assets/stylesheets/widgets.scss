@@ -31,6 +31,8 @@
     line-height: 26px;
     position: absolute;
     overflow: hidden;
+    left: -14px;
+    top:-14px;
     &:before {
       color: #e6737e;
       background: #000;
@@ -46,35 +48,35 @@
     top: 69px;
   }
   &.widget-security {
-    background: url("sec.png") no-repeat #52ade6;
+    background: url("../../../../../Downloads/static-master%202/img/sec.png") no-repeat #52ade6;
   }
 
   &.widget-docs {
-    background: url("mail.png") no-repeat #01b9c5;
+    background: url("../../../../../Downloads/static-master%202/img/mail.png") no-repeat #01b9c5;
   }
 
   &.widget-admission {
-    background: url("camera.png") no-repeat #375eab;
+    background: url("../../../../../Downloads/static-master%202/img/camera.png") no-repeat #375eab;
   }
 
   &.widget-chat {
-    background: url("chat.png") no-repeat #56b5ef;
+    background: url("../../../../../Downloads/static-master%202/img/chat.png") no-repeat #56b5ef;
   }
 
   &.widget-library {
-    background: url("library.png") no-repeat #1bbc9b;
+    background: url("../../../../../Downloads/static-master%202/img/library.png") no-repeat #1bbc9b;
   }
 
   &.widget-weather {
-    background: url("cloud.png") no-repeat #1bbc9b;
+    background: url("../../../../../Downloads/static-master%202/img/cloud.png") no-repeat #1bbc9b;
   }
 
   &.widget-org {
-    background: url("people.png") no-repeat #e53d4c;
+    background: url("../../../../../Downloads/static-master%202/img/people.png") no-repeat #e53d4c;
   }
 
   &.widget-odject {
-    background: url("place.png") no-repeat #00bfca;
+    background: url("../../../../../Downloads/static-master%202/img/place.png") no-repeat #00bfca;
   }
 
   &.widget-profile {

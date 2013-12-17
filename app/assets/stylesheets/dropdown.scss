@@ -1,4 +1,85 @@
 /*dropdowns*/
+.dropdown {
+  &.open {
+    *[data-toggle="dropdown"], *[data-toggle="dropdown"]:focus, *[data-toggle="dropdown"]:active {
+      background: #1ba0e1;
+      color: #fff;
+    }
+    .bubble[data-toggle="dropdown"], .bubble[data-toggle="dropdown"]:focus, .bubble[data-toggle="dropdown"]:active {
+      padding: 12px;
+      border-radius: 30px;
+      left: -12px;
+    }
+    .caret {
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+    h1 {
+      padding-bottom: 16px;
+      margin-bottom: -16px;
+    }
+  }
+  &.full-drop { 
+    *[data-toggle="dropdown"] {
+      border-radius: 10px 10px 0 0;
+    }
+    width: 100%;
+    .caret {
+      border-top-color:inherit;
+    }
+    .dropdown-menu {
+      border-radius: 0 0 10px 10px;
+      top:100%;
+      width: 100%;
+      left: 0;
+      margin-top: 16px;
+      li {
+        border-color: #3db3ed;
+        background:#1ba0e1;
+        &:first-child {
+          border-radius:0;
+          border-top:1px solid #3db3ed;
+        }
+        a {
+          padding-left: 25px;
+          font-size: 20px;
+        }
+      }
+      .dropdown-arr {
+        display: none;
+      }
+    }
+  }
+  h1 {
+    display: inline-block;
+    font-size: 35px;
+    margin-top: 0;
+    line-height: 35px;
+    text-transform: none;
+    padding: 10px 40px 0 24px;
+  }
+ 
+}
+
+.open .dropdown[data-toggle="dropdown"], 
+.open .dropdown[data-toggle="dropdown"]:focus, 
+.open .dropdown[data-toggle="dropdown"]:active {
+    background: #1ba0e1;
+    color: #fff;
+    .caret {
+      border-top-color: #fff;
+      border-bottom-color: #fff;
+    }
+}
+
+.open .dropdown.bubble[data-toggle="dropdown"], 
+.open .dropdown.bubble[data-toggle="dropdown"]:focus, 
+.open .dropdown.bubble[data-toggle="dropdown"]:active {
+  padding: 12px;
+  border-radius: 30px;
+  left: -12px;
+}
+
 .dropdown-menu {
   display: none;
   background: rgba(0, 0, 0, 0.8);
@@ -11,7 +92,12 @@
 .dropdown-menu {
   li {
     border-top: 1px solid #666666;
-    overflow: hidden;
+    width: 100%;
+    &:after {
+      content:"";
+      display: table;
+      clear: both;
+    }
     &:first-child {
       border-top: 0;
       border-radius: 5px 5px 0 0;
@@ -21,12 +107,13 @@
     }
     color: #fff;
     font-size: 13px;
-    a {
+    >a {
       color: #fff;
       font-size: 13px;
-      padding: 13px 0 13px 34px;
-      width: 259px;
-      text-transform: capitalize;
+      padding: 13px 20px 13px 34px;
+      display: block;
+      text-decoration: none;
+      text-align: left;
       &:before {
         font-size: 18px;
         left: -16px;
@@ -41,12 +128,21 @@
     .title {
       margin: 14px 0 10px;
       display: block;
+      text-align: left;
+      padding-left: 0px;
     }
   }
-  .other-desktop a {
-    padding-left: 17px;
+  .other-desktop {
+    .title {
+      margin-top: 0px;
+    }
+    a {
+      padding-left: 17px;
+      text-decoration: underline;
+    }
   }
-    .dropdown.active > a {
+  
+  .dropdown.active > a {
       background: #1BA0E1;
       border-radius: 100px;
       color: #fff;
@@ -58,21 +154,97 @@
       margin-bottom: 3px;
       top: 0;
     }
-  .dropdown-arr {
-    border-bottom: 8px solid rgba(0, 0, 0, 0.8) !important;
-    border-left: 8px solid rgba(0, 0, 0, 0);
-    border-right: 8px solid rgba(0, 0, 0, 0);
-    border-top: 0 none;
-    height: 0;
-    left: 50%;
-    margin-left: -8px;
-    position: absolute;
-    top: -7px;
-    width: 0;
+    .dropdown-arr {
+      border-bottom: 8px solid rgba(0, 0, 0, 0.8);
+      border-left: 8px solid rgba(0, 0, 0, 0);
+      border-right: 8px solid rgba(0, 0, 0, 0);
+      border-top: 0 none;
+      height: 0;
+      left: 50%;
+      margin-left: -8px;
+      position: absolute;
+      top: -7px;
+      width: 0;
+    }
+    .time {
+    padding:13px 12px 20px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 23px;
+    .date {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .progress {
+      height:8px;
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    .progress-bar-success {
+      background: #1bbc9b;
+    }
+  }
+  &.history {
+    li {
+      border: none;
+      line-height: 31px;
+      &:hover {
+        a {
+          background:none;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+     .title {
+        padding-left: 5px;
+        position: relative;
+         &:before {
+          font-size: 18px;
+          left: -8px;
+          top: 2px;
+        }
+     }
+      > a {
+        display: inline;
+        padding: 0;
+        font-size: 12px;
+      }
+    }
+    .btn {
+      text-decoration: none;
+    }
+    .back-btn {
+      margin-bottom: 12px;
+    }
+  }
+
+  &.drop-left {
+    top: -156%;
+    left: -112%;
+   .dropdown-arr {
+      border-bottom: 8px solid rgba(0, 0, 0, 0.0) !important;
+      border-left: 8px solid rgba(0, 0, 0, 0.8);
+      border-right: 8px solid rgba(0, 0, 0, 0);
+      border-top: 8px solid rgba(0, 0, 0, 0);
+      height: 0;
+      left: auto;
+      right:-14px;
+      margin-left: -8px;
+      position: absolute;
+      top: 50%;
+      width: 0;
+    }
+  }
+  &.drop-bottom {
+    .dropdown-arr {
+      border-bottom: 8px solid rgba(0, 0, 0, 0.0);
+    }
   }
 }
 
 .other-desktop {
+  padding: 20px;
   .title {
     padding-left: 17px;
   }
@@ -84,7 +256,6 @@
 }
 
 .dropdown-menu .other-desktop a {
-  text-decoration: underline;
   padding-top: 0;
   padding-bottom: 0;
   &:hover {
@@ -113,4 +284,33 @@
 
 .dropdown.active .dropdown-menu {
   display: block;
+}
+
+.user .dropdown-menu {
+  padding: 5px 0 0 20px;
+    li {
+      width: 73%;
+      float: right;
+      &.dropdown-arr {
+        width: 10px;
+      }
+      &.title {
+        width: 100%;
+        margin-bottom: 12px;
+        a {
+          text-decoration: underline;
+          padding: 0;
+          font-size: 18px;
+          margin-bottom: 5px;
+          &:hover {
+            text-decoration: none;
+            background:none;
+            color: #fff;
+          }
+        }
+      }
+      &:last-child {
+        border-radius: 0 0 10px 0 ;
+      }
+    }
 }
