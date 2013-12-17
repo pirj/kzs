@@ -1,0 +1,30 @@
+
+.user_image {
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+input[type="checkbox"] {
+  float: left;
+}
+
+input[type="file"] {
+  vertical-align: middle;
+}
+
+.rights label {
+  float: left;
+}
+
+label.error {
+  color: #9a0000;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-top: -8px;
+}
+
+label i {
+  color: grey;
+  font-size: 10px;
+}
