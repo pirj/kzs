@@ -1,4 +1,5 @@
-@import "reset.scss";
+//@import "bootstrap.min";
+//@import "reset";
 @import "buttons.scss";
 @import "icons.scss";
 @import "dropdown.scss";
@@ -21,7 +22,9 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#41a8e4', endColorstr='#41a8e4',GradientType=0 ); /* IE6-8 */
 }
 
-
+.alert{
+  padding-left: 90px;
+}
 
 .page .container {
   max-width: 890px;
@@ -102,13 +105,14 @@
       position: relative;
       height: 100%;
       border-radius: 5px;
+      transition: all 0.15s ease-in;
     }
     &:hover {
-      border-color: #000;
-      box-shadow: 0 1px 3px #000;
+      //border-color: #000;
+      //box-shadow: 0 1px 3px #000;
         a {
-          border-color: #000;
-          box-shadow: inset 0 0 3px 3px #000;
+          //border-color: #000;
+          box-shadow: inset 0 0 300px 300px rgba(255,255,255,0.2);
         }
         .picture-in {
             position: relative;
@@ -127,6 +131,11 @@
           content: "";
         }
       }
+    &:active {
+      a {
+        box-shadow: inset 0 0 60px 30px rgba(0,0,0,0.15);
+      }
+    }
     }
   img {
     height: auto;
@@ -175,7 +184,7 @@
     text-transform: none;
   }
   .username {
-    font-size: 13px;
+    font-size: 12px;
     line-height: 16px;
     display: inline-block;
     width: 210px;
@@ -187,7 +196,7 @@
     margin-top: 5px;
   }
   .username {
-    margin-top: 3px;
+    margin-top: 2px;
     float: right;
     color: #999;
   }
@@ -346,7 +355,8 @@
     }
   }
   .pic i, .doc i, .xls i, .pdf i {
-    background: url("../../../../../Downloads/static-master%202/img/format-sprite.png") no-repeat;
+    background: url("
+    format-sprite.png") no-repeat;
     opacity: 0.4;
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);
     display: block;
