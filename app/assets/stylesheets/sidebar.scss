@@ -7,7 +7,6 @@
   height: 100%;
   transition: width ease 0.1s;
 
-
 }
 
 #sidebar {
@@ -20,20 +19,53 @@
 
   .menu-dir {
 
-
-    .child-dir {
-     // display: none;
-      transition: height 1s linear 0.5s;
-      -webkit-transition: height 0.5s linear 0.5s;
+    > .menu-link b {
+      display: none;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #1ba0e1;
       height: 0;
-      border: 1px solid red;
+      width: 0;
+      position: absolute;
+      top: 20px;
+      right: 15px;
+      transition: all 0.3s linear 0;
     }
 
-//    &:hover {
-//      .child-dir {
-//       height: auto;
-//      }
-//    }
+    .child-dir {
+      // display: none;
+      transition: all 0.5s linear 0.1s;
+      height: 0px;
+
+      .menu-link {
+
+        font-size: 14px;
+        text-align: left;
+        padding-left: 20px;
+        margin-top: 7px;
+        display: block;
+        color: gray;
+        text-decoration: none;
+        border-radius: 12px;
+        height: 40px;
+        line-height: 40px;
+
+
+        .text{
+          display: inline-block;
+        }
+        i{
+          display: none;
+        }
+
+        &:first-child{
+          margin-top: 0;
+        }
+      }
+
+    }
+
+
   }
 
   .counter {
@@ -65,10 +97,10 @@
       height: 75px;
       text-decoration: none;
       text-align: center;
-      &:hover{
+      &:hover {
         background-color: #1ba0e1;
-        .icon{
-          span{
+        .icon {
+          span {
             background-color: white;
           }
         }
@@ -106,7 +138,7 @@
       background-color: white;
       position: relative;
       text-decoration: none;
-      &:hover{
+      &:hover {
         background-color: #76d4ce;
       }
       .counter {
@@ -149,7 +181,7 @@
           background-size: 10px 60px;
         }
 
-        &:hover{
+        &:hover {
           //background-color: white;
           background-color: #9ad8ff;
         }
@@ -175,18 +207,19 @@
         z-index: 10;
       }
 
-
       &.documents {
         i {
           background-position: -10px -370px;
 
         }
-        &:hover i { background-color: #76d4ce;
-          background-position: -80px -370px;}
-        &.active i{
+        &:hover i {
+          background-color: #76d4ce;
+          background-position: -80px -370px;
+        }
+        &.active i {
           background-position: -150px -370px;
         }
-        &.active:hover i{
+        &.active:hover i {
           background-color: #9ad8ff;
         }
       }
@@ -195,11 +228,16 @@
         i {
           background-position: -10px -300px;
         }
-        &:hover i{background-color: #76d4ce;
+        &:hover i {
+          background-color: #76d4ce;
           background-position: -80px -300px;
         }
-        &.active i{background-position: -150px -300px;}
-        &.active:hover i{background-color: #9ad8ff;}
+        &.active i {
+          background-position: -150px -300px;
+        }
+        &.active:hover i {
+          background-color: #9ad8ff;
+        }
       }
 
       &.letters {
@@ -207,22 +245,33 @@
           background-position: left -25px;
         }
 
-        &:hover .icon{background-color: #76d4ce;
-          background-position: -35px -25px;}
-        &.active .icon{background-position: -70px -25px;}
-        &.active:hover .icon{background-color: #9ad8ff;}
+        &:hover .icon {
+          background-color: #76d4ce;
+          background-position: -35px -25px;
+        }
+        &.active .icon {
+          background-position: -70px -25px;
+        }
+        &.active:hover .icon {
+          background-color: #9ad8ff;
+        }
       }
       &.bubble {
         .icon {
           background-position: left -48px;
         }
-        &:hover .icon{background-color: #76d4ce;
-          background-position: -35px -48px;}
-        &.active .icon{background-position: -70px -48px;}
-        &.active:hover .icon{background-color: #9ad8ff;}
+        &:hover .icon {
+          background-color: #76d4ce;
+          background-position: -35px -48px;
+        }
+        &.active .icon {
+          background-position: -70px -48px;
+        }
+        &.active:hover .icon {
+          background-color: #9ad8ff;
+        }
 
       }
-
 
     }
 
@@ -237,27 +286,100 @@
       width: 182px;
       text-align: left;
       padding-left: 8px;
-      display: inline-block;
+
       vertical-align: super;
       transition: width ease 0.1s;
-      .text{
+      .text {
         display: inline-block;
         vertical-align: super;
         color: gray;
         width: auto;
         line-height: 18px;
       }
-      &:hover{
-        .text{
+      &:hover {
+        .text {
           color: white;
         }
       }
     }
-    .menu-link.active{
-      border-radius: 12px ;
+    .menu-link.active {
+      border-radius: 12px;
 
-      &:after{
+      &:after {
         display: none;
+      }
+    }
+
+    .menu-dir {
+
+      > .menu-link b {
+        display: block;
+      }
+
+
+      &.open {
+        > .menu-link {
+          margin-bottom: 0;
+
+          background-color: #9ad8ff;
+          border-radius: 12px 12px 0 0 !important;
+        }
+        .child-dir {
+          padding: 13px 2px;
+          margin-bottom: 20px;
+          margin-left: 10px;
+          width: 182px;
+          display: inline-block;
+          border-radius: 0 0 12px 12px;
+          border: 1px solid #9ad8ff;
+          overflow: hidden;
+          background-color: white;
+          margin-top: -6px;
+          .menu-link {
+            width: 160px;
+            font-size: 14px;
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 7px;
+            display: block;
+            color: gray;
+            text-decoration: none;
+            border-radius: 12px;
+            height: 40px;
+            line-height: 40px;
+            .text{
+              position: relative;
+              display: inline-block;
+              top: 9px;
+            }
+            .badge{
+              border-radius: 6px;
+              padding: 0px 2px;
+              height: 19px;
+              width: 18px;
+              margin-left: 15px;
+              display: inline-block;
+              color: white;
+              background-color: #e63d4d;
+              position: relative;
+              top: -2px;
+            }
+            &:hover{
+              background-color: #9ad8ff;
+              color: white;
+
+              .badge{
+                background-color: white;
+                color: #e63d4d;
+              }
+            }
+          }
+        }
+
+        > .menu-link b {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+        }
       }
     }
   }

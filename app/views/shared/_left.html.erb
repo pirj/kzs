@@ -11,28 +11,29 @@
 
 
     <div class="menu-dir">
-      <div class="menu-link"><i></i><div class="text">Документы ↓</div></div>
+      <div class="menu-link documents"><i></i><div class="text">Документы</div><b></b></div>
 
       <div class="child-dir">
-        <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link documents active' : 'menu-link documents') do %>
+        <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link  active' : 'menu-link ') do %>
             <i></i>
 
             <div class="text">Все документы</div>
-            <span class="bullet"></span>
+
         <% end %>
 
-        <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? 'ch active menu-link ' : 'menu-link  ch') do %>
+        <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? ' active menu-link ' : 'menu-link ') do %>
             <i></i>
 
             <div class="text">Черновики</div>
         <% end %>
 
-        <%= link_to statements_path, :class => (controller?("statements") ? 'acts active menu-link ' : 'menu-link  acts') do %>
-          <span class="badge badge-important">2
-            <% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>
+        <%= link_to statements_path, :class => (controller?("statements") ? 'active menu-link ' : 'menu-link ') do %>
+
             <i></i>
 
             <div class="text">Акты</div>
+            <span class="badge badge-important">2
+              <% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>
         <% end %>
       </div>
 
@@ -56,7 +57,7 @@
         <div class="text">Организации</div>
     <% end %>
     <%= link_to tasks_path, :class => (controller?("tasks") ? 'menu-link tasks active' : 'menu-link tasks') do %>
-        <div class="icon"></div>
+        <i></i>
         <div class="text">Задачи</div>
 
     <% end %>
