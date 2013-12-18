@@ -6,18 +6,22 @@ $(document).ready(function () {
     $('.menu-dir div.menu-link').click(function () {
         var childDir = $(this).next();
 
-        childDir.toggleClass('open');
+        if (childDir.parent().hasClass('open')) {
+            childDir.parent().toggleClass('open');
+            childDir.css({'height': 0});
+        }
+        else {
 
-
-
+        childDir.parent().toggleClass('open');
         var counter =  childDir.children('.menu-link').length;
-        console.log(counter);
 
-        childDir.css({'height': (counter*50)+'px'});
 
+        childDir.css({'height': ((counter+1)*50)+'px'});
+
+        }
         $('.l-page__column').mouseleave(function() {
-            childDir.removeClass('open');
-            //childDir.css({'height': 0});
+            childDir.parent().removeClass('open');
+            childDir.css({'height': '0px'});
         });
     });
 
