@@ -1,18 +1,18 @@
-<table class="table documents_table" style="font-size: 12px; width: 900px;">
+<table class="table dynamic-table default-table">
   	<thead>
   	 <tr>
 		<% unless action?('show') %>
-	    <th><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
+	    <th width="50"><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
    <span class="checkbox-label"></span>
 </label></th>
 		<% end %>
-	    <th><%= sortable "id", "Номер / Дата" %></th>
-	    <th><%= sortable "sender_organization_id", "Отправитель" %></th>
-		  <th><%= sortable "organization_id", "Получатель" %></th> 
-		  <th style="width: 100px;"><%= sortable "title", "Тема" %></th> 
-	    <th><%= sortable "document_type", "Тип" %></th>
-	    <th style="width: 30px"></th>
-	    <th class="tab_right"><%= sortable_status %></th>
+	    <th width="150"><%= sortable "id", "Номер / Дата", "sortable current" %></th>
+	    <th width="250"><%= sortable "sender_organization_id", "Отправитель", "sortable ascending" %></th>
+          <th width="250"><%= sortable "organization_id", "Получатель" %></th>
+          <th width="100"><%= sortable "title", "Тема" %></th>
+	    <th width="100"><%= sortable "document_type", "Тип" %></th>
+	    <th width="30"></th>
+	    <th idth="100" class="status"><%= sortable_status %></th>
 	  </tr>
 	  </thead>
 	  <tbody>
@@ -34,7 +34,7 @@
 		  <% elsif document.document_type == 'writ' %>
 			Распоряжение
 		  <% end %>
-	    		<td>
+	    <td>
 			<% unless document.document_attachments.blank? %>
 			<%= image_tag('attachement_ico.png') %>
 			<% end %>

@@ -1,12 +1,3 @@
-@import "reset.scss";
-@import "buttons.scss";
-@import "icons.scss";
-@import "dropdown.scss";
-@import "widgets";
-@import "sidebar.scss";
-@import "media.scss";
-@import "carousel.scss";
-
 /*var*/
 @mixin blue-gradient() {
    background: rgba(65,168,228,0.5); /* Old browsers */
@@ -194,28 +185,29 @@
   .dropdown-menu {
     text-transform: none;
   }
-  .search {
-    position: relative;
-    margin: 0;
-    min-width: 220px;
-    input[type="text"] {
-      font-size: 13px;
-    }
-    input[type="submit"] {
-      position: absolute;
-      right: 5px;
-      top: 2px;
-      background: none;
-      border:none;
-      width: 30px;
-      height: 30px;
-      z-index: 100;
-    }
+}
+
+.search {
+  position: relative;
+  margin: 0;
+  min-width: 220px;
+  input[type="text"] {
+    font-size: 13px;
   }
-  .full-drop {
-    top:-10px;
-    left: -24px;
+  input[type="submit"] {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    background: none;
+    border:none;
+    width: 30px;
+    height: 30px;
+    z-index: 100;
   }
+}
+.full-drop {
+  top:-10px;
+  left: -24px;
 }
 
 .top-pannel .btn-available,

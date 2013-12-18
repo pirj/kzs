@@ -1,27 +1,36 @@
-
-  
 <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
-
 
     <div class="container">
       <ul class="row top-pannel clearfix">
         <li class="col-md-5">
-          <h1 class="dropdown">Все документы<span class="caret"></span></h1>
+          <span class="dropdown full-drop">
+            <h1 data-toggle="dropdown">Все документы <span class="caret"></span></h1>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Письма <span class="count">(112)</span></a></li>
+              <li><a href="#">Акты <span class="count">(23)</span></a></li>
+              <li><a href="#">Распоряжения <span class="count">(43)</span></a></li>
+              <li><a href="#">Черновики <span class="count">(43)</span></a></li>
+              <li class="dropdown-arr"></li>
+              <li><a href="#">Отмена</a></li>
+            </ul>
+          </span>
         </li>
-        <li class="col-md-3"></li>
+        <li class="col-md-3">
+            <div class="form-group search" role="search">
+              <input type="text" class="form-control" placeholder="Поиск по пропускам">
+              <input type="submit" class="icon-search" value=""/>
+            </div>
+        </li>
         <li class="col-md-4 pull-right">
           <%= render 'shared/user' %>
         </li>
-
       </ul>
 
 
       <%= render 'panel' %>
-    </div>
+
 
 <% end %>
 <%= form_tag documents_batch_path, method: :put do %>
-    <div class="container">
-    <div id="document_table" class="default-table"><%= render 'table'%></div>
-    </div>
+    <%= render 'table' %></div>
 <% end %>

@@ -1,48 +1,25 @@
-<div class="btn-toolbar">
-
-<div class="btn-group">
-  <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
-    Создать
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
-     <li><%= link_to "Письмо", new_document_path(:type => 'mail') %></li>	
-	   <li><%= link_to "Распоряжение", new_document_path(:type => 'writ') %></li>	
-	   <li><%= link_to "Акт", new_statement_path %></li>	
-  </ul>
-</div>
-
-
-<div class="btn-group">				
-  <a class="btn btn-success" href="javascript:location.reload(true);"><%= image_tag('refresh.png') %></a>
-</div>
-
-<div class="btn-group">	
-	<%= link_to image_tag('create_copy.png'), "#", :class => "btn disabled", :title => "Создать по образу и подобию", :id => 'create_copy_link' %>
-</div>
-
-<div class="btn-group">	
-	<%= link_to "редактировать", "#", :class => "btn disabled", :id => 'edit_link' %>
-</div>
-
-<% if action?('drafts') %>
-<div class="btn-group">				
-  <%= link_to "подготовить", "#", :class => "btn disabled", :name => "prepare", data: { confirm: "Вы уверены?" } %>
-</div>
-<% end %>
-
-<% if current_user.has_permission?(1) %>
-<div class="btn-group">				
-  <%= link_to "подписать", "#", :class => "btn disabled", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %>
-</div>
-<% end %>
-
-<div class="btn-group">				
-  <%= link_to "отправить", "#", :class => "btn disabled", :name => "send", :id => 'send_link', data: { confirm: "Вы уверены?" } %>
-</div>
-
-<div class="btn-group">	
-	<%= link_to "ответить", "#", :class => "btn disabled", :id => 'reply_link' %>
-</div>
-
-</div>
+<ul class="nav nav-pills">
+  <li class="dropdown">
+    <a class="dropdown-toggle btn btn-available" data-toggle="dropdown" href="#">
+      Создать <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= link_to "Письмо", new_document_path(:type => 'mail') %></li>
+      <li><%= link_to "Распоряжение", new_document_path(:type => 'writ') %></li>
+      <li><%= link_to "Акт", new_statement_path %></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+      Действия <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><%= link_to "Создать по образу и подобию", "#", :id => 'create_copy_link' %></li>
+      <li><%= link_to "Редактировать", "#", :id => 'edit_link' %></li>
+      <li><%= link_to "Подготовить", "#", :name => "prepare", data: { confirm: "Вы уверены?" } %></li>
+      <li> <%= link_to "Подписать", "#", :name => "approve", :id => 'approve_link', data: { confirm: "Вы уверены?" } %></li>
+      <li><%= link_to "Отправить", "#", :name => "send", :id => 'send_link', data: { confirm: "Вы уверены?" } %></li>
+      <li><%= link_to "Ответить", "#", :id => 'reply_link' %></li>
+    </ul>
+  </li>
+</ul>

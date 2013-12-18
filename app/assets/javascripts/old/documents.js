@@ -160,8 +160,8 @@ $(document).ready(function(){
 });
 
 
-	$(".documents_table tbody tr").click(appendTr);
-	$(".documents_table tbody td.not_this").click(function(e){
+	$(".dynamic-table tbody tr").click(appendTr);
+	$(".dynamic-table tbody td.not_this").click(function(e){
 	    e.stopPropagation()
 	})
 	
