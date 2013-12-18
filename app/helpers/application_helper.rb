@@ -18,9 +18,8 @@ module ApplicationHelper
      action.include?(params[:action])
    end
 
-  def sortable(column, title = nil, extended_css_class = nil)
+  def sortable(column, title = nil, extended_css_class)
     title ||= column.titleize
-    extended_css_class ||= nil
     css_class = column == sort_column ? extended_css_class + " current #{sort_direction}" : extended_css_class
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil, :status_sort => nil), :remote => true, :class => css_class
