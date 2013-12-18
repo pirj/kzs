@@ -1,7 +1,5 @@
 <span class="permit_label">Тип</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false }) %><br>
 <span class="permit_label">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title) %><%= v.text_field :model, :placeholder => 'Модель' %><br>
-<span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС' %>
-<br>
 <span class="permit_label">Номер ГРЗ</span>
 <% if @permit.new_record? %>
 <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, {:style=>'width:50px'}) %>
