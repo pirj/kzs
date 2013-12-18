@@ -17,6 +17,7 @@ $(document).ready(function () {
 
         $('.l-page__column').mouseleave(function() {
             childDir.removeClass('open');
+            //childDir.css({'height': 0});
         });
     });
 
