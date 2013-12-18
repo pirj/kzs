@@ -1,73 +1,121 @@
-<div class="row">
-	
-	<%= render 'shared/left' %>
-	
-	<div class="span8">
-	
-		<div class="btn-toolbar">
-			<div class="btn-group">	
-				<%= link_to " назад", :back, :class => "btn" %>
-			</div>
+<div class="container">
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-2">
+      <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
+      <%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
+      <%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
+    </li>
+    <li class="col-md-2">ТИП: <b>ПИСЬМО</b></li>
+    <li class="col-md-3">
+      Статус:
+      <b class="btn-available btn dropdown" data-toggle="dropdown">Подписан</b>
+      <ul class="dropdown-menu" role="menu">
+        <li class="time">Последий статус назначен:
+          <span class="date">20 ноября 2013</span>
 
-			<div class="btn-group">	
-				<%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
-			</div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+              <span class="sr-only">40% Complete (success)</span>
+            </div>
+          </div>
+        </li>
+        <li><a href="#" class="icon-ok">Отправить</a></li>
+        <li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>
+        <li class="dropdown-arr"></li>
+        <li><a href="#" class="icon-block-1">Отмена</a></li>
+      </ul>
+    </li>
+    <li class="col-md-4 pull-right">
+      <%= render 'shared/user' %>
+    </li>
+  </ul>
+  <h1><%= @document.title %></h1>
+  <ol class="breadcrumb">
+    <li><a href="#">ООО «Циклон»</a></li>
+    <li><a href="#">ОАО «Метрострой»</a></li>
+  </ol>
+</div>
 
-			<div class="btn-group">	
-				<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
-			</div>
-		</div>
 
-      <div class="btn-toolbar">
-        <div class="btn-group">
-          <%= link_to " назад", :back, :class => "btn" %>
+
+
+
+
+
+<div class="container">
+  <div class="col-md-6">
+
+    <ul class="doc-info">
+      <li><span class="title">Номер и дата:</span><span class="value"><a href="#"><%= @document.id %></a> / <%= @document.date %></span>
+      </li>
+      <li>
+        <span class="title valign-mid">Исполнитель:</span>
+
+        <div class="user value">
+          <span class="photo"><img src="img/user1.jpg" alt="user"></span>
+          <a href="#" class="name dropdown bubble" data-toggle="dropdown"><%= @document.user_id %>       Феликс Константинопольский</a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="title"><a href="#">Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li>
+            <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>
+            <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+            <li><a href="#" class="icon-clock">Личная страница</a></li>
+            <li class="dropdown-arr"></li>
+            <li><a href="#" class="icon-block-1">Отмена</a></li>
+          </ul>
         </div>
+      </li>
+      <li><span class="title valign-mid">Отправитель:</span>
 
-        <div class="btn-group">
-          <%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
-        </div>
+        <div class="user value"><span class="photo"><img src="img/user2.jpg" alt="user"></span><a href="#" class="name">Феликс
+          Константинопольский</a></div>
+      </li>
+      <li class="doc-format"><span class="title">Приложения:</span>
 
-        <div class="btn-group">
-          <%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
-        </div>
-      </div>
-
-      <div class="new-wrap">
-        <iframe style="width: 400px; height: 520px;" src="/documents/<%= @document.id %>.pdf"/></iframe>
-
-      </div>
-
-      <% unless @document.document_attachments.blank? %>
-          <p>Прикрепленные файлы</p>
-          <% @document.document_attachments.each do |a| %>
-              <%= link_to a.attachment_file_name, a.attachment.url(:original, false) %>
-          <% end %>
-      <% end %>
-
-      <% unless @document.documents.blank? %>
-          <p>Прикрепленные документы</p>
-          <ol>
-            <% @document.documents.each do |d| %>
-                <li><%= d.created_at.strftime('%d %m %Y') %> <%= link_to d.title, d %></li>
-            <% end %>
+        <% unless @document.documents.blank? %>
+            <p>Прикрепленные документы</p>
+            <ul class="value doc-format-list">
+              <% @document.documents.each do |d| %>
+                  <li><%= d.created_at.strftime('%d %m %Y') %> <%= link_to d.title, d %></li>
+              <% end %>
             </ul>
-      <% end %>
+        <% end %>
 
-      <br><br>
-      <% unless @conversation.nil? || @conversation_documents.count < 1 %>
-          <p>История переписки</p>
-          <%= render 'table', :@documents => @conversation_documents %>
-      <% end %>
+      </li>
+    </ul>
 
-      <% if @document.document_type == 'writ' %>
-          <%= render 'document_tasks' %>
-          <%= render 'document_statements' %>
-      <% end %>
 
-      <%= render 'actions_show' %>
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="view-main-doc">
+      <iframe style="width: 400px; height: 520px;" src="/documents/<%= @document.id %>.pdf"/>
+      </iframe>
+
     </div>
-    
-    
+
+    <% unless @document.document_attachments.blank? %>
+        <p>Прикрепленные файлы</p>
+        <% @document.document_attachments.each do |a| %>
+            <%= link_to a.attachment_file_name, a.attachment.url(:original, false) %>
+        <% end %>
+    <% end %>
+
+
+
+    <br><br>
+    <% unless @conversation.nil? || @conversation_documents.count < 1 %>
+        <p>История переписки</p>
+        <%= render 'table', :@documents => @conversation_documents %>
+    <% end %>
+
+    <% if @document.document_type == 'writ' %>
+        <%= render 'document_tasks' %>
+        <%= render 'document_statements' %>
+    <% end %>
+
+    <%= render 'actions_show' %>
+  </div>
 
 
 </div>
