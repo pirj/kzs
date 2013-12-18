@@ -4,7 +4,7 @@
 		$.getJSON( "/documents/" + document_id + ".json", function(data) {
 			
 			if (data.sn){
-			  doc_serial = "<p class='exp_date'><a href='#'>" + data.sn + "</a> / " + data.date + "</p>"
+			  doc_serial = "<p class='value'><a href='#'>" + data.sn + "</a> / " + data.date + "</p>"
 			}
 			else {
 			  doc_serial = "отсутсвует"
@@ -17,26 +17,33 @@
 			  document_executor = "отсутсвует"
 			}
 			
-			$("<tr class='inform'><td colspan='9'><div class='inform-wrap status'><ul class='expanded'></ul></div></td></tr>").insertAfter(current_row);
-			$("<li><span>Тип:</span><p class='exp_type'>" + data.type + "</p></li><li><span>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
-			$("<li><span>Тема:</span><p class='exp_title'><a href='/documents/" + document_id + "'>" + data.title + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span>Исполнитель</span><p class='exp_exec'><a href='#'>" + document_executor + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span>Отправитель</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
-			$("<li><span style='text-align: right;'>Контрольное <br> лицо</span><p class='exp_exec'><a href='#'>" + data.approver + "</a></p></li>").appendTo('.inform td ul');
-			if (data.attachments.length != 0){
-				$("<li class='attach'><span>Приложения:</span></li>").appendTo('.inform td ul');
-				$.each(data.attachments, function(i,attachment_file_name){
-						$("<p class='exp_attach'>" + data.attachments[i].attachment_file_name + "</p></li>").appendTo('.attach');
-				});
-			}
-			$('<iframe class="doc_sample" src="/documents/' + document_id + '.pdf"/></iframe>').appendTo('.inform td div');
+//			$("<tr class='inform'><td colspan='9'><div class='inform-wrap collapse status'><ul class='doc-info'></ul></div></td></tr>").insertAfter(current_row);
+//			$("<li><span class='title'>Номер и дата:</span>" + doc_serial + "</li>").appendTo('.inform td ul');
+//			$("<li><span class='title'>Тема:</span><p class='value'><a class='h4' href='/documents/" + document_id + "'> " + data.title + "</a></p></li>").appendTo('.inform td ul');
+//			$("<li><p class='exp_fromto'><a href='#'>"  + data.sender_organization + "</a> &rarr; <a href='#'>" + data.organization + "</a></p></li>").appendTo('.inform td ul');
+//			$("<li><span>Исполнитель</span><p class='exp_exec'><a href='#'>" + document_executor + "</a></p></li>").appendTo('.inform td ul');
+//			$("<li><span>Отправитель</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
+//			$("<li><span style='text-align: right;'>Контрольное <br> лицо</span><p class='exp_exec'><a href='#'>" + data.approver + "</a></p></li>").appendTo('.inform td ul');
+//
+            $("<tr class='inform'><td colspan='9'><div class='col-md-8'><ul class='doc-info'></ul><div class='nav-pills nav controls'><a href='#' class='btn btn-default'>История переписки</a><a href='/documents/" + document_id + "' class='btn btn-default'>Открыть</a><a href=#' class='btn btn-default'>Удалить</a></div></div><div class='col-md-4'><div class='view-main-doc'><div class='overlay'><a href='#' target='blank' class='zoom'></a></div><a href='' class='icon-chat-empty'></a></div></div></td></tr>").insertAfter(current_row);
+            $("<li><span class='title'>Номер и дата:</span>" + doc_serial + "</p></li>").appendTo('.inform td ul');
+			$("<li><span class='title'>Тема:</span><div class='value'><a class='h4' href='/documents/" + document_id + "'> " + data.title + "</a><ol class='breadcrumb'><li><a href='#'>ООО «Циклон»</a></li><li><a href='#'>ОАО «Метрострой»</a></li></ol></div></li>").appendTo('.inform td ul');
+			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'><img src='assets/user1.jpg' alt='user'/></span><a href='#' class='name dropdown' data-toggle='dropdown'>" + document_executor + "</a><ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img src='img/konstantin.jpg' alt='user'/></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul></div></li>").appendTo('.inform td ul');
+			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'><img src='assets/user2.jpg' alt='user'/></span><a href='#' class='name dropdown' data-toggle='dropdown'>" + data.sender + "</a><ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img src='img/konstantin.jpg' alt='user'/></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul></div></li>").appendTo('.inform td ul');
+
+//			if (data.attachments.length != 0){
+				$("<li class='attach'><span class='title'>Приложения:</span><ul class='value attach-list'><li class='pic'><i></i><a href='#'>Фотография001.jpg</a></li><li class='doc'><i></i><a href='#'>Контракт-пример.doc</a></li><li class='xls'><i></i><a href='#'>Расчет эргономических пока.xls</a></li><li class='pdf'><i></i><a href='#'>Новые показатели.pdf</a></li><li><a href='#' class='else-link'>и еще 4 файла</a></li></ul></li>").appendTo('.inform td ul');
+//				$.each(data.attachments, function(i,attachment_file_name){
+//						$("<p class='exp_attach'>" + data.attachments[i].attachment_file_name + "</p></li>").appendTo('.attach');
+//				});
+//			}
+			$('<iframe class="doc-sample" src="/documents/' + document_id + '.pdf"/></iframe>').appendTo('.inform td .view-main-doc');
 			// $("<input class='btn btn-success btn-large' data-confirm='Вы уверены?' id='send_link' name='send' type='submit' value='Отправить'>").appendTo('.inform td');
 			// $('<a href="/documents/' + document_id + '" class="btn btn-disabled" data-method="delete" data-confirm="Вы уверены?">Удалить</a>').appendTo('.inform td');
-			$('<a href="/documents/' + document_id + '" class="btn btn-success">Открыть</a>').appendTo('.inform td');
-			$('.label').filter(":hidden").clone().appendTo(".inform td div");
-			$('.control').filter(":hidden").clone().prependTo(".inform td");
-			
+//			$('<a href="/documents/' + document_id + '" class="btn btn-success">Открыть</a>').appendTo('.inform td');
+//			$('.label').filter(":hidden").clone().appendTo(".inform td div");
+//			$('.control').filter(":hidden").clone().prependTo(".inform td");
+
 			$( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('btn-success');
 
 			$("#create_copy_link").attr("href", "/documents/" + document_id + "/copy");
@@ -44,7 +51,7 @@
 			$("#approve_link").attr("href", "/documents/" + document_id + "/approve");
 			$("#send_link").attr("href", "/documents/" + document_id + "/send_document");
 			$("#reply_link").attr("href", "/documents/" + document_id + "/reply");
-			
+
 			full_control = $(".inform td").find(':checkbox')
 			$(document).find(':checkbox').not(full_control).prop('checked', null);
 			full_control.prop('checked', true);
@@ -54,8 +61,8 @@
 				$( "#create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
 				$( "#create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).attr("href", "");
 			});
-			
-			
+
+
 	});
 	};
 
