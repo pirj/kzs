@@ -5,7 +5,7 @@ $(document).ready(function(){
 		$('#permit_vehicle_fields').show();
 		$('#temporary_permit_fields').hide();
 		$('#permit_user_id').val('');
-		$('#permit_drivers').chosen({max_selected_options: 3}); 
+		$('#permit_drivers').chosen(); 
 	}
 	else if ($('#permit_permit_type_user').attr('checked') == "checked"){
 	  $('#permit_user_fields').show();
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		$('#date_fields').show();
 		$('#temporary_permit_fields').hide();
 		$('#permit_user_id').val('');
-		$('#permit_drivers').chosen({max_selected_options: 3});
+		$('#permit_drivers').chosen();
 		inputs = $('#permit_user_fields :input, #permit_temporary_fields :input')	
 		inputs.each(function() {
 		  $(this).removeAttr('value');
