@@ -18,6 +18,24 @@
   left: 0;
   z-index: 25;
 
+  .menu-dir {
+
+
+    .child-dir {
+     // display: none;
+      transition: height 1s linear 0.5s;
+      -webkit-transition: height 0.5s linear 0.5s;
+      height: 0;
+      border: 1px solid red;
+    }
+
+//    &:hover {
+//      .child-dir {
+//       height: auto;
+//      }
+//    }
+  }
+
   .counter {
     border-radius: 50%;
     background-color: #e68c5c;
@@ -215,6 +233,7 @@
     box-shadow: 1px 0 5px gray;
 
     .menu-link {
+      cursor: pointer;
       width: 182px;
       text-align: left;
       padding-left: 8px;
