@@ -8,24 +8,31 @@
       </div>
       <div class="text">Виджеты</div>
     </a>
-    <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link mail active' : 'menu-link mail') do %>
+    <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link documents active' : 'menu-link documents') do %>
 
-        <div class="icon"></div>
+        <i></i>
         <div class="text">Документы</div>
         <span class="bullet"></span>
+        <div class="childmenu">
+          <a>
+
+          </a>
+          <span><!--place for counter-->
+          </span>
+        </div>
     <% end %>
 
-    <%= link_to permits_path, :class => (controller?("permits") ? 'menu-link placemark active' : 'menu-link placemark ') do %>
+    <%= link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do %>
 
 
-        <div class="icon"></div>
-        <div class="text">пропуска</div>
+        <i></i>
+        <div class="text">Пропуска</div>
 
     <% end %>
 
     <%= link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do %>
 
-        <div class="icon"></div>
+        <i></i>
         <div class="text">Организации</div>
     <% end %>
     <%= link_to tasks_path, :class => (controller?("tasks") ? 'menu-link tasks active' : 'menu-link tasks') do %>
@@ -36,15 +43,15 @@
 
 
     <%= link_to statements_path, :class => (controller?("statements") ? 'acts active menu-link ' : 'menu-link  acts') do %>
-        <!--<span class="badge badge-important"><% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>-->
+        <span class="badge badge-important"><% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>
 
-        <div class="icon"></div>
+        <i></i>
         <div class="text">Акты</div>
     <% end %>
 
 
     <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? 'ch active menu-link ' : 'menu-link  ch') do %>
-        <div class="icon"></div>
+        <i></i>
         <div class="text">Черновики</div>
 
     <% end %>

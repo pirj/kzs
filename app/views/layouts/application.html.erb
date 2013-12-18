@@ -4,29 +4,17 @@
   <title>Kzs</title>
 
   <%= stylesheet_link_tag "/assets/application", :media => "all" %>
-   <%= javascript_include_tag "/assets/old/application" %>
-
-
-
-
+  <%= javascript_include_tag "/assets/old/application" %>
 
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
 
 </head>
 <body>
-  <div >
-  <!--class="container"-->
-      
+<div>
 
-	 <!-- <= render 'layouts/navbar' %> -->
-		
-
-
-
-<div id="sidebar">
+  <div id="sidebar">
     <%= render 'shared/left' %>
-
   </div>
 
   <div class="page">
@@ -37,10 +25,9 @@
         <div class="alert alert-error"><%= alert %></div>
     <% end %>
 
-
-	      <%= yield %>
-	  </div>
-
+    <%= yield %>
   </div>
+
+</div>
 </body>
 </html>

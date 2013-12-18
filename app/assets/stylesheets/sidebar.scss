@@ -146,32 +146,42 @@
         width: 0;
         transition: width 1s ease;
       }
-      .icon {
+      i {
         margin-top: 7px;
         position: relative;
         left: 0;
         display: inline-block;
-        width: 35px;
-        height: 25px;
+        width: 45px;
+        height: 30px;
         background: url('icons-shortcuts.png') no-repeat;
         z-index: 10;
       }
 
 
-      &.mail {
-        .icon {
-          background-position: left 0px;
+      &.documents {
+        i {
+          background-position: -10px -370px;
 
         }
-        &:hover .icon { background-color: #76d4ce;
-          background-position: -35px 0px;}
-        &.active .icon{
-          background-position: -70px 0px;
+        &:hover i { background-color: #76d4ce;
+          background-position: -80px -370px;}
+        &.active i{
+          background-position: -150px -370px;
         }
-        &.active:hover .icon{
+        &.active:hover i{
           background-color: #9ad8ff;
         }
+      }
 
+      &.permits {
+        i {
+          background-position: -10px -300px;
+        }
+        &:hover i{background-color: #76d4ce;
+          background-position: -80px -300px;
+        }
+        &.active i{background-position: -150px -300px;}
+        &.active:hover i{background-color: #9ad8ff;}
       }
 
       &.letters {
@@ -194,16 +204,7 @@
         &.active:hover .icon{background-color: #9ad8ff;}
 
       }
-      &.placemark {
-        .icon {
-          background-position: left -75px;
-        }
-        &:hover .icon{background-color: #76d4ce;
-          background-position: -35px -75px;
-        }
-        &.active .icon{background-position: -70px -75px;}
-        &.active:hover .icon{background-color: #9ad8ff;}
-      }
+
 
     }
 
