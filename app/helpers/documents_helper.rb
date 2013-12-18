@@ -65,25 +65,25 @@ module DocumentsHelper
   
   def document_status(document)
     if document.executed?
-      '<span class="label label-success">Исполнен</span>'.html_safe
+      '<span class="label label-success" data-toggle="dropdown">Исполнен</span>'.html_safe
     elsif document.with_comments?
-      '<span class="label label-warning">С замечаниями</span>'.html_safe
+      '<span class="label label-warning" data-toggle="dropdown">С замечаниями</span>'.html_safe
     elsif document.for_confirmation?
-      '<span class="label label-success">Проверка исполнения</span>'.html_safe    
+      '<span class="label label-success" data-toggle="dropdown">Проверка исполнения</span>'.html_safe
     elsif document.opened?
-      '<span class="label label-success">Получен</span>'.html_safe
+      '<span class="label label-success" data-toggle="dropdown">Получен</span>'.html_safe
     elsif document.sent?
       if document.organization_id == current_user.organization_id
-       '<span class="label label-info">Получен</span>'.html_safe
+       '<span class="label label-ready" data-toggle="dropdown">Получен</span>'.html_safe
      else
-       '<span class="label label-info">Отправлен</span>'.html_safe
+       '<span class="label label-ready" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
      end
      elsif document.approved?
-       '<span class="label label-warning">Подписан</span>'.html_safe    
+       '<span class="label label-warning" data-toggle="dropdown">Подписан</span>'.html_safe
      elsif document.prepared?
-       '<span class="label">Подготовлен</span>'.html_safe
+       '<span class="label" data-toggle="dropdown">Подготовлен</span>'.html_safe
     elsif document.draft?
-      '<span class="label label-inverse">Черновик</span>'.html_safe
+      '<span class="label label-inverse" data-toggle="dropdown">Черновик</span>'.html_safe
     else
       nil
     end

@@ -22,9 +22,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#41a8e4', endColorstr='#41a8e4',GradientType=0 ); /* IE6-8 */
 }
 
-.alert{
-  padding-left: 90px;
-}
+
 
 .page .container {
   max-width: 890px;
@@ -105,14 +103,13 @@
       position: relative;
       height: 100%;
       border-radius: 5px;
-      transition: all 0.15s ease-in;
     }
     &:hover {
-      //border-color: #000;
-      //box-shadow: 0 1px 3px #000;
+      border-color: #000;
+      box-shadow: 0 1px 3px #000;
         a {
-          //border-color: #000;
-          box-shadow: inset 0 0 300px 300px rgba(255,255,255,0.2);
+          border-color: #000;
+          box-shadow: inset 0 0 3px 3px #000;
         }
         .picture-in {
             position: relative;
@@ -131,11 +128,6 @@
           content: "";
         }
       }
-    &:active {
-      a {
-        box-shadow: inset 0 0 60px 30px rgba(0,0,0,0.15);
-      }
-    }
     }
   img {
     height: auto;
@@ -184,7 +176,7 @@
     text-transform: none;
   }
   .username {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 16px;
     display: inline-block;
     width: 210px;
@@ -196,7 +188,7 @@
     margin-top: 5px;
   }
   .username {
-    margin-top: 2px;
+    margin-top: 3px;
     float: right;
     color: #999;
   }
@@ -235,6 +227,8 @@
 
 .nav-pills .btn {
   height: 36px;
+  line-height: 36px;
+  padding: 0 12px;
 }
 
 .attachments {
@@ -306,18 +300,18 @@
     width: 100%;
     float: left;
     line-height: 21px;
-  }
-  >.title {
-    font-size: 12px;
-    width: 25%;
-    position: absolute;
-    line-height: 16px;
-    top:2px;
-    color: #666;
-    text-align: left;
-    &.valign-mid {
-      top: 50%;
-      margin-top: -8px;
+    .title {
+      font-size: 12px;
+      width: 25%;
+      position: absolute;
+      line-height: 16px;
+      top:2px;
+      color: #666;
+      text-align: left;
+      &.valign-mid {
+        top: 50%;
+        margin-top: -8px;
+      }
     }
   }
   .value {
@@ -355,8 +349,7 @@
     }
   }
   .pic i, .doc i, .xls i, .pdf i {
-    background: url("
-    format-sprite.png") no-repeat;
+    background: url("format-sprite.png") no-repeat;
     opacity: 0.4;
     filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);
     display: block;
@@ -379,11 +372,11 @@
   }
 } 
 
-.doc-format {
+.attach {
   margin-top: 30px;
 }
 
-.doc-format-list {
+.attach-list {
   padding-left: 4px;
   li {
     padding-left: 46px;
@@ -442,7 +435,7 @@
     height: 150px;
     margin: -75px  0 0 -65px;
     color: #fff;
-    background: url("../../../../../Downloads/static-master%202/img/lupa.png") no-repeat;
+    background: url("lupa.png") no-repeat;
   }
   .overlay {
     @include blue-gradient;
@@ -456,11 +449,12 @@
 }
 
 /*tables*/
-.default-table {
+  .default-table {
   width: 100%;
   thead > tr > th {
     height: 48px;
     vertical-align: middle;
+    font-weight: normal;
     &.status {
       text-align: center;
     }
@@ -478,16 +472,10 @@
         font-weight: bold;
         text-transform: uppercase;
       }
-      &.collapse {
+      &.inform {
         width: 100%;
-        display: none;
         &.in{
           display: block;
-        }
-        .controls {
-          .btn {
-            margin-right: 20px;
-          }
         }
       }
     >a {
@@ -541,8 +529,7 @@
   }
 }
 
-.collapse {
-  display: block;
+.inform {
   background: #f7fffd;
   padding-top: 30px;
   &:after {
@@ -558,10 +545,13 @@
   }
   .view-main-doc {
     margin-top: 32px;
+  }
+  .view-main-doc, .doc-sample {
     height: 264px;
     width: 190px;
   }
   .controls {
+    margin:18px 0 0 168px;
     .btn {
       margin-right: 20px;
     }
