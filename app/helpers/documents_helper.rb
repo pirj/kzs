@@ -88,6 +88,84 @@ module DocumentsHelper
       nil
     end
   end
+
+  def document_status_date(document)
+    if document.executed?
+      Russian::strftime(document.executed_date, "%d %B %Y")
+    elsif document.opened?
+      Russian::strftime(document.opened_date, "%d %B %Y")
+    elsif document.sent?
+      Russian::strftime(document.sent_date, "%d %B %Y")
+    elsif document.approved?
+      Russian::strftime(document.approved_date, "%d %B %Y")
+    elsif document.prepared?
+      Russian::strftime(document.prepared_date, "%d %B %Y")
+    elsif document.draft?
+      Russian::strftime(document.date, "%d %B %Y")
+    else
+      nil
+    end
+  end
+
+  def document_status_progress(document)
+    if document.executed?
+      100
+    elsif document.with_comments?
+      90
+    elsif document.for_confirmation
+      80
+    elsif document.opened?
+      75
+    elsif document.sent?
+      50
+    elsif document.approved?
+      30
+    elsif document.prepared?
+      20
+    elsif document.draft?
+      10
+    else
+      nil
+    end
+  end
+
+  def document_status_list(document)
+    #
+    #
+    #"Создан - " +  Russian::strftime(document.prepared_date, "%d %B %Y")          #черновик
+    #
+    #
+    #"Подготовлен - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
+    #
+    #if document.prepared?
+    #  "Подписан - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
+    #  if document.approved?
+    #
+    #  end
+    #
+    #
+    #
+    #end
+    #if document.executed?
+    #  100
+    #elsif document.with_comments?
+    #  90
+    #elsif document.for_confirmation
+    #  80
+    #elsif document.opened?
+    #  75
+    #elsif document.sent?
+    #  50
+    #elsif document.approved?
+    #
+    #  "Подготовлен - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
+    #elsif document.prepared?
+    #
+    #else
+    #  nil
+    #end
+
+  end
   
   
 end
