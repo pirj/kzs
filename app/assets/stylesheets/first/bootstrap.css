@@ -2606,9 +2606,9 @@ fieldset[disabled] .btn-link:focus {
 }
 
 .btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
+    /*padding: 5px 10px;*/
+    /*font-size: 12px;*/
+    /*line-height: 1.5;*/
     border-radius: 3px;
 }
 
@@ -4084,13 +4084,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav > li > a {
     position: relative;
     display: block;
-    padding: 10px 15px;
+    /*padding: 10px 15px;*/
 }
 
 .nav > li > a:hover,
 .nav > li > a:focus {
     text-decoration: none;
-    background-color: #eeeeee;
+    /*background-color: #eeeeee;*/
 }
 
 .nav > li.disabled > a {
@@ -4108,7 +4108,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-    background-color: #eeeeee;
+    /*background-color: #eeeeee;*/
     border-color: #428bca;
 }
 

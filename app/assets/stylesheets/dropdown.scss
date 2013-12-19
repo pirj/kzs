@@ -16,7 +16,7 @@
     }
     h1 {
       padding-bottom: 16px;
-      margin-bottom: -16px;
+
     }
   }
   &.full-drop { 
@@ -51,14 +51,12 @@
     }
   }
   h1 {
-    display: inline-block;
-    font-size: 35px;
-    margin-top: 0;
-    line-height: 35px;
-    text-transform: none;
-    padding: 10px 40px 0 24px;
-  }
- 
+      display: inline-block;
+      font-size: 35px;
+      margin-top: 0;
+      line-height: 35px;
+      text-transform: none;
+    }
 }
 
 .open .dropdown[data-toggle="dropdown"], 

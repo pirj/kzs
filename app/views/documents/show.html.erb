@@ -2,13 +2,13 @@
   <ul class="row top-pannel clearfix">
     <li class="col-md-2">
       <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
-      <%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>
-      <%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>
+      <%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-sm btn-success", :title => "Создать по образу и подобию" %>
+      <%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-sm btn-success" %>
     </li>
     <li class="col-md-2">ТИП: <b>ПИСЬМО</b></li>
     <li class="col-md-3">
       Статус:
-      <b class="btn-available btn dropdown" data-toggle="dropdown">Подписан</b>
+      <b class="btn-available btn btn-sm dropdown" data-toggle="dropdown">Подписан</b>
       <ul class="dropdown-menu" role="menu">
         <li class="time">Последий статус назначен:
           <span class="date">20 ноября 2013</span>
