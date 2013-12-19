@@ -22,7 +22,11 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#41a8e4', endColorstr='#41a8e4',GradientType=0 ); /* IE6-8 */
 }
 
+.alert {margin-left: 70px;}
 
+@media (max-width: 1120px){
+  .alert {margin-left: -20px;}
+}
 
 .page .container {
   max-width: 890px;
