@@ -1,18 +1,18 @@
-<div class="btn-toolbar">
+<div class="nav nav-pills">
 	
-	<div class="btn-group">	
-		<%= f.submit "подготовить", :class => "btn btn-success", :name => "prepare" %>
-	</div>
+	<li class="btn-group">
+		<%= f.submit "подготовить", :class => "btn btn-primary btn-sm", :name => "prepare" %>
+	</li>
 	
 	
 	<% if @document.user_id == current_user.id || action?('new') %>
-	<div class="btn-group" style="margin-left: 10px;">	
-		<%= f.submit "в черновики", :class => "btn btn-primary", :name => "to_draft" %>
-	</div>
+	<li class="btn-group" style="margin-left: 10px;">
+		<%= f.submit "в черновики", :class => "btn btn-default btn-sm", :name => "to_draft" %>
+	</li>
 	<% end %>
 	
-	<div class="btn-group"   style="margin-left: 10px">	
-		<%= link_to 'Отмена', :back, :class => "btn btn-danger" %>
-	</div>
+	<li class="btn-group"   style="margin-left: 10px">
+		<%= link_to 'Отмена', :back, :class => "btn btn-default btn-sm" %>
+	</li>
 
 </div>

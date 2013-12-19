@@ -2,12 +2,15 @@
   <ul class="row top-pannel clearfix">
     <li class="col-md-2">
       <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
+
       <!--<%= link_to image_tag('create_copy.png'), copy_document_path(@document), :class => "btn btn-success", :title => "Создать по образу и подобию" %>-->
       <!--<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>-->
+
     </li>
     <li class="col-md-2">ТИП: <b>ПИСЬМО</b></li>
     <li class="col-md-3">
       Статус:
+
       <b class="btn-available btn dropdown" data-toggle="dropdown">
         <%=  document_status(@document) %><br>
         <%=  document_status_date(@document) %><br>
@@ -34,6 +37,7 @@
         <!--<li class="dropdown-arr"></li>-->
         <!--<li><a href="#" class="icon-block-1">Отмена</a></li>-->
       <!--</ul>-->
+
     </li>
     <li class="col-md-4 pull-right">
       <%= render 'shared/user' %>

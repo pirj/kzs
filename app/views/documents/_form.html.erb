@@ -1,15 +1,18 @@
 
 <div class="container">
   <ul class="row top-pannel clearfix">
+    <li class="col-md-2">
+      <a href="#"><%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %></a>
+    </li>
     <li class="col-md-5">
       <% if action?('new') %>
-          <h1 class="doc_header">
-            <% if params[:type] == 'mail' %>
-                Новое письмо
-            <% elsif params[:type] == 'writ' %>
-                Новое распоряжение
-            <% end %>
-            <span class="caret"></span></h1>
+            <h1>
+              <% if params[:type] == 'mail' %>
+                  Новое письмо
+              <% elsif params[:type] == 'writ' %>
+                  Новое распоряжение
+              <% end %>
+            </h1>
       <% end %>
     </li>
     <li class="col-md-3"></li>
@@ -19,20 +22,15 @@
       <% end %>
     </li>
   </ul>
-  <ul class="nav nav-pills permnavi">
-    <li class="btn"><%= link_to "Назад", :back, :class => "" %></li>
-    <!--  <li class="btn">  <%= link_to "Шаблоны", "#", :class => "" %></li>-->
-    <li class="btn"> <%= link_to "Черновики", drafts_documents_path, :class => "" %> </li>
+  <ul class="nav nav-pills">
+      <li><%= link_to "Шаблоны", "#", :class => "btn btn-sm btn-default" %></li>
+    <li><%= link_to "Черновики", drafts_documents_path, :class => "btn btn-sm btn-default" %> </li>
   </ul>
-</div>
-
-    
-<div class="container">
 
 
 
-	
-	<%= form_for(@document) do |f| %>
+
+  <%= form_for(@document, :html => { :class => "form new-doc" }) do |f| %>
 	
 	<!-- hidden_fields -->
 	<% if action?('new') %>
@@ -42,20 +40,21 @@
 	<% elsif %>
 	<%= f.hidden_field :document_type, :value => @document.document_type %>
 	<% end %>
-	
 	<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
   <!-- end -->
-	
-	<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Тема' %>
+
+
+
+	<%= f.text_field :title, :class => 'form-control', :placeholder => 'Прошу предусмотреть' %>
 	
 	<% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %> 
-	<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
+	<%= f.text_field(:deadline, :class => 'form-control', :placeholder => 'Дата исполонения') %><br>
 	<% end %>
 	
-	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :style=>'width:544px;', :'data-placeholder' => "Организация-получатель"}) %>
-	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Контрольное-лицо"}) %>
-	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Исполнитель", :id => "document_executor_ids"}) %>
-	<%= f.text_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст', :rows => "20" %>
+	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :'data-placeholder' => "Организация-получатель", :class => 'form-control' }) %>
+	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :'data-placeholder' => "Контрольное-лицо", :class => 'form-control'}) %>
+	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :'data-placeholder' => "Исполнитель", :id => "document_executor_ids", :class => 'form-control' }) %>
+	<%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control"  %>
 	
 	  
 	  <% if @document.document_type == 'writ' || params[:type] == 'writ' %>    

@@ -27,7 +27,8 @@
  .power-btn:before,
  .breadcrumb > li + li:before,
  .attachment-add:before,
- .attachment-delete:before {
+ .attachment-delete:before,
+ .chosen-choices:after{
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -121,7 +122,7 @@
 .icon-info:before { content: '\e832'; } /* '' */
 .icon-list:before { content: '\e851'; } /* '' */
 .icon-question:before { content: '\e828'; } /* '' */
-.icon-search:before { content: '\e801'; } /* '' */
+.icon-search:before, .chosen-choices:after { content: '\e801'; } /* '' */
 .icon-th-thumb:before { content: '\e852'; } /* '' */
 .icon-lock-1:before { content: '\e825'; } /* '' */
 .icon-lock-open-2:before { content: '\e827'; } /* '' */

@@ -227,19 +227,24 @@
   .full-drop {
     top:-10px;
     left: -24px;
+    h1 {
+      padding: 10px 40px 15px 24px;
+    }
+  }
+  h1 {
+    display: inline-block;
+    font-size: 35px;
+    margin-top: 0;
+    line-height: 35px;
+    text-transform: none;
+    padding: 0;
   }
 }
 
-.top-pannel .btn-available,
-.nav-pills .btn-available  {
+.top-pannel .btn,
+.nav-pills .btn  {
   font-size: 12px;
   margin-right: 10px;
-}
-
-.nav-pills .btn {
-  height: 36px;
-  line-height: 36px;
-  padding: 0 12px;
 }
 
 .attachments {

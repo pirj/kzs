@@ -30,6 +30,16 @@
   }
 }
 
+.btn-default:hover {
+  background: #cfcfcf;
+}
+
+.btn-sm {
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0 12px;
+}
+
 .add-widget-btn {
   color: #17a488;
   font-size: 22px;
@@ -56,12 +66,12 @@
 }
 
 .btn-primary {
-  background: #1BBC9B; 
+  background: #1abc9c;
   &:hover, &:focus {
-    background: #1BBC9B;
+    background: #00a499;
   }
 }
-.nav .power-btn,
+
 .power-btn {
   border-radius: 9px;
   font-size: 16px;
