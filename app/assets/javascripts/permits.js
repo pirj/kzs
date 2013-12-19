@@ -74,5 +74,13 @@ $(document).ready(function(){
 		$('#permit_drivers_chosen').toggle();
 	});
 	
+	$('#permit_permit_class').on("change", function() {
+		if ($(this).val() == "vip"){
+		  $('.vip_number_wrap').show();
+		}
+		else if ($(this).val() == "standart"){
+			$('.vip_number_wrap').hide();
+		}
+	});
 	
 });

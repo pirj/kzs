@@ -6,10 +6,12 @@
 		  <%= render 'panel' %>
 		  
 		  
-	<% if @permit.permit_type == 'user' %>
+	<% if @permit.permit_class == 'user' %>
 	  <h3>Пропуск на пеший проход</h3>
 	  
-	  Номер: <%= @permit.number %><br>
+	  Номер: <%= @permit.id %><br>
+	  
+
 	  
 	  <%= @user.last_name %><br>
 	  <%= @user.first_name %><br>
@@ -23,7 +25,11 @@
 	<% elsif @permit.permit_type == 'vehicle' %>
     <h3>Пропуск на транспортное средство</h3>
     
-    Номер: <%= @permit.id %><br>
+    <% if @permit.permit_class == "standart"  %>
+	    Номер: <%= @permit.number %><br>
+	  <% elsif @permit.permit_class == "vip"  %>
+	    Номер: <%= @permit.vip_number %><br>
+	  <% end %>
     Организация: <%= organization_full_title(@permit.organization_id) %><br>
     Класс пропуска: <%= t(@permit.permit_class) %><br>
     

@@ -117,7 +117,7 @@ class PermitPdf < Prawn::Document
 
           font "Verdana"
           fill_color(100,83,28,13)
-          draw_text "№ #{@permit.number}", :size => 38, :at => [407,128]
+          draw_text "№ #{@permit.vip_number}", :size => 38, :at => [407,128]
         
           fill_color(0,0,0,100)
           font "RoadNumbers"

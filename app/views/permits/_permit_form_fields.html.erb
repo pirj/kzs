@@ -29,6 +29,10 @@
   <div id="permit_vehicle_fields">
   <h3>1. Тип пропуска</h3>
   <%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+  <span class="vip_number_wrap" style="display: none;">
+  <span class="permit_label">Укажите номер пропуска</span>
+  <%= f.select(:vip_number, Array(001..100).map {|n| "%03d" % n}) %>
+  </span>
   <h3>2. Данные техсредства</h3>
   <%= f.fields_for :vehicle do |v| %>
     <%= render 'vehicle_fields', v: v %>
