@@ -286,9 +286,9 @@
       width: 182px;
       text-align: left;
       padding-left: 8px;
-
       vertical-align: super;
       transition: width ease 0.1s;
+
       .text {
         display: inline-block;
         vertical-align: super;
@@ -354,8 +354,8 @@
             }
             .badge{
               border-radius: 6px;
-              padding: 0px 2px;
-              height: 19px;
+              padding: 2px 2px 0;
+              height: 17px;
               width: 18px;
               margin-left: 15px;
               display: inline-block;
