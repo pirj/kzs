@@ -6,7 +6,7 @@
 		  <%= render 'panel' %>
 		  
 		  
-	<% if @permit.permit_class == 'user' %>
+	<% if @permit.permit_type == 'user' %>
 	  <h3>Пропуск на пеший проход</h3>
 	  
 	  Номер: <%= @permit.id %><br>
