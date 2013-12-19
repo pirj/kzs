@@ -231,6 +231,7 @@ class DocumentsController < ApplicationController
   
   def prepare
     @document = Document.find(params[:id])
+    @document.prepared_date = Time.now
     @document.prepared = true
     @document.draft = false
     @document.save

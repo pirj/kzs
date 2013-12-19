@@ -18,6 +18,5 @@
 //= require new/jquery.gridster.min.js
 //=
 //= require new/scripts-index.js
-
 //= require_tree .
 

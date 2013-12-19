@@ -8,22 +8,32 @@
     <li class="col-md-2">ТИП: <b>ПИСЬМО</b></li>
     <li class="col-md-3">
       Статус:
-      <b class="btn-available btn dropdown" data-toggle="dropdown">Подписан</b>
-      <ul class="dropdown-menu" role="menu">
-        <li class="time">Последий статус назначен:
-          <span class="date">20 ноября 2013</span>
+      <b class="btn-available btn dropdown" data-toggle="dropdown">
+        <%=  document_status(@document) %><br>
+        <%=  document_status_date(@document) %><br>
+        <%=  document_status_progress(@document) %><br>
 
-          <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-              <span class="sr-only">40% Complete (success)</span>
-            </div>
-          </div>
-        </li>
-        <li><a href="#" class="icon-ok">Отправить</a></li>
-        <li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>
-        <li class="dropdown-arr"></li>
-        <li><a href="#" class="icon-block-1">Отмена</a></li>
-      </ul>
+        <%=  document_status_list(@document) %><br>
+
+
+      </b>
+
+
+      <!--<ul class="dropdown-menu" role="menu">-->
+        <!--<li class="time">Последий статус назначен:-->
+          <!--<span class="date">20 ноября 2013</span>-->
+
+          <!--<div class="progress">-->
+            <!--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">-->
+              <!--<span class="sr-only">40% Complete (success)</span>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+        <!--<li><a href="#" class="icon-ok">Отправить</a></li>-->
+        <!--<li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>-->
+        <!--<li class="dropdown-arr"></li>-->
+        <!--<li><a href="#" class="icon-block-1">Отмена</a></li>-->
+      <!--</ul>-->
     </li>
     <li class="col-md-4 pull-right">
       <%= render 'shared/user' %>
@@ -53,11 +63,16 @@
         <span class="title valign-mid">Исполнитель:</span>
 
         <div class="user value">
-          <span class="photo"><img src="img/user1.jpg" alt="user"></span>
+          <span class="photo">
+            <!--<img src="img/user1.jpg" alt="user">-->
+            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" />
+          </span>
           <a href="#" class="name dropdown bubble" data-toggle="dropdown"><%= user_with_full_name(@document.executor_id)%>  </a>
           <ul class="dropdown-menu" role="menu">
             <li class="title"><a href="#">Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li>
-            <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>
+            <li class="photo">
+              <!--<img src="img/konstantin.jpg" alt="user">-->
+            </li>
             <li><a href="#" class="icon-ok">Написать соообщение</a></li>
             <li><a href="#" class="icon-clock">Личная страница</a></li>
             <li class="dropdown-arr"></li>
@@ -67,16 +82,17 @@
       </li>
       <li><span class="title valign-mid">Отправитель:</span>
 
-        <div class="user value"><span class="photo"><img src="img/user2.jpg" alt="user"></span><a href="#" class="name"><%= user_with_full_name(@document.user_id)%> </a></div>
+        <div class="user value"><span class="photo">
+          <!--<img src="img/user2.jpg" alt="user">-->
+          <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" />
+        </span><a href="#" class="name"><%= user_with_full_name(@document.user_id)%> </a></div>
       </li>
       <% unless @document.document_attachments.blank? %>
       <li class="doc-format"><span class="title">Приложения:</span>
 
-
-
             <ul class="value doc-format-list">
               <% @document.document_attachments.each do |a| %>
-                  <li> <i></i> <%= link_to a.attachment_file_name, a.attachment.url(:original, false) %></li>
+                  <li> <i></i> <%= link_to a.attachment_file_name, a.attachment.url(:original, false), :target=> '_blank' %></li>
               <% end %>
             </ul>
 
