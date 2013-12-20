@@ -1,25 +1,25 @@
-<div class="btn btn-sm-toolbar">
+
   
   <% if @document.draft? && @document.user_id == current_user.id %>
-	<div class="btn btn-sm-group">	
+	<div   >	
 		<%= link_to "в черновики", to_drafts_document_path(@document), :class => "btn btn-sm" %>
 	</div>
 	<% end %>
 	
 	<% unless @document.approved? || @document.deleted? %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
+	<div      style="margin-right: 10px;">	
 		<%= link_to 'Редактировать', edit_document_path(@document), :class => "btn btn-sm" %>
 	</div>
 	<% end %>
   
 	<% unless @document.prepared? %>
-	<div class="btn btn-sm-group">	
+	<div   >	
 		<%= link_to "подготовить", prepare_document_path(@document), :class => "btn btn-sm btn-success" %>
 	</div>
 	<% end %>
 	
 	<% if for_send(@document) %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
+	<div      style="margin-right: 10px;">	
 		<%= link_to 'Отправить', send_document_document_path(@document), :class => "btn btn-sm btn-success" %>
 	</div>
 	<% end %>
@@ -27,7 +27,7 @@
 	
 	<% if can? :approve, @document %>
 	<% if for_approve(@document) %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
+	<div      style="margin-right: 10px;">	
 		<%= link_to 'Подписать', approve_document_path(@document), :class => "btn btn-sm btn-success" %>
 	</div>
 	<% end %>
@@ -35,22 +35,21 @@
 	
 	
 	<% if @document.sender_organization_id != current_user.organization_id && @document.opened && @document.document_type == 'mail' %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
+	<div      style="margin-right: 10px;">	
 		<%= link_to 'Ответить', reply_document_path(@document), :class => "btn btn-sm btn-success" %>
 	</div>
 	<% end %>
-	
-	<% if for_callback(@document) %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
-		<%= link_to 'Отозвать', callback_document_path(@document), :class => "btn btn-sm" %>
-	</div>
-	<% end %>
+	<!---->
+	<!--<% if for_callback(@document) %>-->
+	<!--<div      style="margin-right: 10px;">	-->
+		<!--<%= link_to 'Отозвать', callback_document_path(@document), :class => "btn btn-sm" %>-->
+	<!--</div>-->
+	<!--<% end %>-->
 	
 	
 	<% if for_execution(@document) %>
-	<div class="btn btn-sm-group"   style="margin-right: 10px;">	
+	<div      style="margin-right: 10px;">	
 		<%= link_to 'Исполнить', execute_document_path(@document), :class => "btn btn-sm btn-success" %>
 	</div>
 	<% end %>
 	
-</div>

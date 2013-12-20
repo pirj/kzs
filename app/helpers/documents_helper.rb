@@ -73,25 +73,25 @@ module DocumentsHelper
 
   def document_status(document)
     if document.executed?
-      '<span class="label label-success" data-toggle="dropdown">Исполнен</span>'.html_safe
+      '<span class="label label-success btn-available btn" data-toggle="dropdown">Исполнен</span>'.html_safe
     elsif document.with_comments?
-      '<span class="label label-warning" data-toggle="dropdown">С замечаниями</span>'.html_safe
+      '<span class="label label-warning btn-available btn" data-toggle="dropdown">С замечаниями</span>'.html_safe
     elsif document.for_confirmation?
-      '<span class="label label-success" data-toggle="dropdown">Проверка исполнения</span>'.html_safe
+      '<span class="label label-success btn-available btn" data-toggle="dropdown">Проверка исполнения</span>'.html_safe
     elsif document.opened?
-      '<span class="label label-success" data-toggle="dropdown">Получен</span>'.html_safe
+      '<span class="label label-success btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
     elsif document.sent?
       if document.organization_id == current_user.organization_id
-        '<span class="label label-ready" data-toggle="dropdown">Получен</span>'.html_safe
+        '<span class="label label-ready btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
       else
-        '<span class="label label-ready" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
+        '<span class="label label-ready btn-available btn" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
       end
     elsif document.approved?
-      '<span class="label label-warning" data-toggle="dropdown">Подписан</span>'.html_safe
+      '<span class="label label-warning btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.prepared?
-      '<span class="label" data-toggle="dropdown">Подготовлен</span>'.html_safe
+      '<span class="label btn-available btn" data-toggle="dropdown">Подготовлен</span>'.html_safe
     elsif document.draft?
-      '<span class="label label-inverse" data-toggle="dropdown">Черновик</span>'.html_safe
+      '<span class="label label-inverse btn-available btn" data-toggle="dropdown">Черновик</span>'.html_safe
     else
       nil
     end
@@ -138,32 +138,33 @@ module DocumentsHelper
   end
 
   def document_status_list(document)
-    created = "Создан - " + Russian::strftime(document.created_at, "%d %B %Y") #черновик
-    prepared = "Подготовлен - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    approved = "Подписан - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    sent = "Отправлен - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    opened = "Открыт - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    for_confirmation = "На проверке - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    with_comments =  "Вернули с комментариями - " + Russian::strftime(document.prepared_date, "%d %B %Y")
-    executed = "Исполнено! - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    created = content_tag(:li, "Создан - " + Russian::strftime(document.created_at, "%d %B %Y"))
+    prepared = content_tag(:li, "Подготовлен - " + Russian::strftime(document.prepared_date, "%d %B %Y")) if document.prepared_date
+    approved = content_tag(:li,"Подписан - " + Russian::strftime(document.approved_date, "%d %B %Y")) if document.approved_date
+    sent = content_tag(:li,"Отправлен - " + Russian::strftime(document.sent_date, "%d %B %Y")) if document.sent_date
+    opened = content_tag(:li,"Открыт - " + Russian::strftime(document.opened_date, "%d %B %Y")) if document.opened_date
+    for_confirmation = content_tag(:li,"На проверке - " + Russian::strftime(document.statements.last.approved_date, "%d %B %Y")) if document.statements.present?
+   # with_comments =  content_tag(:li,"Вернули с комментариями - " + Russian::strftime(document.with_comments, "%d %B %Y"))
+    executed = content_tag(:li,"Исполнено! - " + Russian::strftime(document.executed_date, "%d %B %Y")) if document.executed_date
 
     if document.executed?
       executed + opened + sent + approved + prepared
-    elsif document.with_comments
-      with_comments + opened + sent + approved + prepared
-    elsif document.for_confirmation
+ #   elsif document.with_comments
+ #     with_comments + opened + sent + approved + prepared
+    elsif document.for_confirmation?
       for_confirmation + opened + sent + approved + prepared
-    elsif document.opened
+    elsif document.opened?
       opened + sent + approved + prepared
-    elsif document.sent
+    elsif document.sent?
       sent + approved + prepared
-    elsif document.approved
+    elsif document.approved?
       approved + prepared
-    elsif document.prepared
+    elsif document.prepared?
       prepared
     else
       created
     end
+
   end
 
 

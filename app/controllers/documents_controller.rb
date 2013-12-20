@@ -100,6 +100,7 @@ class DocumentsController < ApplicationController
     
     if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true
+      @document.opened_date = Time.now
       @document.save
       users = User.where(:organization_id => @document.sender_organization_id)
       users.each do |user|
@@ -193,6 +194,7 @@ class DocumentsController < ApplicationController
       document.approver_id = params[:document][:approver_ids].second
       if params[:prepare]
         document.prepared = true
+        document.prepared_date = Time.now
         document.draft = false
       end
       document.save!
@@ -258,6 +260,7 @@ class DocumentsController < ApplicationController
     @document = Document.find(params[:id])
     if current_user.id == @document.approver_id && @document.sent == false || current_user.id == @document.user_id && @document.sent == false
       @document.sent = true
+      @document.sent_date = Time.now
       @document.save
       redirect_to documents_url, notice: t('document_successfully_sent')
     else
@@ -385,11 +388,13 @@ class DocumentsController < ApplicationController
   end
   
   def assign_organizations_to_tasks(document)
-    document.task_list.tasks.each do |task|
-      task.deadline = document.deadline
-      task.executor_organization_id = document.organization_id
-      task.sender_organization_id = document.sender_organization_id
-      task.save!
+    if document.task_list
+      document.task_list.tasks.each do |task|
+        task.deadline = document.deadline
+        task.executor_organization_id = document.organization_id
+        task.sender_organization_id = document.sender_organization_id
+        task.save!
+      end
     end
   end
     
