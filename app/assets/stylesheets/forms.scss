@@ -1,12 +1,16 @@
 .new-doc {
   .form-control[type="text"], .chosen-container {
-    width: 440px !important;
+    width: 440px;
+    float: left;
   }
   textarea {
     &:focus, &:active {
       border-color: #76d4ce;
       border-width: 2px;
     }
+  }
+  label {
+    width: 100%;
   }
 }
 

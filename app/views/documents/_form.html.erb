@@ -4,7 +4,7 @@
     <li class="col-md-2">
       <a href="#"><%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %></a>
     </li>
-    <li class="col-md-5">
+    <li class="col-md-6">
       <% if action?('new') %>
             <h1>
               <% if params[:type] == 'mail' %>
@@ -15,7 +15,6 @@
             </h1>
       <% end %>
     </li>
-    <li class="col-md-3"></li>
     <li class="col-md-4 pull-right">
       <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
           <%= render 'shared/user' %>
@@ -44,17 +43,19 @@
   <!-- end -->
 
 
+      <label><%= f.text_field :title, :class => 'form-control', :placeholder => 'Прошу предусмотреть' %></label>
+	
 
-	<%= f.text_field :title, :class => 'form-control', :placeholder => 'Прошу предусмотреть' %>
-	
-	<% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %> 
-	<%= f.text_field(:deadline, :class => 'form-control', :placeholder => 'Дата исполонения') %><br>
-	<% end %>
-	
-	<%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :'data-placeholder' => "Организация-получатель", :class => 'form-control' }) %>
-	<%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :'data-placeholder' => "Контрольное-лицо", :class => 'form-control'}) %>
-	<%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :'data-placeholder' => "Исполнитель", :id => "document_executor_ids", :class => 'form-control' }) %>
-	<%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control"  %>
+
+    <label>
+      <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :'data-placeholder' => "Организация-получатель", :class => 'form-control' }) %>
+      <% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %>
+          <%= f.text_field(:deadline, :class => 'form-control datepicker', :placeholder => 'Дата исполонения') %>
+      <% end %>
+    </label>
+    <label><%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :'data-placeholder' => "Контрольное-лицо", :class => 'form-control'}) %></label>
+    <label><%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :'data-placeholder' => "Исполнитель", :id => "document_executor_ids", :class => 'form-control' }) %></label>
+    <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control"  %>
 	
 	  
 	  <% if @document.document_type == 'writ' || params[:type] == 'writ' %>    
@@ -80,10 +81,8 @@
     <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
     </label>
     <% end %>
-    </div>
-    
 
-	
+    </div>
 	
 	<%= render 'actions_form', :f => f %>
 
