@@ -183,7 +183,11 @@
 
 
   <% unless @conversation.nil? || @conversation_documents.count < 1 %>
-      <p>История переписки</p>
-      <%= render 'table', :@documents => @conversation_documents %>
+      <div class="container">
+        <h3>История переписки
+         <!-- <%= @conversation.documents.count %> писем:-->
+        </h3>
+        <%= render 'table', :@documents => @conversation_documents %>
+      </div>
   <% end %>
 </div>
