@@ -1,22 +1,3 @@
-<tr class="inform">
-	  <td colspan="9">
-	  	<%= link_to document.title, document %>
-	  	<%= organization(document.sender_organization_id) %> -> <%= organization(document.organization_id) %>
-	  	<%= link_to doc_user(document.user_id), user_path(document.user_id) %>
-	  	<% unless document.document_attachments.blank? %>
-		<p>Прикрепленные файлы</p>
-		<% document.document_attachments.each do |a| %>
-		<%= link_to a.attachment_file_name, a.attachment.url(:original, false) %>
-		<% end %>
-		<% end %>
-
-		<% unless document.documents.blank? %>
-		<p>Прикрепленные документы</p>
-		<ol>
-		<% document.documents.each do |d| %>
-		<li><%= d.created_at.strftime('%d %m %Y') %> <%= link_to d.title, d %></li>
-		<% end %>
-		</ul>
-		<% end %>
-	  </td>
-</tr>
+<td colspan="9" class="inform">
+	  	<%= @document.title %>
+</td>

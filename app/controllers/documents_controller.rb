@@ -150,6 +150,7 @@ class DocumentsController < ApplicationController
                                     :opened_date => @document.opened_date,
                                     :attachments => @document.document_attachments,
                                     :conversation => @conversation }}
+      format.js { @document = @document }
       format.pdf do
         pdf = DocumentPdf.new(@document, view_context)
         send_data pdf.render, filename: "document_#{@document.id}.pdf",

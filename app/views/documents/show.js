@@ -1,0 +1,1 @@
+$('#<%= @document.id %>').html("<%=j render :partial => 'full_element', :@document => @document %>");

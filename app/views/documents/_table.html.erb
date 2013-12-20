@@ -18,7 +18,7 @@
 	  <tbody>
 	<% @documents.each do |document| %>
 	
-	  <tr>
+	  <tr id="<%= document.id %>">
 		<% unless action?('show') %>
 		<td class="not_this"><label class="control checkbox"><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %><span class="checkbox-label"></span>
 </label></td>

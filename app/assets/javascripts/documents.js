@@ -67,14 +67,21 @@
 			}
 	else if (!!$(".inform").not(current_row).length){
 		$(".inform").not(current_row).remove();
-	  	jsonTr();
+			$( "tr:hidden" ).not(this).show(0);
+	  	$.ajax({
+			  url: '/documents/' + document_id + '.js',
+			  type: "GET",
+			});
 	  	$( "tr:hidden" ).not(this).show(0);
 			}
 	else {
-			jsonTr();
+			$.ajax({
+			  url: '/documents/' + document_id + '.js',
+			  type: "GET",
+			});
 	}
 
-};
+	};
 
 
 $(document).ready(function(){
@@ -161,6 +168,7 @@ $(document).ready(function(){
 
 
 	$(".documents_table tbody tr").click(appendTr);
+	
 	$(".documents_table tbody td.not_this").click(function(e){
 	    e.stopPropagation()
 	})
