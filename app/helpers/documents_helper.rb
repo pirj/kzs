@@ -1,7 +1,7 @@
 # coding: utf-8
 
 module DocumentsHelper
-  
+
   def doc_user(user_id)
     if User.exists?(user_id)
       User.find(user_id).first_name_with_last_name
@@ -9,15 +9,15 @@ module DocumentsHelper
       "Deleted"
     end
   end
-  
+
   def organization(organization_id)
     if Organization.exists?(organization_id)
       Organization.find(organization_id).title
     else
       "Deleted"
     end
-  end  
-  
+  end
+
   def recipient(document)
     if current_user.organization_id == document.organization_id
       true
@@ -25,7 +25,7 @@ module DocumentsHelper
       false
     end
   end
-  
+
   def indox(current_user)
     if current_user.has_permission?(5)
       count = Document.sent.unopened.where(:organization_id => current_user.organization_id).count
@@ -34,35 +34,43 @@ module DocumentsHelper
     end
     count
   end
-  
+
   def draft(current_user)
     Document.draft.where(:user_id => current_user.id).count
   end
-  
+
   def to_be_approved(current_user)
     Document.prepared.not_approved.where(:approver_id => current_user.id).count
   end
-  
+
   def to_be_sent(current_user)
     Document.prepared.approved.not_sent.where(:user_id => current_user.id).count
   end
-  
+
   def for_approve(document)
-    if document.approver_id == current_user.id && document.prepared? && document.approved != true then true end
+    if document.approver_id == current_user.id && document.prepared? && document.approved != true then
+      true
+    end
   end
-  
+
   def for_send(document)
-    if document.approver_id == current_user.id && document.sent != true && document.approved? || document.user_id == current_user.id && document.sent != true && document.approved? then true end
+    if document.approver_id == current_user.id && document.sent != true && document.approved? || document.user_id == current_user.id && document.sent != true && document.approved? then
+      true
+    end
   end
-  
+
   def for_callback(document)
-    if document.user_id == current_user.id && document.opened != true && document.sent == true then true end
+    if document.user_id == current_user.id && document.opened != true && document.sent == true then
+      true
+    end
   end
-  
+
   def for_execution(document)
-    if action?('execute') == false && @document.for_confirmation == false && @document.statements.present? && @document.organization_id == current_user.organization_id then true end
+    if action?('execute') == false && @document.for_confirmation == false && @document.statements.present? && @document.organization_id == current_user.organization_id then
+      true
+    end
   end
-  
+
   def document_status(document)
     if document.executed?
       '<span class="label label-success" data-toggle="dropdown">Исполнен</span>'.html_safe
@@ -74,14 +82,14 @@ module DocumentsHelper
       '<span class="label label-success" data-toggle="dropdown">Получен</span>'.html_safe
     elsif document.sent?
       if document.organization_id == current_user.organization_id
-       '<span class="label label-ready" data-toggle="dropdown">Получен</span>'.html_safe
-     else
-       '<span class="label label-ready" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
-     end
-     elsif document.approved?
-       '<span class="label label-warning" data-toggle="dropdown">Подписан</span>'.html_safe
-     elsif document.prepared?
-       '<span class="label" data-toggle="dropdown">Подготовлен</span>'.html_safe
+        '<span class="label label-ready" data-toggle="dropdown">Получен</span>'.html_safe
+      else
+        '<span class="label label-ready" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
+      end
+    elsif document.approved?
+      '<span class="label label-warning" data-toggle="dropdown">Подписан</span>'.html_safe
+    elsif document.prepared?
+      '<span class="label" data-toggle="dropdown">Подготовлен</span>'.html_safe
     elsif document.draft?
       '<span class="label label-inverse" data-toggle="dropdown">Черновик</span>'.html_safe
     else
@@ -130,42 +138,33 @@ module DocumentsHelper
   end
 
   def document_status_list(document)
-    #
-    #
-    #"Создан - " +  Russian::strftime(document.prepared_date, "%d %B %Y")          #черновик
-    #
-    #
-    #"Подготовлен - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
-    #
-    #if document.prepared?
-    #  "Подписан - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
-    #  if document.approved?
-    #
-    #  end
-    #
-    #
-    #
-    #end
-    #if document.executed?
-    #  100
-    #elsif document.with_comments?
-    #  90
-    #elsif document.for_confirmation
-    #  80
-    #elsif document.opened?
-    #  75
-    #elsif document.sent?
-    #  50
-    #elsif document.approved?
-    #
-    #  "Подготовлен - " +  Russian::strftime(document.prepared_date, "%d %B %Y")
-    #elsif document.prepared?
-    #
-    #else
-    #  nil
-    #end
+    created = "Создан - " + Russian::strftime(document.created_at, "%d %B %Y") #черновик
+    prepared = "Подготовлен - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    approved = "Подписан - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    sent = "Отправлен - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    opened = "Открыт - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    for_confirmation = "На проверке - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    with_comments =  "Вернули с комментариями - " + Russian::strftime(document.prepared_date, "%d %B %Y")
+    executed = "Исполнено! - " + Russian::strftime(document.prepared_date, "%d %B %Y")
 
+    if document.executed?
+      executed + opened + sent + approved + prepared
+    elsif document.with_comments
+      with_comments + opened + sent + approved + prepared
+    elsif document.for_confirmation
+      for_confirmation + opened + sent + approved + prepared
+    elsif document.opened
+      opened + sent + approved + prepared
+    elsif document.sent
+      sent + approved + prepared
+    elsif document.approved
+      approved + prepared
+    elsif document.prepared
+      prepared
+    else
+      created
+    end
   end
-  
-  
+
+
 end
