@@ -362,10 +362,10 @@ h2 {
 .control.radio input[type="radio"]:checked ~ .radio-label:after {
   background-color: #e6737e;
 }
-
-input[type="text"], select {
-  margin-right: 40px;
-}
+//
+//input[type="text"], select {
+//  margin-right: 40px;
+//}
 
 label.error {
   display: block;
