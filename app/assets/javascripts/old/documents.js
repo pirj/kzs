@@ -25,11 +25,11 @@
 //			$("<li><span>Отправитель</span><p class='exp_exec'><a href='#'>" + data.sender + "</a></p></li>").appendTo('.inform td ul');
 //			$("<li><span style='text-align: right;'>Контрольное <br> лицо</span><p class='exp_exec'><a href='#'>" + data.approver + "</a></p></li>").appendTo('.inform td ul');
 //
-            $("<tr class='inform'><td colspan='9'><div class='col-md-8'><ul class='doc-info'></ul><div class='nav-pills nav controls'><a href='#' class='btn btn-default'>История переписки</a><a href='/documents/" + document_id + "' class='btn btn-default'>Открыть</a><a href=#' class='btn btn-default'>Удалить</a></div></div><div class='col-md-4'><div class='view-main-doc'><div class='overlay'><a href='#' target='blank' class='zoom'></a></div><a href='' class='icon-chat-empty'></a></div></div></td></tr>").insertAfter(current_row);
-            $("<li><span class='title'>Номер и дата:</span>" + doc_serial + "</p></li>").appendTo('.inform td ul');
+            $("<tr class='inform'><td colspan='9'><div class='col-md-8'><ul class='doc-info'></ul><div class='nav-pills nav controls'><a href='/documents/" + document_id + "' class='btn btn-default'>Открыть</a></div></div><div class='col-md-4'><div class='view-main-doc'><div class='overlay'><a href='#' target='blank' class='zoom'></a></div><a href='' class='icon-chat-empty'></a></div></div></td></tr>").insertAfter(current_row);
+            $("<li><span class='title'>Номер и дата:" + data.data.date + "</span></p></li>").appendTo('.inform td ul');
 			$("<li><span class='title'>Тема:</span><div class='value'><a class='h4' href='/documents/" + document_id + "'> " + data.title + "</a><ol class='breadcrumb'><li><a href='#'>ООО «Циклон»</a></li><li><a href='#'>ОАО «Метрострой»</a></li></ol></div></li>").appendTo('.inform td ul');
-			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'><img src='assets/user1.jpg' alt='user'/></span><a href='#' class='name dropdown' data-toggle='dropdown'>" + document_executor + "</a><ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img src='img/konstantin.jpg' alt='user'/></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul></div></li>").appendTo('.inform td ul');
-			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'><img src='assets/user2.jpg' alt='user'/></span><a href='#' class='name dropdown' data-toggle='dropdown'>" + data.sender + "</a><ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Святослав Заря</a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img src='img/konstantin.jpg' alt='user'/></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul></div></li>").appendTo('.inform td ul');
+			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'> <img alt='' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=' /></span><a href='#' class='name ' data-toggle='dropdown'>" + document_executor + "</a></div></li>").appendTo('.inform td ul');
+			$("<li><span class='title valign-mid'>Исполнитель:</span><div class='user value'><span class='photo'><img alt='' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=' /></span><a href='#' class='name ' data-toggle='dropdown'>" + data.sender + "</a></div></li>").appendTo('.inform td ul');
 
 //			if (data.attachments.length != 0){
 				$("<li class='attach'><span class='title'>Приложения:</span><ul class='value attach-list'><li class='pic'><i></i><a href='#'>Фотография001.jpg</a></li><li class='doc'><i></i><a href='#'>Контракт-пример.doc</a></li><li class='xls'><i></i><a href='#'>Расчет эргономических пока.xls</a></li><li class='pdf'><i></i><a href='#'>Новые показатели.pdf</a></li><li><a href='#' class='else-link'>и еще 4 файла</a></li></ul></li>").appendTo('.inform td ul');
@@ -67,8 +67,10 @@
 	};
 
 	function appendTr() {
+
 	current_row = $(this).closest('tr');
 	document_id = $(this).find('.document_id').html();
+
 	if (!!$(current_row).next(".inform").length){
 			$(".inform").remove();
 			}
@@ -92,23 +94,23 @@ $(document).ready(function(){
 		
        rules:{
             "document[title]":{
-                required: true,
+                required: true
             },	
             "document[organization_ids][]":{
-                required: true,
+                required: true
             },
 
 			"document[approver_ids][]":{
-                required: true,
+                required: true
             },
 
 			"document[executor_ids][]":{
-                required: true,
+                required: true
             },
 
 			"document[text]":{
-                required: true,
-            },
+                required: true
+            }
 
        },
 
@@ -119,20 +121,20 @@ $(document).ready(function(){
             },
 
             "document[organization_ids][]":{
-                required: "Укажите тему организацию-получателя",
+                required: "Укажите тему организацию-получателя"
             },
 
 			"document[approver_ids][]":{
-                required: "Укажите контрольное лицо",
+                required: "Укажите контрольное лицо"
             },
 
 			"document[executor_ids][]":{
-                required: "Укажите исполнителя",
+                required: "Укажите исполнителя"
             },
 
 			"document[text]":{
-                required: "Заполните текс письма",
-            },
+                required: "Заполните текст письма"
+            }
 
        }
 
