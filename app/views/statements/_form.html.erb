@@ -29,24 +29,17 @@
 
     </ul>
     <ul class="nav nav-pills permnavi">
-      <li class="btn">
-        <%= link_to " назад", :back, :class => "" %>
+      <li>
+        <%= link_to " назад", :back, :class => "btn btn-default back-btn btn-sm" %>
       </li>
     </ul>
 
 
 
     <%= render 'panel' %>
-  </div>
-	
-<div class="container">
 
 
-  
 
-
-		<div>
-		  
 		  <% if @statement.errors.any? %>
         <div id="error_explanation">
           <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>
@@ -58,24 +51,22 @@
           </ul>
         </div>
       <% end %>
-		  
-			<%= form_for(@statement) do |f| %>
-			
-			<%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => @statement.document_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите распоряжение"}) %>
-			
-			<%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите контрольное лицо"}) %>
-			
-      <%= f.collection_select(:approver_ids, @acceptors, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Выберите согласующих лиц"}) %>
-      
-			
-			<%= f.text_field :title, :class => 'input-xxlarge', :placeholder => 'Укажите заголовок акта..' %>
-			
-			<%= f.cktext_area :text, :class => 'input-xxlarge letter_input', :placeholder => 'Текст акта', :rows => "20" %>
-			
-			
+
+			<%= form_for(@statement, :html => { :class => "form new-doc row-fuild" }) do |f| %>
+
+            <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Укажите заголовок акта..' %></span>
+      <span class="form-item"><%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => @statement.document_id}, {multiple: true, :'data-placeholder' => "Выберите распоряжение", :class => 'form-control col-xs-7'}) %></span>
+
+      <span class="form-item"><%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true,  :'data-placeholder' => "Выберите контрольное лицо", :class => 'form-control col-xs-7'}) %></span>
+
+      <span class="form-item"><%= f.collection_select(:approver_ids, @acceptors, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :'data-placeholder' => "Выберите согласующих лиц", :class => 'form-control col-xs-7'}) %></span>
+
+
+      <span class="form-item"><%= f.cktext_area :text, :placeholder => 'Текст акта', :rows => "20" %></span>
+
+
       <%= render 'actions_form', :f => f %>
-		
+
 			<% end %>
-	</div>
 
 </div>

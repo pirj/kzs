@@ -1,45 +1,45 @@
-<div class="btn-toolbar">
+<ul class="btn-toolbar">
   
   <% if current_user.id == @statement.user_id && @statement.sent != true && @statement.approved == true %>
-  <div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Отправить', send_statement_statement_path(@statement), confirm: "Вы уверены?", :class => "btn" %>
-	</div>
+  <li>
+		<%= link_to 'Отправить', send_statement_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-primary btn-sm" %>
+	</li>
 	<% end %>  
 	
 	<% if current_user.id == @statement.user_id && @statement.draft == true %>
-  <div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Подготовить', prepare_statement_path(@statement), confirm: "Вы уверены?", :class => "btn" %>
-	</div>
+  <li  >
+		<%= link_to 'Подготовить', prepare_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
+	</li>
 	<% end %>
 	
 	<% if current_user.id == @statement.user_id && @statement.sent == false %>
-  <div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Редактировать', edit_statement_path(@statement), :class => "btn" %>
-	</div>
+  <li  >
+		<%= link_to 'Редактировать', edit_statement_path(@statement), :class => "btn btn-default btn-sm" %>
+	</li>
 	<% end %>
 	
 	<% if @statement.approved == false && @statement.approver_id == current_user.id && @statement.prepared == true %>
-	 <div class="btn-group"   style="margin-right: 10px;">	
- 		<%= link_to 'Подписать', approve_statement_path(@statement), confirm: "Вы уверены?", :class => "btn" %>
- 	</div>
+	 <li>
+ 		<%= link_to 'Подписать', approve_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
+ 	</li>
  	<% end %> 
 	
 	
 	
 	<% if for_accept(@statement) %>
 
-	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Принять', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-success" %>
-	</div>
+	<li>
+		<%= link_to 'На подпись', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-primary btn-sm" %>
+	</li>
 	
 	
 	<% unless @writ.statements.count > 1 %>
-	<div class="btn-group"   style="margin-right: 10px;">	
-		<%= link_to 'Отклонить', task_list_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-danger" %>
-	</div>
+	<li>
+		<%= link_to 'Отклонить', task_list_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
+	</li>
 	<% end %>
 	
 	<% end %>
 	
 	
-</div>
+</ul>

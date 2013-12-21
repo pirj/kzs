@@ -1,14 +1,14 @@
-<div class="btn-toolbar">
+<ul class="nav nav-pills">
 	
 	
-	<div class="btn-group">	
-		<%= f.submit "подготовить", :class => "btn btn-success", :name => "prepare" %>
-	</div>
+	<li>
+		<%= f.submit "подготовить", :class => "btn btn-primary btn-sm", :name => "prepare" %>
+	</li>
 	
 	<% if action?('new') %>
-	<div class="btn-group">	
-		<%= f.submit "в черновики", :class => "btn btn-primary" %>
-	</div>
+	<li>
+		<%= f.submit "в черновики", :class => "btn btn-default btn-sm" %>
+	</li>
 	<% end %>
 
-  </div>
+  </ul>
