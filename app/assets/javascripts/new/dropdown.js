@@ -152,10 +152,3 @@
     .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
 
 }(jQuery);
-
-$(function(){
-    // Fix input element click problem
-    $('.dropdown-form input, .dropdown-form label').click(function(e) {
-        e.stopPropagation();
-    });
-});

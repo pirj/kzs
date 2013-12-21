@@ -99,6 +99,7 @@
       color: #fff;
       border:2px solid #cdcdcd;
       border-radius:5px;
+      padding: 10px;
     }
   }
   li {
@@ -145,6 +146,7 @@
     &.split-btn {
       width: 100%;
       display: table;
+      overflow: hidden;
       a {
         width: 50%;
         display: table-cell;

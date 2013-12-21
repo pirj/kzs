@@ -37,8 +37,7 @@
 	<% end %>
 	<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
   <!-- end -->
-
-
+      
     <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Прошу предусмотреть' %></span>
 
     <span class="form-item">
@@ -59,12 +58,12 @@
       <span class="col-xs-2 hint">name@email.com</span>
     </span>
     <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %>
-     <div class="col-lg-12">
-        <b class="btn-primary btn dropdown icon-plus" data-toggle="dropdown">Добавить задачу</b>
+     <div class="col-lg-12 row-fuild">
+        <b id="add-task" class="btn-primary btn dropdown icon-plus" data-toggle="dropdown">Добавить задачу</b>
         <ul class="dropdown-menu dropdown-form col-md-4" role="menu">
           <li class="form-group clearfix">
             <label class="sr-only" for="new-task"></label><input id="new-task" type="text" placeholder="Новая задача"/>
-            <textarea name="" id="" cols="30" rows="5"></textarea>
+            <textarea name="" id="" cols="30" rows="5" placeholder="Суть задачи"></textarea>
           </li>
           <li class="dropdown-arr"></li>
           <li class="split-btn">
