@@ -1,17 +1,15 @@
 <div class="nav nav-pills">
 	
-	<li class="btn-group">
-		<%= f.submit "подготовить", :class => "btn btn-primary btn-sm", :name => "prepare" %>
+	<li>
+		<%= f.submit "На подпись", :class => "btn btn-primary btn-sm", :name => "prepare" %>
 	</li>
-	
-	
 	<% if @document.user_id == current_user.id || action?('new') %>
-	<li class="btn-group" style="margin-left: 10px;">
-		<%= f.submit "в черновики", :class => "btn btn-default btn-sm", :name => "to_draft" %>
+	<li>
+		<%= f.submit "Сохранить в черновики", :class => "btn btn-default btn-sm", :name => "to_draft" %>
 	</li>
 	<% end %>
 	
-	<li class="btn-group"   style="margin-left: 10px">
+	<li>
 		<%= link_to 'Отмена', :back, :class => "btn btn-default btn-sm" %>
 	</li>
 
