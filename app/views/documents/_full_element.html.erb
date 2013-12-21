@@ -43,14 +43,20 @@
         <% end %>
       </ul>
       <div class="nav-pills nav controls">
-        <a class="btn btn-default">История переписки</a>
-        <a class="btn btn-default">Открыть</a>
+       <!--<a class="btn btn-default">История переписки</a>-->
+        <a class="btn btn-default" href="documents/<%= @document.id %>">Открыть</a>
       </div>
     </div>
     <div class="col-md-4">
       <div class="view-main-doc">
-        <div class="overlay"><a href="file:///C:/Users/WARP/Desktop/desktopVerstka/img/doc-big.jpg" target="blank" class="zoom"></a></div>
+        <div class="overlay"><a href="documents/<%= @document.id %>.pdf" target="_blank" class="zoom"></a></div>
         <a href="" class="icon-chat-empty"></a>
+      
+          <iframe style="width: 190px; height: 264px;" src="/documents/<%= @document.id %>.pdf"/>
+          </iframe>
+
+
+
         <!--<img src="img/collapse-doc.jpg" alt=""/>-->
       </div>
     </div>

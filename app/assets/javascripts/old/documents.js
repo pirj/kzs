@@ -1,66 +1,18 @@
+function appendTr() {
+    current_row = $(this).closest('tr');
+    document_id = $(this).find('.document_id').html();
 
-
-    function appendTr() {
-
-
-
-
-        current_row = $(this).closest('tr');
-        document_id = $(this).find('.document_id').html();
-
-        //current_row.hide();
-
-        //var request = new $.Deferred()
-
-
-        $.when($.ajax({
-            url: '/documents/' + document_id + '.js',
-            type: "GET"
-        })).then(function(data, textStatus, jqXHR){
-                console.log(textStatus);
-            }
-        )
-
-
-       // if ()
-
-      /*  if (!!$(current_row).next(".inform").length){
-                           $(".inform").remove();
-            console.log(1);
+    $.when($.ajax({
+        url: '/documents/' + document_id + '.js',
+        type: "GET"
+    })).then(function(data, textStatus, jqXHR){
+            console.log(textStatus);
         }
-        else if (!!$(".inform").not(current_row).length){
-                          $(".inform").not(current_row).remove();
-            $( "tr:hidden" ).not(this).show();
-
-
-            $('.inform').on("click", function() {
-                $(this).hide();
-                current_row.show();
-                alert();
-            });
-            console.log(2);
-        }
-        else {
-            $.ajax({
-                url: '/documents/' + document_id + '.js',
-                type: "GET"
-            });
-
-            $('.inform').on("click", function() {
-                $(this).hide();
-                current_row.show();
-                alert();
-            });
-            console.log(3);
-        }*/
-
-    };
+    )
+}
 
 
 $(document).ready(function(){
-
-
-
 
 
 	$('#new_document').validate({
