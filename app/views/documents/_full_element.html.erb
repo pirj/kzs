@@ -1,22 +1,59 @@
-<tr class="inform">
-	  <td colspan="9">
-	  	<%= link_to document.title, document %>
-	  	<%= organization(document.sender_organization_id) %> -> <%= organization(document.organization_id) %>
-	  	<%= link_to doc_user(document.user_id), user_path(document.user_id) %>
-	  	<% unless document.document_attachments.blank? %>
-		<p>Прикрепленные файлы</p>
-		<% document.document_attachments.each do |a| %>
-		<%= link_to a.attachment_file_name, a.attachment.url(:original, false) %>
-		<% end %>
-		<% end %>
+<td colspan="9" class="inform">
 
-		<% unless document.documents.blank? %>
-		<p>Прикрепленные документы</p>
-		<ol>
-		<% document.documents.each do |d| %>
-		<li><%= d.created_at.strftime('%d %m %Y') %> <%= link_to d.title, d %></li>
-		<% end %>
-		</ul>
-		<% end %>
-	  </td>
-</tr>
+
+    <div class="col-md-8">
+      <ul class="doc-info">
+        <li><span class="title">Номер и дата:</span><span class="value"><a href="#"><%= @document.id %></a> / <%= if @document.sent then @document.sent_date.strftime('%d.%m.%Y') else 'Дата не присвоена' end %></span></li>
+        <li><span class="title">Тема:</span>
+									<span class="value">
+										<span class="h3"><%= @document.title %></span>
+										<ol class="breadcrumb">
+                                          <li><%= link_to organization_full_title(@document.sender_organization_id), organization_path(@document.sender_organization_id) %></li>
+                                          <li><%= link_to organization_full_title(@document.organization_id), organization_path(@document.organization_id) %></li>
+                                        </ol>
+									</span>
+        </li>
+        <li>
+          <span class="title valign-mid">Исполнитель:</span>
+          <div class="user value">
+            <span class="photo"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></span>
+            <a href="#" class="name dropdown" data-toggle="dropdown">Феликс Константинопольский</a>
+            <ul class="dropdown-menu" role="menu">
+              <!--<li class="title"><a href="#"><%= user_with_full_name(@document.executor_id)%> </a> Инженер ПТО, ООО «Циклон»</li>-->
+              <li class="photo"><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></li>
+              <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+              <li><a href="#" class="icon-clock">Личная страница</a></li>
+              <li class="dropdown-arr"></li>
+              <li><a href="#" class="icon-block-1">Отмена</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><span class="title valign-mid">Отправитель:</span><div class="user value"><span class="photo"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></span><a href="#" class="name"><%= user_with_full_name(@document.user_id)%></a></div></li>
+        <% unless @document.document_attachments.blank? %>
+            <li class="doc-format"><span class="title">Приложения:</span>
+
+              <ul class="value doc-format-list">
+                <% @document.document_attachments.each do |a| %>
+                    <li> <i></i> <%= link_to a.attachment_file_name, a.attachment.url(:original, false), :target=> '_blank' %></li>
+                <% end %>
+              </ul>
+
+            </li>
+
+        <% end %>
+      </ul>
+      <div class="nav-pills nav controls">
+        <a class="btn btn-default">История переписки</a>
+        <a class="btn btn-default">Открыть</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="view-main-doc">
+        <div class="overlay"><a href="file:///C:/Users/WARP/Desktop/desktopVerstka/img/doc-big.jpg" target="blank" class="zoom"></a></div>
+        <a href="" class="icon-chat-empty"></a>
+        <!--<img src="img/collapse-doc.jpg" alt=""/>-->
+      </div>
+    </div>
+
+
+</td>
