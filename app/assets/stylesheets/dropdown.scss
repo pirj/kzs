@@ -88,6 +88,19 @@
 }
 
 .dropdown-menu {
+  &.dropdown-form {
+    input[type="text"] {
+      height: 38px;
+      margin-bottom:12px;
+    }
+    input, textarea {
+      width: 100%;
+      background: transparent;
+      color: #fff;
+      border:2px solid #cdcdcd;
+      border-radius:5px;
+    }
+  }
   li {
     border-top: 1px solid #666666;
     width: 100%;
@@ -129,6 +142,22 @@
       text-align: left;
       padding-left: 0px;
     }
+    &.split-btn {
+      width: 100%;
+      display: table;
+      a {
+        width: 50%;
+        display: table-cell;
+        border-left:1px solid #666666;
+        &:first-child {
+          border-left:none;
+        }
+      }
+    }
+    &.form-group {
+      padding: 12px;
+      margin-bottom: 0;
+    }
   }
   .other-desktop {
     .title {
@@ -139,7 +168,7 @@
       text-decoration: underline;
     }
   }
-  
+
   .dropdown.active > a {
       background: #1BA0E1;
       border-radius: 100px;

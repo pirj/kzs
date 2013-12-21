@@ -1,4 +1,4 @@
- 
+
 	function jsonTr() {
 		current_row.hide();
 		$.getJSON( "/documents/" + document_id + ".json", function(data) {
@@ -264,4 +264,3 @@ $(function() {
     return false;
   });
 });
-
