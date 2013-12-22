@@ -176,7 +176,7 @@
 }
 
 .top-pannel {
-  margin-top: 20px;
+  margin: 20px 0 31px -15px;
   line-height: 35px;
   text-transform: uppercase;
   b {
@@ -185,6 +185,9 @@
   }
   .btn, .username {
     text-transform: none;
+  }
+  .back-btn {
+    float: left;
   }
   .username {
     font-size: 13px;
@@ -226,12 +229,13 @@
   }
   .full-drop {
     top:-10px;
-    left: -24px;
+    left: -41px;
     h1 {
-      padding: 10px 40px 15px 24px;
+      padding: 10px 40px 15px 39px;
     }
   }
   h1 {
+    margin-left:32px;
     display: inline-block;
     font-size: 35px;
     margin-top: 0;
