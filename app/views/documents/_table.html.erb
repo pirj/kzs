@@ -23,8 +23,8 @@
 		<td class="not_this"><label class=""><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %><span class="checkbox-label"></span>
 </label></td>
 		<% end %>
-		<td><a class="document_id"><%= document.id %></a> / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
-	    <td><a href=""><%= organization(document.sender_organization_id) %></a></td>
+		<td><a class="document_id" href="documents/<%= document.id %>"><%= document.id %></a> / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
+	    <td><%= link_to organization_full_title(document.sender_organization_id), organization_path(document.sender_organization_id) %></td>
 		  <td><a href=""><%= organization(document.organization_id) %> </a></td>
 
 		  <td><%= truncate(document.title, length: 13) %></td>
@@ -41,23 +41,24 @@
 		</td>
 	    <td class="status dropdown">
           <%= document_status(document) %>
-          <!--<ul class="dropdown-menu drop-left" role="menu">-->
-            <!--<li class="time">Последий статус назначен:-->
-              <!--<span class="date">20 ноября 2013</span>-->
-              <!--<div class="progress">-->
-                <!--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">-->
-                  <!--<span class="sr-only">40% Complete (success)</span>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</li>-->
-            <!--<li><a href="#" class="icon-ok">Отправить</a></li>-->
-            <!--<li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>-->
-            <!--<li class="dropdown-arr"></li>-->
-            <!--<li><a href="#" class="icon-block-1">Отмена</a></li>-->
-          <!--</ul>-->
+          <ul class="dropdown-menu drop-left" role="menu">
+            <li class="time">Последий статус назначен:
+              <span class="date"><!--  document_status_date(document) --></span>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=  document_status_progress(document) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=  document_status_progress(document) %>%">
+                  <span class="sr-only"><%=  document_status_progress(document) %>% Complete (success)</span>
+                </div>
+              </div>
+            </li>
+
+            <li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>
+            <!-- document_status_list(@document) -->
+            <li class="dropdown-arr"></li>
+            <li><a href="#" class="icon-block-1">Отмена</a></li>
+          </ul>
         </td>
 	  </tr>
-		<%#= render 'full_element', :document => document %>
+
 	<% end %>
 	</tbody>
 </table>
