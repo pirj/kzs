@@ -1,0 +1,17 @@
+
+console.log();
+
+if ($('#<%= @document.id %>').find('.inform').length > 0 ) {
+    $('#<%= @document.id %> .inform').remove();
+    $('#<%= @document.id %>').children('td').show();
+}
+else
+{
+    $('#<%= @document.id %>').children('td').hide();
+    $('<%=j render :partial => 'full_element', :@document => @document %>').appendTo("#<%= @document.id %>");
+}
+
+
+
+
+
