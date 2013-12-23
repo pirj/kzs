@@ -97,7 +97,8 @@
 
           </ul>
         </li>
-        <li class="exit"><a href="#" class="btn btn-default btn-sm">Выйти</a></li>
+        <li class="exit">
+          <%= link_to ("").html_safe, destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn' %>
       </ul>
     </nav>
   </footer>

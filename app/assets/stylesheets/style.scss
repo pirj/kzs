@@ -46,6 +46,25 @@
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 20px;
+  .opener {
+    display: inline-block;
+    margin-left: 15px;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    background: #fff;
+    border-radius: 90px;
+    font-size: 13px;
+    text-decoration: none;
+    top: 45%;
+    position: relative;
+    line-height: 27px;
+  }
+}
+
+.forgot-password {
+  padding: 10px 0 0 10px;
+  display: block;
 }
 
 .main-desktop-controls {
@@ -578,6 +597,11 @@
   }
 }
 
+.all-center {
+  margin:0 auto;
+  text-align: center;
+}
+
 .caret {
   border-color-top: inherit;
 }
@@ -595,8 +619,9 @@
   color: #666666!important;
 }
 
-/*footer*/
-footer.container.fixed {
-  display: block;
-  padding-bottom: 40px;
+#logo3 {
+  text-align: right;
+  img {
+    margin-top: 21px;
+  }
 }

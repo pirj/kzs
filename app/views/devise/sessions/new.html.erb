@@ -1,54 +1,65 @@
-<div class="top-title">Система автоматизированного контроля за эксплуатацией КЗС</div>
-
-<div class="container">
-
-<div class="row">
-  <div class="span8 offset4">
-
-	<h3 class='login_header'>Авторизуйтесь, пожалуйста</h3>
-
-  </div>
+<div class="page-title">
+  <a class="logo" href="#"><img alt="Менеджер КЗС" src="/assets/mkzs-logo.png"></a>
+  <a title="Что это?" class="opener" data-toggle="modal" data-target="#about" href="#">?</a>
 </div>
 
+<div class="container sign-in">
 <div class="row">
-  <div class="span6 offset4">
-
-
-
-		<div class="hero-unit sign_in">
-		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-
-		<div class="control-group">
-		  <div class="controls">
-			<%= f.text_field :login, :placeholder => 'логин' %>
-
-		  </div>
+  <div class="all-center">
+	<h1>Авторизуйтесь, пожалуйста</h1>
+  </div>
+</div>
+<div class="col-md-6 col-lg-offset-4">
+		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
+		<div class="form-item">
+			<%= f.text_field :login, :placeholder => 'логин', :class => "form-control icon-acc pull-left" %>
+            <%= f.submit "Вход", :class => 'btn btn-default btn-sm pull-left' %>
 		</div>
+		<div class="form-item">
+		    <%= f.password_field :password, :placeholder => 'пароль', :class => "form-control icon-lock" %>
+          <a href="#" class="forgot-password">я забыл пароль</a>
 
-		<div class="control-group">
-		  <div class="controls">
-		    <%= f.password_field :password, :placeholder => 'пароль' %>
-		    <%= f.submit "Вход", :class => 'btn btn-small login' %>
 			<% if flash[:alert] == "Неверный адрес e-mail или пароль." %>
 				<span class="help-inline"><%= flash[:alert] %></span>
 			<% end %>
-		  </div>
 		</div>
 
 		<% end %>
+</div>
+<!--modal-->
+  <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title all-center">Чо такое САКЭ?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Система автоматизированного контроля за эксплуатацией Комплекса защитных сооружений Санкт-Петербурга —это веб-система, созданная компанией
+            <a href="http://ziklon.ru/">«Циклон»</a> для удобной организации документооборота, назначения задач, планирования сроков и этапов эксплуатации, учета труда, ресурсов, контроля за ситуацией на дамбе и других задач, связанных с эксплуатацией КЗС.
 
-		</div>
+            Для начала работы в САКЭ вам необходимо авторизоватьсяили получить код доступа у ответственногов вашей огранизаци
+            Система автоматизированного контроля за эксплуатацией Комплекса защитных сооружений Санкт-Петербурга —это веб-система, созданная компанией «Циклон» для удобной организации документооборота, назначения задач, планирования сроков и этапов эксплуатации, учета труда, ресурсов, контроля за ситуацией на дамбе и других задач, связанных с эксплуатацией КЗС.
+            <br/>
+            <br/>
+            Для начала работы в САКЭвам необходимо авторизоватьсяили получить код доступа у ответственногов вашей огранизации.
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
+</div>
+
+<footer class="row footer navbar-fixed-bottom">
+  <div class="container">
+    <a href="#" class="col-lg-7" id="logo1">
+      <img src="/assets/logo-dir.png" alt=""/>
+    </a>
+    <a href="#" class="col-lg-2" id="logo2">
+      <img src="/assets/logo-metro.png" alt=""/>
+    </a>
+    <a href="#" class="col-lg-3" id="logo3">
+      <img src="/assets/logo-cyclone.png" alt=""/>
+    </a>
   </div>
-</div>
-
-<div class="row">
-  <div class="span8 offset2">
-
-	<%= image_tag('login.png', :class=> 'logos') %>
-
-  </div>
-</div>
-
-</div>
+</footer>

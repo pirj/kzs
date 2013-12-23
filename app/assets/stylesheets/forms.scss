@@ -8,7 +8,7 @@
       content:"";
     }
     .hint {
-      height: 34px;
+      height: 38px;
       padding: 6px 12px;
       font-size: 14px;
       line-height: 1.428571429;
@@ -31,6 +31,7 @@
 }
 
 .form-control {
+  min-height: 38px;
   border-width: 2px;
   z-index: 2;
   &:focus, &:active {
@@ -40,6 +41,28 @@
 
 .radio-label {
   padding-left:0 ;
+}
+
+/*login*/
+.sign-in {
+  h1 {
+    margin: 40px 0 60px 0;
+    color: #00bc80;
+    text-align: center;
+    font-weight: 100;
+    font-size: 28px;
+  }
+  .form-control {
+    background: #fff;
+    margin-right: 22px;
+  }
+  input[type"submit"] {
+
+}
+  .form {
+    margin: 0 auto;
+    max-width:320px;
+  }
 }
 
 //chosen_override
