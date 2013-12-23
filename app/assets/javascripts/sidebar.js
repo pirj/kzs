@@ -1,13 +1,26 @@
 $(document).ready(function () {
 
+
+
+    function slideOff(){ $('.l-page__column').mouseleave(function() {
+        setTimeout(function(){
+            $('.l-page__column').removeClass('m-open');
+            $('.menu-dir').removeClass('open');
+            $('.child-dir').css({'height': '0px'});
+
+        }, 700)         //оставлять если мышка вернулась!
+
+    })};
+
+
 $('#main-b').on('click', function(e) {
     e.preventDefault();
 
         var panel = $('.l-page__column');
 
     if (panel.hasClass('m-open')){
-alert();
-      document.location.path = '/';
+
+      document.location.href = '/';
 
        // panel.removeClass('m-open');
     }
@@ -16,11 +29,10 @@ alert();
        // alert();
     }
 
+slideOff();
 
-//    $('.l-page__column').mouseleave(function() {
-//        childDir.parent().removeClass('open');
-//        childDir.css({'height': '0px'});
-//    })
+
+
 
    // return false
 } );
