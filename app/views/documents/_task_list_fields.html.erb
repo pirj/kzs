@@ -1,4 +1,7 @@
-<%= f.fields_for :tasks do |builder| %>
-  <%= render 'tasks_fields', f: builder %>
-<% end %>
-<%= link_to_add_fields "Добавить задачу",  f, :tasks %>
+<div class="col-lg-12 row-fuild">
+    
+  <%= f.fields_for :tasks do |builder| %>
+    <%= render 'tasks_fields', f: builder %>
+  <% end %>
+  <b id="add-task" class="btn-primary btn dropdown icon-plus add_task_button" data-toggle="dropdown">Добавить задачу</b>
+</div>

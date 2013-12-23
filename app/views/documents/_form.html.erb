@@ -61,25 +61,9 @@
     </span>
       <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %>
       <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
-          <br><br>
-          <div class="col-lg-12 row-fuild">
-            <b id="add-task" class="btn-primary btn dropdown icon-plus" data-toggle="dropdown">Добавить задачу</b>
-            <ul class="dropdown-menu dropdown-form col-md-4" role="menu">
-              <li class="form-group clearfix">
-                <label class="sr-only" for="new-task"></label><input id="new-task" type="text" placeholder="Новая задача"/>
-                <textarea name="" id="" cols="30" rows="5" placeholder="Суть задачи"></textarea>
-              </li>
-              <li class="dropdown-arr"></li>
-              <li class="split-btn">
-                <a href="#" class="icon-ok">Создать</a>
-                <a href="#" class="icon-block-1">Отмена</a>
-              </li>
-            </ul>
-          </div><br><br>
-
-          <%= f.fields_for :task_list do |builder| %>
-              <%= render 'task_list_fields', f: builder %>
-          <% end %>
+        <%= f.fields_for :task_list do |builder| %>
+            <%= render 'task_list_fields', f: builder %>
+        <% end %>
       <% end %>
 
       <%= f.fields_for :document_attachments do |builder| %>

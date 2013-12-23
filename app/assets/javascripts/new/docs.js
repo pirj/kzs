@@ -38,4 +38,16 @@ $(function() {
 
         return false;
     });
+
+    $('.add_task_button').on('click', function(){
+				alert();
+				
+				
+
+        return false;
+    });
+
+
+		
+		
 });
