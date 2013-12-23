@@ -8,7 +8,7 @@ $(function() {
 
     $('#j-history').hide();
 
-    $('.status-history').on('click', function(){
+    $('.dropdown-menu .status-history').on('click', function(){
 
         var parent = $(this).closest('.dropdown-menu');
 
@@ -27,7 +27,7 @@ $(function() {
         }
         return false;
     });
-    $('.back-btn').on('click', function(){
+    $('.dropdown-menu .back-btn').on('click', function(){
         $(this).closest('.dropdown-menu').removeClass('history').animate({
             width: "190px"
         }, 500).css(

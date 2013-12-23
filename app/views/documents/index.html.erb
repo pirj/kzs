@@ -6,21 +6,21 @@
           <span class="dropdown full-drop">
             <h1 data-toggle="dropdown">Все документы <span class="caret"></span></h1>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Письма <span class="count">(112)</span></a></li>
-              <li><a href="#">Акты <span class="count">(23)</span></a></li>
-              <li><a href="#">Распоряжения <span class="count">(43)</span></a></li>
-              <li><a href="#">Черновики <span class="count">(43)</span></a></li>
+              <li><a href="/documents">Документы<!-- <span class="count">(112)</span>--></a></li>
+              <li><a href="/statements">Акты <!--<span class="count">(23)</span>--></a></li>
+              <!--<li><a href="/">Распоряжения <span class="count">(43)</span></a></li>-->
+              <li><a href="/documents/drafts">Черновики <!--<span class="count">(43)</span>--></a></li>
               <li class="dropdown-arr"></li>
               <li><a href="#">Отмена</a></li>
             </ul>
           </span>
         </li>
-        <li class="col-md-3">
-            <div class="form-group search" role="search">
-              <input type="text" class="form-control" placeholder="Поиск по пропускам">
-              <input type="submit" class="icon-search" value=""/>
-            </div>
-        </li>
+        <!--<li class="col-md-3">-->
+            <!--<div class="form-group search" role="search">-->
+              <!--<input type="text" class="form-control" placeholder="Поиск по пропускам">-->
+              <!--<input type="submit" class="icon-search" value=""/>-->
+            <!--</div>-->
+        <!--</li>-->
         <li class="col-md-4 pull-right">
           <%= render 'shared/user' %>
         </li>

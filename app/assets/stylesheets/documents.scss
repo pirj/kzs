@@ -458,3 +458,8 @@
 //  margin: 0;
 //  clear: both;
 //}
+.attachments-controls {
+  > div{
+    display: inline-block;
+  }
+}

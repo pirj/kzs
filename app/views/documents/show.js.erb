@@ -1,5 +1,5 @@
 
-console.log();
+console.log($('#<%= @document.id %>').find('.inform').length);
 
 if ($('#<%= @document.id %>').find('.inform').length > 0 ) {
     $('#<%= @document.id %> .inform').remove();
@@ -7,8 +7,12 @@ if ($('#<%= @document.id %>').find('.inform').length > 0 ) {
 }
 else
 {
+
+    $('.inform').remove();
+    $('.dynamic-table.table td').show();
     $('#<%= @document.id %>').children('td').hide();
     $('<%=j render :partial => 'full_element', :@document => @document %>').appendTo("#<%= @document.id %>");
+
 }
 
 

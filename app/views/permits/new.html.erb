@@ -1,31 +1,16 @@
 
-
 	<div class="container">
-
-
-
-
-
-		  <div class="btn-toolbar">
-
-            <ul class="row top-pannel clearfix">
-              <li class="col-md-5">
-                <h1 class="dropdown">Новый пропуск<span class="caret"></span></h1>
-              </li>
-              <li class="col-md-3"></li>
-              <li class="col-md-4 pull-right">
-                <%= render 'shared/user' %>
-              </li>
-
-            </ul>
-
-
-          </div>
-
-		
-		
-	</div>
-    <div class="container">
+      <ul class="row top-pannel clearfix">
+        <li class="col-md-8">
+          <a href="#"><%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %></a>
+              <h1>Новый пропуск</h1>
+        </li>
+        <li class="col-md-4 pull-right">
+          <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
+              <%= render 'shared/user' %>
+          <% end %>
+        </li>
+      </ul>
 
       <%= form_for @permit, :html => {:name => 'newPermitForm'} do |f| %>
 
