@@ -181,7 +181,6 @@
   text-transform: uppercase;
   .btn {
     color: #000;
-    margin-left: 10px;
   }
   .btn, .username {
     text-transform: none;
@@ -210,6 +209,7 @@
     text-transform: none;
   }
   .search {
+    display: none;
     position: relative;
     margin: 0;
     min-width: 220px;
