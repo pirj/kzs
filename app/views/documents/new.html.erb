@@ -1,27 +1,9 @@
 <div class="container">
-  <ul class="row top-pannel clearfix">
-    <li class="col-md-8">
-      <a href="#"><%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %></a>
-      <% if action?('new') %>
-          <h1>
-            <% if params[:type] == 'mail' %>
-                Новое письмо
-            <% elsif params[:type] == 'writ' %>
-                Новое распоряжение
-            <% end %>
-          </h1>
-      <% end %>
-    </li>
-    <li class="col-md-4 pull-right">
-      <%= form_tag documents_path, method: :get, :remote => true, :id => "text-search" do %>
-          <%= render 'shared/user' %>
-      <% end %>
-    </li>
-  </ul>
-  <ul class="nav nav-pills">
-    <li><%= link_to "Шаблоны", "#", :class => "btn btn-sm btn-default" %></li>
-    <li><%= link_to "Черновики", drafts_documents_path, :class => "btn btn-sm btn-default" %> </li>
-  </ul>
+
+  <!--<ul class="nav nav-pills">-->
+    <!--<li><%= link_to "Шаблоны", "#", :class => "btn btn-sm btn-default" %></li>-->
+    <!--<li><%= link_to "Черновики", drafts_documents_path, :class => "btn btn-sm btn-default" %> </li>-->
+  <!--</ul>-->
 
 <%= render 'form' %>
 
