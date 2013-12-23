@@ -1,6 +1,29 @@
 $(document).ready(function () {
 
+$('#main-b').on('click', function(e) {
+    e.preventDefault();
 
+        var panel = $('.l-page__column');
+
+    if (panel.hasClass('m-open')){
+alert();
+      document.location.path = '/';
+
+       // panel.removeClass('m-open');
+    }
+    else {
+        panel.addClass('m-open');
+       // alert();
+    }
+
+
+//    $('.l-page__column').mouseleave(function() {
+//        childDir.parent().removeClass('open');
+//        childDir.css({'height': '0px'});
+//    })
+
+   // return false
+} );
 
 
     $('.menu-dir div.menu-link').click(function () {

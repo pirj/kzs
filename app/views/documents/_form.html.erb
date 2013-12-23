@@ -2,7 +2,7 @@
 <div class="container">
   <ul class="row top-pannel clearfix">
     <li class="col-md-2">
-      <a href="#"><%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %></a>
+      <%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %>
     </li>
     <li class="col-md-6">
       <% if action?('new') %>
@@ -25,6 +25,8 @@
       <!--<li><%= link_to "Шаблоны", "#", :class => "btn btn-sm btn-default" %></li>-->
     <!--<li><%= link_to "Черновики", drafts_documents_path, :class => "btn btn-sm btn-default" %> </li>-->
   <!--</ul>-->
+
+
   <%= form_for(@document, :html => { :class => "form new-doc row-fuild" }) do |f| %>
 	
 	<!-- hidden_fields -->
@@ -32,7 +34,7 @@
 	<%= f.hidden_field :document_type, :value => params[:type] %>
 	<% elsif action?('reply') %>
 	<%= f.hidden_field :document_type, :value => @original_document.document_type %>
-	<% elsif %>
+	<% else %>
 	<%= f.hidden_field :document_type, :value => @document.document_type %>
 	<% end %>
 	<%= f.hidden_field :document_conversation_id, :value => @document_conversation_id %>
@@ -58,7 +60,9 @@
       <span class="col-xs-2 hint">name@email.com</span>
     </span>
     <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %>
-     <div class="col-lg-12 row-fuild">
+      <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
+
+        <div class="col-lg-12 row-fuild">
         <b id="add-task" class="btn-primary btn dropdown icon-plus" data-toggle="dropdown">Добавить задачу</b>
         <ul class="dropdown-menu dropdown-form col-md-4" role="menu">
           <li class="form-group clearfix">
@@ -72,7 +76,7 @@
            </li>
         </ul>
      </div>
-	  <% if @document.document_type == 'writ' || params[:type] == 'writ' %>    
+
       <%= f.fields_for :task_list do |builder| %>
         <%= render 'task_list_fields', f: builder %>
       <% end %>
