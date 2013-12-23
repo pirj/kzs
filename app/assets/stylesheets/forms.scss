@@ -1,5 +1,7 @@
 .form {
   .form-item {
+    display:block;
+    margin-bottom: 12px;
     &:after {
       clear: both;
       display:table;
@@ -30,12 +32,16 @@
 
 .form-control {
   border-width: 2px;
-  margin-bottom: 12px;
   z-index: 2;
   &:focus, &:active {
     box-shadow: none;
   }
 }
+
+.radio-label {
+  padding-left:0 ;
+}
+
 //chosen_override
 .chosen-container {
   float: left;
