@@ -19,8 +19,8 @@
         <li class="time">Последий статус назначен:
           <span class="date"><%=  document_status_date(@document) %></span>
           <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%=  document_status_progress(@document) %>%">
-              <span class="sr-only">40% Complete (success)</span>
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%=  document_status_progress(@document) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=  document_status_progress(@document) %>%">
+              <span class="sr-only"><%=  document_status_progress(@document) %>% Complete (success)</span>
             </div>
           </div>
         </li>

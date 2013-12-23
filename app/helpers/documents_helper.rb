@@ -73,31 +73,32 @@ module DocumentsHelper
 
   def document_status(document)
     if document.executed?
-      '<span class="label label-success btn-available btn" data-toggle="dropdown">Исполнен</span>'.html_safe
+      '<span class=" label-success btn-available btn" data-toggle="dropdown">Исполнен</span>'.html_safe
     elsif document.with_comments?
-      '<span class="label label-warning btn-available btn" data-toggle="dropdown">С замечаниями</span>'.html_safe
+      '<span class=" label-warning btn-available btn" data-toggle="dropdown">С замечаниями</span>'.html_safe
     elsif document.for_confirmation?
-      '<span class="label label-success btn-available btn" data-toggle="dropdown">Проверка исполнения</span>'.html_safe
+      '<span class=" label-success btn-available btn" data-toggle="dropdown">Проверка исполнения</span>'.html_safe
     elsif document.opened?
-      '<span class="label label-success btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
+      '<span class=" label-success btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
     elsif document.sent?
       if document.organization_id == current_user.organization_id
-        '<span class="label label-ready btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
+        '<span class=" label-ready btn-available btn" data-toggle="dropdown">Получен</span>'.html_safe
       else
-        '<span class="label label-ready btn-available btn" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
+        '<span class=" label-ready btn-available btn" data-toggle="dropdown" data-toggle="dropdown">Отправлен</span>'.html_safe
       end
     elsif document.approved?
-      '<span class="label label-warning btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
+      '<span class=" label-warning btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.prepared?
-      '<span class="label btn-available btn" data-toggle="dropdown">Подготовлен</span>'.html_safe
+      '<span class=" btn-available btn" data-toggle="dropdown">Подготовлен</span>'.html_safe
     elsif document.draft?
-      '<span class="label label-inverse btn-available btn" data-toggle="dropdown">Черновик</span>'.html_safe
+      '<span class=" label-inverse btn-available btn" data-toggle="dropdown">Черновик</span>'.html_safe
     else
       nil
     end
   end
 
   def document_status_date(document)
+   # document.date
     if document.executed?
       Russian::strftime(document.executed_date, "%d %B %Y")
     elsif document.opened?
@@ -111,7 +112,7 @@ module DocumentsHelper
     elsif document.draft?
       Russian::strftime(document.date, "%d %B %Y")
     else
-      nil
+      Russian::strftime(document.date, "%d %B %Y")
     end
   end
 

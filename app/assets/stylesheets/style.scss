@@ -179,7 +179,7 @@
   margin: 20px 0 31px -15px;
   line-height: 35px;
   text-transform: uppercase;
-  b {
+  .btn {
     color: #000;
     margin-left: 10px;
   }
@@ -507,7 +507,7 @@
     }
     &.status {
       text-align: center;
-      .label {
+      .btn {
         position: relative;
         min-width: 100px;
         display: inline-block;
@@ -583,15 +583,16 @@
 }
 
 .label-success {
-  background: #1BBC9B;
+  background: #1BBC9B!important;
+  color:#fff!important;
 }
 .label-warning {
-  background: #dcf2ec;
-  color:#009969;
+  background: #dcf2ec!important;
+  color:#009969!important;
 }
 .label-ready {
-  background: #f2f2f2;
-  color: #666666;
+  background: #f2f2f2!important;
+  color: #666666!important;
 }
 
 /*footer*/
