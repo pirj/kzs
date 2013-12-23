@@ -6,7 +6,7 @@ function appendTr() {
             url: '/documents/' + document_id + '.js',
             type: "GET"
         })).then(function(data, textStatus, jqXHR){
-            console.log(textStatus);
+            //console.log(textStatus);
         }
     )
 }

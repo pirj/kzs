@@ -4,4 +4,16 @@
     <%= render 'tasks_fields', f: builder %>
   <% end %>
   <b id="add-task" class="btn-primary btn dropdown icon-plus add_task_button" data-toggle="dropdown">Добавить задачу</b>
+
+  <ul id="bubbleForm" class="dropdown-menu dropdown-form col-md-4" role="menu">
+    <li class="form-group clearfix">
+      <label class="sr-only" for="new-task"></label><input id="new-task" type="text" placeholder="Новая задача"/>
+      <textarea name="" id="" cols="30" rows="5" placeholder="Суть задачи"></textarea>
+    </li>
+    <li class="dropdown-arr"></li>
+    <li class="split-btn">
+      <a href="#" class="icon-ok">Создать</a>
+      <a href="#" class="icon-block-1">Отмена</a>
+    </li>
+  </ul>
 </div>

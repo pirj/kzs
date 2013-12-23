@@ -40,9 +40,20 @@ $(function() {
     });
 
     $('.add_task_button').on('click', function(){
-				alert();
-				
-				
+
+        var bubbleForm = {
+            dom: $('#bubbleForm').show(),
+            save: alert(123)
+    }
+
+
+        bubbleForm.dom.find('.icon-block-1').on('click',function(e){
+            e.preventDefault();
+            bubbleForm.hide()});
+
+        bubbleForm.dom.find('.icon-ok').on('click', bubbleForm.save());
+
+
 
         return false;
     });

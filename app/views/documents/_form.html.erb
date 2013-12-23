@@ -61,8 +61,20 @@
     </span>
       <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %>
       <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
+
+
+
+
+
+
+
+
+
+
+
         <%= f.fields_for :task_list do |builder| %>
             <%= render 'task_list_fields', f: builder %>
+
         <% end %>
       <% end %>
 
