@@ -43,7 +43,7 @@ class DocumentPdf < Prawn::Document
     move_down 30
     text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 30
-    writ_tasks if @document.document_type == 'writ'
+    writ_tasks if @document.document_type == 'writ' && @document.task_list.present?
     move_down 60
     float {text "Генеральный директор", :size => 10, :inline_format => true}
     move_down 10

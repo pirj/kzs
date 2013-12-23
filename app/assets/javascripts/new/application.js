@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require new/jquery.min.js
+//= require jquery_ujs
 //= require new/docs.js
 //= require new/dropdown.js
 //= require new/html5shiv.js

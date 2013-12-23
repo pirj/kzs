@@ -130,7 +130,7 @@
 
 
   </div>
-  <% if @document.document_type == 'writ' %>
+  <% if @document.document_type == 'writ' && @document.task_list.present? %>
       <h4 class="col-md-12">Чек лист</h4>
 
       <div class="container" style="margin-left: 16px;">
