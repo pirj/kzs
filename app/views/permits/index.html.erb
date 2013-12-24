@@ -1,10 +1,18 @@
 <%= form_tag group_print_permits_path, method: :get do %>
     <div class="container">
       <ul class="row top-pannel clearfix">
-        <li class="col-md-5">
-          <h1 class="dropdown">Заявки на пропуск <span class="caret"></span></h1>
+        <li class="col-md-8">
+           <span class="dropdown full-drop">
+            <h1 data-toggle="dropdown">Заявки на пропуск <span class="caret"></span></h1>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/documents">Документы<!-- <span class="count">(112)</span>--></a></li>
+              <li><a href="/statements">Акты <!--<span class="count">(23)</span>--></a></li>
+              <!--<li><a href="/">Распоряжения <span class="count">(43)</span></a></li>-->
+              <li><a href="/documents/drafts">Черновики <!--<span class="count">(43)</span>--></a></li>
+              <li><a href="#">Отмена</a></li>
+            </ul>
+          </span>
         </li>
-        <li class="col-md-3"></li>
         <li class="col-md-4 pull-right">
           <%= render 'shared/user' %>
         </li>
