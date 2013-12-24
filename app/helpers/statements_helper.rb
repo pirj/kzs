@@ -3,7 +3,7 @@
 module StatementsHelper
   def statement_status(document)
     if document.accepted?
-      '<span class="label label-success">Подписан</span>'.html_safe
+      '<span class=" label-success btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.not_accepted?
         '<span class="label label-important">Отклонен</span>'.html_safe     
     elsif document.opened?
@@ -17,11 +17,11 @@ module StatementsHelper
     elsif document.approved?
       '<span class="label">Подписан</span>'.html_safe
      elsif document.prepared?
-       '<span class="label">Подготовлен</span>'.html_safe
+       '<span class="btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.draft?
       '<span class="label label-inverse">Черновик</span>'.html_safe
     else
-      nil
+      'gbpl'
     end
   end
   

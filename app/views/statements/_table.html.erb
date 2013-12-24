@@ -1,15 +1,17 @@
-<table class="table permits_table" style="font-size: 12px; width: 900px;">
+<table class="table dynamic-table default-table">
+  <thead>
   	 <tr>
-	    <th><%= sortable "id", "ID" %></th>
-			<th><%= sortable "sender_organization_id", "Отправитель" %></th>
-			<th><%= sortable "organization_id", "Получатель" %></th>
-	    <th>Тип</th>
-	    <th><%= sortable "title", "Тема письма" %></th>
+	    <th width="50"><%= sortable "id", "Номер" %></th>
+			<th width="130"><%= sortable "sender_organization_id", "Отправитель" %></th>
+			<th width="130"><%= sortable "organization_id", "Получатель" %></th>
+	    <th width="50">Тип</th>
+	    <th width="240"><%= sortable "title", "Тема письма" %></th>
 	    <th>Детали</th>
 	    <th><%= sortable "created_at", "Дата/Время" %></th>
 	    <th><%= sortable_status %></th>
 	  </tr>
-
+	</thead>
+	<tbody>
   	<% @statements.each do |statement| %>
   	  <tr>
   		  <td><%= statement.id %></td>
@@ -19,8 +21,9 @@
   	    <td><span class="label label-warning">Акт</span></td>
   	    <td><%= statement.title %></td>
   	    <td><%= link_to "Подробнее", statement %></td>
-  	    <td><%= Russian::strftime(statement.created_at, "%d %B %Y %H:%M") %></td>
+  	    <td><%= Russian::strftime(statement.created_at, "%d.%m.%y") %></td>
   	    <td class="status"><%= statement_status(statement) %></td>
   	  </tr>
   	<% end %>
+  	</tbody>
 </table>
