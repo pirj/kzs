@@ -1,25 +1,28 @@
 $(function () {
 
+    var documentAr = {
+
+    }
+
+
+
     $(".attachments-carousel").jCarouselLite({
         btnNext: ".icon-right-open",
         btnPrev: ".icon-left-open",
         width: 900
     });
 
-    $('#myModal').find('checkbox').click(
-        function () {
+    $('.addDocuments').hide();
 
-            var thisCheck = $(this);
-            if (thischeck.is(':checked')){
-                console.log('checked')
+    $('.addDocBut').on('click', function(e) {
+        e.preventDefault();
+        $('.addDocuments').slideToggle();
+    })
 
-            }
-            else {
-                console.log('none')
-            }
-        });
+
 
     $('#j-history').hide();
+
 
     $('.dropdown-menu .status-history').on('click', function () {
 
