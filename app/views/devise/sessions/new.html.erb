@@ -21,8 +21,8 @@
 		    <%= f.password_field :password, :placeholder => 'пароль', :class => "form-control icon-lock" %>
           <a href="#" class="forgot-password">я забыл пароль</a>
 
-			<% if flash[:alert] == "Неверный адрес e-mail или пароль." %>
-				<span class="help-inline"><%= flash[:alert] %></span>
+			<% if flash[:alert] %>
+				<%= flash[:alert] %>
 			<% end %>
 		</div>
 
