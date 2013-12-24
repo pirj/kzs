@@ -40,19 +40,36 @@ $(function() {
         return false;
     });
 
+
+
+
+
     var bubbleForm = {
         dom: $('#bubbleForm'),
         save: function() {
 
             if (document.getElementById('textTask').value==""){
+
                 alert('пустая задача!');
                 return false
             }
             else
             {
+
                 var text = document.getElementById('textTask').value;
-                document.getElementById('textTask').value="";
-                document.getElementById('inputs').innerHTML = document.getElementById('inputs').innerHTML + "<textarea  placeholder='введите задачу' rows='5'>"+ text +"</textarea>";
+               // document.getElementById('textTask').value="";
+
+
+
+    //            var temp = document.getElementById('inputs').innerHTML;
+
+                var regexp, time;
+                time = new Date().getTime();
+                regexp = new RegExp($('.add_task_button').data('id'), 'g');
+                return $('.add_task_button').before($('.add_task_button').data('fields').replace(regexp, time));
+
+//                var newInput =  "<textarea  placeholder='введите задачу' rows='5' >"+ text +"</textarea>"
+//                document.getElementById('inputs').innerHTML = temp + newInput;
             }
 
 
@@ -60,10 +77,11 @@ $(function() {
         clear: function() {}
     }
 
-    $('.add_task_button').on('click', function(){
+   /* $('.add_task_button').on('click', function(){
+
         bubbleForm.dom.show();
         return false;
-    });
+    });*/
 
     bubbleForm.dom.find('.icon-block-1').on('click',function(e){
         e.preventDefault();

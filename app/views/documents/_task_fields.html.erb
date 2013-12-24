@@ -1,19 +1,5 @@
-<!-- <fieldset>
-  <%= f.text_area :task, :placeholder => 'введите задачу', :class => "input-xlarge task_input" %>
+ <fieldset>
+  <%= f.text_area :task, :placeholder => 'Опишите суть задачи', :class => "input-xlarge task_input" %>
   <%= f.hidden_field :_destroy %>
-  <%= link_to "удалить", '#', class: "remove_fields" %>
-</fieldset> -->
-
-
-
-<ul class="dropdown-menu dropdown-form col-md-4" role="menu">
-  <!--<li class="form-group clearfix">-->
-    <!--<label class="sr-only" for="new-task"></label><input id="new-task" type="text" placeholder="Новая задача"/>-->
-    <!--<textarea name="" id="" cols="30" rows="5" placeholder="Суть задачи"></textarea>-->
-  <!--</li>-->
-  <li class="dropdown-arr"></li>
-  <li class="split-btn">
-    <a href="#" class="icon-ok">Создать</a>
-    <a href="#" class="icon-block-1">Отмена</a>
-  </li>
-</ul>
+  <%= link_to "Удалить задачу", '#', class: "remove_fields" %>
+</fieldset>

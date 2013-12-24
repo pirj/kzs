@@ -11,7 +11,6 @@ function appendTr() {
     )
 }
 
-
 $(document).ready(function(){
 
 
@@ -61,18 +60,6 @@ $(document).ready(function(){
     });
 
 
-    $('#document_executor_id').on("change", function() {
-        if ($('#document_executor_id option:selected').val() == "") {
-            $('#executor_tel').hide();
-        } else {
-            $('#executor_tel').show();
-        }
-        $.ajax({
-            url: "/document/executor_phone",
-            type: "GET",
-            data: 'user=' + $('#document_executor_id option:selected').val()
-        })
-    });
 
 
     $(".dynamic-table tbody tr").click(appendTr);
@@ -89,10 +76,38 @@ $(document).ready(function(){
 
     $("#document_approver_ids").chosen({max_selected_options: 1}).change(function() {
         $("#new_document").validate().element("#document_approver_ids");
+				if ($(this).val() == null) {
+            $('#approver_info').hide();
+        } else {
+						var field = "approver_info"
+						$.ajax({
+		            url: "/document/executor_phone",
+		            type: "GET",
+		            data: {user: +$(this).val(), field: field},
+		        }).done(function() {
+							    $('#approver_info').show();
+						}).fail(function() {
+								    alert( "error" );
+						})
+        }
     });
 
     $("#document_executor_ids").chosen({max_selected_options: 1}).change(function() {
         $("#new_document").validate().element("#document_executor_ids");
+				if ($(this).val() == null) {
+            $('#executor_info').hide();
+        } else {
+						var field = "executor_info"
+						$.ajax({
+		            url: "/document/executor_phone",
+		            type: "GET",
+		            data: {user: +$(this).val(), field: field},
+		        }).done(function() {
+							    $('#executor_info').show();
+						}).fail(function() {
+								    alert( "error" );
+						})
+        }
     });
 
 

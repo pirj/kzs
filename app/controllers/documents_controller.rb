@@ -366,11 +366,13 @@ class DocumentsController < ApplicationController
   
   def executor_phone
       @user = User.find(params[:user])
+      @field = params[:field]
       respond_to do |format|
          format.js {  }
       end
   end
   
+
   private
   
   def sort_column
