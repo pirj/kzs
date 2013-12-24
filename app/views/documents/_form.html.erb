@@ -1,10 +1,8 @@
 
 <div class="container">
   <ul class="row top-pannel clearfix">
-    <li class="col-md-2">
+    <li class="col-md-8">
       <%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %>
-    </li>
-    <li class="col-md-6">
       <% if action?('new') %>
           <h1>
             <% if params[:type] == 'mail' %>
@@ -59,33 +57,26 @@
       <span class="col-xs-2 hint">+7 921 123 45 67</span>
       <span class="col-xs-2 hint">name@email.com</span>
     </span>
-      <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %>
-      <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
-
-
-
-
-
-
-
-
-
-
-
-        <%= f.fields_for :task_list do |builder| %>
-            <%= render 'task_list_fields', f: builder %>
-
+    <span class="form-item"> <%= f.text_area :text,  :placeholder => 'Текст', :rows => "14", :class => "form-control col-xs-12"  %></span>
+    <span class="form-item">
+        <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
+            <%= f.fields_for :task_list do |builder| %>
+                <%= render 'task_list_fields', f: builder %>
+            <% end %>
         <% end %>
-      <% end %>
-
+     </span>
+    <span class="form-item">
+      <%= link_to_add_fields "Добавить приложение", f, :document_attachments   %>
       <%= f.fields_for :document_attachments do |builder| %>
           <%= render 'document_attachment_fields', f: builder %>
       <% end %>
-      <%= link_to_add_fields "Добавить приложение", f, :document_attachments   %>
+    </span>
+
+</div>
+<div class="container">
 
 
-
-      <h4 class="col-md-12">Прикрепить документы</h4>
+      <h3 class="col-md-12">Прикрепить документы</h3>
 
 
       <div class="attachments-carousel attachments">
