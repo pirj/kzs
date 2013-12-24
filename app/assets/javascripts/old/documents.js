@@ -83,7 +83,7 @@ $(document).ready(function(){
 						$.ajax({
 		            url: "/document/executor_phone",
 		            type: "GET",
-		            data: 'user=' + $(this).val()
+		            data: {user: +$(this).val(), user2: 55}
 		        });
             $('#info').show();
         }
