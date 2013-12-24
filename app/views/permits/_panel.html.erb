@@ -1,31 +1,43 @@
 <ul class="nav nav-pills">
-  
-  <% unless action?('index') %>
-  <li>
-		<%= link_to " назад", :back, :class => "btn-sm back-btn btn" %>
-	</li>
-	<% end %>
-  
-  <% if current_user.has_permission?(6) %>
-  <li>
-  	<%= link_to "Новая заявка", new_permit_path, :class=> "btn-sm btn" %>
-  </li>
-  <% end %>
-  
-  <li>
-  	<%= link_to "Все пропуска", permits_path, :class=> (params[:scope] ? 'btn btn-sm' : 'btn btn-primary btn-sm')  %>
+
+  <li class="dropdown">
+    <a href="#" data-toggle="dropdown" class="btn btn-primary btn-sm">Заявки на пропуск
+      <span class="caret"></span>
+      <span class="dropdown-arr"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="/documents">На сотрудника</a></li>
+      <li><a href="/statements">На транспорт</a></li>
+      <li><a href="/documents/drafts">Разовый пропуск</a></li>
+    </ul>
   </li>
 
-  <li>
-  	<%= link_to "Текущие заявки", permits_path(:scope => :application), :class => (params[:scope] == 'application' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>
-  </li>
+  <!--<% unless action?('index') %>-->
+  <!--<li>-->
+		<!--<%= link_to " назад", :back, :class => "btn-sm back-btn btn" %>-->
+	<!--</li>-->
+	<!--<% end %>-->
+  <!---->
+  <!--<% if current_user.has_permission?(6) %>-->
+  <!--<li>-->
+  	<!--<%= link_to "Новая заявка", new_permit_path, :class=> "btn-sm btn" %>-->
+  <!--</li>-->
+  <!--<% end %>-->
+  <!---->
+  <!--<li>-->
+  	<!--<%= link_to "Все пропуска", permits_path, :class=> (params[:scope] ? 'btn btn-sm' : 'btn btn-primary btn-sm')  %>-->
+  <!--</li>-->
 
-  <li>
-  	<%= link_to "Просроченные", permits_path(:scope => :expired), :class => (params[:scope] == 'expired' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>
-  </li>
-  
-  <li>
-  	<%= link_to "Групповая печать пеш пропусков", permits_path(:scope => :for_print), :class => (params[:scope] == 'for_print' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>
-  </li>
+  <!--<li>-->
+  	<!--<%= link_to "Текущие заявки", permits_path(:scope => :application), :class => (params[:scope] == 'application' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>-->
+  <!--</li>-->
+
+  <!--<li>-->
+  	<!--<%= link_to "Просроченные", permits_path(:scope => :expired), :class => (params[:scope] == 'expired' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>-->
+  <!--</li>-->
+  <!---->
+  <!--<li>-->
+  	<!--<%= link_to "Групповая печать пеш пропусков", permits_path(:scope => :for_print), :class => (params[:scope] == 'for_print' ? 'btn btn-primary btn-sm' : 'btn btn-sm') %>-->
+  <!--</li>-->
 
 </ul>
