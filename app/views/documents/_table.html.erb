@@ -2,16 +2,16 @@
   	<thead>
   	 <tr>
 		<% unless action?('show') %>
-	    <th width="50"><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
+	    <th width="30"><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
    <span class="checkbox-label"></span>
 </label></th>
 		<% end %>
-	    <th width="170"><%= sortable "id", "Номер / Дата", "sortable current" %></th>
-	    <th width="270"><%= sortable "sender_organization_id", "Отправитель", "sortable ascending" %></th>
-        <th width="250"><%= sortable "organization_id", "Получатель", "sortable ascending" %></th>
+	    <th width="120"><%= sortable "id", "Номер / Дата", "sortable current" %></th>
+	    <th width="200"><%= sortable "sender_organization_id", "Отправитель", "sortable ascending" %></th>
+        <th width="200"><%= sortable "organization_id", "Получатель", "sortable ascending" %></th>
         <th width="100"><%= sortable "title", "Тема", "sortable ascending" %></th>
 	    <th width="100"><%= sortable "document_type", "Тип", "sortable ascending" %></th>
-	    <th></th>
+	    <th width="50" ></th>
 	    <th width="100" class="status"><%= sortable_status %></th>
 	  </tr>
 	  </thead>

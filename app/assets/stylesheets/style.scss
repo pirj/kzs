@@ -199,9 +199,6 @@
   margin: 20px 0 31px -15px;
   line-height: 35px;
   text-transform: uppercase;
-  .btn {
-    color: #000;
-  }
   .btn, .username {
     text-transform: none;
   }
@@ -216,9 +213,10 @@
     padding-right: 20px;
     text-align: right;
   }
-  .power-btn,  {
+  .power-btn  {
     float: right;
     margin-top: 5px;
+    margin-right: 0;
   }
   .username {
     margin-top: 3px;
@@ -247,6 +245,16 @@
       z-index: 100;
     }
   }
+  > .pull-right {
+      right: 0;
+      padding-right: 0;
+      margin-right: 0;
+  }
+  > .pull-left {
+      left: 0;
+      padding-left: 0;
+      margin-left: 0;
+  }
   .full-drop {
     top:-10px;
     left: -41px;
@@ -268,7 +276,15 @@
 .top-pannel .btn,
 .nav-pills .btn  {
   font-size: 12px;
-  margin-right: 10px;
+  margin-left: 10px;
+  &.power-btn {
+    font-size: 16px;
+  }
+}
+
+.top-pannel > li:first-child .btn,
+.nav-pills li:first-child .btn  {
+  margin-left: 0;
 }
 
 .attachments {

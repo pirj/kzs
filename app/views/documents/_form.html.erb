@@ -1,9 +1,7 @@
 <div class="container">
   <ul class="row top-pannel clearfix">
-    <li class="col-md-2">
+    <li class="col-md-8">
       <%= link_to "Назад", :back, :class => "btn btn-sm back-btn" %>
-    </li>
-    <li class="col-md-6">
       <% if action?('new') %>
           <h1>
             <% if params[:type] == 'mail' %>
@@ -56,22 +54,23 @@
 
       <span class="form-item">
       <%= f.collection_select(:approver_ids, @approvers, :id, :first_name_with_last_name, {:selected => @document.approver_id}, {multiple: true, :'data-placeholder' => "Контрольное-лицо", :class => 'form-control col-xs-7'}) %>
-        <span id="approver_info">
 
-      </span>
+      <span id="approver_info"></span>
+
     </span>
     <span class="form-item">
       <%= f.collection_select(:executor_ids, @executors.all, :id, :first_name_with_last_name, {:selected => @document.executor_id}, {multiple: true, :'data-placeholder' => "Исполнитель", :id => "document_executor_ids", :class => 'form-control col-xs-7'}) %>
-      <span class="col-xs-2 hint">+7 921 123 45 67</span>
-      <span class="col-xs-2 hint">name@email.com</span>
+      <span id="executor_info"></span>
     </span>
-      <%= f.text_area :text, :placeholder => 'Текст', :rows => "14", :class => "form-item form-control col-xs-12" %>
+    <span class="form-item"><%= f.text_area :text, :placeholder => 'Текст', :rows => "14", :class => "form-item form-control col-xs-12" %></span>
+</div>
 
+<div class="container"
       <div class="form-item docsFiles">
         <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
 
       <span class=" col-xs-6">
-        <h4>Прикрепленные задачи</h4>
+        <h3>Прикрепленные задачи</h3>
         <div class="taskCard">
           <%= f.fields_for :task_list do |builder| %>
               <%= render 'task_list_fields', f: builder %>
@@ -96,7 +95,7 @@
       </div>
 
 
-      <h4 class="col-md-12">Прикрепить документы</h4>
+      <h3 class="col-md-12">Прикрепить документы</h3>
 
 
       <div class="attachments-carousel attachments">

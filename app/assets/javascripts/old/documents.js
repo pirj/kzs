@@ -11,7 +11,6 @@ function appendTr() {
     )
 }
 
-
 $(document).ready(function(){
 
 
@@ -78,19 +77,37 @@ $(document).ready(function(){
     $("#document_approver_ids").chosen({max_selected_options: 1}).change(function() {
         $("#new_document").validate().element("#document_approver_ids");
 				if ($(this).val() == null) {
-            $('#info').hide();
+            $('#approver_info').hide();
         } else {
+						var field = "approver_info"
 						$.ajax({
 		            url: "/document/executor_phone",
 		            type: "GET",
-		            data: {user: +$(this).val(), user2: 55}
-		        });
-            $('#info').show();
+		            data: {user: +$(this).val(), field: field},
+		        }).done(function() {
+							    $('#approver_info').show();
+						}).fail(function() {
+								    alert( "error" );
+						})
         }
     });
 
     $("#document_executor_ids").chosen({max_selected_options: 1}).change(function() {
         $("#new_document").validate().element("#document_executor_ids");
+				if ($(this).val() == null) {
+            $('#executor_info').hide();
+        } else {
+						var field = "executor_info"
+						$.ajax({
+		            url: "/document/executor_phone",
+		            type: "GET",
+		            data: {user: +$(this).val(), field: field},
+		        }).done(function() {
+							    $('#executor_info').show();
+						}).fail(function() {
+								    alert( "error" );
+						})
+        }
     });
 
 

@@ -7,7 +7,7 @@
   <% if task.completed? %>
    | Выполнено
   <% else %>
-   <%= link_to "Выполнить", execute_task_path(task), :class=> "btn", :style=> "margin-left: 20px;" %>
+   <%= link_to "Выполнить", execute_task_path(task), :class=> "btn" %>
    <br>
   <% end %>
   <br>

@@ -2,6 +2,7 @@
 
 .btn {
   background: #F2F2F2;
+  color:#979797;
   font-size: 13px;
   border: none;
   text-decoration:none;
@@ -14,9 +15,15 @@
   }
   .caret {
     border-top-color:inherit;
+    margin-left: 5px;
+  }
+  &:hover {
+    color:#000;
+    background: #cfcfcf;
   }
 }
-.bottom-nav > li > a {
+
+ > li > a {
   border-radius: 90px;
 }
 
@@ -30,15 +37,25 @@
   }
 }
 
-.btn-default:hover {
-  background: #cfcfcf;
-}
-
 .btn-sm {
   min-height: 38px;
-  line-height: 36px;
+  line-height: 38px;
   padding: 0 12px;
+//  &.icon-plus {
+//    padding-left: 34px;
+//    &:before {
+//      font-size: 22px;
+//      position: absolute;
+//      left: 8px;
+//      top: 8px;
+//    }
+//  }
 }
+
+.back-btn:before {
+    left: -3px;
+}
+
 
 .add-widget-btn {
   color: #17a488;
@@ -66,9 +83,14 @@
 }
 
 .btn-primary {
+  color:#fff;
   background: #1abc9c;
   &:hover, &:focus {
+    color:#fff;
     background: #00a499;
+    .caret {
+      border-top-color:#fff;
+    }
   }
 }
 
@@ -76,14 +98,18 @@
   border-radius: 9px;
   font-size: 16px;
   padding: 4px;
+  border-radius: 9px;
+  font-size: 16px;
+  padding: 4px;
+  height: 30px;
+  width: 30px;
+  line-height: 25px;
 }
 
 .power-btn:before {
-  top: -1px;
-}
-
-.back-btn:before {
-  left: -3px;
+  top: -2px;
+  margin: 0 auto;
+  color:#979797;
 }
 
 .btn.btn-available, .btn.btn-available:hover {
@@ -113,8 +139,6 @@
 #add-task.icon-plus {
   font-size: 22px;
   border-radius:10px;
-  height: 38px;
-  line-height: 38px;
   text-align: center;
   padding: 0 35px 0 52px;
   &:before {
