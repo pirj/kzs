@@ -143,7 +143,7 @@ $(function() {
 
 function myFunction(elem) {
     if ($('.document_operation:checked').length == 1) {
-        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('btn-success');
+        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('');
 
         $("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
         $("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
@@ -152,7 +152,7 @@ function myFunction(elem) {
         $("#reply_link").attr("href", "/documents/" + elem.val() + "/reply");
 
     } else {
-        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('disabled');
+        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('');
     }
 };
 
