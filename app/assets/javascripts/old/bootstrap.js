@@ -418,7 +418,11 @@
   function clearMenus() {
     $('.dropdown-backdrop').remove()
     $(toggle).each(function () {
-      getParent($(this)).removeClass('open')
+        var a = getParent($(this));
+    //  getParent($(this)).removeClass('open')
+        $('.icon-block-1').on('click',function(e){
+            e.preventDefault();
+            a.removeClass('open')})
     })
   }
 

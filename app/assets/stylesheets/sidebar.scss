@@ -209,31 +209,35 @@
 
       &.documents {
         i {
-          background-position: -10px -370px;
-
+          background-position: -13px -230px;
         }
         &:hover i {
-          background-color: #76d4ce;
-          background-position: -80px -370px;
+        //  background-color: #76d4ce;
+          background-position: -83px -230px;
         }
         &.active i {
-          background-position: -150px -370px;
+          background-position: -83px -230px;
+        //  background-position: -153px -230px;
         }
+
         &.active:hover i {
-          background-color: #9ad8ff;
+      //    background-color: #9ad8ff;
         }
       }
-
+      .open documents i {
+        background-position: -83px -230px;
+        //  background-position: -153px -230px;
+      }
       &.permits {
         i {
-          background-position: -10px -300px;
+          background-position: -10px -164px;  ///300
         }
         &:hover i {
           background-color: #76d4ce;
-          background-position: -80px -300px;
+          background-position: -80px -164px;
         }
         &.active i {
-          background-position: -150px -300px;
+          background-position: -150px -164px;
         }
         &.active:hover i {
           background-color: #9ad8ff;
@@ -276,7 +280,7 @@
     }
 
   }
-  .l-page__column.left:hover {
+  .l-page__column.left.m-open {
     width: 210px;
     position: fixed;
     box-shadow: 1px 0 5px gray;
