@@ -29,3 +29,9 @@
     background: #1BBC9B;
   }
 }
+.bottom-nav.nav-pills  li:first-child,
+.bottom-nav.nav-pills  li:first-child + li,
+.bottom-nav.nav-pills  li:first-child + li + li,
+.bottom-nav.nav-pills  li:first-child + li + li + li {
+  display: none;
+}

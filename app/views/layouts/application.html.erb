@@ -20,10 +20,11 @@
 </head>
 <body>
 <div>
-
+  <% unless controller?('devise/sessions') || controller?('dashboard')  %>
   <div id="sidebar">
     <%= render 'shared/left' %>
   </div>
+  <% end %>
 
   <div class="page">
     <% if notice %>

@@ -61,18 +61,6 @@ $(document).ready(function(){
     });
 
 
-    $('#document_executor_id').on("change", function() {
-        if ($('#document_executor_id option:selected').val() == "") {
-            $('#executor_tel').hide();
-        } else {
-            $('#executor_tel').show();
-        }
-        $.ajax({
-            url: "/document/executor_phone",
-            type: "GET",
-            data: 'user=' + $('#document_executor_id option:selected').val()
-        })
-    });
 
 
     $(".dynamic-table tbody tr").click(appendTr);
@@ -89,6 +77,16 @@ $(document).ready(function(){
 
     $("#document_approver_ids").chosen({max_selected_options: 1}).change(function() {
         $("#new_document").validate().element("#document_approver_ids");
+				if ($(this).val() == null) {
+            $('#info').hide();
+        } else {
+						$.ajax({
+		            url: "/document/executor_phone",
+		            type: "GET",
+		            data: 'user=' + $(this).val()
+		        });
+            $('#info').show();
+        }
     });
 
     $("#document_executor_ids").chosen({max_selected_options: 1}).change(function() {

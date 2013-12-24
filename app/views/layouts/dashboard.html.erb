@@ -97,7 +97,9 @@
 
           </ul>
         </li>
-        <li class="exit"><%= link_to "Log out", destroy_user_session_path, :method => :delete  %><a href="/users/sign_out" class="btn btn-default btn-sm">Выйти</a></li>
+        <li class="exit">
+          <%= link_to "Выйти", destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn' %>
+        </li>
       </ul>
     </nav>
   </footer>

@@ -371,6 +371,13 @@ class DocumentsController < ApplicationController
       end
   end
   
+  def executor_mail
+      @user = User.find(params[:user])
+      respond_to do |format|
+         format.js {  }
+      end
+  end
+  
   private
   
   def sort_column
