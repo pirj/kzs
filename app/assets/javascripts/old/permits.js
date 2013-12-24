@@ -10,9 +10,7 @@ $(document).ready(function(){
 
     var permit = {
             type: '#user',
-
             setType: function (type) {
-          //  console.log(type);
             document.location.hash = type;
             permit.type = type;
             switch(type) {
