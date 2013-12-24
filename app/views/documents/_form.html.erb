@@ -63,14 +63,12 @@
       <span id="executor_info"></span>
     </span>
     <span class="form-item"><%= f.text_area :text, :placeholder => 'Текст', :rows => "14", :class => "form-item form-control col-xs-12" %></span>
-</div>
 
-<div class="container"
       <div class="form-item docsFiles">
         <% if @document.document_type == 'writ' || params[:type] == 'writ' %>
 
       <span class=" col-xs-6">
-        <h3>Прикрепленные задачи</h3>
+        <h4>Прикрепленные задачи</h4>
         <div class="taskCard">
           <%= f.fields_for :task_list do |builder| %>
               <%= render 'task_list_fields', f: builder %>
