@@ -26,10 +26,10 @@
           <% end %>
 
           <%= render 'permit_form_fields', f: f %>
-
-          <%= f.submit 'Создать заявку', :class => 'btn btn-success' %>
-          <%= link_to "Отмена", :back, :class => 'btn btn-disabled' %>
-
+          <ul class="nav nav-pills col-md-12">
+              <li><%= f.submit 'Создать заявку', :class => 'btn btn-primary btn-sm' %></li>
+              <li><%= link_to "Отмена", :back, :class => 'btn btn-sm' %></li>
+          </ul>
       <% end %>
     </div>
 
