@@ -1,9 +1,6 @@
-function appendTr() {
-    current_row = $(this).closest('tr');
-    document_id = $(this).find('.document_id').html();
-
+function appendTr(controller, self) {
     $.when($.ajax({
-            url: '/documents/' + document_id + '.js',
+            url: controller + '/' + self.id + '.js',
             type: "GET"
         })).then(function(data, textStatus, jqXHR){
             //console.log(textStatus);
@@ -60,8 +57,12 @@ $(document).ready(function(){
     });
 
 
-    $(".dynamic-table tbody tr").click(appendTr);
-
+    $(".dynamic-table tbody tr").click(function(){
+				var self = this;
+				var controller = $('table').attr('id')
+        appendTr(controller, self)
+    })
+		
 
     $(".dynamic-table tbody td.not_this").click(function(e){
         e.stopPropagation()
