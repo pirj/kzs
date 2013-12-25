@@ -15,6 +15,18 @@ else
 
 }
 
+var a = "<ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Шаяхметов Роберт </a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img alt='' src=''></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul>"
+
+
+
+$('#<%= @document.id %>').find('.dropdown').on('click', function(e) {
+    $(this).after(a);
+    console.log(this);
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+});
+
 
 
 
