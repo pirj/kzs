@@ -14,8 +14,8 @@
 <div class="all-center">
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f| %>
 		<div class="form-item">
-			<%= f.text_field :login, :placeholder => 'логин', :class => "form-control icon-acc pull-left" %>
-            <%= f.submit "Вход", :class => 'btn btn-default btn-sm pull-left' %>
+			<%= f.text_field :login, :placeholder => 'логин', :class => "form-control icon-acc " %>
+            <%= f.submit "Вход", :class => 'btn btn-default btn-sm' %>
 		</div>
 		<div class="form-item">
 		    <%= f.password_field :password, :placeholder => 'пароль', :class => "form-control icon-lock" %>

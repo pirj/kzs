@@ -53,16 +53,19 @@
     font-weight: 100;
     font-size: 28px;
   }
+  .form-item {
+    text-align: center;
+  }
   .form-control {
     background: #fff;
     margin-right: 22px;
+    display: inline-block;
+    &[type="password"] {
+      margin-left: -59px;
+    }
   }
-  input[type"submit"] {
-
-}
   .form {
     margin: 0 auto;
-    max-width:320px;
   }
 }
 
