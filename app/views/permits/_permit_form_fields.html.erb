@@ -28,7 +28,7 @@
   
   <div id="permit_vehicle_fields">
   <h3>1. Тип пропуска</h3>
-  <%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }) %>
+  <div class="form-item"><%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-xs-5'}) %></div>
   <h3>2. Данные техсредства</h3>
   <%= f.fields_for :vehicle do |v| %>
     <%= render 'vehicle_fields', v: v %>
@@ -41,8 +41,6 @@
      <span class="checkbox-label">Согласно путевому листу</span>
   </label>
   
-  <br>
-  
     <%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %> 
     
 
@@ -51,8 +49,8 @@
   
   <div class="control-group" id="date_fields">
 	  <div class="controls">
-		<span class="permit_label">Пропуск действителен с</span><%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала' %>
-		<span class="permit_label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания' %>
+		<span class="form-label">Пропуск действителен с</span><%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала', :class => 'form-control col-xs-2' %>
+		<span class="form-label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания', :class => 'form-control col-xs-2'  %>
 	  </div>
 	</div>
 	

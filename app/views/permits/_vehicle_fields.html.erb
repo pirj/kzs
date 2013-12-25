@@ -1,18 +1,21 @@
-<div class="form-item"><span class="form-item">Тип ТС</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false}, { :class => 'form-control'}) %></div>
-<div class="form-item"><span class="permit_label">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title, {}, {:class => 'form-control'}) %><%= v.text_field :model, :placeholder => 'Модель', :class => 'form-control'  %></div>
-<div class="form-item"><span class="permit_label">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС', :class => 'form-control'  %></div>
-<div class="form-item"><span class="permit_label">Номер ГРЗ</span></div>
+<div class="form-item"><span class="form-label col-md-2">Тип ТС</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false}, { :class => 'form-control col-md-5'}) %></div>
+<div class="form-item"><span class="form-label col-md-2">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title, {}, {:class => 'form-control col-md-3'}) %><%= v.text_field :model, :placeholder => 'Модель', :class => 'form-control col-md-3'  %></div>
+<div class="form-item"><span class="form-label col-md-2">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС', :class => 'form-control col-md-3'  %></div>
 <% if @permit.new_record? %>
-<div class="form-item"><%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control'}) %></div>
-<div class="form-item"><%= v.text_field(:sn_number, :placeholder => 'Номер', :class => 'form-control' ) %></div>
-<div class="form-item"><%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control'}) %></div>
-<div class="form-item"><%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control'}) %></div>
+
+<div class="form-item"><span class="form-label col-md-2">Номер ГРЗ</span>
+<%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
+<%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
+<%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
+  <%= v.text_field(:sn_number, :placeholder => 'Номер', :class => 'form-control col-md-2' ) %>
+  <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-4'}) %>
+  <span class="form-label col-md-2"><%= v.text_field(:sn_region, :placeholder => 'Номер региона', :class => 'form-control col-md-5' ) %>Номер региона</span>
+</div>
 <% else %>
-<div class="form-item"><%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[0] }, { :class => 'form-control'}) %></div>
+<div class="form-item"><%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[0] }, { :class => 'form-control col-md-5'}) %></div>
 <div class="form-item"><%= v.text_field(:sn_number, :placeholder => 'Номер', :class => 'form-control',  :value => @permit.vehicle.register_sn[1..3]) %></div>
-<div class="form-item"><%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[4] }, { :class => 'form-control'}) %></div>
-<div class="form-item"><%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[5] }, { :class => 'form-control'}) %></div>
+<div class="form-item"><%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[4] }, { :class => 'form-control col-md-5'}) %></div>
+<div class="form-item"><%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false, :selected => @permit.vehicle.register_sn[5] }, { :class => 'form-control col-md-5'}) %></div>
 <% end %>
 
 
-<%= v.text_field(:sn_region, :placeholder => 'Регион', :class => 'form-control' ) %>

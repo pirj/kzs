@@ -17,6 +17,9 @@
       font-weight: normal;
     }
   }
+  .nav-pills {
+    margin-top: 71px;
+  }
 }
 
 .new-doc {
@@ -32,12 +35,21 @@
 }
 
 .form-control {
-  min-height: 38px;
+  height: 38px;
   border-width: 2px;
   z-index: 2;
+  margin-right: 22px;
   &:focus, &:active {
     box-shadow: none;
   }
+}
+
+.form-label {
+  float: left;
+  margin-right: 22px;
+  color: #999999;
+  font-size: 14px;
+  line-height:38px;
 }
 
 .radio-label {
@@ -58,14 +70,69 @@
   }
   .form-control {
     background: #fff;
-    margin-right: 22px;
     display: inline-block;
     &[type="password"] {
       margin-left: -59px;
     }
   }
+  .forgot-password {
+    padding: 10px 0 0 10px;
+    display: block;
+    margin-left: -208px;
+  }
   .form {
     margin: 0 auto;
+  }
+}
+
+
+.control.radio {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  cursor: pointer;
+    >input[type=radio] {
+      position: absolute;
+      opacity: 0;
+      &:checked ~ .radio-label:after {
+        background-color: #e6737e;
+      }
+    }
+  .radio-label {
+    padding-left: 30px;
+    position: relative;
+    font-weight: normal;
+    &:before {
+      border: 2px #1abc9c solid;
+      position: absolute;
+      display: block;
+      height: 20px;
+      width: 20px;
+      content: "";
+      text-indent: -9999px;
+      z-index: 1;
+      opacity: 1;
+      top: -2px;
+      left: 0;
+      border-radius: 100%;
+    }
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      color: #1a1a1a;
+      z-index: 2;
+      font-size: 16px;
+      font-weight: bold;
+      left: 10px;
+      margin-left: -5px;
+      top: 60%;
+      margin-top: -6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+    }
   }
 }
 

@@ -62,12 +62,6 @@
   }
 }
 
-.forgot-password {
-  padding: 10px 0 0 10px;
-  display: block;
-  text-align: left;
-}
-
 .main-desktop-controls {
   margin-bottom: 30px;
   & .edit-mode i {
@@ -502,6 +496,11 @@
     top: 2px;
     position: absolute;
   }
+}
+
+/*permits*/
+#permit_vehicle_id, #temoporary_fields, #permit_user_fields, #temporary_permit_fields {
+  display: none;
 }
 
 /*tables*/
