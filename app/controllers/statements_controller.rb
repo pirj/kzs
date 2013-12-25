@@ -2,10 +2,19 @@ class StatementsController < ApplicationController
   helper_method :sort_column, :sort_direction
   
   def index
+    @controller = params[:controller]
     current_user_id = current_user.id
     organization = current_user.organization_id
     
-    @statements = Statement.order('created_at DESC').where{(sent == true) & (organization_id == organization) | 
+    #default scope
+    if params[:status_sort]
+      direction = params[:direction]
+      sort_type = "not_accepted #{direction}", "accepted #{direction}", "opened #{direction}", "sent #{direction}", "approved #{direction}", "prepared #{direction}"
+    else
+      sort_type = sort_column + " " + sort_direction
+    end
+    
+    @statements = Statement.order(sort_type).where{(sent == true) & (organization_id == organization) | 
                                 (sender_organization_id == organization) & (user_id == current_user_id) | 
                                 (prepared == true) & (sender_organization_id == organization) 
                                 }
@@ -102,16 +111,12 @@ class StatementsController < ApplicationController
   def show
     @statement = Statement.find(params[:id])
     @task_list = @statement.task_list
-    @writ = Document.find(@statement.document_id)
+    Document.exists?(@statement.document_id) ? @writ = Document.find(@statement.document_id) : @writ = nil 
+  
     
     if @statement.organization_id == current_user.organization_id && current_user.has_permission?(2)
       @statement.opened = true
       @statement.save
-    end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @document }
     end
   end
   
