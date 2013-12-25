@@ -210,24 +210,31 @@
       &.documents {
         i {
           background-position: -13px -230px;
+          cursor: pointer;
         }
         &:hover i {
         //  background-color: #76d4ce;
           background-position: -83px -230px;
         }
         &.active i {
-          background-position: -83px -230px;
+          background-position: -152px -230px;
         //  background-position: -153px -230px;
         }
 
-        &.active:hover i {
-      //    background-color: #9ad8ff;
+        &.active:hover  {
+          background-color: #fff;
         }
       }
-      .open documents i {
+      .open {
+        .documents i {
         background-position: -83px -230px;
-        //  background-position: -153px -230px;
+
+        }
+
       }
+
+
+
       &.permits {
         i {
           background-position: -10px -164px;  ///300
@@ -299,10 +306,19 @@
         color: gray;
         width: auto;
         line-height: 18px;
+        cursor: pointer;
       }
       &:hover {
         .text {
           color: white;
+        }
+      }
+
+
+      &.documents:hover  {
+        background-color: #9ad8ff!important;
+        i{
+          background-position: -83px -230px!important;
         }
       }
     }
