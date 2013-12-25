@@ -1,10 +1,13 @@
-<div class="container"><div class="row">
-	<%= render 'shared/left' %>
-	<div class="span12">
-		  <%= render 'shared/user' %>
-	    <h1 class="doc_header">Все контрагенты</h1>
-	    <%= render 'panel' %>
-	    <div id="organizations_table"><%= render 'table' %></div>
-	</div>	
+<div class="container">
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+        <h1>Все контрагенты</h1>
+    </li>
+    <li class="col-md-4 pull-right">
+      <%= render 'shared/user' %>
+    </li>
+  </ul>
+  <%= render 'panel' %>
+  <%= render 'table' %>
 </div>
-</div>
+

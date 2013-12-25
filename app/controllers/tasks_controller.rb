@@ -28,7 +28,7 @@ class TasksController < ApplicationController
       end
       redirect_to :back, :notice => t('task_completed')
     else
-      redirect_to :back, :notice => t('permission_denied')
+      redirect_to :back, :alert => t('permission_denied')
     end
   end
   
