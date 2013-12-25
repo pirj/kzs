@@ -171,6 +171,7 @@ class StatementsController < ApplicationController
     if @statement.statement_approvers.pluck(:accepted).exclude?(nil)    
       document = Document.find(@statement.document)
       document.executed = true
+      document.executed_date = Time.now
       document.save  
       @statement.accepted = true
       @statement.save

@@ -1,27 +1,37 @@
-<div class="row">
 
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Лист замечаний</h1>
-		<h3>К акту #<%= @statement.id %> к распоряжению #<%= @writ.sn %> </h3>
-		
-		<%= form_for @task_list do |f| %>
-		<%= f.hidden_field :statement_id, :value => params[:id] %>
-		
-		<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
-		
-		<h4>Задачи:</h4>
-		
-		<%= f.fields_for :tasks do |builder| %>
-      <%= render 'task_fields', f: builder %>
-    <% end %>
-    <%= link_to_add_fields "Добавить задачу", f, :tasks %>
-		
-		<br>
-		
-		<%= f.submit "Создать список замечаний", :class => 'btn' %>
-		<% end %>
-		
-		  <%= render 'panel' %>
-      
+
+
+<div class="container">
+
+  <ul class="row top-pannel clearfix">
+    <li class="col-md-5">
+      <h1 class="dropdown">Лист замечаний</h1>
+    </li>
+    <li class="col-md-4 pull-right">
+      <%= render 'shared/user' %>
+    </li>
+
+  </ul>
+
+</div>
+
+<div class="container">
+
+
+    	<%= form_for @task_list do |f| %>
+  		<%= f.hidden_field :statement_id, :value => params[:id] %>
+
+  		<%= f.text_field(:deadline, :class => 'input-medium', :placeholder => 'Дата исполонения') %><br>
+
+  		<h4>Задачи:</h4>
+
+  		<%= f.fields_for :tasks do |builder| %>
+        <%= render 'task_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Добавить задачу", f, :tasks %>
+
+
+  		<%= f.submit "Создать список замечаний", :class => 'btn' %>
+  		<% end %>
+
 </div>
