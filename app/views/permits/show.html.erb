@@ -1,16 +1,16 @@
 <div class="container">
   <ul class="row top-pannel clearfix">
     <li class="col-md-8">
-      <h1 class="dropdown">Заявки на пропуск <span class="caret"></span></h1>
-        <span class="dropdown full-drop">
-            <h1 data-toggle="dropdown">Заявки на пропуск <span class="caret"></span></h1>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/documents">Документы<!-- <span class="count">(112)</span>--></a></li>
-                <li><a href="/statements">Акты <!--<span class="count">(23)</span>--></a></li>
-                <li><a href="/documents/drafts">Черновики <!--<span class="count">(43)</span>--></a></li>
-                <li><a href="#">Отмена</a></li>
-            </ul>
-        </span>
+      <h1 >Пропуск <%= @permit.number %></h1>
+        <!--<span class="dropdown full-drop">-->
+            <!--<h1 data-toggle="dropdown">Заявки на пропуск <span class="caret"></span></h1>-->
+            <!--&lt;!&ndash;<ul class="dropdown-menu" role="menu">&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="/documents">Документы&lt;!&ndash; <span class="count">(112)</span>&ndash;&gt;</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="/statements">Акты &lt;!&ndash;<span class="count">(23)</span>&ndash;&gt;</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="/documents/drafts">Черновики &lt;!&ndash;<span class="count">(43)</span>&ndash;&gt;</a></li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li><a href="#">Отмена</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--</span>-->
     </li>
     <li class="col-md-4 pull-right">
       <%= render 'shared/user' %>

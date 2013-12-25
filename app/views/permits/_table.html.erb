@@ -1,4 +1,5 @@
 <table class="table default-table" style="font-size: 12px; width: 900px;">
+  <thead>
   <tr>
     <% if params[:scope] == 'for_print' %>
         <th style="width: 5%"></th>
@@ -11,7 +12,8 @@
     <th style="width: 12%"><%= sortable_status %></th>
     <!--<th style="width: 8%">Детали</th>-->
   </tr>
-
+</thead>
+  <tbody>
   <% @permits.each do |permit| %>
       <tr id="<%= permit.id %>">
         <% if params[:scope] == 'for_print' %>
@@ -98,4 +100,5 @@
         <!--<td><%= link_to "Подробнее", permit %></td>-->
       </tr>
   <% end %>
+  </tbody>
 </table>
