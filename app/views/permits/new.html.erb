@@ -12,7 +12,7 @@
         </li>
       </ul>
 
-      <%= form_for @permit, :html => {:name => 'newPermitForm'} do |f| %>
+      <%= form_for(@permit, :html => {:class => "form new-doc row-fuild", :name => 'newPermitForm'}) do |f| %>
 
           <% if @permit.errors.any? %>
               <div id="error_explanation">
@@ -26,8 +26,6 @@
           <% end %>
 
           <%= render 'permit_form_fields', f: f %>
-
-
 
           <%= f.submit 'Создать заявку', :class => 'btn btn-success' %>
           <%= link_to "Отмена", :back, :class => 'btn btn-disabled' %>

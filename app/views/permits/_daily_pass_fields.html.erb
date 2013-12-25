@@ -1,13 +1,13 @@
-<%= v.text_field(:last_name, :placeholder => 'Фамилия', :value => @permit.daily_pass.last_name) %><br>
-<%= v.text_field(:first_name, :placeholder => 'Имя', :value => @permit.daily_pass.first_name) %><br>
-<%= v.text_field(:middle_name, :placeholder => 'Отчество', :value => @permit.daily_pass.middle_name) %><br>
-<%= v.text_field(:id_type, :placeholder => 'Наименование документа', :value => @permit.daily_pass.id_type) %><br>
-<%= v.text_field(:id_sn, :placeholder => 'Его серия и номер', :value => @permit.daily_pass.id_sn) %><br>
-<%= v.text_field(:vehicle, :placeholder => 'гос. номер и марка автотранспортного средства', :value => @permit.daily_pass.vehicle) %><br>
-<%= v.text_field(:object, :placeholder => 'куда', :value => @permit.daily_pass.object) %><br>
-<%= v.text_field(:person, :placeholder => 'к кому', :value => @permit.daily_pass.person) %><br>
-<%= v.text_field(:issued, :placeholder => 'выдан', :value => @permit.daily_pass.issued) %><br>
-<%= v.text_field(:date, :placeholder => 'дата', :value => @permit.daily_pass.date) %><br>
-<%= v.text_field(:guard_duty, :placeholder => 'Дежурный охранник КПП', :value => @permit.daily_pass.guard_duty) %><br>
+<div class="form-item"><%= v.text_field(:last_name, :placeholder => 'Фамилия', :class => 'form-control',  :value => @permit.daily_pass.last_name) %></div>
+<div class="form-item"><%= v.text_field(:first_name, :placeholder => 'Имя', :class => 'form-control', :value => @permit.daily_pass.first_name) %></div>
+<div class="form-item"><%= v.text_field(:middle_name, :placeholder => 'Отчество', :class => 'form-control', :value => @permit.daily_pass.middle_name) %></div>
+<div class="form-item"><%= v.text_field(:id_type, :placeholder => 'Наименование документа', :class => 'form-control', :value => @permit.daily_pass.id_type) %></div>
+<div class="form-item"><%= v.text_field(:id_sn, :placeholder => 'Его серия и номер', :class => 'form-control', :value => @permit.daily_pass.id_sn) %></div>
+<div class="form-item"><%= v.text_field(:vehicle, :placeholder => 'гос. номер и марка автотранспортного средства', :class => 'form-control', :value => @permit.daily_pass.vehicle) %></div>
+<div class="form-item"><%= v.text_field(:object, :placeholder => 'куда', :class => 'form-control', :value => @permit.daily_pass.object) %></div>
+<div class="form-item"><%= v.text_field(:person, :placeholder => 'к кому', :class => 'form-control', :value => @permit.daily_pass.person) %></div>
+<div class="form-item"><%= v.text_field(:issued, :placeholder => 'выдан', :class => 'form-control', :value => @permit.daily_pass.issued) %></div>
+<div class="form-item"><%= v.text_field(:date, :placeholder => 'дата', :class => 'form-control', :value => @permit.daily_pass.date) %></div>
+<div class="form-item"><%= v.text_field(:guard_duty, :placeholder => 'Дежурный охранник КПП', :class => 'form-control', :value => @permit.daily_pass.guard_duty) %></div>
 
 
