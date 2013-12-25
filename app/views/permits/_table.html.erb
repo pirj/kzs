@@ -1,8 +1,8 @@
 <table class="table default-table" style="font-size: 12px; width: 900px;">
   <tr>
-    <% if params[:scope] == 'for_print' %>
-        <th style="width: 5%"></th>
-    <% end %>
+    <th width="30"><label class=""><%= check_box_tag "permits_ids[]", nil, nil, :id => "select_all_permits" %>
+      <span class="checkbox-label"></span>
+    </label></th>
     <th style="width: 9%"><%= sortable "id", "№" %></th>
     <th style="width: 36%">Субъект</th>
     <th style="width: 12%"><%= sortable "permit_type", "Тип" %></th>
@@ -14,13 +14,11 @@
 
   <% @permits.each do |permit| %>
       <tr id="<%= permit.id %>">
-        <% if params[:scope] == 'for_print' %>
             <td class="not_this">
               <label class="control checkbox"><%= check_box_tag "permit_ids[]", permit.id, nil, :class => 'permit_operation' %>
                 <span class="checkbox-label"></span>
               </label>
             </td>
-        <% end %>
         <td><%= permit.id %></td>
         <td>
 
