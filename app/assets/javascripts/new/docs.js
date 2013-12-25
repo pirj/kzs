@@ -1,10 +1,5 @@
 $(function () {
 
-    var documentAr = {
-
-    }
-
-
 
     $(".attachments-carousel").jCarouselLite({
         btnNext: ".icon-right-open",

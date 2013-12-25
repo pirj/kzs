@@ -18,6 +18,8 @@ class PermitsController < ApplicationController
       @permits = @permits.expired
     elsif params[:scope] == "application"
       @permits = @permits.applications
+    elsif params[:scope] == "daily"
+      @permits = @permits.daily
     elsif params[:scope] == "for_print"
       @permits = @permits.for_print.walkers
     else

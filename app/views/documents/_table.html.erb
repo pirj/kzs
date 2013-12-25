@@ -1,4 +1,4 @@
-<table class="table dynamic-table default-table">
+<table class="table dynamic-table default-table" id="<%= @controller %>">
   <thead>
   <tr>
     <% unless action?('show') %>
@@ -44,21 +44,6 @@
         <td class="status">
           <%= document_status(document) %>
 
-          <!--<ul class="dropdown-menu drop-left" role="menu">-->
-          <!--<li class="time">Последий статус назначен:-->
-          <!--<span class="date">&lt;!&ndash;  document_status_date(document) &ndash;&gt;</span>-->
-          <!--<div class="progress">-->
-          <!--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= document_status_progress(document) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= document_status_progress(document) %>%">-->
-          <!--<span class="sr-only"><%= document_status_progress(document) %>% Complete (success)</span>-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</li>-->
-
-          <!--<li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>-->
-          <!--&lt;!&ndash; document_status_list(@document) &ndash;&gt;-->
-          <!--<li class="dropdown-arr"></li>-->
-          <!--<li><a href="#" class="icon-block-1">Отмена</a></li>-->
-          <!--</ul>-->
         </td>
       </tr>
 

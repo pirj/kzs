@@ -1,0 +1,46 @@
+<td colspan="8" class="inform">
+  <div class="col-md-8">
+    <ul class="doc-info">
+      <li><span class="title">Номер и дата:</span><span class="value"><a href="#"><%= @statement.id %></a> / <%= if @statement.approved_date then @statement.approved_date.strftime('%d.%m.%Y') else 'Дата не присвоена' end %></span></li>
+      <li><span class="title">Тема:</span>
+					<span class="value">
+					  <span class="h3"><%= @statement.title %></span>
+						<ol class="breadcrumb">
+              <li><%= link_to organization_full_title(@statement.sender_organization_id), organization_path(@statement.sender_organization_id), :target => '_blank' %></li>
+              <li><%= link_to organization_full_title(@statement.organization_id), organization_path(@statement.organization_id), :target => '_blank' %></li>
+            </ol>
+					</span>
+      </li>
+      <li>
+        <span class="title valign-mid">Контрольное лицо:</span>
+        <div class="user value">
+          <span class="photo"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></span>
+          <a href="#" class="name dropdown" data-toggle="dropdown"><%= user_with_full_name(@statement.approver_id)%></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="photo"><img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></li>
+            <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+            <li><a href="#" class="icon-clock">Личная страница</a></li>
+            <li class="dropdown-arr"></li>
+            <li><a href="#" class="icon-block-1">Отмена</a></li>
+          </ul>
+        </div>
+      </li>
+      <li><span class="title valign-mid">Отправитель:</span><div class="user value"><span class="photo"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></span><a href="#" class="name"><%= user_with_full_name(@statement.user_id)%></a></div></li>
+    </ul>
+    <div class="nav-pills nav controls">
+
+
+      <a class="btn btn-default" href="statements/<%= @statement.id %>">Открыть</a>
+
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="view-main-doc">
+
+
+
+
+
+    </div>
+  </div>
+</td>

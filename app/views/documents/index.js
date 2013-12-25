@@ -1,4 +1,4 @@
-$('#document_table').html("<%=j render :partial => 'table', :@documents => @documents %>");
+$('table').html("<%=j render :partial => 'table', :@documents => @documents %>");
 
 $('.document_operation').on("change", function() {
 	elem = $(this)

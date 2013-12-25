@@ -1,17 +1,17 @@
 <ul class="nav nav-pills">
-
+  <% if current_user.has_permission?(6) %>
   <li class="dropdown">
-    <a href="#" data-toggle="dropdown" class="btn btn-primary btn-sm">Заявки на пропуск
+    <a href="#" data-toggle="dropdown" class="btn btn-primary btn-sm">Создать пропуск
       <span class="caret"></span>
       <span class="dropdown-arr"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
-      <li><a href="/documents">На сотрудника</a></li>
-      <li><a href="/statements">На транспорт</a></li>
-      <li><a href="/documents/drafts">Разовый пропуск</a></li>
+      <li><a href="/permits/new#user">На сотрудника</a></li>
+      <li><a href="/permits/new#vehicle">На транспорт</a></li>
+      <li><a href="/permits/new#vehicle">Разовый пропуск</a></li>
     </ul>
   </li>
-
+  <% end %>
   <!--<% unless action?('index') %>-->
   <!--<li>-->
 		<!--<%= link_to " назад", :back, :class => "btn-sm back-btn btn" %>-->
