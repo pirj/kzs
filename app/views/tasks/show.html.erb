@@ -1,33 +1,26 @@
-<div class="row">
-	<%= render 'shared/left' %>
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header">Задача<span class="caret"></span></h1>
-		<div class="btn-toolbar">
-      <div class="btn-group">	
-        <%= link_to "назад", :back, :class => "btn" %>
-      </div>
-    </div>
-		  
-	  <h3>Задача №<%= @task.id %></h3>
-	  
-	  <p>Лист-задач: <%= @task.task_list_id %></p>
-	  <p>Задача: <%= @task.task %></p>
-	  <p>Создана: <%= @task.created_at.strftime('%d.%m.%Y') %></p>
-	  
-	  <p>Организация-исполнитель: <%= organization_short_title(@task.executor_organization_id) %></p>
-	  <p>Организация-постановщик: <%= organization_short_title(@task.sender_organization_id) %></p>
-	  <p>Срок исполнения: <%= task_deadline(@task) %></p>
-	  
-	  <p>Исполнитель: <%= user(@task.executor_id) %></p>
-	  <p>Составитель: <%= user(@task.creator_id) %></p>
-	  <p>Контрольное лицо: <%= user(@task.approver_id) %></p>
-	  <p>Комментарий исполнителя: <%= @task.executor_comment %></p>
-	  
-                               
-    <% if @task.completed %> Выполнена <% else %> <%= link_to "Выполнить", execute_task_path(@task), data: { confirm: "Вы уверены?" }, :class => 'btn' %><% end %>
+<div class="container">
 
 
-    
-    <%= render 'actions' %>
+    	<h3>Задача №<%= @task.id %></h3>
+
+  	  <p>Лист-задач: <%= @task.task_list_id %></p>
+  	  <p>Задача: <%= @task.task %></p>
+  	  <p>Создана: <%= @task.created_at.strftime('%d.%m.%Y') %></p>
+
+  	  <p>Организация-исполнитель: <%= organization_short_title(@task.executor_organization_id) %></p>
+  	  <p>Организация-постановщик: <%= organization_short_title(@task.sender_organization_id) %></p>
+  	  <p>Срок исполнения: <%= task_deadline(@task) %></p>
+
+  	  <p>Исполнитель: <%= user(@task.executor_id) %></p>
+  	  <p>Составитель: <%= user(@task.creator_id) %></p>
+  	  <p>Контрольное лицо: <%= user(@task.approver_id) %></p>
+  	  <p>Комментарий исполнителя: <%= @task.executor_comment %></p>
+
+
+      <% if @task.completed %> Выполнена <% else %> <%= link_to "Выполнить", execute_task_path(@task), data: { confirm: "Вы уверены?" }, :class => 'btn' %><% end %>
+
+
+
+      <%= render 'actions' %>
+
 </div>
