@@ -1,6 +1,6 @@
 function appendTr(controller, self) {
     $.when($.ajax({
-            url: controller + '/' + self.id + '.js',
+            url: '/'+controller + '/' + self.id + '.js',
             type: "GET"
         })).then(function(data, textStatus, jqXHR){
             //console.log(textStatus);
