@@ -59,6 +59,7 @@ ru:
   task_list_created: "Лист замечаний создан"
   account_details: "Реквизиты"
   main_info: "Общие данные"
+  task_list_successfully_created: "Лист замечаний успешно создан"
   activerecord:
     models: 
       permission:

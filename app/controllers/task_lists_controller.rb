@@ -12,7 +12,7 @@ class TaskListsController < ApplicationController
     
     if @task_list.save
       assign_organizations_to_tasks(@statement)
-      redirect_to statement_path(@statement), notice: t("user_successfully_created")
+      redirect_to statement_path(@statement), notice: t("task_list_successfully_created")
     else
       render action: "new"
     end
