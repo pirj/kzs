@@ -12,7 +12,7 @@
 	<tbody>
   	<% @statements.each do |statement| %>
   	  <tr id="<%= statement.id %>">
-  		  <td><%= statement.id %> / <%= Russian::strftime(statement.created_at, "%d.%m.%y") %></td>
+  		  <td><a href="statements/<%= statement.id %>"><%= statement.id %></a> / <%= Russian::strftime(statement.created_at, "%d.%m.%y") %></td>
   	    <td><%= organization(statement.sender_organization_id) %></td>
   	    <td><%= organization(statement.organization_id) %></td>
   	    <td><%= statement.title %></td>
