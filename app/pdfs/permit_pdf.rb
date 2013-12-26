@@ -166,7 +166,9 @@ class PermitPdf < Prawn::Document
           draw_text "#{@driver.first_name}   #{@driver.middle_name}", :size => 20, :at => [160,300]
           draw_text "#{@driver.position}", :size => 20, :at => [160,237]
           if @driver.organization_id?
-          draw_text "#{Organization.find(@driver.organization_id).title}", :size => 20, :at => [160,180]
+            draw_text "#{Organization.find(@driver.organization_id).title}", :size => 20, :at => [160,180]
+          else
+            draw_text "#{Organization.find(@permit.organization_id).title}", :size => 20, :at => [160,180]
           end
           draw_text "#{@permit.vehicle.register_sn} #{@permit.vehicle.sn_region}", :size => 20, :at => [240,120]
           draw_text "#{@permit.expiration_date.strftime('%d.%m.%y')}", :size => 20, :at => [165,65]
