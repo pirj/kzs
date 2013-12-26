@@ -41,7 +41,7 @@
   height: 38px;
   border-width: 2px;
   z-index: 2;
-  margin-right: 22px;
+  margin-right: 20px;
   &:focus, &:active {
     box-shadow: none;
   }
@@ -49,10 +49,19 @@
 
 .form-label {
   float: left;
-  margin-right: 22px;
+  margin-right: 20px;
+  margin-left: -20px;
   color: #999999;
   font-size: 14px;
   line-height:38px;
+  text-align: right;
+  padding: 0;
+}
+
+.form-label + .form-label {
+  padding: auto;
+  margin-left: 0;
+  text-align: left;
 }
 
 .radio-label {
@@ -95,7 +104,6 @@
   margin-bottom: 10px;
   margin-top: 0;
   cursor: pointer;
-  overflow: hidden;
     >input[type=radio] {
       position: absolute;
       opacity: 0;
@@ -145,6 +153,7 @@
   display: inline-block;
   font-weight: bold;
   border: 1px #000000 solid;
+  height: 38px;
   .letter {
     display: inline-block;
     border-right: 1px #000000 solid;

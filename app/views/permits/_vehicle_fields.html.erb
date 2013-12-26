@@ -1,9 +1,9 @@
-<div class="form-item"><span class="form-label col-md-2">Тип ТС</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false}, { :class => 'form-control col-md-5'}) %></div>
-<div class="form-item"><span class="form-label col-md-2">Марка</span><%= v.collection_select(:brand, CarBrand.all, :title, :title, {}, {:class => 'form-control col-md-3'}) %><%= v.text_field :model, :placeholder => 'Модель', :class => 'form-control col-md-3'  %></div>
-<div class="form-item"><span class="form-label col-md-2">Номер СТС</span><%= v.text_field :register_document, :placeholder => 'Номер СТС', :class => 'form-control col-md-3'  %></div>
+<div class="form-item"><span class="form-label col-md-2">Тип ТС :</span><%= v.select(:vehicle_body, Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, { include_blank: false}, { :class => 'form-control col-md-5'}) %></div>
+<div class="form-item"><span class="form-label col-md-2">Марка :</span><%= v.collection_select(:brand, CarBrand.all, :title, :title, {}, {:class => 'form-control col-md-3'}) %><%= v.text_field :model, :placeholder => 'Модель', :class => 'form-control col-md-3'  %></div>
+<!--<div class="form-item"><span class="form-label col-md-2">Номер СТС:</span><%= v.text_field :register_document, :placeholder => 'Номер СТС', :class => 'form-control col-md-3'  %></div>-->
 <% if @permit.new_record? %>
 
-<div class="form-item"><span class="form-label col-md-2">Номер ГРЗ</span>
+<div class="form-item"><span class="form-label col-md-2">Номер ГРЗ :</span>
 <%= v.select(:first_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
 <%= v.select(:second_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
 <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
