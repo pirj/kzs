@@ -38,6 +38,14 @@ class Permit < ActiveRecord::Base
       false
     end
   end
+  
+  def validity 
+    if self.daily_pass.date
+      '1'
+    else
+      self.expiration_date
+    end
+  end
 
   
 end
