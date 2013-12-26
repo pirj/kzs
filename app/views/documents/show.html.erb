@@ -7,7 +7,11 @@
       <!--<%= link_to "pdf", document_path(@document, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>-->
 
     </li>
-    <li class="col-md-2">ТИП: <b>ПИСЬМО</b></li>
+    <li class="col-md-3">ТИП: <b><% if @document.document_type == 'mail' %>
+          Письмо
+      <% elsif @document.document_type == 'writ' %>
+          Распоряжение
+      <% end %></b></li>
 
     <li class="col-md-3">
       Статус:
@@ -76,7 +80,6 @@
             <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" />
           </span>
           <a href="#" class="name" data-toggle="dropdown"><%= user_with_full_name(@document.executor_id)%>  </a>
-
         </div>
       </li>
       <li><span class="title valign-mid">Отправитель:</span>
@@ -141,7 +144,7 @@
   <% unless @document.documents.blank? %>
       <h4 class="col-md-12">Прикрепленные документы</h4>
       <div class="attachments-carousel attachments">
-        <a href="#" class="icon-left-open">&nbsp;</a>
+        <span  class="icon-left-open">&nbsp;</span>
         <ul class="col-md-12">
 
 
@@ -161,7 +164,7 @@
           <% end %>
 
         </ul>
-        <a href="#" class="icon-right-open">&nbsp;</a>
+        <span href="" class="icon-right-open">&nbsp;</span>
       </div>
 
   <% end %>
@@ -182,3 +185,4 @@
       </div>
   <% end %>
 </div>
+<div class="container"></div>

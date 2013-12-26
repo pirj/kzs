@@ -1,6 +1,11 @@
 <table class="table dynamic-table default-table" id="<%= @controller %>">
   <thead>
   	 <tr>
+  	   <% unless action?('show') %>
+           <th width="30"><label class=""><%= check_box_tag "statement_ids[]", nil, nil, :id => "select_all_statements" %>
+             <span class="checkbox-label"></span>
+           </label></th>
+       <% end %>
 	    <th width="120"><%= sortable "id", "Номер / Дата" %></th>
 			<th width="130"><%= sortable "sender_organization_id", "Отправитель" %></th>
 			<th width="130"><%= sortable "organization_id", "Получатель" %></th>
@@ -12,7 +17,15 @@
 	<tbody>
   	<% @statements.each do |statement| %>
   	  <tr id="<%= statement.id %>">
-  		  <td><%= statement.id %> / <%= Russian::strftime(statement.created_at, "%d.%m.%y") %></td>
+
+  	    <% unless action?('show') %>
+            <td class="not_this">
+              <label class=""><%= check_box_tag "statement_ids[]", statement.id, nil, :class => 'statement_operation' %>
+                <span class="checkbox-label"></span>
+              </label></td>
+        <% end %>
+  		  <td><a href="statements/<%= statement.id %>"><%= statement.id %></a> / <%= Russian::strftime(statement.created_at, "%d.%m.%y") %></td>
+
   	    <td><%= organization(statement.sender_organization_id) %></td>
   	    <td><%= organization(statement.organization_id) %></td>
   	    <td><%= statement.title %></td>

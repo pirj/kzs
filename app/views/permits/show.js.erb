@@ -1,0 +1,13 @@
+if ($('#<%= @permit.id %>').find('.inform').length > 0 ) {
+    $('#<%= @permit.id %> .inform').remove();
+    $('#<%= @permit.id %>').children('td').show();
+}
+else
+{
+
+    $('.inform').remove();
+    $('.dynamic-table.table td').show();
+    $('#<%= @permit.id %>').children('td').hide();
+    $('<%=j render :partial => 'full_element', :@permit => @permit %>').appendTo("#<%= @permit.id %>");
+
+}

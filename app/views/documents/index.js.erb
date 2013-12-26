@@ -16,8 +16,16 @@ $(function() {
 		$('#document_table').html("<tr class='inform'><td colspan='9'>По запросу &laquo;"+ searchString +"&raquo; - ничего не найдено.</td></tr>");
 	}
 });
-$("tbody tr").click(appendTr);
-$("tbody td.not_this").click(function(e){
+
+
+$(".dynamic-table tbody tr").click(function(){
+		var self = this;
+		var controller = $('table').attr('id')
+    appendTr(controller, self)
+})
+
+
+$(".dynamic-table tbody td.not_this").click(function(e){
     e.stopPropagation()
-});
+})
 

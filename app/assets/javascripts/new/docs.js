@@ -1,11 +1,14 @@
 $(function () {
 
 
+
     $(".attachments-carousel").jCarouselLite({
         btnNext: ".icon-right-open",
         btnPrev: ".icon-left-open",
-        width: 900
-    });
+        width: 900,
+        circular: false
+
+});
 
     $('.addDocuments').hide();
 
