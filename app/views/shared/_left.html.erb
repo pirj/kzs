@@ -20,8 +20,10 @@
         <%= link_to statements_path, :class => (controller?("statements") ? 'active menu-link ' : 'menu-link ') do %>
             <i></i>
             <div class="text">Акты</div>
-            <span class="badge badge-important">
-              <% unless statement_indox(current_user) < 1 %> <%= statement_indox(current_user) %> <% end %></span>
+            
+              <% unless statement_indox(current_user) < 1 %> 
+                <span class="badge badge-important"><%= statement_indox(current_user) %></span>  
+              <% end %>
         <% end %>
       </div>
     </div>
