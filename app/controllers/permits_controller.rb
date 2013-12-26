@@ -68,7 +68,7 @@ class PermitsController < ApplicationController
     @daily_pass = @permit.daily_pass
     respond_to do |format|
       format.html
-      format.js
+      format.js {@permit = @permit}
       format.pdf do
         pdf = PermitPdf.new(@permit, view_context)
         send_data pdf.render, filename: "permit#{@permit.id}.pdf",

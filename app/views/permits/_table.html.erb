@@ -21,7 +21,7 @@
                 <span class="checkbox-label"></span>
               </label>
             </td>
-        <td><%= permit.id %></td>
+        <td><%= permit.number %></td>
         <td>
 
           <% if permit.permit_type == "vehicle" %>
@@ -85,11 +85,11 @@
         </td>
         <td>
           <% if permit.permit_type == "user" %>
-              <%= image_tag('old/propusk-man.png') %>
+              <%= image_tag('/assets/propusk-man.png') %>
           <% elsif permit.permit_type == "vehicle" %>
-              <%= image_tag('old/propusk-car.png') %>
+              <%= image_tag('/assets/propusk-car.png') %>
           <% elsif permit.permit_type == "daily" %>
-              <%= image_tag('old/propusk-daily.png') %>
+              <%= image_tag('/assets/propusk-daily.png') %>
           <% end %>
         </td>
         <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></td>
