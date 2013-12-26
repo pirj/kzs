@@ -38,7 +38,7 @@
     <div class="nav-pills nav controls">
 
 
-      <a class="btn btn-default" href="statements/<%= @statement.id %>">Открыть</a>
+      <a class="btn btn-default" href="/statements/<%= @statement.id %>">Открыть</a>
 
     </div>
   </div>
@@ -47,6 +47,10 @@
 
 
 
+      <div class="overlay"><a href="/statements/<%= @statement.id %>.pdf" target="_blank" class="zoom"></a></div>
+
+      <iframe style="width: 190px; height: 264px;" src="/statements/<%= @statement.id %>.pdf"/>
+      </iframe>
 
 
     </div>
