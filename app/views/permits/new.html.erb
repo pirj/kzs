@@ -12,7 +12,7 @@
         </li>
       </ul>
 
-      <%= form_for(@permit, :html => {:class => "form new-doc row-fuild"}) do |f| %>
+      <%= form_for(@permit, :html => {:class => "form new-doc row-fuild", :name => 'newPermitForm'}) do |f| %>
 
           <% if @permit.errors.any? %>
               <div id="error_explanation">
