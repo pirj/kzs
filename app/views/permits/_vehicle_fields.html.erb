@@ -9,10 +9,10 @@
 <%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-1'}) %>
   <%= v.text_field(:sn_number, :placeholder => '', :class => 'form-control col-md-1' ) %>
   <!--<%= v.select(:third_letter, Vehicle::LETTERS.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-md-3 col-md-offset-1'}) %>-->
-    <div class="visual-number col-md-3 col-md-offset-1">
-        <span class="letter">A<span class="number" style="">222</span>AA</span>
-        <span class="region"></span>
-    </div>
+    <!--<div class="visual-number col-md-3 col-md-offset-1">-->
+        <!--<span class="letter">A<span class="number" style="">222</span>AA</span>-->
+        <!--<span class="region"></span>-->
+    <!--</div>-->
 </div>
 <div class="form-item"><span class="form-label col-md-2"></span><span class="form-label"><%= v.text_field(:sn_region, :placeholder => '', :class => 'form-control col-md-2' ) %>номер региона</span></div>
 <% else %>
