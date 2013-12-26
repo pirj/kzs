@@ -38,7 +38,7 @@
     <div class="form-item">
       <label class="control checkbox">
          <%= f.check_box :way_bill %>
-         <span class="checkbox-label">Согласно путевому листу</span>
+         <span class="checkbox-label">Согласно путевого листа</span>
       </label>
     </div>
     <div class="form-item"><%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %></div>
