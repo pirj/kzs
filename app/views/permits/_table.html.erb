@@ -1,15 +1,15 @@
 <table class="table dynamic-table default-table" id="<%= @controller %>">
   <thead>
   <tr>
-    <th width="30"><label class=""><%= check_box_tag "permits_ids[]", nil, nil, :id => "select_all_permits" %>
+    <th style="width: 5%"><label class=""><%= check_box_tag "permits_ids[]", nil, nil, :id => "select_all_permits" %>
       <span class="checkbox-label"></span>
     </label></th>
-    <th style="width: 9%"><%= sortable "id", "№" %></th>
-    <th style="width: 36%">Субъект</th>
-    <th style="width: 12%"><%= sortable "permit_type", "Тип" %></th>
-    <th style="width: 12%"><%= sortable "start_date", "Начало" %></th>
-    <th style="width: 12%"><%= sortable "expiration_date", "Конец" %></th>
-    <th style="width: 12%"><%= sortable_status %></th>
+    <th style="width: 8%"><%= sortable "id", "№" %></th>
+    <th style="width: 30%">Субъект</th>
+    <th style="width: 10%"><%= sortable "permit_type", "Тип" %></th>
+    <th style="width: 14%"><%= sortable "start_date", "Начало" %></th>
+    <th style="width: 14%"><%= sortable "expiration_date", "Конец" %></th>
+    <th style="width: 12%" class="status"><%= sortable_status %></th>
     <!--<th style="width: 8%">Детали</th>-->
   </tr>
 </thead>

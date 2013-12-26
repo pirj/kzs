@@ -622,12 +622,13 @@
     }
   }
   .progress {
-    width: 18%;
+    width: 25%;
     height: 8px;
     margin: 39px 0 0 64%;
     position: relative;
     overflow: visible;
     .progress-label {
+      text-align: center;
       position: relative;
       width: 110%;
       height: auto;
