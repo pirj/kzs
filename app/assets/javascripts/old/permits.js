@@ -96,7 +96,7 @@ $(document).ready(function(){
     var clear = {
         vehicle: function() {
             document.getElementById('permit_vehicle_attributes_model').value = '';
-            document.getElementById('permit_vehicle_attributes_register_document').value = '';
+       //     document.getElementById('permit_vehicle_attributes_register_document').value = '';
             document.getElementById('permit_vehicle_attributes_sn_number').value = '';
             document.getElementById('permit_vehicle_attributes_sn_region').value = '';
         },
