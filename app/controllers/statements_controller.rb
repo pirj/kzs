@@ -118,6 +118,18 @@ class StatementsController < ApplicationController
       @statement.opened = true
       @statement.save
     end
+    
+    respond_to do |format|
+      format.html
+      format.js
+      format.pdf do
+        pdf = StatementPdf.new(@statement, view_context)
+        send_data pdf.render, filename: "document_#{@statement.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+    
   end
   
   def prepare

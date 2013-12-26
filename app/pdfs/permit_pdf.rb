@@ -149,6 +149,7 @@ class PermitPdf < Prawn::Document
         if @permit.way_bill
           font "Verdana"
           float {image "#{Rails.root}/app/assets/images/propusk_car_back-2.jpg"}
+          draw_text "#{Organization.find(@permit.organization_id).title}", :size => 20, :at => [170,200]
           draw_text "#{@permit.vehicle.brand}", :size => 20, :at => [200,163]
           
           font "RoadNumbers"

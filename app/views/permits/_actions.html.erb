@@ -1,38 +1,49 @@
 <div class="btn-toolbar">
 
-<% if current_user.has_permission?(11)  %>
-<div class="btn-group">
-	<%= link_to "Редактировать", edit_permit_path(@permit), :class=> "btn btn-primary" %>
+<% unless @permit.canceled == true || @permit.agreed == true %>
+<% if current_user.has_permission?(11) || current_user.organization_id == @permit.organization_id %>
+<div class="btn-group">	
+	<%= link_to "Редактировать", edit_permit_path(@permit), :class=> "btn btn-primary" %>	
 </div>
 <% end %>
+<% end %>
 
-
+<% unless @permit.agreed == true %>
 <% if current_user.has_permission?(7) %>
-<div class="btn-group">
-	<%= link_to "Согласовать", agree_permit_path(@permit), :class=> "btn btn-success" %>
+<div class="btn-group">	
+	<%= link_to "Согласовать", agree_permit_path(@permit), :class=> "btn btn-success" %>	
 </div>
 <% end %>
+<% end %>
 
-<div class="btn-group">
+<% if @permit.agreed == true %>
+<div class="btn-group">	
   <%= link_to "Печать", permit_path(@permit, :format => :pdf), :class=> "btn btn-primary" %>
 </div>
-
-<% if current_user.has_permission?(7) %>
-<div class="btn-group">
-	<%= link_to "Отклонить", reject_permit_path(@permit), :class=> "btn btn-danger" %>
-</div>
 <% end %>
 
+<% unless @permit.rejected == true || @permit.agreed	 == true %>
+<% if current_user.has_permission?(7) %>
+<div class="btn-group">	
+	<%= link_to "Отклонить", reject_permit_path(@permit), :class=> "btn btn-danger" %>	
+</div>
+<% end %>
+<% end %>
+
+<% if @permit.agreed == true && @permit.released == false %>
 <% if current_user.has_permission?(8) %>
-<div class="btn-group">
-	<%= link_to "Выпустить", release_permit_path(@permit), :class=> "btn btn-success" %>
+<div class="btn-group">	
+	<%= link_to "Выпустить", release_permit_path(@permit), :class=> "btn btn-success" %>	
 </div>
 <% end %>
+<% end %>
 
+<% if @permit.issued == true && @permit.canceled == false %>
 <% if current_user.has_permission?(7) %>
-<div class="btn-group">
-	<%= link_to "Аннулировать", cancel_permit_path(@permit), :class=> "btn btn-danger" %>
+<div class="btn-group">	
+	<%= link_to "Аннулировать", cancel_permit_path(@permit), :class=> "btn btn-danger" %>	
 </div>
+<% end %>
 <% end %>
 
 
