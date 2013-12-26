@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
-    $('#permit_way_bill').on("change", function() {                 // putev list only transport
-        $('#permit_drivers_chosen').toggle();
-    });
+
 
 
 
@@ -180,5 +178,13 @@ $(document).ready(function(){
 
 
     })
-	
+
+    $('#permit_way_bill').on("change", function() {                 // putev list only transport
+       if (document.getElementById('permit_way_bill').checked) {
+           $('#permit_drivers_chosen').hide();
+       }else{
+           $('#permit_drivers_chosen').show();
+       }
+
+    });
 });
