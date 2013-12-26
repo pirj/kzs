@@ -1,5 +1,5 @@
 <td colspan="8" class="inform">
-  <div>
+  <div style="position: relative">
     <table class="sub-table">
       <tr>
         <td width="64"></td>
@@ -62,11 +62,11 @@
         <% end %></td>
         <td width="107">
           <% if @permit.permit_type == "user" %>
-              <%= image_tag('old/propusk-man.png') %>
+              <%= image_tag('/assets/propusk-man.png') %>
           <% elsif @permit.permit_type == "vehicle" %>
-              <%= image_tag('old/propusk-car.png') %>
+              <%= image_tag('/assets/propusk-car.png') %>
           <% elsif @permit.permit_type == "daily" %>
-              <%= image_tag('old/propusk-daily.png') %>
+              <%= image_tag('/assets/propusk-daily.png') %>
           <% end %>
         </td>
         <td width="106"><%= @permit.start_date.strftime("%d.%m.%y") if @permit.start_date %></td>
@@ -74,12 +74,13 @@
         <td class="status"><%= permit_status(@permit) %></td>
       </tr>
     </table>
-    <div class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="30" aria-valuemax="100">
-        <span class="sr-only">100%</span>
-      </div>
-      <span class="progress-label">Общий срок действия: 12 месяцев</span>
-    </div>
+    <!--<div class="progress">-->
+      <!--<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="30" aria-valuemax="100">-->
+        <!--<span class="sr-only">100%</span>-->
+      <!--</div>-->
+
+    <!--</div>-->
+    <!--<span class="progress-label">Общий срок действия: 12 месяцев</span>-->
   </div>
   
   <div class="nav-pills nav controls">

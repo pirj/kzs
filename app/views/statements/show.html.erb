@@ -75,6 +75,16 @@
 
 
   </div>
+
+  <div class="container">
+  <% if @statement.task_list %>
+
+      <p>Имеется лист замечаний, статус: <%= @task_list.completed ? "Выполнен" : "Невыполнен" %></p>
+  <% end %>
+
+  <%= render 'actions' %>
+
+  </div>
 </div>
 
 

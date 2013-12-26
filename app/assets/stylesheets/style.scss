@@ -627,18 +627,18 @@
     margin: 39px 0 0 64%;
     position: relative;
     overflow: visible;
-    .progress-label {
-      text-align: center;
-      position: relative;
-      width: 110%;
-      height: auto;
-      font-size: 13px;
-      color: #666666;
-      clip:auto;
-      top: 20px;
-      overflow: visible;
-    }
+
   }
+   .progress-label {
+     position: absolute;
+     height: auto;
+     font-size: 13px;
+     color: #666666;
+     clip: auto;
+     right: 130px;
+     top: 110px;
+     overflow: visible;
+   }
 }
 
 .progress-bar-success {

@@ -1,4 +1,10 @@
 <ul class="nav nav-pills">
+
+
+<li>
+  <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
+</li>
+
   <% if current_user.has_permission?(6) %>
   <li class="dropdown">
     <a href="#" data-toggle="dropdown" class="btn btn-primary btn-sm">Создать пропуск
