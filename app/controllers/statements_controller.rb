@@ -190,7 +190,7 @@ class StatementsController < ApplicationController
       document.executed_date = Time.now
       document.save  
       @statement.accepted = true
-      @statement.accepteddate = Time.now
+      @statement.accepted_date = Time.now
       @statement.save
     end
 
