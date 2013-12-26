@@ -1,25 +1,25 @@
 <ul class="btn-toolbar">
   
   <% if current_user.id == @statement.user_id && @statement.sent != true && @statement.approved == true %>
-  <li>
+  <li class="btn-group">
 		<%= link_to 'Отправить', send_statement_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-primary btn-sm" %>
 	</li>
 	<% end %>  
 	
 	<% if current_user.id == @statement.user_id && @statement.draft == true %>
-  <li  >
+  <li  class="btn-group">
 		<%= link_to 'Подготовить', prepare_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
 	</li>
 	<% end %>
 	
 	<% if current_user.id == @statement.user_id && @statement.sent == false %>
-  <li  >
+  <li class="btn-group" >
 		<%= link_to 'Редактировать', edit_statement_path(@statement), :class => "btn btn-default btn-sm" %>
 	</li>
 	<% end %>
 	
 	<% if @statement.approved == false && @statement.approver_id == current_user.id && @statement.prepared == true %>
-	 <li>
+	 <li class="btn-group">
  		<%= link_to 'Подписать', approve_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
  	</li>
  	<% end %> 
@@ -28,17 +28,17 @@
 	
 	<% if for_accept(@statement) %>
 
-	<li>
+	<li class="btn-group">
 		<%= link_to 'На подпись', accept_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-primary btn-sm" %>
 	</li>
 	
-	
+
 	<% unless @writ.statements.count > 1 %>
-	<li>
+	<li class="btn-group">
 		<%= link_to 'Отклонить', task_list_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
 	</li>
 	<% end %>
-	
+
 	<% end %>
 	
 	
