@@ -4,7 +4,7 @@
     <th width="30"><label class=""><%= check_box_tag "permits_ids[]", nil, nil, :id => "select_all_permits" %>
       <span class="checkbox-label"></span>
     </label></th>
-    <th style="width: 9%"><%= sortable "id", "№" %></th>
+    <th style="width: 9%"><%= sortable "number", "№" %></th>
     <th style="width: 36%">Субъект</th>
     <th style="width: 12%"><%= sortable "permit_type", "Тип" %></th>
     <th style="width: 12%"><%= sortable "start_date", "Начало" %></th>
@@ -21,7 +21,7 @@
                 <span class="checkbox-label"></span>
               </label>
             </td>
-        <td><%= permit.id %></td>
+        <td><%= permit.number %></td>
         <td>
 
           <% if permit.permit_type == "vehicle" %>
