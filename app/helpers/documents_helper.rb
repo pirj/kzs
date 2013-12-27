@@ -110,7 +110,7 @@ module DocumentsHelper
     elsif document.prepared?
       Russian::strftime(document.prepared_date, "%d %B %Y")
     elsif document.draft?
-      Russian::strftime(document.date, "%d %B %Y")
+      Russian::strftime(document.created_at, "%d %B %Y")
     else
       Russian::strftime(document.date, "%d %B %Y")
     end
