@@ -6,10 +6,38 @@
       <!--<%= link_to "pdf", document_path(@statement, format: "pdf"), :target => '_blank', :class => "btn btn-success" %>-->
     </li>
     <li class="col-md-2"></li>
+
+    
     <li class="col-md-3">
       Статус:
       <%=  statement_status(@statement) %>
+
+      <ul class="dropdown-menu" role="menu">
+
+        <div id="j-status">
+        <li class="time">Последий статус назначен:
+          <span class="date"><%=  statement_status_date(@statement) %></span>
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100" style="width:%">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        </li>
+
+        <li class="status-history"><a href="#" class="icon-clock">История статусов</a></li>
+        <li class="dropdown-arr"></li>
+        <li><a href="#" class="icon-block-1">Отмена</a></li>
+
+        </div>
+
+        <div id="j-history">
+          <li><span class='title icon-clock'>История назначения стстусов</span></li><li><span><a class='btn btn-sm back-btn pull-left' href='#'>Назад</a></span></li>
+          <%= statement_status_list(@statement) %>
+        </div>
+
+      </ul>
     </li>
+    
     <li class="col-md-4 pull-right">
       <%= render 'shared/user' %>
     </li>

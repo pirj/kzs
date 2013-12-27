@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131213123013) do
+ActiveRecord::Schema.define(:version => 20131226142700) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -323,6 +323,11 @@ ActiveRecord::Schema.define(:version => 20131213123013) do
     t.string   "sn"
     t.integer  "approver_id"
     t.boolean  "with_completed_task_list", :default => false
+    t.datetime "accepted_date"
+    t.datetime "opened_date"
+    t.datetime "sent_date"
+    t.datetime "prepared_date"
+    t.datetime "refuse_date"
   end
 
   create_table "task_lists", :force => true do |t|

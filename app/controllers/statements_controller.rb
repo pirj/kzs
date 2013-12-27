@@ -60,6 +60,7 @@ class StatementsController < ApplicationController
     
     if params[:prepare]
       @statement.prepared = true
+      @statement.prepared_date = Time.now
       @statement.draft = false
     end
 
@@ -116,6 +117,7 @@ class StatementsController < ApplicationController
     
     if @statement.organization_id == current_user.organization_id && current_user.has_permission?(2)
       @statement.opened = true
+      @statement.opened_date = Time.now
       @statement.save
     end
     
@@ -137,6 +139,7 @@ class StatementsController < ApplicationController
     
     if current_user.id == @statement.user_id    
       @statement.prepared = true
+      @statement.prepared_date = Time.now
       @statement.draft = false
       @statement.save
       redirect_to statements_path, notice: t('statement_prepared')
@@ -167,6 +170,7 @@ class StatementsController < ApplicationController
     document.for_confirmation = true
     document.save!
     @statement.sent = true
+    @statement.sent_date = Time.now
     @statement.save!
     redirect_to statements_path, :notice => t('statement_sent')
   end
@@ -186,6 +190,7 @@ class StatementsController < ApplicationController
       document.executed_date = Time.now
       document.save  
       @statement.accepted = true
+      @statement.accepted_date = Time.now
       @statement.save
     end
 
@@ -205,6 +210,7 @@ class StatementsController < ApplicationController
     @statement = Statement.find(params[:id])
     @statement.accepted = false
     @statement.not_accepted = true
+    @statement.refuse_date = Time.now
     @statement.save
     
     document = Document.find(@statement.document)
