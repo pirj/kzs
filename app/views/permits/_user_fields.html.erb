@@ -1,6 +1,6 @@
-<div class="form-item"><%= v.text_field(:last_name, :placeholder => 'Фамилия', :class => 'form-control col-xs-5', :value => @permit.user.last_name) %></div>  <!--# ||= ""-->
-<div class="form-item"><%= v.text_field(:first_name, :placeholder => 'Имя', :class => 'form-control col-xs-5', :value => @permit.user.first_name) %></div>
-<div class="form-item"><%= v.text_field(:middle_name, :placeholder => 'Отчество', :class => 'form-control col-xs-5', :value => @permit.user.middle_name) %></div>
+<div class="form-item"><span class="form-label col-md-3">Фамилия</span><%= v.text_field(:last_name, :placeholder => 'Фамилия', :class => 'form-control col-xs-5', :value => @permit.user.last_name) %></div>  <!--# ||= ""-->
+<div class="form-item"><span class="form-label col-md-3">Имя</span><%= v.text_field(:first_name, :placeholder => 'Имя', :class => 'form-control col-xs-5', :value => @permit.user.first_name) %></div>
+<div class="form-item"><span class="form-label col-md-3">Отчество</span><%= v.text_field(:middle_name, :placeholder => 'Отчество', :class => 'form-control col-xs-5', :value => @permit.user.middle_name) %></div>
 
-<div class="form-item"><%= v.collection_select(:organization_id, Organization.where(:id => current_user.organization_id).all, :id, :title, {}, {:class => 'form-control col-xs-5'}) %>
-<%= v.text_field(:position, :placeholder => 'Должность', :class => 'form-control col-xs-5', :value => @permit.user.position) %></div>
+<div class="form-item"><span class="form-label col-md-3">Организация и должность</span><%= v.collection_select(:organization_id, Organization.where(:id => current_user.organization_id).all, :id, :title, {}, {:class => 'form-control col-xs-3'}) %>
+<%= v.text_field(:position, :placeholder => 'Должность', :class => 'form-control col-xs-3', :value => @permit.user.position) %></div>

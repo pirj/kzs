@@ -133,6 +133,7 @@ $(document).ready(function(){
 
         switch(thisType) {
             case '#vehicle':
+
                 clear.user();
                 clear.daily();
                 if (document.getElementById('permit_start_date').value && document.getElementById('permit_expiration_date').value && document.getElementById('permit_vehicle_attributes_sn_number').value ) {
@@ -146,9 +147,8 @@ $(document).ready(function(){
 
             case '#daily':
                 clear.user();
-          //      clear.daily();
                 clear.vehicle();
-
+                console.log('ddsdsds');
                 if (document.getElementById('permit_daily_pass_attributes_last_name').value&&document.getElementById('permit_daily_pass_attributes_first_name').value) {
                     document.newPermitForm.submit();
                 }
