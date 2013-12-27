@@ -505,7 +505,16 @@
 
 /*tables*/
   .default-table {
-  width: 100%;
+    width: 100%;
+    .new {
+      td:first-child {
+        border-left:4px solid #1ba0e1;
+        padding-left: 0;
+        label {
+          margin-left: -2px;
+        }
+      }
+    }
   thead > tr > th {
     height: 48px;
     vertical-align: middle;
@@ -515,6 +524,10 @@
     }
     a {
       text-decoration: none;
+    }
+    &:first-child {
+      text-align: center;
+      padding-left: 0;
     }
   }
   td {
@@ -563,6 +576,9 @@
           border-radius: 90px;
         }
       }
+    }
+    &:first-child {
+      text-align: center;
     }
   }
   .sortable {

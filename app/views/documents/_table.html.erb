@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <% unless action?('show') %>
-        <th width="30"><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
+        <th width="50"><label class=""><%= check_box_tag "document_ids[]", nil, nil, :id => "select_all_documents" %>
           <span class="checkbox-label"></span>
         </label></th>
     <% end %>
@@ -18,7 +18,7 @@
   <tbody>
   <% @documents.each do |document| %>
 
-      <tr id="<%= document.id %>" style="background-color: <%= '#1BA0E1;' if document.opened == false && document.sent == true && document.sender_organization_id != current_user.organization_id %>">
+      <tr id="<%= document.id %>" <%= new_document(document) %>>
         <% unless action?('show') %>
             <td class="not_this">
               <label class=""><%= check_box_tag "document_ids[]", document.id, nil, :class => 'document_operation' %>

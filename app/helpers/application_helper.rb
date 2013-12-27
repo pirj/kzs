@@ -45,6 +45,14 @@ module ApplicationHelper
      direction = params[:status_sort] && params[:direction] == "desc" ? "asc" : "desc"
      link_to "Статус", {:status_sort => true, :direction => direction}, :remote => true, :class => css_class  
    end
+
+  def new_document(document)
+    if document.opened == false && document.sent == true && document.sender_organization_id != current_user.organization_id
+      'class=new'
+    else
+      nil
+    end
+  end
    
   
 end

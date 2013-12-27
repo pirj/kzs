@@ -2,7 +2,7 @@
   <thead>
   	 <tr>
   	   <% unless action?('show') %>
-           <th width="30"><label class=""><%= check_box_tag "statement_ids[]", nil, nil, :id => "select_all_statements" %>
+           <th width="50"><label class=""><%= check_box_tag "statement_ids[]", nil, nil, :id => "select_all_statements" %>
              <span class="checkbox-label"></span>
            </label></th>
        <% end %>
@@ -16,7 +16,7 @@
 	</thead>
 	<tbody>
   	<% @statements.each do |statement| %>
-  	  <tr id="<%= statement.id %>" style="background-color: <%= '#1BA0E1;' if statement.opened == false && statement.sent == true && statement.sender_organization_id != current_user.organization_id %>">
+  	  <tr id="<%= statement.id %>" <%= new_document(statement) %>>
 
   	    <% unless action?('show') %>
             <td class="not_this">
