@@ -25,7 +25,7 @@
                 <span class="checkbox-label"></span>
               </label></td>
         <% end %>
-        <td><a class="document_id" href="documents/<%= document.id %>"><%= document.id %></a>
+        <td><a class="document_id" href="/documents/<%= document.id %>"><%= document.id %></a>
           / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
         <td><%= link_to organization_full_title(document.sender_organization_id), organization_path(document.sender_organization_id), :target => '_blank' %></td>
         <td><%= link_to organization_full_title(document.organization_id), organization_path(document.organization_id), :target => '_blank' %></td>
