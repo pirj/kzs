@@ -5,21 +5,21 @@ module StatementsHelper
     if document.accepted?
       '<span class=" label-success btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.not_accepted?
-        '<span class="btn-available btn label-important">Отклонен</span>'.html_safe
+        '<span class="btn-available btn label-important"  data-toggle="dropdown">Отклонен</span>'.html_safe
     elsif document.opened?
-      '<span class="btn-available btn">Получен</span>'.html_safe
+      '<span class="btn-available btn"  data-toggle="dropdown">Получен</span>'.html_safe
     elsif document.sent?
        if document.organization_id == current_user.organization_id
-        '<span class="btn-available btn">Получен</span>'.html_safe
+        '<span class="btn-available btn"  data-toggle="dropdown">Получен</span>'.html_safe
       else
-        '<span class="btn-available label-info btn">Отправлен</span>'.html_safe
+        '<span class="btn-available label-info btn"  data-toggle="dropdown">Отправлен</span>'.html_safe
       end
     elsif document.approved?
-      '<span class="btn-available btn">Подписан</span>'.html_safe
+      '<span class="btn-available btn"  data-toggle="dropdown">Подписан</span>'.html_safe
      elsif document.prepared?
        '<span class="btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
     elsif document.draft?
-      '<span class="btn-available btn label-inverse">Черновик</span>'.html_safe
+      '<span class="btn-available btn label-inverse"  data-toggle="dropdown">Черновик</span>'.html_safe
     else
       'gbpl'
     end
