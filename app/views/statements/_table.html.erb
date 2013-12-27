@@ -16,7 +16,7 @@
 	</thead>
 	<tbody>
   	<% @statements.each do |statement| %>
-  	  <tr id="<%= statement.id %>">
+  	  <tr id="<%= statement.id %>" style="background-color: <%= '#1BA0E1;' if statement.opened == false && statement.sent == true && statement.sender_organization_id != current_user.organization_id %>">
 
   	    <% unless action?('show') %>
             <td class="not_this">
