@@ -33,7 +33,7 @@
     }
 
     .child-dir {
-       display: none;
+      display: none;
       transition: all 0.5s linear 0.1s;
       height: 0px;
 
@@ -50,21 +50,19 @@
         height: 40px;
         line-height: 40px;
 
-
-        .text{
+        .text {
           display: inline-block;
         }
-        i{
+        i {
           display: none;
         }
 
-        &:first-child{
+        &:first-child {
           margin-top: 0;
         }
       }
 
     }
-
 
   }
 
@@ -103,12 +101,12 @@
           span {
             background-color: white;
           }
+          .text{color: #fff!important;}
         }
       }
+
       .text {
         display: none;
-        width: 0;
-        transition: width ease 0.1s;
 
       }
       .icon {
@@ -213,31 +211,29 @@
           cursor: pointer;
         }
         &:hover i {
-        //  background-color: #76d4ce;
+          //  background-color: #76d4ce;
           background-position: -83px -230px;
         }
         &.active i {
           background-position: -152px -230px;
-        //  background-position: -153px -230px;
+          //  background-position: -153px -230px;
         }
 
-        &.active:hover  {
+        &.active:hover {
           background-color: #fff;
         }
       }
       .open {
         .documents i {
-        background-position: -83px -230px;
+          background-position: -83px -230px;
 
         }
 
       }
 
-
-
       &.permits {
         i {
-          background-position: -10px -164px;  ///300
+          background-position: -10px -164px; ///300
         }
         &:hover i {
           background-color: #76d4ce;
@@ -292,6 +288,30 @@
     position: fixed;
     box-shadow: 1px 0 5px gray;
 
+    .main  {
+      .text{display: inline-block;
+        vertical-align: super;
+        margin-left: 10px;
+        margin-right: 45px;
+
+        width: auto;
+        line-height: 18px;
+        cursor: pointer;
+        color: #1ba0e1;
+        font-size: 16px;
+        transition: width ease 0.1s;
+        &:hover {
+          color: white!important;
+        }}
+
+
+      &:hover{
+        .text{
+          color: white;
+        }
+      }
+    }
+
     .menu-link {
       cursor: pointer;
       width: 182px;
@@ -314,11 +334,10 @@
         }
       }
 
-
-      &.documents:hover  {
-        background-color: #9ad8ff!important;
-        i{
-          background-position: -83px -230px!important;
+      &.documents:hover {
+        background-color: #9ad8ff !important;
+        i {
+          background-position: -83px -230px !important;
         }
       }
     }
@@ -335,7 +354,6 @@
       > .menu-link b {
         display: block;
       }
-
 
       &.open {
         > .menu-link {
@@ -367,12 +385,12 @@
             border-radius: 12px;
             height: 40px;
             line-height: 40px;
-            .text{
+            .text {
               position: relative;
               display: inline-block;
               top: 9px;
             }
-            .badge{
+            .badge {
               border-radius: 6px;
               padding: 2px 2px 0;
               height: 17px;
@@ -384,11 +402,11 @@
               position: relative;
               top: -2px;
             }
-            &:hover{
+            &:hover {
               background-color: #9ad8ff;
               color: white;
 
-              .badge{
+              .badge {
                 background-color: white;
                 color: #e63d4d;
               }
