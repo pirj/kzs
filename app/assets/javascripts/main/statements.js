@@ -10,17 +10,17 @@ $(document).ready(function(){
 
 
             "statement[document_ids][]":{
-                required: true,
+                required: true
             },	
             "statement[approver_ids][]":{
-                required: true,
+                required: true
             },
 						"statement[internal_approver_id][]":{
-                required: true,
+                required: true
             },
             
             "statement[title]":{
-                required: true,
+                required: true
             },
 
        },
@@ -31,14 +31,14 @@ $(document).ready(function(){
                 required: "Выберите распоряжение"
             },
             "statement[internal_approver_id][]":{
-                required: "Выберите контрольное лицо",
+                required: "Выберите контрольное лицо"
             },
             "statement[approver_ids][]":{
-                required: "Выберите согласующих лиц",
+                required: "Выберите согласующих лиц"
             },
 
 			"statement[title]":{
-                required: "Укажите заголовок акта",
+                required: "Укажите заголовок акта"
             },
 
        }

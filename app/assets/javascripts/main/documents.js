@@ -84,7 +84,7 @@ $(document).ready(function(){
 						$.ajax({
 		            url: "/document/executor_phone",
 		            type: "GET",
-		            data: {user: +$(this).val(), field: field},
+		            data: {user: +$(this).val(), field: field}
 		        }).done(function() {
 							    $('#approver_info').show();
 						}).fail(function() {

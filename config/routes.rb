@@ -79,8 +79,9 @@ Kzs::Application.routes.draw do
 
   root :to => 'dashboard#index'
 
-  match '/library' => 'admin/users#index'
-  
+  #match '/library' => 'admin/users#index'
+  match '/library' => 'library#library'
+
   ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:
