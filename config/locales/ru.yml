@@ -175,3 +175,9 @@ ru:
         title: "Заголовок"
         text: "Содержимое"
         document_id: "Распоряжение"
+ru:
+  kids:
+    zero: ru_zero
+    one: ru_one
+    few: ru_few
+    other: ru_other
