@@ -11,6 +11,8 @@
 
 </head>
 <body>
+<% unless controller?('devise/sessions')  %>
 <%= yield %>
+<% end %>
 </body>
 </html>

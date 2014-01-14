@@ -4,6 +4,7 @@ Kzs::Application.routes.draw do
   get "library/library"
 
   get "/users/sign_out" => "sessions#destroy"
+
   devise_for :users
 
   mount Ckeditor::Engine => '/ckeditor'
@@ -77,8 +78,8 @@ Kzs::Application.routes.draw do
   
 
   root :to => 'dashboard#index'
-  
-  match '/library' => 'library#library'
+
+  match '/library' => 'admin/users#index'
   
   ActiveAdmin.routes(self)
 
