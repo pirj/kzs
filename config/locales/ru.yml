@@ -68,9 +68,10 @@ ru:
       organization:
         one: "Организация"
         other: "Организации"
-      user:
+      user: 
         one: "Пользователь"
         other: "Пользователи"
+        many: "Пользователей"
       group:
         one: "Группа"
         other: "Группы"
