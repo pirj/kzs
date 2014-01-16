@@ -54,7 +54,7 @@ class Document < ActiveRecord::Base
   
   scope :with_completed_tasks, includes(:task_list).where(:task_list => {:completed => true})  
   scope :with_completed_tasks_in_statement, includes(:statements).where(:statements => {:with_completed_task_list => true})
-  
+
   DOCUMENT_TYPES = ["mail", "writ"]
   
   def self.text_search(query)
