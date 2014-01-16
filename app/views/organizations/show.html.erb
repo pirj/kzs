@@ -1,55 +1,135 @@
 <div class="container">
-
-	<div class="span12">
-		<%= render 'shared/user' %>
-		<h1 class="doc_header"><%= @organization.title %><span class="caret"></span></h1>
-		<div class="btn-toolbar">
-      <div class="btn-group">	
-        <%= link_to "назад", :back, :class => "btn" %>
-      </div>
-      <% if current_user.organization_id == @organization.id %>
-      <div class="btn-group">	
-        <%= link_to "редактировать", edit_organization_path(@organization), :class => "btn" %>
-      </div>
-      <% end %>
-    </div>
-		  
-    <h1>Общие данные</h1>
-    <p>Полное наименование: <%= @organization.title %></p>
-    <p>Форма собственности: <%= @organization.type_of_ownership %></p>
-    <p>Дата постановки на учет в налоговом органе: <%= @organization.date_of_registration.strftime('%d.%m.%Y') if @organization.date_of_registration %></p>
-    <p>Налоговый орган, принявший на учет: <%= @organization.tax_authority_that_registered %></p>
-    <p>Скан свидетельства о постановке на учет в налоговом органе: <%= link_to "Скачать", @organization.certificate_of_tax_registration.url(:original, false) %></p>
-    <p>Дата решения о создании организации: <%= @organization.creation_resolution_date %></p>
-    <p>Скан решения о создании: <%= link_to "Скачать", @organization.creation_resolution.url(:original, false) %></p>
-    <p>Скан Устава организации: <%= link_to "Скачать", @organization.articles_of_organization.url(:original, false) %></p>
-    <br>
-    <p>Генеральный директор: <%= user_with_full_name_with_middle_name(@organization.director_id) %></p>
-    <p>Главный бухгалтер: <%= user_with_full_name_with_middle_name(@organization.accountant_id) %></p>
-    <p>ИНН: <%= @organization.inn %></p>
-    <p>КПП: <%= @organization.kpp %></p>
-    <p>ОГРН: <%= @organization.ogrn %></p>
-    <p>БИК: <%= @organization.bik %></p>
-    <p>Дата постановки в ЕГРЮЛ: <%= @organization.egrul_registration_date %></p>
-    <p>Скан выписки из ЕГРЮЛ: <%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false) %></p>
-     
-    <h1>Реквизиты</h1>
-    <p>Полное наименование банка: <%= @organization.bank_title %></p>
-    <p>Юридический адрес банка: <%= @organization.bank_address %></p>
-    <p>Корр. счет банка: <%= @organization.bank_correspondent_account %></p>
-    <p>БИК банка: <%= @organization.bank_bik %></p>
-    <p>ИНН банка: <%= @organization.bank_inn %></p>
-    <p>КПП банка: <%= @organization.bank_kpp %></p>
-    <p>ОКВЭД банка: <%= @organization.bank_okved %></p>
-    <p>Расчетный счет организации: <%= @organization.organization_account %></p>
-    <p>Юридический адрес организации: <%= @organization.legal_address %></p>
-    <p>Физический адрес организации: <%= @organization.actual_address %></p>
-    
-    <h1>Сотрудники</h1>
-    <ul>
-      <% @organization.users.each do |user| %>
-      <li><%= user.position %>: <%= user_with_full_name_with_middle_name(user) %></li>
-      <% end %>
+    <ul class="row top-pannel clearfix">
+      <li class="col-md-8">
+        <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
+        <h1><%= @organization.title %><span class="sub-title">(Режим редактирования)</span></h1>
+      </li>
+      <li class="col-md-4 pull-right">
+        <%= render 'shared/user' %>
+      </li>
     </ul>
-</div>
+<%= form_for(@organization, :html => {:class => "form row-fuild"}) do |f| %>
+   <h2 class="h1">1. Общие данные</h2>
+    <div class="form-item"><span class="form-label col-md-5">Полное наименование:</span><%= f.text_field :title, :class => 'form-control col-xs-6' %></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Сокращенное наименование:</span><input class="form-control col-xs-6" placeholder="<%= @organization.title %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Форма собственности:</span>
+      <select class="form-control col-xs-2" id="" name="">
+        <option value="3"><%= @organization.type_of_ownership %></option>
+      </select>
+    </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Дата постановки на учет в налоговом органе:</span>
+     <input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">
+    </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Налоговый орган, принявший на учет:</span>
+     <input class="form-control col-xs-6" id="" name="" placeholder="" size="10" type="text">
+    </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Скан свидетельства о постановке на учет в налоговом органе:</span><%= link_to "Скачать", @organization.certificate_of_tax_registration.url(:original, false), {:class => "download-link"} %><input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Дата решения о создании  рганизации:</span>
+     <input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">
+    </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Скан решения о создании:</span>  <input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Скан Устава организации:</span><input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Генеральный директор:</span><input class="form-control col-xs-6 chosen-container chosen-container-multi" placeholder="<%= user_with_full_name_with_middle_name(@organization.director_id) %>" type="text"/></div>
+
+    <!--%= f.collection_select(@organization.director_id, :id, :user_with_full_name_with_middle_name, {multiple: true, :id => "gen_dir_choice", :class => "col-xs-8"}) %>-->
+
+    <div class="form-item"><span class="form-label col-md-5">Главный бухгалтер:</span><input class="form-control col-xs-6" placeholder="<%= user_with_full_name_with_middle_name(@organization.accountant_id) %>" type="text"/></div>
+
+    <!--%= f.collection_select(@organization.accountant_id, :id, :user_with_full_name_with_middle_name, {multiple: true, :id => "gen_dir_choice", :class => "col-xs-8"}) %>-->
+
+    <div class="form-item"><span class="form-label col-md-5">ИНН:</span><input class="form-control col-xs-2" placeholder="<%= @organization.inn %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">КПП:</span><input class="form-control col-xs-2" placeholder="<%= @organization.kpp %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">ОГРН:</span><input class="form-control col-xs-2" placeholder="<%= @organization.ogrn %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">БИК:</span><input class="form-control col-xs-2" placeholder="<%= @organization.bik %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Дата постановки в ЕГРЮЛ:</span><input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text"></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Скан выписки из ЕГРЮЛ:</span><%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"} %><input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+    <ul class="nav nav-pills">
+      <li class="col-md-offset-5"><input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить"></li>
+      <li><a href="#" class="btn-link btn-sm">Отменить изменения</a></li>
+    </ul>
+   <% end %> 
+ </div>   
+ <div class="container">
+  <%= form_for(@organization, :html => {:class => "form row-fuild"}) do |f| %>
+  <h2 class="h1">2. Реквизиты</h2>
+    <div class="form-item"><span class="form-label col-md-5">Полное наименование банка:</span><input class="form-control col-xs-6" placeholder="<%= @organization.bank_title %>" type="text"/></div>
+
+    <div class="form-item"><span class="form-label col-md-5">Юридический адрес банка:</span><input class="form-control col-xs-6" placeholder="<%= @organization.bank_address %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Корр. счет банка:</span><input class="form-control col-xs-4" placeholder="<%= @organization.bank_correspondent_account %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">БИК банка:</span><input class="form-control col-xs-2" placeholder="<%= @organization.bank_bik %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">ИНН банка:</span><input class="form-control col-xs-3" placeholder="<%= @organization.bank_inn %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">КПП банка:</span><input class="form-control col-xs-2" placeholder="<%= @organization.bank_kpp %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">ОКВЭД банка:</span> <input class="form-control col-xs-4" placeholder="<%= @organization.bank_okved %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Расчетный счет организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.organization_account %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Юридический адрес организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.legal_address %>" type="text"/> </div>
+
+    <div class="form-item"><span class="form-label col-md-5">Физический адрес организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.actual_address %>" type="text"/> </div>
+    <ul class="nav nav-pills">
+      <li class="col-md-offset-5"><input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить"></li>
+      <li><a href="#" class="btn-link btn-sm">Отменить изменения</a></li>
+    </ul>
+    <% end %>
+  </div>
+
+
+<div class="container add-list">
+  <%= form_for(@organization, :html => {:class => "form row-fuild"}) do |f| %>   
+   <span class="h1"><span class="col-md-5">2. Лицензии</span> <a href="#" class="add-new" id="add_new_lic"><span class="icon-plus"></span>Добавить новую</a></span>
+    <div class="form-container">
+      <div class="row title">
+        <div class="col-md-3">
+          <div class="view-main-doc view-doc-small">
+            <iframe src=""/></iframe>
+          </div>
+        </div>
+        <div class="col-md-7"><b class="h1">Лицензия на строительство зданий и сооружений I и II уровней</b></div>
+        <div class="col-md-2"><a href="#" class="delete">Удалить</a></div>
+      </div>
+      <div class="row">
+        <div class="form-item"><span class="form-label col-md-5">Тип документа:</span>
+          <select class="form-control col-xs-2" id="" name="">
+            <option value="3"><%= @organization.type_of_ownership %></option>
+          </select>
+        </div>
+        <div class="form-item"><span class="form-label col-md-5">Серия и номер:</span>
+          <input class="col-md-6 form-control"/>
+        </div>
+        <div class="form-item"><span class="form-label col-md-5">Дата выдачи:</span>
+         <input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">
+        </div>
+        <div class="form-item"><span class="form-label col-md-5">Срок действия до:</span>
+         <input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">
+        </div>
+        <div class="form-item"><span class="form-label col-md-5">Кем выдан:</span>
+          <input class="col-md-6 form-control"/>  
+        </div>
+        <div class="form-item"><span class="form-label col-md-5">Скан документа:</span><%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"} %><input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+      </div>
+      <ul class="nav nav-pills">
+        <li class="col-md-offset-5"><input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить"></li>
+        <li><a href="#" class="btn-link btn-sm">Отменить изменения</a></li>
+      </ul>
+    </div>
+  <% end %>
 </div>
