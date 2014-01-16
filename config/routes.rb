@@ -28,6 +28,7 @@ Kzs::Application.routes.draw do
       get 'copy'
       get 'to_drafts'
       get 'reply'
+      get 'action_list'
     end
   end
   

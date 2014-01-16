@@ -389,6 +389,21 @@ class DocumentsController < ApplicationController
          format.js {  }
       end
   end
+
+  def action_list
+    @document = Document.find(params[:id])
+    @edit = @document.user_id == current_user.id ? true : false
+    @show =          @document.sent == true && @document.organization_id == current_user.organization_id ||
+                     @document.sender_organization_id == current_user.organization_id && @document.user_id == current_user.id ||
+                     @document.sender_organization_id == current_user.organization_id && @document.approver_id == current_user.id ||
+                     @document.approved == true && @document.sender_organization_id == current_user.organization_id ? true : false
+    @reply =         @document.organization_id == current_user.organization_id ? true : false
+    @approve =       @document.approver_id == current_user.id && @document.prepared == true && @document.approved == false ? true : false
+    @prepare =       @document.user_id == current_user.id || @document.approver_id == current_user.id && @@document.approved == false ? true : false
+    @create_draft =  @document.prepared == false ? true : false
+    @send_document = @document.approver_id == current_user.id && @document.sent == false && @document.approved == true ||
+        @document.user_id == current_user.id && @document.sent == false && @document.approved == true ? true : false
+  end
   
 
   private
@@ -418,6 +433,8 @@ class DocumentsController < ApplicationController
       end
     end
   end
+
+
     
   
   
