@@ -58,11 +58,15 @@ $(document).ready(function(){
 
 
     $(".dynamic-table tbody tr").click(function(){
-				var self = this;
-				var controller = $('table').attr('id')
-        appendTr(controller, self)
-    })
-		
+        if(this.className!=='opened'){
+            var self = this;
+            var controller = $('table').attr('id')
+            appendTr(controller, self)
+        }
+    });
+
+
+
 
     $(".dynamic-table tbody td.not_this").click(function(e){
         e.stopPropagation()

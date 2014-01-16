@@ -1,30 +1,41 @@
+var idDoc = <%= @document.id %>;
+var tr = {
+    open: function(id){
+        $('.inform').remove();
+        $('tr.opened').removeClass('opened');
+        $('.dynamic-table.table td').show();
+        $('#<%= @document.id %>').children('td').hide();
+        $('<%=j render :partial => 'full_element', :@document => @document %>').appendTo("#<%= @document.id %>");
+        $('#<%= @document.id %>').addClass('opened');
+    },
+    close: function(id){
+        $('#'+id+' .inform').remove();
+        $('#'+id+'').children('td').show();
+    }
+};
 
-//console.log($('#<%= @document.id %>').find('.inform').length);
-
-if ($('#<%= @document.id %>').find('.inform').length > 0 ) {
-    $('#<%= @document.id %> .inform').remove();
-    $('#<%= @document.id %>').children('td').show();
+if ($('#'+idDoc+'').find('.inform').length > 0 ) {
+    tr.close(idDoc);
 }
 else
 {
-
-    $('.inform').remove();
-    $('.dynamic-table.table td').show();
-    $('#<%= @document.id %>').children('td').hide();
-    $('<%=j render :partial => 'full_element', :@document => @document %>').appendTo("#<%= @document.id %>");
-
+    tr.open(idDoc);
 }
-
-//var a = "<ul class='dropdown-menu' role='menu'><li class='title'><a href='#'>Шаяхметов Роберт </a> Инженер ПТО, ООО «Циклон»</li><li class='photo'><img alt='' src=''></li><li><a href='#' class='icon-ok'>Написать соообщение</a></li><li><a href='#' class='icon-clock'>Личная страница</a></li><li class='dropdown-arr'></li><li><a href='#' class='icon-block-1'>Отмена</a></li></ul>"
 
 
 
 $('#<%= @document.id %>').find('.dropdown').on('click', function(e) {
-   // $(this).after(a);
-  //  console.log(this);
+
     e.preventDefault();
     e.stopPropagation();
     return false;
+});
+
+
+
+$("div.inform-hide").click(function(){
+
+tr.close(idDoc);
 });
 
 

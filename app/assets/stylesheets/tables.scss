@@ -1,0 +1,167 @@
+
+/*tables*/
+
+
+.dynamic-table {
+  tr{
+    cursor: pointer;
+    &.opened{
+      cursor: default;
+    }
+  }
+}
+
+.default-table {
+  width: 100%;
+  .new {
+    td:first-child {
+      border-left: 4px solid #1ba0e1;
+      padding-left: 0;
+      label {
+        margin-left: -2px;
+      }
+    }
+  }
+  thead > tr > th {
+    height: 48px;
+    vertical-align: middle;
+    font-weight: normal;
+    color: #989898;
+    &.status {
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+    }
+    &:first-child {
+      text-align: center;
+      padding-left: 0;
+    }
+  }
+  td {
+    padding: 16px 0;
+    vertical-align: middle;
+    border-top: 1px solid #e0e0e0;
+    color: #666666;
+    position: relative;
+    &.type {
+      color: #000;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    &.inform {
+      width: 100%;
+      &.in {
+        display: block;
+      }
+    }
+    > a {
+      color: #0e84cf;
+      text-decoration: none;
+      div {
+        display: table-cell;
+      }
+    }
+    &.status {
+      text-align: center;
+      .btn {
+        position: relative;
+        min-width: 100px;
+        display: inline-block;
+        font-size: 12px;
+        line-height: 20px;
+        padding: 6px 10px;
+        font-weight: normal;
+        border-radius: 15px;
+        cursor: pointer;
+        &:before {
+          color: #999999;
+          font-size: 18px;
+          left: -39px;
+          position: absolute;
+          top: 4px;
+        }
+        .count {
+          border-radius: 90px;
+        }
+      }
+    }
+    &:first-child {
+      text-align: center;
+    }
+  }
+  .sortable {
+    display: inline-block;
+    line-height: 34px;
+    color: #999999;
+    font-weight: normal;
+    &.current {
+      color: #36b3aa;
+      .caret {
+        border-top-color: #36b3aa;
+      }
+    }
+  }
+  .today {
+    text-align: center;
+    font-weight: 100;
+    font-size: 22px;
+  }
+
+  .sub-table {
+    td {
+      padding: 0;
+      border: 0;
+    }
+  }
+}
+
+.default-table .inform {
+  padding: 30px 0 100px;
+}
+
+.inform {
+  background: #f7fffd;
+  &:after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  .h3 {
+    font-weight: normal;
+  }
+  .value {
+    width: 79%;
+  }
+  .view-main-doc {
+    margin-top: 32px;
+  }
+  .view-main-doc, .doc-sample {
+    height: 264px;
+    width: 190px;
+  }
+  .controls {
+    margin: 18px 0 0 168px;
+    .btn {
+      margin-right: 20px;
+    }
+  }
+  .progress {
+    width: 25%;
+    height: 8px;
+    margin: 39px 0 0 64%;
+    position: relative;
+    overflow: visible;
+
+  }
+  .progress-label {
+    position: absolute;
+    height: auto;
+    font-size: 13px;
+    color: #666666;
+    clip: auto;
+    right: 130px;
+    top: 110px;
+    overflow: visible;
+  }
+}
