@@ -9,6 +9,7 @@ class DocumentsController < ApplicationController
   
   def index
     # check if user can view confindetnial documents
+    # code since lines from 10 to 14 dont usage in this action, maybe delete them?
     if current_user.has_permission?(5)
       documents = Document.all
     else
@@ -31,20 +32,14 @@ class DocumentsController < ApplicationController
                 .where{(sent == true) & (organization_id == organization) | 
                   (sender_organization_id == organization) & (user_id == current_user_id) | 
                   (sender_organization_id == organization) & (approver_id == current_user_id) | 
-                  (approved == true) & (sender_organization_id == organization) 
-                  }
-    
-    # mails
-    if params[:type] == "mails"
-      @documents = documents.where(:document_type => 'mail')
-      
-    # writs
-    elsif params[:type] == "writs"
-      @documents = documents.where(:document_type => 'writ')
-      
-    # any other case
+                  (approved == true) & (sender_organization_id == organization)}
+
+    @documents = if params[:type] == 'mails'
+      documents.mails # mails
+    elsif params[:type] == 'writs'
+      documents.writs # writs
     else
-      @documents = documents
+      documents # any other case
     end  
     
     # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
@@ -55,7 +50,6 @@ class DocumentsController < ApplicationController
       format.html
       format.js
     end
-    
   end
   
   def drafts    
@@ -64,32 +58,22 @@ class DocumentsController < ApplicationController
   end
   
   def batch
-    documents_ids = params[:document_ids]
-    if params[:prepare]
-      Document.where(:id => documents_ids).each do |d|
+    Document.find(params[:document_ids]).each do
+      if params[:prepare]
         if for_approve?(d)
-          d.prepared = true
-          d.draft = false
-          d.save!
+          d.update_attributes(prepared: true, draft: false)
           flash[:notice] = t('documents_updated')
         else
           d.reject
           flash[:notice] = t('access_denied')
         end
-      end
-    elsif params[:approve]
-      Document.where(:id => documents_ids).each do |d|
-        d.draft = false
-        d.approved = true
-        d.approved_date = Time.now
-        d.date = Time.now
-        d.sn = "D" + d.id.to_s
-        d.save!
+      elsif params[:approve]
+        d.update_attributes!(approved: true, draft: false, approved_date: Time.now, date: Time.now, sn: "D #{d.id}")
+        flash[:notice] = t('documents_updated')
+      elsif params[:send]
+        d.update_attributes(sent: true, sent_date: Time.now)
         flash[:notice] = t('documents_updated')
       end
-    elsif params[:send]
-        Document.update_all({sent: true, sent_date: Time.now}, {id: documents_ids})
-        flash[:notice] = t('documents_updated')
     end
     redirect_to documents_path
   end
