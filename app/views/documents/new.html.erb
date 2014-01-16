@@ -15,17 +15,7 @@
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        <div class="list_to_add_documents">
-          <%= hidden_field_tag "document[document_ids][]", nil %>
-          <% @documents.each do |document| %>
-              <label class="checkbox">
-                <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
-                <b><%= document.title %></b> ||
-                <%= t(document.document_type) %> ||
-                <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
-              </label>
-          <% end %>
-        </div>
+
       </div>
       <!--<div class="modal-footer">-->
       <!--<button type="button" class="btn btn-default" >Close</button>-->

@@ -61,14 +61,14 @@ ru:
   main_info: "Общие данные"
   task_list_successfully_created: "Лист замечаний успешно создан"
   activerecord:
-    models: 
+    models:
       permission:
         one: "Право"
         other: "Права"
       organization:
         one: "Организация"
         other: "Организации"
-      user: 
+      user:
         one: "Пользователь"
         other: "Пользователи"
         many: "Пользователей"
@@ -106,7 +106,7 @@ ru:
         title: "Название"
         description: "Описание"
       group:
-        title: "Название"  
+        title: "Название"
         permissions: "Права"
       organization:
         title: "Полное название"
@@ -175,9 +175,3 @@ ru:
         title: "Заголовок"
         text: "Содержимое"
         document_id: "Распоряжение"
-ru:
-  kids:
-    zero: ru_zero
-    one: ru_one
-    few: ru_few
-    other: ru_other
