@@ -1,4 +1,8 @@
 .form {
+  .h1 {
+    margin-bottom:40px;
+    display:block;
+  }
   position: relative;
   .form-item {
     display:block;
@@ -25,6 +29,10 @@
     &:first-child {
       margin-top: 0;
     }
+  }
+  .download-link {
+    margin-right:20px;
+    color:#428bca;
   }
 }
 
@@ -265,4 +273,24 @@ fieldset[disabled] .chosen-container {
 
 .cke_editor_statement_text {
   margin-bottom: 20px !important;
+}
+
+.form-container {
+  .h1 {
+    font-weight:bold;
+  }
+  background:#fffff2;
+  padding:20px;
+  .view-doc-small {
+    box-shadow:0 15px 20px -5px rgba(0,0,0,0.3);
+  }
+  .view-doc-small, .view-doc-small iframe {
+      min-height:250px;
+      max-width:174px;
+      margin:0;
+  }
+  .delete {
+    float:right;
+    color:#e6737e;
+  }
 }

@@ -69,29 +69,49 @@
     left: -3px;
 }
 
-
-.add-widget-btn {
+.add-new, .add-widget-btn {
   color: #17a488;
   font-size: 22px;
   position: relative;
+  padding-left: 54px;
   &:hover, &:focus {
     color: #17a488;
     font-size: 22px;
     position: relative;
   }
-  span {
+   span {
     border-radius: 100px;
     background: #17a488;
     display: block;
-    height: 40px;
-    line-height: 40px;
     font-size: 14px;
     text-align: center;
     color: #fff;
-    left: -54px;
     position: absolute;
+    left:0;
+  }
+} 
+
+.add-widget-btn {
+  span {
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
     width: 40px;
     top: -3px;
+  }
+}
+
+.add-new {
+  padding-left:36px;
+   span {
+    width:26px;
+    height:26px;
+    line-height:26px;
+    top:2px;
+    font-size:18px;
+    &:before {
+      left:0;
+    }
   }
 }
 
