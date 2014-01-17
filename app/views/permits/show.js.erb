@@ -1,13 +1,62 @@
-if ($('#<%= @permit.id %>').find('.inform').length > 0 ) {
-    $('#<%= @permit.id %> .inform').remove();
-    $('#<%= @permit.id %>').children('td').show();
+//if ($('#<%= @permit.id %>').find('.inform').length > 0 ) {
+//    $('#<%= @permit.id %> .inform').remove();
+//    $('#<%= @permit.id %>').children('td').show();
+//}
+//else
+//{
+//
+//    $('.inform').remove();
+//    $('.dynamic-table.table td').show();
+//    $('#<%= @permit.id %>').children('td').hide();
+//    $('<%=j render :partial => 'full_element', :@permit => @permit %>').appendTo("#<%= @permit.id %>");
+//
+//}
+//
+//
+
+
+
+var idDoc = <%= @permit.id %>;
+var tr = {
+    open: function(id){
+        $('.inform').remove();
+        $('tr.opened').removeClass('opened');
+        $('.dynamic-table.table td').show();
+        $('#'+id+'').children('td').hide();
+        $('<%=j render :partial => 'full_element', :@permit => @permit %>').appendTo('#'+id+'');
+        $('#'+id+'').addClass('opened');
+    },
+    close: function(id){
+        $('#'+id+' .inform').remove();
+        $('#'+id+'').children('td').show();
+    }
+};
+
+if ($('#'+idDoc+'').find('.inform').length > 0 ) {
+    tr.close(idDoc);
 }
 else
 {
-
-    $('.inform').remove();
-    $('.dynamic-table.table td').show();
-    $('#<%= @permit.id %>').children('td').hide();
-    $('<%=j render :partial => 'full_element', :@permit => @permit %>').appendTo("#<%= @permit.id %>");
-
+    tr.open(idDoc);
 }
+
+
+
+$('#<%= @permit.id %>').find('.dropdown').on('click', function(e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+});
+
+
+
+$("div.inform-hide").click(function(){
+
+    tr.close(idDoc);
+});
+
+
+
+
+
