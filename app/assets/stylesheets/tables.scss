@@ -1,12 +1,16 @@
-
 /*tables*/
 
-
 .dynamic-table {
-  tr{
+  tr {
     cursor: pointer;
-    &.opened{
+    &.opened {
       cursor: default;
+      td{
+         display: none;
+        &.inform{
+          display: table-cell;
+        }
+      }
     }
   }
 }
@@ -50,10 +54,59 @@
       text-transform: uppercase;
     }
     &.inform {
+
+      display: none;
+
       width: 100%;
       &.in {
         display: block;
       }
+
+      background: #f7fffd;
+      padding: 30px 0 100px;
+      &:after {
+        display: table;
+        clear: both;
+        content: "";
+      }
+      .h3 {
+        font-weight: normal;
+      }
+      .value {
+        width: 79%;
+      }
+      .view-main-doc {
+        margin-top: 32px;
+      }
+      .view-main-doc, .doc-sample {
+        height: 264px;
+        width: 190px;
+      }
+      .controls {
+        margin: 18px 0 0 168px;
+        .btn {
+          margin-right: 20px;
+        }
+      }
+      .progress {
+        width: 25%;
+        height: 8px;
+        margin: 39px 0 0 64%;
+        position: relative;
+        overflow: visible;
+
+      }
+      .progress-label {
+        position: absolute;
+        height: auto;
+        font-size: 13px;
+        color: #666666;
+        clip: auto;
+        right: 130px;
+        top: 110px;
+        overflow: visible;
+      }
+
     }
     > a {
       color: #0e84cf;
@@ -90,12 +143,13 @@
       text-align: center;
     }
 
-    &.exp_type{
+    &.exp_type {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
     }
   }
+
   .sortable {
     display: inline-block;
     line-height: 34px;
@@ -122,52 +176,3 @@
   }
 }
 
-.default-table .inform {
-  padding: 30px 0 100px;
-}
-
-.inform {
-  background: #f7fffd;
-  &:after {
-    display: table;
-    clear: both;
-    content: "";
-  }
-  .h3 {
-    font-weight: normal;
-  }
-  .value {
-    width: 79%;
-  }
-  .view-main-doc {
-    margin-top: 32px;
-  }
-  .view-main-doc, .doc-sample {
-    height: 264px;
-    width: 190px;
-  }
-  .controls {
-    margin: 18px 0 0 168px;
-    .btn {
-      margin-right: 20px;
-    }
-  }
-  .progress {
-    width: 25%;
-    height: 8px;
-    margin: 39px 0 0 64%;
-    position: relative;
-    overflow: visible;
-
-  }
-  .progress-label {
-    position: absolute;
-    height: auto;
-    font-size: 13px;
-    color: #666666;
-    clip: auto;
-    right: 130px;
-    top: 110px;
-    overflow: visible;
-  }
-}
