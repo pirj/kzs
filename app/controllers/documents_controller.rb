@@ -132,7 +132,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json {render :json => {:sender_organization => @sender_organization, 
+      format.json {render :json => {:sender_organization => @sender_organization,
                                     :sender_organization_id => @sender_organization_id,
                                     :organization => @organization,
                                     :organization_id => @organization_id,
