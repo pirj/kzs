@@ -180,3 +180,12 @@
   position: absolute;
   }
 }
+
+.download-link {
+  color: #428bca;
+  text-decoration:underline;
+  font-size:13px;
+  &:focus, &:hover {
+    color: #428bca;
+  }
+}
