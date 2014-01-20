@@ -142,7 +142,7 @@
         }
       }
     }
-    &#documents tr > td:first-child {
+    &:first-child {
       text-align: center;
     }
 
@@ -182,5 +182,7 @@
       border: 0;
     }
   }
+}
+
 }
 
