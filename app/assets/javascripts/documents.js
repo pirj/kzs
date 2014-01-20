@@ -1,53 +1,34 @@
-
-
 $(document).ready(function(){
     var controller = $('table').attr('id')
 
     function CloseAllTR(controller){
-
             _.each(document.getElementById(controller).getElementsByClassName('opened'), function(td){
-
                 td.classList.remove('opened');
-    //            console.log(td.classList);
             })
-
     }
-
     $(".dynamic-table tbody tr").click(function(){                      //открытие
         var docId = this.id;
-
-
         if(this.className!=='opened'){
             var self = this;
 
             if (document.getElementById(controller).getElementsByClassName('opened')) {
                 CloseAllTR(controller);
             }
-
             if (!this.getElementsByTagName('iframe')[0].src){
                 this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
             }
-
             self.classList.add('opened');
-                  //className classList stopImmediatePropagation(' ' ,....,...).
-          //  self.className += ' opened' ;            //className classList src="/<%= @controller %>/<%= document.id %>.pdf"
-
         }
     });
 
     $(".dynamic-table .inform-hide").on('click', function(){                  //закрытие
-
         event.stopPropagation()
-
         CloseAllTR(controller);
-
     });
-
 
     $(".dynamic-table tbody td.not_this").click(function(e){
         e.stopPropagation()
     });
-
 
     $('#new_document').validate({
 

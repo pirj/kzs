@@ -1,8 +1,42 @@
 $(document).ready(function(){
 
 
+// table
 
 
+        var controller = $('table').attr('id')
+
+        function CloseAllTR(controller){
+            _.each(document.getElementById(controller).getElementsByClassName('opened'), function(td){
+                td.classList.remove('opened');
+            })
+        }
+        $(".dynamic-table tbody tr").click(function(){                      //открытие
+            var docId = this.id;
+            if(this.className!=='opened'){
+                var self = this;
+
+                if (document.getElementById(controller).getElementsByClassName('opened')) {
+                    CloseAllTR(controller);
+                }
+             /*   if (!this.getElementsByTagName('iframe')[0].src){
+                    this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
+                }*/
+                self.classList.add('opened');
+            }
+        });
+
+        $(".dynamic-table .inform-hide").on('click', function(){                  //закрытие
+            event.stopPropagation()
+            CloseAllTR(controller);
+        });
+
+        $(".dynamic-table tbody td.not_this").click(function(e){
+            e.stopPropagation()
+        });
+
+
+//table end
 
     $("#permit_start_date, #permit_expiration_date, #permit_date").datepicker({ dateFormat: "dd-mm-yy" });
 

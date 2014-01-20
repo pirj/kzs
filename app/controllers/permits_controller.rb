@@ -1,4 +1,5 @@
 class PermitsController < ApplicationController
+  layout 'permits'
   helper_method :sort_column, :sort_direction
   
   def index

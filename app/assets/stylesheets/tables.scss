@@ -1,20 +1,5 @@
 /*tables*/
 
-.dynamic-table {
-  tr {
-    cursor: pointer;
-    &.opened {
-      cursor: default;
-      td{
-         display: none;
-        &.inform{
-          display: table-cell;
-        }
-      }
-    }
-  }
-}
-
 .default-table {
   width: 100%;
   .new {

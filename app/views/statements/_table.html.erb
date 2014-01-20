@@ -37,10 +37,14 @@
           <div class="col-md-8">
             <ul class="doc-info">
               <li>
-                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= statement.id %></a> / </span>
+                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= statement.id %></a> / <%= if statement.sent_date then
+                                                                                                                       statement.sent_date.strftime('%d.%m.%Y')
+                                                                                                                     else
+                                                                                                                       'Дата не присвоена'
+                                                                                                                     end %></span>
               </li>
-              <li>Тип документа: </li>
-              <li> </li>
+              <li>Тип документа: Акт</li>
+              <li> <%= statement_status(statement) %></li>
               <li><span class="title">Тема:</span>
 						<span class="value">
 						  <span class="h3"><%= statement.title %></span>
@@ -55,7 +59,7 @@
 
                 <div class="user value">
                   <span class="photo"> <i class="default-user" ></i></span>
-                  <a href="#" class="name"></a>
+                  <a href="#" class="name"><%= user_with_full_name(statement.approver_id) %></a>
 
                 </div>
               </li>

@@ -1,0 +1,28 @@
+.attachments-controls {
+  > div{
+    display: inline-block;
+  }
+}
+
+.docsFiles {
+  margin-top: 40px;
+  h4{
+    padding-bottom: 15px;
+    padding-top: 20px;
+  }
+}
+
+.dynamic-table {
+  tr {
+    cursor: pointer;
+    &.opened {
+      cursor: default;
+      td{
+        display: none;
+        &.inform{
+          display: table-cell;
+        }
+      }
+    }
+  }
+}

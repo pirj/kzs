@@ -95,6 +95,12 @@
         <td><%= permit.start_date.strftime("%d.%m.%y") if permit.start_date %></td>
         <td><%= permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date %></td>
         <td class="status "><%= permit_status(permit) %></td>
+        <td class="inform">
+          <div class="col-md-12">wasd
+
+            <div class="inform-hide">Close</div></div>
+
+        </td>
         <!--<td><%= link_to "Подробнее", permit %></td>-->
       </tr>
   <% end %>
