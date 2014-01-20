@@ -1,14 +1,50 @@
-function appendTr(controller, self) {
-    $.when($.ajax({
-            url: '/'+controller + '/' + self.id + '.js',
-            type: "GET"
-        })).then(function(data, textStatus, jqXHR){
-            //console.log(textStatus);
-        }
-    )
-}
+
 
 $(document).ready(function(){
+    var controller = $('table').attr('id')
+
+    function CloseAllTR(controller){
+
+            _.each(document.getElementById(controller).getElementsByClassName('opened'), function(td){
+
+                td.classList.remove('opened');
+                console.log(td.classList);
+            })
+
+    }
+
+    $(".dynamic-table tbody tr").click(function(){                      //открытие
+        var docId = this.id;
+
+        if(this.className!=='opened'){
+            var self = this;
+
+            if (document.getElementById(controller).getElementsByClassName('opened')) {
+                CloseAllTR(controller);
+            }
+
+            if (!this.getElementsByTagName('iframe')[0].src){
+                this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
+            }
+
+            self.classList.add('opened');
+                  //className classList
+          //  self.className += ' opened' ;            //className classList src="/<%= @controller %>/<%= document.id %>.pdf"
+
+        }
+    });
+
+    $(".dynamic-table .inform-hide").on('click', function(){                  //закрытие
+
+        console.log(this.parentNode.parentNode);
+       // CloseAllTR(controller);
+
+    });
+
+
+    $(".dynamic-table tbody td.not_this").click(function(e){
+        e.stopPropagation()
+    });
 
 
     $('#new_document').validate({
@@ -57,20 +93,6 @@ $(document).ready(function(){
     });
 
 
-    $(".dynamic-table tbody tr").click(function(){
-        if(this.className!=='opened'){
-            var self = this;
-            var controller = $('table').attr('id')
-            appendTr(controller, self)
-        }
-    });
-
-
-
-
-    $(".dynamic-table tbody td.not_this").click(function(e){
-        e.stopPropagation()
-    })
 
     $('#document_organization_ids').chosen();
 
@@ -166,7 +188,7 @@ $('#delete_link').click(function() {
     return false;
 });
 $(function() {
-    $("#text-search input").keyup(function() {
+    $("#text-search input").keyup(function() {                                                              //?
         $.get($("#text-search").attr("action"), $("#text-search").serialize(), null, "script");
         return false;
     });

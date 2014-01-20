@@ -25,7 +25,7 @@
                 <span class="checkbox-label"></span>
               </label></td>
         <% end %>
-        <td><a class="document_id" href="/documents/<%= document.id %>"><%= document.id %></a>
+        <td><a class="document_id" href="/<%= @controller %>/<%= document.id %>"><%= document.id %></a>
           / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
         <td><%= link_to organization_full_title(document.sender_organization_id), organization_path(document.sender_organization_id), :target => '_blank' %></td>
         <td><%= link_to organization_full_title(document.organization_id), organization_path(document.organization_id), :target => '_blank' %></td>
@@ -44,6 +44,70 @@
         <td class="status">
           <%= document_status(document) %>
 
+        </td>
+
+
+        <td colspan="9" class="inform">
+          <div class="col-md-8">
+            <ul class="doc-info">
+              <li>
+                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= document.id %></a> / <%= if document.sent then
+                                                                                                                        document.sent_date.strftime('%d.%m.%Y')
+                                                                                                                      else
+                                                                                                                        'Дата не присвоена'
+                                                                                                                      end %></span>
+              </li>
+              <li>Тип документа: <%= t document.document_type %></li>
+              <li> <%= document_status(document) %></li>
+              <li><span class="title">Тема:</span>
+						<span class="value">
+						  <span class="h3"><%= document.title %></span>
+							<ol class="breadcrumb">
+                              <li><%= link_to organization_full_title(document.sender_organization_id), organization_path(document.sender_organization_id), :target => '_blank' %></li>
+                              <li><%= link_to organization_full_title(document.organization_id), organization_path(document.organization_id), :target => '_blank' %></li>
+                            </ol>
+						</span>
+              </li>
+              <li>
+                <span class="title valign-mid">Исполнитель:</span>
+
+                <div class="user value">
+                  <span class="photo"> <i class="default-user" ></i></span>
+                  <a href="#" class="name"><%= user_with_full_name(document.executor_id) %></a>
+
+                </div>
+              </li>
+              <li><span class="title valign-mid">Отправитель:</span>
+
+                <div class="user value">
+                  <span class="photo">
+                    <i class="default-user"></i>
+                  </span>
+                  <a href="#" class="name">
+                    <%= user_with_full_name(document.user_id) %>
+                  </a>
+                </div>
+              </li>
+              <% unless document.document_attachments.blank? %>
+                  <li class="doc-format"><span class="title">Приложения: количество</span>
+
+                  </li>
+              <% end %>
+            </ul>
+            <div class="nav-pills nav controls">
+              <!--<a class="btn btn-default">История переписки</a>-->
+              <a class="btn btn-default" href="/<%= @controller %>/<%= document.id %>">Открыть</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="view-main-doc">
+              <div class="overlay"><a href="/<%= @controller %>/<%= document.id %>.pdf" target="_blank" class="zoom"></a></div>
+              <iframe style="width: 190px; height: 264px;" />
+              </iframe>
+
+            </div>
+          </div>
+          <div class="inform-hide">Close</div>
         </td>
       </tr>
 
