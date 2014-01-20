@@ -76,7 +76,7 @@ Kzs::Application.routes.draw do
   resources :document_attachments
   resources :task_lists
   
-
+  match '/save_desktop_configuration' => 'dashboard#save_desktop_configuration', :via => :post
   root :to => 'dashboard#index'
 
   #match '/library' => 'admin/users#index'
