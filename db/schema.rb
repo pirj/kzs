@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131226142700) do
+ActiveRecord::Schema.define(:version => 20140120112313) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -353,6 +353,13 @@ ActiveRecord::Schema.define(:version => 20131226142700) do
     t.integer  "creator_id"
     t.integer  "approver_id"
     t.text     "executor_comment"
+  end
+
+  create_table "user_desktop_configurations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "desktop_conf"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "user_document_types", :force => true do |t|
