@@ -11,6 +11,10 @@ Kzs::Application.routes.draw do
   
   match '/documents/batch' => 'documents#batch'
 
+  get '/documents/action_list'
+  get '/documents/approve'
+  get '/documents/prepare'
+  get '/documents/send_document'
   resources :documents do
     collection do
       get 'sents'
@@ -28,7 +32,6 @@ Kzs::Application.routes.draw do
       get 'copy'
       get 'to_drafts'
       get 'reply'
-      get 'action_list'
     end
   end
   

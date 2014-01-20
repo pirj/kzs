@@ -77,7 +77,74 @@ class DocumentsController < ApplicationController
     end
     redirect_to documents_path
   end
-  
+
+  def action_list
+   if params[:ids].count > 1
+     @approve = @prepare = @send_document = true
+     params['ids'].each do |id|
+       d = Document.find(id)
+       @approve = @approve && (!d.approved && d.approver_id == current_user.id && d.prepared ? true : false)
+       @prepare = @prepare && (!d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false)
+       @send_document = @send_document && (!d.sent && d.approved && (d.approver_id == current_user.id ||
+                        d.user_id == current_user.id) ? true : false)
+     end
+     @many = params[:ids]
+    else
+      d = Document.find(params[:ids])[0]
+      @edit = d.user_id == current_user.id && d.prepared == false ? true : false
+      @show = d.sent && d.organization_id == current_user.organization_id ||
+              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
+              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
+              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
+      @reply = !d.sent && d.organization_id == current_user.organization_id ? true : false
+      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
+      @prepare = !d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false
+      @create_draft = !d.prepared
+      @send_document = !d.sent && d.approved && (d.approver_id == current_user.id ||
+                       d.user_id == current_user.id) ? true : false
+      @document_id = d.id
+      end
+  end
+
+  def prepare
+    render_text = t('documents_prepared')
+    if params[:ids].class == String
+      params[:ids] = params[:ids].split(",").map { |s| s.to_i }
+      render_text = t('document_prepared')
+    end
+    params[:ids].each do |id|
+      @document = Document.find(id)
+      @document.update_attributes(prepared_date: Time.now, prepared: true, draft: false)
+    end
+    redirect_to documents_path, notice: render_text
+  end
+
+  def approve
+    render_text = t('documents_approved')
+    if params[:ids].class == String
+      params[:ids] = params[:ids].split(",").map { |s| s.to_i }
+      render_text = t('document_approved')
+    end
+    params[:ids].each do |id|
+      @document = Document.find(id)
+      @document.update_attributes(draft: false, approved: true, approved_date: Time.now, date: Time.now, sn: "D" + @document.id.to_s)
+    end
+    redirect_to documents_path, notice: render_text
+  end
+
+  def send_document
+    render_text = t('documents_successfully_sent')
+    if params[:ids].class == String
+      params[:ids] = params[:ids].split(",").map { |s| s.to_i }
+      render_text = t('document_successfully_sent')
+    end
+    params[:ids].each do |id|
+      @document = Document.find(id)
+      @document.update_attributes(sent: true, sent_date: Time.now)
+    end
+    redirect_to documents_path, notice: render_text
+  end
+
   # member
   
   def show
@@ -180,27 +247,13 @@ class DocumentsController < ApplicationController
     organizations = organizations.delete_if{ |x| x.empty? }
     organizations.each do |organization|
       document = Document.new(params[:document])
-      document.organization_id = organization
-      document.user_id = current_user.id
-      document.sender_organization_id = current_user.organization_id
-      document.executor_id = params[:document][:executor_ids].second
-      document.approver_id = params[:document][:approver_ids].second
-      if params[:prepare]
-        document.prepared = true
-        document.prepared_date = Time.now
-        document.draft = false
-      end
-      document.save!
-      if document.document_type == 'writ'
-        task = Task.new
-        task.document_id = document.id
-        task.task = "Исполнить распоряжения №#{document.id}"
-        task.executor_organization_id = organization
-        task.sender_organization_id = current_user.organization_id
-        task.deadline = document.deadline
-        task.save!
-      end
-      
+      # document.document_type = params[:type] ? params[:type] : 'mail'
+      current_user.documents << document
+      document.update_attributes(organization_id: organization, user_id: current_user.id,
+                                 sender_organization_id: current_user.organization_id,
+                                 executor_id: params[:document][:executor_ids].second,
+                                 approver_id: params[:document][:approver_ids].second)
+      document.update_attributes(prepared: true, prepared_date: Time.now, draft: false) if params[:prepare]
       assign_organizations_to_tasks(document)
     end
     redirect_to documents_path, notice: t('document_successfully_created')
@@ -233,43 +286,8 @@ class DocumentsController < ApplicationController
     end
   end
 
-  
-  def prepare
-    @document = Document.find(params[:id])
-    @document.prepared_date = Time.now
-    @document.prepared = true
-    @document.draft = false
-    @document.save
-    redirect_to documents_url, notice: t('document_prepared')
-  end
-  
-  def approve
-    @document = Document.find(params[:id])
-    
-    if current_user.id == @document.approver_id && @document.approved == false  
-      @document.draft = false
-      @document.approved = true
-      @document.approved_date = Time.now
-      @document.date = Time.now
-      @document.sn = "D" + @document.id.to_s
-      @document.save
-      redirect_to documents_path, notice: t('document_approved')
-    else
-      redirect_to :back, alert: t('permission_denied')
-    end
-  end
-  
-  def send_document
-    @document = Document.find(params[:id])
-    if current_user.id == @document.approver_id && @document.sent == false || current_user.id == @document.user_id && @document.sent == false
-      @document.sent = true
-      @document.sent_date = Time.now
-      @document.save
-      redirect_to documents_url, notice: t('document_successfully_sent')
-    else
-      redirect_to :back, alert: t('permission_denied')
-    end
-  end
+
+
   
   def callback
     @document = Document.find(params[:id])
@@ -336,23 +354,18 @@ class DocumentsController < ApplicationController
   
   def reply
     @original_document = Document.find(params[:id])
-    @document_conversation_id = DocumentConversation.where(:id => @original_document.document_conversation_id).first_or_create!
-    @document_conversation_id = @document_conversation_id.id
-    @original_document.document_conversation_id = @document_conversation_id
-    @original_document.save!
-    @document = Document.new
-    @document_conversation_id
-    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
-    @executors = User.where(:organization_id => current_user.organization_id)
-    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @document_conversation = DocumentConversation.where(id: @original_document.document_conversation_id).first_or_create!
+    @original_document.update_attribute(:document_conversation_id, @document_conversation.id)
+    @approvers = User.approvers.where(organization_id: current_user.organization_id)
+    @executors = User.where(organization_id: current_user.organization_id)
+    @recipients = User.where(organization_id: current_user.organization_id)
     @documents = Document.all
-    
+    @document = Document.new
     if current_user.organization_id != @original_document.sender_organization_id && @original_document.opened?
       render :new
     else
       redirect_to :back, :alert => t('only_mails_from_other_organizations_could_be_answered')
     end
-      
   end
   
   def to_drafts
@@ -374,21 +387,6 @@ class DocumentsController < ApplicationController
       end
   end
 
-  def action_list
-    @document = Document.find(params[:id])
-    @edit = @document.user_id == current_user.id ? true : false
-    @show =          @document.sent == true && @document.organization_id == current_user.organization_id ||
-                     @document.sender_organization_id == current_user.organization_id && @document.user_id == current_user.id ||
-                     @document.sender_organization_id == current_user.organization_id && @document.approver_id == current_user.id ||
-                     @document.approved == true && @document.sender_organization_id == current_user.organization_id ? true : false
-    @reply =         @document.organization_id == current_user.organization_id ? true : false
-    @approve =       @document.approver_id == current_user.id && @document.prepared == true && @document.approved == false ? true : false
-    @prepare =       @document.user_id == current_user.id || @document.approver_id == current_user.id && @@document.approved == false ? true : false
-    @create_draft =  @document.prepared == false ? true : false
-    @send_document = @document.approver_id == current_user.id && @document.sent == false && @document.approved == true ||
-        @document.user_id == current_user.id && @document.sent == false && @document.approved == true ? true : false
-  end
-  
 
   private
   

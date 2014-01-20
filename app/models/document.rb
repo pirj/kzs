@@ -5,8 +5,8 @@ class Document < ActiveRecord::Base
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
                   :document_ids, :organization_ids, :document_attachments, 
                   :document_conversation_id, :sender_organization_id, :executor_ids, :approver_ids, 
-                  :task_list_attributes
-                  
+                  :task_list_attributes, :prepared_date, :draft, :approved, :approved_date, :date, :sn, :sent, :sent_date
+
   attr_accessor :organization_ids, :executor_ids, :approver_ids
   
   validates :title, :organization_id, :approver_id, :executor_id, :text, :presence => true

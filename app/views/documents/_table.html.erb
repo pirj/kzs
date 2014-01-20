@@ -132,23 +132,3 @@
   </tbody>
 </table>
 
-<script>
-    $(function() {
-        $('.document_operation').click(function(){
-            if ($(this).prop("checked")) {
-                var id = $(this).closest("tr").attr("id");
-                $.ajax({
-                    type: 'GET',
-                    url: '/documents/'+id+'/action_list',
-                    data: {},
-                    success: function(data){},
-                    error: function(){},
-                    datatype: 'json'
-                });
-            }
-            else {
-                $('.dropdown:last').empty();
-            }
-        })
-    })
-</script>

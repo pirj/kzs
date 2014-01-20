@@ -1,4 +1,9 @@
 $('.dropdown:last').empty();
-$('.dropdown:last').append('<%= j (render 'documents/action_list', document_id: @document.id, show: @show, create_draft: @create_draft,
-                                                                   edit: @edit, prepare: @prepare, approve: @approve,
-                                                                   send_document: @send_document, reply: @reply ) %>');
+<% if @many %>
+    $('.dropdown:last').append('<%= j (render 'documents/action_list', prepare: @prepare, approve: @approve,
+                                                                       send_document: @send_document ) %>');
+<% else %>
+    $('.dropdown:last').append('<%= j (render 'documents/action_list', document_id: @document.id, show: @show, create_draft: @create_draft,
+                                                                       edit: @edit, prepare: @prepare, approve: @approve,
+                                                                       send_document: @send_document, reply: @reply ) %>');
+<% end %>
