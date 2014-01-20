@@ -25,8 +25,16 @@ class TasksController < ApplicationController
       if task_list.with_completed_tasks
          task_list.completed = true
          task_list.save!
+         if task_list.document_id.present?
+            document = Document.find(task_list.document_id)
+            task = document.task  
+            task.completed = true
+            task.save!
+            redirect_to new_statement_path(:document_id => document.id)
+         end
+      else   
+        redirect_to :back, :notice => t('task_completed')
       end
-      redirect_to :back, :notice => t('task_completed')
     else
       redirect_to :back, :alert => t('permission_denied')
     end
