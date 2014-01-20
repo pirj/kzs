@@ -31,23 +31,26 @@
     vertical-align: middle;
     font-weight: normal;
     color: #989898;
-    &.status {
+    padding-left:0;
+    &.status, &.valign {
       text-align: center;
     }
     a {
       text-decoration: none;
-    }
+    }  
     &:first-child {
-      text-align: center;
-      padding-left: 0;
+      padding-left: 20px;
     }
+  }
+  &#documents tr > th:first-child {
+    text-align: center;
   }
   td {
     padding: 16px 0;
     vertical-align: middle;
     border-top: 1px solid #e0e0e0;
     color: #666666;
-    position: relative;
+    position: relative; 
     &.type {
       color: #000;
       font-weight: bold;
@@ -139,14 +142,19 @@
         }
       }
     }
-    &:first-child {
+    &#documents tr > td:first-child {
       text-align: center;
     }
+
 
     &.exp_type {
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
+
+    &:first-child {
+      padding-left:20px;
+
     }
   }
 

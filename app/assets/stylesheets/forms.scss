@@ -1,8 +1,13 @@
 .form {
+  .h1 {
+    margin-bottom:40px;
+    display:block;
+  }
   position: relative;
   .form-item {
-    display:block;
+    display:table;
     margin-bottom: 12px;
+    width:100%;
     &:after {
       clear: both;
       display:table;
@@ -26,6 +31,10 @@
       margin-top: 0;
     }
   }
+  .download-link {
+    margin-right:20px;
+    color:#428bca;
+  }
 }
 
 .new-doc {
@@ -41,6 +50,7 @@
 }
 
 .form-control {
+  display:table-cell;
   height: 38px;
   border-width: 2px;
   z-index: 2;
@@ -53,16 +63,20 @@
 select.form-control {
   box-shadow: none;
   background: #ededed;
+  &:focus, &:active {
+    border-color:#76d4ce;
+  }
 }
 
 .form-label {
-  float: left;
-  margin-right: 20px;
+  float: none;
+  padding-right: 20px;
   color: #999999;
   font-size: 14px;
-  line-height:38px;
+  line-height:16px;
   text-align: right;
-  padding: 0;
+  display:table-cell;
+  vertical-align:middle;
   min-width: 130px;
 }
 
@@ -91,7 +105,7 @@ select.form-control {
   }
   .form-control {
     background: #fff;
-    display: inline-block;
+    display: table-cell;
     &[type="password"] {
       margin-left: -59px;
     }
@@ -265,4 +279,24 @@ fieldset[disabled] .chosen-container {
 
 .cke_editor_statement_text {
   margin-bottom: 20px !important;
+}
+
+.form-container {
+  .h1 {
+    font-weight:bold;
+  }
+  background:#fffff2;
+  padding:20px;
+  .view-doc-small {
+    box-shadow:0 15px 20px -5px rgba(0,0,0,0.3);
+  }
+  .view-doc-small, .view-doc-small iframe {
+      min-height:250px;
+      max-width:174px;
+      margin:0;
+  }
+  .delete {
+    float:right;
+    color:#e6737e;
+  }
 }

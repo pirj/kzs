@@ -261,13 +261,47 @@
     }
   }
   h1 {
-    margin-left: 32px;
+    margin-left: 20px;
     display: inline-block;
     font-size: 35px;
     margin-top: 0;
     line-height: 35px;
     text-transform: none;
     padding: 0;
+    max-width:460px;
+    .sub-title {
+      font-size:16px;
+      display:block;
+      color:#999999;
+      a {
+        position:relative;
+        padding-left:30px;
+        &:before {
+          position: absolute;
+          left: 0px;
+          top:-1px;
+          font-size:18px;
+        }
+      }
+      .pdf {
+        i {
+          background: url("format-sprite.png") no-repeat;
+          display: block;
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          left: 0;
+          top:-1px;
+          background-position: 0 -96px;
+          opacity: 0.4;
+          filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+        }
+         &:hover i {
+          opacity: 1;
+          filter: progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+        }
+      }
+    }
   }
 }
 
@@ -347,6 +381,18 @@
   height: auto;
 }
 
+.user {
+    &:hover {
+      text-decoration: none;
+    }
+    > .name {
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px dashed #000;
+      line-height: 28px;
+    }
+  }
+
 .doc-info {
   > li {
     position: relative;
@@ -392,14 +438,9 @@
     margin-right: 0;
   }
   .user {
-    &:hover {
-      text-decoration: none;
-    }
     > .name {
       color: #56b4ee;
-      text-decoration: none;
       border-bottom: 1px dashed #0e84cf;
-      line-height: 28px;
     }
   }
   .pic i, .doc i, .xls i, .pdf i {
@@ -541,6 +582,10 @@
   color: #666666 !important;
 }
 
+.btn-link {
+  color:#999999;
+}
+
 #logo3 {
   text-align: right;
   img {
@@ -550,4 +595,40 @@
 
 .footer.navbar-fixed-bottom {
   margin-bottom: 60px;
+}
+
+.data-grid {
+  .data-label, .data-value, .h1 {
+    display:block;
+  }
+  .data-label {
+    color:#999999;
+    font-size:12px;
+    line-height:18px;
+  }
+  .data-value {
+    font-size:16px;
+    margin-bottom:10px;
+  }
+  .download-link {
+    font-size:13px;
+  }
+  .h1 {
+    margin-bottom:35px;
+  }
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+  color:#000;
+}
+
+.nav-tabs > li > a {
+  text-decoration:none;
+  &:hover {
+    color:#00b8ac;
+    background:#e5fff9;
+    border-color:#fff;
+  }
 }

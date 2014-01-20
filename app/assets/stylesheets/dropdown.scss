@@ -4,6 +4,9 @@
     *[data-toggle="dropdown"], *[data-toggle="dropdown"]:focus, *[data-toggle="dropdown"]:active {
       background: #1ba0e1;
       color: #fff;
+      a {
+        background:none;
+      }
     }
     .bubble[data-toggle="dropdown"], .bubble[data-toggle="dropdown"]:focus, .bubble[data-toggle="dropdown"]:active {
       padding: 12px;
@@ -352,4 +355,17 @@
   margin-top: -10px;
   opacity: 1;
   filter: alpha(opacity=100);
+}
+.default-table {
+  .dropdown-toggle {
+    a {
+      color:#36b2aa;
+      &:focus, &:active, &:hover {
+        color:#36b2aa;
+      }
+    }
+    .caret {
+      border-top-color:#36b2aa;
+    }
+  }
 }

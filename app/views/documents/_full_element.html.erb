@@ -12,9 +12,9 @@
 						<span class="value">
 						  <span class="h3"><%= @document.title %></span>
 							<ol class="breadcrumb">
-                              <li><%= link_to organization_full_title(@document.sender_organization_id), organization_path(@document.sender_organization_id), :target => '_blank' %></li>
-                              <li><%= link_to organization_full_title(@document.organization_id), organization_path(@document.organization_id), :target => '_blank' %></li>
-                            </ol>
+                <li><%= link_to organization_full_title(@document.sender_organization_id), organization_path(@document.sender_organization_id), :target => '_blank' %></li>
+                <li><%= link_to organization_full_title(@document.organization_id), organization_path(@document.organization_id), :target => '_blank' %></li>
+              </ol>
 						</span>
       </li>
       <li>

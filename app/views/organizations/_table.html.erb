@@ -1,7 +1,7 @@
 <table class="table dynamic-table default-table">
 	<thead>
   	 <tr>
-  	  <th class="dropdown">
+  	  <th class="dropdown col-md-4">
   	  	<span class="dropdown-toggle" data-toggle="dropdown">
 	  	  	<%= sortable "title", "Организация" %>
 	  	  	<span class="caret"></span>
@@ -12,10 +12,12 @@
 	      <li><a href="#">Бла бла бла</a></li>
 	    </ul>
   	  </th>
-  	  <th><%= sortable "director_id", "Руководитель" %></th>
-  	  <th>Штат</th>
-  	  <th>Телефон</th>
-  	  <th>Подробнее</th>
+  	  <th class="col-md-3">
+  	  <!--  <%= sortable "director_id", "Руководитель" %> -->
+  	  Руководитель</th>
+  	  <th class="col-md-3">Штат</th>
+  	  <th class="col-md-2">Телефон</th>
+  	 <!--  <th>Подробнее</th> -->
 	  </tr>
  	</thead>
  	<tbody>
@@ -25,7 +27,7 @@
 			<td><%= user_with_full_name(organization.director_id) %></td>
 			<td><%= organization.users.count %></td>
 			<td><%= organization.phone %></td>
-			<td><%= link_to "Подробнее", organization_path(organization) %></td>
+			<!-- <td><%= link_to "Подробнее", organization_path(organization) %></td> -->
 	  </tr>
 	<% end %>
 	</tbody>

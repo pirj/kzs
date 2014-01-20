@@ -44,13 +44,9 @@
   <div class="form-item"><%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %></div>
 
   </div>
-  <div class="form-item">
-  <div class="control-group" id="date_fields">
-  <div class="controls">
+  <div class="form-item controls" id="date_fields">
   <span class="form-label col-xs-3">Пропуск действителен с</span><%= f.text_field :start_date, :size => 10, :placeholder => 'Дата начала', :class => 'form-control col-xs-2' %>
-  <span class="form-label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания', :class => 'form-control col-xs-2'  %>
-  </div>
-  </div>
+  <span class="form-label">по</span> <%= f.text_field :expiration_date, :placeholder => 'Дата окончания', :class => 'form-control col-xs-2'  %> 
   </div>
 	
 	<div id="temporary_permit_fields">
