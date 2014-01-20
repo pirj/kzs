@@ -2,11 +2,7 @@
 .dropdown {
   &.open {
     *[data-toggle="dropdown"], *[data-toggle="dropdown"]:focus, *[data-toggle="dropdown"]:active {
-      background: #1ba0e1;
       color: #fff;
-      a {
-        background:none;
-      }
     }
     .bubble[data-toggle="dropdown"], .bubble[data-toggle="dropdown"]:focus, .bubble[data-toggle="dropdown"]:active {
       padding: 12px;
@@ -35,6 +31,9 @@
   &.full-drop { 
     *[data-toggle="dropdown"] {
       border-radius: 10px 10px 0 0;
+    }
+    *[data-toggle="dropdown"]:focus, *[data-toggle="dropdown"]:active {
+      background: #1ba0e1;
     }
     h1 {
       margin-left: 0;
