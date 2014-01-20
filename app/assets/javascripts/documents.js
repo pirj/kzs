@@ -8,13 +8,14 @@ $(document).ready(function(){
             _.each(document.getElementById(controller).getElementsByClassName('opened'), function(td){
 
                 td.classList.remove('opened');
-                console.log(td.classList);
+    //            console.log(td.classList);
             })
 
     }
 
     $(".dynamic-table tbody tr").click(function(){                      //открытие
         var docId = this.id;
+
 
         if(this.className!=='opened'){
             var self = this;
@@ -28,7 +29,7 @@ $(document).ready(function(){
             }
 
             self.classList.add('opened');
-                  //className classList
+                  //className classList stopImmediatePropagation(' ' ,....,...).
           //  self.className += ' opened' ;            //className classList src="/<%= @controller %>/<%= document.id %>.pdf"
 
         }
@@ -36,8 +37,9 @@ $(document).ready(function(){
 
     $(".dynamic-table .inform-hide").on('click', function(){                  //закрытие
 
-        console.log(this.parentNode.parentNode);
-       // CloseAllTR(controller);
+        event.stopPropagation()
+
+        CloseAllTR(controller);
 
     });
 

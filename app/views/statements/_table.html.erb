@@ -31,6 +31,70 @@
   	    <td><%= statement.title %></td>
   	    <td><span class="label label-warning">Акт</span></td>
   	    <td class="status"><%= statement_status(statement) %></td>
+
+
+        <td colspan="9" class="inform">
+          <div class="col-md-8">
+            <ul class="doc-info">
+              <li>
+                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= statement.id %></a> / <%= if statement.sent then
+                                                                                                                       statement.sent_date.strftime('%d.%m.%Y')
+                                                                                                                     else
+                                                                                                                       'Дата не присвоена'
+                                                                                                                     end %></span>
+              </li>
+              <li>Тип документа: <%= t statement.document_type %></li>
+              <li> <%= document_status(statement) %></li>
+              <li><span class="title">Тема:</span>
+						<span class="value">
+						  <span class="h3"><%= statement.title %></span>
+							<ol class="breadcrumb">
+                              <li><%= link_to organization_full_title(statement.sender_organization_id), organization_path(statement.sender_organization_id), :target => '_blank' %></li>
+                              <li><%= link_to organization_full_title(statement.organization_id), organization_path(statement.organization_id), :target => '_blank' %></li>
+                            </ol>
+						</span>
+              </li>
+              <li>
+                <span class="title valign-mid">Исполнитель:</span>
+
+                <div class="user value">
+                  <span class="photo"> <i class="default-user" ></i></span>
+                  <a href="#" class="name"><%= user_with_full_name(statement.executor_id) %></a>
+
+                </div>
+              </li>
+              <li><span class="title valign-mid">Отправитель:</span>
+
+                <div class="user value">
+                  <span class="photo">
+                    <i class="default-user"></i>
+                  </span>
+                  <a href="#" class="name">
+                    <%= user_with_full_name(statement.user_id) %>
+                  </a>
+                </div>
+              </li>
+              <% unless statement.document_attachments.blank? %>
+                  <li class="doc-format"><span class="title">Приложения: количество</span>
+
+                  </li>
+              <% end %>
+            </ul>
+            <div class="nav-pills nav controls">
+              <!--<a class="btn btn-default">История переписки</a>-->
+              <a class="btn btn-default" href="/<%= @controller %>/<%= statement.id %>">Открыть</a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="view-main-doc">
+              <div class="overlay"><a href="/<%= @controller %>/<%= statement.id %>.pdf" target="_blank" class="zoom"></a></div>
+              <iframe style="width: 190px; height: 264px;" />
+              </iframe>
+
+            </div>
+          </div>
+          <div class="inform-hide">Close</div>
+        </td>
   	  </tr>
   	<% end %>
   	</tbody>
