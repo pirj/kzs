@@ -1,0 +1,19 @@
+/*permits*/
+#permit_vehicle_id, #temoporary_fields, #permit_user_fields, #temporary_permit_fields {
+  display: none;
+}
+
+.dynamic-table {
+  tr {
+    cursor: pointer;
+    &.opened {
+      cursor: default;
+      td{
+     //   display: none;
+        &.inform{
+          display: table-cell;
+        }
+      }
+    }
+  }
+}
