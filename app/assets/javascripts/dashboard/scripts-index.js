@@ -1,5 +1,30 @@
-//DOM Ready
-$(function(){ 
+//init
+$(function(){
+
+    var request = $.ajax({
+        url: "/dashboard.json",
+        type: "GET",
+        dataType : "json"
+    });
+
+    request.done(function(response) {
+        console.log(response);
+        if (response.desktop_conf[0]) {
+            var i = 0;
+            _.each(document.getElementsByClassName('widget'), function(widget) {
+
+                widget.setAttribute('data-row',response.desktop_conf[i][0]);
+                widget.setAttribute('data-col', response.desktop_conf[i][1]);
+                widget.setAttribute('data-sizex', response.desktop_conf[i][2]);
+                widget.setAttribute('data-sizey', response.desktop_conf[i][3]);
+
+                i++
+
+            });
+        }
+
+    });
+
     $(".gridster ul").gridster({
         widget_margins: [10, 10],
         widget_base_dimensions: [140, 140],
@@ -23,6 +48,12 @@ $(function(){
             gridster.remove_widget($(this).parent('li'));
     });
 
+
+
+
+
+
+
 // Enter edit-mode
 
     $('#edit-current-desktop').bind('click', function(){
@@ -30,14 +61,50 @@ $(function(){
         $('.edit-nav').show();
 
      //   $('.main-desktop-title').html(' <div class="row-fuild clearfix edit-nav"><div class="col-md-3 column"><span class="edit-mode clearfix dropdown"><a type="button" class="ajax-link" href="#" id="dropdownMenu1" data-toggle="dropdown">Главный рабочий стол</a><ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2"><li><a class="icon-pencil" href="#">Переименовать</a></li><li><a class="icon-trash" href="#">Удалить</a></li><li><a class="icon-block-1" href="#">Отмена</a></li><li class="other-desktop"><span class="title">Другие столы</span><a class="rename" href="#">Диспетчерская</a><span class="widgets-count">12 виджетов</span><a class="rename" href="#">Общение</a><span class="widgets-count">3 виджета</span></li><li class="dropdown-arr"></li><li><a class="icon-plus-1" href="#">Добавить рабочий стол</a></li></ul><i>(режим редактирования)</i></span></div><div class="col-md-3 col-md-offset-3 column"><button class="btn default-primary save" type="button">Сохранить изменения</button></div><div id="exit-edit" class="col-md-3 column"><a type="button" href="#">Выйти из режима редактирования</a></div></div><div class="row clearfix add-widget"><div class="col-md-9 col-md-offset-2 column"><a class="add-widget-btn" href="#"><span class="icon-plus-1"></span>Добавить виджет на рабочий стол</a></div></div>');
-        $('.main-desktop-title').removeClass('main-desktop-title').addClass('main-desktop-controls');
+       $('.page.full').addClass('editing');
         $('.gridster li').append('<span class="icon-resize-full-alt" title="Перемещение виджета по рабочему столу зажав левую кнопку мыши"></span><span class="icon-resize-full" title="Изменение размера виджета зажав левую кнопку мыши на нижней и правой границе виджета"></span><span class="icon-cancel-circled" title="Удалить виджет"></span>');
         gridster.enable($('.gridster li'));
         gridster.enable_resize($('.gridster li'));
 
-        $('.widget a').click(function(){
+        $('.editing .widget a').on('click', function(){
             return false
         });
+
+        $('.save').click(function() {
+
+
+            var data = new Array();
+
+            _.each(document.getElementsByClassName('widget'), function(widget) {
+
+                var name = widget.classList[1];
+                var Ar = new Array;
+                Ar.push(widget.getAttribute('data-row'))
+                Ar.push(widget.getAttribute('data-col'))
+                    Ar.push(widget.getAttribute('data-sizex'))
+                        Ar.push(widget.getAttribute('data-sizey'))
+
+                data.push(Ar)
+            })
+//            var data = {widgets: {docs: [1,2,4,5], mops: [1,2,4,5], loks: [1,2,4,5]}}
+
+             data = {
+                widgets: data
+            }
+
+            console.log(data);
+
+            var request = $.ajax({
+                url: "/save_desktop_configuration",
+                type: "POST",
+                dataType : "json",
+                data: data
+        });
+
+            $('#exit-edit a').click();
+
+        });
+
 
     }).data('gridster');
 
@@ -46,11 +113,17 @@ $(function(){
 
         });
 // Exit edit-mode
-    $('#exit-edit a').live('click', function(){
-        $('.main-desktop-controls').html('<h3>Главный рабочий стол</h3>');
-        $('.main-desktop-controls').removeClass('main-desktop-controls').addClass('main-desktop-title');
+    $('#exit-edit a').on('click', function(){
+     //   $('.main-desktop-controls').html('<h3>Главный рабочий стол</h3>');
+        $('.widget a').on('click', function(){
+           document.location = this.href;
+                   });
+
+        $('.page.full').removeClass('editing');
+        $('.edit-nav').hide();
         $('.icon-resize-full-alt, .icon-resize-full, .icon-cancel-circled').remove();
         gridster.disable($('.gridster ul li'));
         gridster.disable_resize($('.gridster ul li'));
     }).data('gridster');
-});     
+});
+

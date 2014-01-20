@@ -357,7 +357,7 @@ ActiveRecord::Schema.define(:version => 20140120112313) do
 
   create_table "user_desktop_configurations", :force => true do |t|
     t.integer  "user_id"
-    t.string   "desktop_conf"
+    t.text   "desktop_conf"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

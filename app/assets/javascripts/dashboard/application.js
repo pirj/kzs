@@ -14,7 +14,7 @@
 //= require ./jquery.gridster.min.js
 //= require ./dropdown
 //= require ./html5shiv.js
-//=
+//= require jquery_ujs
 //= require ./scripts-index.js
 //= require_tree .
 

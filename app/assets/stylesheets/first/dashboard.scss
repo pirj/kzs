@@ -7,3 +7,13 @@
 .edit-nav{
   display: none;
 }
+
+.bottom-nav .dropdown-menu {
+  left: -104px;
+  top: -111px;
+}
+
+
+.dropdown.open .dropdown-arr{
+  border-bottom: 0px solid rgba(0, 0, 0, 0.8) !important;
+}
