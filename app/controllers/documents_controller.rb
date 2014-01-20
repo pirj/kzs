@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  layout 'documents'
   helper_method :sort_column, :sort_direction
   # collection
   

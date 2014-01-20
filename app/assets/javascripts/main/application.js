@@ -13,11 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require chosen-jquery
-//= //require documents
 //= require ckeditor/init
 //= require jquery_ujs
-
-//= //require shared
 //= require ckeditor/ckeditor
 //= require_tree .
 
