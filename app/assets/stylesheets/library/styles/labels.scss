@@ -1,0 +1,27 @@
+@mixin label-default{
+  @include border-radius(15px);
+  min-width: 100px;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  padding: 9px 10px;
+  cursor: pointer;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-family: $f-family-base;
+}
+
+.label{
+  @include label-default;
+  background-color: #c4f2e4;
+  color: #00a499;
+}
+
+.label-success{
+  @include label-default;
+  background-color: #1BBC9B;
+  color: #fff;
+}

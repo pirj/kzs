@@ -30,6 +30,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'compass-rails'
+  gem 'compass-rails'
 end
 
 gem 'jquery-rails', '~> 2.3.0'
