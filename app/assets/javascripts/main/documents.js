@@ -14,6 +14,8 @@ $(document).ready(function(){
     }
 
     $(".dynamic-table tbody tr").click(function(){                      //открытие
+        var docId = this.id;
+
         if(this.className!=='opened'){
             var self = this;
 
@@ -21,8 +23,13 @@ $(document).ready(function(){
                 CloseAllTR(controller);
             }
 
-            self.classList.add('opened') ;            //className classList
-          //  self.className += ' opened' ;            //className classList
+            if (!this.getElementsByTagName('iframe')[0].src){
+                this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
+            }
+
+            self.classList.add('opened');
+                  //className classList
+          //  self.className += ' opened' ;            //className classList src="/<%= @controller %>/<%= document.id %>.pdf"
 
         }
     });
