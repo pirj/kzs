@@ -27,8 +27,8 @@
         <% end %>
         <td><a class="document_id" href="/<%= @controller %>/<%= document.id %>"><%= document.id %></a>
           / <%= Russian::strftime(document.created_at, "%d.%m.%y") %></td>
-        <td><%= link_to organization_full_title(document.sender_organization_id), organization_path(document.sender_organization_id), :target => '_blank' %></td>
-        <td><%= link_to organization_full_title(document.organization_id), organization_path(document.organization_id), :target => '_blank' %></td>
+        <td><%= link_to organization_short_title(document.sender_organization_id), organization_path(document.sender_organization_id), :target => '_blank' %></td>
+        <td><%= link_to organization_short_title(document.organization_id), organization_path(document.organization_id), :target => '_blank' %></td>
         <td><%= truncate(document.title, length: 13) %></td>
         <td class="exp_type">
           <% if document.document_type == 'mail' %>
