@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   attr_accessible :task_list_id, :task, :deadline
   belongs_to :task_list
+  belongs_to :document
   scope :completed, -> { where(completed: true) }  
   scope :not_completed, -> { where(completed: false) }  
   scope :expired, lambda { where("deadline < ?", Date.today ) }

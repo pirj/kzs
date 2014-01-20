@@ -124,6 +124,18 @@
 
 
   </div>
+  
+  
+        <h4 class="col-md-12">Задача</h4>
+        
+        <div style="margin-left: 16px;">
+            <b>Номер:</b> №<%= @document.task.id %><br>
+            <b>Текст задачи:</b> <%= @document.task.task %><br>
+            <b>Организация постановщик:</b> <%= organization_full_title(@document.task.sender_organization_id) %><br>
+            <b>Организация исполнитель:</b> <%= organization_full_title(@document.task.executor_organization_id) %><br>
+            <b>Срок исполнения:</b> <%= @document.task.deadline.strftime('%d.%m.%Y') %>
+        </div>
+        
   <% if @document.document_type == 'writ' && @document.task_list.present? %>
       <h4 class="col-md-12">Чек лист</h4>
 

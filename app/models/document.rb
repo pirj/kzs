@@ -16,6 +16,7 @@ class Document < ActiveRecord::Base
   has_many :statements
   has_many :document_attachments
   has_one :task_list
+  has_one :task
 
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
   accepts_nested_attributes_for :task_list, allow_destroy: true
