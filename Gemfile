@@ -18,6 +18,7 @@ gem "ckeditor"
 gem 'activeadmin'
 gem 'awesome_nested_set'
 gem 'haml'
+gem 'slim'
 
 gem 'will_paginate'
 
@@ -28,6 +29,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
+  gem 'compass-rails'
   gem 'compass-rails'
 end
 

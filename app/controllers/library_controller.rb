@@ -6,7 +6,8 @@ class LibraryController < ApplicationController
   end
   
   private
-  
+
+  #
   def require_admin
     return if current_user.sys_user
     redirect_to root_path, :alert => I18n.t('access_denined')

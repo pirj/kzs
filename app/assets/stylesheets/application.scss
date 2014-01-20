@@ -2,6 +2,8 @@
 *= require chosen
 *= require_directory .
 *= require_self
+*= require_tree ./plugins
+*= require ./library/base
 *= stub active_admin
 */
 

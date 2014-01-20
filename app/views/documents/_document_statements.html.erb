@@ -1,10 +1,10 @@
-<% if @document.statements.empty? %>
-  <h5>Акты отсутствуют</h5>
+<% if @document.statements.empty? && @document.task_list.completed && @document.task.completed %>
+    <p><%= link_to "Создать АКТ", new_statement_path(:document_id => @document.id) %>
 <% else %>
-  <h5>Акты</h5>
-  <ul>
-	  <% @document.statements.each do |statement| %>
+    <h5>Акты</h5>
+    <ul>
+    <% @document.statements.each do |statement| %>
 	    <li><%= link_to statement.title, statement_path(statement) %></li>
-	  <% end %>
+	<% end %>
 	</ul>
 <% end %>

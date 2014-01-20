@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-  layout "dashboard"
+  #TODO: bug with logout from dashboard layout.
+  layout 'dashboard'
   def index
 
     #@desktop = UserDesktopConfiguration.find_by_user_id(current_user.id)
