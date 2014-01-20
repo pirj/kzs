@@ -9,6 +9,7 @@
     &.opened {
       cursor: default;
       td{
+        background: #f7fffd;
      //   display: none;
         &.inform{
           display: table-cell;
