@@ -8,7 +8,7 @@
       <%= render 'shared/user' %>
     </li>
   </ul>
-<%= form_for(@organization, :html => {:class => "form row-fuild"}) do |f| %>
+<%= form_for(@organization, :html => {:class => "form row-fuild add-list"}) do |f| %>
    <h2 class="h1">1. Общие данные</h2>
     <div class="form-item"><span class="form-label col-md-5">Полное наименование:</span><%= f.text_field :title, :class => 'form-control col-xs-6' %></div>
 
