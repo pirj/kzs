@@ -37,14 +37,10 @@
           <div class="col-md-8">
             <ul class="doc-info">
               <li>
-                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= statement.id %></a> / <%= if statement.sent then
-                                                                                                                       statement.sent_date.strftime('%d.%m.%Y')
-                                                                                                                     else
-                                                                                                                       'Дата не присвоена'
-                                                                                                                     end %></span>
+                <span class="title">Номер и дата:</span><span class="value"><a href="#"><%= statement.id %></a> / </span>
               </li>
-              <li>Тип документа: <%= t statement.document_type %></li>
-              <li> <%= document_status(statement) %></li>
+              <li>Тип документа: </li>
+              <li> </li>
               <li><span class="title">Тема:</span>
 						<span class="value">
 						  <span class="h3"><%= statement.title %></span>
@@ -59,7 +55,7 @@
 
                 <div class="user value">
                   <span class="photo"> <i class="default-user" ></i></span>
-                  <a href="#" class="name"><%= user_with_full_name(statement.executor_id) %></a>
+                  <a href="#" class="name"></a>
 
                 </div>
               </li>
@@ -74,11 +70,7 @@
                   </a>
                 </div>
               </li>
-              <% unless statement.document_attachments.blank? %>
-                  <li class="doc-format"><span class="title">Приложения: количество</span>
 
-                  </li>
-              <% end %>
             </ul>
             <div class="nav-pills nav controls">
               <!--<a class="btn btn-default">История переписки</a>-->
