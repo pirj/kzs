@@ -5,8 +5,9 @@
   }
   position: relative;
   .form-item {
-    display:block;
+    display:table;
     margin-bottom: 12px;
+    width:100%;
     &:after {
       clear: both;
       display:table;
@@ -49,6 +50,7 @@
 }
 
 .form-control {
+  display:table-cell;
   height: 38px;
   border-width: 2px;
   z-index: 2;
@@ -61,16 +63,20 @@
 select.form-control {
   box-shadow: none;
   background: #ededed;
+  &:focus, &:active {
+    border-color:#76d4ce;
+  }
 }
 
 .form-label {
-  float: left;
-  margin-right: 20px;
+  float: none;
+  padding-right: 20px;
   color: #999999;
   font-size: 14px;
-  line-height:38px;
+  line-height:16px;
   text-align: right;
-  padding: 0;
+  display:table-cell;
+  vertical-align:middle;
   min-width: 130px;
 }
 
@@ -99,7 +105,7 @@ select.form-control {
   }
   .form-control {
     background: #fff;
-    display: inline-block;
+    display: table-cell;
     &[type="password"] {
       margin-left: -59px;
     }
