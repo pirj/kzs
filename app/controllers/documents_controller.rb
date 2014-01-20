@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class DocumentsController < ApplicationController
   layout 'documents'
   helper_method :sort_column, :sort_direction
@@ -205,6 +207,16 @@ class DocumentsController < ApplicationController
         document.draft = false
       end
       document.save!
+      if document.document_type == 'writ'
+        task = Task.new
+        task.document_id = document.id
+        task.task = "Исполнить распоряжения №#{document.id}"
+        task.executor_organization_id = organization
+        task.sender_organization_id = current_user.organization_id
+        task.deadline = document.deadline
+        task.save!
+      end
+      
       assign_organizations_to_tasks(document)
     end
     redirect_to documents_path, notice: t('document_successfully_created')
