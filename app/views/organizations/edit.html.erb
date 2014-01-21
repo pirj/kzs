@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Дата постановки на учет в налоговом органе:</span>
-      <%= f.text_field :date_of_registration, class: 'form-control col-xs-2 hasDatepicker', size: 10 %>
+      <%= f.text_field :date_of_registration, class: 'form-control col-xs-2 js-datepicker', size: 10 %>
      <!--<input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">-->
     </div>
 
@@ -44,10 +44,11 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Дата решения о создании  организации:</span>
-      <%= f.text_field :creation_resolution_date, class: 'form-control col-xs-2 hasDatepicker', size: 10 %>
+      <%= f.text_field :creation_resolution_date, class: 'form-control col-xs-2 js-datepicker', size: 10 %>
      <!--<input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">-->
     </div>
 
+    <!-- TODO: unknown parameter -->
     <div class="form-item"><span class="form-label col-md-5">Скан решения о создании:</span>  <input type="file" class="filestyle col-xs-2" data-input="false"/></div>
 
     <div class="form-item"><span class="form-label col-md-5">Скан Устава организации:</span>
@@ -92,7 +93,7 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Дата постановки в ЕГРЮЛ:</span>
-      <%= f.text_field :egrul_registration_date, class: 'form-control col-xs-2 hasDatepicker', size: 10 %>
+      <%= f.text_field :egrul_registration_date, class: 'form-control col-xs-2 js-datepicker', size: 10 %>
       <!--<input class="form-control col-xs-2 hasDatepicker" id="" name="" placeholder="" size="10" type="text">-->
     </div>
 

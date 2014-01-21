@@ -18,3 +18,8 @@
 //= require ckeditor/ckeditor
 //= require_tree .
 
+
+$(function() {
+    $( ".js-datepicker" ).datepicker({ dateFormat: "dd-mm-yy" });
+});
+
