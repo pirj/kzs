@@ -277,11 +277,15 @@
       a {
         position:relative;
         padding-left:30px;
+        margin-left:30px;
         &:before {
           position: absolute;
           left: 0px;
           top:-1px;
           font-size:18px;
+        }
+        &:first-child {
+          margin-left:0;
         }
       }
       .pdf {
@@ -623,7 +627,9 @@
   &:hover {
     color:#00b8ac;
     background:#e5fff9;
-    border-color:#fff;
+    border-top-color:#fff;
+    border-right-color:#fff;
+    border-left-color:#fff;
   }
 }
 
