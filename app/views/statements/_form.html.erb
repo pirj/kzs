@@ -54,7 +54,7 @@
 
 			<%= form_for(@statement, :html => { :class => "form new-doc row-fuild" }) do |f| %>
 
-            <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Укажите заголовок акта..', :value => 'К распоряжению №' + params[:document_id] %></span>
+            <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Укажите заголовок акта..', :value => params[:document_id] ? 'К распоряжению №' + params[:document_id] : nil %></span>
             
       
         
