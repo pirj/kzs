@@ -9,6 +9,7 @@ $(document).ready(function(){
         function CloseAllTR(controller){
             _.each(document.getElementById(controller).getElementsByClassName('opened'), function(td){
                 td.classList.remove('opened');
+                td.nextSibling.classList.remove('open');
             })
         }
         $(".dynamic-table tbody tr").click(function(){                      //открытие
@@ -23,6 +24,7 @@ $(document).ready(function(){
                     this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
                 }*/
                 self.classList.add('opened');
+                this.nextSibling.classList.add('open');
             }
         });
 

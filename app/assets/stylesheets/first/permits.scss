@@ -10,11 +10,23 @@
       cursor: default;
       td{
         background: #f7fffd;
-     //   display: none;
-        &.inform{
-          display: table-cell;
-        }
+        position: relative;
+        border-bottom: 0;
       }
     }
+
+
+
   }
+
+  .inform{
+     display: none;
+     background: #f7fffd;
+    &.open{
+      display: table-row;
+      td{
+        border-top:0;
+      }
+    }
+   }
 }

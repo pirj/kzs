@@ -16,4 +16,20 @@ module PermitsHelper
        '<span class="btn-available btn label-ready">Заявка</span>'.html_safe
     end
   end
+
+  def permit_progress(permit)
+
+    #all_days = (permit.expiration_date - permit.start_date).to_i
+    #days_done = (DateTime.now.to_date - permit.start_date).to_i
+    #"#{all_days} #{days_done}"
+  end
+
+  def permit_remaining(permit)
+  #  Time.now
+  #  t = Time.now
+  #  a = DateTime.parse(permit.expiration_date)
+  #  b = DateTime.parse(permit.start_date)
+  #  c = (t - 10)
+    distance_of_time_in_words(permit.start_date, permit.expiration_date)
+  end
 end
