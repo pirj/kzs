@@ -18,8 +18,8 @@ $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 // Brand colors
 // -------------------------
 
-$brand-primary:         #428bca !default;
-$brand-success:         #5cb85c !default;
+$brand-primary:         #c4f2e4 !default;
+$brand-success:         #1BBC9B !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 $brand-info:            #5bc0de !default;
@@ -39,7 +39,7 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:  'Open Sans', arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
@@ -429,8 +429,8 @@ $label-info-bg:               $brand-info !default;
 $label-warning-bg:            $brand-warning !default;
 $label-danger-bg:             $brand-danger !default;
 
-$label-color:                 #fff !default;
-$label-link-hover-color:      #fff !default;
+$label-color:                 $gray-darker !default;
+$label-link-hover-color:      $gray-darker !default;
 
 
 // Modals

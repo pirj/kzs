@@ -3,16 +3,19 @@
 // --------------------------------------------------
 
 .label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
-  font-weight: bold;
+  border-radius: 1.2em;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
   line-height: 1;
-  color: $label-color;
+  min-width: 100px;
+  padding: .75em .8em;
   text-align: center;
+  text-decoration: none;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25em;
 
   // Add hover effects, but only for links
   &[href] {
@@ -34,15 +37,15 @@
 // Contextual variations (linked labels get darker on :hover)
 
 .label-default {
-  @include label-variant($label-default-bg);
+  @include label-variant($label-default-bg, #fff);
 }
 
 .label-primary {
-  @include label-variant($label-primary-bg);
+  @include label-variant($label-primary-bg, #fff);
 }
 
 .label-success {
-  @include label-variant($label-success-bg);
+  @include label-variant($label-success-bg, #fff);
 }
 
 .label-info {
