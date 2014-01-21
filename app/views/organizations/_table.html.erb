@@ -42,7 +42,7 @@
                 <li>
                   <span class="title">Контрагент:</span>
                   <span class="value"><%= link_to organization.title , organization_path(organization), :class => 'h3' %>
-                    <a href="#" class="sub-title breadcrumb"><%= organization.users.count %> человек в штате</a>
+                    <a href="#" class="sub-title"><%= organization.users.count %> человек в штате</a>
                   </span>
                 </li>
                 <li><span class="title valign-mid">Руководитель:</span>
@@ -66,11 +66,18 @@
                     </a>
                   </div>
                 </li>
-                <li><%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link data-value' %></li>
-                <li>Телефон: <%= organization.phone %></li>
+                <li>
+                  <span class="title"></span>
+                 <span class="value"><%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link pdf' %></span>
+                </li>
               </ul>
-              <%= link_to 'Редактировать данные', (organization_path(organization)+'/edit')%>
-              <%= link_to 'Открыть анкету контрагента', organization_path(organization)%>
+              <div class="nav-pills nav controls">
+              <%= link_to 'Редактировать данные', (organization_path(organization)+'/edit'), class: 'btn'%>
+              <%= link_to 'Открыть анкету контрагента', organization_path(organization), class: 'btn'%>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="h3 phone"><%= organization.phone %></span>
             </div>
           </td>
 	  </tr>

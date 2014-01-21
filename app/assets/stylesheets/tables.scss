@@ -42,14 +42,11 @@
       text-transform: uppercase;
     }
     &.inform {
-
       display: none;
-
       width: 100%;
       &.in {
         display: block;
       }
-
       background: #f7fffd;
       padding: 30px 0 100px;
       &:after {
@@ -57,11 +54,24 @@
         clear: both;
         content: "";
       }
+      .doc-info .title {
+        width: 17%;
+        text-align: right;
+        display: table-cell;
+      }
       .h3 {
         font-weight: normal;
       }
       .value {
-        width: 79%;
+        width: 100%;
+        display: table-cell;
+        padding-left:30px;
+        .sub-title {
+          display:block;
+          color:#999999;
+          font-size:18px;
+          line-height:30px;
+        }
       }
       .view-main-doc {
         margin-top: 32px;
@@ -71,10 +81,14 @@
         width: 190px;
       }
       .controls {
-        margin: 18px 0 0 168px;
+        margin: 18px 0 0 20%;
         .btn {
-          margin-right: 20px;
+          display:inline-block;
         }
+      }
+      .h3.phone {
+        display:table-cell;
+        vertical-align:middle;
       }
       .progress {
         width: 25%;
@@ -82,7 +96,6 @@
         margin: 39px 0 0 64%;
         position: relative;
         overflow: visible;
-
       }
       .progress-label {
         position: absolute;
