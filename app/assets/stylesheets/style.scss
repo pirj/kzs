@@ -405,18 +405,15 @@
     width: 100%;
     float: left;
     line-height: 21px;
+    display:table;
     .title {
       font-size: 12px;
       width: 20%;
-      position: absolute;
+      display:table-cell;
       line-height: 16px;
-      top: 2px;
       color: #666;
+      vertical-align:top;
       text-align: left;
-      &.valign-mid {
-        top: 50%;
-        margin-top: -8px;
-      }
     }
   }
   .value {
@@ -491,6 +488,10 @@
       color: #0E84CF;
     }
   }
+}
+
+.valign-mid {
+  vertical-align:middle !important;
 }
 
 .breadcrumb {

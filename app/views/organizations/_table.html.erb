@@ -36,21 +36,43 @@
 			<td><%= organization.phone %></td>
 			<!-- <td><%= link_to "Подробнее", organization_path(organization) %></td> -->
 
-            <td class="inform col-md-12" colspan="4" >
-              <%= link_to organization.title , organization_path(organization)%>
-            <br>
-              Штат: <%= organization.users.count %>
-              <br>
-             Руководитель:  <%= user_with_full_name(organization.director_id) %>
-              <br>
-              <%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link data-value' %>
-              <br>
-              Телефон: <%= organization.phone %>
-              <br>
-
+            <td class="inform" colspan="4" >
+            <div class="col-md-8">
+              <ul class="doc-info">
+                <li>
+                  <span class="title">Контрагент:</span>
+                  <span class="value"><%= link_to organization.title , organization_path(organization), :class => 'h3' %>
+                    <a href="#" class="sub-title breadcrumb"><%= organization.users.count %> человек в штате</a>
+                  </span>
+                </li>
+                <li><span class="title valign-mid">Руководитель:</span>
+                  <div class="user value ">
+                    <span class="photo">
+                      <i class="default-user"></i>
+                    </span>
+                    <a href="#" class="name">
+                      <%= user_with_full_name(organization.director_id) %>
+                    </a>
+                  </div>
+                </li>
+                <li><span class="title valign-mid">Контактное
+лицо:</span>
+                  <div class="user value ">
+                    <span class="photo">
+                      <i class="default-user"></i>
+                    </span>
+                    <a href="#" class="name">
+                      <%= user_with_full_name(organization.director_id) %>
+                    </a>
+                  </div>
+                </li>
+                <li><%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link data-value' %></li>
+                <li>Телефон: <%= organization.phone %></li>
+              </ul>
               <%= link_to 'Редактировать данные', (organization_path(organization)+'/edit')%>
               <%= link_to 'Открыть анкету контрагента', organization_path(organization)%>
-            </td>
+            </div>
+          </td>
 	  </tr>
 	<% end %>
 	</tbody>
