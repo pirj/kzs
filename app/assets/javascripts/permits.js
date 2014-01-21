@@ -1,9 +1,6 @@
 $(document).ready(function(){
 
-
 // table
-
-
         var controller = $('table').attr('id')
 
         function CloseAllTR(controller){
@@ -20,9 +17,7 @@ $(document).ready(function(){
                 if (document.getElementById(controller).getElementsByClassName('opened')) {
                     CloseAllTR(controller);
                 }
-             /*   if (!this.getElementsByTagName('iframe')[0].src){
-                    this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
-                }*/
+
                 self.classList.add('opened');
                 this.nextSibling.classList.add('open');
             }

@@ -5,7 +5,8 @@
         <h1><%= @organization.title %>
         <span class="sub-title row-fuild">
           <a cla href="#" class="download-link pdf"><i></i>Скачать реквизиты</a>
-          <a class="download-link icon-pencil" href="#">Редактировать данные</a>
+          <%= link_to 'редактировать данные', edit_organization_path(@organization), class: 'download-link icon-pencil' %>
+          <!--<a class="download-link icon-pencil" href="#">Редактировать данные</a>-->
         </span>
         </h1>
       </li>
@@ -22,56 +23,57 @@
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div class="tab-pane data-grid active" id="total-data">
-          <span class="h1 col-md-12">Общие данные</span>
-          <div class="col-md-5">
-            <span class="data-label">Полное наименование</span>
-            <span class="data-value">Общество с ограниченной ответственностью «Циклон»</span>
-            <span class="data-label">Сокращенное наименование</span>  
-            <span class="data-value">ООО «Циклон»</span>
-            <span class="data-label">Форма собственности</span>
-            <span class="data-value">ООО</span>
-            <span class="data-label">Дата постановки на учет в налоговом органе</span>  
-            <span class="data-value">12.11.2013</span>
-            <span class="data-label">Налоговый орган, принявший на учет</span>  
-            <span class="data-value">ИФНС России по Выборгскому району</span>
-            <span class="data-label">Копия свидетельства о постановке на учет  в налоговом органе</span>  
-            <a href="#" class="data-value download-link">Скачать</a>
-            <span class="data-label">Дата решения о создании организации</span> 
-            <span class="data-value">12.11.2013</span>
-            <span class="data-label">Копия решения о создании</span>  
-            <a href="#" class="data-value download-link">Скачать</a>
-            <span class="data-label">Копия Устава организации</span>  
-            <a href="#" class="data-value download-link">Скачать</a>
-          </div>
-          <div class="col-md-6 col-md-offset-1">
-             <span class="data-label">Генеральный директор</span>   
-            <span class="data-value">
-              <span class="user">
-                <a href="#" class="name" data-toggle="dropdown">Кобец Андрей Сергеевич</a>
-              </span>
-            </span>
-             <span class="data-label">Главный бухгалтер</span>  
-            <span class="data-value">
-              <span class="user">
-                  <a href="#" class="name" data-toggle="dropdown">Кобец Андрей Сергеевич</a>
-              </span>
-            </span>
-             <span class="data-label">ИНН</span>  
-            <span class="data-value">7840369540</span>
-             <span class="data-label">КПП</span>  
-            <span class="data-value">784001001</span>
-             <span class="data-label">ОГРН</span>   
-            <span class="data-value">1077847567478</span>
-             <span class="data-label">БИК</span>
-            <span class="data-value">044030755</span>
-             <span class="data-label">Дата постановки в ЕГРЮЛ</span>  
-            <span class="data-value">12.11.2013</span>
-             <span class="data-label">Копия выписки из ЕГРЮЛ</span>   
-            <a href="#" class="data-value download-link">Скачать</a>
-          </div>
-        </div>
-        <div class="tab-pane" id="details">...</div>
+        <%= render 'organizations/tabs/show_total', organization: @organization %>
+        <!--<div class="tab-pane data-grid active" id="total-data">-->
+          <!--<span class="h1 col-md-12">Общие данные</span>-->
+          <!--<div class="col-md-5">-->
+            <!--<span class="data-label">Полное наименование</span>-->
+            <!--<span class="data-value">Общество с ограниченной ответственностью «Циклон»</span>-->
+            <!--<span class="data-label">Сокращенное наименование</span>  -->
+            <!--<span class="data-value">ООО «Циклон»</span>-->
+            <!--<span class="data-label">Форма собственности</span>-->
+            <!--<span class="data-value">ООО</span>-->
+            <!--<span class="data-label">Дата постановки на учет в налоговом органе</span>  -->
+            <!--<span class="data-value">12.11.2013</span>-->
+            <!--<span class="data-label">Налоговый орган, принявший на учет</span>  -->
+            <!--<span class="data-value">ИФНС России по Выборгскому району</span>-->
+            <!--<span class="data-label">Копия свидетельства о постановке на учет  в налоговом органе</span>  -->
+            <!--<a href="#" class="data-value download-link">Скачать</a>-->
+            <!--<span class="data-label">Дата решения о создании организации</span> -->
+            <!--<span class="data-value">12.11.2013</span>-->
+            <!--<span class="data-label">Копия решения о создании</span>  -->
+            <!--<a href="#" class="data-value download-link">Скачать</a>-->
+            <!--<span class="data-label">Копия Устава организации</span>  -->
+            <!--<a href="#" class="data-value download-link">Скачать</a>-->
+          <!--</div>-->
+          <!--<div class="col-md-6 col-md-offset-1">-->
+             <!--<span class="data-label">Генеральный директор</span>   -->
+            <!--<span class="data-value">-->
+              <!--<span class="user">-->
+                <!--<a href="#" class="name" data-toggle="dropdown">Кобец Андрей Сергеевич</a>-->
+              <!--</span>-->
+            <!--</span>-->
+             <!--<span class="data-label">Главный бухгалтер</span>  -->
+            <!--<span class="data-value">-->
+              <!--<span class="user">-->
+                  <!--<a href="#" class="name" data-toggle="dropdown">Кобец Андрей Сергеевич</a>-->
+              <!--</span>-->
+            <!--</span>-->
+             <!--<span class="data-label">ИНН</span>  -->
+            <!--<span class="data-value">7840369540</span>-->
+             <!--<span class="data-label">КПП</span>  -->
+            <!--<span class="data-value">784001001</span>-->
+             <!--<span class="data-label">ОГРН</span>   -->
+            <!--<span class="data-value">1077847567478</span>-->
+             <!--<span class="data-label">БИК</span>-->
+            <!--<span class="data-value">044030755</span>-->
+             <!--<span class="data-label">Дата постановки в ЕГРЮЛ</span>  -->
+            <!--<span class="data-value">12.11.2013</span>-->
+             <!--<span class="data-label">Копия выписки из ЕГРЮЛ</span>   -->
+            <!--<a href="#" class="data-value download-link">Скачать</a>-->
+          <!--</div>-->
+        <!--</div>-->
+        <%= render 'organizations/tabs/show_details', organization: @organization %>
         <div class="tab-pane" id="stuff">...</div>
       </div>
     </div>

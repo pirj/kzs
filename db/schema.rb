@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140120112313) do
+ActiveRecord::Schema.define(:version => 20140121134053) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -218,7 +218,6 @@ ActiveRecord::Schema.define(:version => 20140120112313) do
     t.string   "kpp"
     t.string   "ogrn"
     t.string   "bik"
-    t.string   "egrul_registration_date"
     t.string   "egrul_excerpt_file_name"
     t.string   "egrul_excerpt_content_type"
     t.integer  "egrul_excerpt_file_size"
@@ -231,6 +230,7 @@ ActiveRecord::Schema.define(:version => 20140120112313) do
     t.string   "bank_kpp"
     t.string   "bank_okved"
     t.string   "organization_account"
+    t.date     "egrul_registration_date"
   end
 
   create_table "permission_groups", :force => true do |t|
@@ -357,7 +357,7 @@ ActiveRecord::Schema.define(:version => 20140120112313) do
 
   create_table "user_desktop_configurations", :force => true do |t|
     t.integer  "user_id"
-    t.text   "desktop_conf"
+    t.string   "desktop_conf"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end

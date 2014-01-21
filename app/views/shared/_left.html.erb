@@ -11,7 +11,7 @@
       <div class="child-dir">
         <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do %>
             <i></i>
-            <div class="text">Документы</div>
+            <div class="text">Письма,распоряжения</div>
             <% unless indox(current_user) < 1  %>
               <span class="badge badge-important"><%= indox(current_user) %></span>  
             <% end %>
