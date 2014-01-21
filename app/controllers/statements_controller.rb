@@ -190,6 +190,9 @@ class StatementsController < ApplicationController
       document.executed = true
       document.executed_date = Time.now
       document.save  
+      task = document.task
+      task.completed = true
+      task.save
       @statement.accepted = true
       @statement.accepted_date = Time.now
       @statement.save

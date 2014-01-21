@@ -27,9 +27,6 @@ class TasksController < ApplicationController
          task_list.save!
          if task_list.document_id.present?
             document = Document.find(task_list.document_id)
-            task = document.task  
-            task.completed = true
-            task.save!
             redirect_to new_statement_path(:document_id => document.id)
          end
       else   
