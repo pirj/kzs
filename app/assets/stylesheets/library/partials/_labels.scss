@@ -7,7 +7,7 @@
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
-  font-size: 12px;
+  font-size: 75%;
   font-weight: normal;
   line-height: 1;
   min-width: 100px;
@@ -41,7 +41,7 @@
 }
 
 .label-primary {
-  @include label-variant($label-primary-bg, #fff);
+  @include label-variant($label-primary-bg, #00a499);
 }
 
 .label-success {

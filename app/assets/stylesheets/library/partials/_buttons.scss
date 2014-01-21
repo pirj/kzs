@@ -15,10 +15,13 @@
   vertical-align: middle;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid transparent;
+  border: none;
   white-space: nowrap;
-  @include button-size($padding-base-vertical, $padding-base-horizontal, $font-size-base, $line-height-base, $border-radius-base);
+  min-height: 3.1em;
+  @include button-size(0, 12px, 75%, 3.1em, $border-radius-base);
   @include user-select(none);
+
+  &:first-letter{text-transform: uppercase;}
 
   &:focus {
     @include tab-focus();
@@ -53,27 +56,34 @@
 // --------------------------------------------------
 
 .btn-default {
-  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+  @include button-variant($btn-default-color, $btn-default-bg);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: darken($btn-default-color, 30%);
+  }
 }
 .btn-primary {
-  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+  @include button-variant($btn-primary-color, $btn-primary-bg);
 }
-// Warning appears as orange
-.btn-warning {
-  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
-}
-// Danger and error appear as red
-.btn-danger {
-  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
-}
-// Success appears as green
-.btn-success {
-  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
-}
-// Info appears as blue-green
-.btn-info {
-  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
-}
+//// Warning appears as orange
+//.btn-warning {
+//  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+//}
+//// Danger and error appear as red
+//.btn-danger {
+//  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+//}
+//// Success appears as green
+//.btn-success {
+//  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+//}
+//// Info appears as blue-green
+//.btn-info {
+//  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+//}
 
 
 // Link buttons
@@ -118,20 +128,20 @@
 
 // Button Sizes
 // --------------------------------------------------
-
-.btn-lg {
-  // line-height: ensure even-numbered height of button next to large input
-  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
-}
-.btn-sm,
-.btn-xs {
-  // line-height: ensure proper height of button next to small input
-  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
-}
-.btn-xs {
-  padding: 1px 5px;
-}
-
+//
+//.btn-lg {
+//  // line-height: ensure even-numbered height of button next to large input
+//  @include button-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+//}
+//.btn-sm,
+//.btn-xs {
+//  // line-height: ensure proper height of button next to small input
+//  @include button-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+//}
+//.btn-xs {
+//  padding: 1px 5px;
+//}
+//
 
 // Block button
 // --------------------------------------------------
