@@ -38,7 +38,9 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Скан свидетельства о постановке на учет в налоговом органе:</span>
-      <%= link_to "Скачать", @organization.certificate_of_tax_registration.url(:original, false), {:class => "download-link"} %>
+      <% if @organization.certificate_of_tax_registration.file? %>
+        <%= link_to "Скачать", @organization.certificate_of_tax_registration.url(:original, false), {:class => "download-link"} %>
+      <% end %>
       <%= f.file_field :certificate_of_tax_registration, class: 'filestyle col-xs-2', data: {input: false} %>
       <!--<input type="file" class="filestyle col-xs-2" data-input="false"/>-->
     </div>
@@ -49,9 +51,18 @@
     </div>
 
     <!-- TODO: unknown parameter -->
-    <div class="form-item"><span class="form-label col-md-5">Скан решения о создании:</span>  <input type="file" class="filestyle col-xs-2" data-input="false"/></div>
+    <div class="form-item"><span class="form-label col-md-5">Скан решения о создании:</span>
+      <% if @organization.creation_resolution.file? %>
+        <%= link_to "Скачать", @organization.creation_resolution.url(:original, false), {:class => "download-link"} %>
+      <% end %>
+      <%= f.file_field :creation_resolution, class: 'filestyle col-xs-2', data: {input: false} %>
+      <!--<input type="file" class="filestyle col-xs-2" data-input="false"/>-->
+    </div>
 
     <div class="form-item"><span class="form-label col-md-5">Скан Устава организации:</span>
+      <% if @organization.articles_of_organization.file? %>
+        <%= link_to "Скачать", @organization.articles_of_organization.url(:original, false), {:class => "download-link"} %>
+      <% end %>
       <%= f.file_field :articles_of_organization, class: 'filestyle col-xs-2', data: {input: false} %>
       <!--<input type="file" class="filestyle col-xs-2" data-input="false"/>-->
     </div>
@@ -98,7 +109,9 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Скан выписки из ЕГРЮЛ:</span>
-      <%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"} %>
+      <% if @organization.egrul_excerpt.file? %>
+        <%= link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"} %>
+      <% end %>
       <%= f.file_field :egrul_excerpt, class: 'filestyle col-xs-2', data: {input: false} %>
       <!--<input type="file" class="filestyle col-xs-2" data-input="false"/>-->
     </div>
@@ -126,7 +139,7 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Юридический адрес банка:</span>
-      <%= f.text_field :bank_address, class: 'form-control col-xs-6'%>
+      <%= f.text_area :bank_address, class: 'form-control col-xs-6', rows: 2%>
       <!--<input class="form-control col-xs-6" placeholder="<% @organization.bank_address %>" type="text"/> -->
     </div>
 
@@ -161,12 +174,12 @@
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Юридический адрес организации:</span>
-      <%= f.text_field :legal_address, class: 'form-control col-xs-6'%>
+      <%= f.text_area :legal_address, class: 'form-control col-xs-6', rows: 2%>
       <!--<input class="form-control col-xs-6" placeholder="<% @organization.legal_address %>" type="text"/> -->
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Физический адрес организации:</span>
-      <%= f.text_field :actual_address, class: 'form-control col-xs-6'%>
+      <%= f.text_area :actual_address, class: 'form-control col-xs-6', rows: 2%>
       <!--<input class="form-control col-xs-6" placeholder="<% @organization.actual_address %>" type="text"/> -->
     </div>
     <ul class="nav nav-pills">
