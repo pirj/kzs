@@ -1,10 +1,10 @@
-<table class="table dynamic-table default-table">
+<table class="table dynamic-table default-table" id="organizations">
 	<thead>
   	 <tr>
   	  <th class="col-md-4">
   	  	<span class="dropdown">
 	  	  	<span class="dropdown-toggle" data-toggle="dropdown">
-		  	  	<%= sortable "title", "Организация" %>
+		  	  	<%= sortable "title", "Организация, ОПФ" %>
 		  	  	<span class="caret"></span>
 	  	  	 	<span class="dropdown-arr"></span>
 	  	  	</span>
@@ -26,11 +26,31 @@
  	<tbody>
 	<% @organizations.each do |organization| %>
 	  <tr>	
-			<td><a href="#" class="organization-title"><%= organization.title %></a></td>
+			<td><a href="#" class="organization-title">
+              <%= link_to organization.title , organization_path(organization)%>
+
+
+              <%= %></a></td>
 			<td><%= user_with_full_name(organization.director_id) %></td>
 			<td><%= organization.users.count %></td>
 			<td><%= organization.phone %></td>
 			<!-- <td><%= link_to "Подробнее", organization_path(organization) %></td> -->
+
+            <td class="inform col-md-12" colspan="4" >
+              <%= link_to organization.title , organization_path(organization)%>
+            <br>
+              Штат: <%= organization.users.count %>
+              <br>
+             Руководитель:  <%= user_with_full_name(organization.director_id) %>
+              <br>
+              <%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link data-value' %>
+              <br>
+              Телефон: <%= organization.phone %>
+              <br>
+
+              <%= link_to 'Редактировать данные', (organization_path(organization)+'/edit')%>
+              <%= link_to 'Открыть анкету контрагента', organization_path(organization)%>
+            </td>
 	  </tr>
 	<% end %>
 	</tbody>

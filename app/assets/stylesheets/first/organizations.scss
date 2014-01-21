@@ -1,0 +1,14 @@
+.dynamic-table {
+  tr {
+    cursor: pointer;
+    &.opened {
+      cursor: default;
+      td{
+        display: none;
+        &.inform{
+          display: table-cell;
+        }
+      }
+    }
+  }
+}
