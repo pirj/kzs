@@ -33,11 +33,11 @@
   .col-md-6.col-md-offset-1
     .data-label = t("activerecord.attributes.organization.director_id")
     .data-value
-      .user = link_to organization.director_id, '#', class: 'name'
+      .user = link_to user_with_full_name_with_middle_name(organization.director_id), '#', class: 'name'
 
     .data-label = t("activerecord.attributes.organization.accountant_id")
     .data-value
-      .user = link_to organization.accountant_id, '#', class: 'name'
+      .user = link_to user_with_full_name_with_middle_name(organization.accountant_id), '#', class: 'name'
 
     .data-label = t("activerecord.attributes.organization.inn")
     .data-value = organization.inn

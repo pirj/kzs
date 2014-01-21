@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
   
   def show
     @organization = Organization.find(params[:id])
-    @users = User.where(:organization_id => current_user.organization_id)
+    @users = User.where(:organization_id => @organization.id)
 
     respond_to do |format|
       format.html # show.html.erb
