@@ -112,32 +112,71 @@
       </li>
     </ul>
    <% end %> 
- </div>   
+ </div>
+
+
+
  <div class="container">
   <%= form_for(@organization, :html => {:class => "form row-fuild"}) do |f| %>
   <h2 class="h1">2. Реквизиты</h2>
-    <div class="form-item"><span class="form-label col-md-5">Полное наименование банка:</span><input class="form-control col-xs-6" placeholder="<%= @organization.bank_title %>" type="text"/></div>
+    <div class="form-item"><span class="form-label col-md-5">Полное наименование банка:</span>
+      <%= f.text_field :bank_title, class: 'form-control col-xs-6'%>
+      <!--<input class="form-control col-xs-6" placeholder="<% @organization.bank_title %>" type="text"/>-->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">Юридический адрес банка:</span><input class="form-control col-xs-6" placeholder="<%= @organization.bank_address %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">Юридический адрес банка:</span>
+      <%= f.text_field :bank_address, class: 'form-control col-xs-6'%>
+      <!--<input class="form-control col-xs-6" placeholder="<% @organization.bank_address %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">Корр. счет банка:</span><input class="form-control col-xs-4" placeholder="<%= @organization.bank_correspondent_account %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">Корр. счет банка:</span>
+      <%= f.text_field :bank_correspondent_account, class: 'form-control col-xs-4'%>
+      <!--<input class="form-control col-xs-4" placeholder="<% @organization.bank_correspondent_account %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">БИК банка:</span><input class="form-control col-xs-2" placeholder="<%= @organization.bank_bik %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">БИК банка:</span>
+      <%= f.text_field :bank_bik, class: 'form-control col-xs-2'%>
+      <!--<input class="form-control col-xs-2" placeholder="<% @organization.bank_bik %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">ИНН банка:</span><input class="form-control col-xs-3" placeholder="<%= @organization.bank_inn %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">ИНН банка:</span>
+      <%= f.text_field :bank_inn, class: 'form-control col-xs-3'%>
+      <!--<input class="form-control col-xs-3" placeholder="<% @organization.bank_inn %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">КПП банка:</span><input class="form-control col-xs-2" placeholder="<%= @organization.bank_kpp %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">КПП банка:</span>
+      <%= f.text_field :bank_kpp, class: 'form-control col-xs-2'%>
+      <!--<input class="form-control col-xs-2" placeholder="<% @organization.bank_kpp %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">ОКВЭД банка:</span> <input class="form-control col-xs-4" placeholder="<%= @organization.bank_okved %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">ОКВЭД банка:</span>
+      <%= f.text_field :bank_okved, class: 'form-control col-xs-4'%>
+      <!--<input class="form-control col-xs-4" placeholder="<% @organization.bank_okved %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">Расчетный счет организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.organization_account %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">Расчетный счет организации:</span>
+      <%= f.text_field :organization_account, class: 'form-control col-xs-6'%>
+      <!--<input class="form-control col-xs-6" placeholder="<% @organization.organization_account %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">Юридический адрес организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.legal_address %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">Юридический адрес организации:</span>
+      <%= f.text_field :legal_address, class: 'form-control col-xs-6'%>
+      <!--<input class="form-control col-xs-6" placeholder="<% @organization.legal_address %>" type="text"/> -->
+    </div>
 
-    <div class="form-item"><span class="form-label col-md-5">Физический адрес организации:</span><input class="form-control col-xs-6" placeholder="<%= @organization.actual_address %>" type="text"/> </div>
+    <div class="form-item"><span class="form-label col-md-5">Физический адрес организации:</span>
+      <%= f.text_field :actual_address, class: 'form-control col-xs-6'%>
+      <!--<input class="form-control col-xs-6" placeholder="<% @organization.actual_address %>" type="text"/> -->
+    </div>
     <ul class="nav nav-pills">
-      <li class="col-md-offset-5"><input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить"></li>
-      <li><a href="#" class="btn-link btn-sm">Отменить изменения</a></li>
+      <li class="col-md-offset-5">
+        <!--<input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить">-->
+        <%= f.submit 'Сохранить', class: 'btn btn-default btn-primary btn-sm' %>
+      </li>
+      <li>
+        <%= link_to 'Отменить изменения', edit_admin_organization_path(@organization), class: 'btn-link btn-sm' %>
+        <!--#<a href="#" class="btn-link btn-sm">Отменить изменения</a>-->
+      </li>
     </ul>
     <% end %>
   </div>

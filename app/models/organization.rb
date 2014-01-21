@@ -1,7 +1,7 @@
 class Organization < ActiveRecord::Base
-  attr_accessible :title, :short_title, :inn, :logo,
+  attr_accessible :title, :short_title, :inn,
                   :lft, :rgt,
-                  :phone, :mail,
+                  :phone, :mail,:tax_authority_that_registered,
                   :parent_id,
                   :director_id,
                   :admin_id,
@@ -10,10 +10,10 @@ class Organization < ActiveRecord::Base
                   :date_of_registration, :creation_resolution_date, :egrul_registration_date,
                   :legal_address, :actual_address, :bank_address,
                   :type_of_ownership,
-                  :tax_authority_that_registered, :certificate_of_tax_registration, :creation_resolution, :articles_of_organization,
+                  :certificate_of_tax_registration, :creation_resolution, :articles_of_organization, :logo, :egrul_excerpt,
                   :kpp, :ogrn, :bik, :ogrn, :bik,
-                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved,
-                  :egrul_excerpt, :bank_title
+                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :bank_title
+
 
                   
                   
