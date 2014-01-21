@@ -80,7 +80,7 @@ module StatementsHelper
    def statement_status_list(statement)
      created = content_tag(:li, "Создан - " + Russian::strftime(statement.created_at, "%d %B %Y"))
      prepared = content_tag(:li, "Подготовлен - " + Russian::strftime(statement.prepared_date, "%d %B %Y")) if statement.prepared_date
-     approved = content_tag(:li,"Подписан - " + Russian::strftime(statement.approved_date, "%d %B %Y")) if statement.approved_date
+     approved = content_tag(:li,"Согласован - " + Russian::strftime(statement.approved_date, "%d %B %Y")) if statement.approved_date
      sent = content_tag(:li,"Отправлен - " + Russian::strftime(statement.sent_date, "%d %B %Y")) if statement.sent_date
      opened = content_tag(:li,"Открыт - " + Russian::strftime(statement.opened_date, "%d %B %Y")) if statement.opened_date
      accepted = content_tag(:li,"Подписан - " + Russian::strftime(statement.accepted_date, "%d %B %Y")) if statement.accepted_date
