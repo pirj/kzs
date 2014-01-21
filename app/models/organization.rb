@@ -1,13 +1,20 @@
 class Organization < ActiveRecord::Base
-  attr_accessible :title, :parent_id, :lft, :rgt, :logo,
-                  :phone, :mail, :director_id, :short_title, :inn, :admin_id,
-                  :type_of_ownership, :legal_address, :actual_address, 
-                  :date_of_registration, :tax_authority_that_registered, :certificate_of_tax_registration,
-                  :creation_resolution_date, :creation_resolution, :articles_of_organization, 
-                  :accountant_id, :kpp, :ogrn, :bik, :ogrn, :bik, :egrul_registration_date, 
-                  :egrul_excerpt, :bank_title, :bank_address, :bank_correspondent_account,
-                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :organization_account
-                  
+  attr_accessible :title, :short_title, :inn, :logo,
+                  :lft, :rgt,
+                  :phone, :mail,
+                  :parent_id,
+                  :director_id,
+                  :admin_id,
+                  :accountant_id,
+                  :bank_correspondent_account, :organization_account,
+                  :date_of_registration, :creation_resolution_date, :egrul_registration_date,
+                  :legal_address, :actual_address, :bank_address,
+                  :type_of_ownership,
+                  :tax_authority_that_registered, :certificate_of_tax_registration, :creation_resolution, :articles_of_organization,
+                  :kpp, :ogrn, :bik, :ogrn, :bik,
+                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved,
+                  :egrul_excerpt, :bank_title
+
                   
                   
                   
