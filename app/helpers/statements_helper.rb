@@ -15,9 +15,9 @@ module StatementsHelper
         '<span class="btn-available label-info btn"  data-toggle="dropdown">Отправлен</span>'.html_safe
       end
     elsif document.approved?
-      '<span class="btn-available btn"  data-toggle="dropdown">Подписан</span>'.html_safe
+      '<span class="btn-available btn"  data-toggle="dropdown">Согласован</span>'.html_safe
      elsif document.prepared?
-       '<span class="btn-available btn" data-toggle="dropdown">Подписан</span>'.html_safe
+       '<span class="btn-available btn" data-toggle="dropdown">Подготовлен</span>'.html_safe
     elsif document.draft?
       '<span class="btn-available btn label-inverse"  data-toggle="dropdown">Черновик</span>'.html_safe
     else
