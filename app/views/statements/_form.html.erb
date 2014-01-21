@@ -5,21 +5,14 @@
 
       <li class="col-md-5">
           <span class="dropdown full-drop">
-            <h1 data-toggle="dropdown">
+            <h1 >
               <% if action?('new') %>
                   Новый АКТ
               <% else %>
                   ФСО
               <% end %>
-              <span class="caret"></span></h1>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Письма <span class="count">(112)</span></a></li>
-              <li><a href="#">Акты <span class="count">(23)</span></a></li>
-              <li><a href="#">Распоряжения <span class="count">(43)</span></a></li>
-              <li><a href="#">Черновики <span class="count">(43)</span></a></li>
-              <li class="dropdown-arr"></li>
-              <li><a href="#">Отмена</a></li>
-            </ul>
+            </h1>
+
           </span>
       </li>
       <li class="col-md-3"></li>
@@ -63,9 +56,9 @@
       
       <%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => params[:document_id] ? params[:document_id] : @statement.document_id}, {multiple: true, :'data-placeholder' => "Выберите распоряжение", :class => 'form-control col-xs-7'}) %></span>
 
-      <span class="form-item"><%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true,  :'data-placeholder' => "Выберите контрольное лицо", :class => 'form-control col-xs-7'}) %></span>
+      <span class="form-item"><%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true,  :'data-placeholder' => "Выберите согласующих лиц", :class => 'form-control col-xs-7'}) %></span>
 
-      <span class="form-item"><%= f.collection_select(:approver_ids, @acceptors, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :'data-placeholder' => "Выберите согласующих лиц", :class => 'form-control col-xs-7'}) %></span>
+      <span class="form-item"><%= f.collection_select(:approver_ids, @acceptors, :id, :first_name_with_last_name, {:selected => @statement.user_ids}, {multiple: true, :'data-placeholder' => "Выберите контрольное лицо", :class => 'form-control col-xs-7'}) %></span>
 
 
       <span class="form-item"><%= f.cktext_area :text, :placeholder => 'Текст акта', :rows => "20" %></span>
