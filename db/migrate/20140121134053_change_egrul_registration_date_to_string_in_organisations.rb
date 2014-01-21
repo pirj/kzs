@@ -1,9 +1,11 @@
 class ChangeEgrulRegistrationDateToStringInOrganisations < ActiveRecord::Migration
   def up
-    change_column :organizations, :egrul_registration_date, :date
+    remove_column :organizations, :egrul_registration_date
+    add_column :organizations, :egrul_registration_date, :date
   end
 
   def down
-    change_column :organizations, :egrul_registration_date, :string
+    remove_column :organizations, :egrul_registration_date
+    add_column :organizations, :egrul_registration_date, :string
   end
 end
