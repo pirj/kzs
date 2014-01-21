@@ -58,9 +58,9 @@ class DocumentsController < ApplicationController
   end
   
   def batch
-    Document.find(params[:document_ids]).each do
+    Document.find(params[:document_ids]).each do |d|
       if params[:prepare]
-        if for_approve?(d)
+        if for_approve?(d) #what is this method?
           d.update_attributes(prepared: true, draft: false)
           flash[:notice] = t('documents_updated')
         else
@@ -83,8 +83,8 @@ class DocumentsController < ApplicationController
      @approve = @prepare = @send_document = true
      params['ids'].each do |id|
        d = Document.find(id)
-       @approve = @approve && (!d.approved && d.approver_id == current_user.id && d.prepared ? true : false)
-       @prepare = @prepare && (!d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false)
+       @approve =       @approve && (!d.approved && d.approver_id == current_user.id && d.prepared ? true : false)
+       @prepare =       @prepare && (!d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false)
        @send_document = @send_document && (!d.sent && d.approved && (d.approver_id == current_user.id ||
                         d.user_id == current_user.id) ? true : false)
      end
@@ -96,13 +96,13 @@ class DocumentsController < ApplicationController
               d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
               d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
               d.approved && d.sender_organization_id == current_user.organization_id ? true : false
-      @reply = !d.sent && d.organization_id == current_user.organization_id ? true : false
+      @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
       @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
       @prepare = !d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false
-      @create_draft = !d.prepared
+      @create_draft =  !d.prepared
       @send_document = !d.sent && d.approved && (d.approver_id == current_user.id ||
-                       d.user_id == current_user.id) ? true : false
-      @document_id = d.id
+                        d.user_id == current_user.id) ? true : false
+      @document_id =    d.id
       end
   end
 
@@ -182,7 +182,6 @@ class DocumentsController < ApplicationController
       @approver = User.find(@document.approver_id).first_name_with_last_name
       end
     end
-    
 
     respond_to do |format|
       format.html # show.html.erb
@@ -208,18 +207,23 @@ class DocumentsController < ApplicationController
                                     :attachments => @document.document_attachments,
                                     :conversation => @conversation }}
       format.js { @document = @document }
+      #format.pdf do
+      #  send_data(File.write("document_#{@document.id}.pdf"), :type => "application/pdf")
+      #end
       format.pdf do
         pdf = DocumentPdf.new(@document, view_context)
+        filename = "document_#{@document.id}.pdf"
+        pdf.render_file "tmp/#{filename}"
         send_data pdf.render, filename: "document_#{@document.id}.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
+                              type: 'application/pdf',
+                              disposition: 'inline'
       end
     end
   end
 
   def new
     @document = Document.new
-    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
     @executors = User.where(:organization_id => current_user.organization_id)
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
@@ -231,14 +235,14 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    @document = Document.find(params[:id])
-    @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
-    @executors = User.where(:organization_id => current_user.organization_id)
-    @recipients = User.where('organization_id != ?', current_user.organization_id)
-    @documents = Document.where('id != ?', @document.id)
-    
     if @document.user_id != current_user.id || @document.approved == true || @document.approver_id != current_user.id
       redirect_to :back, :alert => t('permission_denied')
+    else
+      @document = Document.find(params[:id])
+      @approvers = User.approvers.where(organization_id: current_user.organization_id)
+      @executors = User.where(organization_id: current_user.organization_id)
+      @recipients = User.where('organization_id != ?', current_user.organization_id)
+      @documents = Document.where('id != ?', @document.id)
     end
   end
 
@@ -261,19 +265,10 @@ class DocumentsController < ApplicationController
 
   def update
     @document = Document.find(params[:id])
-    @document.user_id = current_user.id
-    @document.executor_id = params[:document][:executor_ids].second
-    @document.approver_id = params[:document][:approver_ids].second
-    
-    if params[:prepare]
-      @document.prepared = true
-      @document.draft = false
-    end
-    
-    if params[:to_draft]
-      @document.prepared = false
-      @document.draft = true
-    end
+    @document.update_attributes(user_id: current_user.id, executor_id: params[:document][:executor_ids].second,
+                                approver_id: params[:document][:approver_ids].second)
+    @document.update_attributes(prepared: true, draft: false) if params[:prepare]
+    @document.update_attributes(prepared: false, draft: true) if params[:to_draft]
     
     respond_to do |format|
       if @document.update_attributes(params[:document])
@@ -415,9 +410,4 @@ class DocumentsController < ApplicationController
       end
     end
   end
-
-
-    
-  
-  
 end
