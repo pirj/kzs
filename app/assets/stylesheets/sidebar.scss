@@ -310,7 +310,7 @@
         vertical-align: super;
         margin-left: 10px;
         margin-right: 45px;
-
+        text-overflow: ellipsis;
         width: auto;
         line-height: 18px;
         cursor: pointer;
@@ -344,6 +344,9 @@
         width: auto;
         line-height: 18px;
         cursor: pointer;
+        overflow: hidden;
+        max-width: 110px;
+        text-overflow: ellipsis;
       }
       &:hover {
         .text {
