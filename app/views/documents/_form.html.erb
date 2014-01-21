@@ -44,6 +44,7 @@
       <%= f.collection_select(:organization_ids, Organization.where('id != ?', current_user.organization_id), :id, :title, {:include_blank => false, :selected => @document.organization_id}, {multiple: true, :'data-placeholder' => "Организация-получатель", :class => 'form-control col-xs-7 pull-left'}) %>
       <span class="col-xs-2 hint"><%= link_to "Все организации", "#", :id => 'select_all_organizations' %></span>
       </span>
+      
 
       <% if @document.document_type == 'writ' || action?('new') && params[:type] == 'writ' %>
       <span class="form-item">
@@ -71,7 +72,7 @@
         <h4>Прикрепленные задачи</h4>
         <div class="taskCard">
           <%= f.fields_for :task_list do |builder| %>
-              <%= render 'task_list_fields', f: builder %>
+              <%= render 'documents/task_list_fields', f: builder %>
 
           <% end %>
         </div>
@@ -84,7 +85,7 @@
          <h4>Прикрепленные файлы</h4>
         <div class="attachCard">
           <%= f.fields_for :document_attachments do |builder| %>
-              <%= render 'document_attachment_fields', f: builder %>
+              <%= render 'documents/document_attachment_fields', f: builder %>
           <% end %>
           <%= link_to_add_attachments "Прикрепить файл", f, :document_attachments %>
         </div>
@@ -117,7 +118,7 @@
 
 
       <div class="col-md-12">
-      <%= render 'actions_form', :f => f %>
+      <%= render 'documents/actions_form', :f => f %>
       </div>
   <% end %>
 </div>

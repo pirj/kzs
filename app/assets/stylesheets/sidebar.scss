@@ -247,6 +247,23 @@
         }
       }
 
+
+      &.contragent {
+        i {
+          background-position: -10px -430px;
+        }
+        &:hover i {
+          background-color: #76d4ce;
+          background-position: -80px -430px;
+        }
+        &.active i {
+          background-position: -150px -430px;
+        }
+        &.active:hover i {
+          background-color: #9ad8ff;
+        }
+      }
+
       &.letters {
         .icon {
           background-position: left -25px;
@@ -346,6 +363,10 @@
 
       &:after {
         display: none;
+      }
+
+      &:hover{
+        i{}
       }
     }
 

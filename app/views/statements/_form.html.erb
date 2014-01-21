@@ -54,14 +54,14 @@
 
 			<%= form_for(@statement, :html => { :class => "form new-doc row-fuild" }) do |f| %>
 
-            <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Укажите заголовок акта..' %></span>
+            <span class="form-item"><%= f.text_field :title, :class => 'form-control col-xs-7', :placeholder => 'Укажите заголовок акта..', :value => params[:document_id] ? 'К распоряжению №' + params[:document_id] : nil %></span>
             
       
         
       <span class="form-item">
       
       
-      <%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => action?('new') ? params[:document_id] : @statement.document_id}, {multiple: true, :'data-placeholder' => "Выберите распоряжение", :class => 'form-control col-xs-7'}) %></span>
+      <%= f.collection_select(:document_ids, @writs, :id, :title, {:selected => params[:document_id] ? params[:document_id] : @statement.document_id}, {multiple: true, :'data-placeholder' => "Выберите распоряжение", :class => 'form-control col-xs-7'}) %></span>
 
       <span class="form-item"><%= f.collection_select(:internal_approver_id, @approvers, :id, :first_name_with_last_name, {:selected => @statement.approver_id}, {multiple: true,  :'data-placeholder' => "Выберите контрольное лицо", :class => 'form-control col-xs-7'}) %></span>
 

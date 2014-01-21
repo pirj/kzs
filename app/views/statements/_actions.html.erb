@@ -35,7 +35,7 @@
 
 	<% unless @writ.statements.count > 1 %>
 	<li class="btn-group">
-		<%= link_to 'Отклонить', task_list_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
+		<%= link_to 'Отклонить', refuse_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
 	</li>
 	<% end %>
 

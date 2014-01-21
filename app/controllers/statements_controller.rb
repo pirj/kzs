@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class StatementsController < ApplicationController
   layout 'documents'
   helper_method :sort_column, :sort_direction
@@ -190,6 +192,9 @@ class StatementsController < ApplicationController
       document.executed = true
       document.executed_date = Time.now
       document.save  
+      task = document.task
+      task.completed = true
+      task.save
       @statement.accepted = true
       @statement.accepted_date = Time.now
       @statement.save
@@ -208,24 +213,36 @@ class StatementsController < ApplicationController
   end
   
   def refuse
-    @statement = Statement.find(params[:id])
-    @statement.accepted = false
-    @statement.not_accepted = true
-    @statement.refuse_date = Time.now
-    @statement.save
-    
-    document = Document.find(@statement.document)
-    document.with_comments = true
-    document.executed = false
-    document.save
-    
+    statement = Statement.find(params[:id])
+    if statement.user_ids.include?(current_user.id)
+      statement.accepted = false
+      statement.not_accepted = true
+      statement.refuse_date = Time.now
+      statement.save
+      initial_document = Document.find(statement.document)
+      initial_document.with_comments = true
+      initial_document.executed = false
+      initial_document.save
+      @document = Document.new
+      @document.document_type = 'writ'
+      @document.title = "В ответ на распоряжение №" + initial_document.id.to_s
+      @document.organization_id = initial_document.organization_id
+      @document.approver_id = initial_document.approver_id
+      @document.executor_id = initial_document.executor_id
+      @document.text = "Исполнить задачи согласно листу замечаний"
 
-    respond_to do |format|
-      format.html { redirect_to statements_path, notice: t('statement_refused') }
-      format.json { render json: @statement }
+      @approvers = User.approvers.where("organization_id = ?", current_user.organization_id)
+      @executors = User.where(:organization_id => current_user.organization_id)
+      @recipients = User.where('organization_id != ?', current_user.organization_id)
+      @documents = Document.all
+      @task_list = @document.build_task_list
+
+      render "documents/new"
+    else
+      redirect_to documents_path, :alert => t('permission_denied')
     end
   end
-  
+
   private
   
   def sort_column
