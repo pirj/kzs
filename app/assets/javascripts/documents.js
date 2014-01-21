@@ -14,9 +14,9 @@ $(document).ready(function(){
             if (document.getElementById(controller).getElementsByClassName('opened')) {
                 CloseAllTR(controller);
             }
-            if (!this.getElementsByTagName('iframe')[0].src){
-                this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
-            }
+            //if (!this.getElementsByTagName('iframe')[0].src){
+            //    this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
+            //}
             self.classList.add('opened');
         }
     });

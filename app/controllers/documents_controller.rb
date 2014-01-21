@@ -1,12 +1,11 @@
-# coding: utf-8
-
+# encoding: UTF-8
 class DocumentsController < ApplicationController
   layout 'documents'
   helper_method :sort_column, :sort_direction
   # collection
-  
+
   before_filter :authorize, :only => :edit
-  
+
   def index
     # check if user can view confindetnial documents
     # code since lines from 10 to 14 dont usage in this action, maybe delete them?
@@ -17,7 +16,7 @@ class DocumentsController < ApplicationController
     end
     organization = current_user.organization_id
     current_user_id = current_user.id
-    
+
     #default scope
     if params[:status_sort]
       direction = params[:direction]
@@ -25,13 +24,13 @@ class DocumentsController < ApplicationController
     else
       sort_type = sort_column + " " + sort_direction
     end
-    
+
     documents = Document.text_search(params[:query])
                 .not_deleted.not_archived.not_draft
                 .order(sort_type)
-                .where{(sent == true) & (organization_id == organization) | 
-                  (sender_organization_id == organization) & (user_id == current_user_id) | 
-                  (sender_organization_id == organization) & (approver_id == current_user_id) | 
+                .where{(sent == true) & (organization_id == organization) |
+                  (sender_organization_id == organization) & (user_id == current_user_id) |
+                  (sender_organization_id == organization) & (approver_id == current_user_id) |
                   (approved == true) & (sender_organization_id == organization)}
 
     @documents = if params[:type] == 'mails'
@@ -40,23 +39,23 @@ class DocumentsController < ApplicationController
       documents.writs # writs
     else
       documents # any other case
-    end  
-    
+    end
+
     # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
-    
+
     @controller = params[:controller]
-    
+
     respond_to do |format|
       format.html
       format.js
     end
   end
-  
-  def drafts    
+
+  def drafts
     @documents = Document.not_deleted.not_archived.order("created_at DESC").draft.where(:user_id => current_user.id)
     @documents = @documents.paginate(:per_page => 20, :page => params[:page])
   end
-  
+
   def batch
     Document.find(params[:document_ids]).each do |d|
       if params[:prepare]
@@ -146,14 +145,14 @@ class DocumentsController < ApplicationController
   end
 
   # member
-  
+
   def show
     @document = Document.find(params[:id])
     if DocumentConversation.exists?(@document.document_conversation_id)
       @conversation = DocumentConversation.find(@document.document_conversation_id)
       @conversation_documents = @conversation.documents.where('id != ?', @document.id)
     end
-    
+
     if current_user.permissions.exists?('1') && @document.organization_id == current_user.organization_id && @document.opened != true
       @document.opened = true
       @document.opened_date = Time.now
@@ -163,7 +162,7 @@ class DocumentsController < ApplicationController
         OpenNotice.create!(:user_id => user.id, :document_id => @document.id)
       end
     end
-    
+
     @sender_organization = Organization.find(@document.sender_organization_id).title
     @organization = Organization.find(@document.organization_id).title
     if @document.user_id
@@ -176,7 +175,7 @@ class DocumentsController < ApplicationController
       @executor = User.find(@document.executor_id).first_name_with_last_name
       end
     end
-    
+
     if @document.approver_id
       if User.exists?(@document.approver_id)
       @approver = User.find(@document.approver_id).first_name_with_last_name
@@ -228,7 +227,7 @@ class DocumentsController < ApplicationController
     @recipients = User.where('organization_id != ?', current_user.organization_id)
     @documents = Document.all
     @task_list = @document.build_task_list
-    
+
     if params[:type] == nil
       redirect_to documents_path
     end
@@ -258,6 +257,15 @@ class DocumentsController < ApplicationController
                                  executor_id: params[:document][:executor_ids].second,
                                  approver_id: params[:document][:approver_ids].second)
       document.update_attributes(prepared: true, prepared_date: Time.now, draft: false) if params[:prepare]
+      if document.document_type == 'writ'
+        task = Task.new
+        task.document_id = document.id
+        task.task = "Исполнить распоряжения №#{document.id}"
+        task.executor_organization_id = organization
+        task.sender_organization_id = current_user.organization_id
+        task.deadline = document.deadline
+        task.save!
+      end
       assign_organizations_to_tasks(document)
     end
     redirect_to documents_path, notice: t('document_successfully_created')
