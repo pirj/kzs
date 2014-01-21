@@ -3,9 +3,9 @@
       <li class="col-md-8">
         <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
         <h1><%= @organization.title %>
-        <span class="sub-title row-fuild">
-          <a cla href="#" class="download-link pdf"><i></i>Скачать реквизиты</a>
-          <%= link_to 'редактировать данные', edit_organization_path(@organization), class: 'download-link icon-pencil' %>
+        <span class="sub-title row-fuild row">
+          <a href="#" class="download-link pdf col-md-5"><i></i>Скачать реквизиты</a>
+          <%= link_to 'редактировать данные', edit_organization_path(@organization), class: 'download-link icon-pencil col-md-5 col-md-offset-1' %>
           <!--<a class="download-link icon-pencil" href="#">Редактировать данные</a>-->
         </span>
         </h1>
@@ -74,7 +74,7 @@
           <!--</div>-->
         <!--</div>-->
         <%= render 'organizations/tabs/show_details', organization: @organization %>
-        <div class="tab-pane" id="stuff">...</div>
+        <%= render 'organizations/tabs/show_stuff', organization: @organization, users: @users %>
       </div>
     </div>
 </div>
