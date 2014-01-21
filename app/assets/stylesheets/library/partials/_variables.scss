@@ -22,7 +22,7 @@ $brand-primary:         #c4f2e4 !default;
 $brand-success:         #1BBC9B !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
-$brand-info:            #5bc0de !default;
+$brand-info:            #1BA0E1 !default;
 
 // Scaffolding
 // -------------------------
@@ -40,6 +40,13 @@ $link-hover-color:      darken($link-color, 15%) !default;
 // -------------------------
 
 $font-family-sans-serif:  'open_sansregular', arial, sans-serif !default;
+$font-family-sans-serif-italic:  'open_sansitalic', arial, sans-serif !default;
+$font-family-sans-serif-bold:  'open_sansbold', arial, sans-serif !default;
+$font-family-sans-serif-bold-italic:  'open_sansbold_italic', arial, sans-serif !default;
+$font-family-sans-serif-extrabold:  'open_sansextrabold', arial, sans-serif !default;
+$font-family-sans-serif-extrabold-italic:  'open_sansextrabold_italic', arial, sans-serif !default;
+$font-family-sans-serif-light:  'open_sanslight', arial, sans-serif !default;
+$font-family-sans-serif-light-italic:  'open_sanslight_italic', arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
@@ -58,10 +65,10 @@ $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px
 $line-height-base:        1.428571429 !default; // 20/14
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
 
-$headings-font-family:    $font-family-base !default;
+$headings-font-family:    $font-family-sans-serif-light !default;
 $headings-font-weight:    500 !default;
 $headings-line-height:    1.1 !default;
-$headings-color:          inherit !default;
+$headings-color:          $brand-info !default;
 
 
 // Iconography
