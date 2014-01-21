@@ -9,6 +9,7 @@ $(document).ready(function(){
 	});
 
 
+    $('.js-select-collection').chosen()
 
 
 
