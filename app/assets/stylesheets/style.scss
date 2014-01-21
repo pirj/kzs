@@ -625,3 +625,10 @@
     border-color:#fff;
   }
 }
+
+
+.data-row.m-inline{
+  display: block;
+  .data-label, .data-value{display: inline-block;}
+  .data-label{text-align: right;}
+}

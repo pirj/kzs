@@ -21,9 +21,6 @@
     <div class="form-item"><span class="form-label col-md-5">Форма собственности:</span>
       <!-- TODO: this parameteres not exists -->
       <%= f.text_field :type_of_ownership %>
-      <!--<select class="form-control col-xs-2" id="" name="">-->
-        <!--<option value="3"><%# @organization.type_of_ownership %></option>-->
-      <!--</select>-->
     </div>
 
     <div class="form-item"><span class="form-label col-md-5">Дата постановки на учет в налоговом органе:</span>
@@ -73,7 +70,6 @@
       <!--<input class="form-control col-xs-6 chosen-container chosen-container-multi" placeholder="<%= user_with_full_name_with_middle_name(@organization.director_id) %>" type="text"/>-->
     </div>
 
-    <!--%= f.collection_select(@organization.director_id, :id, :user_with_full_name_with_middle_name, {multiple: true, :id => "gen_dir_choice", :class => "col-xs-8"}) %>-->
 
     <!-- TODO: account not exists -->
     <div class="form-item"><span class="form-label col-md-5">Главный бухгалтер:</span>
@@ -81,7 +77,6 @@
       <!--<input class="form-control col-xs-6" placeholder="<%= user_with_full_name_with_middle_name(@organization.accountant_id) %>" type="text"/>-->
     </div>
 
-    <!--%= f.collection_select(@organization.accountant_id, :id, :user_with_full_name_with_middle_name, {multiple: true, :id => "gen_dir_choice", :class => "col-xs-8"}) %>-->
 
     <div class="form-item"><span class="form-label col-md-5">ИНН:</span>
       <%= f.text_field :inn, class: 'form-control col-xs-2'%>

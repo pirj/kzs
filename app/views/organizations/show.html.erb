@@ -74,7 +74,7 @@
           <!--</div>-->
         <!--</div>-->
         <%= render 'organizations/tabs/show_details', organization: @organization %>
-        <div class="tab-pane" id="stuff">...</div>
+        <%= render 'organizations/tabs/show_stuff', organization: @organization, users: @users %>
       </div>
     </div>
 </div>
