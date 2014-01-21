@@ -425,7 +425,7 @@
           position: relative;
           bottom: 1px;
           .menu-link {
-            margin-left: 6px;
+            margin-left: 0px;
             width: 200px;
             font-size: 14px;
             text-align: left;
@@ -447,12 +447,13 @@
               padding: 2px 2px 0;
               height: 17px;
               width: 18px;
-              margin-left: 15px;
               display: inline-block;
               color: white;
               background-color: #e63d4d;
               position: relative;
               top: -2px;
+              left: 12px;
+              margin-left: -14px;
             }
             &:hover {
               background-color: #9ad8ff;
