@@ -178,11 +178,25 @@
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAABFCAYAAABzPHcEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALNJREFUeNpi%2FP%2F%2FPwMRQJqJgTigQ6xCR0YirAYZdpcYE8OAWIEBZCIezAPED%2F8TUARy1vL%2FUIBPUc9%2FJIDLuqX%2F0QCyAiYgjoC5CR2wAH3kBgonqO%2BUcHmd8T%2BRcUhszIwqHFU4qnBU4ajCUYWjCoHYA4g7gPg%2BXpVoFXskroodV1NhGTEKYY2PPmIUwhSvIEYh0Q0kGAa1XP4T24i7R0yA%2FwPiFcTGzH5GYpuuxCpkAwgwAEABi254DNFjAAAAAElFTkSuQmCC) no-repeat;
           background-size: 10px 60px;
         }
-
-        &:hover {
-          //background-color: white;
-          background-color: #9ad8ff;
+        &:hover{
+          background-color: white;
         }
+
+        &.contragent:hover {
+          i {
+            background-color: white;
+
+
+          }
+        }
+
+        &.permits:hover {
+          i {
+            background-color: white;
+            background-position: -153px -164px;
+          }
+        }
+
       }
 
       .text {
@@ -233,35 +247,33 @@
 
       &.permits {
         i {
-          background-position: -10px -164px; ///300
+          background-position: -13px -164px; ///300
+          width: 38px;
         }
         &:hover i {
           background-color: #76d4ce;
-          background-position: -80px -164px;
+          background-position: -83px -164px;
         }
         &.active i {
-          background-position: -150px -164px;
+          background-position: -153px -164px;
         }
-        &.active:hover i {
-          background-color: #9ad8ff;
-        }
+
       }
 
 
       &.contragent {
         i {
-          background-position: -10px -430px;
+          width: 38px;
+          background-position: -13px -430px;
         }
         &:hover i {
           background-color: #76d4ce;
-          background-position: -80px -430px;
+          background-position: -83px -430px;
         }
         &.active i {
-          background-position: -150px -430px;
+          background-position: -153px -430px;
         }
-        &.active:hover i {
-          background-color: #9ad8ff;
-        }
+
       }
 
       &.letters {
@@ -360,6 +372,18 @@
           background-position: -83px -230px !important;
         }
       }
+
+
+
+
+      &:hover {
+        //background-color: white;
+        background-color: #9ad8ff;
+        i{
+          background-color: #9ad8ff;
+        }
+
+      }
     }
     .menu-link.active {
       border-radius: 12px;
@@ -368,9 +392,10 @@
         display: none;
       }
 
-      &:hover{
-        i{}
+      &.contragent i {
+        background-position: -153px -430px;
       }
+
     }
 
     .menu-dir {
