@@ -64,10 +64,8 @@
     <div class="view-main-doc">
       <div class="overlay"><a href="/documents/<%= @document.id %>.pdf" target="_blank" class="zoom"></a></div>
       <!--<a href="" class="icon-chat-empty"></a>-->
-
-      <iframe style="width: 190px; height: 270px;" src=<%= pdf_to_png(@document.id) %>/>
-      </iframe>
-
+      <%= pdf_to_png(@document.id) %>
+      <!--<img src="img/collapse-doc.jpg" alt=""/>-->
     </div>
   </div>
   <!--<div class="inform-hide">Close</div>-->

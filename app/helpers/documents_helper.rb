@@ -169,14 +169,10 @@ module DocumentsHelper
   end
 
   def pdf_to_png(id)
-    require 'RMagick'
-    require 'open-uri'
-    pdf = Magick::ImageList.new
-    urlpdf = open("http://localhost:3000/documents/#{id}.pdf")
-    pdf.from_blob(urlpdf.read)
-    thumb = pdf.scale(300, 300)
-    thumb.write 'doc.png'
-    image_path 'doc.png'
+    pdf = Magick::ImageList.new("tmp/document_#{id}.pdf")
+    thumb = pdf.scale(190, 270)
+    thumb.write "app/assets/images/document_#{id}.png"
+    image_tag "document_#{id}.png"
   end
 
 
