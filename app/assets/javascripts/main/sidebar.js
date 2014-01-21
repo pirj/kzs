@@ -20,9 +20,9 @@ $(document).ready(function () {
     function closeSidebar() {
 
         removeId = setTimeout(function() {
-            $('.l-page__column').removeClass('m-open');
-            $('.menu-dir').removeClass('open');
-            $('.child-dir').css({'height': '0px'});
+     //       $('.l-page__column').removeClass('m-open');
+     //       $('.menu-dir').removeClass('open');
+     //       $('.child-dir').css({'height': '0px'});
 
         }, 800)
     }
