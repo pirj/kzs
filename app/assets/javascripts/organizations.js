@@ -16,7 +16,9 @@ $(document).ready(function(){
 /* table logic   */
 
 
-    var controller = document.getElementsByTagName('table')[0].id;
+    var controller = 'organizations';//document.getElementsByTagName('table')[0].id;
+
+
 
     console.log(controller);
 

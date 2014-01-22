@@ -20,7 +20,7 @@
 	
 	<% if @statement.approved == false && @statement.approver_id == current_user.id && @statement.prepared == true %>
 	 <li class="btn-group">
- 		<%= link_to 'Подписать', approve_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
+ 		<%= link_to 'Согласовать', approve_statement_path(@statement), confirm: "Вы уверены?", :class => "btn btn-default btn-sm" %>
  	</li>
  	<% end %> 
 	

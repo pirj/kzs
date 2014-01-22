@@ -225,7 +225,7 @@ class StatementsController < ApplicationController
       initial_document.save
       @document = Document.new
       @document.document_type = 'writ'
-      @document.title = "В ответ на распоряжение №" + initial_document.id.to_s
+      @document.title = "В ответ на акт №" + statement.id.to_s
       @document.organization_id = initial_document.organization_id
       @document.approver_id = initial_document.approver_id
       @document.executor_id = initial_document.executor_id

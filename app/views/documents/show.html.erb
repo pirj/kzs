@@ -128,7 +128,8 @@
 
   </div>
 
-
+  
+  <% if @document.task.present? %>
   <h4 class="col-md-12">Задача</h4>
 
   <div style="margin-left: 16px;">
@@ -145,7 +146,7 @@
     <%= @document.task.deadline.strftime('%d.%m.%Y')%>
         <%end %>
   </div>
-
+  <% end %>
   <% if @document.document_type == 'writ' && @document.task_list.present? %>
       <h4 class="col-md-12">Чек лист</h4>
 

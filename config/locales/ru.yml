@@ -78,6 +78,8 @@ ru:
       group:
         one: "Группа"
         other: "Группы"
+        many: "Группы"
+        few: "Группы"
       vehicle: "ТС"
       permit:
         one: "Пропуск"
@@ -135,6 +137,7 @@ ru:
         accountant_id: "Главный бухгалтер"
         kpp: "КПП"
         bik: "БИК"
+        ogrn: "ОГРН"
         egrul_registration_date: "Дата постановки в ЕГРЮЛ"
         egrul_excerpt: "Скан выписки из ЕГРЮЛ"
         bank_title: "Полное наименование банка"
