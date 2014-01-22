@@ -5,8 +5,6 @@ class DocumentsController < ApplicationController
   # collection
 
   before_filter :authorize, :only => :edit
-  after_filter :generate_png, :only => :edit
-
 
   def index
     # check if user can view confindetnial documents
@@ -201,6 +199,8 @@ class DocumentsController < ApplicationController
       #end
       format.pdf do
         pdf = DocumentPdf.new(@document, view_context)
+        filename = "document_#{@document.id}.pdf"
+        pdf.render_file "tmp/#{filename}"
         send_data pdf.render, filename: "document_#{@document.id}.pdf",
                               type: 'application/pdf',
                               disposition: 'inline'
