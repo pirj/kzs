@@ -85,26 +85,26 @@ class DocumentsController < ApplicationController
        @approve =       @approve && (!d.approved && d.approver_id == current_user.id && d.prepared ? true : false)
        document.user_id == current_user.id && document.prepared == false ||
        document.approver_id == current_user.id && document.prepared == false
-       @prepare =       @prepare && (!d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false)
+       @prepare =       d.user_id == current_user.id || d.approver_id == current_user.id && !d.prepared && @prepare ? true : false
        @send_document = @send_document && (!d.sent && d.approved && (d.approver_id == current_user.id ||
                         d.user_id == current_user.id) ? true : false)
      end
      @many = params[:ids]
-    else
-      d = Document.find(params[:ids])[0]
-      @edit = d.user_id == current_user.id && d.prepared == false ? true : false
-      @show = d.sent && d.organization_id == current_user.organization_id ||
-              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
-              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
-              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
-      @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
-      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
-      @prepare = !d.prepared && d.user_id == current_user.id || d.approver_id == current_user.id ? true : false
-      @create_draft =  !d.prepared
-      @send_document = !d.sent && d.approved && (d.approver_id == current_user.id ||
-                        d.user_id == current_user.id) ? true : false
-      @document_id =    d.id
-      end
+   else
+     d = Document.find(params[:ids])[0]
+     @edit = d.user_id == current_user.id && d.prepared == false ? true : false
+     @show = d.sent && d.organization_id == current_user.organization_id ||
+             d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
+             d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
+             d.approved && d.sender_organization_id == current_user.organization_id ? true : false
+     @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
+     @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
+     @prepare = !d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false
+     @create_draft =  !d.prepared
+     @send_document = !d.sent && d.approved && (d.approver_id == current_user.id ||
+                       d.user_id == current_user.id) ? true : false
+     @document_id =    d.id
+     end
   end
 
   def prepare
