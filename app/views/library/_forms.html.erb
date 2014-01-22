@@ -37,25 +37,17 @@
   примеры поискового инпута
 </p>
 <div class="bs-example">
-  <form class="form-inline">
-    <div class="form-group">
-      <div class="input-group">
-        <input type="search" class="form-control" placeholder="поисковый инпут">
-        <span class="input-group-icon search"></span>
-      </div>
-    </div>
-  </form>
+  <div class="input-group">
+    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
+    <span class="input-group-icon search"></span>
+  </div>
 </div>
 <div class="highlight">
   <pre class="prettyprint lang-html"><%= html_escape %q{
-      <form class="form-inline">
-        <div class="form-group">
-          <div class="input-group">
-            <input type="search" class="form-control" placeholder="поисковый инпут">
-            <span class="input-group-icon search"></span>
-          </div>
-        </div>
-        </form>
+  <div class="input-group">
+    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
+    <span class="input-group-icon search"></span>
+  </div>
   }%></pre>
 </div>
 
@@ -63,18 +55,17 @@
   пример инпута c датой
 </p>
 <div class="bs-example">
-  <form class="form-inline">
-    <div class="form-group">
-      <div class="input-group">
-        <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
-        <input type="search" class="form-control" placeholder="поисковый инпут">
-      </div>
-    </div>
-  </form>
+  <div class="input-group">
+    <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+    <input class="form-control js-datepicker" placeholder="инпут с датой">
+  </div>
 </div>
 <div class="highlight">
   <pre class="prettyprint lang-html"><%= html_escape %q{
-
+    <div class="input-group">
+      <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+      <input class="form-control js-datepicker" placeholder="инпут с датой">
+    </div>
   }%></pre>
 </div>
 

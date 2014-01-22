@@ -856,3 +856,18 @@
     height: auto;
   }
 }
+
+
+
+@mixin arrow-top($color){
+  border-bottom: $dropdown-arrow-width-base solid $color;
+  border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-right: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-top: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  width: $dropdown-arrow-width-base;
+  left: 2*$dropdown-arrow-width-base;
+  top: -2*$dropdown-arrow-width-base;
+  display: block;
+  content: '';
+  position: absolute;
+}
