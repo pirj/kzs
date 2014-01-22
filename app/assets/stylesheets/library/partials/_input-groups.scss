@@ -22,6 +22,7 @@
   }
 }
 
+
 // Sizing options
 //
 // Remix the default form control sizing classes into new ones for easier
@@ -39,6 +40,7 @@
 // -------------------------
 .input-group-addon,
 .input-group-btn,
+.input-group-icon,
 .input-group .form-control {
   display: table-cell;
 
@@ -48,11 +50,13 @@
 }
 // Addon and addon wrapper for buttons
 .input-group-addon,
-.input-group-btn {
+.input-group-btn,
+.input-group-icon {
   width: 1%;
   white-space: nowrap;
   vertical-align: middle; // Match the inputs
 }
+
 
 // Text input groups
 // -------------------------
@@ -85,6 +89,27 @@
     margin-top: 0;
   }
 }
+
+// style for special search. It render search icon at right of input. wow.
+.input-group-icon {
+  &.search:after{
+    font-family: FontAwesome;
+    content: "\f002";
+    position: absolute;
+    right: 10px;
+    top: .6em;
+    font-size: 1em;
+    color: $input-border;
+    @include transition(color ease-in-out .15s);
+  }
+}
+// this styles not working inside .input-group-icon
+// only next writing is working
+.form-control.active + .input-group-icon:after,
+.form-control:focus + .input-group-icon:after{
+  color: $brand-success;
+}
+
 
 // Reset rounded corners
 .input-group .form-control:first-child,
