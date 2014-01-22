@@ -1,6 +1,6 @@
 .chosen-container-multi{
 
-  // visible input and selected options
+  // input and selected options
   .chosen-choices{
     border: 2px solid $input-border;
     border-radius: $input-border-radius;
@@ -21,10 +21,49 @@
       width: 100%;
       @include box-shadow(none);
     }
+
+    // selected items with cancel button
+    li.search-choice{
+      padding: $padding-base-vertical+2px $padding-base-horizontal*2 $padding-base-vertical+2px $padding-base-horizontal;
+      font-size: $font-size-base;
+      background: $input-border-focus;
+      border-radius: $input-border-radius;
+      color: #fff;
+      border: none;
+
+      @include transition(background, ease-in-out .15s);
+
+      &:hover, &:active{
+        background: $btn-primary-bg;
+        .search-choice-close{
+          display: block;
+        }
+      }
+
+      .search-choice-close{
+        background: none;
+        display: none;
+        top: 10px;
+        right: 7px;
+        &:after{
+          $size: 1em;
+          font-size: 12px;
+          content:"\f00d";
+          color: #fff;
+          font-family: FontAwesome;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: $size;
+          height: $size;
+          line-height: $size;
+        }
+      }
+    }
   }
 
 
-  // active (focused) visible input and selected options
+  // active (focused) input and selected options
   &.chosen-container-active .chosen-choices{
     border-color: $input-border-focus;
     box-shadow: none;
@@ -37,11 +76,17 @@
   border: none;
   background: transparent;
   @include box-shadow(none);
+
   // select options list background
   .chosen-results{
     background-color: $input-border-focus;
     padding: $input-border-radius 0;
     margin: 0 $input-border-radius;
+  }
+
+  // not-selectable item in options list
+  .result-selected{
+    color: $btn-primary-bg;
   }
 }
 // select options list background items
@@ -52,3 +97,5 @@
 
   &.highlighted{background: $brand-success;}
 }
+
+
