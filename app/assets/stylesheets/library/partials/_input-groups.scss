@@ -94,24 +94,36 @@
 .input-group-icon {
   border: 2px solid $input-border;
   border-radius: $input-border-radius;
+  width: 2*$input-border-radius;
 
   &.search:after{
+    color: $input-border;
+    padding-left: 5px;
+    background: #fff;
     font-family: FontAwesome;
     content: "\f002";
     position: absolute;
     right: 10px;
     top: .6em;
     font-size: 1em;
-    color: $input-border;
-    
+
     @include transition(color ease-in-out .15s);
   }
 }
 // this styles not working inside .input-group-icon
 // only next writing is working
+.form-control.active + .input-group-icon,
+.form-control:focus + .input-group-icon{
+  border-color: $brand-success;
+}
 .form-control.active + .input-group-icon:after,
 .form-control:focus + .input-group-icon:after{
   color: $brand-success;
+}
+
+.form-control + .input-group-icon{
+  border-left: 0;
+  @include border-left-radius(0);
 }
 
 
@@ -122,6 +134,7 @@
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
   @include border-right-radius(0);
+  border-right: 0;
 }
 .input-group-addon:first-child {
   border-right: 0;
@@ -132,6 +145,7 @@
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child) {
   @include border-left-radius(0);
+  border-left: 0;
 }
 .input-group-addon:last-child {
   border-left: 0;
