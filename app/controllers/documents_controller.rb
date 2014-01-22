@@ -5,6 +5,8 @@ class DocumentsController < ApplicationController
   # collection
 
   before_filter :authorize, :only => :edit
+  after_filter :generate_png, :only => :edit
+
 
   def index
     # check if user can view confindetnial documents
@@ -165,22 +167,10 @@ class DocumentsController < ApplicationController
 
     @sender_organization = Organization.find(@document.sender_organization_id).title
     @organization = Organization.find(@document.organization_id).title
-    if @document.user_id
-      if User.exists?(@document.user_id)
-        @sender = User.find(@document.user_id).first_name_with_last_name
-      end
-    end
-    if @document.executor_id
-      if User.exists?(@document.executor_id)
-      @executor = User.find(@document.executor_id).first_name_with_last_name
-      end
-    end
 
-    if @document.approver_id
-      if User.exists?(@document.approver_id)
-      @approver = User.find(@document.approver_id).first_name_with_last_name
-      end
-    end
+    @sender = User.find(@document.user_id).first_name_with_last_name if @document.user_id && User.exists?(@document.user_id)
+    @executor = User.find(@document.executor_id).first_name_with_last_name if @document.executor_id && User.exists?(@document.executor_id)
+    @approver = User.find(@document.approver_id).first_name_with_last_name if @document.approver_id && User.exists?(@document.approver_id)
 
     respond_to do |format|
       format.html # show.html.erb

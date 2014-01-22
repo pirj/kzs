@@ -73,4 +73,13 @@ class Document < ActiveRecord::Base
     includes(:statements).where(:statements => {:id => nil})
   end
 
+  def generate_png
+    pdf = DocumentPdf.new(self, 'show')
+    filename = "document_#{self.id}.pdf"
+    pdf.render_file "tmp/#{filename}"
+    pdf = Magick::ImageList.new("tmp/document_#{id}.pdf")
+    thumb = pdf.scale(190, 270)
+    thumb.write "app/assets/images/document_#{id}.png"
+  end
+
 end
