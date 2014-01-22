@@ -16,7 +16,7 @@
     position: relative;
     display: block;
 
-    > a {
+    > a:not('.btn') {
       position: relative;
       display: block;
       padding: $nav-link-padding;
@@ -28,7 +28,7 @@
     }
 
     // Disabled state sets text to gray and nukes hover/tab effects
-    &.disabled > a {
+    &.disabled > a:not('.btn') {
       color: $nav-disabled-link-color;
 
       &:hover,
@@ -42,7 +42,7 @@
   }
 
   // Open dropdowns
-  .open > a {
+  .open > a:not('.btn') {
     &,
     &:hover,
     &:focus {
@@ -132,7 +132,7 @@
     }
 
     // Active state
-    &.active > a {
+    &.active > a:not('.btn') {
       &,
       &:hover,
       &:focus {
@@ -244,11 +244,11 @@
 // -------------------------
 
 // Make dropdown carets use link color in navs
-.nav .caret {
+.nav a:not('.btn') .caret {
   border-top-color: $link-color;
   border-bottom-color: $link-color;
 }
-.nav a:hover .caret {
+.nav a:not('.btn'):hover .caret {
   border-top-color: $link-hover-color;
   border-bottom-color: $link-hover-color;
 }
