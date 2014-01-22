@@ -1,7 +1,5 @@
 $ ->
-  $window = $(window)
-
-  # Запускаем code pretty:
+  # run code pretty:
   window.prettyPrint and prettyPrint()
 
   # replace backslashes to nil word.
@@ -10,4 +8,7 @@ $ ->
     $(@).html($(@).html().replace(/\\/g, ''))
   )
 
-  console.log 'highlighter on'
+
+
+  $( ".js-datepicker" ).datepicker({ dateFormat: "dd-mm-yy" })
+  $( ".js-chosen" ).chosen()
