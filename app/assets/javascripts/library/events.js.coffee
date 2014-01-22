@@ -12,3 +12,7 @@ $ ->
 
   $( ".js-datepicker" ).datepicker({ dateFormat: "dd-mm-yy" })
   $( ".js-chosen" ).chosen()
+
+  $(document).on('blur focus', '.input-group input', (e)->
+    $(@).parent('.input-group').toggleClass('active')
+  )

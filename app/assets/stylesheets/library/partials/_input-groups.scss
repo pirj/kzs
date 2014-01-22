@@ -20,6 +20,21 @@
     width: 100%;
     margin-bottom: 0;
   }
+
+  // set to active with js function
+  // when input focused
+  &.active{
+    .input-group-icon,
+    .input-group-icon:after{
+      color: $input-border-focus;
+      @include transition(color ease-in-out .15s);
+    }
+    .form-control,
+    .input-group-icon{
+      border-color: $input-border-focus;
+      @include transition(border-color, ease-in-out .15s);
+    }
+  }
 }
 
 
@@ -94,8 +109,10 @@
 .input-group-icon {
   border: 2px solid $input-border;
   border-radius: $input-border-radius;
-  width: 2*$input-border-radius;
-  padding: 0 5px 0 25px;
+  width: auto;
+  min-width: 25px;
+  padding: 0 5px 0 5px;
+  color: $input-border;
 
   &.search:after{
     color: $input-border;
@@ -119,16 +136,6 @@
     @include border-right-radius(0);
   }
 
-}
-// this styles not working inside .input-group-icon
-// only next writing is working
-.form-control.active + .input-group-icon,
-.form-control:focus + .input-group-icon{
-  border-color: $brand-success;
-}
-.form-control.active + .input-group-icon:after,
-.form-control:focus + .input-group-icon:after{
-  color: $brand-success;
 }
 
 

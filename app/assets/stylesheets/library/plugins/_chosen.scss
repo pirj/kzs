@@ -26,7 +26,7 @@
 
   // active (focused) visible input and selected options
   &.chosen-container-active .chosen-choices{
-    border-color: $brand-primary;
+    border-color: $input-border-focus;
     box-shadow: none;
   }
 }
@@ -39,7 +39,7 @@
   @include box-shadow(none);
   // select options list background
   .chosen-results{
-    background-color: $brand-primary;
+    background-color: $input-border-focus;
     padding: $input-border-radius 0;
     margin: 0 $input-border-radius;
   }

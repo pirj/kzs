@@ -133,7 +133,7 @@ output {
   @include transition(border-color ease-in-out .15s);
 
   // Customize the `:focus` state to imitate native WebKit styles.
-  @include form-control-focus($brand-success);
+  @include form-control-focus($input-border-focus);
 
   // Placeholder
   //
