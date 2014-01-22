@@ -30,21 +30,22 @@
 
 // The dropdown menu (ul)
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
   z-index: $zindex-dropdown;
-  display: none; // none by default, but block on "open" of the menu
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0; // override default ul
-  list-style: none;
   font-size: $font-size-base;
   background-color: $dropdown-bg;
   border: 1px solid $dropdown-fallback-border; // IE8 fallback
   border: 1px solid $dropdown-border;
   border-radius: $border-radius-base;
+  margin: $dropdown-arrow-width-base 0 0; // override default ul
+  position: absolute;
+  font-size: 75%;
+  top: 100%;
+  left: 0;
+  display: none; // none by default, but block on "open" of the menu
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  list-style: none;
   @include box-shadow(0 6px 12px rgba(0,0,0,.175));
   background-clip: padding-box;
 
@@ -60,13 +61,16 @@
   }
 
   // Links within the dropdown menu
+  > li {
+    padding: 0 $dropdown-item-padding;
+  }
   > li > a {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: normal;
     line-height: $line-height-base;
     color: $dropdown-link-color;
+    padding: 3px $dropdown-link-padding;
+    display: block;
+    clear: both;
+    font-weight: normal;
     white-space: nowrap; // prevent links from randomly breaking onto new lines
   }
 }
@@ -121,6 +125,20 @@
   // Show the menu
   > .dropdown-menu {
     display: block;
+
+    // arrow of the top of the dropdown-menu
+    &:before{
+      border-bottom: $dropdown-arrow-width-base solid $dropdown-arrow-color;
+      border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+      border-right: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+      border-top: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+      width: $dropdown-arrow-width-base;
+      left: 2*$dropdown-arrow-width-base;
+      top: -2*$dropdown-arrow-width-base;
+      display: block;
+      content: '';
+      position: absolute;
+    }
   }
 
   // Remove the outline when :focus is triggered

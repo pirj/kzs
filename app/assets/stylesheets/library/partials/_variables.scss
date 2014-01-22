@@ -104,6 +104,8 @@ $component-active-bg:            $brand-primary !default;
 $caret-width-base:               4px !default;
 $caret-width-large:              5px !default;
 
+
+
 // Tables
 // -------------------------
 
@@ -126,6 +128,7 @@ $btn-font-weight:                normal !default;
 $btn-default-color:              #979797 !default;
 $btn-default-bg:                 #F2F2F2 !default;
 $btn-default-border:             #ccc !default;
+$btn-default-padding:            12px;
 
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 #1abc9c !default;
@@ -177,14 +180,14 @@ $input-group-addon-border-color: $input-border !default;
 // Dropdowns
 // -------------------------
 
-$dropdown-bg:                    #fff !default;
-$dropdown-border:                rgba(0,0,0,.15) !default;
+$dropdown-bg:                    $brand-success !default;
+$dropdown-border:                none !default;
 $dropdown-fallback-border:       #ccc !default;
-$dropdown-divider-bg:            #e5e5e5 !default;
+$dropdown-divider-bg:            $brand-success !default;
 
-$dropdown-link-color:            $gray-dark !default;
-$dropdown-link-hover-color:      darken($gray-dark, 5%) !default;
-$dropdown-link-hover-bg:         #f5f5f5 !default;
+$dropdown-link-color:            #fff !default;
+$dropdown-link-hover-color:      #fff !default;
+$dropdown-link-hover-bg:         darken($brand-success, 8%) !default;
 
 $dropdown-link-active-color:     $component-active-color !default;
 $dropdown-link-active-bg:        $component-active-bg !default;
@@ -195,6 +198,11 @@ $dropdown-header-color:          $gray-light !default;
 
 $dropdown-caret-color:           #000 !default;
 
+$dropdown-arrow-width-base:      8px !default;
+$dropdown-arrow-color:           $dropdown-bg;
+
+$dropdown-item-padding:          floor($btn-default-padding/3);
+$dropdown-link-padding:          $btn-default-padding - $dropdown-item-padding;
 
 // COMPONENT VARIABLES
 // --------------------------------------------------

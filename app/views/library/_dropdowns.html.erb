@@ -5,21 +5,19 @@
 </p>
 <div class="bs-example">
   <ul class="nav nav-pills">
-    <li class="dropdown">
+    <li class="dropdown open">
       <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
         Создать <span class="caret"></span>
-        <span class="dropdown-arr"></span>
       </a>
       <span class="dropdown-arr"></span><ul class="dropdown-menu" role="menu">
-      <li><a href="/documents/new?type=mail">Письмо</a></li>
-      <li><a href="/documents/new?type=writ">Распоряжение</a></li>
-      <li><a href="/statements/new">Акт</a></li>
+      <li><a href="#">Письмо</a></li>
+      <li><a href="#">Распоряжение</a></li>
+      <li><a href="#">Акт</a></li>
     </ul>
     </li>
-    <li class="dropdown open">
+    <li class="dropdown">
       <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="#">
         Действия <span class="caret"></span>
-        <span class="dropdown-arr"></span>
       </a>
       <ul class="dropdown-menu" role="menu">
         <li><a href="#" id="create_copy_link">Создать по образу и подобию</a></li>
@@ -30,15 +28,34 @@
         <li><a href="#" id="reply_link">Ответить</a></li>
       </ul>
     </li>
-
-    <li>
-      <a class="btn btn-sm" href="javascript:location.reload(true);"><img alt="Refresh" src="/assets/refresh-f365d2ec78f9c8d60d0637842d10ded5.png"></a>
-    </li>
   </ul>
 </div>
 <div class="highlight">
   <pre class="prettyprint lang-html"><%= html_escape %q{
-  <a href="#" class="btn btn-primary">Primary</a>
-  <a href="#" class="btn btn-default">Default</a>
+    <ul class="nav nav-pills">
+    <li class="dropdown open">
+      <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+        Создать <span class="caret"></span>
+      </a>
+      <span class="dropdown-arr"></span><ul class="dropdown-menu" role="menu">
+      <li><a href="#">Письмо</a></li>
+      <li><a href="#">Распоряжение</a></li>
+      <li><a href="#">Акт</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="#">
+        Действия <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" id="create_copy_link">Создать по образу и подобию</a></li>
+        <li><a href="#" id="edit_link">Редактировать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" name="prepare">Подготовить</a></li>
+        <li> <a href="#" data-confirm="Вы уверены?" id="approve_link" name="approve">Подписать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" id="send_link" name="send">Отправить</a></li>
+        <li><a href="#" id="reply_link">Ответить</a></li>
+      </ul>
+    </li>
+  </ul>
   }%></pre>
 </div>
