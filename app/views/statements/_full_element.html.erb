@@ -16,7 +16,18 @@
         <div class="user value">
           <span class="photo"> <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" /></span>
      <!--//     <a href="#" class="name "><%= user_with_full_name(@statement.approver_id)%></a>-->
-          <%= link_to user_with_full_name(@statement.approver_id), user_path(@statement.approver_id), :class => 'name', :target => '_blank' %>
+          <%= link_to user_with_full_name(@statement.approver_id), user_path(@statement.approver_id), :class => 'name dropdown bubble', :target => '_blank', :data-toggle => 'dropdown' %>
+        <!--//  вот так должно быть нужно всунуть dropdown-arr
+            <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
+              <span class="dropdown-arr"></span> 
+            </a> -->
+            <ul class="dropdown-menu" role="menu">
+              <li class="title"><a href="#"><%= user_with_full_name(@statement.approver_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+              <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+              <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+              <li><a href="#" class="icon-clock">Личная страница</a></li>
+              <li><a href="#" class="icon-block-1">Отмена</a></li>
+            </ul>
         </div>
       </li>
 
@@ -28,7 +39,18 @@
             <span class="photo">
               <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAATlBMVEXz9PaAnq2Foa/29vjy8/WNp7SSqreOqLWPqbZ9m6rV3uOIpLHv8fOzxM3j6ey8y9Pq7vB6majI1Nre5OmetcCswMmWrrpwkqKiuMKnusXLnEwGAAABH0lEQVQ4y5WS2a6DMAxEiRMvWSEspf3/H72gAo2EebgjJJY5TOSRu//KWWsfPWdLfucQBt1PrizRG+8hDlqIS8HXKMyInoJVgAJms3eR90WJGAH5EMagJPRvOoH4Cu4GpIVeVwJkZYj5d4TUfE9w2fApNL0yRm/kIszYaQlyEqICo+eDEIbRKj1U/hIi0RR3B4YZdnO7EPLQjHedMUH8ZgCl9scLSBmQZSPUIXdgAhRmQSwqkNJyNAF9UnctmKPrSElp2pW3kbOnPNzssERoqsZlso3dhdlX5EZozPzbiZIFSRr7Wyf0x0GBifguIfpM1m0FmiisihCm0pUX8JOkfsK+J/IIYMzdDBfwe6DzHrFbj7eWoOsDr928Vv+ouuY/yfASuYyFl+0AAAAASUVORK5CYII=" />
             </span>
-              <%= link_to user_with_full_name(user), user_path(user), :class => 'name', :target => '_blank' %>
+              <%= link_to user_with_full_name(user), user_path(user), :class => 'name', :target => '_blank', :class => 'name dropdown bubble', :target => '_blank', :data-toggle => 'dropdown' %>
+               <!--//  вот так должно быть нужно всунуть dropdown-arr
+            <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
+              <span class="dropdown-arr"></span> 
+            </a> -->
+            <ul class="dropdown-menu" role="menu">
+              <li class="title"><a href="#"><%= user_with_full_name(user) %></a> Инженер ПТО, ООО «Циклон»</li> 
+              <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+              <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+              <li><a href="#" class="icon-clock">Личная страница</a></li>
+              <li><a href="#" class="icon-block-1">Отмена</a></li>
+            </ul>
             </div>
           </li>
       <% end %>

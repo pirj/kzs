@@ -54,12 +54,12 @@
         clear: both;
         content: "";
       }
-      .doc-info .title {
+      > .doc-info > .title {
         width: 17%;
         text-align: right;
         display: table-cell;
       }
-      .h3 {
+      > .h3 {
         font-weight: normal;
       }
       .value {

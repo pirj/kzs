@@ -50,9 +50,17 @@
                     <span class="photo">
                       <i class="default-user"></i>
                     </span>
-                    <a href="#" class="name">
+                    <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
                       <%= user_with_full_name(organization.director_id) %>
+                      <span class="dropdown-arr"></span>
                     </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li class="title"><a href="#"><%= user_with_full_name(organization.director_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+                      <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+                      <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+                      <li><a href="#" class="icon-clock">Личная страница</a></li>
+                      <li><a href="#" class="icon-block-1">Отмена</a></li>
+                    </ul>
                   </div>
                 </li>
                 <li><span class="title valign-mid">Контактное
@@ -61,9 +69,17 @@
                     <span class="photo">
                       <i class="default-user"></i>
                     </span>
-                    <a href="#" class="name">
+                     <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
                       <%= user_with_full_name(organization.director_id) %>
+                      <span class="dropdown-arr"></span>
                     </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li class="title"><a href="#"><%= user_with_full_name(organization.director_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+                      <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+                      <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+                      <li><a href="#" class="icon-clock">Личная страница</a></li>
+                      <li><a href="#" class="icon-block-1">Отмена</a></li>
+                    </ul>
                   </div>
                 </li>
                 <li>
