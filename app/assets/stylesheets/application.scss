@@ -9,12 +9,11 @@
 
 
 /*chosen overrite*/
-.chosen-container-multi .chosen-choices {
+.chosen-container-multi .chosen-choices, 
+.chosen-container-single .chosen-single {
   background: none;
-}
-
-.chosen-container-multi .chosen-choices {
   border: 1px solid #cccccc;
+  line-height:34px;
   /*  background-color: #fff;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
     background-image: -webkit-linear-gradient(#eeeeee 1%, #ffffff 15%);
@@ -23,26 +22,75 @@
     background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);*/
 }
 
-.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
-  margin: 1px 0;
-  padding: 5px;
+
+
+
+.chosen-container-single,
+.chosen-container-single  .chosen-single,
+.chosen-container-single  .chosen-single span {
+  min-height:38px;
+  box-shadow: none;
+  border-width:2px;
+}
+
+.chosen-container-single  .chosen-single,
+.chosen-container-single  .chosen-single span {
+  padding:3px 5px 5px 5px;
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+  border:2px solid #76d4ce;
+  border-radius:5px;
+  padding-bottom:3px;
+} 
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"], .chosen-container-single .chosen-single span, .chosen-container-single.chosen-container-active.chosen-with-drop .chosen-single {
+  height: 38px;
+  margin:0;
+}
+
+.chosen-container-single.chosen-container-active.chosen-with-drop {
+  .chosen-single div b {
+    background-position:-18px 8px;
+  }
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"],
+.chosen-container-single  .chosen-single span,  
+.chosen-container-single.chosen-container-active.chosen-with-drop .chosen-single {
   height: 15px;
   outline: 0;
-  border: 0 !important;
   background: transparent !important;
   box-shadow: none;
   color: #999999;
   font-size: 14px;
   font-family: "open_sansregular", "Segoe WP", "Helvetica Neue", sans-serif;
   line-height: normal;
+
+}
+
+.chosen-container-active.chosen-with-drop .chosen-drop {
+  width: 99%;
+  margin: 0 auto;
+  left: 2px;
+  top: 89%;
+}
+ 
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  border: 0 !important;
   border-radius: 0;
+  padding: 5px;
+  margin: 1px 0;
 }
 
 .chosen-container-multi .chosen-choices li.search-field .default {
   color: #999999;
 }
 
-
+.chosen-container-single .chosen-single div b, 
+.chosen-container-single.chosen-container-active.chosen-with-drop .chosen-single {
+  background-position:0 8px;
+}
 
 
 /*devise.css*/
