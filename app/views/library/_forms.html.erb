@@ -60,3 +60,29 @@
     </form>
   }%></pre>
 </div>
+
+
+<p>
+  пример инпута с ниспадающим списком
+</p>
+<div class="bs-example">
+  <select class="form-control js-chosen" data-placeholder="Организация-получатель" multiple="multiple">
+    <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
+    <option value="2">ФКП «Дирекция КЗС Минрегиона России» </option>
+  </select>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only">обычный инпут</label>
+        <input type="text" class="form-control" placeholder="обычный инпут">
+      </div>
+      <div class="form-group">
+        <label class="sr-only">активный инпут</label>
+        <input type="text" class="form-control active"placeholder="активный инпут">
+      </div>
+    </form>
+  }%></pre>
+</div>
+

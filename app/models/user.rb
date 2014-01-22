@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
             
   # validates :username, uniqueness: true
   
-  has_attached_file :avatar, :styles => { :small => "48x48#", :large => "100x100#" } 
+  has_attached_file :avatar, :plugins => { :small => "48x48#", :large => "100x100#" }
   
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

@@ -1,0 +1,54 @@
+.chosen-container-multi{
+
+  // visible input and selected options
+  .chosen-choices{
+    border: 2px solid $input-border;
+    border-radius: $input-border-radius;
+    background: transparent;
+
+    @include transition(border-color ease-in-out .15s);
+
+    li.search-field input[type="text"]{
+      height: auto;
+      background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+      color: $input-color;
+      line-height: $line-height-base;
+      font-size: $font-size-base;
+      height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+      outline-width: 0;
+      padding: $padding-base-vertical $padding-base-horizontal;
+      vertical-align: middle;
+      width: 100%;
+      @include box-shadow(none);
+    }
+  }
+
+
+  // active (focused) visible input and selected options
+  &.chosen-container-active .chosen-choices{
+    border-color: $brand-primary;
+    box-shadow: none;
+  }
+}
+
+
+// wrapper for options list items
+.chosen-container .chosen-drop{
+  border: none;
+  background: transparent;
+  @include box-shadow(none);
+  // select options list background
+  .chosen-results{
+    background-color: $brand-primary;
+    padding: $input-border-radius 0;
+    margin: 0 $input-border-radius;
+  }
+}
+// select options list background items
+.chosen-container .chosen-results li{
+  color: #fff;
+  padding: $dropdown-link-padding;
+  margin: 0 $dropdown-link-padding*4 0 $dropdown-link-padding;
+
+  &.highlighted{background: $brand-success;}
+}

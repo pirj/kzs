@@ -92,6 +92,9 @@
 
 // style for special search. It render search icon at right of input. wow.
 .input-group-icon {
+  border: 2px solid $input-border;
+  border-radius: $input-border-radius;
+
   &.search:after{
     font-family: FontAwesome;
     content: "\f002";
@@ -100,6 +103,7 @@
     top: .6em;
     font-size: 1em;
     color: $input-border;
+    
     @include transition(color ease-in-out .15s);
   }
 }
