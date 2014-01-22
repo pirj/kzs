@@ -2,19 +2,113 @@
 // BUTTONS
 // --------------------------------------------------
 
+// Core buttons styles
+.btn {
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: none;
+  white-space: nowrap;
+  min-height: 3.1em;
+  @include button-size(0, $btn-default-padding, 75%, 3.1em, $border-radius-base);
+  @include user-select(none);
+
+  &:first-letter{text-transform: uppercase;}
+
+  &:focus {
+    @include tab-focus();
+  }
+
+  &:hover,
+  &:focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+}
 
 // --------------------------------------------------
 // Buttons styles.
-.btn { @include btn-style; }
-.btn-default { @include btn-style-default; }
-.btn-primary { @include btn-style-primary; }
+
+.btn-default {
+  @include button-variant($btn-default-color, $btn-default-bg);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: darken($btn-default-color, 30%);
+  }
+}
+
+.btn-primary { @include button-variant($btn-primary-color, $btn-primary-bg);}
 
 
 // --------------------------------------------------
 // Link buttons
 
 // Make a button look and behave like a link
-.btn-link { @include btn-style-link; }
+@mixin btn-link-style($color, $hover-color){
+  color: $color;
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+    text-decoration: underline;
+  }
+  &:hover,
+  &:focus {
+    color: $hover-color;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}
+
+.btn-link {
+  @include btn-link-style($link-color, $link-hover-color);
+}
+
+.btn-link-muted{
+  @include btn-link-style($link-muted-color, $link-muted-hover-color);
+}
 
 
 
