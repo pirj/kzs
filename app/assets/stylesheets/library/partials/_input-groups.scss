@@ -95,11 +95,10 @@
   border: 2px solid $input-border;
   border-radius: $input-border-radius;
   width: 2*$input-border-radius;
+  padding: 0 5px 0 25px;
 
   &.search:after{
     color: $input-border;
-    padding-left: 5px;
-    background: #fff;
     font-family: FontAwesome;
     content: "\f002";
     position: absolute;
@@ -109,6 +108,17 @@
 
     @include transition(color ease-in-out .15s);
   }
+
+  &:last-child{
+    border-left: 0;
+    @include border-left-radius(0);
+  }
+
+  &:first-child{
+    border-right: 0;
+    @include border-right-radius(0);
+  }
+
 }
 // this styles not working inside .input-group-icon
 // only next writing is working
@@ -121,10 +131,6 @@
   color: $brand-success;
 }
 
-.form-control + .input-group-icon{
-  border-left: 0;
-  @include border-left-radius(0);
-}
 
 
 // Reset rounded corners
