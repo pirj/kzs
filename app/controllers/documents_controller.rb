@@ -201,8 +201,6 @@ class DocumentsController < ApplicationController
       #end
       format.pdf do
         pdf = DocumentPdf.new(@document, view_context)
-        filename = "document_#{@document.id}.pdf"
-        pdf.render_file "tmp/#{filename}"
         send_data pdf.render, filename: "document_#{@document.id}.pdf",
                               type: 'application/pdf',
                               disposition: 'inline'

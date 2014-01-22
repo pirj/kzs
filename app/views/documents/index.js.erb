@@ -5,11 +5,6 @@ $('.document_operation').on("change", function() {
 	myFunction(elem);
 });
 
-$('#select_all_documents').on("click", function() {	
-	$(document).find(':checkbox').prop('checked', this.checked);
-	myFunction();
-});
-
 $(function() {
 	var searchString = $("#query").val();
 	if ($("tr").length <= 1){

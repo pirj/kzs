@@ -126,7 +126,19 @@ $(document).ready(function(){
         $("#document_organization_ids").trigger("chosen:updated");
     });
 
-//#select_all_documents
+    $('#select_all_documents').click(function() {
+        //$(document).find(':checkbox').prop('checked', this.checked);
+        if(this.checked) {
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        }else{
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+
     if ( [].indexOf ) {
         var Find_id = function(array, value) {
             return array.indexOf(value);
