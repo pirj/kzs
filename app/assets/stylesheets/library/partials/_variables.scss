@@ -18,7 +18,7 @@ $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 // Brand colors
 // -------------------------
 
-$brand-primary:         #c4f2e4 !default;
+$brand-primary:         #76d4ce !default;
 $brand-success:         #1BBC9B !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
@@ -447,7 +447,7 @@ $label-info-bg:               $brand-info !default;
 $label-warning-bg:            $brand-warning !default;
 $label-danger-bg:             $brand-danger !default;
 
-$label-color:                 $gray-darker !default;
+$label-color:                 $gray !default;
 $label-link-hover-color:      $gray-darker !default;
 
 

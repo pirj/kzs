@@ -14,7 +14,10 @@ $ ->
     showOtherMonths: true
     dateFormat: "dd-mm-yy"
   )
-  $( ".js-chosen" ).chosen()
+  $( ".js-chosen" ).chosen(
+    disable_search_threshold: 1
+    no_results_text: "Ничего не найдено."
+  )
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
