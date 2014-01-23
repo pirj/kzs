@@ -69,8 +69,7 @@ select.form-control {
 }
 
 .form-label {
-  float: none;
-  padding-right: 20px;
+  /*padding-right: 20px;*/
   color: #999999;
   font-size: 14px;
   line-height:16px;
@@ -78,6 +77,7 @@ select.form-control {
   display:table-cell;
   vertical-align:middle;
   min-width: 130px;
+  word-wrap: break-word;  
 }
 
 .form-label ~ .form-label {
