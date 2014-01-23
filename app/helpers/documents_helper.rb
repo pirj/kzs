@@ -168,11 +168,11 @@ module DocumentsHelper
 
   end
 
-  def pdf_to_png(document)
+  def pdf_to_png(document, width, height)
     pdf = DocumentPdf.new(document, 'show')
     pdf.render_file "tmp/document_#{document.id}.pdf"
     pdf = Magick::Image.read("tmp/document_#{document.id}.pdf").first
-    thumb = pdf.scale(190, 270)
+    thumb = pdf.scale(width, height)
     thumb.write "app/assets/images/document_#{document.id}.png"
     image_tag "document_#{document.id}.png", style: 'background-color: white' #replace to css
   end
