@@ -63,7 +63,8 @@
   <div class="col-md-4">
     <div class="view-main-doc">
       <div class="overlay"><a href="/documents/<%= @document.id %>.pdf" target="_blank" class="zoom"></a></div>
-      <%= pdf_to_png(@document) %>
+      <iframe style="width: 190px; height: 264px;" src="/documents/<%= @document.id %>.pdf"/>
+      </iframe>
     </div>
   </div>
   <!--<div class="inform-hide">Close</div>-->
