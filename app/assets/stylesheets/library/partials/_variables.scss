@@ -21,8 +21,8 @@ $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 $brand-primary:         #76d4ce !default;
 $brand-success:         #1BBC9B !default;
 $brand-default:         #dcf2ec !default;
-$brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
+$brand-warning:         #ffe381 !default;
+$brand-danger:          #ffa581 !default;
 $brand-info:            #1BA0E1 !default;
 
 // Scaffolding
@@ -443,7 +443,7 @@ $popover-arrow-outer-fallback-color:  #999 !default;
 // Labels
 // -------------------------
 
-$label-default-bg:            $gray-light !default;
+$label-default-bg:            $gray-lighter !default;
 $label-primary-bg:            $brand-default !default;
 $label-success-bg:            $brand-success !default;
 $label-info-bg:               $brand-info !default;
