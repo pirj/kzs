@@ -110,6 +110,25 @@
   @include btn-link-style($link-muted-color, $link-muted-hover-color);
 }
 
+.btn-link-dashed{
+  @include btn-link-style($link-color, $link-hover-color);
+  &, &:hover, &:active, &:visited, &:focus{
+    border-bottom: 1px dashed $link-color;
+    margin: $btn-default-padding $btn-default-padding;
+
+    min-height: initial; // for merge text and dashed
+    line-height: initial; // for merge text and dashed
+
+    display: inline-block;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  &:hover, &:active, &:visited, &:focus{
+    border-color: $link-hover-color;
+  }
+}
+
 
 
 // --------------------------------------------------
