@@ -1,27 +1,51 @@
-.chosen-container-multi{
+// wrapper for visible block with selected options.
+.chosen-container-multi .chosen-choices,
+.chosen-container .chosen-single{
+  border: 2px solid $input-border;
+  border-radius: $input-border-radius;
+  background: transparent;
 
-  // input and selected options
-  .chosen-choices{
-    border: 2px solid $input-border;
+  @include transition(border-color ease-in-out .15s);
+}
+
+// wrapper for selected oprion in select
+.chosen-container-multi .chosen-choices li.search-field input[type="text"],
+.chosen-container .chosen-single{
+  height: auto;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  color: $input-color;
+  line-height: $line-height-base;
+  font-size: $font-size-base;
+  height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  outline-width: 0;
+  padding: $padding-base-vertical $padding-base-horizontal;
+  vertical-align: middle;
+  width: 100%;
+  @include box-shadow(none);
+}
+
+// wrapper for single select
+.chosen-container{
+  .chosen-single{
+    // arrow up-down on the right of label
+    b{
+      margin-top: 5px;
+    }
+  }
+
+  &.chosen-container-active .chosen-single{
+    border: 2px solid  $input-border-focus;
     border-radius: $input-border-radius;
     background: transparent;
+    box-shadow: none;
+  }
+}
 
-    @include transition(border-color ease-in-out .15s);
 
-    li.search-field input[type="text"]{
-      height: auto;
-      background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-      color: $input-color;
-      line-height: $line-height-base;
-      font-size: $font-size-base;
-      height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
-      outline-width: 0;
-      padding: $padding-base-vertical $padding-base-horizontal;
-      vertical-align: middle;
-      width: 100%;
-      @include box-shadow(none);
-    }
-
+// wrapper for multiple select
+.chosen-container-multi{
+  // input and selected options
+  .chosen-choices{
     // selected items with cancel button
     li.search-choice{
       padding: $padding-base-vertical+2px $padding-base-horizontal*2 $padding-base-vertical+2px $padding-base-horizontal;
@@ -77,11 +101,37 @@
   background: transparent;
   @include box-shadow(none);
 
-  // select options list background
-  .chosen-results{
+  // select options list background and search field
+  .chosen-results, .chosen-search{
     background-color: $input-border-focus;
     padding: $input-border-radius 0;
     margin: 0 $input-border-radius;
+  }
+
+  // search wrapper in options list
+  .chosen-search{
+//    padding: $padding-base-vertical $padding-base-horizontal;
+
+    padding: $padding-base-vertical $dropdown-link-padding $padding-base-vertical $dropdown-link-padding;
+    input{
+      background: $btn-primary-bg;
+      padding: $dropdown-link-padding;
+      border-radius: $input-border-radius;
+      border: none;
+      color: #fff;
+      @include box-shadow(none);
+    }
+
+    // search icon on the right of wrapper
+    &:after{
+      color: #fff;
+      font-family: FontAwesome;
+      content: "\f002";
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      font-size: 12px;
+    }
   }
 
   // not-selectable item in options list
@@ -93,9 +143,13 @@
 .chosen-container .chosen-results li{
   color: #fff;
   padding: $dropdown-link-padding;
-  margin: 0 $dropdown-link-padding*4 0 $dropdown-link-padding;
+  margin: 0 $dropdown-link-padding 0 $dropdown-link-padding;
 
   &.highlighted{background: $brand-success;}
+  &.no-results{
+    background: transparent;
+    color: $btn-primary-bg;
+  }
 }
 
 
