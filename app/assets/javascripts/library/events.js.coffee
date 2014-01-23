@@ -8,12 +8,16 @@ $ ->
     $(@).html($(@).html().replace(/\\/g, ''))
   )
 
+  # dropdown
+  $('.dropdown-toggle').dropdown()
 
-
+  # datepicker
   $( ".js-datepicker" ).datepicker(
     showOtherMonths: true
     dateFormat: "dd-mm-yy"
   )
+
+  # chosen
   $( ".js-chosen" ).chosen(
     disable_search_threshold: 1
     no_results_text: "Ничего не найдено."
