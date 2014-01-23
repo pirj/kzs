@@ -85,6 +85,5 @@ $(function () {
         bubbleForm.save()
         bubbleForm.dom.hide();
     });
-
 });
 

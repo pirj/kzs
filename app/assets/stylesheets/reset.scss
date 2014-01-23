@@ -77,8 +77,8 @@ ul {
   padding-left:0;
 }
 
-.page input:focus {
-  border-color:#76d4ce;
+input:focus, input:active {
+  border-color:#76d4ce !important;
 }
 
 

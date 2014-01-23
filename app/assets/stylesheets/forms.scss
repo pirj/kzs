@@ -102,18 +102,22 @@ select.form-control {
   }
   .form-item {
     text-align: center;
+    .btn-default {
+      position: absolute;
+      top: 0;
+    }
   }
   .form-control {
     background: #fff;
     display: table-cell;
     &[type="password"] {
-      margin-left: -59px;
+      margin-left: 0;
     }
   }
   .forgot-password {
     padding: 10px 0 0 10px;
-    display: block;
-    margin-left: -208px;
+    display: none;
+    margin-left: -197px;
   }
   .form {
     margin: 0 auto;
