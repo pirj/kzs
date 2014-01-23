@@ -33,8 +33,6 @@
   z-index: $zindex-dropdown;
   font-size: $font-size-base;
   background-color: $dropdown-bg;
-  border: 1px solid $dropdown-fallback-border; // IE8 fallback
-  border: 1px solid $dropdown-border;
   border-radius: $border-radius-base;
   margin: $dropdown-arrow-width-base 0 0; // override default ul
   position: absolute;
@@ -200,3 +198,94 @@
   }
 }
 
+
+
+
+// Header dropdown
+// Styles header of dropdown and options list in same color
+.header{
+  $_padding: $padding-base-horizontal*2;
+  margin-left: -$_padding; // it step to alignment h1 and dropdown header-with-left-padding
+
+  font-family: $font-family-sans-serif-light;
+
+  // dropdown header
+  .dropdown-toggle{
+    background-color: transparent; // set to transparent for beautiful animation with change background color
+    margin: 0;
+    padding: $padding-base-vertical*3 $_padding $padding-base-vertical;
+    display: block;
+    @include border-top-radius(15px);
+    @include transition(background-color ease-in-out .01s);
+
+
+    &, &:hover, &:visited, &:active, &:focus,
+    a, a:hover, a:visited, a:active, a:focus{
+      text-decoration: none;
+      border-bottom: none;
+    }
+  }
+
+  // dropdown menu items wrapper
+  .dropdown-menu{
+    background-color: transparent; // set to transparent for beautiful animation with change background color
+
+    display: block; // set to render beautiful animation by change color
+    opacity: 0.01;  // set to render beautiful animation by change color
+
+    padding-bottom: $_padding;
+    margin-top: 0;
+    padding-top: 0;
+    max-width: 420px;
+    color: #fff;
+
+    @include border-top-radius(0);
+    @include border-bottom-radius(15px);
+    @include transition(background-color ease-in-out .05s);
+
+    > li {
+      font-size: $font-size-h3;
+      padding: 0;
+
+      // menu item divider
+      border-bottom: 1px solid $dropdown-header-divider-bg;
+      &:last-child{border-bottom: none;}
+
+      a{
+        padding: $_padding/2 $_padding;
+      }
+
+      & a:hover,
+      & a:focus {
+        background: darken($dropdown-header-bg, 10%);
+      }
+    }
+
+    // Dividers (basically an hr) within the dropdown
+    .divider {
+      @include nav-divider($dropdown-header-divider-bg);
+    }
+  }
+
+
+  // open dropdown styles
+  &.open{
+    > .dropdown-toggle{
+      background-color: $dropdown-header-bg;
+
+      &, &:hover, &:visited, &:active, &:focus,
+      a, a:hover, a:visited, a:active, a:focus{
+        color: #fff;
+      }
+    }
+
+    > .dropdown-menu{
+      background-color: $dropdown-header-bg;
+      border-top: 1px solid $dropdown-header-divider-bg;
+      opacity: 0.99;
+      &:before{
+        @include arrow-top(transparent);
+      }
+    }
+  }
+}

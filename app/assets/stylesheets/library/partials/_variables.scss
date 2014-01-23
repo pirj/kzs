@@ -23,7 +23,9 @@ $brand-success:         #1BBC9B !default;
 $brand-default:         #dcf2ec !default;
 $brand-warning:         #ffe381 !default;
 $brand-danger:          #ffa581 !default;
-$brand-info:            #1BA0E1 !default;
+$brand-info:            #70d0ff !default;
+
+$brand-rich-info:       #1ba0e1 !default;
 
 // Scaffolding
 // -------------------------
@@ -34,8 +36,8 @@ $text-color:            $gray-dark !default;
 // Links
 // -------------------------
 
-$link-color:                  #0e84cf !default;
-$link-hover-color:            #005e99 !default;
+$link-color:                  $brand-rich-info !default;
+$link-hover-color:            darken($brand-rich-info, 10%) !default;
 
 $link-muted-color:            #888 !default;
 $link-muted-hover-color:      #333 !default;
@@ -190,6 +192,12 @@ $dropdown-bg:                    $brand-success !default;
 $dropdown-border:                none !default;
 $dropdown-fallback-border:       #ccc !default;
 $dropdown-divider-bg:            $brand-success !default;
+
+
+$dropdown-header-bg:                    $brand-rich-info !default;
+$dropdown-header-border:                none !default;
+$dropdown-header-fallback-border:       #ccc !default;
+$dropdown-header-divider-bg:            $brand-info !default;
 
 $dropdown-link-color:            #fff !default;
 $dropdown-link-hover-color:      #fff !default;

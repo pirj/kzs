@@ -35,3 +35,20 @@ $ ->
     $('.input-group').removeClass('active')
   )
   # =========
+
+  # set same width for header and dropdown in .dropdown.header
+  # because of .dropdown-menu position is set to absolute, than .dropdown width not equal .dropdown-menu
+  # the design requirements is the same width of header and dropdown-menu
+  # when .dropdown-menu is hidden, it width is equal 0.
+  # than calculate it width, when dropdown-menu will be opening
+  (->
+    $('.dropdown.header .dropdown-toggle').on('click.dropdown.data-api', (e) ->
+      console.log 'open'
+      width = @.parentElement.getElementsByClassName('dropdown-menu')[0].offsetWidth
+      if width > 0
+        @.parentElement.style.width = "#{width}px"
+    )
+
+
+  )()
+
