@@ -8,11 +8,13 @@
   display: none;
 }
 
-.bottom-nav .dropdown-menu {
+.bottom-nav.nav-pills .dropdown-menu {
   left: -104px;
   top: -111px;
+  .dropdown.open *[data-toggle="dropdown"]:active, .dropdown.open *[data-toggle="dropdown"]:focus  {
+  	background:#cfcfcf;
+  }
 }
-
 
 .dropdown.open .dropdown-arr{
   border-bottom: 0px solid rgba(0, 0, 0, 0.8) !important;

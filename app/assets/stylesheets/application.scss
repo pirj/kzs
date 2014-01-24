@@ -365,7 +365,9 @@ h2 {
   width: 17em;
   display: none;
   background-color: #eeeeee;
-  padding: 10px 25px 10px 10px;
+  padding: 4px;
+  background:#76d4ce;
+  border-radius:5px;
 }
 .ui-datepicker .ui-datepicker-header {
   position: relative;
@@ -407,6 +409,7 @@ h2 {
   margin: 0 2.3em;
   line-height: 1.8em;
   text-align: center;
+  color:#fff;
 }
 .ui-datepicker .ui-datepicker-title select {
   font-size: 1em;
@@ -423,7 +426,7 @@ h2 {
   width: 100%;
   font-size: .9em;
   border-collapse: collapse;
-  margin: 0 0 .4em;
+  background:#fff;
 }
 .ui-datepicker th {
   padding: .7em .3em;
@@ -434,14 +437,29 @@ h2 {
 .ui-datepicker td {
   border: 0;
   padding: 1px;
+  color:#000;
 }
 .ui-datepicker td span,
 .ui-datepicker td a {
   display: block;
-  padding: .2em;
-  text-align: right;
+  padding: 5px;
+  text-align: center;
   text-decoration: none;
+  border-radius:5x;
 }
+
+.ui-state-default:hover {
+  background:#d9d9d9;
+}
+
+.ui-state-active {
+  background:#76d4ce;
+  color:#fff;
+  &:hover {
+    color:#fff;
+  }
+}
+
 .ui-datepicker .ui-datepicker-buttonpane {
   background-image: none;
   margin: .7em 0 0 0;

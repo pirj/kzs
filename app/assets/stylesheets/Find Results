@@ -1,0 +1,138 @@
+Searching 32 files for ".bottom-nav"
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/dropdown.scss:
+  296  }
+  297  
+  298: .bottom-nav .dropdown-menu {
+  299    left: -102px;
+  300    top: -158px;
+  301  }
+  302  
+  303: .bottom-nav .dropdown-arr {
+  304    border-left: 8px solid rgba(0, 0, 0, 0);
+  305    border-right: 8px solid rgba(0, 0, 0, 0);
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/first/dashboard.scss:
+    1: .nav-pills.bottom-nav {
+    2    li {
+    3      display: block;
+    .
+    9  }
+   10  
+   11: .bottom-nav .dropdown-menu {
+   12    left: -104px;
+   13    top: -111px;
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/icons.scss:
+   11  }
+   12  
+   13: .bottom-nav {
+   14    padding-right: 0;
+   15  }
+   ..
+   19  }
+   20  
+   21: .bottom-nav.nav-pills {
+   22    > li {
+   23      margin-left: 14px;
+   ..
+   30    }
+   31  }
+   32: .bottom-nav.nav-pills  li:first-child,
+   33: .bottom-nav.nav-pills  li:first-child + li,
+   34: .bottom-nav.nav-pills  li:first-child + li + li,
+   35: .bottom-nav.nav-pills  li:first-child + li + li + li {
+   36    //display: none;
+   37  }
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/style.scss:
+  174  }
+  175  
+  176: .bottom-nav, .edit-mode {
+  177    position: relative;
+  178  }
+
+11 matches across 4 files
+
+
+Searching 32 files for "icon-cog"
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/buttons.scss:
+  150  }
+  151  
+  152: .icon-cog:before {
+  153    font-size: 18px;
+  154    top: 0;
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/first/bootstrap.css:
+ 2781  }
+ 2782  
+ 2783: .glyphicon-cog:before {
+ 2784      content: "\e019";
+ 2785  }
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/fontello.css:
+   76  .icon-chat-empty:before { content: '\e854'; } /* '' */
+   77  .icon-phone:before { content: '\e82a'; } /* '' */
+   78: .icon-cog:before { content: '\e80a'; } /* '' */
+   79: .icon-cog-alt:before { content: '\e81c'; } /* '' */
+   80  .icon-wrench:before { content: '\e81d'; } /* '' */
+   81  .icon-calendar:before { content: '\e81f'; } /* '' */
+   ..
+  115  .icon-location:before { content: '\e82f'; } /* '' */
+  116  .icon-menu:before { content: '\e81b'; } /* '' */
+  117: .icon-cog-outline:before { content: '\e82e'; } /* '' */
+  118  .icon-power:before, .power-btn:before { content: '\e853'; } /* '' */
+  119  .icon-search-1:before { content: '\e830'; } /* '' */
+
+5 matches across 3 files
+
+
+Searching 32 files for ".dropdown.open *[data-toggle="dropdown"]:active"
+
+0 matches across 0 files
+
+
+Searching 32 files for ".dropdown.open"
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/first/dashboard.scss:
+   15  
+   16  
+   17: .dropdown.open .dropdown-arr{
+   18    border-bottom: 0px solid rgba(0, 0, 0, 0.8) !important;
+   19  }
+
+1 match in 1 file
+
+
+Searching 32 files for "icon-cog"
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/buttons.scss:
+  150  }
+  151  
+  152: .icon-cog:before {
+  153    font-size: 18px;
+  154    top: 2px;
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/first/bootstrap.css:
+ 2781  }
+ 2782  
+ 2783: .glyphicon-cog:before {
+ 2784      content: "\e019";
+ 2785  }
+
+/Users/honky/Desktop/kzs2/kzs/app/assets/stylesheets/fontello.css:
+   76  .icon-chat-empty:before { content: '\e854'; } /* '' */
+   77  .icon-phone:before { content: '\e82a'; } /* '' */
+   78: .icon-cog:before { content: '\e80a'; } /* '' */
+   79: .icon-cog-alt:before { content: '\e81c'; } /* '' */
+   80  .icon-wrench:before { content: '\e81d'; } /* '' */
+   81  .icon-calendar:before { content: '\e81f'; } /* '' */
+   ..
+  115  .icon-location:before { content: '\e82f'; } /* '' */
+  116  .icon-menu:before { content: '\e81b'; } /* '' */
+  117: .icon-cog-outline:before { content: '\e82e'; } /* '' */
+  118  .icon-power:before, .power-btn:before { content: '\e853'; } /* '' */
+  119  .icon-search-1:before { content: '\e830'; } /* '' */
+
+5 matches across 3 files
