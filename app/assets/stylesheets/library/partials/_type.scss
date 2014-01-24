@@ -67,8 +67,8 @@ cite    { font-style: normal; }
 }
 
 // Alignment
-.text-left           { text-align: left; }
-.text-right          { text-align: right; }
+.text-left           { text-align: left !important; }
+.text-right          { text-align: right !important; }
 .text-center         { text-align: center; }
 
 

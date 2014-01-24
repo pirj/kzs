@@ -64,7 +64,7 @@ $font-size-base:          16px !default;
 $font-size-large:         ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-small:         ceil($font-size-base * 0.85) !default; // ~12px
 
-$font-size-h1:            floor($font-size-base * 2.6) !default; // ~36px
+$font-size-h1:            35px !default;
 $font-size-h2:            floor($font-size-base * 2.15) !default; // ~30px
 $font-size-h3:            ceil($font-size-base * 1.7) !default; // ~24px
 $font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
@@ -293,7 +293,7 @@ $grid-float-breakpoint:     $screen-sm-min !default;
 $navbar-height:                    50px !default;
 $navbar-margin-bottom:             $line-height-computed !default;
 $navbar-border-radius:             $border-radius-base !default;
-$navbar-padding-horizontal:        floor($grid-gutter-width / 2) !default;
+$navbar-padding-horizontal:        $padding-base-horizontal !default;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2) !default;
 
 $navbar-default-color:             #777 !default;

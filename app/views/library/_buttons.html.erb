@@ -2,13 +2,38 @@
 
 <p>
   для создания кнопки нужно любой элемент обернуть в css-классы <span class="lib-prop">.btn</span>
-  и задать один из стилизующих css-классов <span class="lib-prop">.btn-primary</span>, <span class="lib-prop">.btn-success</span>, <span class="lib-prop">.btn-default</span>, <span class="lib-prop">.btn-link</span> или <span class="lib-prop">.btn-muted</span>
+  и задать один из стилизующих css-классов
+  <span class="lib-prop">.btn-primary</span>,
+  <span class="lib-prop">.btn-success</span>,
+  <span class="lib-prop">.btn-default</span>,
+  <span class="lib-prop">.btn-link</span>,
+  <span class="lib-prop">.btn-muted</span>.
+  Для создания округлой кнопки только с иконкой, добавьте к кнопке класс
+  <span class="lib-prop">.btn-icon</span>
+</p>
+
+<p>
+  Если текст в кнопке нужно принудительно разделить на две строки, то добавьте css-класс <span class="lib-prop">.btn-divide-by-word</span>
+  и оберните каждый перенос строки в отдельный элемент <span class="lib-prop">span</span>
+</p>
+
+<p>
+  Если стоит задача отцентровать текст в кнопке по правому или краю,то добавьте css-классы:
+  <span class="lib-prop">.text-right</span>
+  <span class="lib-prop">.text-left</span>
 </p>
 <div class="bs-example">
   <a href="#" class="btn btn-primary">Primary</a>
   <a href="#" class="btn btn-default">Default</a>
   <a href="#" class="btn btn-link">Link</a>
   <a href="#" class="btn btn-link-muted">Link-muted</a>
+  <a href="#" class="btn btn-primary btn-icon"><span class="fa fa-sign-out"></span></a>
+  <a href="#" class="btn btn-link btn-no-hover">Link-no-hover</a>
+  <a href="#" class="btn btn-link-muted btn-no-hover">Link-no-hover</a>
+  <a href="#" class="btn btn-primary btn-divide-by-word"><span>top line</span><span>& bottom</span></a>
+  <a href="#" class="btn btn-primary btn-divide-by-word text-right"><span>top</span><span>& bottom line</span></a>
+  <a href="#" class="btn btn-primary btn-divide-by-word text-left"><span>top</span><span>& bottom line</span></a>
+
 </div>
 <div class="highlight">
   <pre class="prettyprint lang-html"><%= html_escape %q{
@@ -16,5 +41,6 @@
   <a href="#" class="btn btn-default">Default</a>
   <a href="#" class="btn btn-link">Primary</a>
   <a href="#" class="btn btn-link-muted">Default</a>
+  <a href="#" class="btn btn-primary btn-icon"><span class="fa fa-sign-out"></span></a>
   }%></pre>
 </div>

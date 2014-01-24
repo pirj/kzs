@@ -6,17 +6,10 @@
 // Dropdown arrow/caret
 .caret {
   display: inline-block;
-//  width: 0;
-//  height: 0;
   margin-left: 2px;
   vertical-align: middle;
-//  border-top:   $caret-width-base solid $dropdown-caret-color;
-//  border-right: $caret-width-base solid transparent;
-//  border-left:  $caret-width-base solid transparent;
-//  // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once fixed,
-//  // we can just straight up remove this.
-//  border-bottom: 0 dotted;
-  @include fa-icon("\f0d7", 14px);
+
+  @include fa-icon("\f0d7", 10px);
 }
 
 // The dropdown wrapper (div)
@@ -214,6 +207,9 @@
   margin-left: -$_padding; // it step to alignment h1 and dropdown header-with-left-padding
 
   font-family: $font-family-sans-serif-light;
+
+  // caret must be bigger
+  .caret{ font-size: 14px; }
 
   // dropdown header
   .dropdown-toggle{
