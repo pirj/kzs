@@ -28,7 +28,9 @@
  .breadcrumb > li + li:before,
  .attachment-add:before,
  .attachment-delete:before,
- .chosen-choices:after{
+ .chosen-choices:after,
+ .ui-datepicker .ui-datepicker-prev span:before,
+ .ui-datepicker .ui-datepicker-next span:before{
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -85,8 +87,8 @@
 .icon-resize-full-alt:before { content: '\e808'; } /* '' */
 .icon-resize-small:before { content: '\e809'; } /* '' */
 .icon-down-open:before { content: '\e805'; } /* '' */
-.icon-left-open:before { content: '\e804'; } /* '' */
-.icon-right-open:before { content: '\e803'; } /* '' */
+.icon-left-open:before, .ui-datepicker .ui-datepicker-prev span:before { content: '\e804'; } /* '' */
+.icon-right-open:before, .ui-datepicker .ui-datepicker-next span:before { content: '\e803'; } /* '' */
 .icon-up-open:before { content: '\e806'; } /* '' */
 .icon-gplus:before { content: '\e812'; } /* '' */
 .icon-tumblr:before { content: '\e811'; } /* '' */
