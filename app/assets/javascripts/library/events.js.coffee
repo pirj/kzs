@@ -61,19 +61,24 @@ $ ->
 
 
   # show/hide additional information in table row
-  # tabel cell with extra info is named '.js-more-info'
-  # all other cells not named
+  # tabel row with more info is named '.js-more-info'
+  # all other rows not named
+  # bind two rows by 'data-id' attribute
   (->
     # show more info
-    $(document).on('click', '.js-row-clickable td', (e) ->
+    $(document).on('click', '.js-row-clickable tr', (e) ->
       e.preventDefault()
-      $(@).parent('tr').find('td:not(".js-more-info")').hide().parent('tr').find('.js-more-info').show()
+
+      $elem = $(@)
+      id = $elem.data('id')
+
+
+      $target = $elem.siblings(".js-more-info[data-id=#{id}]")
+
+      console.log id
+      console.log $target.length
+      if id? && $target.length > 0
+#        $elem.hide()
+        $target.toggle()
     )
-
-    # hide more info. go to default state
-#    $(document).on('click', '.js-row-clickable .js-more-info', (e) ->
-#      e.preventDefault()
-#      $(@).hide().parent('tr').find('td:not(".js-more-info")').show()
-#    )
-
   )()
