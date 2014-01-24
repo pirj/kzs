@@ -23,7 +23,7 @@ $brand-success:         #1BBC9B !default;
 $brand-default:         #dcf2ec !default;
 $brand-warning:         #ffe381 !default;
 $brand-danger:          #ffa581 !default;
-$brand-info:            #70d0ff !default;
+$brand-info:            #5fc6f9 !default;
 
 $brand-rich-info:       #1ba0e1 !default;
 
@@ -198,6 +198,7 @@ $dropdown-header-bg:                    $brand-rich-info !default;
 $dropdown-header-border:                none !default;
 $dropdown-header-fallback-border:       #ccc !default;
 $dropdown-header-divider-bg:            $brand-info !default;
+$dropdown-header-item-hover-bg:         $dropdown-header-divider-bg !default;
 
 $dropdown-link-color:            #fff !default;
 $dropdown-link-hover-color:      #fff !default;

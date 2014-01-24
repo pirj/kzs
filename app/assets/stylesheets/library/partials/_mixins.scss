@@ -858,7 +858,7 @@
 }
 
 
-
+// arrow for dropdown menus
 @mixin arrow-top($color){
   border-bottom: $dropdown-arrow-width-base solid $color;
   border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
@@ -870,4 +870,13 @@
   display: block;
   content: '';
   position: absolute;
+}
+
+// fonts icon with FontAwesome
+@mixin fa-icon($icon-code, $size: $base-font-size){
+  font-family: FontAwesome;
+  font-size: $size;
+  &:after{
+    content: $icon-code;
+  }
 }

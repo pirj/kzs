@@ -42,11 +42,20 @@ $ ->
   # when .dropdown-menu is hidden, it width is equal 0.
   # than calculate it width, when dropdown-menu will be opening
   (->
-    $('.dropdown.header .dropdown-toggle').on('click.dropdown.data-api', (e) ->
-      console.log 'open'
-      width = @.parentElement.getElementsByClassName('dropdown-menu')[0].offsetWidth
-      if width > 0
-        @.parentElement.style.width = "#{width}px"
+    $('.dropdown.header .dropdown-toggle:not("calculated")').on('click.dropdown.data-api', (e) ->
+      elem = @
+      parent = elem.parentElement
+      menu = elem.parentElement.getElementsByClassName('dropdown-menu')[0]
+
+      header_w = elem.offsetWidth
+      items_w = menu.offsetWidth
+
+      if items_w > 0
+        ws = [header_w, items_w]
+        width = _.last(ws.sort())
+        elem.style.width = "#{width}px"
+        menu.style.width = "#{width}px"
+        parent.classList.add('calculated')
     )
 
 

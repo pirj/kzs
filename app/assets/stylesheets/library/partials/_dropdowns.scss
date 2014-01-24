@@ -6,21 +6,27 @@
 // Dropdown arrow/caret
 .caret {
   display: inline-block;
-  width: 0;
-  height: 0;
+//  width: 0;
+//  height: 0;
   margin-left: 2px;
   vertical-align: middle;
-  border-top:   $caret-width-base solid $dropdown-caret-color;
-  border-right: $caret-width-base solid transparent;
-  border-left:  $caret-width-base solid transparent;
-  // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once fixed,
-  // we can just straight up remove this.
-  border-bottom: 0 dotted;
+//  border-top:   $caret-width-base solid $dropdown-caret-color;
+//  border-right: $caret-width-base solid transparent;
+//  border-left:  $caret-width-base solid transparent;
+//  // Firefox fix for https://github.com/twbs/bootstrap/issues/9538. Once fixed,
+//  // we can just straight up remove this.
+//  border-bottom: 0 dotted;
+  @include fa-icon("\f0d7", 14px);
 }
 
 // The dropdown wrapper (div)
 .dropdown {
   position: relative;
+
+  // replace header block display option to right-calculate all dropdown wrapper by js-script.
+  .dropdown-toggle{
+    display: inline-block;
+  }
 }
 
 // Prevent the focus on the dropdown toggle when closing dropdowns
@@ -214,9 +220,7 @@
     background-color: transparent; // set to transparent for beautiful animation with change background color
     margin: 0;
     padding: $padding-base-vertical*3 $_padding $padding-base-vertical;
-    display: block;
     @include border-top-radius(15px);
-    @include transition(background-color ease-in-out .01s);
 
 
     &, &:hover, &:visited, &:active, &:focus,
@@ -228,20 +232,16 @@
 
   // dropdown menu items wrapper
   .dropdown-menu{
-    background-color: transparent; // set to transparent for beautiful animation with change background color
+    background-color: $dropdown-header-bg;
+    border-top: 1px solid $dropdown-header-divider-bg;
+    padding-bottom: $_padding/2;
 
-    display: block; // set to render beautiful animation by change color
-    opacity: 0.01;  // set to render beautiful animation by change color
-
-    padding-bottom: $_padding;
     margin-top: 0;
     padding-top: 0;
-    max-width: 420px;
     color: #fff;
 
     @include border-top-radius(0);
     @include border-bottom-radius(15px);
-    @include transition(background-color ease-in-out .05s);
 
     > li {
       font-size: $font-size-h3;
@@ -257,13 +257,19 @@
 
       & a:hover,
       & a:focus {
-        background: darken($dropdown-header-bg, 10%);
+        background: $dropdown-header-item-hover-bg;
+        color: $link-hover-color;
       }
     }
 
     // Dividers (basically an hr) within the dropdown
     .divider {
       @include nav-divider($dropdown-header-divider-bg);
+    }
+
+    // turn-off arrow-top of menu
+    &:before{
+      @include arrow-top(transparent);
     }
   }
 
@@ -276,15 +282,6 @@
       &, &:hover, &:visited, &:active, &:focus,
       a, a:hover, a:visited, a:active, a:focus{
         color: #fff;
-      }
-    }
-
-    > .dropdown-menu{
-      background-color: $dropdown-header-bg;
-      border-top: 1px solid $dropdown-header-divider-bg;
-      opacity: 0.99;
-      &:before{
-        @include arrow-top(transparent);
       }
     }
   }
