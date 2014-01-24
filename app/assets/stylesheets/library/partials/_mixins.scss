@@ -880,3 +880,39 @@
     content: $icon-code;
   }
 }
+
+// Make a button look and behave like a link
+@mixin btn-link-style($color: $link-color, $hover-color: $link-hover-color){
+  color: $color;
+  font-weight: normal;
+  cursor: pointer;
+  border-radius: 0;
+
+  &,
+  &:active,
+  &[disabled],
+  fieldset[disabled] & {
+    background-color: transparent;
+    @include box-shadow(none);
+  }
+  &,
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: transparent;
+    text-decoration: underline;
+  }
+  &:hover,
+  &:focus {
+    color: $hover-color;
+    background-color: transparent;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus {
+      color: $btn-link-disabled-color;
+      text-decoration: none;
+    }
+  }
+}

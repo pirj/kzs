@@ -31,13 +31,17 @@
   &:empty {
     display: none;
   }
+
+  &.label-sm{
+    padding: .3em .75em;
+  }
 }
 
 // Colors
 // Contextual variations (linked labels get darker on :hover)
 
 .label-default {
-  @include label-variant($label-default-bg, $gray-dark);
+  @include label-variant($label-default-bg, $gray-light);
 }
 
 .label-primary {

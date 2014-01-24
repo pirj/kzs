@@ -57,7 +57,23 @@ $ ->
         menu.style.width = "#{width}px"
         parent.classList.add('calculated')
     )
-
-
   )()
 
+
+  # show/hide additional information in table row
+  # tabel cell with extra info is named '.js-more-info'
+  # all other cells not named
+  (->
+    # show more info
+    $(document).on('click', '.js-row-clickable td', (e) ->
+      e.preventDefault()
+      $(@).parent('tr').find('td:not(".js-more-info")').hide().parent('tr').find('.js-more-info').show()
+    )
+
+    # hide more info. go to default state
+#    $(document).on('click', '.js-row-clickable .js-more-info', (e) ->
+#      e.preventDefault()
+#      $(@).hide().parent('tr').find('td:not(".js-more-info")').show()
+#    )
+
+  )()
