@@ -82,7 +82,7 @@ class DocumentsController < ApplicationController
      params['ids'].each do |id|
        d = Document.find(id)
        @approve =       @approve && (!d.approved && d.approver_id == current_user.id && d.prepared ? true : false)
-       @prepare =       d.user_id == current_user.id || d.approver_id == current_user.id && !d.prepared && @prepare ? true : false
+       @prepare =       @prepare && (!d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false)
        @send_document = @send_document && (!d.sent && d.approved && (d.approver_id == current_user.id ||
                         d.user_id == current_user.id) ? true : false)
      end
