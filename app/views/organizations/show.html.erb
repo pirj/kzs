@@ -20,6 +20,7 @@
         <li class="active"><a href="#total-data" data-toggle="tab">Общие данные</a></li>
         <li><a href="#details" data-toggle="tab">Реквизиты</a></li>
         <li><a href="#stuff" data-toggle="tab">Сотрудники</a></li>
+        <li><a href="#licenses" data-toggle="tab">Лицензии</a></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -75,6 +76,7 @@
         <!--</div>-->
         <%= render 'organizations/tabs/show_details', organization: @organization %>
         <%= render 'organizations/tabs/show_stuff', organization: @organization, users: @users %>
+        <%= render 'organizations/tabs/show_licenses', organization: @organization, users: @users %>
       </div>
     </div>
 </div>
