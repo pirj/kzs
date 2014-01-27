@@ -3,26 +3,31 @@
       <ul class="row top-pannel clearfix">
         <li class="col-md-8">
            <span class="dropdown full-drop">
-            <h1 data-toggle="dropdown">
-              <% if params[:scope] == 'expired' %>
-                   Просроченные
-              <% elsif params[:scope] == 'application' %>
-                    Новые заявки
-              <% elsif params[:scope] == 'daily' %>
-                  Разовые пропуска
-              <% else %>
-                  Все пропуска
-              <% end %>
-              <span class="caret"></span></h1>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="/permits">Все пропуска<!-- <span class="count">(112)</span>--></a></li>
-              <li><a href="/permits?scope=application">Новые заявки<!--<span class="count">(23)</span>--></a></li>
-              <li><a href="/permits?scope=expired">Просроченные<!--<span class="count">(23)</span>--></a></li>
-              <li><a href="/permits?scope=daily">Разовые пропуска<!--<span class="count">(23)</span>--></a></li>
+                <div class="dropdown header">
 
-              <li><a href="#">Отмена</a></li>
-            </ul>
+                  <h1 data-toggle="dropdown" class="dropdown-toggle">
+                    <% if params[:scope] == 'expired' %>
+                        Просроченные
+                    <% elsif params[:scope] == 'application' %>
+                        Новые заявки
+                    <% elsif params[:scope] == 'daily' %>
+                        Разовые пропуска
+                    <% else %>
+                        Все пропуска
+                    <% end %>
+                    <span class="caret"></span></h1>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="/permits">Все пропуска<!-- <span class="count">(112)</span>--></a></li>
+                    <li><a href="/permits?scope=application">Новые заявки<!--<span class="count">(23)</span>--></a></li>
+                    <li><a href="/permits?scope=expired">Просроченные<!--<span class="count">(23)</span>--></a></li>
+                    <li><a href="/permits?scope=daily">Разовые пропуска<!--<span class="count">(23)</span>--></a></li>
+
+                    <li><a href="#">Отмена</a></li>
+                  </ul>
+                </div>
+
           </span>
+
         </li>
         <li class="col-md-4 pull-right">
           <%= render 'shared/user' %>
