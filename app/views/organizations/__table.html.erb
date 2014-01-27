@@ -1,0 +1,104 @@
+<table class="table dynamic-table default-table" id="organizations">
+	<thead>
+  	 <tr>
+  	  <th class="col-md-4">
+  	  	<span class="dropdown">
+	  	  	<span class="dropdown-toggle" data-toggle="dropdown">
+		  	  	<%= sortable "title", "Организация, ОПФ" %>
+                <!-- <span class="caret"></span>
+                <span class="dropdown-arr"></span> -->
+	  	  	</span>
+	  	  	<ul class="dropdown-menu" role="menu">
+		      <li><a href="#">Бла</a></li>
+		      <li><a href="#">Бла бла</a></li>
+		      <li><a href="#">Бла бла бла</a></li>
+		    </ul>
+	    </span>
+  	  </th>
+  	  <th class="col-md-3">
+  	  <!--  <%= sortable "director_id", "Руководитель" %> -->
+  	  Руководитель</th>
+  	  <th class="col-md-3">Штат</th>
+  	  <th class="col-md-2">Телефон</th>
+  	 <!--  <th>Подробнее</th> -->
+	  </tr>
+ 	</thead>
+ 	<tbody>
+	<% @organizations.each do |organization| %>
+	  <tr>	
+			<td><a href="#" class="organization-title">
+              <%= link_to organization.title , organization_path(organization)%>
+
+
+              <%= %></a></td>
+			<td><%= user_with_full_name(organization.director_id) %></td>
+			<td><%= organization.users.count %></td>
+			<td><%= organization.phone %></td>
+			<!-- <td><%= link_to "Подробнее", organization_path(organization) %></td> -->
+
+            <td class="inform" colspan="4" >
+            <div class="col-md-8">
+              <ul class="doc-info">
+                <li>
+                  <span class="title">Контрагент:</span>
+                  <span class="value"><%= link_to organization.title , organization_path(organization), :class => 'h3' %>
+                    <a href="#" class="sub-title"><%= organization.users.count %> человек в штате</a>
+                  </span>
+                </li>
+                <li><span class="title valign-mid">Руководитель:</span>
+                  <div class="user value ">
+                    <span class="photo">
+                      <i class="default-user"></i>
+                    </span>
+                    <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
+                      <%= user_with_full_name(organization.director_id) %>
+                      <span class="dropdown-arr"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li class="title"><a href="#"><%= user_with_full_name(organization.director_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+                      <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+                      <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+                      <li><a href="#" class="icon-clock">Личная страница</a></li>
+                      <li><a href="#" class="icon-block-1">Отмена</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><span class="title valign-mid">Контактное
+лицо:</span>
+                  <div class="user value ">
+                    <span class="photo">
+                      <i class="default-user"></i>
+                    </span>
+                     <a href="#" class="name dropdown bubble"  data-toggle="dropdown">
+                      <%= user_with_full_name(organization.director_id) %>
+                      <span class="dropdown-arr"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li class="title"><a href="#"><%= user_with_full_name(organization.director_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+                      <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
+                      <li><a href="#" class="icon-ok">Написать соообщение</a></li>
+                      <li><a href="#" class="icon-clock">Личная страница</a></li>
+                      <li><a href="#" class="icon-block-1">Отмена</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <span class="title"></span>
+                 <!-- <span class="value"><%= link_to 'Скачать реквизиты', organization.egrul_excerpt.url(:original), class: 'download-link pdf' %></span> -->
+                </li>
+              </ul>
+              <div class="nav-pills nav controls">
+              <% if current_user.organization_id == organization.id %>
+                  <%= link_to 'Редактировать данные', edit_organization_path(organization), class: 'btn' %>
+              <% end %>
+              <%= link_to 'Открыть анкету контрагента', organization_path(organization), class: 'btn'%>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <span class="h3 phone"><%= organization.phone %></span>
+            </div>
+          </td>
+	  </tr>
+	<% end %>
+	</tbody>
+</table>
