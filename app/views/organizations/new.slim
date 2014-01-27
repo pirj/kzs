@@ -1,0 +1,14 @@
+.navbar
+  ul.nav.navbar-nav
+    li
+      h1 Все контрагенты
+  form.navbar-form.navbar-left
+    .input-group
+      input.form-control.js-input-with-icon placeholder="поиск по контрагентам" type="search"
+      span.input-group-icon.search
+  = render 'application/header_user_bar'
+
+
+.row
+  .col-xs-12
+    = render 'form', resource: @organization

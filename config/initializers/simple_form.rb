@@ -17,6 +17,10 @@ inputs.each do |input_type|
     def input_html_classes
       super.push('form-control')
     end
+
+    def label_html_classes
+      super.push('control-label')
+    end
   end
 
   Object.const_set(input_type, new_class)
@@ -27,6 +31,7 @@ SimpleForm.browser_validations = false
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.boolean_style = :nested
+  config.label_class = 'control-label'
 
   config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error',
                   defaults: { input_html: { class: 'default_class' } } do |b|
@@ -43,6 +48,21 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
     b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
   end
+
+
+  config.wrappers :inline, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
+    b.use :html5
+    b.use :placeholder
+
+    b.use :label
+    b.wrapper :input_wrapper, tag: 'div' do |bi|
+      bi.use :input
+    end
+    b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
+  end
+
+
 
   config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5

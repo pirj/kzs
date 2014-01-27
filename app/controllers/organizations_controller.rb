@@ -47,9 +47,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     @users = User.where(:organization_id => current_user.organization_id)
     
-    if current_user.organization_id != @organization.id
-      redirect_to :back, :alert => t('access_denied')
-    end
+    #if current_user.organization_id != @organization.id
+    #  redirect_to :back, :alert => t('access_denied')
+    #end
 
   end
 
