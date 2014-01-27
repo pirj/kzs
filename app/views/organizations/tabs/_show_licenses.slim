@@ -1,58 +1,42 @@
-#licenses.tab-pane.data-grid
-  h1.col-md-12 Лицензии
-  - left_params_order = [:bank_title, :bank_address, :bank_correspondent_account, :bank_bik, :bank_inn, :bank_kpp]
-  - right_params_order = [:bank_okved, :organization_account, :legal_address, :actual_address]
-  .col-md-5
-    - left_params_order.each do |param|
-      .data-label = t("activerecord.attributes.organization.#{param.to_s}")
-      .data-value = organization.public_send(param.to_sym)
-
-  .col-md-6.col-md-offset-1
-    - right_params_order.each do |param|
-      .data-label = t("activerecord.attributes.organization.#{param.to_s}")
-      .data-value = organization.public_send(param.to_sym)
-
-
-#licenses.container.add-list
-  = form_for @organization, html: { class: 'form row-fluid' } do |f|
-  span.h1
-    span.col-md-5 2. Лицензии
-        a#add_new_lic.add-new href="#"
-          span.icon-plus>
-          | Добавить новую
-  .form-container
-    .row.title
-      .col-md-3
-        .view-main-doc.view-doc-small
-          iframe src=""
-      .col-md-7
-        b.h1 Лицензия на строительство зданий и сооружений I и II уровней
-      .col-md-2
-        a.delete href="#"
-    .row
-      .form-item
-        span.form-label.col-md-5 Тип документа:
-        select.form-control.col-md-2 id="" name=""
-          option value="3"
-      .form-item
-        span.form-label.col-md-5 Серия и номер:
-        input.col-md-6.form-control/
-      .form-item
-        span.form-label.col-md-5 Дата выдачи:
-        input.form-control.col-md-2.hasDatepicker id="" name="" placeholder="" size="10" type="text"
-      .form-item
-        span.form-label.col-md-5 Срок действия до:
-        input.form-control.col-md-2.hasDatepicker id="" name="" placeholder="" size="10" type="text"
-      .form-item
-        span.form-label.col-md-5 Кем выдан:
-        input.col-md-6.form-control/
-      .form-item
-        span.form-label.col-md-5 Скан документа:
-        = link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"}
-        input.filestyle.col-md-2 data-input="false" type="file"
-    ul.nav.nav-pills
-      li.col-md-offset-5
-        input.btn.btn-default.btn-primary.btn-sm name="" type="submit" value="Сохранить"
-      li
-        a.btn-link.btn-sm href="#"
- =  f.method_name
+#licenses.tab-pane.container.add-list
+  = form_for(@organization, :html => {:class => "form row-fuild"}) do |f|
+    span.h1
+      span.col-md-5 Лицензии
+      a#add_new_lic.add-new href="#"
+        span.icon-plus>
+        | Добавить новую
+    .form-container
+      .row.title
+        .col-md-3
+          .view-main-doc.view-doc-small
+            iframe src=""
+        .col-md-7
+          b.h1 Лицензия на строительство зданий и сооружений I и II уровней
+        .col-md-2
+          a.delete href="#"
+      .row
+        .form-item
+          span.form-label.col-md-5 Тип документа:
+          select.form-control.col-md-2 id="" name=""
+            option value="3"
+        .form-item
+          span.form-label.col-md-5 Серия и номер:
+          input.col-md-6.form-control/
+        .form-item
+          span.form-label.col-md-5 Дата выдачи:
+          input.form-control.col-md-2.hasDatepicker id="" name="" placeholder="" size="10" type="text"
+        .form-item
+          span.form-label.col-md-5 Срок действия до:
+          input.form-control.col-md-2.hasDatepicker id="" name="" placeholder="" size="10" type="text"
+        .form-item
+          span.form-label.col-md-5 Кем выдан:
+          input.col-md-6.form-control/
+        .form-item
+          span.form-label.col-md-5 Скан документа:
+          = link_to "Скачать", @organization.egrul_excerpt.url(:original, false), {:class => "download-link"}
+          input.filestyle.col-md-2 data-input="false" type="file"
+      ul.nav.nav-pills
+        li.col-md-offset-5
+          input.btn.btn-default.btn-primary.btn-sm name="" type="submit" value="Сохранить"
+        li
+          a.btn-link.btn-sm href="#"
