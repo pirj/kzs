@@ -78,6 +78,7 @@ select.form-control {
   vertical-align:middle;
   min-width: 130px;
   word-wrap: break-word;  
+  float:none;
 }
 
 .form-label ~ .form-label {
@@ -214,7 +215,6 @@ select.form-control {
   .h1 {
     font-weight:bold;
   }
-  background:#fffff2;
   padding:20px;
   .view-doc-small {
     box-shadow:0 15px 20px -5px rgba(0,0,0,0.3);
