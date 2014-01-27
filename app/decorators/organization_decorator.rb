@@ -1,27 +1,25 @@
+# coding: utf-8
 class OrganizationDecorator < Draper::Decorator
   delegate_all
 
-  def director
-    object.director.first_name_with_last_name
-  end
 
-  # отдает дату в указанном формате
-  # obj.date :date_format
-  def date *args
-    opts = args.extract_options!
-    DateFormatter.new(object.date, args.first)
-  end
 
   def name
-    'Циклон,ООО'
+    h.content_tag( :span, "#{object.short_title}, ", class: 'extra inline' )+
+    h.content_tag( :span, object.type_of_ownership, class: 'muted inline' )
   end
 
   def director
+    #"#{object.director.last_name} #{object.director.first_name.first}.#{object.director.middle_name.first}."
     'Иван'
   end
 
   def phone
     '+7 911 918-12-45'
+  end
+
+  def users_count
+    object.users.count
   end
 
   def path
@@ -32,4 +30,10 @@ class OrganizationDecorator < Draper::Decorator
     edit_organization_path(object)
   end
 
+  # отдает дату в указанном формате
+  # obj.date :date_format
+  def date *args
+    opts = args.extract_options!
+    DateFormatter.new(object.date, args.first)
+  end
 end

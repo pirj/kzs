@@ -2,24 +2,20 @@
 table.table.js-row-clickable
   thead
     tr
-      th
-        input type="checkbox"
-      th №/дата
-      th Отправитель
-      th Получатель
-      th Тип
-      th
-      th Статус
+      - attrs.each do |attr|
+        th = t(".list_attrs.#{attr.to_s}")
+
   tbody
     /= collection.inspect
-    = collection.each do |res|
+    - collection.each do |res|
       tr data-id="#{res.id}"
-        td
-          input type="checkbox"
-        td= res.name
-    /    td= res.director
-    /    td= res.users.count
-    /    td= res.phone
+        - attrs.each do |attr|
+          td = res.public_send(attr)
+        /
+        /td= res.name
+        /td= res.director
+        /td= res.users.count
+        /td= res.phone
       /tr.tr-hovered.more-info.js-more-info{"data-id" => "1"}
       /  td{colspan: "6"}
       /    .row
