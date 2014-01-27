@@ -66,9 +66,11 @@ $font-size-base:          16px !default;
 $font-size-large:         18px !default;
 $font-size-small:         13px !default;
 
+
 $font-size-h1:            36px !default;
 $font-size-h2:            26px !default;
 $font-size-h3:            24px !default;
+
 $font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px

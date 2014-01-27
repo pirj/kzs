@@ -16,20 +16,25 @@ class OrganizationDecorator < Draper::Decorator
     'Циклон,ООО'
   end
 
-  def director
-    'Иван'
+
+  def director_name
+    "#{object.director.last_name} #{object.director.first_name.first}.#{object.director.middle_name.first}."
+  end
+
+  def director_avatar
+    h.image_tag( director.avatar, class: 'img img-thumbnail table-img-xs' ) if director.avatar?
   end
 
   def phone
-    '+7 911 918-12-45'
+    object.phone
   end
 
   def path
-    organization_path(object)
+    h.organization_path(object)
   end
 
   def edit_path
-    edit_organization_path(object)
+    h.edit_organization_path(object)
   end
 
 end

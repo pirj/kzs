@@ -57,7 +57,6 @@ class Organization < ActiveRecord::Base
     User.find(self.admin_id)
   end
 
-
   
   def users_statement
     self.users.statement_approvers
