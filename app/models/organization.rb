@@ -40,6 +40,7 @@ class Organization < ActiveRecord::Base
   end
 
   TYPEOFOWNERSHIP = ['ООО', 'ИП']
+
   
   def users_statement
     self.users.statement_approvers

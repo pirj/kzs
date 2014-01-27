@@ -35,6 +35,7 @@ th {
         color: $table-simple-text-color;
         font-size: $font-size-base;
         vertical-align: top;
+        cursor: pointer;
       }
     }
   }
@@ -66,7 +67,7 @@ th {
 
 
   td{
-    h2, h3, h3, h4, h5, h6{margin: 0; padding: 0;}
+    h2, h3, h3, h4, h5, h6{margin: 0; padding: 0 0 $padding-base-vertical;}
     .control-label, .extra, .muted, .important{ line-height: $line-height-base-in-px; }
 
     .extra, .muted, .important{display: block;}

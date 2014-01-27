@@ -8,72 +8,45 @@ table.table.js-row-clickable
   tbody
     /= collection.inspect
     - collection.each do |res|
-      tr data-id="#{res.id}"
-        - attrs.each do |attr|
-          td = res.public_send(attr)
-        /
-        /td= res.name
-        /td= res.director
-        /td= res.users.count
-        /td= res.phone
-      /tr.tr-hovered.more-info.js-more-info{"data-id" => "1"}
-      /  td{colspan: "6"}
-      /    .row
-      /      .col-sm-9
-      /        .form-horizontal
-      /          .form-group
-      /            .col-sm-1
-      /              input{type: "checkbox"}/
-      /            .col-sm-2.control-label тип
-      /            .col-sm-9
-      /              span.important письмо
-      /          .form-group
-      /            .col-sm-3.control-label номер и дата
-      /            .col-sm-9
-      /              span.extra.inline 002
-      /              span.muted.inline /10.12.2013
-      /          .form-group
-      /            .col-sm-3.control-label тема
-      /            .col-sm-9
-      /              h2 Неполадки в районе С-2
-      /              a.link-muted{href: "#"} ООО «Метрострой»
-      /              span.fa.fa-long-arrow-right.text-muted
-      /              a.link-muted{href: "#"} ООО «Циклон»
-      /          .form-group
-      /            .col-sm-3.control-label исполнитель
-      /            .col-sm-9
-      /              img.img-thumbnail.table-img-xs{src: "http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"}/
-      /              a.link-dashed{href: "#"} Святослав Заря
-      /          .form-group
-      /            .col-sm-3.control-label отправитель
-      /            .col-sm-9
-      /              img.img-thumbnail.table-img-xs{src: "http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"}/
-      /              a.link-dashed{href: "#"} Феникс Константинопольский
-      /          .form-group
-      /            .col-sm-3.control-label приложения
-      /            .col-sm-9
-      /              ul.list-unstyled
-      /                li
-      /                  a.link{href: "#"} Картинка.png
-      /                li
-      /                  a.link{href: "#"} файлик.doc
-      /                li
-      /                  a.link{href: "#"} do-not-send-here-email-name.pdf
-      /      .col-sm-3
-      /  td
-      /    span.label.label-success подтвержден
-      /tr
-      /  td
-      /    input{type: "checkbox"}/
-      /  td
-      /    span.extra 002
-      /    span.muted 19.12.2013
-      /  td
-      /    a{href: "#"} ОАО «Метрострой»
-      /  td
-      /    a{href: "#"} ООО «Циклон»
-      /  td
-      /    spab.important Акт
-      /  td
-      /  td
-      /    span.label.label-danger отказ
+      / simple row with short information
+      tr data-id = res.id
+        td = link_to res.name, res.path
+        td = res.director_name
+        td = res.users_count
+        td = res.phone
+
+      / row with extra information
+      tr data-id = res.id class = 'more-info js-more-info'
+        td colspan = attrs.count
+          .col-sm-7
+            .form-horizontal
+              .form-group
+                .col-sm-3.control-label контрагент
+                .col-sm-9
+                  h2 = link_to res.title, res.path
+                  h4.link-muted = "#{res.users_count} человек в штате"
+
+
+              .form-group
+                .col-sm-3.control-label руководитель
+                .col-sm-9
+                  = res.director_avatar
+                  = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed'
+
+
+              .form-group
+                .col-sm-3.control-label контактное лицо
+                .col-sm-9
+                  = res.director_avatar
+                  = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed'
+
+              .col-sm-9.col-sm-offset-3
+                ul.list-unstyled
+                  li = link_to 'скачать все реквизиты', '#'
+
+              .col-sm-9.col-sm-offset-3
+                = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default'
+                = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
+
+          .col-sm-5
+            h2.text-right = res.phone

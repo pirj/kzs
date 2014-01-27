@@ -50,6 +50,11 @@
   .fa + span, span + .fa{margin-left: 0.3em;}
 }
 
+// set offset right button from left
+.btn + .btn{
+  margin-left: $padding-base-horizontal;
+}
+
 // --------------------------------------------------
 // Buttons styles.
 
