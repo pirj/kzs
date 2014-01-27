@@ -15,7 +15,8 @@
         %li= link_to 'Отправить', documents_send_document_path(ids: @many), :name => 'send', data: { confirm: 'Вы уверены?' }
   - else
     %li= link_to 'Просмотр', document_path(document_id)
-    %li= link_to 'Создать копию', copy_document_path(document_id)
+    - if copy
+      %li= link_to 'Создать копию', copy_document_path(document_id)
     - if edit
       %li= link_to 'Редактировать', edit_document_path(document_id)
     - if prepare

@@ -94,6 +94,7 @@ class DocumentsController < ApplicationController
              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
+     @copy = d.sender_organization_id == current_user.organization.id ? true : false
      @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
      @prepare = !d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false
@@ -323,23 +324,19 @@ class DocumentsController < ApplicationController
   
   def copy
     @original_document = Document.find(params[:id]) # find original object
-    if @original_document.sender_organization_id == current_user.organization.id    
-      @document = Document.new(:organization_id => @original_document.organization_id,
-                               :approver_id => @original_document.approver_id,
-                               :executor_id => @original_document.executor_id,
-                               :title => @original_document.title,
-                               :text => @original_document.text,
-                               :document_type => @original_document.document_type,
-                               :document_attachments => @original_document.document_attachments,
-                               :document_ids => @original_document.document_ids)
-      @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
-      @executors = User.where(:organization_id => current_user.organization_id)
-      @recipients = User.where('organization_id != ?', current_user.organization_id)
-      @documents = Document.all
-      render :new
-    else
-      redirect_to :back, alert: t('permission_denied')
-    end
+    @document = Document.new(organization_id: @original_document.organization_id,
+                             approver_id: @original_document.approver_id,
+                             executor_id: @original_document.executor_id,
+                             title: @original_document.title,
+                             text: @original_document.text,
+                             document_type: @original_document.document_type,
+                             document_attachments: @original_document.document_attachments,
+                             document_ids: @original_document.document_ids)
+    @approvers = User.approvers.where("organization_id = ? AND users.id != ?", current_user.organization_id, current_user.id)
+    @executors = User.where(organization_id: current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    render :new
   end
   
   def reply
