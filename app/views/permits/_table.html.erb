@@ -77,7 +77,9 @@
           <% if permit.permit_type == 'daily' %>
               Разовый пропуск
           <% else %>
-              Общий срок действия: <%= permit_remaining(permit) %>
+              Общий срок действия: <%= permit_remaining(permit) %><br>
+              Оставшийся срок действия: <%= permit_progress(permit) %>
+
           <% end %>
         </td>
         <td colspan="1"></td>

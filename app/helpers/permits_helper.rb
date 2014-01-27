@@ -22,6 +22,7 @@ module PermitsHelper
     #all_days = (permit.expiration_date - permit.start_date).to_i
     #days_done = (DateTime.now.to_date - permit.start_date).to_i
     #"#{all_days} #{days_done}"
+    distance_of_time_in_words(Time.new.inspect, permit.expiration_date)
   end
 
   def permit_remaining(permit)
