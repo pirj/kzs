@@ -1,0 +1,104 @@
+//
+// Tables
+// --------------------------------------------------
+
+
+table {
+  max-width: 100%;
+  background-color: $table-bg;
+}
+th {
+  text-align: left;
+}
+
+
+// Baseline styles
+
+.table {
+  width: 100%;
+  margin-bottom: $line-height-computed;
+
+  .tr-hovered{
+    background: $table-bg-hover;
+  }
+
+  // Cells
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: $table-cell-padding;
+        line-height: $line-height-base;
+        border-top: 1px solid $table-border-color;
+        color: $table-simple-text-color;
+        font-size: $font-size-base;
+        vertical-align: top;
+      }
+    }
+  }
+  // Bottom align for column headings
+  > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 1px solid $table-border-color;
+  }
+  // Remove top border from thead by default
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+  // Account for multiple tbody instances
+  > tbody + tbody {
+    border-top: 1px solid $table-border-color;
+  }
+
+  // Nesting
+  .table {
+    background-color: $body-bg;
+  }
+
+
+  td{
+    h2, h3, h3, h4, h5, h6{margin: 0; padding: 0;}
+    .control-label, .extra, .muted, .important{ line-height: $line-height-base-in-px; }
+
+    .extra, .muted, .important{display: block;}
+    .inline{display: inline-block;}
+    .extra{
+      @include btn-link-style();
+      &, a{ text-decoration: none; }
+    }
+    .important{
+      font-family: $font-family-sans-serif-bold;
+      font-size: $font-size-base - 2px;
+      color: $gray;
+      text-transform: uppercase;
+    }
+    .icon{font-size: $font-size-base+10px;}
+    .row-header{display: block; text-align: center; color: $table-simple-text-color; margin: $padding-base-vertical 0;}
+
+    .table-img-xs{
+      max-width: 32px;
+      max-height: 32px;
+      width: auto;
+      height: auto;
+      margin-right: $padding-base-horizontal;
+    }
+
+    .control-label{padding-top: 0;}
+  }
+}
+
+
+
+// Generate the contextual variants
+@include table-row-variant('success', $state-success-bg, $state-success-border);
+@include table-row-variant('danger', $state-danger-bg, $state-danger-border);
+@include table-row-variant('warning', $state-warning-bg, $state-warning-border);

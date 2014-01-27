@@ -1,0 +1,171 @@
+<h2>Заголовки</h2>
+
+<h5>
+  Варианты заголовка и заголовка с ниспадающим списком
+</h5>
+
+<div class="bs-example">
+  <div class="row">
+    <div class="col-sm-6"><h1>Наивысший Заголовок</h1></div>
+    <div class="col-sm-6">
+      <div class="dropdown header">
+        <h1 data-toggle="dropdown" class="dropdown-toggle">
+          <a href="#" >Заголовок с dropdown
+            <span class="caret"></span>
+          </a>
+        </h1>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">подпункт заголовка 1</a></li>
+          <li><a href="#">подпункт заголовка 2</a></li>
+          <li><a href="#">подпункт заголовка 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+  <h1>Наивысший Заголовок</h1>
+
+  <div class="dropdown header">
+    <h1 data-toggle="dropdown" class="dropdown-toggle">
+      <a href="#" >Заголовок с dropdown
+        <span class="caret"></span>
+      </a>
+    </h1>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">подпункт заголовка 1</a></li>
+      <li><a href="#">подпункт заголовка 2</a></li>
+      <li><a href="#">подпункт заголовка 3</a></li>
+    </ul>
+  </div>
+  }%></pre>
+</div>
+
+
+
+<h5>
+  Вариант шапки страницы c заголовком
+</h5>
+<div class="bs-example">
+  <div class="navbar">
+    <ul class="nav navbar-nav">
+      <li><a href="#" class="btn btn-default">
+        <span class="fa fa-arrow-left"></span>
+        <span>назад</span>
+      </a></li>
+
+      <li><h1>Наивысший Заголовок</h1></li>
+    </ul>
+
+    <form class="navbar-form navbar-left">
+      <div class="input-group">
+        <input type="search" class="form-control js-input-with-icon" placeholder="поиск по сущности">
+        <span class="input-group-icon search"></span>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a class="link-muted btn-divide-by-word text-right btn-no-hover">Иван Иванович</a>
+      </li>
+      <li>
+        <a href='#' class="btn btn-default btn-icon"><span class="fa fa-sign-out"></span></a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+<h5>
+  Вариант шапки страницы c dropdown
+</h5>
+<div class="bs-example">
+  <div class="navbar">
+    <ul class="nav navbar-nav">
+      <li><a href="#" class="btn btn-default">
+        <span class="fa fa-arrow-left"></span>
+        <span>назад</span>
+      </a></li>
+
+      <li>
+        <div class="dropdown header">
+          <h1 data-toggle="dropdown" class="dropdown-toggle">
+            <a href="#" >Заголовок с dropdown
+              <span class="caret"></span>
+            </a>
+          </h1>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">подпункт заголовка 1</a></li>
+            <li><a href="#">подпункт заголовка 2</a></li>
+            <li><a href="#">подпункт заголовка 3</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <form class="navbar-form navbar-left">
+      <div class="input-group">
+        <input type="search" class="form-control js-input-with-icon" placeholder="поиск по сущности">
+        <span class="input-group-icon search"></span>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a class="link-muted btn-divide-by-word text-right btn-no-hover">
+          <span>Иван</span><span>Иванович</span></a>
+      </li>
+      <li>
+        <a href='#' class="btn btn-default btn-icon"><span class="fa fa-sign-out"></span></a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+  <div class="navbar">
+    <ul class="nav navbar-nav">
+      <li><a href="#" class="btn btn-default">
+        <span class="fa fa-arrow-left"></span>
+        <span>назад</span>
+      </a></li>
+
+      <li>
+        <div class="dropdown header">
+          <h1 data-toggle="dropdown" class="dropdown-toggle">
+            <a href="#" >Заголовок с dropdown
+              <span class="caret"></span>
+            </a>
+          </h1>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">подпункт заголовка 1</a></li>
+            <li><a href="#">подпункт заголовка 2</a></li>
+            <li><a href="#">подпункт заголовка 3</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+
+    <form class="navbar-form navbar-left">
+      <div class="input-group">
+        <input type="search" class="form-control js-input-with-icon" placeholder="поиск по сущности">
+        <span class="input-group-icon search"></span>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a class="link-muted btn-divide-by-word text-right btn-no-hover">
+          <span>Иван</span><span>Иванович</span></a>
+      </li>
+      <li>
+        <a href='#' class="btn btn-default btn-icon"><span class="fa fa-sign-out"></span></a>
+      </li>
+    </ul>
+
+  </div>
+  }%></pre>
+</div>
+

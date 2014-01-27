@@ -1,0 +1,90 @@
+<h2>Элементы форм</h2>
+
+<p>
+  примеры обычного и активного инпутов
+  Чтобы скрыть описание к инпуту при его отрисовке через simple_form подставляйте в нужным инпут следующий код
+  <span class="lib-prop">label_html: {class: 'sr-only'}</span>
+</p>
+<div class="bs-example">
+  <form class="form-inline">
+    <div class="form-group">
+      <label class="sr-only">обычный инпут</label>
+      <input type="text" class="form-control" placeholder="обычный инпут">
+    </div>
+    <div class="form-group">
+      <label class="sr-only">активный инпут</label>
+      <input type="text" class="form-control active"placeholder="активный инпут">
+    </div>
+  </form>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only">обычный инпут</label>
+        <input type="text" class="form-control" placeholder="обычный инпут">
+      </div>
+      <div class="form-group">
+        <label class="sr-only">активный инпут</label>
+        <input type="text" class="form-control active"placeholder="активный инпут">
+      </div>
+    </form>
+  }%></pre>
+</div>
+
+
+<p>
+  примеры поискового инпута
+</p>
+<div class="bs-example">
+  <div class="input-group">
+    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
+    <span class="input-group-icon search"></span>
+  </div>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+  <div class="input-group">
+    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
+    <span class="input-group-icon search"></span>
+  </div>
+  }%></pre>
+</div>
+
+<p>
+  пример инпута c датой
+</p>
+<div class="bs-example">
+  <div class="input-group">
+    <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+    <input class="form-control js-datepicker" placeholder="инпут с датой">
+  </div>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+    <div class="input-group">
+      <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+      <input class="form-control js-datepicker" placeholder="инпут с датой">
+    </div>
+  }%></pre>
+</div>
+
+
+<p>
+  пример инпута с ниспадающим списком
+</p>
+<div class="bs-example">
+  <select class="form-control js-chosen" data-placeholder="Организация-получатель" multiple="multiple">
+    <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
+    <option value="2">ФКП «Дирекция КЗС Минрегиона России» </option>
+  </select>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+    <select class="form-control js-chosen" data-placeholder="Организация-получатель" multiple="multiple">
+      <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
+      <option value="2">ФКП «Дирекция КЗС Минрегиона России» </option>
+    </select>
+  }%></pre>
+</div>
+

@@ -1,23 +1,24 @@
 <h2>Статусы</h2>
 
-<p>
-  примеры статусов
-</p>
-<div>
-  <span class="label-success">Выпущен</span>
-  <span class="label">Выпущен</span>
-  <span class="label-error">Выпущен</span>
-  <span class="label-danger">Выпущен</span>
+<div class="bs-example">
+  <span class="label label-success">Success</span>
+  <span class="label label-default">Default</span>
+  <span class="label label-primary">Primary</span>
+  <span class="label label-warning">Warning</span>
+  <span class="label label-danger">Danger</span>
 </div>
-<div>
-  <p>
-    статусы могут быть нескольких цветов
-    <span class="lib-prop">.label</span>
-    <span class="lib-prop">.label-success</span>
-    <span class="lib-prop">.label-error</span>
-  </p>
-    <pre class="prettyprint lang-html"><%= html_escape %q{
-        <span class="btn-available btn label-success">
-            Выпущен
-        </span>} %></pre>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+  <span class="label label-success">Success</span>
+  <span class="label label-default">Default</span>
+  <span class="label label-primary">Primary</span>
+  <span class="label label-warning">Warning</span>
+  <span class="label label-danger">Danger</span>
+
+  <a href="#" class="label label-success">Success</a>
+  <a href="#" class="label label-default">Default</a>
+  <a href="#" class="label label-primary">Primary</a>
+  <a href="#" class="label label-warning">Warning</a>
+  <a href="#" class="label label-danger">Danger</a>
+  }%></pre>
 </div>

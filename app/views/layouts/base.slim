@@ -1,0 +1,20 @@
+html
+  head
+    title System page
+    / <link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+    = stylesheet_link_tag "library", :media => "all"
+    = javascript_include_tag "library"
+    = csrf_meta_tags
+    = yield(:head)
+  body
+    div
+      - unless controller?('devise/sessions') || controller?('dashboard')
+        #sidebar
+          = render 'shared/left'
+      .page
+        - if notice
+          .alert.alert-success= notice
+        - if alert
+          .alert.alert-error= alert
+        = yield
+

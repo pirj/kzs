@@ -20,6 +20,9 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'slim'
 
+gem 'simple_form'
+gem 'draper'
+
 gem 'will_paginate'
 
 # gem 'texticle', "2.0", :require => 'texticle/rails'
@@ -30,7 +33,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'compass-rails'
-  gem 'compass-rails'
+  gem 'font-awesome-rails'
 end
 
 gem 'jquery-rails', '~> 2.3.0'

@@ -1,0 +1,148 @@
+// --------------------------------------------------
+// BUTTONS
+// --------------------------------------------------
+
+// Core buttons styles
+.btn {
+  display: inline-block;
+  margin-bottom: 0; // For input.btn
+  font-weight: $btn-font-weight;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+  border: none;
+  white-space: nowrap;
+  min-height: 3.1em;
+  @include button-size(0, $btn-default-padding, 75%, 3.1em, $border-radius-base);
+  @include user-select(none);
+
+  &:first-letter{text-transform: uppercase;}
+
+  &:focus {
+    @include tab-focus();
+  }
+
+  &:hover,
+  &:focus {
+    color: $btn-default-color;
+    text-decoration: none;
+  }
+
+  &:active,
+  &.active {
+    outline: 0;
+    background-image: none;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    pointer-events: none; // Future-proof disabling of clicks
+    @include opacity(.65);
+    @include box-shadow(none);
+  }
+
+  // padding between icon and text.
+  // each must be inserting in 'span'
+  .fa + span, span + .fa{margin-left: 0.3em;}
+}
+
+// --------------------------------------------------
+// Buttons styles.
+
+.btn-default {
+  @include button-variant($btn-default-color, $btn-default-bg);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: darken($btn-default-color, 30%);
+  }
+}
+
+.btn-primary { @include button-variant($btn-primary-color, $btn-primary-bg);}
+
+.btn-icon{
+  border-radius: 1.6em;
+  .fa, .icon{
+    font-size: 1.6em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+
+// set each 'span' word on new line
+.btn-divide-by-word{
+  line-height: normal;
+  span{ display: block; margin: 0; line-height: 1.5; }
+}
+
+.btn-no-hover{
+  &, &:hover, &:visited, &:active, &:focus{
+    text-decoration: none !important;
+    border-bottom: none !important;
+  }
+}
+
+
+// --------------------------------------------------
+// Link buttons
+
+.btn-link {
+  @include btn-link-style($link-color, $link-hover-color);
+}
+
+.btn-link-muted{
+  @include btn-link-style($link-muted-color, $link-muted-hover-color);
+}
+
+.btn-link-dashed{
+  @include btn-link-style($link-color, $link-hover-color);
+  &, &:hover, &:active, &:visited, &:focus{
+    border-bottom: 1px dashed $link-color;
+    margin: $btn-default-padding $btn-default-padding;
+
+    min-height: initial; // for merge text and dashed
+    line-height: initial; // for merge text and dashed
+
+    display: inline-block;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  &:hover, &:active, &:visited, &:focus{
+    border-color: $link-hover-color;
+  }
+}
+
+
+
+// --------------------------------------------------
+// Block button
+
+
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}

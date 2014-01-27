@@ -1,0 +1,90 @@
+<h2>Dropdown меню</h2>
+
+<h5>
+  Dropdown у кнопок в меню
+</h5>
+<div class="bs-example">
+  <ul class="nav nav-pills">
+    <li class="dropdown open">
+      <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+        Создать <span class="caret"></span>
+      </a>
+      <span class="dropdown-arr"></span><ul class="dropdown-menu" role="menu">
+      <li><a href="#">Письмо</a></li>
+      <li><a href="#">Распоряжение</a></li>
+      <li><a href="#">Акт</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="#">
+        Действия <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" id="create_copy_link">Создать по образу и подобию</a></li>
+        <li><a href="#" id="edit_link">Редактировать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" name="prepare">Подготовить</a></li>
+        <li> <a href="#" data-confirm="Вы уверены?" id="approve_link" name="approve">Подписать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" id="send_link" name="send">Отправить</a></li>
+        <li><a href="#" id="reply_link">Ответить</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+    <ul class="nav nav-pills">
+    <li class="dropdown open">
+      <a class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+        Создать <span class="caret"></span>
+      </a>
+      <span class="dropdown-arr"></span><ul class="dropdown-menu" role="menu">
+      <li><a href="#">Письмо</a></li>
+      <li><a href="#">Распоряжение</a></li>
+      <li><a href="#">Акт</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+      <a class="dropdown-toggle btn btn-default" data-toggle="dropdown" href="#">
+        Действия <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" id="create_copy_link">Создать по образу и подобию</a></li>
+        <li><a href="#" id="edit_link">Редактировать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" name="prepare">Подготовить</a></li>
+        <li> <a href="#" data-confirm="Вы уверены?" id="approve_link" name="approve">Подписать</a></li>
+        <li><a href="#" data-confirm="Вы уверены?" id="send_link" name="send">Отправить</a></li>
+        <li><a href="#" id="reply_link">Ответить</a></li>
+      </ul>
+    </li>
+  </ul>
+  }%></pre>
+</div>
+
+
+
+<h5>
+  Dropdown у заголовков
+</h5>
+<div class="bs-example">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="dropdown header">
+        <h1 data-toggle="dropdown" class="dropdown-toggle">
+          <a href="#" >Заголовок
+            <span class="caret"></span>
+          </a>
+        </h1>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">подпункт заголовка 1</a></li>
+          <li><a href="#">подпункт заголовка 2</a></li>
+          <li class="muted"><a href="#">подпункт заголовка 3</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="highlight">
+  <pre class="prettyprint lang-html"><%= html_escape %q{
+
+  }%></pre>
+</div>

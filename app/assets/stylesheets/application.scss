@@ -1,10 +1,9 @@
 /*
 *= require chosen
-*= require_directory .
+*= require_directory ./application
 *= require_self
 *= require_tree ./plugins
-*= require ./library/base
-*= stub active_admin
+*= stub application/active_admin.scss
 */
 
 
