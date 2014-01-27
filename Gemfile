@@ -20,6 +20,9 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'slim'
 
+gem 'simple_form'
+gem 'drapper'
+
 gem 'will_paginate'
 
 # gem 'texticle', "2.0", :require => 'texticle/rails'
