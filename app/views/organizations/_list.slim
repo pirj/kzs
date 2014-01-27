@@ -1,0 +1,83 @@
+- attrs = [:name, :director, :users_count, :phone]
+table.table.js-row-clickable
+  thead
+    tr
+      th
+        input type="checkbox"
+      th №/дата
+      th Отправитель
+      th Получатель
+      th Тип
+      th
+      th Статус
+  tbody
+    /= collection.inspect
+    = collection.each do |res|
+      tr data-id="#{res.id}"
+        td
+          input type="checkbox"
+        td= res.name
+    /    td= res.director
+    /    td= res.users.count
+    /    td= res.phone
+      /tr.tr-hovered.more-info.js-more-info{"data-id" => "1"}
+      /  td{colspan: "6"}
+      /    .row
+      /      .col-sm-9
+      /        .form-horizontal
+      /          .form-group
+      /            .col-sm-1
+      /              input{type: "checkbox"}/
+      /            .col-sm-2.control-label тип
+      /            .col-sm-9
+      /              span.important письмо
+      /          .form-group
+      /            .col-sm-3.control-label номер и дата
+      /            .col-sm-9
+      /              span.extra.inline 002
+      /              span.muted.inline /10.12.2013
+      /          .form-group
+      /            .col-sm-3.control-label тема
+      /            .col-sm-9
+      /              h2 Неполадки в районе С-2
+      /              a.link-muted{href: "#"} ООО «Метрострой»
+      /              span.fa.fa-long-arrow-right.text-muted
+      /              a.link-muted{href: "#"} ООО «Циклон»
+      /          .form-group
+      /            .col-sm-3.control-label исполнитель
+      /            .col-sm-9
+      /              img.img-thumbnail.table-img-xs{src: "http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"}/
+      /              a.link-dashed{href: "#"} Святослав Заря
+      /          .form-group
+      /            .col-sm-3.control-label отправитель
+      /            .col-sm-9
+      /              img.img-thumbnail.table-img-xs{src: "http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"}/
+      /              a.link-dashed{href: "#"} Феникс Константинопольский
+      /          .form-group
+      /            .col-sm-3.control-label приложения
+      /            .col-sm-9
+      /              ul.list-unstyled
+      /                li
+      /                  a.link{href: "#"} Картинка.png
+      /                li
+      /                  a.link{href: "#"} файлик.doc
+      /                li
+      /                  a.link{href: "#"} do-not-send-here-email-name.pdf
+      /      .col-sm-3
+      /  td
+      /    span.label.label-success подтвержден
+      /tr
+      /  td
+      /    input{type: "checkbox"}/
+      /  td
+      /    span.extra 002
+      /    span.muted 19.12.2013
+      /  td
+      /    a{href: "#"} ОАО «Метрострой»
+      /  td
+      /    a{href: "#"} ООО «Циклон»
+      /  td
+      /    spab.important Акт
+      /  td
+      /  td
+      /    span.label.label-danger отказ

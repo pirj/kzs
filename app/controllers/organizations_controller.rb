@@ -1,9 +1,9 @@
 class OrganizationsController < ApplicationController
-  layout 'organizations'
+  layout 'base'
   helper_method :sort_column, :sort_direction
   
   def index 
-    @organizations = Organization.order(sort_column + " " + sort_direction)
+    @organizations = OrganizationsDecorator.decorate( Organization.order(sort_column + " " + sort_direction) )
 
     respond_to do |format|
       format.html
