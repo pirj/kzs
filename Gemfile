@@ -21,7 +21,7 @@ gem 'haml'
 gem 'slim'
 
 gem 'simple_form'
-gem 'drapper'
+gem 'draper'
 
 gem 'will_paginate'
 
