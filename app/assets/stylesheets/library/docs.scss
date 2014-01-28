@@ -692,8 +692,13 @@ h1[id] {
     border-color: #ddd;
     border-radius: 4px 4px 0 0;
     box-shadow: none;
+
+    > .nav.nav-tabs{
+      margin-bottom: -16px;
+      margin-top: 16px;
+    }
   }
-  .bs-example + .highlight {
+  .bs-example + .highlight, .bs-example + .tab-content {
     margin-top: -16px;
     margin-left: 0;
     margin-right: 0;
