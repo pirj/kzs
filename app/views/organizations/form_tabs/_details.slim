@@ -1,0 +1,26 @@
+.tab-pane#details
+  .col-sm-offset-4.col-sm-8
+    h2 Реквизиты
+  = f.input :bank_title
+  = f.input :bank_address
+  = f.input :bank_correspondent_account
+  = f.input :bank_bik
+  = f.input :bank_inn
+  = f.input :bank_kpp
+  = f.input :bank_okved
+  = f.input :organization_account
+
+
+  = f.input :short_title
+  = f.input :type_of_ownership
+  = f.input :date_of_registration, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
+  = f.input :tax_authority_that_registered
+  = f.input :certificate_of_tax_registration
+  = f.input :creation_resolution_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
+  = f.input :creation_resolution
+  = f.input :articles_of_organization
+  = f.input :legal_address
+  = f.input :actual_address
+
+
+

@@ -1,29 +1,24 @@
 = simple_form_for resource, html: {class: 'form-horizontal'}, defaults: { input_wrapper_html: { class: 'col-sm-8' }, label_html: { class: 'col-sm-4' }, wrapper: :inline } do |f|
-  = 'VIT'
-  = f.input :title
-  = f.input :type_of_ownership, wrapper: :inline
-  = f.input :title, wrapper: :icon_prepend, icon: 'fa fa-calendar', input_html: { class: 'js-datepicker' }
-  = f.input :date_of_registration, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
-  = f.input :tax_authority_that_registered
-  = f.input :certificate_of_tax_registration
-  = f.input :creation_resolution_date
-  = f.input :creation_resolution
-  = f.input :articles_of_organization
-  = f.input :inn
-  = f.input :kpp
-  = f.input :ogrn
-  = f.input :bik
-  = f.input :egrul_registration_date
-  = f.input :egrul_excerpt
-  = f.input :bank_title
-  = f.input :bank_address
-  = f.input :bank_correspondent_account
-  = f.input :bank_bik
-  = f.input :bank_inn
-  = f.input :bank_kpp
-  = f.input :bank_okved
-  = f.input :organization_account
-  = f.input :legal_address
-  = f.input :actual_address
+  /= f.input :title, wrapper: :icon_prepend, icon: 'fa fa-calendar', input_html: { class: 'js-datepicker' }
 
-  = f.submit 'cоздать', class: 'btn btn-primary'
+  .row
+    .col-sm-12
+      ul.nav.nav-tabs
+        li = link_to 'Общие', '#main', data: { toggle: 'tab' }
+        li = link_to 'Реквизиты', '#details', data: { toggle: 'tab' }
+        li = link_to 'Сотрудники', '#users', data: { toggle: 'tab' }
+        li = link_to 'Лицензии', '#licenses', data: { toggle: 'tab' }
+
+
+  .row
+    .col-sm-12
+      .tab-content
+        = render 'organizations/form_tabs/main', f: f
+        = render 'organizations/form_tabs/details', f: f
+
+
+
+
+    .col-sm-offset-4.col-sm-8
+      = f.submit 'cоздать', class: 'btn btn-primary'
+      = link_to 'отменить изменения', f.object.path, class: 'btn btn-link-muted'

@@ -33,8 +33,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/new
   # GET /organizations/new.json
   def new
-    @organization = Organization.new
-    @users = User.where(:organization_id => @organization.id)
+    @organization = OrganizationDecorator.decorate(Organization.new)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +43,7 @@ class OrganizationsController < ApplicationController
   
   def edit
     
-    @organization = Organization.find(params[:id])
+    @organization = OrganizationDecorator.decorate(Organization.find(params[:id]))
     @users = User.where(:organization_id => current_user.organization_id)
     
     #if current_user.organization_id != @organization.id
