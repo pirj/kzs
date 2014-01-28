@@ -1,6 +1,6 @@
 = simple_form_for resource, html: {class: 'form-horizontal'}, defaults: { input_wrapper_html: { class: 'col-sm-8' }, label_html: { class: 'col-sm-4' }, wrapper: :inline } do |f|
   = 'VIT'
-  = f.input :title, wrapper: :inline, label_html: { class: 'col-sm-4' }, input_wrapper_html: {class: 'col-sm-8'}
+  = f.input :title, wrapper: :icon_prepend, icon: 'fa fa-calendar', input_html: { class: 'js-datepicker' }
   = f.input :type_of_ownership, wrapper: :inline
   = f.input :date_of_registration
   = f.input :tax_authority_that_registered

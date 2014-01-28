@@ -62,6 +62,20 @@ SimpleForm.setup do |config|
     b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
   end
 
+  config.wrappers :icon_prepend, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
+    b.use :html5
+    b.use :placeholder
+
+    b.use :label
+    b.wrapper :input_wrapper, tag: 'div', class: 'input-group' do |bi|
+      bi.use :icon, class: 'input-group-icon', tag: 'div'
+      bi.use :input
+    end
+
+    b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
+  end
+
 
 
   config.wrappers :prepend, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
