@@ -60,25 +60,4 @@ $ ->
   )()
 
 
-  # show/hide additional information in table row
-  # tabel row with more info is named '.js-more-info'
-  # all other rows not named
-  # bind two rows by 'data-id' attribute
-  (->
-    # show more info
-    $(document).on('click', '.js-row-clickable tr', (e) ->
-      e.preventDefault()
 
-      $elem = $(@)
-      id = $elem.data('id')
-
-
-      $target = $elem.siblings(".js-more-info[data-id=#{id}]")
-
-      console.log id
-      console.log $target.length
-      if id? && $target.length > 0
-#        $elem.hide()
-        $target.toggle()
-    )
-  )()

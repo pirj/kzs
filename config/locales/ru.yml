@@ -1,4 +1,6 @@
 ru:
+  permits: "Пропуска"
+  library: "Библиотека"
   at_work: "На работе"
   ooo: "Нет на месте"
   choose_status: "Выберите статус"

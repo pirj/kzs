@@ -1,6 +1,6 @@
 html
   head
-    title = controller.class.name
+    title = title
     / <link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">
     = stylesheet_link_tag "library", :media => "all"
     = javascript_include_tag "library"
@@ -17,4 +17,3 @@ html
         - if alert
           .alert.alert-error= alert
         = yield
-

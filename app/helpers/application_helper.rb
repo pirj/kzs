@@ -1,5 +1,10 @@
 # coding: utf-8
 module ApplicationHelper
+
+  def title
+    t(controller.controller_name)
+
+  end
   
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
