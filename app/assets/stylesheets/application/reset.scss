@@ -10,12 +10,12 @@ html, body {
   height: 100%;
 }
 
-body > div {
+.page-wrapper {
   min-height: 100%;
   margin-bottom: -100px;
 }
 
-* html body > div{
+* html .page-wrapper {
     height: 100%;
 }
 
