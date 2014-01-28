@@ -61,7 +61,7 @@ task :staging do
     end
   end
 
-  before "deploy:assets:precompile", "copy_database_config"
+  # before "deploy:assets:precompile", "copy_database_config"
   after "deploy", "deploy:cleanup"
 end
 
