@@ -30,7 +30,11 @@ class OrganizationDecorator < Draper::Decorator
   end
 
   def path
-    h.organization_path(object)
+    unless object.id.nil?
+      h.organization_path(object)
+    else
+      h.new_organization_path
+    end
   end
 
   def edit_path
