@@ -11,6 +11,15 @@ development:
   pool: 5
   username: user
   password: ks86ybdl!
+
+production:
+  adapter: postgresql
+  host: babrovka.ru
+  encoding: utf8
+  database: kzs-staging
+  pool: 5
+  username: user
+  password: ks86ybdl!
     
 # development:
 #   adapter: postgresql
@@ -31,12 +40,14 @@ test:
   pool: 5
   username: babrovka
   password:
+    
+    
 
-production:
-  adapter: postgresql
-  host: localhost
-  encoding: utf8
-  database: postgres
-  pool: 5
-  username: sake
-  password: ARprmSbqIl1eFphH
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   encoding: utf8
+#   database: postgres
+#   pool: 5
+#   username: sake
+#   password: ARprmSbqIl1eFphH
