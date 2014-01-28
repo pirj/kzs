@@ -17,12 +17,12 @@
 
 <div class="highlight">
   <ul class="nav nav-pills lib-control-tabs">
-    <li class="active"><a href="#slim" data-toggle="tab">slim</a></li>
-    <li><a href="#html" data-toggle="tab">html</a></li>
+    <li><a href="#tab-menu-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#tab-menu-html" data-toggle="tab">html</a></li>
   </ul>
   <!-- Tab panes -->
   <div class="tab-content">
-    <div class="tab-pane active" id="slim">
+    <div class="tab-pane" id="tab-menu-slim">
       <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
   ul.nav.nav-tabs
     li.active = link_to 'Общие', '#main', data: { toggle: 'tab' }
@@ -36,7 +36,7 @@
       }%></pre>
     </div>
 
-    <div class="tab-pane" id="html">
+    <div class="tab-pane" id="tab-menu-html">
       <pre class="prettyprint linenums lang-html"><%= html_escape %q{
   <ul class="nav nav-tabs">
     <li class="active"><a href="#main" data-toggle="tab">Общие</a></li>
