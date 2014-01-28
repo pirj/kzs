@@ -174,13 +174,21 @@
 
 .main-desktop-title h3 {
   text-align: center;
-  color: #17a488;
-  font-size: 33px;
   margin: 6px 0 25px;
+  font-size: 35px; 
+  color: #00bc80; 
+  letter-spacing: -0.5px
 }
 
 .bottom-nav, .edit-mode {
   position: relative;
+}
+
+.bottom-nav .btn {
+  height:30px;
+  line-height:40px;
+  border-radius:12px;
+  padding:0 22px;
 }
 
 .nav {
@@ -430,6 +438,8 @@
     }
     a.h3 {
       color:#56b4ee;
+      margin-bottom: 12px;
+      display:block;
     }
     .h3 {
       font-size: 26px;
