@@ -6,13 +6,13 @@
   = f.input :type_of_ownership
   = f.input :date_of_registration, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
   = f.input :tax_authority_that_registered
-  = f.input :certificate_of_tax_registration
+  = f.input :certificate_of_tax_registration, as: :filename
   = f.input :creation_resolution_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
-  = f.input :creation_resolution
-  = f.input :articles_of_organization
+  = f.input :creation_resolution, as: :filename
+  = f.input :articles_of_organization, as: :filename
   h6.col-sm-offset-4.col-sm-8 нужен директор и бухгалтер
   = f.input :inn
   = f.input :kpp
   = f.input :ogrn
   = f.input :bik
-  = f.input :egrul_excerpt
+  = f.input :egrul_excerpt, as: :filename

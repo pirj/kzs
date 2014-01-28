@@ -97,6 +97,7 @@
         background: $btn-default-bg;
         text-decoration: none;
         border-color: transparent;
+        border-bottom-color: $input-border;
       }
     }
 
@@ -105,13 +106,9 @@
       &,
       &:hover,
       &:focus {
-//        color: $nav-tabs-active-link-hover-color;
-//        background-color: $nav-tabs-active-link-hover-bg;
-//        border: 2px solid $nav-tabs-active-link-hover-border-color;
-//        border-bottom-color: transparent;
-//        cursor: default;
         border-color: $input-border;
         border-bottom-color: white;
+        background: transparent;
       }
     }
   }
