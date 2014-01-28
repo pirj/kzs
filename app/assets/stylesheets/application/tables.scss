@@ -48,7 +48,7 @@
         display: block;
       }
       background: #f7fffd;
-      padding: 30px 0 100px;
+      padding: 30px 0 20px;
       &:after {
         display: table;
         clear: both;
@@ -70,7 +70,8 @@
           display:block;
           color:#999999;
           font-size:18px;
-          line-height:30px;
+          line-height:20px;
+          margin-bottom:14px;
         }
       }
       .view-main-doc {

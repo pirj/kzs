@@ -295,21 +295,27 @@
   }
 }
 
-.bottom-nav .dropdown-menu {
-  left: -102px;
-  top: -158px;
-}
-
-.bottom-nav .dropdown-arr {
-  border-left: 8px solid rgba(0, 0, 0, 0);
-  border-right: 8px solid rgba(0, 0, 0, 0);
-  border-top: 8px solid rgba(0, 0, 0, 0.8) !important;
-  height: 0;
-  left: 50%;
-  margin-left: -8px;
-  position: absolute;
-  top: 100%;
-  width: 0;
+.bottom-nav {
+  .dropdown-arr {
+    border-left: 8px solid rgba(0, 0, 0, 0);
+    border-right: 8px solid rgba(0, 0, 0, 0);
+    border-top: 8px solid rgba(0, 0, 0, 0.8) !important;
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    top: 100%;
+    width: 0;
+  }
+  .dropdown-menu {
+    left: -102px;
+    top: -158px;
+  }
+  .open {
+    .btn {
+      background:#cfcfcf;
+    }
+  }
 }
 
 .dropdown.active .dropdown-menu {
