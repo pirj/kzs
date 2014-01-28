@@ -34,6 +34,7 @@ group :assets do
   gem 'chosen-rails'
   gem 'compass-rails'
   gem 'font-awesome-rails'
+  gem 'turbo-sprockets-rails3'
 end
 
 gem 'jquery-rails', '~> 2.3.0'
