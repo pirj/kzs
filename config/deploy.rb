@@ -14,6 +14,8 @@ task :staging do
   set :deploy_to, "/home/user/projects/#{application}"
   set :deploy_via, :remote_cache
   set :use_sudo, false
+  
+  set :host, "5.178.80.26"
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
