@@ -172,12 +172,15 @@ $input-bg:                       #fff !default;
 $input-bg-disabled:              $gray-lighter !default;
 
 $input-color:                    $gray !default;
-$input-border:                   #ccc !default;
+$input-border-color:             #ccc !default;
+$input-border-weight:            2px !default;
+$input-border:                   $input-border-weight solid $input-border-color !default;
 $input-border-radius:            $border-radius-base !default;
 $input-border-focus:             $brand-primary !default;
 
 $input-color-placeholder:        $gray-light !default;
 
+$input-font-size:                14px;
 $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
 $input-height-large:             (floor($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2) !default;
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2) !default;
@@ -188,7 +191,7 @@ $legend-border-color:            #e5e5e5 !default;
 $input-label-color:               $gray-light;
 
 $input-group-addon-bg:           $gray-lighter !default;
-$input-group-addon-border-color: $input-border !default;
+$input-group-addon-border-color: $input-border-color !default;
 
 
 // Dropdowns

@@ -83,7 +83,7 @@
   color: $input-color;
   text-align: center;
   background-color: $input-group-addon-bg;
-  border: 1px solid $input-group-addon-border-color;
+  border: $input-border;
   border-radius: $border-radius-base;
 
   // Sizing
@@ -107,15 +107,15 @@
 
 // style for special search. It render search icon at right of input. wow.
 .input-group-icon {
-  border: 2px solid $input-border;
+  border: $input-border;
   border-radius: $input-border-radius;
   width: auto;
   min-width: 25px;
   padding: 0 5px 0 5px;
-  color: $input-border;
+  color: $input-border-color;
 
   &.search:after{
-    color: $input-border;
+    color: $input-border-color;
     font-family: FontAwesome;
     content: "\f002";
     position: absolute;
