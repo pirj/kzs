@@ -1,0 +1,18 @@
+.navbar
+  ul.nav.navbar-nav
+    li
+      h1 Измени меня
+  form.navbar-form.navbar-left
+    .input-group
+      input.form-control.js-input-with-icon placeholder="поиск по контрагентам" type="search"
+      span.input-group-icon.search
+  = render 'application/header_user_bar'
+
+
+.row
+  .col-xs-12
+    = render 'tabs'
+
+.row
+  .col-xs-12
+    = render 'organizations/show_tabs/main', resource: @organization

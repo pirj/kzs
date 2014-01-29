@@ -255,6 +255,11 @@ input[type="checkbox"],
   }
 }
 
+// Label class
+.control-label{
+  @extend .text-help;
+}
+
 // Form control sizing
 
 @include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
@@ -372,10 +377,6 @@ input[type="checkbox"],
   // Make form groups behave like rows
   .form-group {
     @include make-row();
-  }
-
-  .control-label{
-    color: $input-label-color;
   }
 
   .form-control-static {

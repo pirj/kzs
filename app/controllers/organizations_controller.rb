@@ -8,9 +8,10 @@ class OrganizationsController < ApplicationController
 
 
   def show
-    @organization = Organization.find(params[:id])
-    @users = User.where(:organization_id => @organization.id)
+    @organization = Organizations::ShowDecorator.decorate(Organization.find(params[:id]))
+    @users = User.for_organization(@organization.id)
   end
+
 
   def details
     @organization = Organization.find(params[:id])
