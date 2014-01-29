@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   scope :superuser, -> { where(is_superuser: true) }
   scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
   scope :statement_approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '2'")
+  scope :for_organization, lambda {|id=nil| where(organization_id: id) }
                               
   WORK_STATUSES = %w[at_work ooo]
   
