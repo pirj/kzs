@@ -1,6 +1,9 @@
 ActiveAdmin.register User do
   config.batch_actions = false
   filter :username
+  #TODO это мешает загрузить окружение, поэтому новый член команды не сможет накатить миграции или запустить консоль
+  # в rails3 .all возвращает массив, делая запрос к БД, если я не путаю то в 4-х будет уже relation
+  # поэтому можно сделать  Organization.scoped
   filter :organization_id, :as => :check_boxes, :collection => Organization.all, :include_blank => false
   menu :priority => 1
   
