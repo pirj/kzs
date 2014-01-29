@@ -5,3 +5,13 @@
   border-radius: 1px;
   border: 1px solid #ccc;
 }
+
+.lib-menu{
+  background: #efefef;
+
+  &, > ul { @extend .list-unstyled }
+  > ul {margin-left: 15px;}
+
+  font-size: 12px;
+
+}
