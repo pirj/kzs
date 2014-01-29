@@ -108,7 +108,7 @@ input[type="number"] {
 output {
   display: block;
   padding-top: ($padding-base-vertical + 1);
-  font-size: $font-size-base;
+  font-size: $input-font-size;
   line-height: $line-height-base;
   color: $input-color;
   vertical-align: middle;
@@ -145,7 +145,7 @@ output {
   color: $input-color;
   display: block;
   line-height: $line-height-base;
-  font-size: $font-size-base;
+  font-size: $input-font-size;
   height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   outline-width: 0;
   padding: $padding-base-vertical $padding-base-horizontal;
