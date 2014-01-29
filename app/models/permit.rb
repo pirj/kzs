@@ -30,6 +30,8 @@ class Permit < ActiveRecord::Base
   PERMIT_CLASSES = %w[standart vip]
   
   def temporary
+    # TODO избыточная запись получается, можно просто:
+    # start_date == expiration_date
     if self.start_date == self.expiration_date
       true
     else

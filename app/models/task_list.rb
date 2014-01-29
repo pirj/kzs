@@ -10,12 +10,19 @@ class TaskList < ActiveRecord::Base
   after_save :update_statement
   
   def progress
+    # TODO может стоит посмотреть на cache_counter
+    # иначе наша БД вскоре начнет страдать
     total = 100 / self.tasks.count
     progress = total * self.tasks.completed.count
     progress
   end
   
   def with_completed_tasks
+    # TODO if точно не нужен
+    # tasks.count == tasks.completed.count
+    # сам по себе вернет true или false
+    # + вынести и закешить
+
     if self.tasks.count == self.tasks.completed.count
       true
     else
@@ -24,6 +31,11 @@ class TaskList < ActiveRecord::Base
   end
   
   def update_statement
+    #TODO этого достаточно:
+    #if statement && completed
+    #  statement.update_attributes(with_completed_tasks: true)
+    #end
+
     if self.completed
       if self.statement
         statement = self.statement
@@ -34,6 +46,10 @@ class TaskList < ActiveRecord::Base
   end
   
   def with_empty_tasks
+    #TODO скорее всего это необходимо для построения формы
+    #списка задач, но в модель редко выносят таие вещи,
+    #обычно они находятся в контроллере, где происходит
+    #создание объекта: см. StatementsController#183
     1.times {tasks.build}
     self
   end

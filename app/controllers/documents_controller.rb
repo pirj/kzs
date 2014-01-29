@@ -6,6 +6,9 @@ class DocumentsController < ApplicationController
   
   def index
     # check if user can view confindetnial documents
+
+    #TODO далее documents просто переписывается,
+    #не совсем понятно, зачем мы вообще делаем проверку?
     if current_user.has_permission?(5)
       documents = Document.all
     else
@@ -21,7 +24,10 @@ class DocumentsController < ApplicationController
     else
       sort_type = sort_column + " " + sort_direction
     end
-    
+
+    #TODO имеет смысл разнести выборки по методам меньшего размера,
+    #можно попробовать через has_scope применять параметры к одноименным scope
+
     documents = Document.text_search(params[:query])
                 .not_deleted.not_archived.not_draft
                 .order(sort_type)
@@ -30,7 +36,7 @@ class DocumentsController < ApplicationController
                   (sender_organization_id == organization) & (approver_id == current_user_id) | 
                   (approved == true) & (sender_organization_id == organization) 
                   }
-    
+
     # mails
     if params[:type] == "mails"
       @documents = documents.where(:document_type => 'mail')

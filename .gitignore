@@ -13,6 +13,10 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+.idea
+.rvmrc
+ModelDependencyDiagram.svg
+defaults.reek
 
 config/database.yml
 

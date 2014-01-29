@@ -22,6 +22,8 @@ class Statement < ActiveRecord::Base
   def assign_approvers
     if self.approver_ids
       approver_ids = self.approver_ids.delete_if{ |x| x.empty? }
+      # TODO откуда может в этом аттрибуте браться мусор в виде пустых строк и массивов?
+      # если такой возможности нет, то а) compact б) user_ids === approvers_ids
       self.user_ids = approver_ids
     end
   end

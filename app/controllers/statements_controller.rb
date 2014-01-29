@@ -1,6 +1,7 @@
 class StatementsController < ApplicationController
   helper_method :sort_column, :sort_direction
-  
+  #TODO переписать устаревшие нотации ActiveRecord
+
   def index
     current_user_id = current_user.id
     organization = current_user.organization_id
@@ -181,6 +182,9 @@ class StatementsController < ApplicationController
     @statement = Statement.find(params[:id])
     @writ = Document.find(@statement.document_id)
     @task_list = @statement.build_task_list.with_empty_tasks
+    # TODO из модели выносим метод
+    # @task_list = @statement.build_task_list
+    # @task_list.tasks.build
   end
   
   def refuse
