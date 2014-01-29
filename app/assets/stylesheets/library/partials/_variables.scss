@@ -671,3 +671,6 @@ $container-md:                 $container-desktop !default;
 // Large screen / wide desktop
 $container-large-desktop:      ((1140px + $grid-gutter-width)) !default;
 $container-lg:                 $container-large-desktop !default;
+
+
+$sidebar-width-closed:          70px !default;

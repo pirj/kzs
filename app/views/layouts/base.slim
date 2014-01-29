@@ -9,15 +9,14 @@ html
     = csrf_meta_tags
     = yield(:head)
   body
-    div
-      - unless controller?('devise/sessions') || controller?('dashboard')
-        #sidebar
-          = render 'shared/left'
-      .page
-        - if notice
-          .alert.alert-success= notice
-        - if alert
-          .alert.alert-error= alert
-        .container
-          = yield
+    - unless controller?('devise/sessions') || controller?('dashboard')
+      #sidebar
+        = render 'shared/left'
+    .page
+      - if notice
+        .alert.alert-success= notice
+      - if alert
+        .alert.alert-error= alert
+      .container
+        = yield
 

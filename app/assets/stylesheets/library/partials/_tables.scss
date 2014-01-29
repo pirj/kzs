@@ -18,7 +18,18 @@ th {
   width: 100%;
   margin-bottom: $line-height-computed;
 
+  &.m-table-append{
+    .tr-hovered{
+      td{
+        border-top: none;
+      }
+    }
+  }
+
   .tr-hovered{
+    background: $table-bg-hover;
+  }
+  .tr-slim{
     background: $table-bg-hover;
   }
 

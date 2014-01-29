@@ -10,7 +10,7 @@
     <div class="col-sm-6">
       <div class="dropdown header">
         <h1 data-toggle="dropdown" class="dropdown-toggle">
-          <a href="#" >Заголовок с dropdown
+          <a href="#">Заголовок с dropdown
             <span class="caret"></span>
           </a>
         </h1>
@@ -39,7 +39,7 @@
       <li><a href="#">подпункт заголовка 3</a></li>
     </ul>
   </div>
-  }%></pre>
+  } %></pre>
 </div>
 
 
@@ -91,7 +91,7 @@
       <li>
         <div class="dropdown header">
           <h1 data-toggle="dropdown" class="dropdown-toggle">
-            <a href="#" >Заголовок с dropdown
+            <a href="#">Заголовок с dropdown
               <span class="caret"></span>
             </a>
           </h1>
@@ -123,8 +123,49 @@
 
   </div>
 </div>
+
+
 <div class="highlight">
-  <pre class="prettyprint lang-html"><%= html_escape %q{
+
+  <ul class="nav nav-pills">
+    <li><a href="#headers-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#headers-html" data-toggle="tab">html</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane" id="headers-slim">
+       <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
+.navbar
+  ul.nav.navbar-nav
+    li
+      a.btn.btn-default href="#"
+        span.fa.fa-arrow-left
+        span назад
+    li
+      .dropdown.header
+        h1.dropdown-toggle data-toggle="dropdown"
+          a href="#"
+            | Заголовок с dropdown
+            span.caret
+      ul.dropdown-menu role="menu"
+        li
+          a href="#"
+        li
+          a href="#"
+        li
+          a href="#"
+
+  ul.nav.navbar-nav.navbar-right
+    li
+      a.link-muted.btn-divide-by-word.text-right.btn-no-hover
+        span Иван
+        span Иванович
+    li
+      a.btn.btn-default.btn-icon href="#"
+        span.fa.fa-sign-out
+        }%></pre>
+    </div>
+    <div class="tab-pane" id="headers-html">
+       <pre class="prettyprint lang-html"><%= html_escape %q{
   <div class="navbar">
     <ul class="nav navbar-nav">
       <li><a href="#" class="btn btn-default">
@@ -166,7 +207,11 @@
     </ul>
 
   </div>
-  }%></pre>
+  } %></pre>
+    </div>
+  </div>
+
+
 </div>
 
 <%= render 'library/headers/tab_menu' %>

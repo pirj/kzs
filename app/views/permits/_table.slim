@@ -1,0 +1,31 @@
+table.table.m-table-append.js-row-clickable
+  thead
+    tr
+      th
+        input type="checkbox"
+      th Номер
+      th Субъект
+      th =sortable "permit_type", "Тип"
+      th =sortable "start_date", "Начало"
+      th =sortable "expiration_date", "Конец"
+      th =sortable_status
+
+  tbody
+    -@permits.each do |permit|
+      tr data-id=permit.id
+        td
+          input type='checkbox'
+        td
+          span class='extra' =permit.id
+        td
+          -case permit.permit_type
+            =when 'vehicle'
+              | auto
+            =when 'daily'
+              | daily
+            =when 'user'
+              | user
+/          -if permit.permit_type == "vehicle"
+          span class='extra'
+
+          span class='muted'
