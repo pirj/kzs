@@ -28,7 +28,8 @@ namespace :csv do
     csv_file_path = 'db/car_brands.csv'
     CSV.foreach(csv_file_path) do |row|
       row = CarBrand.create!({
-        :title => row[0]      
+        :title => row[0],   
+        :brand_type => row[1],       
       })
       puts "Car brands imported!"
     end
