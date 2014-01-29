@@ -4,5 +4,5 @@ ul.nav.navbar-nav.navbar-right
       = content_tag(:span, current_user.first_name)+\
         content_tag(:span, current_user.last_name)
   li
-    = link_to destroy_user_session_path, class: 'btn btn-default btn-icon' do
+    = link_to destroy_user_session_path, class: 'btn btn-default btn-icon', method: :delete do
       = content_tag :span, nil, class: 'fa fa-sign-out'
