@@ -16,16 +16,18 @@ table.table.m-table-append.js-row-clickable
         td
           input type='checkbox'
         td
-          span class='extra' =permit.id
+          span class='extra' = permit.id
         td
           -case permit.permit_type
-            =when 'vehicle'
-              | auto
-            =when 'daily'
+            -when 'vehicle'
+              =link_to permit
+                span class='extra'
+                  = permit.vehicle.brand
+                  = permit.vehicle.model
+                span class='muted'
+                  = permit_auto_number(permit)
+            -when 'daily'
               | daily
-            =when 'user'
+            -when 'user'
               | user
-/          -if permit.permit_type == "vehicle"
-          span class='extra'
-
-          span class='muted'
+            -else
