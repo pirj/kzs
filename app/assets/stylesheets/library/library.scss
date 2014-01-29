@@ -7,10 +7,23 @@
 }
 
 .lib-menu{
+  padding: 5px;
   background: #efefef;
 
-  &, > ul { @extend .list-unstyled }
-  > ul {margin-left: 15px;}
+  ul {
+    @extend .list-unstyled;
+    margin-bottom: 20px;
+
+    > li > a{
+      display: inline-block;
+      padding-bottom: 5px;
+      line-height: 1;
+    }
+
+    ul {margin-left: 15px;}
+  }
+
+  // submenu
 
   font-size: 12px;
 
