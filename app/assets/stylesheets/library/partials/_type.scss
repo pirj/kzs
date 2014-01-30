@@ -39,8 +39,8 @@ cite    { font-style: normal; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: $headings-font-family;
-  font-weight: $headings-font-weight;
+  font-weight: normal;
+  font-family: $font-size-base;
   line-height: $headings-line-height;
   color: $headings-color;
 
@@ -52,13 +52,18 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
-h1{
+h1, .h1{
   margin-top: $padding-base-vertical*3;
   margin-bottom: $padding-base-vertical;
 }
 
-h2,
-h3 {
+h1, h2,
+.h1, .h2{
+  font-family: $headings-font-family;
+}
+
+h2, .h2
+h3, .h3 {
   margin-top: $line-height-computed;
   margin-bottom: ($line-height-computed / 2);
 
