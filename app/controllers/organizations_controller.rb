@@ -8,8 +8,9 @@ class OrganizationsController < ApplicationController
 
 
   def show
-    @organization = Organizations::ShowDecorator.decorate(Organization.find(params[:id]))
-    @users = User.for_organization(@organization.id)
+    organization = Organization.find(params[:id])
+    @users = User.for_organization(organization.id)
+    @organization = Organizations::ShowDecorator.decorate(organization)
   end
 
 
@@ -27,8 +28,9 @@ class OrganizationsController < ApplicationController
 
 
   def edit
-    @organization = OrganizationDecorator.decorate(Organization.find(params[:id]))
-    @users = @users = User.for_organization(@organization.id)
+    organization = Organization.find(params[:id])
+    @users = @users = User.for_organization(organization.id)
+    @organization = OrganizationDecorator.decorate(organization)
   end
 
 
