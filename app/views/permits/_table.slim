@@ -55,7 +55,7 @@ table.table.m-table-append.js-row-clickable
       tr.more-info.js-more-info.tr-hovered data-id=permit.id
         td colspan='2'
         td colspan='2'
-          a.btn.btn-default href="/permits/<%= permit.id %>" Открыть
+          a.btn.btn-default.js-open href="/permits/#{permit.id}" Открыть
         td colspan='2'
           - if permit.permit_type == 'daily'
             | Разовый пропуск
@@ -63,7 +63,7 @@ table.table.m-table-append.js-row-clickable
             | Общий срок действия:
             = permit_remaining(permit)
             br
-            | Оставшийся срок действия: =
+            | Оставшийся срок действия:
             = permit_progress(permit)
         td colspan='1'
 

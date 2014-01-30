@@ -23,6 +23,10 @@ $ ->
     no_results_text: "Ничего не найдено."
   )
 
+  # button
+  $('.js-open').on "click", ->
+    document.location = $(this).attr "href"
+
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
     e.stopPropagation()
