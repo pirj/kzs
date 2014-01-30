@@ -155,7 +155,7 @@ $(document).ready(function(){
     var ids= []
     $('.document_operation').click(function() {
         var id = $(this).closest("tr").attr("id");
-        $('.dropdown:last').empty();
+        $('li.dropdown:last').empty();
         if ($(this).prop("checked")) {
             ids.push(id);
             console.log(ids);
