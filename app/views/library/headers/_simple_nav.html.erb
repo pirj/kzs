@@ -2,31 +2,32 @@
   Вариант шапки страницы c заголовком
 </h5>
 <div class="bs-example">
-  <div class="navbar">
-    <ul class="nav navbar-nav">
-      <li><a href="#" class="btn btn-default">
-        <span class="fa fa-arrow-left"></span>
-        <span>назад</span>
-      </a></li>
 
-      <li><h1>Наивысший Заголовок</h1></li>
-    </ul>
+</div>
 
-    <form class="navbar-form navbar-left">
-      <div class="input-group">
-        <input type="search" class="form-control js-input-with-icon" placeholder="поиск по сущности">
-        <span class="input-group-icon search"></span>
-      </div>
-    </form>
+<div class="highlight">
+  <ul class="nav nav-pills lib-control-tabs">
+    <li><a href="#simple-nav-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#simple-nav-html" data-toggle="tab">html</a></li>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane" id="simple-nav-slim">
+      <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
+  = content_for :page_header do
+    = header_back_btn resource_path
+    = header_title do
+      h1
+        | Организация, Тип
+      .text-help
+        | (Режим редактирования)
+      }%></pre>
+    </div>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a class="link-muted btn-divide-by-word text-right btn-no-hover">Иван Иванович</a>
-      </li>
-      <li>
-        <a href='#' class="btn btn-default btn-icon"><span class="fa fa-sign-out"></span></a>
-      </li>
-    </ul>
+    <div class="tab-pane" id="simple-nav-html">
+      <pre class="prettyprint linenums lang-html"><%= html_escape %q{
 
+      }%></pre>
+    </div>
   </div>
 </div>
