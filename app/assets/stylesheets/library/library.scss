@@ -7,20 +7,39 @@
 }
 
 .lib-menu{
-  padding: 5px;
-  background: #efefef;
+  $bg: #f2f2f2;
+  $link-color: #555;
+  $offset: 5px;
+  background: $bg;
+  margin-top: 20px;
 
+  // first level of menu
   ul {
     @extend .list-unstyled;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 
     > li > a{
-      display: inline-block;
-      padding-bottom: 5px;
+      padding: $offset;
+      display: block;
       line-height: 1;
+      color: $link-color;
+
+      &, &:hover, &:active, &:focus, &:visited{
+        text-decoration: none;
+        color: darken($link-color, 15%);
+      }
+
+      &:hover, &:active, &:focus{
+        background: darken($bg, 7%);
+      }
     }
 
-    ul {margin-left: 15px;}
+    // second level of menu
+    ul{
+      > li > a{
+        padding-left: 3*$offset;
+      }
+    }
   }
 
   font-size: 12px;
