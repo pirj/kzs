@@ -2,8 +2,9 @@ class OrganizationsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction
   
-  def index 
-    @organizations = OrganizationsDecorator.decorate( Organization.order(sort_column + " " + sort_direction) )
+  def index
+    collection = Organization.order(sort_column + " " + sort_direction)
+    @organizations = Organizations::ListDecorator.decorate( collection, with: Organizations::BaseDecorator )
   end
 
 
@@ -23,14 +24,14 @@ class OrganizationsController < ApplicationController
 
 
   def new
-    @organization = OrganizationDecorator.decorate(Organization.new)
+    @organization = Organizations::EditDecorator.decorate(Organization.new)
   end
 
 
   def edit
     organization = Organization.find(params[:id])
     @users = @users = User.for_organization(organization.id)
-    @organization = OrganizationDecorator.decorate(organization)
+    @organization = Organizations::EditDecorator.decorate(organization)
   end
 
 

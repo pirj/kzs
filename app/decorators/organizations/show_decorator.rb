@@ -1,14 +1,14 @@
 # coding: utf-8
 module Organizations
-  class ShowDecorator < Draper::Decorator
+  class ShowDecorator < Organizations::BaseDecorator
+    decorates :organization
     delegate_all
 
     ATTACH_ATTR = [:certificate_of_tax_registration, :articles_of_organization, :creation_resolution, :egrul_excerpt]
     USER_ATTR =   [:director, :account]
     DATE_ATTR =   [:date_of_registration, :creation_resolution_date, :egrul_registration_date]
 
-    # render Model methods in html
-    # need to render only attr with saved information
+    # render Model methods as html
     def method_missing(method, *args)
       unless object.try(method, *args).to_s.empty?
         case method.to_sym
@@ -49,7 +49,7 @@ module Organizations
 
     # render saved date
     def date_info(method, *args)
-      date = DateFormatter.new(object.public_send(method, *args))
+      date = DateFormatter.new(object.public_send(method, *args).try(:to_date))
       label(method) +
       h.content_tag( :div, date, class: 'text' )
     end

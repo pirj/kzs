@@ -1,12 +1,10 @@
-.navbar
-  ul.nav.navbar-nav
-    li
-      h1 Все контрагенты
-  form.navbar-form.navbar-left
-    .input-group
-      input.form-control.js-input-with-icon placeholder="поиск по контрагентам" type="search"
-      span.input-group-icon.search
-  = render 'application/header_user_bar'
+= content_for :page_header do
+  = header_back_btn organization_path(@organization)
+  = header_title do
+    h1 = @organization.full_title
+    .text-help
+      | (Режим редактирования)
+
 
 
 .row

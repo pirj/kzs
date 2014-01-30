@@ -10,7 +10,7 @@ table.table.js-row-clickable
     - collection.each do |res|
       / simple row with short information
       tr data-id = res.id
-        td = link_to res.name, res.path
+        td = link_to res.full_title, res.path
         td = res.director_name
         td = res.users_count
         td = res.phone

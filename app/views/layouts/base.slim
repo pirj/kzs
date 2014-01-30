@@ -18,5 +18,12 @@ html
       - if alert
         .alert.alert-error= alert
       .container
+        / ===============================================================
+        .navbar
+          ul.nav.navbar-nav
+            = yield :page_header
+          = yield :page_header_search
+          = render 'application/header_user_bar'
+        / ===============================================================
         = yield
 
