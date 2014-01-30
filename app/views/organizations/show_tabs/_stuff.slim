@@ -1,8 +1,0 @@
-#stuff.tab-pane.data-grid
-  h1.col-md-12=  "Сотрудники (#{@users.count} #{Russian.p(@users.count, "человек", "человека", "людей")} в САКЭ)"
-  - users.each do |u|
-    .data-row.row.m-inline
-      .data-label.col-md-4 = u.position
-      .data-value.col-md-6 = u.first_name_with_last_name
-
-

@@ -14,5 +14,10 @@
     = render 'tabs'
 
 .row
-  .col-xs-12
+  .tab-content.col-xs-12
     = render 'organizations/show_tabs/main', resource: @organization
+    = render 'organizations/show_tabs/details', resource: @organization
+    = render 'organizations/show_tabs/users', resource: @organization, collection: @users
+    = render 'organizations/show_tabs/licenses', resource: @organization
+
+

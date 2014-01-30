@@ -29,7 +29,7 @@ class Organization < ActiveRecord::Base
 
   TYPEOFOWNERSHIP = ['ООО', 'ИП']
 
-  
+
   def director
     User.find(self.director_id)
   end

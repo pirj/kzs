@@ -1,14 +1,20 @@
 .tab-pane#details
-  .col-sm-offset-4.col-sm-8
-    h2 Реквизиты
-  = f.input :bank_title
-  = f.input :bank_address
-  = f.input :bank_correspondent_account
-  = f.input :bank_bik
-  = f.input :bank_inn
-  = f.input :bank_kpp
-  = f.input :bank_okved
-  = f.input :organization_account
+  .row
+    h2.col-md-12 Реквизиты
+
+  .row
+    - left_params_order = [:bank_title, :bank_address, :bank_correspondent_account, :bank_bik, :bank_inn, :bank_kpp]
+    - right_params_order = [:bank_okved, :organization_account, :legal_address, :actual_address]
+
+    .col-md-5
+      - left_params_order.each do |attr|
+        .form-group
+          = resource.public_send(attr)
+
+    .col-md-5.col-md-offset-1
+      - right_params_order.each do |attr|
+        .form-group
+          = resource.public_send(attr)
 
 
 

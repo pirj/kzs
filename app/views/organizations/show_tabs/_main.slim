@@ -1,13 +1,16 @@
-.tab-pane.data-grid.active#main
-  h1.col-md-12 Общие данные
-  - left_params_order = [:title, :short_title, :type_of_ownership, :date_of_registration, :tax_authority_that_registered, :certificate_of_tax_registration, :creation_resolution_date, :creation_resolution, :articles_of_organization]
-  - right_params_order = [:director, :account, :inn, :kpp, :ogrn, :bik, :egrul_registration_date, :egrul_excerpt]
-  .col-md-5
-    - left_params_order.each do |attr|
-      .form-group
-        = resource.public_send(attr)
+.tab-pane.active#main
+  .row
+    h2.col-md-12 Общие данные
 
-  .col-md-5.col-md-offset-1
-    - right_params_order.each do |attr|
-      .form-group
-        = resource.public_send(attr)
+  .row
+    - left_params_order = [:title, :short_title, :type_of_ownership, :date_of_registration, :tax_authority_that_registered, :certificate_of_tax_registration, :creation_resolution_date, :creation_resolution, :articles_of_organization]
+    - right_params_order = [:director, :account, :inn, :kpp, :ogrn, :bik, :egrul_registration_date, :egrul_excerpt]
+    .col-md-5
+      - left_params_order.each do |attr|
+        .form-group
+          = resource.public_send(attr)
+
+    .col-md-5.col-md-offset-1
+      - right_params_order.each do |attr|
+        .form-group
+          = resource.public_send(attr)
