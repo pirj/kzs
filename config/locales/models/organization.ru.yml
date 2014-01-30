@@ -1,0 +1,49 @@
+ru:
+  activerecord:
+    models:
+      organization:
+        one: "Организация"
+        other: "Организации"
+        many: "Организации"
+        few: "Организации"
+
+    attributes:
+      organization:
+        title: "Полное название"
+        short_title: "Краткое название"
+        inn: "ИНН"
+        admin_id: "Администратор"
+        admin: "Администратор"
+        director_id: Директор
+        director: Директор
+        account_id: Бухгалтер
+        account: Бухгалтер
+        parent_id: "Руководящая организация"
+        logo: "Логотип"
+        address: "Адрес"
+        phone: "Телефон"
+        mail: "Электронная почта"
+        director_id: "Генеральный директор"
+        type_of_ownership: "Форма собственности"
+        legal_address: "Юридический адрес"
+        actual_address: "Физический адрес"
+        date_of_registration: "Дата постановки на учет в налоговом органе"
+        tax_authority_that_registered: "Налоговый орган, принявший на учет"
+        certificate_of_tax_registration: "Скан свидетельства о постановке на учет в налоговом органе"
+        creation_resolution_date: "Дата решения о создании организации"
+        creation_resolution: "Скан решения о создании"
+        articles_of_organization: "Скан Устава организации"
+        accountant_id: "Главный бухгалтер"
+        kpp: "КПП"
+        bik: "БИК"
+        ogrn: "ОГРН"
+        egrul_registration_date: "Дата постановки в ЕГРЮЛ"
+        egrul_excerpt: "Скан выписки из ЕГРЮЛ"
+        bank_title: "Полное наименование банка"
+        bank_address: "Юридический адрес банка"
+        bank_correspondent_account: "Корр. счет банка"
+        bank_bik: "БИК банка"
+        bank_inn: "ИНН банка"
+        bank_kpp: "КПП банка"
+        bank_okved: "ОКВЭД банка"
+        organization_account: "Расчетный счет организации"
