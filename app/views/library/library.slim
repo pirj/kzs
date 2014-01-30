@@ -9,15 +9,20 @@
 /       li
 /         a href='#partial_name-subpartial_name'
 /
-.col-sm-12
-  h1 Библиотека стилей
-  .row= render 'headers'
-  .row= render 'buttons'
-  .row= render 'dropdowns'
-  .row= render 'links'
-  .row= render 'statuses'
-  .row= render 'tables'
-  .row= render 'form_elements'
-  .row= render 'forms'
+.col-xs-12
+  .navbar
+    ul.nav.navbar-nav
+      li.brand
+        h1 Библиотека стилей
+
+
+  .row.lib-section.col-xs-12= render 'headers'
+  .row.lib-section.col-xs-12= render 'buttons'
+  .row.lib-section.col-xs-12= render 'dropdowns'
+  .row.lib-section.col-xs-12= render 'links'
+  .row.lib-section.col-xs-12= render 'statuses'
+  .row.lib-section.col-xs-12= render 'tables'
+  .row.lib-section.col-xs-12= render 'form_elements'
+  .row.lib-section.col-xs-12= render 'forms'
 
 

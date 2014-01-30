@@ -53,9 +53,12 @@
     display: inline-block;
     vertical-align: middle;
 
+    // page title style
     &.brand{
       margin-left: 2*$navbar-padding-horizontal ;
+      &:first-child{margin-left: 0;} // if first in menu, than level by left edge
     }
+
 
     > {
       h1{ margin: auto; }

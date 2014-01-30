@@ -23,8 +23,9 @@
     ul {margin-left: 15px;}
   }
 
-  // submenu
-
   font-size: 12px;
+}
 
+.lib-section + .lib-section{
+  margin-top: 30px;
 }
