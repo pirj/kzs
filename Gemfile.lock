@@ -200,6 +200,7 @@ GEM
     request_store (1.0.5)
     responders (1.0.0)
       railties (>= 3.2, < 5)
+    rmagick (2.13.1)
     ruby-rc4 (0.1.5)
     russian (0.6.0)
       i18n (>= 0.5.0)
@@ -277,6 +278,7 @@ DEPENDENCIES
   populator
   prawn
   rails (= 3.2.13)
+  rmagick
   russian (~> 0.6.0)
   rvm-capistrano
   sass-rails (~> 3.2.3)

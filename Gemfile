@@ -39,6 +39,7 @@ end
 
 gem 'jquery-rails', '~> 2.3.0'
 gem 'prawn'
+gem 'rmagick', :require => 'RMagick'
 
 gem 'populator'
 gem 'faker'

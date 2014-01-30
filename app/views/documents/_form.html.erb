@@ -107,7 +107,7 @@
             <label class="checkbox">
               <%= check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document) %>
               <b><%= document.title %></b> ||
-              <%= if document.document_type.present? then I18n.t document.document_type end %> ||
+              <%= if document.document_type.present? then t(document.document_type) end     %> ||
               <%= Russian::strftime(document.created_at, "%d %B %Y %H:%M") %>
             </label>
         <% end %>

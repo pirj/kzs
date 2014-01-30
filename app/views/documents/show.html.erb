@@ -138,8 +138,8 @@
   <div class="col-md-6">
 
     <div class="view-main-doc">
-      <iframe style="width: 400px; height: 520px;" src="/documents/<%= @document.id %>.pdf"/>
-      </iframe>
+      <%= pdf_to_png(@document, 400, 520) %>
+
 
     </div>
 
