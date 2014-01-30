@@ -6,11 +6,11 @@ html
     = javascript_include_tag 'library'
     = csrf_meta_tags
     = yield(:head)
-  body
+  body data-spy="scroll" data-target=".js-library-menu"
     .container
       .row
         .col-sm-2
-          .js-library-menu.lib-menu  data-spy='affix' data-offset-top="60" data-offset-bottom="200"
+          .js-library-menu.lib-menu.nav data-spy='affix' data-offset-top="60" data-offset-bottom="200"
         .col-sm-10
           .row
             = yield
