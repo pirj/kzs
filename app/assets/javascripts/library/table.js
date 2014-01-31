@@ -1,3 +1,4 @@
+// TODO: @tagir need refactor. This code must have a default modificator value instead of two modificators.
 /**
  * Created by shine on 28.01.14.
  */
