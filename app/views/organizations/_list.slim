@@ -1,5 +1,5 @@
 - attrs = [:name, :director, :users_count, :phone]
-table.table.js-row-clickable
+table.table.js-row-clickable.m-table-replacement
   thead
     tr
       - attrs.each do |attr|
@@ -18,13 +18,13 @@ table.table.js-row-clickable
       / row with extra information
       tr data-id = res.id class = 'more-info js-more-info'
         td colspan = attrs.count
-          .col-sm-7
+          .col-sm-8
             .form-horizontal
               .form-group
                 .col-sm-3.control-label контрагент
                 .col-sm-9
                   h2 = link_to res.title, res.path
-                  h4.link-muted = "#{res.users_count} человек в штате"
+                  h4.btn-link-muted.btn-no-hover = "#{res.users_count} человек в штате"
 
 
               .form-group
@@ -48,5 +48,5 @@ table.table.js-row-clickable
                 = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default'
                 = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
 
-          .col-sm-5
+          .col-sm-4
             h2.text-right = res.phone
