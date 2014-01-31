@@ -110,6 +110,14 @@
       <%= f.file_field :egrul_excerpt, class: 'filestyle col-md-4', data: {input: false} %>
       <!--<input type="file" class="filestyle col-md-2" data-input="false"/>-->
     </div>
+    <div class="form-item"><span class="form-label col-md-5">Логотип:</span>
+      <% if @organization.logo.file? %>
+          <%= image_tag @organization.logo.url(:medium) %>
+          <%= link_to "Скачать", @organization.logo.url(:original, false), {:class => "download-link"} %>
+      <% end %>
+      <%= f.file_field :egrul_excerpt, class: 'filestyle col-md-4', data: {input: false} %>
+      <!--<input type="file" class="filestyle col-md-2" data-input="false"/>-->
+    </div>
     <ul class="nav nav-pills">
       <li class="col-md-offset-5">
         <!--<input class="btn btn-default btn-primary btn-sm" name="" type="submit" value="Сохранить">-->

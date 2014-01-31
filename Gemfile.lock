@@ -251,7 +251,10 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    wicked_pdf (0.9.10)
+      rails
     will_paginate (3.0.5)
+    wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
   ruby
@@ -289,4 +292,6 @@ DEPENDENCIES
   thin
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
+  wicked_pdf
   will_paginate
+  wkhtmltopdf-binary

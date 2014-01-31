@@ -13,7 +13,9 @@ class OrganizationsController < ApplicationController
   
   def show
     @organization = Organization.find(params[:id])
+    @licenses = @organization.licenses
     @users = User.where(:organization_id => @organization.id)
+    @license = License.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,10 +23,18 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def details
+    @organization = Organization.find(params[:id])
+    respond_to do |format|
+      format.pdf { render  :pdf => "file.pdf", :template => 'organizations/details' }
+    end
+  end
+
   # GET /organizations/new
   # GET /organizations/new.json
   def new
     @organization = Organization.new
+    @users = User.where(:organization_id => @organization.id)
 
     respond_to do |format|
       format.html # new.html.erb

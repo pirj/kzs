@@ -44,6 +44,8 @@ gem 'rmagick', :require => 'RMagick'
 gem 'populator'
 gem 'faker'
 gem 'factory_girl_rails'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 
 group :production do
