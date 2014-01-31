@@ -25,6 +25,12 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organizations::EditDecorator.decorate(Organization.new)
+    # TODO: @neodelf
+    # this row
+    @organization.licenses.build
+    # instead of
+    # @license = License.new
+    # @organization.licenses << @license
   end
 
 

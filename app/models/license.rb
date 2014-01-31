@@ -1,3 +1,6 @@
+# coding: utf-8
+# TODO: @neodelf
+# where is rspec???
 class License < ActiveRecord::Base
   attr_accessible :typeof, :number, :issuance, :deadline, :issued_by, :image, :organization_id
 
