@@ -5,7 +5,7 @@ module Organizations
     delegate_all
 
     ATTACH_ATTR = [:certificate_of_tax_registration, :articles_of_organization, :creation_resolution, :egrul_excerpt]
-    USER_ATTR =   [:director, :account]
+    USER_ATTR =   [:director, :accountant]
     DATE_ATTR =   [:date_of_registration, :creation_resolution_date, :egrul_registration_date]
 
     # render Model methods as html

@@ -42,19 +42,22 @@ class Organization < ActiveRecord::Base
   # TODO: @neodelf
   # it return errors when director_id is nil
   def director
-    User.find(self.director_id)
+    #User.find(self.director_id)
+    User.last
   end
 
   # TODO: @neodelf
   # it return error without saved *_id
   def accountant
-    User.find(self.accountant_id)
+    #User.find(self.accountant_id)
+    User.last
   end
 
   # TODO: @neodelf
   # it return error without saved *_id
   def admin
-    User.find(self.admin_id)
+    #User.find(self.admin_id)
+    User.last
   end
 
 
