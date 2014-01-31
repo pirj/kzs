@@ -1,0 +1,37 @@
+- a = 'user'
+
+.navbar
+  ul.nav.navbar-nav
+    li
+      = backButton
+    li
+      h1
+        - case a#@permit.permit_type
+          - when 'user'
+            |Новый пропуск на сотрудника №#{}
+          - when 'vehicle'
+            |Новый пропуск на ТС №#{}
+          - when 'daily'
+            |Разовый пропуск №#{}
+          - else
+
+
+
+  = render 'application/header_user_bar'
+
+
+
+- if @permit.errors.any?
+  h4 Пожалуйста, исправьте некорректные поля:
+  ul
+    = @permit.errors.full_messages.each do |msg|
+      li #{msg}
+
+= form_for(@permit, :html => {:class => "form new-doc row-fuild", :name => 'newPermitForm'}) do |f|
+  = render 'permit_form_fields', f: f
+  ul.nav.nav-pills
+    li
+      = f.submit 'Создать заявку', :class => 'btn btn-primary'
+
+    li
+      = link_to "Отмена", :back, :class => 'btn btn-primary'
