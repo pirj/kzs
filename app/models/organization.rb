@@ -27,6 +27,18 @@ class Organization < ActiveRecord::Base
   has_many :users
   has_many :licenses
 
+  def director
+    User.find(self.director_id)
+  end
+
+  def accountant
+    User.find(self.accountant_id)
+  end
+
+  def admin
+    User.find(self.admin_id)
+  end
+
   TYPEOFOWNERSHIP = ['ООО', 'ИП']
   
   def users_statement
