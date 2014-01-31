@@ -19,7 +19,15 @@ $(document).ready(function(){
             }
         }
 
+        $(document).on('click', '.js-row-clickable tr a, .js-row-clickable tr input', function(e) {
+            e.stopPropagation();
+
+            // return false;
+        })
+
+
         $(document).on('click', '.js-row-clickable tr', function(e) {
+
 
             var $elem, $target, id;
             e.preventDefault();

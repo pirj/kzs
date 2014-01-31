@@ -88,7 +88,9 @@
             <span class="dropdown-arr"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+
             <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+
             <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
             <li><a href="#" class="icon-ok">Написать соообщение</a></li>
             <li><a href="#" class="icon-clock">Личная страница</a></li>
@@ -106,13 +108,17 @@
             <span class="dropdown-arr"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+
             <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+
             <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
             <li><a href="#" class="icon-ok">Написать соообщение</a></li>
             <li><a href="#" class="icon-clock">Личная страница</a></li>
             <li><a href="#" class="icon-block-1">Отмена</a></li>
           </ul>
-          </span>
+
+            </span>
+
         </div>
       </li>
       <% unless @document.document_attachments.blank? %>

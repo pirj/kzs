@@ -1,11 +1,16 @@
 # coding: utf-8
 module ApplicationHelper
 
-  def title
+  def pageTitle
     t(controller.controller_name)
-
   end
-  
+
+  def backButton
+    link_to(:back, :class => "btn btn-default") do
+      content_tag(:span, '',class: "fa fa-arrow-left") + content_tag(:span, "Назад")
+    end
+  end
+
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -24,10 +29,6 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields2 btn-primary btn dropdown icon-plus", data: {id: id, fields: fields.gsub("\n", "")})
   end
-
-
-
-
 
   def controller?(*controller)
      controller.include?(params[:controller])
@@ -58,6 +59,5 @@ module ApplicationHelper
       nil
     end
   end
-   
-  
+
 end
