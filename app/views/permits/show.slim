@@ -1,15 +1,24 @@
-.navbar
-  ul.nav.navbar-nav
-    li
-      = backButton
-    li
-      h1 Все пропуска
-  = render 'application/header_user_bar'
-= render 'permits/panel'
+= content_for :page_header do
+  = header_back_btn permits_path
+  = header_title do
+    - case @permit.permit_type
+      - when 'user'
+        h1 Пропуск на пеший проход
+      - when 'vehicle'
+        h1 Пропуск на транспортное средство
+      - when 'daily'
+        h1 Пропуск на транспортное средство
+      - else
+
+
+
+
+
+
 - case @permit.permit_type
 
   - when 'user'
-    h2 Пропуск на пеший проход
+    /h2 Пропуск на пеший проход
 
     div Номер: #{@permit.number}
 
@@ -19,7 +28,7 @@
 
   - when 'vehicle'
 
-    h2 Пропуск на транспортное средство
+    /h2 Пропуск на транспортное средство
 
     div Номер: #{@permit.id}
     div Организация: #{organization_full_title(@permit.organization_id)}
@@ -47,7 +56,7 @@
 
   - when 'daily'
 
-    h2 Разовый пропуск
+    /h2 Разовый пропуск
 
     div Имя: #{ @daily_pass.first_name }<br>
     div Фамилия: #{ @daily_pass.last_name }<br>

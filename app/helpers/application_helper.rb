@@ -5,11 +5,6 @@ module ApplicationHelper
     t(controller.controller_name)
   end
 
-  def backButton
-    link_to(:back, :class => "btn btn-default") do
-      content_tag(:span, '',class: "fa fa-arrow-left") + content_tag(:span, "Назад")
-    end
-  end
 
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new

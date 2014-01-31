@@ -1,24 +1,8 @@
-- a = 'user'
 
-.navbar
-  ul.nav.navbar-nav
-    li
-      = backButton
-    li
-      h1
-        - case a#@permit.permit_type
-          - when 'user'
-            |Новый пропуск на сотрудника №#{}
-          - when 'vehicle'
-            |Новый пропуск на ТС №#{}
-          - when 'daily'
-            |Разовый пропуск №#{}
-          - else
-
-
-
-  = render 'application/header_user_bar'
-
+= content_for :page_header do
+  = header_back_btn permits_path
+  = header_title do
+    h1 Новый пропуск
 
 
 - if @permit.errors.any?

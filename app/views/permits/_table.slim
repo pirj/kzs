@@ -33,6 +33,7 @@ table.table.m-table-append.js-row-clickable
             - when 'user'
               =link_to permit
                 = permit.user.try(:last_name)
+                |&nbsp
                 = permit.user.try(:first_name)
               span class='muted'
                 = permit.user.try(:position)
