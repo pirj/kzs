@@ -1,5 +1,5 @@
 class RenameTypeToTypeOfInLicenses < ActiveRecord::Migration
   def up
-    rename_column :licenses, :typeof, :type_of
+    add_column :licenses, :type_of, :string
   end
 end
