@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   config.batch_actions = false
   filter :username
-  filter :organization_id, :as => :check_boxes, :collection => Organization.all, :include_blank => false
+  filter :organization_id, :as => :check_boxes, :collection => Organization.scoped, :include_blank => false
   menu :priority => 1
 
    index do
@@ -29,7 +29,7 @@ ActiveAdmin.register User do
        f.input :first_name
        f.input :middle_name
        f.input :last_name
-       f.input :id_type, :as => :select, :collection => UserDocumentType.all, :include_blank => false
+       f.input :id_type, :as => :select, :collection => UserDocumentType.scoped, :include_blank => false
        f.input :id_sn
        f.input :id_issue_date
        f.input :id_issuer
@@ -44,7 +44,7 @@ ActiveAdmin.register User do
        f.input :avatar
        f.input :email
        if current_user.sys_user
-         f.input :organization_id, :as => :select, :collection => Organization.all
+         f.input :organization_id, :as => :select, :collection => Organization.scoped
        else
          f.input :organization_id, :as => :hidden, :value => current_user.organization_id
        end

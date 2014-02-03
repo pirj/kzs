@@ -19,12 +19,12 @@ ActiveAdmin.register Organization do
          f.input :type_of_ownership
          f.input :legal_address
          f.input :actual_address
-         f.input :director_id, :as => :select, :collection => User.all.map { |u| [ u.first_name_with_last_name, u.id ] }
+         f.input :director_id, :as => :select, :collection => User.scoped.map { |u| [ u.first_name_with_last_name, u.id ] }
        end
 
        f.inputs t('main_info') do
-         f.input :admin_id, :as => :select, :collection => User.all
-         f.input :parent_id, :as => :select, :collection => Organization.all
+         f.input :admin_id, :as => :select, :collection => User.scoped
+         f.input :parent_id, :as => :select, :collection => Organization.scoped
          f.input :logo, :as => :file
          f.input :phone
          f.input :mail
@@ -34,7 +34,7 @@ ActiveAdmin.register Organization do
          f.input :creation_resolution_date
          f.input :creation_resolution, :as => :file
          f.input :articles_of_organization, :as => :file
-         f.input :accountant_id, :as => :select, :collection => User.all.map { |u| [ u.first_name_with_last_name, u.id ] }
+         f.input :accountant_id, :as => :select, :collection => User.scoped.map { |u| [ u.first_name_with_last_name, u.id ] }
          f.input :inn
          f.input :kpp
          f.input :bik
