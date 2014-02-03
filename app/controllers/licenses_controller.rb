@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class LicensesController < ApplicationController
   # GET /licenses
   # GET /licenses.json
