@@ -3,8 +3,8 @@ ActiveAdmin.register User do
   filter :username
   filter :organization_id, :as => :check_boxes, :collection => Organization.all, :include_blank => false
   menu :priority => 1
-  
-   index do 
+
+   index do
      column :id
      column :username
      column :first_name
@@ -21,7 +21,7 @@ ActiveAdmin.register User do
 
    end
 
-   form do |f|  
+   form do |f|
      f.inputs t('required_fields') do
        f.input :username
        f.input :password
@@ -34,7 +34,7 @@ ActiveAdmin.register User do
        f.input :id_issue_date
        f.input :id_issuer
      end
-     
+
      f.inputs t('properties') do
        f.input :alt_name
        f.input :phone, :as => :string
@@ -79,30 +79,30 @@ ActiveAdmin.register User do
       end
       row :created_at
     end
-      
-     panel t('permissions') do 
-       table_for user.permissions do 
+
+     panel t('permissions') do
+       table_for user.permissions do
          column :title
          column :description
        end
      end
-     
-     panel t('groups') do 
-       table_for user.groups do 
+
+     panel t('groups') do
+       table_for user.groups do
          column :title
        end
      end
-      
+
    end
-   
+
    controller do
-     
+
      def create
        @user = User.new(params[:user])
- 
+
        group_ids = params[:user][:group_ids]
-       permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)      
-       
+       permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)
+
        respond_to do |format|
          if @user.save && @user.permissions << permission_ids
            format.html { redirect_to admin_user_path(@user), notice: t('user_successfully_created') }
@@ -111,25 +111,25 @@ ActiveAdmin.register User do
            format.json { render json: @user.errors, status: :unprocessable_entity }
          end
        end
-     end  
-     
+     end
+
      def update
        @user = User.find(params[:id])
-       
+
        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
            params[:user].delete(:password)
            params[:user].delete(:password_confirmation)
        end
-       
-        
+
+
        group_ids = params[:user][:group_ids]
        permission_ids = Permission.includes(:groups).where("groups.id" => group_ids)
-        
+
        @user.groups.clear
        @user.permissions.clear
        @user.permissions << permission_ids
 
-       
+
        respond_to do |format|
          if @user.update_attributes(params[:user])
 
@@ -141,7 +141,7 @@ ActiveAdmin.register User do
          end
        end
      end
-      
+
    end
-   
+
 end

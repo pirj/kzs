@@ -1,7 +1,7 @@
 ActiveAdmin.register Organization do
 
 
-     index do 
+     index do
        column :id
        column :title
        column :parent_id do |column|
@@ -12,7 +12,7 @@ ActiveAdmin.register Organization do
        default_actions
      end
 
-     form do |f|  
+     form do |f|
        f.inputs t('required_fields') do
          f.input :title
          f.input :short_title
@@ -21,7 +21,7 @@ ActiveAdmin.register Organization do
          f.input :actual_address
          f.input :director_id, :as => :select, :collection => User.all.map { |u| [ u.first_name_with_last_name, u.id ] }
        end
-       
+
        f.inputs t('main_info') do
          f.input :admin_id, :as => :select, :collection => User.all
          f.input :parent_id, :as => :select, :collection => Organization.all
@@ -41,9 +41,9 @@ ActiveAdmin.register Organization do
          f.input :egrul_registration_date
          f.input :egrul_excerpt, :as => :file
        end
-       
-       
-       
+
+
+
        f.inputs t('account_details') do
          f.input :bank_title
          f.input :bank_address
@@ -65,7 +65,7 @@ ActiveAdmin.register Organization do
         row :legal_address
         row :actual_address
         row :director_id
-        
+
         row :inn
         row :admin_id
         row :parent_id
@@ -74,6 +74,6 @@ ActiveAdmin.register Organization do
         end
         row :phone
         row :mail
-      end  
+      end
      end
 end
