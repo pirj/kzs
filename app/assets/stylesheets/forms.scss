@@ -63,9 +63,6 @@
 select.form-control {
   box-shadow: none;
   background: #ededed;
-  &:focus, &:active {
-    border-color:#76d4ce;
-  }
 }
 
 .form-label {

@@ -1,13 +1,15 @@
 <div class="container">
-  <ul class="row top-pannel clearfix">
-    <li class="col-md-8">
-      <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
-      <h1 class="doc_header"><%= @organization.title %><span class="sub-title">(Режим редактирования)</span></h1>
-    </li>
-    <li class="col-md-4 pull-right">
-      <%= render 'shared/user' %>
-    </li>
-  </ul>
+  <div class="fixed-container">
+    <ul class="row top-pannel clearfix">
+      <li class="col-md-8">
+        <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
+        <h1 class="doc_header"><%= @organization.title %><span class="sub-title">(Режим редактирования)</span></h1>
+      </li>
+      <li class="col-md-4 pull-right">
+        <%= render 'shared/user' %>
+      </li>
+    </ul>
+</div>
 <%= form_for(@organization, :html => {:class => "form row-fuild add-list"}) do |f| %>
    <h2 class="h1">1. Общие данные</h2>
     <div class="form-item"><span class="form-label col-md-5">Полное наименование:</span>
