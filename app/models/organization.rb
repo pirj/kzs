@@ -42,15 +42,15 @@ class Organization < ActiveRecord::Base
 
 
   def director
-    User.find(self.director_id) unless self.director_id.nil?
+    User.find(self.director_id) if self.director_id
   end
 
   def accountant
-    User.find(self.accountant_id) unless self.accountant_id.nil?
+    User.find(self.accountant_id) if self.accountant_id
   end
 
   def admin
-    User.find(self.admin_id) unless self.admin_id.nil?
+    User.find(self.admin_id) if self.admin_id
   end
 
 
