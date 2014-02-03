@@ -10,6 +10,10 @@ Kzs::Application.routes.draw do
 
   devise_for :users
 
+  # TODO: просмотреть зациту аплоадов через этот роут.
+  # Пользователи не должны видеть чужих аплоудов.
+  # Пользователи должны пройти контроль на права.
+  # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
   
   match '/documents/batch' => 'documents#batch'

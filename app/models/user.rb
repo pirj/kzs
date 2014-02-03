@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   scope :superuser, -> { where(is_superuser: true) }
+  #TODO: такая запись вернет тот же SQL, но будет, возможно, более читаема
+  # scope :approvers, includes(:user_permissions).where('user_permissions.permission_id'=>1)
   scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
   scope :statement_approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '2'")
   scope :for_organization, lambda {|id=nil| where(organization_id: id) }
