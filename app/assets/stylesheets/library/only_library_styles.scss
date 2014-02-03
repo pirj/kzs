@@ -21,8 +21,11 @@ p{
   $bg: #f2f2f2;
   $link-color: #999;
   $offset: 5px;
+
   background: $bg;
   margin-top: 20px;
+  position: fixed;
+  -webkit-transform: translateZ(0); // fixes strange render fixed div after scrolling.
 
   // first level of menu
   ul {
