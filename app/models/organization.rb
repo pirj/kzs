@@ -31,7 +31,7 @@ class Organization < ActiveRecord::Base
   # TODO: @neodelf
   # true way is put next russian words into locales (I18n)
   # for example in locales/model/organization.ru.yml
-  TYPEOFOWNERSHIP = ['ООО', 'ИП']
+  TYPEOFOWNERSHIP = [t('activerecord.attributes.organization.llc'), t('activerecord.attributes.organization.businessman')]
 
   # TODO: @neodelf
   # where is the nested_attributes for :licenses
