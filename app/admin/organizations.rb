@@ -1,8 +1,5 @@
 ActiveAdmin.register Organization do
-    config.batch_actions = false
-    filter :username
-    config.sort_order = "id_asc"
-    menu :priority => 1
+
 
      index do 
        column :id
