@@ -3,9 +3,8 @@
 <head>
   <title>System page</title>
 
-  <link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "/assets/main/application" %>
+  <%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tags %>
   <%= yield(:head) %>

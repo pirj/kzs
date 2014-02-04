@@ -17,47 +17,40 @@ class Organization < ActiveRecord::Base
                   :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :bank_title
 
   acts_as_nested_set
-  
+
+
   # validates :short_title, :inn, :admin_id, :presence => true
   has_attached_file :logo, :plugins => { :pdf => "120x70#" }, :styles => { :medium => "300x300>"}
   has_attached_file :certificate_of_tax_registration
   has_attached_file :creation_resolution
   has_attached_file :articles_of_organization
   has_attached_file :egrul_excerpt
-  
+
   has_many :users
   has_many :licenses
 
   # TODO: @neodelf
   # true way is put next russian words into locales (I18n)
   # for example in locales/model/organization.ru.yml
-  TYPEOFOWNERSHIP = ['ООО', 'ИП']
+  TYPEOFOWNERSHIP = [I18n::translate('activerecord.attributes.organization.llc'), I18n::translate('activerecord.attributes.organization.businessman')]
 
   # TODO: @neodelf
   # where is the nested_attributes for :licenses
   # read http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
   # and view http://railscasts.com/episodes?utf8=%E2%9C%93&search=nested+attributes
+  accepts_nested_attributes_for :licenses, allow_destroy: true
 
 
-  # TODO: @neodelf
-  # it return errors when director_id is nil
   def director
-    #User.find(self.director_id)
-    User.last
+    User.find(self.director_id) unless self.director_id.nil?
   end
 
-  # TODO: @neodelf
-  # it return error without saved *_id
   def accountant
-    #User.find(self.accountant_id)
-    User.last
+    User.find(self.accountant_id) unless self.accountant_id.nil?
   end
 
-  # TODO: @neodelf
-  # it return error without saved *_id
   def admin
-    #User.find(self.admin_id)
-    User.last
+    User.find(self.admin_id) unless self.admin_id.nil?
   end
 
 

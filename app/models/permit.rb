@@ -2,7 +2,7 @@ class Permit < ActiveRecord::Base
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled, 
                   :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, 
-                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes
+                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number
   
 
   
@@ -23,8 +23,6 @@ class Permit < ActiveRecord::Base
   scope :applications, -> { where(agreed: false) }
   
   attr_accessor :date, :drivers
-  
-  
 
   # validates :permit_type, :permit_class, :start_date, :expiration_date, :presence => true  
   
@@ -32,6 +30,8 @@ class Permit < ActiveRecord::Base
   PERMIT_CLASSES = %w[standart vip]
   
   def temporary
+    # TODO избыточная запись получается, можно просто:
+    # start_date == expiration_date
     if self.start_date == self.expiration_date
       true
     else

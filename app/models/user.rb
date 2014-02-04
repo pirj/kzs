@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   scope :superuser, -> { where(is_superuser: true) }
+  #TODO: такая запись вернет тот же SQL, но будет, возможно, более читаема
+  # scope :approvers, includes(:user_permissions).where('user_permissions.permission_id'=>1)
   scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
   scope :statement_approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '2'")
   scope :for_organization, lambda {|id=nil| where(organization_id: id) }
@@ -59,11 +61,11 @@ class User < ActiveRecord::Base
   end
   
   def first_name_with_last_name
-      "#{last_name} #{first_name}"
+      "#{last_name} #{first_name}" if last_name && first_name
   end
   
   def first_name_with_last_name_with_middle_name
-      "#{last_name} #{first_name} #{middle_name}" 
+      "#{last_name} #{first_name} #{middle_name}" if last_name && first_name && middle_name
   end
   
   def last_name_with_initials
