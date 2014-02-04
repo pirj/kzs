@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20140131054516) do
     t.string   "permit_class"
     t.boolean  "way_bill"
     t.integer  "organization_id"
+    t.string   "vip_number"
   end
 
   create_table "projects", :force => true do |t|
