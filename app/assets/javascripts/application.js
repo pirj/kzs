@@ -19,5 +19,4 @@
 //= require_directory ./dashboard
 //= require_directory ./main
 //= require ./organizations
-//= require ./permits
 //= require ./documents

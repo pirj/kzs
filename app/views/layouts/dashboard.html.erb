@@ -2,10 +2,12 @@
 <html>
 <head>
   <title>Kzs</title>
-  <!--<link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">-->
-    <%= stylesheet_link_tag    "application", :media => "all" %>
-  <!--<link href="/assets/first/dashboard.css" media="all" rel="stylesheet" type="text/css">-->
-    <%= javascript_include_tag "application" %>
+  <script src="/assets/dashboard/jquery.min.js" type="text/javascript"></script>
+  <script src="/assets/dashboard/jquery.gridster.min.js" type="text/javascript"></script>
+  <link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+    <%= stylesheet_link_tag    "/assets/application", :media => "all" %>
+  <link href="/assets/first/dashboard.css" media="all" rel="stylesheet" type="text/css">
+    <%= javascript_include_tag "/assets/dashboard/application" %>
 
   <%= csrf_meta_tags %>
   <%= yield(:head) %>
