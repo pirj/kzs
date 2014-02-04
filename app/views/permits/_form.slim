@@ -8,9 +8,9 @@
           li= msg
 
 
+  - if @permit.new_record?
+    = render 'option_buttons', f: f
 
-  = render 'option_buttons', f: f
-    / TODO: add if to edit
 
 
   = render 'user_fields', f: f
@@ -21,10 +21,8 @@
 
 
 
-  #temporary_permit_fields
-    h3 Разовый пропуск
-    = f.fields_for :daily_pass do |v|
-      = render 'daily_pass_fields', v: v
+
+  = render 'daily_fields', f: f
 
 
   #date_fields.form-item.controls
@@ -35,4 +33,4 @@
       .col-sm-4 = f.input :expiration_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, label: false
 
   .actions
-    = f.submit 'Внести изменения', :class => 'btn btn-primary'
+    = f.submit 'Внести изменения', :class => 'btn btn-primary', :id => 'submitButton'

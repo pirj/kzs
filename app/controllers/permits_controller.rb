@@ -58,12 +58,13 @@ class PermitsController < ApplicationController
     
     
     drivers = params[:permit][:drivers]
-    drivers = drivers.delete_if{ |x| x.empty? }
+    #drivers = drivers.delete_if{ |x| x.empty? }
     @permit.save!
-    
-    vehicle = @permit.vehicle
-    vehicle.user_ids = drivers
-    vehicle.save!
+    if @permit.vehicle
+      vehicle = @permit.vehicle
+      vehicle.user_ids = drivers
+      vehicle.save!
+    end
     
     redirect_to @permit, notice: t('permit_request_created')
   end

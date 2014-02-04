@@ -1,0 +1,16 @@
+= content_for :page_header do
+  = header_back_btn permits_path
+  = header_title do
+    h1 Редактирование
+
+
+- if @permit.errors.any?
+  h4 Пожалуйста, исправьте некорректные поля:
+  ul
+    = @permit.errors.full_messages.each do |msg|
+      li #{msg}
+
+= render 'form', resource: @permit
+
+
+

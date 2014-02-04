@@ -91,39 +91,39 @@ $(document).ready(function(){
 
     var clear = {
         vehicle: function() {
-            document.getElementById('permit_vehicle_attributes_model').value = '';
-            //     document.getElementById('permit_vehicle_attributes_register_document').value = '';
-            document.getElementById('permit_vehicle_attributes_sn_number').value = '';
-            document.getElementById('permit_vehicle_attributes_sn_region').value = '';
+            _.each(document.getElementById('permit_vehicle_fields').getElementsByTagName('input'), function(w){
+                w.disabled = true
+
+            })
+            _.each(document.getElementById('permit_vehicle_fields').getElementsByTagName('select'), function(w){
+                w.disabled = true
+
+            })
         },
         user: function() {
-            document.getElementById('permit_user_attributes_first_name').value = '';
-            document.getElementById('permit_user_attributes_middle_name').value = '';
-            document.getElementById('permit_user_attributes_last_name').value = '';
-            document.getElementById('permit_user_attributes_position').value = '';
+            _.each(document.getElementById('permit_user_fields').getElementsByTagName('input'), function(w){
+                w.disabled = true
+            })
+
+            _.each(document.getElementById('permit_user_fields').getElementsByTagName('select'), function(w){
+                w.disabled = true
+            })
         },
         daily: function() {
-            document.getElementById('permit_daily_pass_attributes_last_name').value = '';
-            document.getElementById('permit_daily_pass_attributes_first_name').value = '';
-            document.getElementById('permit_daily_pass_attributes_middle_name').value = '';
-            document.getElementById('permit_daily_pass_attributes_id_type').value = '';
-            document.getElementById('permit_daily_pass_attributes_id_sn').value = '';
-            document.getElementById('permit_daily_pass_attributes_vehicle').value = '';
-            document.getElementById('permit_daily_pass_attributes_object').value = '';
-            document.getElementById('permit_daily_pass_attributes_person').value = '';
-            document.getElementById('permit_daily_pass_attributes_issued').value = '';
-            document.getElementById('permit_daily_pass_attributes_date').value = '';
-            document.getElementById('permit_daily_pass_attributes_guard_duty').value = '';
+            _.each(document.getElementById('temporary_permit_fields').getElementsByTagName('input'), function(w){
+                w.disabled = true
+              //  w.input = '';
+            })
+            _.each(document.getElementById('temporary_permit_fields').getElementsByTagName('select'), function(w){
+                w.disabled = true
+
+            })
         }
     }
 
 
-    $('#new_permit').submit(function( event ) {                                 //submit
+    $('#submitButton').click(function( event ) {                                 //submit
 
-        function baddata(){
-            alert('Заполните необходимые поля!');
-
-        }
 
         event.preventDefault();
 
@@ -134,39 +134,21 @@ $(document).ready(function(){
 
                 clear.user();
                 clear.daily();
-                if (document.getElementById('permit_start_date').value && document.getElementById('permit_expiration_date').value && document.getElementById('permit_vehicle_attributes_sn_number').value ) {
-                    document.newPermitForm.submit();
-                }
-                else {
-
-                    baddata();
-                }
+              //  $(".actions [name='commit']").submit();
+                $('#new_permit').submit();
                 break;
 
             case '#daily':
                 clear.user();
                 clear.vehicle();
-                console.log('ddsdsds');
-                if (document.getElementById('permit_daily_pass_attributes_last_name').value&&document.getElementById('permit_daily_pass_attributes_first_name').value) {
-                    document.newPermitForm.submit();
-                }
-                else {
-                    baddata();
-                }
+                $('#new_permit').submit();
                 break;
 
             case '#user':
 
                 clear.daily();
                 clear.vehicle();
-
-                if (document.getElementById('permit_start_date').value && document.getElementById('permit_expiration_date').value) {
-                    document.newPermitForm.submit();
-                }
-                else {
-
-                    baddata();
-                }
+                $('#new_permit').submit();
 
                 break;
 
