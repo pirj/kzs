@@ -222,14 +222,14 @@ class DocumentsController < ApplicationController
   end
 
   def edit
+    @document = Document.find(params[:id])
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.where('id != ?', @document.id)
+
     if @document.user_id != current_user.id || @document.approved == true || @document.approver_id != current_user.id
       redirect_to :back, :alert => t('permission_denied')
-    else
-      @document = Document.find(params[:id])
-      @approvers = User.approvers.where(organization_id: current_user.organization_id)
-      @executors = User.where(organization_id: current_user.organization_id)
-      @recipients = User.where('organization_id != ?', current_user.organization_id)
-      @documents = Document.where('id != ?', @document.id)
     end
   end
 
@@ -239,7 +239,6 @@ class DocumentsController < ApplicationController
     organizations.each do |organization|
       document = Document.new(params[:document])
       # document.document_type = params[:type] ? params[:type] : 'mail'
-      current_user.documents << document
       document.update_attributes(organization_id: organization, user_id: current_user.id,
                                  sender_organization_id: current_user.organization_id,
                                  executor_id: params[:document][:executor_ids].second,
