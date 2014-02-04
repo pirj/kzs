@@ -14,7 +14,7 @@
   border: none;
   white-space: nowrap;
   min-height: 3.1em;
-  @include button-size(0, $btn-default-padding, 75%, 3.1em, $border-radius-base);
+  @include button-size(0, $btn-default-padding, $btn-font-size, 3.1em, $border-radius-base);
   @include user-select(none);
 
   &:first-letter{text-transform: uppercase;}

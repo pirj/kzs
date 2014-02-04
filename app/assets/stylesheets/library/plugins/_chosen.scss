@@ -13,7 +13,7 @@
 .chosen-container .chosen-single{
   height: auto;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  color: $input-color;
+  color: $input-label-color; // It is fake input, and color set 'placeholder' color
   line-height: $line-height-base;
   font-size: $input-font-size;
   height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
