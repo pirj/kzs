@@ -1,9 +1,12 @@
 <ul class="nav nav-pills">
 
 
-<li>
-  <%= link_to " назад", :back, :class => "btn btn-sm back-btn" %>
-</li>
+<!--<li>-->
+  <!--<%= link_to(:back, :class => "btn btn-default") do %>-->
+
+      <!--<span class="fa fa-arrow-left"></span><span>назад</span>-->
+  <!--<% end %>-->
+<!--</li>-->
 
   <% if current_user.has_permission?(6) %>
   <li class="dropdown">

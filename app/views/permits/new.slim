@@ -1,0 +1,21 @@
+
+= content_for :page_header do
+  = header_back_btn permits_path
+  = header_title do
+    h1 Новый пропуск
+
+
+- if @permit.errors.any?
+  h4 Пожалуйста, исправьте некорректные поля:
+  ul
+    = @permit.errors.full_messages.each do |msg|
+      li #{msg}
+
+= form_for(@permit, :html => {:class => "form new-doc row-fuild", :name => 'newPermitForm'}) do |f|
+  = render 'permit_form_fields', f: f
+  ul.nav.nav-pills
+    li
+      = f.submit 'Создать заявку', :class => 'btn btn-primary'
+
+    li
+      = link_to "Отмена", :back, :class => 'btn btn-primary'

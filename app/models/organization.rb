@@ -1,3 +1,5 @@
+# encoding: utf-8
+# where is rspec???
 class Organization < ActiveRecord::Base
   attr_accessible :title, :short_title, :inn,
                   :lft, :rgt,
@@ -14,23 +16,51 @@ class Organization < ActiveRecord::Base
                   :kpp, :ogrn, :bik, :ogrn, :bik,
                   :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :bank_title
 
-
-                  
-                  
-                  
-                  
   acts_as_nested_set
   
   # validates :short_title, :inn, :admin_id, :presence => true
-  has_attached_file :logo, :plugins => { :pdf => "120x70#" }
-  
+  has_attached_file :logo, :plugins => { :pdf => "120x70#" }, :styles => { :medium => "300x300>"}
   has_attached_file :certificate_of_tax_registration
   has_attached_file :creation_resolution
   has_attached_file :articles_of_organization
   has_attached_file :egrul_excerpt
   
   has_many :users
-  
+  has_many :licenses
+
+  # TODO: @neodelf
+  # true way is put next russian words into locales (I18n)
+  # for example in locales/model/organization.ru.yml
+  TYPEOFOWNERSHIP = ['ООО', 'ИП']
+
+  # TODO: @neodelf
+  # where is the nested_attributes for :licenses
+  # read http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
+  # and view http://railscasts.com/episodes?utf8=%E2%9C%93&search=nested+attributes
+
+
+  # TODO: @neodelf
+  # it return errors when director_id is nil
+  def director
+    #User.find(self.director_id)
+    User.last
+  end
+
+  # TODO: @neodelf
+  # it return error without saved *_id
+  def accountant
+    #User.find(self.accountant_id)
+    User.last
+  end
+
+  # TODO: @neodelf
+  # it return error without saved *_id
+  def admin
+    #User.find(self.admin_id)
+    User.last
+  end
+
+
   def users_statement
     self.users.statement_approvers
   end

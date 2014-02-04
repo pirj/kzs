@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140121134053) do
+ActiveRecord::Schema.define(:version => 20140131054516) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20140121134053) do
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "brand_type"
   end
 
   create_table "ckeditor_assets", :force => true do |t|
@@ -172,6 +173,22 @@ ActiveRecord::Schema.define(:version => 20140121134053) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "licenses", :force => true do |t|
+    t.string   "type"
+    t.string   "number"
+    t.date     "issuance"
+    t.date     "deadline"
+    t.string   "issued_by"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "organization_id"
+    t.string   "type_of"
+  end
+
   create_table "open_notices", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -283,12 +300,6 @@ ActiveRecord::Schema.define(:version => 20140121134053) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "rights", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "statement_approvers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "statement_id"
@@ -380,13 +391,6 @@ ActiveRecord::Schema.define(:version => 20140121134053) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "user_rights", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "right_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

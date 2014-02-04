@@ -14,9 +14,9 @@ $(document).ready(function(){
             if (document.getElementById(controller).getElementsByClassName('opened')) {
                 CloseAllTR(controller);
             }
-            if (!this.getElementsByTagName('iframe')[0].src){
-                this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
-            }
+            //if (!this.getElementsByTagName('iframe')[0].src){
+            //    this.getElementsByTagName('iframe')[0].src = '/'+ controller +'/'+ docId + '.pdf';
+            //}
             self.classList.add('opened');
         }
     });
@@ -126,11 +126,64 @@ $(document).ready(function(){
         $("#document_organization_ids").trigger("chosen:updated");
     });
 
+    $('#select_all_documents').click(function() {
+        //$(document).find(':checkbox').prop('checked', this.checked);
+        if(this.checked) {
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        }else{
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
 
-    $('.document_operation, #select_all_documents').on("change", function() {
-        $(document).find(':checkbox').not(this).prop('checked', null);
-        elem = $(this)
-        myFunction(elem);
+    if ( [].indexOf ) {
+        var Find_id = function(array, value) {
+            return array.indexOf(value);
+        }
+    } else {
+        var Find_id = function(array, value) {
+            for(var i=0; i<array.length; i++) {
+                if (array[i] === value) return i;
+            }
+            return -1;
+        }
+    }
+
+    var ids= []
+    $('.document_operation').click(function() {
+        var id = $(this).closest("tr").attr("id");
+        $('li.dropdown:last').empty();
+        if ($(this).prop("checked")) {
+            ids.push(id);
+            console.log(ids);
+            $.ajax({
+                type: 'GET',
+                url: '/documents/action_list',
+                data: {ids: ids},
+                success: function(data){},
+                error: function(){},
+                datatype: 'json'
+            })
+        } else {
+            $(this).empty();
+            ids.splice(Find_id(ids, id),1);
+            console.log(ids);
+            if (ids.length > 0) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/documents/action_list',
+                    data: {ids: ids},
+                    success: function(data){},
+                    error: function(){},
+                    datatype: 'json'
+                })
+            }
+
+
+        }
     });
 
     $('#text-search_button').on("click", function() {
@@ -150,21 +203,6 @@ $(function() {
     $( "#datepicker, #document_deadline, #task_list_deadline" ).datepicker({ dateFormat: "dd-mm-yy" });
 });
 
-
-function myFunction(elem) {
-    if ($('.document_operation:checked').length == 1) {
-        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('disabled').addClass('');
-
-        $("#create_copy_link").attr("href", "/documents/" + elem.val() + "/copy");
-        $("#edit_link").attr("href", "/documents/" + elem.val() + "/edit");
-        $("#approve_link").attr("href", "/documents/" + elem.val() + "/approve");
-        $("#send_link").attr("href", "/documents/" + elem.val() + "/send_document");
-        $("#reply_link").attr("href", "/documents/" + elem.val() + "/reply");
-
-    } else {
-        $( "input[name$='prepare'], #create_copy_link, #edit_link, #approve_link, #send_link, #reply_link, #delete_link" ).removeClass('btn-success').addClass('');
-    }
-};
 
 $('#delete_link').click(function() {
     $.post(this.href, { _method: 'delete' }, null, "script");

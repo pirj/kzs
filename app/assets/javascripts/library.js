@@ -11,10 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery_ujs
 //= require jquery-ui
 //= require_tree ./plugins
 //= require chosen-jquery
 //= require ckeditor/init
-//= require jquery_ujs
 //= require ckeditor/ckeditor
 //= require_tree ./library

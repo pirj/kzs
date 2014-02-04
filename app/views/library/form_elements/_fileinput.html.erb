@@ -1,0 +1,54 @@
+<h5>
+  Инпут для выбора файла
+</h5>
+<p>
+  Для руби-кода и simple_form использовать параметр <span class="lib-prop">as: :filename</span>.
+</p>
+<div class="bs-example">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="bootstrap-filestyle" style="display: inline;" tabindex="0"><label for="organization_articles_of_organization" class="btn btn-default"><i class="fa fa-paperclip"></i> <span>прикрепить файл</span></label></div>
+    </div>
+    <div class="col-sm-7">
+      <div><a href="#" class="btn btn-link">file_name.woff</a><div class="bootstrap-filestyle" style="display: inline;" tabindex="0"><label for="organization_certificate_of_tax_registration" class="btn btn-default"><i class="fa fa-paperclip"></i> <span>прикрепить другой файл</span></label></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="highlight">
+  <ul class="nav nav-pills">
+    <li><a href="#fileinput-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#fileinput-html" data-toggle="tab">html</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane" id="fileinput-slim">
+        <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
+  f.input :creation_resolution, as: :filename
+        }%></pre>
+    </div>
+
+    <div class="tab-pane" id="fileinput-html">
+        <pre class="prettyprint linenums lang-html"><%= html_escape %q{
+  <div class="bootstrap-filestyle" style="display: inline;" tabindex="0">
+    <label for="organization_articles_of_organization" class="btn btn-default">
+      <i class="fa fa-paperclip"></i>
+      <span>прикрепить файл</span>
+    </label>
+  </div>
+
+
+  <div>
+    <a href="#" class="btn btn-link">file_name.woff</a>
+    <div class="bootstrap-filestyle" style="display: inline;" tabindex="0">
+      <label for="organization_certificate_of_tax_registration" class="btn btn-default">
+        <i class="fa fa-paperclip"></i>
+        <span>прикрепить другой файл</span>
+      </label>
+    </div>
+  </div>
+        }%></pre>
+    </div>
+  </div>
+</div>

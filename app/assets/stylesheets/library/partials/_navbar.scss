@@ -13,6 +13,7 @@
   min-height: $navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
   margin-bottom: $navbar-margin-bottom;
   border: 1px solid transparent;
+  margin-top: 18px;
 
   // Prevent floats from breaking the navbar
   @include clearfix();
@@ -52,6 +53,13 @@
     display: inline-block;
     vertical-align: middle;
 
+    // page title style
+    &.brand{
+      margin-left: 2*$navbar-padding-horizontal ;
+      &:first-child{margin-left: 0;} // if first in menu, than level by left edge
+    }
+
+
     > {
       h1{ margin: auto; }
 
@@ -61,10 +69,6 @@
         margin-left: 0;
         margin-top: -3*$padding-base-vertical;
         margin-right: -6*$padding-base-vertical;
-      }
-
-      h1, h2, h3, h4, h5, h6{
-        margin-left: $navbar-padding-horizontal*2;
       }
     }
 

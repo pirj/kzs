@@ -1,0 +1,35 @@
+= form_tag group_print_permits_path, method: :get do
+
+  = content_for :page_header do
+    / TODO: @vit need refactor
+    = header_title do
+      .dropdown.header
+        h1.dropdown-toggle data-toggle="dropdown"
+          a href="/permits"
+            | Все пропуска
+            span.caret
+        ul.dropdown-menu role="menu"
+          li
+            a href="/permits?scope=application"
+              | Новые заявки
+          li
+            a href="/permits?scope=expired"
+              | Просроченные
+          li
+            a href="/permits?scope=daily"
+              | Разовые пропуска
+
+  = content_for :page_header_search do
+    = header_search_form '#', placeholder: 'поиск по пропускам'
+
+
+
+
+  = render 'permits/panel'
+
+  = render 'permits/table', :@permits => @permits
+
+  - if params[:scope] == 'for_print'
+    .btn-toolbar
+      .btn-group
+        = submit_tag "Печать", :class => "btn btn-success"

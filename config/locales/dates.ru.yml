@@ -1,0 +1,10 @@
+ru:
+  time:
+    formats:
+      day: "%e %B, %a"
+      full: "%d.%m.%Y"
+
+  date:
+    formats:
+      day: "%e %B, %a"
+      full: "%d.%m.%Y"

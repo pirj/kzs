@@ -1,0 +1,8 @@
+ru:
+  organizations:
+    list:
+      list_attrs:
+        director: Руководитель
+        name: Организация, ОПФ
+        phone: Телефон
+        users_count: Штат

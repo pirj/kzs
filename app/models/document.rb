@@ -5,8 +5,8 @@ class Document < ActiveRecord::Base
                   :attachment, :executor_id, :confidential, :document_attachments_attributes,
                   :document_ids, :organization_ids, :document_attachments, 
                   :document_conversation_id, :sender_organization_id, :executor_ids, :approver_ids, 
-                  :task_list_attributes
-                  
+                  :task_list_attributes, :prepared_date, :draft, :approved, :approved_date, :date, :sn, :sent, :sent_date
+
   attr_accessor :organization_ids, :executor_ids, :approver_ids
   
   validates :title, :organization_id, :approver_id, :executor_id, :text, :presence => true
@@ -54,7 +54,7 @@ class Document < ActiveRecord::Base
   
   scope :with_completed_tasks, includes(:task_list).where(:task_list => {:completed => true})  
   scope :with_completed_tasks_in_statement, includes(:statements).where(:statements => {:with_completed_task_list => true})
-  
+
   DOCUMENT_TYPES = ["mail", "writ"]
   
   def self.text_search(query)
@@ -71,6 +71,15 @@ class Document < ActiveRecord::Base
   
   def self.without_statements
     includes(:statements).where(:statements => {:id => nil})
+  end
+
+  def generate_png
+    pdf = DocumentPdf.new(self, 'show')
+    filename = "document_#{self.id}.pdf"
+    pdf.render_file "tmp/#{filename}"
+    pdf = Magick::ImageList.new("tmp/document_#{id}.pdf")
+    thumb = pdf.scale(190, 270)
+    thumb.write "app/assets/images/document_#{id}.png"
   end
 
 end

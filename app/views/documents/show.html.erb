@@ -88,7 +88,13 @@
             <span class="dropdown-arr"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+<<<<<<< HEAD
             <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+=======
+
+            <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+
+>>>>>>> b956fe9de782053e093b3de2b6b34d456a4ac88f
             <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
             <li><a href="#" class="icon-ok">Написать соообщение</a></li>
             <li><a href="#" class="icon-clock">Личная страница</a></li>
@@ -107,12 +113,21 @@
             <span class="dropdown-arr"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
+<<<<<<< HEAD
             <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+=======
+
+            <li class="title"><a href="#"><%= user_with_full_name(@document.executor_id) %></a> Инженер ПТО, ООО «Циклон»</li> 
+
+>>>>>>> b956fe9de782053e093b3de2b6b34d456a4ac88f
             <li class="photo"><img src="img/konstantin.jpg" alt="user"></li>  
             <li><a href="#" class="icon-ok">Написать соообщение</a></li>
             <li><a href="#" class="icon-clock">Личная страница</a></li>
             <li><a href="#" class="icon-block-1">Отмена</a></li>
           </ul>
+
+            </span>
+
         </div>
       </li>
       <% unless @document.document_attachments.blank? %>
@@ -139,8 +154,8 @@
   <div class="col-md-6">
 
     <div class="view-main-doc">
-      <iframe style="width: 400px; height: 520px;" src="/documents/<%= @document.id %>.pdf"/>
-      </iframe>
+      <%= pdf_to_png(@document, 400, 520) %>
+
 
     </div>
 

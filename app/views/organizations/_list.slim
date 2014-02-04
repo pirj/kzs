@@ -1,0 +1,52 @@
+- attrs = [:name, :director, :users_count, :phone]
+table.table.js-row-clickable.m-table-replacement
+  thead
+    tr
+      - attrs.each do |attr|
+        th = t(".list_attrs.#{attr.to_s}")
+
+  tbody
+    /= collection.inspect
+    - collection.each do |res|
+      / simple row with short information
+      tr data-id = res.id
+        td = link_to res.full_title, res.path
+        td = res.director_name
+        td = res.users_count
+        td = res.phone
+
+      / row with extra information
+      tr data-id = res.id class = 'more-info js-more-info'
+        td colspan = attrs.count
+          .col-sm-8
+            .form-horizontal
+              .form-group
+                .col-sm-3.control-label контрагент
+                .col-sm-9
+                  h2 = link_to res.title, res.path
+                  h4.btn-link-muted.btn-no-hover = "#{res.users_count} человек в штате"
+
+
+              .form-group
+                .col-sm-3.control-label руководитель
+                .col-sm-9
+                  = res.director_avatar
+                  = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed'
+
+
+              .form-group
+                .col-sm-3.control-label контактное лицо
+                .col-sm-9
+                  = res.director_avatar
+                  = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed'
+
+              .col-sm-9.col-sm-offset-3
+                ul.list-unstyled
+                  li = link_to 'скачать все реквизиты', '#'
+
+              .col-sm-9.col-sm-offset-3
+                = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default'
+                = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
+
+          .col-sm-4
+            h2.text-right = res.phone

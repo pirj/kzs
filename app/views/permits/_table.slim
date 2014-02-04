@@ -1,0 +1,72 @@
+table.table.m-table-append.js-row-clickable
+  thead
+    tr
+      th
+        input type="checkbox"
+      th Номер
+      th Субъект
+      th =sortable "permit_type", "Тип"
+      th =sortable "start_date", "Начало"
+      th =sortable "expiration_date", "Конец"
+      th =sortable_status
+
+  tbody
+    -@permits.each do |permit|
+      tr data-id=permit.id
+        td
+          input type='checkbox'
+        td
+          span class='extra' = permit.id
+        td
+          - case permit.permit_type
+            - when 'vehicle'
+              =link_to permit
+                span class='extra'
+                  = permit.vehicle.brand
+                  = permit.vehicle.model
+                span class='muted'
+                  = permit_auto_number(permit)
+            - when 'daily'
+              =link_to permit
+                = permit.daily_pass.last_name
+                = permit.daily_pass.first_name
+            - when 'user'
+              =link_to permit
+                = permit.user.try(:last_name)
+                |&nbsp
+                = permit.user.try(:first_name)
+              span class='muted'
+                = permit.user.try(:position)
+            - else
+        td
+          - case permit.permit_type
+            - when 'user'
+              = image_tag('/assets/propusk-man.png')
+            - when 'vehicle'
+              = image_tag('/assets/propusk-car.png')
+            - when 'daily'
+              = image_tag('/assets/propusk-daily.png')
+            - else
+        td
+          = permit.start_date.strftime("%d.%m.%y") if permit.start_date
+        td
+          = permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date
+        td
+          = permit_status(permit)
+      tr.more-info.js-more-info.tr-hovered data-id=permit.id
+        td colspan='2'
+        td colspan='2'
+          a.btn.btn-default.js-open href="/permits/#{permit.id}" Открыть
+        td colspan='2'
+          - if permit.permit_type == 'daily'
+            | Разовый пропуск
+          - else
+            | Общий срок действия:
+            = permit_remaining(permit)
+            br
+            | Оставшийся срок действия:
+            = permit_progress(permit)
+        td colspan='1'
+
+
+

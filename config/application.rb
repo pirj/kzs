@@ -36,6 +36,7 @@ module Kzs
       I18n.locale = :ru
       I18n.default_locale = :ru
       config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+      config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
       config.i18n.locale = :ru
       # bypasses rails bug with i18n in production\
       I18n.reload!
@@ -69,6 +70,8 @@ module Kzs
     
     # Enable the asset pipeline
     config.assets.enabled = true
+    
+    config.assets.initialize_on_precompile = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

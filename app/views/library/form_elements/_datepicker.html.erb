@@ -1,0 +1,34 @@
+<h5>
+  Инпут с выбором даты
+</h5>
+<div class="bs-example">
+  <div class="input-group">
+    <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+    <input class="form-control js-datepicker" placeholder="инпут с датой">
+  </div>
+</div>
+
+<div class="highlight">
+  <ul class="nav nav-pills">
+    <li><a href="#datepicker-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#datepicker-html" data-toggle="tab">html</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane" id="datepicker-slim">
+        <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
+  f.input :date_of_registration, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
+        }%></pre>
+    </div>
+
+    <div class="tab-pane" id="datepicker-html">
+        <pre class="prettyprint linenums lang-html"><%= html_escape %q{
+  <div class="input-group">
+    <span class="input-group-icon"><i class="fa fa-calendar"></i></span>
+    <input class="form-control js-datepicker" placeholder="инпут с датой">
+  </div>
+        }%></pre>
+    </div>
+  </div>
+</div>

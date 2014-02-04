@@ -1,0 +1,76 @@
+= content_for :page_header do
+  = header_back_btn permits_path
+  = header_title do
+    - case @permit.permit_type
+      - when 'user'
+        h1 Пропуск на пеший проход
+      - when 'vehicle'
+        h1 Пропуск на транспортное средство
+      - when 'daily'
+        h1 Пропуск на транспортное средство
+      - else
+
+
+
+
+
+
+- case @permit.permit_type
+
+  - when 'user'
+    /h2 Пропуск на пеший проход
+
+    div Номер: #{@permit.number}
+
+    div #{@user.last_name} #{@user.first_name}  #{@user.middle_name}
+
+    div #{organization(@user.organization_id)} | #{@user.position }
+
+  - when 'vehicle'
+
+    /h2 Пропуск на транспортное средство
+
+    div Номер: #{@permit.id}
+    div Организация: #{organization_full_title(@permit.organization_id)}
+    div Класс пропуска #{t(@permit.permit_class)}
+    div Действителен с #{@permit.start_date.strftime('%d.%m.%y') if @permit.start_date } по #{@permit.expiration_date.strftime('%d.%m.%y') if @permit.start_date}
+
+    h3 Транспортное средство
+
+    div Марка: #{@permit.vehicle.brand}
+    div Модель: #{@permit.vehicle.model}
+    div Тип: #{vehicle_body(@permit.vehicle) }
+    div Номер: #{permit_auto_number(@permit)}
+
+    h3 Водители
+
+    - if @permit.way_bill
+      | Cогласно путевому листу
+    - else
+      ul
+      - @permit.vehicle.users.each do |user|
+        li #{user.first_name_with_last_name} | #{user.position}
+
+
+
+
+  - when 'daily'
+
+    /h2 Разовый пропуск
+
+    div Имя: #{ @daily_pass.first_name }<br>
+    div Фамилия: #{ @daily_pass.last_name }<br>
+    div Отчество: #{ @daily_pass.middle_name }<br>
+    div Наименование документа: #{ @daily_pass.id_type }<br>
+    div Его серия и номер: #{ @daily_pass.id_sn }<br>
+    div Гос. номер и марка автотранспортного средства: #{ @daily_pass.vehicle }<br>
+    div Куда: #{ @daily_pass.object }<br>
+    div К кому: #{ @daily_pass.person }<br>
+    div Выдан: #{ @daily_pass.issued }<br>
+    div Дата: #{ @daily_pass.date.strftime('%d.%m.%y') if @daily_pass.date }<br>
+    div Дежурный охранник КПП: #{ @daily_pass.guard_duty }<br>
+
+  - else
+
+br
+= render 'actions'

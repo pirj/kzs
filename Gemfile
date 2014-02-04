@@ -34,14 +34,18 @@ group :assets do
   gem 'chosen-rails'
   gem 'compass-rails'
   gem 'font-awesome-rails'
+  gem 'turbo-sprockets-rails3'
 end
 
 gem 'jquery-rails', '~> 2.3.0'
 gem 'prawn'
+gem 'rmagick', :require => 'RMagick'
 
 gem 'populator'
 gem 'faker'
 gem 'factory_girl_rails'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 
 group :production do

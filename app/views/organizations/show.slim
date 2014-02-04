@@ -1,0 +1,19 @@
+= content_for :page_header do
+  = header_back_btn organizations_path
+  = header_title do
+    h1 = @organization.full_title
+
+
+
+.row
+  .col-xs-12
+    = render 'tabs'
+
+.row
+  .tab-content.col-xs-12
+    = render 'organizations/show_tabs/main', resource: @organization
+    = render 'organizations/show_tabs/details', resource: @organization
+    = render 'organizations/show_tabs/users', resource: @organization, collection: @users
+    = render 'organizations/show_tabs/licenses', resource: @organization
+
+

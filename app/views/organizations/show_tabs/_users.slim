@@ -1,0 +1,13 @@
+.tab-pane#users
+  .row
+    h2.col-sm-12 = "Сотрудники (#{collection.count} #{Russian.p(collection.count, "человек", "человека", "людей")} в САКЭ)"
+
+  .row
+    .form-horizontal
+      - collection.each do |u|
+        .form-group
+          .text-help.text-right.col-sm-4 = u.position
+          .col-sm-8
+            .link-muted-dashed = u.first_name_with_last_name
+
+

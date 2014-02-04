@@ -1,0 +1,11 @@
+= content_for :page_header do
+  = header_title do
+    h1 Организации
+
+= content_for :page_header_search do
+  = header_search_form organizations_path, placeholder: 'поиск по организациям'
+
+
+.row
+  .col-xs-12
+    = render 'list', collection: @organizations

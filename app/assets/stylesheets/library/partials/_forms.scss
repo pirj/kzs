@@ -3,6 +3,26 @@
 // --------------------------------------------------
 
 
+// Defaults params for all styles
+select
+textarea
+input[type="text"]
+input[type="password"]
+input[type="datetime"]
+input[type="datetime-local"]
+input[type="date"]
+input[type="month"]
+input[type="time"]
+input[type="week"]
+input[type="number"]
+input[type="email"]
+input[type="url"]
+input[type="search"]
+input[type="tel"]
+input[type="color"]{
+  font-size: $input-font-size;
+}
+
 // Normalize non-controls
 //
 // Restyle and baseline non-control form elements.
@@ -50,7 +70,8 @@ input[type="checkbox"] {
 
 // Set the height of select and file controls to match text inputs
 input[type="file"] {
-  display: block;
+  display: inline-block;
+  width: auto;
 }
 
 // Make multiple select elements height not fixed
@@ -87,7 +108,7 @@ input[type="number"] {
 output {
   display: block;
   padding-top: ($padding-base-vertical + 1);
-  font-size: $font-size-base;
+  font-size: $input-font-size;
   line-height: $line-height-base;
   color: $input-color;
   vertical-align: middle;
@@ -119,12 +140,12 @@ output {
 .form-control {
   background-color: $input-bg;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 3px solid $input-border;
+  border: $input-border;
   border-radius: $input-border-radius;
   color: $input-color;
   display: block;
   line-height: $line-height-base;
-  font-size: $font-size-base;
+  font-size: $input-font-size;
   height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   outline-width: 0;
   padding: $padding-base-vertical $padding-base-horizontal;
@@ -232,6 +253,11 @@ input[type="checkbox"],
   fieldset[disabled] & {
     cursor: not-allowed;
   }
+}
+
+// Label class
+.control-label{
+  @extend .text-help;
 }
 
 // Form control sizing
@@ -351,10 +377,6 @@ input[type="checkbox"],
   // Make form groups behave like rows
   .form-group {
     @include make-row();
-  }
-
-  .control-label{
-    color: $input-label-color;
   }
 
   .form-control-static {

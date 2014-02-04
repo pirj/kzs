@@ -18,7 +18,18 @@ th {
   width: 100%;
   margin-bottom: $line-height-computed;
 
+  &.m-table-append{
+    .tr-hovered{
+      td{
+        border-top: none;
+      }
+    }
+  }
+
   .tr-hovered{
+    background: $table-bg-hover;
+  }
+  .tr-slim{
     background: $table-bg-hover;
   }
 
@@ -35,11 +46,13 @@ th {
         color: $table-simple-text-color;
         font-size: $font-size-base;
         vertical-align: top;
+        cursor: pointer;
       }
     }
   }
   // Bottom align for column headings
   > thead > tr > th {
+    @extend .text-help;
     vertical-align: bottom;
     border-bottom: 1px solid $table-border-color;
   }
@@ -66,7 +79,7 @@ th {
 
 
   td{
-    h2, h3, h3, h4, h5, h6{margin: 0; padding: 0;}
+    h2, h3, h3, h4, h5, h6{margin: 0; padding: 0 0 $padding-base-vertical;}
     .control-label, .extra, .muted, .important{ line-height: $line-height-base-in-px; }
 
     .extra, .muted, .important{display: block;}

@@ -36,11 +36,13 @@ $text-color:            $gray-dark !default;
 // Links
 // -------------------------
 
+$link-font-size:              14px;
+
 $link-color:                  $brand-rich-info !default;
 $link-hover-color:            darken($brand-rich-info, 10%) !default;
 
-$link-muted-color:            #888 !default;
-$link-muted-hover-color:      #333 !default;
+$link-muted-color:            #555 !default;
+$link-muted-hover-color:      black !default;
 
 $link-unactive-color:         $gray-light !default;
 
@@ -61,12 +63,14 @@ $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !def
 $font-family-base:        $font-family-sans-serif !default;
 
 $font-size-base:          16px !default;
-$font-size-large:         ceil($font-size-base * 1.25) !default; // ~18px
-$font-size-small:         ceil($font-size-base * 0.85) !default; // ~12px
+$font-size-large:         18px !default;
+$font-size-small:         13px !default;
 
-$font-size-h1:            35px !default;
-$font-size-h2:            floor($font-size-base * 2.15) !default; // ~30px
-$font-size-h3:            ceil($font-size-base * 1.7) !default; // ~24px
+
+$font-size-h1:            36px !default;
+$font-size-h2:            26px !default;
+$font-size-h3:            24px !default;
+
 $font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px
@@ -76,7 +80,7 @@ $line-height-base-in-px:  24px; // 16*1.5
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
 
 $headings-font-family:    $font-family-sans-serif-light !default;
-$headings-font-weight:    500 !default;
+$headings-font-weight:    100 !default;
 $headings-line-height:    1.1 !default;
 $headings-color:          $link-color !default;
 
@@ -172,12 +176,15 @@ $input-bg:                       #fff !default;
 $input-bg-disabled:              $gray-lighter !default;
 
 $input-color:                    $gray !default;
-$input-border:                   #ccc !default;
+$input-border-color:             #ccc !default;
+$input-border-weight:            2px !default;
+$input-border:                   $input-border-weight solid $input-border-color !default;
 $input-border-radius:            $border-radius-base !default;
 $input-border-focus:             $brand-primary !default;
 
 $input-color-placeholder:        $gray-light !default;
 
+$input-font-size:                14px;
 $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
 $input-height-large:             (floor($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2) !default;
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2) !default;
@@ -188,7 +195,7 @@ $legend-border-color:            #e5e5e5 !default;
 $input-label-color:               $gray-light;
 
 $input-group-addon-bg:           $gray-lighter !default;
-$input-group-addon-border-color: $input-border !default;
+$input-group-addon-border-color: $input-border-color !default;
 
 
 // Dropdowns
@@ -265,7 +272,7 @@ $screen-desktop:             $screen-md-min !default;
 
 // Large screen / wide desktop
 // Note: Deprecated $screen-lg and $screen-lg-desktop as of v3.0.1
-$screen-lg:                  1200px !default;
+$screen-lg:                  1280px !default;
 $screen-lg-min:              $screen-lg !default;
 $screen-lg-desktop:          $screen-lg-min !default;
 
@@ -671,3 +678,6 @@ $container-md:                 $container-desktop !default;
 // Large screen / wide desktop
 $container-large-desktop:      ((1140px + $grid-gutter-width)) !default;
 $container-lg:                 $container-large-desktop !default;
+
+
+$sidebar-width-closed:          70px !default;

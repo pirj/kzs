@@ -1,6 +1,9 @@
 Kzs::Application.routes.draw do
 
 
+  resources :licenses
+
+
   get "library/library"
 
   get "/users/sign_out" => "sessions#destroy"
@@ -11,6 +14,10 @@ Kzs::Application.routes.draw do
   
   match '/documents/batch' => 'documents#batch'
 
+  get '/documents/action_list'
+  get '/documents/approve'
+  get '/documents/prepare'
+  get '/documents/send_document'
   resources :documents do
     collection do
       get 'sents'
@@ -71,7 +78,13 @@ Kzs::Application.routes.draw do
   resources :users, :controller => "users"
   resources :rights
   resources :groups
-  resources :organizations
+
+  resources :organizations do
+    member do
+      get 'details'
+    end
+  end
+
   resources :projects
   resources :document_attachments
   resources :task_lists

@@ -1,7 +1,7 @@
 // wrapper for visible block with selected options.
 .chosen-container-multi .chosen-choices,
 .chosen-container .chosen-single{
-  border: 3px solid $input-border;
+  border: $input-border;
   border-radius: $input-border-radius;
   background: transparent;
 
@@ -15,7 +15,7 @@
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   color: $input-color;
   line-height: $line-height-base;
-  font-size: $font-size-base;
+  font-size: $input-font-size;
   height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   outline-width: 0;
   padding: $padding-base-vertical $padding-base-horizontal;
@@ -34,7 +34,7 @@
   }
 
   &.chosen-container-active .chosen-single{
-    border: 3px solid  $input-border-focus;
+    border: $input-border;
     border-radius: $input-border-radius;
     background: transparent;
     box-shadow: none;
@@ -49,7 +49,7 @@
     // selected items with cancel button
     li.search-choice{
       padding: $padding-base-vertical+2px $padding-base-horizontal*2 $padding-base-vertical+2px $padding-base-horizontal;
-      font-size: $font-size-base;
+      font-size: $input-font-size;
       background: $input-border-focus;
       border-radius: $input-border-radius;
       color: #fff;

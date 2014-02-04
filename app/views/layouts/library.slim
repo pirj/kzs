@@ -1,0 +1,18 @@
+html
+  head
+    title System page
+    / <link href="/assets/first/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+    = stylesheet_link_tag 'library', :media => 'all'
+    = javascript_include_tag 'library'
+    = csrf_meta_tags
+    = yield(:head)
+  body data-spy="scroll" data-target=".js-library-menu"
+    .container
+      .row
+        .col-sm-3
+          .lib-menu data-spy='affix' data-offset-top="0" data-offset-bottom="200"
+            .nav.js-library-menu
+        .col-sm-9
+          .row
+            = yield
+

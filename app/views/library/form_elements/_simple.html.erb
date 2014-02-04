@@ -1,0 +1,47 @@
+<p>
+  примеры обычного и активного инпутов
+  Чтобы скрыть описание к инпуту при его отрисовке через simple_form подставляйте в нужным инпут следующий код
+  <span class="lib-prop">label_html: {class: 'sr-only'}</span>
+</p>
+<div class="bs-example">
+    <div class="form-group">
+      <label class="sr-only">обычный инпут</label>
+      <input type="text" class="form-control" placeholder="обычный инпут">
+    </div>
+    <div class="form-group">
+      <label class="sr-only">активный инпут</label>
+      <input type="text" class="form-control active"placeholder="активный инпут">
+    </div>
+</div>
+
+
+<div class="highlight">
+
+  <ul class="nav nav-pills">
+    <li><a href="#simple-form-elemets-slim" data-toggle="tab">slim</a></li>
+    <li><a href="#simple-form-elemets-html" data-toggle="tab">html</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane" id="simple-form-elemets-slim">
+      <pre class="prettyprint lang-ruby"><%= html_escape %q{
+  f.input :attr
+  f.input :attr, input_html: { class: 'active' }
+      }%></pre>
+    </div>
+
+    <div class="tab-pane" id="simple-form-elemets-html">
+      <pre class="prettyprint lang-html"><%= html_escape %q{
+  <div class="form-group">
+    <label class="sr-only">обычный инпут</label>
+    <input type="text" class="form-control" placeholder="обычный инпут">
+  </div>
+  <div class="form-group">
+    <label class="sr-only">активный инпут</label>
+    <input type="text" class="form-control active"placeholder="активный инпут">
+  </div>
+      }%></pre>
+    </div>
+  </div>
+</div>
