@@ -118,6 +118,7 @@ namespace :documents do
       sender_organization = Organization.all.sample
       d.organization_id = organization.id
       d.sender_organization_id = sender_organization.id
+      d.recipient_id = sender_organization.id
       d.text = Populator.sentences(30..50)
       d.title = Faker::Lorem.words(3)
       d.user_id = User.find_by_organization_id(sender_organization.id)
