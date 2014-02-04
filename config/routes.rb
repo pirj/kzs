@@ -5,8 +5,7 @@ Kzs::Application.routes.draw do
 
 
   get "library/library"
-
-  get "/users/sign_out" => "sessions#destroy"
+  #get "/users/sign_out" => "sessions#destroy"
 
   devise_for :users
 
