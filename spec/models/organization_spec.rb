@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Organization do
-  #subject { described_class.make! }
 
   context 'mass assignment attributes' do
     [:title, :short_title, :inn,:lft, :rgt, :phone, :mail,:tax_authority_that_registered, :parent_id, :director_id, :admin_id,
@@ -15,12 +14,19 @@ describe Organization do
   context 'associations' do
     it { should have_many :users }
     it { should have_many :licenses }
+    it { should accept_nested_attributes_for(:licenses) }
   end
 
   context 'check methods:' do
     let!(:organization) {Organization.make!}
     it 'director' do
       organization.director.id == organization.director_id
+    end
+    it 'accountant' do
+      organization.accountant.id == organization.accountant_id
+    end
+    it 'admin' do
+      organization.admin.id == organization.admin_id
     end
   end
 end

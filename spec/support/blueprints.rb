@@ -6,7 +6,7 @@ Organization.blueprint do
   accountant = User.make!
   admin = User.make!
   title {Faker::Lorem.sentence}
-  logo { File.open("#{Rails.root}/spec/fixtures/images/fishing/toon376.gif")}
+  logo { File.open("#{Rails.root}/spec/fixtures/images/logo-cyclone.png")}
   director_id {director.id}
   accountant_id {accountant.id}
   admin_id {admin.id}
