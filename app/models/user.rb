@@ -61,11 +61,11 @@ class User < ActiveRecord::Base
   end
   
   def first_name_with_last_name
-      "#{last_name} #{first_name}"
+      "#{last_name} #{first_name}" if last_name && first_name
   end
   
   def first_name_with_last_name_with_middle_name
-      "#{last_name} #{first_name} #{middle_name}" 
+      "#{last_name} #{first_name} #{middle_name}" if last_name && first_name && middle_name
   end
   
   def last_name_with_initials

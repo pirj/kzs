@@ -15,11 +15,19 @@ module Organizations
     end
 
     def director_name
-      "#{object.director.last_name} #{object.director.first_name.first}.#{object.director.middle_name.first}."
+      if object.director
+        "#{object.director.last_name} #{object.director.first_name.first}.#{object.director.middle_name.first}."
+      end
+    end
+
+    def director_full_name
+      if object.director
+        object.first_name_with_last_name
+      end
     end
 
     def director_avatar
-      h.image_tag( director.avatar, class: 'img img-thumbnail table-img-xs' ) if director.avatar?
+      h.image_tag( director.avatar, class: 'img img-thumbnail table-img-xs' ) if object.director && object.director.avatar?
     end
 
     def phone
