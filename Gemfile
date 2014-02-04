@@ -49,5 +49,5 @@ gem 'wkhtmltopdf-binary'
 
 
 group :production do
-  gem 'thin'
+  gem 'thin', '~> 1.5.1'
 end

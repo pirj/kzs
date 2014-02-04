@@ -17,7 +17,7 @@ development:
 
 production:
   adapter: postgresql
-  host: babrovka.ru
+  host: localhost
   encoding: utf8
   database: kzs-staging
   pool: 5
