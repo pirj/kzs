@@ -76,6 +76,5 @@ module Kzs
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['library.js', 'library.css']
   end
 end

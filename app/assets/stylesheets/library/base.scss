@@ -1,9 +1,6 @@
-// Library page styles
-@import "only_library_styles";
-@import "docs";
-@import 'javascripts';
 
 // Core variables and mixins
+@import 'javascripts';
 @import "partials/variables";
 @import "partials/mixins";
 
@@ -59,3 +56,8 @@
 // Plugins classes
 @import 'plugins/chosen';
 @import 'plugins/datepicker';
+
+
+// Library page styles
+@import "only_library_styles";
+@import "docs";
