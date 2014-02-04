@@ -13,8 +13,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :dob
       t.string :permit
       t.integer :work_status
-      
+
       t.timestamps
     end
   end
 end
+

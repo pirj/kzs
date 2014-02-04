@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class OrganizationDecorator < Draper::Decorator
   delegate_all
 

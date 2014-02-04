@@ -1,16 +1,19 @@
-# SQLite version 3.x
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+# CONNECT TO STAGING DB
+#development:
+#  adapter: postgresql
+#  host: babrovka.ru
+#  encoding: utf8
+#  database: kzs-staging
+#  pool: 5
+#  username: user
+#  password: ks86ybdl!
+
 development:
   adapter: postgresql
-  host: babrovka.ru
   encoding: utf8
-  database: kzs-staging
-  pool: 5
-  username: user
-  password: ks86ybdl!
+  database: kzs_development
+  username:
+  host: localhost
 
 production:
   adapter: postgresql

@@ -84,6 +84,8 @@ ru:
       permit:
         one: "Пропуск"
         other: "Пропуска"
+        many: "Пропуска"
+        few: "Пропуска"
     attributes:
       user:
         first_name: "Имя"
