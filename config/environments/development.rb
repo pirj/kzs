@@ -40,4 +40,8 @@ Kzs::Application.configure do
   config.assets.debug = true
   
   config.serve_static_assets = true
+
+  # Sass options
+  config.sass.style = :expanded
+  config.sass.line = true
 end

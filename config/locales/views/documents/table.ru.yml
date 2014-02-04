@@ -1,0 +1,10 @@
+ru:
+  documents:
+    table:
+      list_attrs:
+        number: '№/дата'
+        sender: Отправитель
+        recipient: Получатель
+        document_type: Тип
+        attachment: ''
+        status: Статус

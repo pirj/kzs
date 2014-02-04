@@ -42,6 +42,7 @@ class DocumentsController < ApplicationController
 
     # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
 
+    @documents = Documents::ListDecorator.decorate(Document.all, with: Documents::ListShowDecorator)
     @controller = params[:controller]
 
     respond_to do |format|
