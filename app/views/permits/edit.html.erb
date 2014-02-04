@@ -3,9 +3,9 @@
 	<div class="span12">
 		<%= render 'shared/user' %>
 		<h1 class="doc_header">Редактирование <span class="caret"></span></h1>
-      
-    <%= form_for @permit do |f| %>
 
+      <%= simple_form_for @permit, html: {class: 'form-horizontal'}, defaults: { input_wrapper_html: { class: 'col-sm-8' }, label_html: { class: 'col-sm-4' }, wrapper: :inline } do |f| %>
+         <p>vit</p>
       <% if @permit.errors.any? %>
         <div id="error_explanation">
           <h4 style="color: #9a0000;">Пожалуйста, исправьте некорректные поля:</h4>

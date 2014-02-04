@@ -10,8 +10,6 @@ class Vehicle < ActiveRecord::Base
   
   before_save :create_register_sn
   
-  WORK_STATUSES = %w[passenger_car truck special_car]
-  
   LETTERS = %w[A B E K M H O P C T Y X]
   
   def vehicle_title

@@ -21,6 +21,18 @@ $ ->
   $( ".js-chosen" ).chosen(
     disable_search_threshold: 1
     no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+    disable_search: true
+  )
+
+  # chosen-search
+  $( ".js-chosen-search" ).chosen(
+    disable_search_threshold: 1
+    no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+  #  disable_search: true !use chosen-container-single-nosearch
   )
 
   # button
@@ -63,3 +75,20 @@ $ ->
     )
   )()
 
+#grouped collection select filter
+
+jQuery ->
+  $('#person_state_id').parent().hide()
+  states = $('#person_state_id').html()
+  console.log(states)
+  $('#person_country_id').change ->
+    country = $('#person_country_id :selected').text()
+    escaped_country = country.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+    options = $(states).filter("optgroup[label=#{escaped_country}]").html()
+    console.log(options)
+    if options
+      $('#person_state_id').html(options)
+      $('#person_state_id').parent().show()
+    else
+      $('#person_state_id').empty()
+      $('#person_state_id').parent().hide()

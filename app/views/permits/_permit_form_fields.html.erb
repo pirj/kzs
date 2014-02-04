@@ -19,7 +19,7 @@
   
   <div id="permit_user_fields">
   <h3>1. Личные данные</h3>
-  <%= f.fields_for :user do |v| %>
+  <%= f.simple_fields_for :user do |v| %>
     <%= render 'user_fields', v: v %>
   <% end %>
   </div>
