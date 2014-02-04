@@ -1,10 +1,10 @@
 # encoding: UTF-8
 class DocumentsController < ApplicationController
-  layout 'documents'
   helper_method :sort_column, :sort_direction
-  # collection
-
   before_filter :authorize, :only => :edit
+
+  layout 'base'
+
 
   def index
     # check if user can view confindetnial documents

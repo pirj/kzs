@@ -49,5 +49,21 @@ gem 'wkhtmltopdf-binary'
 
 
 group :production do
-  gem 'thin', '~> 1.5.1'
+  gem 'thin'
+end
+
+
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'zeus'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'launchy'
+  gem 'database_cleaner'
 end
