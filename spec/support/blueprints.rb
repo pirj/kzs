@@ -2,8 +2,14 @@
 require 'machinist/active_record'
 
 Organization.blueprint do
+  director = User.make!
+  accountant = User.make!
+  admin = User.make!
   title {Faker::Lorem.sentence}
-  logo { Tempfile.new(Rails.root.join('spec', 'files', 'logo-cyclone.png'), 'image/png') }
+  logo { File.open("#{Rails.root}/spec/fixtures/images/fishing/toon376.gif")}
+  director_id {director.id}
+  accountant_id {accountant.id}
+  admin_id {admin.id}
 end
 #Post.make! {user: User.make!, subject: 'asd'}
 
