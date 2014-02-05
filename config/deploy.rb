@@ -132,3 +132,69 @@ task :production do
 
   after "deploy", "deploy:cleanup"
 end
+
+
+task :mercury do
+  module UseScpForDeployment
+    def self.included(base)
+      base.send(:alias_method, :old_upload, :upload)
+      base.send(:alias_method, :upload,     :new_upload)
+    end
+  
+    def new_upload(from, to, options = {}, &block)
+    old_upload(from, to, options.merge(:via => :scp), &block)
+    end
+  end
+ 
+  Capistrano::Configuration.send(:include, UseScpForDeployment)
+
+  server "mercury.cyclonelabs.com", :web, :app, :db, primary: true
+
+  ssh_options[:port] = 23813
+
+  set :user, "babrovka"
+  set :application, "kzs"
+  set :deploy_to, "/srv/webdata/sakedev.kzsspb.ru"
+  set :deploy_via, :remote_cache
+  set :use_sudo, false
+
+  set :scm, "git"
+  set :repository, "git@github.com:babrovka/kzs.git"
+  set :branch, "temp"
+
+  default_run_options[:pty] = true
+  ssh_options[:forward_agent] = true
+
+
+  namespace :deploy do
+    namespace :assets do
+      task :precompile, :roles => :web, :except => { :no_release => true } do
+        from = source.next_revision(current_revision)
+        if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile --trace}
+        else
+          logger.info "Skipping asset pre-compilation because there were no asset changes"
+        end
+      end
+    end
+  end
+  
+  namespace(:uwsgi) do
+    task :stop do
+      run "service uwsgi stop"
+     end
+  
+    task :start do
+      run "service uwsgi stop"
+    end
+  
+    task :restart do
+      run "service uwsgi stop"
+    end
+  end
+  
+
+
+
+  after "deploy", "deploy:cleanup"
+end

@@ -15,9 +15,9 @@
       <span class="dropdown-arr"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
-      <li><a href="/permits/new#user">На сотрудника</a></li>
-      <li><a href="/permits/new#vehicle">На транспорт</a></li>
-      <li><a href="/permits/new#daily">Разовый пропуск</a></li>
+      <li><%= link_to "На сотрудника", permits_user_path %></li>
+      <li><%= link_to "На транспорт", permits_vehicle_path %></li>
+      <li><%= link_to "Разовый пропуск", permits_daily_path %></li>
     </ul>
   </li>
   <% end %>

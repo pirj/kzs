@@ -66,4 +66,8 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'machinist', '>= 2.0.0.beta2'
+  gem 'shoulda-matchers'
+  gem 'populator'
+  gem 'faker'
 end

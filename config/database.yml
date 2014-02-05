@@ -1,0 +1,36 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: kzs_development
+  username:
+  host: localhost
+
+#selectel
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   encoding: utf8
+#   database: kzs-staging
+#   pool: 5
+#   username: user
+#   password: ks86ybdl!
+
+#mercury
+production:
+  adapter: postgresql
+  host: mercury.cyclonelabs.com
+  encoding: utf8
+  database: postgres
+  pool: 5
+  username: sakedev
+  password: OgyKQU3thbI8BdGU
+
+# mars
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   encoding: utf8
+#   database: postgres
+#   pool: 5
+#   username: sake
+#   password: ARprmSbqIl1eFphH

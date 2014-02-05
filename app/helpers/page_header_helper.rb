@@ -5,9 +5,9 @@ module PageHeaderHelper
   def header_back_btn path
     if path
       content_tag :li do
-        link_to path, class: 'btn btn-default' do
+        link_to path, class: 'btn btn-default m-back-btn' do
           content_tag(:span, nil, class: 'fa fa-arrow-left')+
-          content_tag(:span, 'назад')
+          content_tag(:span, 'Назад')
         end
       end
     end

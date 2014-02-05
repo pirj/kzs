@@ -22,7 +22,7 @@ $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 // -------------------------
 
 $brand-primary:         #76d4ce !default;
-$brand-success:         #1BBC9B !default;
+$brand-success:         #00a499 !default; //1BBC9B
 $brand-default:         #dcf2ec !default;
 $brand-warning:         #ffe381 !default;
 $brand-danger:          #ffa581 !default;
@@ -78,7 +78,7 @@ $font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px
 
-$line-height-base:        1.5 !default; // 16*1.5
+$line-height-base:        1.7 !default; // 16*1.5
 $line-height-base-in-px:  24px; // 16*1.5
 $line-height-computed:    floor($font-size-base * $line-height-base) !default; // ~20px
 
@@ -179,7 +179,7 @@ $btn-link-disabled-color:        $gray-light !default;
 $input-bg:                       #fff !default;
 $input-bg-disabled:              $gray-lighter !default;
 
-$input-color:                    $gray !default;
+$input-color:                    #444444 !default; //$gray
 $input-border-color:             #ccc !default;
 $input-border-weight:            2px !default;
 $input-border:                   $input-border-weight solid $input-border-color !default;
@@ -188,7 +188,7 @@ $input-border-focus:             $brand-primary !default;
 
 $input-color-placeholder:        $gray-light !default;
 
-$input-font-size:                14px;
+$input-font-size:                13px;
 $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2) !default;
 $input-height-large:             (floor($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2) !default;
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2) !default;
@@ -205,7 +205,7 @@ $input-group-addon-border-color: $input-border-color !default;
 // Dropdowns
 // -------------------------
 
-$dropdown-bg:                    $brand-success !default;
+$dropdown-bg:                    #76d4ce !default; //$brand-success
 $dropdown-border:                none !default;
 $dropdown-fallback-border:       #ccc !default;
 $dropdown-divider-bg:            $brand-success !default;

@@ -25,18 +25,13 @@ class OrganizationsController < ApplicationController
 
   def new
     @organization = Organizations::EditDecorator.decorate(Organization.new)
-    # TODO: @neodelf
-    # this row
     @organization.licenses.build
-    # instead of
-    # @license = License.new
-    # @organization.licenses << @license
   end
 
 
   def edit
     organization = Organization.find(params[:id])
-    @users = @users = User.for_organization(organization.id)
+    @users = User.for_organization(organization.id)
     @organization = Organizations::EditDecorator.decorate(organization)
   end
 
@@ -73,7 +68,7 @@ class OrganizationsController < ApplicationController
   private
   # TODO: not working code
   def sort_column
-    Document.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
+    Organization.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
   end
   
   def sort_direction
