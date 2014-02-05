@@ -1,13 +1,3 @@
-# CONNECT TO STAGING DB
-#development:
-#  adapter: postgresql
-#  host: babrovka.ru
-#  encoding: utf8
-#  database: kzs-staging
-#  pool: 5
-#  username: user
-#  password: ks86ybdl!
-
 development:
   adapter: postgresql
   encoding: utf8
@@ -15,6 +5,7 @@ development:
   username:
   host: localhost
 
+#selectel
 production:
   adapter: postgresql
   host: localhost
@@ -24,8 +15,17 @@ production:
   username: user
   password: ks86ybdl!
 
+#mercury
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   encoding: utf8
+#   database: postgres
+#   pool: 5
+#   username: sakedev
+#   password: OgyKQU3thbI8BdGU
 
-
+# mars
 # production:
 #   adapter: postgresql
 #   host: localhost

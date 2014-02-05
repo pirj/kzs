@@ -52,4 +52,7 @@ $(document).ready(function(){
     $(".dynamic-table tbody td.not_this").click(function(e){
         e.stopPropagation();
     });
+
+
+
 });

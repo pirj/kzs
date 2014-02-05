@@ -368,6 +368,18 @@ h2 {
   padding: 4px;
   background:#76d4ce;
   border-radius:5px;
+  &:before {
+    border-bottom: 8px solid #76d4ce;
+    border-left: 8px solid rgba(0,0,0,0);
+    border-right: 8px solid rgba(0,0,0,0);
+    border-top: 8px solid rgba(0,0,0,0);
+    width: 8px;
+    left: 16px;
+    top: -16px;
+    display: block;
+    content: '';
+    position: absolute;
+  }
 }
 .ui-datepicker .ui-datepicker-header {
   position: relative;
