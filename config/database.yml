@@ -16,14 +16,14 @@ production:
   password: ks86ybdl!
 
 #mercury
-production:
-  adapter: postgresql
-  host: localhost
-  encoding: utf8
-  database: postgres
-  pool: 5
-  username: sakedev
-  password: OgyKQU3thbI8BdGU
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   encoding: utf8
+#   database: postgres
+#   pool: 5
+#   username: sakedev
+#   password: OgyKQU3thbI8BdGU
 
 # mars
 # production:

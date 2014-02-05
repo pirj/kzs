@@ -178,6 +178,21 @@ task :mercury do
       end
     end
   end
+  
+  namespace(:uwsgi) do
+    task :stop do
+      run "service uwsgi stop"
+     end
+  
+    task :start do
+      run "service uwsgi stop"
+    end
+  
+    task :restart do
+      run "service uwsgi stop"
+    end
+  end
+  
 
 
 
