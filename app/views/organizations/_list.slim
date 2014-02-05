@@ -38,7 +38,7 @@ table.table.js-row-clickable.m-table-replacement
                 .col-sm-3.control-label контактное лицо
                 .col-sm-9
                   = res.director_avatar
-                  = link_to res.director.full_name, user_path(res.director), class: 'link-dashed' if res.director
+                  = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed' if res.director
 
               .col-sm-9.col-sm-offset-3
                 ul.list-unstyled
