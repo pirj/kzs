@@ -2,7 +2,7 @@
 table.table.js-row-clickable.m-table-replacement
   thead
     tr
-      td = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
+      td = check_box_tag :selected, nil, false, class: 'js-select-rows-in-table', data:{ target: 'document' }
       - attrs.each do |attr|
         th = t(".list_attrs.#{attr.to_s}")
 
@@ -10,7 +10,7 @@ table.table.js-row-clickable.m-table-replacement
     - collection.each do |resource|
       / simple row with short information
       tr data-id = resource.id
-        td = check_box_tag :selected, resource.id, false, data:{ target: 'document' }
+        td = check_box_tag :selected_id, resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
         - attrs.each do |attr|
           td = resource.send(attr.to_sym)
 

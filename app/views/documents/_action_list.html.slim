@@ -1,0 +1,29 @@
+-#= link_to '#', class: 'dropdown-toggle btn btn-sm', data: {toggle: 'dropdown'} do
+-#  Действия
+-#  span.caret
+-#  span.dropdown-arr
+-#ul.dropdown-menu{role: 'menu'}
+- if @many
+  - if !prepare && !approve && !send_document
+    li= link_to 'Действия отсутствуют', '#'
+  - else
+    - if prepare
+      li= link_to 'Подготовить', documents_prepare_path(ids: @many), :name => 'prepare', data: { confirm: 'Вы уверены?' }
+    - if approve
+      li= link_to 'Подписать', documents_approve_path(ids: @many), :name => 'approve', data: { confirm: 'Вы уверены?' }
+    - if send_document
+      li= link_to 'Отправить', documents_send_document_path(ids: @many), :name => 'send', data: { confirm: 'Вы уверены?' }
+- else
+  li= link_to 'Просмотр', document_path(document_id)
+  - if copy
+    li= link_to 'Создать копию', copy_document_path(document_id)
+  - if edit
+    li= link_to 'Редактировать', edit_document_path(document_id)
+  - if prepare
+    li= link_to 'Подготовить', documents_prepare_path(ids: document_id), :name => 'prepare', data: { confirm: 'Вы уверены?' }
+  - if approve
+    li= link_to 'Подписать', documents_approve_path(ids: document_id), :name => 'approve', data: { confirm: 'Вы уверены?' }
+  - if send_document
+    li= link_to 'Отправить', documents_send_document_path(ids: document_id), :name => 'send', data: { confirm: 'Вы уверены?' }
+  - if reply
+    li= link_to 'Ответить', reply_document_path(document_id)

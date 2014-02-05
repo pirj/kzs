@@ -78,7 +78,7 @@ class DocumentsController < ApplicationController
   end
 
   def action_list
-   if params[:ids].count > 1
+    if params[:ids].count > 1
      @approve = @prepare = @send_document = true
      params['ids'].each do |id|
        d = Document.find(id)
@@ -88,14 +88,14 @@ class DocumentsController < ApplicationController
                         d.user_id == current_user.id) ? true : false)
      end
      @many = params[:ids]
-   else
-     d = Document.find(params[:ids])[0]
+    else
+     d = Document.find(params[:ids].first())
      @edit = d.user_id == current_user.id && d.prepared == false ? true : false
      @show = d.sent && d.organization_id == current_user.organization_id ||
              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
-     @copy = d.sender_organization_id == current_user.organization.id ? true : false
+     @copy = d.sender_organization_id == current_user.organization.try(:id) ? true : false
      @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
      @prepare = !d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false
@@ -103,7 +103,11 @@ class DocumentsController < ApplicationController
      @send_document = !d.sent && d.approved && (d.approver_id == current_user.id ||
                        d.user_id == current_user.id) ? true : false
      @document_id =    d.id
-     end
+    end
+
+    respond_to do |format|
+       format.js { render layout: false }
+    end
   end
 
   def prepare
