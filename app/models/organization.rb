@@ -26,33 +26,15 @@ class Organization < ActiveRecord::Base
   has_attached_file :articles_of_organization
   has_attached_file :egrul_excerpt
 
-  has_many :users
+  belongs_to :director, foreign_key: :director_id, class_name: 'User'
+  belongs_to :accountant, foreign_key: :accountant_id, class_name: 'User'
+  belongs_to :admin, foreign_key: :admin_id, class_name: 'User'
+
   has_many :licenses
 
-  # TODO: @neodelf
-  # true way is put next russian words into locales (I18n)
-  # for example in locales/model/organization.ru.yml
   TYPEOFOWNERSHIP = [I18n::translate('activerecord.attributes.organization.llc'), I18n::translate('activerecord.attributes.organization.businessman')]
 
-  # TODO: @neodelf
-  # where is the nested_attributes for :licenses
-  # read http://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html
-  # and view http://railscasts.com/episodes?utf8=%E2%9C%93&search=nested+attributes
   accepts_nested_attributes_for :licenses, allow_destroy: true
-
-
-  def director
-    User.find(self.director_id) if self.director_id
-  end
-
-  def accountant
-    User.find(self.accountant_id) if self.accountant_id
-  end
-
-  def admin
-    User.find(self.admin_id) if self.admin_id
-  end
-
 
   def users_statement
     self.users.statement_approvers
