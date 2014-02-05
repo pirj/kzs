@@ -38,12 +38,43 @@ describe OrganizationsController do
   end
 
   describe 'GET details' do
-    it 'redirect' do
-      post :create, valid_attributes
-      response.should render_template("organizations/details")
-      #response.header['Content-Type'].should include 'application/pdf'
+    let!(:organization) { Organization.make! }
+    it 'response status' do
+      get :details, id: organization.id, format: :pdf
+      expect(response.status).to eq(200)
+    end
+    it 'render view details' do
+      get :details, id: organization.id, format: :pdf
+      response.should render_template(:details)
     end
   end
+
+  describe 'GET show' do
+    let!(:organization) { Organization.make! }
+    it 'response status' do
+      get :show, id: organization.id
+      expect(response.status).to eq(200)
+    end
+    it 'render view show' do
+      get :show, id: organization.id
+      response.should render_template(:show)
+    end
+  end
+
+  describe 'PUT update' do
+    let!(:organization) { Organization.make! }
+    let!(:organization_new) { Organization.make!(title: 'new title')}
+    it 'response status' do
+      put :update, {id: organization.id}, title: 'new title'
+      organization.title.should eq(title)
+      expect(response.status).to eq(200)
+    end
+    it 'assigns the requested organization as @organization' do
+      put :update, {id: organization.id}, organization: organization_new
+    end
+  end
+
+
 
 
 end
