@@ -1,11 +1,29 @@
 // wrapper for visible block with selected options.
-.chosen-container-multi .chosen-choices,
+
 .chosen-container .chosen-single{
+  border: $input-border;
+  border-color: transparent;
+  border-radius: $input-border-radius;
+  background: #e7e7e7;
+  color: #444444;
+
+  @include transition(border-color ease-in-out .15s);
+
+  &:hover{
+    background: #cfcfcf;
+    color: #444444;
+  }
+}
+
+.chosen-container-multi .chosen-choices{
   border: $input-border;
   border-radius: $input-border-radius;
   background: transparent;
 
   @include transition(border-color ease-in-out .15s);
+  &:hover{
+    background:  transparent;
+  }
 }
 
 // wrapper for selected oprion in select
@@ -24,6 +42,7 @@
   @include box-shadow(none);
 }
 
+
 // wrapper for single select
 .chosen-container{
   .chosen-single{
@@ -31,13 +50,16 @@
     b{
       margin-top: 5px;
     }
+
   }
 
   &.chosen-container-active .chosen-single{
     border: $input-border;
     border-radius: $input-border-radius;
-    background: transparent;
+    background: #cfcfcf;
     box-shadow: none;
+    border-color: transparent;
+    color: #444444;
   }
 }
 
@@ -145,7 +167,10 @@
   padding: $dropdown-link-padding;
   margin: 0 $dropdown-link-padding 0 $dropdown-link-padding;
 
-  &.highlighted{background: $brand-success;}
+  &.highlighted{
+    background: $brand-success;
+    border-radius: 2px;
+  }
   &.no-results{
     background: transparent;
     color: $btn-primary-bg;

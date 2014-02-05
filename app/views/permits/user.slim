@@ -4,7 +4,7 @@
     h1 Новый пропуск на сотрудника
 
 
-= simple_form_for @permit, html: {class: 'form-horizontal'}, defaults: { input_wrapper_html: { class: 'col-sm-6' }, label_html: { class: 'col-sm-3' }, wrapper: :inline } do |f|
+= simple_form_for @permit, html: {class: 'form-horizontal'}, defaults: { input_html: {class: 'form-control'}, input_wrapper_html: { class: 'col-sm-6' }, label_html: { class: 'col-sm-3' }, wrapper: :inline } do |f|
 
   - if @permit.errors.any?
     #error_explanation
@@ -14,12 +14,9 @@
           li= msg
 
 
-
-
-
   = f.simple_fields_for :user do |f|
     #permit_user_fields
-      h3 1. Личные данные
+      /h3 1. Личные данные
 
 
       = f.input :last_name
@@ -29,19 +26,20 @@
       .form-item.controls
         .form-group
           .control-label.col-sm-3 Организация и должность:
-          .col-sm-3 = f.input :organization_id, collection: @organizations, label: false, input_wrapper_html: {class: 'col-sm-12'}, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen ' , data: {placeholder: '' } }
-          .col-sm-3 = f.input :position , input_wrapper_html: {class: 'col-sm-12'}, input_html: {placeholder: 'Должность'}, label: false
 
-
-
+          .col-sm-3 = f.input :organization_id, collection: @organizations, label: false, input_wrapper_html: {class: 'col-sm-12'}, input_html: { class: 'form-control js-chosen ' , data: {placeholder: 'Организация' } }
+          .col-sm-3 = f.input :position , input_wrapper_html: {class: 'col-sm-12 '}, input_html: {placeholder: 'Должность'}, label: false
 
 
   #date_fields.form-item.controls
     .form-group
       .control-label.col-sm-3 Пропуск действителен с
-      .col-sm-4 = f.input :start_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, label: false
-      .control-label.col-sm-1 по
-      .col-sm-4 = f.input :expiration_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, label: false
+      .col-sm-2 = f.input :start_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' } ,input_html: { class: 'form-control ', placeholder: 'Дата начала'}, label: false
+      .control-label.col-sm-1.text-center  по
+      .col-sm-2 = f.input :expiration_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, input_html: { class: 'form-control ', placeholder: 'Дата окончания'}, label: false
 
-  .actions
-    = f.submit 'Внести изменения', :class => 'btn btn-primary', :id => 'submitButton'
+  .form-item.controls
+    .row
+      .control-label.col-md-3
+      .col-md-2.text-center = f.submit 'Внести изменения', :class => 'btn btn-primary', :id => 'submitButton'
+      .col-md-2.text-center = link_to  'Отменить изменения', permits_url, :class => 'btn btn-link-muted'

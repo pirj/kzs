@@ -70,6 +70,11 @@
   &.active {
     color: darken($btn-default-color, 30%);
   }
+  &.m-back-btn{
+    > span{
+      font-weight: 900;
+    }
+  }
 }
 
 .btn-primary { @include button-variant($btn-primary-color, $btn-primary-bg);}
