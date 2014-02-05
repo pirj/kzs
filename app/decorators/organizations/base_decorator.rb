@@ -22,7 +22,7 @@ module Organizations
 
     def director_full_name
       if object.director
-        object.first_name_with_last_name
+        object.director.first_name_with_last_name
       end
     end
 
