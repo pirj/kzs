@@ -14,7 +14,12 @@ Kzs::Application.routes.draw do
   # Пользователи должны пройти контроль на права.
   # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
-  
+
+  namespace :documents do
+    resources :docs, only: 'index'
+    resources :mails, except: 'index'
+  end
+
   match '/documents/batch' => 'documents#batch'
 
   get '/documents/action_list'
