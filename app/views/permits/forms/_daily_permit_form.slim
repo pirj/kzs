@@ -1,0 +1,31 @@
+= simple_form_for @permit, html: {class: 'form-horizontal'}, defaults: { input_html: {class: 'form-control'}, input_wrapper_html: { class: 'col-sm-6' }, label_html: { class: 'col-sm-3' }, wrapper: :inline } do |f|
+
+  - if @permit.errors.any?
+    #error_explanation
+      h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
+      ul
+        - @permit.errors.full_messages.each do |msg|
+          li= msg
+
+  #temporary_permit_fields
+
+    /= f.simple_fields_for :vehicle do |f|
+    /  = f.object.to_s
+    = f.simple_fields_for :daily_pass do |f|
+
+
+      = f.input :last_name,  input_html: {class: ' form-control ' }
+      = f.input :first_name,  input_html: {class: 'form-control ' }
+      = f.input :middle_name,  input_html: {class: 'form-control ' }
+
+
+      = f.input :id_type,  input_html: {class: ' form-control ' }
+      = f.input :id_sn,  input_html: {class: ' form-control ' }
+
+      = f.input :vehicle,  input_html: {class: ' form-control ' }
+      = f.input :object,  input_html: {class: ' form-control ' }
+      = f.input :person,  input_html: {class: 'form-control ' }
+      = f.input :issued,  input_html: {class: ' form-control ' }
+      = f.input :guard_duty,  input_html: {class: ' form-control ' }
+
+

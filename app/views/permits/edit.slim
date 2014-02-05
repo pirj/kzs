@@ -3,14 +3,22 @@
   = header_title do
     h1 Редактирование
 
-
 - if @permit.errors.any?
   h4 Пожалуйста, исправьте некорректные поля:
   ul
     = @permit.errors.full_messages.each do |msg|
       li #{msg}
 
-= render 'form', resource: @permit
+- case @permit.permit_type
+  - when 'vehicle'
+    = render 'permits/forms/vehicle_permit_form', resource: @permit
+  - when 'daily'
+    = render 'permits/forms/daily_permit_form', resource: @permit
+  - when 'user'
+    = render 'permits/forms/user_permit_form', resource: @permit
+  - else
+
+
 
 
 

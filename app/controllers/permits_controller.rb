@@ -1,10 +1,11 @@
 class PermitsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction
-  before_filter :organizations, only: [:edit, :new, :user, :car, :daily]       #TODO: @vit need refactor
-  before_filter :permit_types, only: [:edit, :new, :user, :car, :daily]
-  before_filter :car_brand_types, only: [:edit, :new, :user, :car, :daily]
-  before_filter :car_brands, only: [:edit, :new, :user, :car, :daily]
+  before_filter :organizations, only: [:edit, :user, :vehicle, :daily]       #TODO: @vit need refactor
+  before_filter :permit_types, only: [:edit, :user, :vehicle, :daily]
+  before_filter :car_brand_types, only: [:edit, :user, :vehicle, :daily]
+  before_filter :car_brands, only: [:edit, :user, :vehicle, :daily]
+  before_filter :number_letters, only: [:edit, :vehicle, :daily]
 
 
   def index
@@ -118,25 +119,27 @@ class PermitsController < ApplicationController
   
   def update
     @permit = Permit.find(params[:id])
-    
-    drivers = params[:permit][:drivers]
-    drivers = drivers.delete_if{ |x| x.empty? }
+
+    if @permit.permit_type == 'vehicle'
+      drivers = params[:permit][:drivers]
+      drivers = drivers.delete_if{ |x| x.empty? }
+    end
     
 
     
     
-    respond_to do |format|
+
       if @permit.update_attributes(params[:permit])
-        vehicle = @permit.vehicle
-        vehicle.user_ids = drivers
-        vehicle.save!
-        format.html { redirect_to permit_path(@permit), notice: t('permit_successfully_updated') }
-        format.json { head :no_content }
+        if @permit.permit_type == 'vehicle'
+          vehicle = @permit.vehicle
+          vehicle.user_ids = drivers
+          vehicle.save!
+        end
+
+        redirect_to permit_path(@permit), notice: t('permit_successfully_updated')
       else
-        format.html { render action: "edit" }
-        format.json { render json: @permit.errors, status: :unprocessable_entity }
+        render action: "edit"
       end
-    end
   end
   
   def agree
@@ -230,5 +233,11 @@ class PermitsController < ApplicationController
   def car_brands
     @car_brands = CarBrand.all
   end
+
+  def number_letters
+    @number_letters =  Vehicle::LETTERS
+  end
+
+
 
 end
