@@ -8,6 +8,8 @@ class Document < ActiveRecord::Base
                   :task_list_attributes, :prepared_date, :draft, :approved, :approved_date, :date, :sn, :sent, :sent_date
 
   attr_accessor :organization_ids, :executor_ids, :approver_ids
+
+  after_save :create_png
   
   validates :title, :organization_id, :approver_id, :executor_id, :text, :presence => true
                   
@@ -73,13 +75,12 @@ class Document < ActiveRecord::Base
     includes(:statements).where(:statements => {:id => nil})
   end
 
-  def generate_png
+  def create_png
     pdf = DocumentPdf.new(self, 'show')
-    filename = "document_#{self.id}.pdf"
-    pdf.render_file "tmp/#{filename}"
-    pdf = Magick::ImageList.new("tmp/document_#{id}.pdf")
-    thumb = pdf.scale(190, 270)
-    thumb.write "app/assets/images/document_#{id}.png"
+    pdf.render_file "tmp/document_#{self.id}.pdf"
+    pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
+    thumb = pdf.scale(400, 520)
+    thumb.write "app/assets/images/document_#{self.id}.png"
   end
 
 end

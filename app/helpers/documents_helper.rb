@@ -169,11 +169,14 @@ module DocumentsHelper
   end
 
   def pdf_to_png(document, width, height)
-    pdf = DocumentPdf.new(document, 'show')
-    pdf.render_file "tmp/document_#{document.id}.pdf"
-    pdf = Magick::Image.read("tmp/document_#{document.id}.pdf").first
-    thumb = pdf.scale(width, height)
-    thumb.write "app/assets/images/document_#{document.id}.png"
-    image_tag "document_#{document.id}.png", style: 'background-color: white' #replace to css
+    #TODO: in production after clear database this code "unless...end" must remove
+    unless File.file?("./tmp/document_#{document.id}.pdf")
+      pdf = DocumentPdf.new(document, 'show')
+      pdf.render_file "tmp/document_#{document.id}.pdf"
+      pdf = Magick::Image.read("tmp/document_#{document.id}.pdf").first
+      thumb = pdf.scale(400, 520)
+      thumb.write "app/assets/images/document_#{document.id}.png"
+    end
+    image_tag "document_#{document.id}.png", style: 'background-color: white', size: "#{width}x#{height}" #replace to css
   end
 end

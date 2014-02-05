@@ -15,7 +15,9 @@
   > li {
     position: relative;
     display: block;
-
+    > a {
+      font-size: $link-font-size;
+    }
     > a:not('.btn') {
       position: relative;
       display: block;

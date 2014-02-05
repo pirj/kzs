@@ -30,12 +30,11 @@
 // The dropdown menu (ul)
 .dropdown-menu {
   z-index: $zindex-dropdown;
-  font-size: $font-size-base;
+  font-size: $btn-font-size;
   background-color: $dropdown-bg;
   border-radius: $border-radius-base;
   margin: $dropdown-arrow-width-base 0 0; // override default ul
   position: absolute;
-  font-size: 75%;
   top: 100%;
   left: 0;
   display: none; // none by default, but block on "open" of the menu
@@ -209,7 +208,7 @@
   font-family: $font-family-sans-serif-light;
 
   // caret must be bigger
-  .caret{ font-size: 14px; }
+  .caret{ font-size: $btn-font-size; }
 
   // dropdown header
   .dropdown-toggle{
@@ -240,7 +239,7 @@
     @include border-bottom-radius(15px);
 
     > li {
-      font-size: $font-size-h3;
+      font-size: $btn-font-size;
       padding: 0;
 
       // menu item divider

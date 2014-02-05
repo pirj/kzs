@@ -31,7 +31,7 @@ $ ->
       menu.push( library.link_to($h.attr('id'), $h.text()) )
 
       # find and construct submenu links
-      $subhs = $h.parents('.row').first().find('h5').not('.bs-example h5')
+      $subhs = $h.parents('.row').first().find('h3').not('.bs-example h3')
       if $subhs.length > 0
         menu.push('<li><ul>')
         _.each($subhs, (subh) ->
