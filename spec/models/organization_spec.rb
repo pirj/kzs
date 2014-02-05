@@ -12,7 +12,7 @@ describe Organization do
   end
 
   context 'associations' do
-    it { should have_many :users }
+    [:director, :accountant, :admin].map{|field| it {should belong_to(field).class_name('User')}}
     it { should have_many :licenses }
     it { should accept_nested_attributes_for(:licenses) }
   end

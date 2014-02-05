@@ -15,10 +15,9 @@ describe OrganizationsController do
 
   context 'GET index' do
     let!(:organization_2) { Organization.make!(title: 'Apple') }
-    it 'assigns all Organization' do
-      get :index, sort: 'title'
+    it 'assigns all Organization with decorator' do
+      get :index, sort: 'title', direction: 'asc'
       assigns(:organizations).should be_decorated_with Organizations::ListDecorator
-      #assigns(:organizations).should eq([organization_2, organization])
       assigns(:organizations).first.should eq(organization_2)
     end
   end
@@ -54,8 +53,9 @@ describe OrganizationsController do
 
   context 'GET show' do
     #let!(:organization) { Organization.make! }
-    it 'response status' do
+    it 'response status and template with decorator' do
       get :show, id: organization.id
+      assigns(:organization).should be_decorated_with Organizations::ShowDecorator
       expect(response.status).to eq(200)
     end
     it 'render view show' do
@@ -85,6 +85,13 @@ describe OrganizationsController do
     it 'redirect' do
       delete :destroy, {id: organization.id}
       response.should redirect_to(organizations_path)
+    end
+  end
+
+  context 'GET edit' do
+    it 'render template with decorator' do
+      get :edit, id: organization.id
+      assigns(:organization).should be_decorated_with Organizations::EditDecorator
     end
   end
 
