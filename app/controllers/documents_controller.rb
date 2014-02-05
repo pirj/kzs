@@ -1,10 +1,10 @@
 # encoding: UTF-8
 class DocumentsController < ApplicationController
-  layout 'documents'
   helper_method :sort_column, :sort_direction
-  # collection
-
   before_filter :authorize, :only => :edit
+
+  layout 'base'
+
 
   def index
     # check if user can view confindetnial documents
@@ -42,6 +42,7 @@ class DocumentsController < ApplicationController
 
     # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
 
+    @documents = Documents::ListDecorator.decorate(Document.all, with: Documents::ListShowDecorator)
     @controller = params[:controller]
 
     respond_to do |format|

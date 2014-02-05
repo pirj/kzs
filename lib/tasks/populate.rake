@@ -21,20 +21,28 @@ namespace :csv do
 end
 
 namespace :csv do
-  desc "Import car brans"
+  desc "Import car brands"
   task :import_car_brands => :environment do
+    CarBrandType.destroy_all
+    CarBrandType.reset_pk_sequence
+    CarBrandType.create(:title => 'Легковые автомобили')
+    CarBrandType.create(:title => 'Грузовики')
+    CarBrandType.create(:title => 'Спецтехника')
+
     CarBrand.destroy_all
     CarBrand.reset_pk_sequence
     csv_file_path = 'db/car_brands.csv'
     CSV.foreach(csv_file_path) do |row|
       row = CarBrand.create!({
         :title => row[0],   
-        :brand_type => row[1],       
+        :car_brand_type_id => row[1],
       })
       puts "Car brands imported!"
     end
   end
 end
+
+
 
 namespace :csv do
   desc "Import user document types"
@@ -110,6 +118,7 @@ namespace :documents do
       sender_organization = Organization.all.sample
       d.organization_id = organization.id
       d.sender_organization_id = sender_organization.id
+      d.recipient_id = sender_organization.id
       d.text = Populator.sentences(30..50)
       d.title = Faker::Lorem.words(3)
       d.user_id = User.find_by_organization_id(sender_organization.id)

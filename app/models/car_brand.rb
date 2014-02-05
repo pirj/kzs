@@ -1,6 +1,13 @@
 class CarBrand < ActiveRecord::Base
-  attr_accessible :title, :brand_type
+  attr_accessible :title, :car_brand_type_id
+  attr_accessor :types
+  belongs_to :car_brand_type
   
-  scope :passenger_cars, -> { where(brand_type: 1) }
-  scope :trucks, -> { where(brand_type: 2) }
+  scope :passenger_cars, -> { where(car_brand_type_id: 1) }
+  scope :trucks, -> { where(car_brand_type_id: 2) }
+  scope :special_cars, -> { where(car_brand_type_id: 3) }
+
+  def types
+    %w[passenger_car truck special_car]
+  end
 end

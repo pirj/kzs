@@ -1,0 +1,46 @@
+ru:
+  activerecord:
+    models:
+      document:
+        one: "Документ"
+        other: "Документы"
+        many: "Документы"
+        few: "Документы"
+
+    attributes:
+      document:
+        deadline:
+        file:
+        text:
+        title:
+        sn:
+        opened:
+        for_approve:
+        confidential:
+        organization_id:
+        recipient_id:
+        user_id:
+        approver_id:
+        executor_id:
+        sender_organization_id:
+        document_conversation_id:
+        deleted:
+        archived:
+        callback:
+        prepared:
+        draft:
+        approved:
+        document_type:
+        task_list_attributes:
+        document_ids:
+        organization_ids:
+        executor_ids:
+        approver_ids:
+        document_attachments:
+        attachment:
+        document_attachments_attributes:
+        prepared_date:
+        approved_date:
+        date:
+        sent:
+        sent_date:

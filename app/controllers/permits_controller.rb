@@ -1,7 +1,12 @@
 class PermitsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction
-  
+  before_filter :organizations, only: [:edit, :new]       #TODO: @vit need refactor
+  before_filter :permit_types, only: [:edit, :new]
+  before_filter :car_brand_types, only: [:edit, :new]
+  before_filter :car_brands, only: [:edit, :new]
+
+
   def index
     
     if params[:status_sort]
@@ -53,12 +58,13 @@ class PermitsController < ApplicationController
     
     
     drivers = params[:permit][:drivers]
-    drivers = drivers.delete_if{ |x| x.empty? }
+    #drivers = drivers.delete_if{ |x| x.empty? }
     @permit.save!
-    
-    vehicle = @permit.vehicle
-    vehicle.user_ids = drivers
-    vehicle.save!
+    if @permit.vehicle
+      vehicle = @permit.vehicle
+      vehicle.user_ids = drivers
+      vehicle.save!
+    end
     
     redirect_to @permit, notice: t('permit_request_created')
   end
@@ -190,5 +196,21 @@ class PermitsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end
-  
+
+  def organizations
+    @organizations ||= Organization.where(:id => current_user.organization_id).all
+  end
+
+  def permit_types            #TODO: @vit need check
+    @permit_types ||= Permit::PERMIT_CLASSES.map{ |a| [ t(a), a ] }
+  end
+
+  def car_brand_types
+    @car_brand_types ||= CarBrandType.all
+  end
+
+  def car_brands
+    @car_brands = CarBrand.all
+  end
+
 end

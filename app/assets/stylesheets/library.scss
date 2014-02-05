@@ -2,9 +2,11 @@
 *= require chosen
 *= require font-awesome
 *= require_tree ./plugins
-*= require ./application/sidebar
-*= require ./application/media
-*= require ./library/fonts
-*= require ./library/base
+*= require application/sidebar
+*= require application/media
+*= require library/fonts
+*= require library/base
 *= require_self
 */
+
+//@import "library/base";

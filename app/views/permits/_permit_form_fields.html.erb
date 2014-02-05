@@ -19,8 +19,8 @@
   
   <div id="permit_user_fields">
   <h3>1. Личные данные</h3>
-  <%= f.fields_for :user do |v| %>
-    <%= render 'user_fields', v: v %>
+  <%= f.simple_fields_for :user do |f| %>
+    <%= render 'user_fields', f: f %>
   <% end %>
   </div>
   
@@ -30,8 +30,8 @@
   <h3>1. Тип пропуска</h3>
   <div class="form-item"><%= f.select(:permit_class, Permit::PERMIT_CLASSES.map { |a| [ t(a), a ] }, { include_blank: false }, { :class => 'form-control col-xs-5'}) %></div>
   <h3>2. Данные техсредства</h3>
-  <%= f.fields_for :vehicle do |v| %>
-      <%= render 'vehicle_fields', v: v %>
+  <%= f.fields_for :vehicle do |f| %>
+      <%= render 'vehicle_fields', f: f %>
       <% end %>
   
   <h3>3. Водители</h3>
@@ -41,7 +41,7 @@
   <span class="checkbox-label">Согласно путевого листа</span>
   </label>
   </div>
-  <div class="form-item"><%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {:selected => @permit.vehicle.user_ids}, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %></div>
+  <div class="form-item"><%= f.collection_select(:drivers, @drivers, :id, :first_name_with_last_name, {multiple: true, :style=>'width:544px', :'data-placeholder' => "Добавьте водителей", :id => "permit_drivers"}) %></div>
 
   </div>
   <div class="form-item controls" id="date_fields">
@@ -51,8 +51,8 @@
 	
 	<div id="temporary_permit_fields">
 	  <h3>Разовый пропуск</h3>
-    <%= f.fields_for :daily_pass do |v| %>
-      <%= render 'daily_pass_fields', v: v %>
+    <%= f.fields_for :daily_pass do |f| %>
+      <%= render 'daily_pass_fields', f: f %>
     <% end %>
   </div>
 

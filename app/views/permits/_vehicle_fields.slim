@@ -1,0 +1,37 @@
+#permit_vehicle_fields
+
+
+
+  h3 1. Тип пропуска
+  .form-item = f.input :permit_class, collection: @permit_types, input_html: {class: 'js-chosen form-control' }
+    /# f.select(:permit_class, , { include_blank: false }, { class: 'form-control col-xs-5' })    #/label_method: :first_name_with_last_name
+  h3 2. Данные техсредства
+
+
+  = f.simple_fields_for :vehicle do |f|
+
+    = f.input :vehicle_body, collection: @car_brand_types, value_method: :title, input_html: {class: 'js-chosen form-control ' }
+
+    = f.input :brand, collection: @car_brand_types, as: :grouped_select, group_method: :car_brands, input_html: {class: ' js-chosen-search form-control' }
+      /#TODO @tag need add logic
+
+    - if @permit.new_record?
+
+      .form-item.controls
+        .form-group
+          .control-label.col-sm-3 Государственный регистрационный номер:
+          .col-sm-2 = f.input :first_letter, label: false, input_html: {class: 'form-control'}
+          .col-sm-2 = f.input :sn_number,label: false, input_html: {class: 'form-control' }
+          .col-sm-2 = f.input :second_letter,label: false, input_html: {class: 'form-control' }
+          .col-sm-2 = f.input :third_letter,label: false, input_html: {class: 'form-control' }
+
+
+  h3 3. Водители
+  .form-item
+    label.control.checkbox
+      = f.check_box :way_bill
+      /TODO: @tag need hide Drivers title
+      span.checkbox-label Согласно путевого листа
+
+
+  = f.input :drivers, collection: @drivers, label_method: :first_name_with_last_name, input_html: { multiple: true, class: 'js-chosen', data: { placeholder: 'Выберите водителей' } }

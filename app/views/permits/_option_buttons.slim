@@ -1,0 +1,11 @@
+label.control.radio
+  = f.radio_button :permit_type, 'user', :checked => true
+  span#user_type.radio-label Для сотрудника
+
+label.control.radio
+  = f.radio_button :permit_type, 'vehicle'
+  span#vehicle_type.radio-label На транспортное средство
+
+label.control.radio
+  = f.radio_button :permit_type, 'daily'
+  span#daily_pass.radio-label Разовый пропуск

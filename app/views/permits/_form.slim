@@ -1,0 +1,36 @@
+= simple_form_for resource, html: {class: 'form-horizontal'}, defaults: { input_wrapper_html: { class: 'col-sm-6' }, label_html: { class: 'col-sm-3' }, wrapper: :inline } do |f|
+
+  - if @permit.errors.any?
+    #error_explanation
+      h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
+      ul
+        - @permit.errors.full_messages.each do |msg|
+          li= msg
+
+
+  - if @permit.new_record?
+    = render 'option_buttons', f: f
+
+
+
+  = render 'user_fields', f: f
+
+
+  = render 'vehicle_fields', f: f
+
+
+
+
+
+  = render 'daily_fields', f: f
+
+
+  #date_fields.form-item.controls
+    .form-group
+      .control-label.col-sm-3 Пропуск действителен с
+      .col-sm-4 = f.input :start_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, label: false
+      .control-label.col-sm-1 по
+      .col-sm-4 = f.input :expiration_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, label: false
+
+  .actions
+    = f.submit 'Внести изменения', :class => 'btn btn-primary', :id => 'submitButton'

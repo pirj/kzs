@@ -1,7 +1,7 @@
 = content_for :page_header do
   = header_back_btn permits_path
   = header_title do
-    h1 Новый пропуск
+    h1 Редактирование
 
 
 - if @permit.errors.any?
@@ -11,4 +11,6 @@
       li #{msg}
 
 = render 'form', resource: @permit
+
+
 

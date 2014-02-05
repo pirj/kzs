@@ -46,7 +46,11 @@
 
   // padding between icon and text.
   // each must be inserting in 'span'
-  .fa + span, span + .fa{margin-left: 0.3em;}
+  .fa + span, span + .fa, span + .caret{margin-left: 0.5em;}
+
+  &.extra-right-padding{
+    margin-right: 1em;
+  }
 }
 
 // set offset right button from left

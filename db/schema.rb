@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131054516) do
+ActiveRecord::Schema.define(:version => 20140204091000) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,11 +53,17 @@ ActiveRecord::Schema.define(:version => 20140131054516) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "car_brands", :force => true do |t|
+  create_table "car_brand_types", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "brand_type"
+  end
+
+  create_table "car_brands", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "car_brand_type_id"
   end
 
   create_table "ckeditor_assets", :force => true do |t|

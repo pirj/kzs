@@ -21,6 +21,18 @@ $ ->
   $( ".js-chosen" ).chosen(
     disable_search_threshold: 1
     no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+    disable_search: true
+  )
+
+  # chosen-search
+  $( ".js-chosen-search" ).chosen(
+    disable_search_threshold: 1
+    no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+  #  disable_search: true !use chosen-container-single-nosearch
   )
 
   # button
