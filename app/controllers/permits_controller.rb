@@ -36,7 +36,25 @@ class PermitsController < ApplicationController
     
   end
 
-  def new
+  def user
+    @permit = Permit.new
+    authorize! :create, @permit
+    @vehicle = @permit.build_vehicle
+    @user = @permit.build_user
+    @daily_pass = @permit.build_daily_pass
+    @drivers = User.with_permit
+  end
+
+  def vehicle
+    @permit = Permit.new
+    authorize! :create, @permit
+    @vehicle = @permit.build_vehicle
+    @user = @permit.build_user
+    @daily_pass = @permit.build_daily_pass
+    @drivers = User.with_permit
+  end
+
+  def daily
     @permit = Permit.new
     authorize! :create, @permit
     @vehicle = @permit.build_vehicle
