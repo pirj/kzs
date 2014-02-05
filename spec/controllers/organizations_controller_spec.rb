@@ -7,20 +7,23 @@ describe OrganizationsController do
       }
     }
   end
-  let!(:user) { User.make! }
+  let!(:organization) { Organization.make!(title: 'Bell') }
+  let!(:user) { User.make!(organization: organization) }
   before :each do
     sign_in user
   end
 
-  describe 'GET index' do
-    let!(:organization) { Organization.make! }
+  context 'GET index' do
+    let!(:organization_2) { Organization.make!(title: 'Apple') }
     it 'assigns all Organization' do
-      get :index
-      assigns(:organizations).should eq([organization])
+      get :index, sort: 'title'
+      assigns(:organizations).should be_decorated_with Organizations::ListDecorator
+      #assigns(:organizations).should eq([organization_2, organization])
+      assigns(:organizations).first.should eq(organization_2)
     end
   end
 
-  describe 'POST create' do
+  context 'POST create' do
     it 'new object Organization' do
       expect {
         post :create, valid_attributes
@@ -37,7 +40,7 @@ describe OrganizationsController do
     end
   end
 
-  describe 'GET details' do
+  context 'GET details' do
     let!(:organization) { Organization.make! }
     it 'response status' do
       get :details, id: organization.id, format: :pdf
@@ -49,8 +52,8 @@ describe OrganizationsController do
     end
   end
 
-  describe 'GET show' do
-    let!(:organization) { Organization.make! }
+  context 'GET show' do
+    #let!(:organization) { Organization.make! }
     it 'response status' do
       get :show, id: organization.id
       expect(response.status).to eq(200)
@@ -61,20 +64,28 @@ describe OrganizationsController do
     end
   end
 
-  describe 'PUT update' do
-    let!(:organization) { Organization.make! }
-    let!(:organization_new) { Organization.make!(title: 'new title')}
-    it 'response status' do
-      put :update, {id: organization.id}, title: 'new title'
-      organization.title.should eq(title)
-      expect(response.status).to eq(200)
-    end
+  context 'PUT update' do
     it 'assigns the requested organization as @organization' do
-      put :update, {id: organization.id}, organization: organization_new
+      put :update, id: organization.id, organization: {title: 'new title'}
+      assigns(:organization).title.should eq('new title')
     end
+    it 'redirect' do
+      put :update, id: organization.id, organization: {title: 'new title'}
+      response.should redirect_to(edit_organization_path(organization.id))
+    end
+
   end
 
 
-
+  context 'DELETE destroy' do
+    it 'destroy organization' do
+      expect { delete :destroy, {id: organization.id}
+             }.to change(Organization, :count).by(-1)
+    end
+    it 'redirect' do
+      delete :destroy, {id: organization.id}
+      response.should redirect_to(organizations_path)
+    end
+  end
 
 end

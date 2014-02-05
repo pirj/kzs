@@ -31,7 +31,7 @@ class OrganizationsController < ApplicationController
 
   def edit
     organization = Organization.find(params[:id])
-    @users = @users = User.for_organization(organization.id)
+    @users = User.for_organization(organization.id)
     @organization = Organizations::EditDecorator.decorate(organization)
   end
 
