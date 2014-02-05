@@ -155,18 +155,30 @@ task :mercury do
   set :user, "babrovka"
   set :application, "kzs"
   set :deploy_to, "/srv/webdata/sakedev.kzsspb.ru"
+  set :deploy_via, :remote_cache
   set :use_sudo, false
 
-  set :scm, :none
-  set :repository, "."
-  set :deploy_via, :copy
-  set :local_repository, "."
-
-
-  set :branch, "master"
+  set :scm, "git"
+  set :repository, "git@github.com:babrovka/kzs.git"
+  set :branch, "temp"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
+
+
+  namespace :deploy do
+    namespace :assets do
+      task :precompile, :roles => :web, :except => { :no_release => true } do
+        from = source.next_revision(current_revision)
+        if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile --trace}
+        else
+          logger.info "Skipping asset pre-compilation because there were no asset changes"
+        end
+      end
+    end
+  end
+
 
 
   after "deploy", "deploy:cleanup"
