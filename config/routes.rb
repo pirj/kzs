@@ -42,6 +42,11 @@ Kzs::Application.routes.draw do
   end
   
   match '/document/executor_phone' => 'documents#executor_phone'
+
+
+  match '/permits/user' => 'permits#user'
+  match '/permits/vehicle' => 'permits#vehicle'
+  match '/permits/daily' => 'permits#daily'
   
   resources :permits do
     member do
@@ -55,6 +60,10 @@ Kzs::Application.routes.draw do
       get 'group_print'
     end
   end
+
+
+
+
   
   resources :statements do
     collection do

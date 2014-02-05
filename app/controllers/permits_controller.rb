@@ -1,10 +1,10 @@
 class PermitsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction
-  before_filter :organizations, only: [:edit, :new]       #TODO: @vit need refactor
-  before_filter :permit_types, only: [:edit, :new]
-  before_filter :car_brand_types, only: [:edit, :new]
-  before_filter :car_brands, only: [:edit, :new]
+  before_filter :organizations, only: [:edit, :new, :user, :car, :daily]       #TODO: @vit need refactor
+  before_filter :permit_types, only: [:edit, :new, :user, :car, :daily]
+  before_filter :car_brand_types, only: [:edit, :new, :user, :car, :daily]
+  before_filter :car_brands, only: [:edit, :new, :user, :car, :daily]
 
 
   def index
@@ -36,7 +36,25 @@ class PermitsController < ApplicationController
     
   end
 
-  def new
+  def user
+    @permit = Permit.new
+    authorize! :create, @permit
+    @vehicle = @permit.build_vehicle
+    @user = @permit.build_user
+    @daily_pass = @permit.build_daily_pass
+    @drivers = User.with_permit
+  end
+
+  def vehicle
+    @permit = Permit.new
+    authorize! :create, @permit
+    @vehicle = @permit.build_vehicle
+    @user = @permit.build_user
+    @daily_pass = @permit.build_daily_pass
+    @drivers = User.with_permit
+  end
+
+  def daily
     @permit = Permit.new
     authorize! :create, @permit
     @vehicle = @permit.build_vehicle
@@ -198,7 +216,7 @@ class PermitsController < ApplicationController
   end
 
   def organizations
-    @organizations ||= Organization.where(:id => current_user.organization_id).all
+    @organizations = Organization.all
   end
 
   def permit_types            #TODO: @vit need check
