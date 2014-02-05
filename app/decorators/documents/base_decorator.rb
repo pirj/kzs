@@ -17,10 +17,10 @@ module Documents
 
     # отдает дату в указанном формате
     # obj.date :date_format
-    def date *args
-      opts = args.extract_options!
-      DateFormatter.new(object.date, args.first)
-    end
+    #def date *args
+    #  opts = args.extract_options!
+    #  DateFormatter.new(object.date, args.first)
+    #end
 
 
   end

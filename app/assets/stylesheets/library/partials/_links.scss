@@ -14,3 +14,7 @@
   @include btn-link-dashed-style($link-muted-color, $link-muted-hover-color);
 }
 
+
+.link + .fa, .fa + .link{
+  margin-left: 5px;
+}
