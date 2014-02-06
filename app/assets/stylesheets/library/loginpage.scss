@@ -1,0 +1,63 @@
+.container.m-login-page{
+  height: 100%;
+  margin-top: -65px;
+  position: relative;
+
+
+}
+
+.sign-in{
+  height: 95%;
+  min-height: 500px;
+  position: relative;
+  //margin-bottom: -50px;
+  .container{
+   height: auto;
+    margin-top: 50px;
+    position: relative;
+  }
+
+  h1 {
+    margin: 40px 0 60px 0;
+    color: #00bc80;
+    text-align: center;
+    font-weight: 100;
+    font-size: 28px;
+  }
+
+  form {
+    margin: 0 auto;
+  }
+
+}
+
+.page-title {
+  line-height: 42px;
+  font-size: 22px;
+  color: #c7c7c7;
+  background: #ededed;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+
+.login-footer{
+  position: absolute;
+  height: 100px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  a {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: 15px 0;
+    img{
+
+    }
+  }
+
+}
