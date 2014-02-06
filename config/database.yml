@@ -20,7 +20,7 @@ production:
   adapter: postgresql
   host: mercury.cyclonelabs.com
   encoding: utf8
-  database: postgres
+  database: sakedev
   pool: 5
   username: sakedev
   password: OgyKQU3thbI8BdGU
