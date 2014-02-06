@@ -18,7 +18,7 @@ development:
 #mercury
 production:
   adapter: postgresql
-  host: mercury.cyclonelabs.com
+  host: localhost
   encoding: utf8
   database: sakedev
   pool: 5
