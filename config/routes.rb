@@ -44,7 +44,7 @@ Kzs::Application.routes.draw do
   match '/document/executor_phone' => 'documents#executor_phone'
 
 
-  match '/permits/user' => 'permits#user'
+  match '/permits/user' => 'permits#user', as: :new_user_permit
   match '/permits/vehicle' => 'permits#vehicle'
   match '/permits/daily' => 'permits#daily'
   

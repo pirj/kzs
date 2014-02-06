@@ -1,0 +1,110 @@
+
+= simple_form_for @permit, html: {class: 'form-horizontal'}, defaults: { input_html: {class: 'form-control'}, input_wrapper_html: { class: 'col-sm-6' }, label_html: { class: 'col-sm-3' }, wrapper: :inline } do |f|
+
+  - if @permit.errors.any?
+    #error_explanation
+      h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
+      ul
+        - @permit.errors.full_messages.each do |msg|
+          li= msg
+
+
+  #permit_vehicle_fields
+    = f.hidden_field :permit_type, value: 'vehicle'
+
+
+    .row
+      .col-md-3
+<<<<<<< HEAD
+<<<<<<< HEAD
+      h2.col-md-3   1. Данные ТС
+=======
+      h2.col-md-3   1. Данные техсредства
+>>>>>>> need temporary
+=======
+      h2.col-md-3   1. Данные ТС
+>>>>>>> permit edition
+    .form-item = f.input :permit_class, collection: @permit_types, input_html: {class: 'js-chosen form-control' }
+      /# f.select(:permit_class, , { include_blank: false }, { class: 'form-control col-xs-5' })    #/label_method: :first_name_with_last_name
+
+
+    = f.simple_fields_for :vehicle do |vehicle|
+
+      = vehicle.input :vehicle_body, collection: @car_brand_types, value_method: :title, input_html: {class: 'js-chosen form-control ' }
+
+      = vehicle.input :brand, collection: @car_brand_types, as: :grouped_select, group_method: :car_brands, input_html: {class: ' js-chosen-search form-control' }
+
+        /#TODO @tag need add logic
+
+
+      = vehicle.input :model,input_html: {class: '  form-control' }
+
+      - if @permit.new_record?
+
+        .form-item.controls
+          .form-group.m-shorten
+            .control-label.col-sm-3 Государственный регистрационный номер:
+            .col-sm-2 = vehicle.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8' }
+            .col-sm-3 = vehicle.input :sn_number,label: false, input_html: {class: 'form-control' }, input_wrapper_html: { class: 'col-sm-12' }
+            .col-sm-2 = vehicle.input :second_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
+            .col-sm-2 = vehicle.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
+
+
+        .form-item.controls
+          .form-group
+            .control-label.col-sm-3 Номер региона:
+            .col-sm-3 = vehicle.input :sn_region, collection: 01..199,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+
+
+    .row
+      .col-md-3
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> permit edition
+      h2.col-md-3   2. Водители
+    .form-item.controls
+      .form-group.m-shorten
+        .control-label.col-sm-3
+          |
+        label.control.checkbox.col-sm-5
+          = f.check_box :way_bill
+          /TODO: @tag need hide Drivers title
+          span.checkbox-label Согласно путевого листа
+<<<<<<< HEAD
+=======
+      h2.col-md-3   3. Водители
+    .form-item
+      label.control.checkbox
+        = f.check_box :way_bill
+        /TODO: @tag need hide Drivers title
+        span.checkbox-label Согласно путевого листа
+>>>>>>> need temporary
+=======
+>>>>>>> permit edition
+
+  = f.input :drivers, collection: @drivers, type: 'search',  label_method: :first_name_with_last_name, input_html: { multiple: true, class: 'js-chosen js-input-with-icon', data: { placeholder: 'Выберите водителей' } }
+  /span.input-group-icon.search
+  .row
+    .col-md-3
+    .col-md-9
+
+      =content_tag :div, class: 'text-muted text-left' do
+        span Не найти водителя в списке? Убедитесь, что у него есть действующий пропуск на пеший доступ.  Или &nbsp
+        = link_to 'создайте заявку на пропуск для сотрудника', new_user_permit_path, class: 'link'
+
+  br
+
+  #date_fields.form-item.controls
+    .form-group
+      .control-label.col-sm-3 Пропуск действителен с
+      .col-sm-2 = f.input :start_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' } ,input_html: { class: 'form-control ', placeholder: 'Дата начала'}, label: false
+      .control-label.col-sm-1.text-center  по
+      .col-sm-2 = f.input :expiration_date, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-12' }, input_html: { class: 'form-control ', placeholder: 'Дата окончания'}, label: false
+
+  .form-item.controls
+    .row
+      .control-label.col-md-3
+      .col-md-2.text-center = f.submit 'Создать заявку', :class => 'btn btn-primary', :id => 'submitButton'
+        /#TODO: @tag add variables to name this button
+      .col-md-2.text-center = link_to  'Отменить изменения', permits_url, :class => 'btn btn-link-muted'

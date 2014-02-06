@@ -3,7 +3,8 @@ class Permit < ActiveRecord::Base
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled, 
                   :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes, 
                   :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number
-  
+  after_initialize :default_permit_class
+
 
   
   has_one :user
@@ -47,5 +48,8 @@ class Permit < ActiveRecord::Base
     end
   end
 
-  
+  protected
+    def default_permit_class
+      self.permit_class = PERMIT_CLASSES.first
+    end
 end

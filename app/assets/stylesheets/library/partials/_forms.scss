@@ -377,6 +377,16 @@ input[type="checkbox"],
   // Make form groups behave like rows
   .form-group {
     @include make-row();
+    &.m-shorten{
+      .col-sm-2{
+        width: 12%;
+      }
+
+        .col-sm-6{
+          padding-right: 0;
+        }
+
+    }
   }
 
   .form-control-static {

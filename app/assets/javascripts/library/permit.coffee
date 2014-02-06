@@ -2,20 +2,29 @@
 
 jQuery ->
 
-  carBrands = $('#permit_vehicle_fields optgroup' )
-
-  $('#permit_vehicle_attributes_vehicle_body').change ->
-
-     #active-result result-selected
-
-    carBrancdGroup = $('#permit_vehicle_attributes_brand_chosen .chosen-results .group-result')
 
 
-    selectedType = $('#permit_vehicle_attributes_vehicle_body_chosen .chosen-single')[0].children[0].innerText #удаляем обертку
 
-    targetMark = _.filter(carBrands, (list) ->
-      return list.label is selectedType
-    )
+
+  $("#permit_way_bill").on "change", ->
+    $(".permit_drivers").toggle()
+
+
+
+#  carBrands = $('#permit_vehicle_fields optgroup' )
+#
+#  $('#permit_vehicle_attributes_vehicle_body').change ->
+#
+#     #active-result result-selected
+#
+#    carBrancdGroup = $('#permit_vehicle_attributes_brand_chosen .chosen-results .group-result')
+#
+#
+#    selectedType = $('#permit_vehicle_attributes_vehicle_body_chosen .chosen-single')[0].children[0].innerText #удаляем обертку
+#
+#    targetMark = _.filter(carBrands, (list) ->
+#      return list.label is selectedType
+#    )
 
   #$('permit_vehicle_attributes_brand_chosen').
 

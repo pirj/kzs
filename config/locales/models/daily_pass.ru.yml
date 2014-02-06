@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    attributes:
+      daily_pass:
+        last_name: Фамилия
+        first_name: Имя
+        middle_name: Отчество
+        id_type: Вид документа
+        id_sn: Серия и номер документа
+        vehicle: Автомобиль
+        object: Куда следует
+        person: К кому
+        issued: Выдан
+        guard_duty: Караульная служба
