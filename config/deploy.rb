@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
-require 'rvm/capistrano'
+# require 'rvm/capistrano'
 
 #selectel
 task :staging do
@@ -104,7 +104,7 @@ task :mercury do
   set :application, "kzs"
   set :deploy_to, "/srv/webdata/sakedev.kzsspb.ru"
   set :deploy_via, :remote_cache
-  set :use_sudo, true
+  set :use_sudo, false
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
@@ -129,15 +129,15 @@ task :mercury do
   
   namespace(:uwsgi) do
     task :stop do
-      run "sudo service uwsgi stop"
+      run "service uwsgi stop"
      end
   
     task :start do
-      run "sudo service uwsgi stop"
+      run "service uwsgi stop"
     end
   
     task :restart do
-      run "sudo service uwsgi stop"
+      run "service uwsgi stop"
     end
   end
   
