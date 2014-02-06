@@ -245,5 +245,4 @@ class PermitsController < ApplicationController
     @daily_document_type = [1, 2]
 
   end
-
 end
