@@ -9,6 +9,7 @@ class PermitsController < ApplicationController
   before_filter :daily_document_type, only: [:edit, :daily]
 
 
+
   def index
     
     if params[:status_sort]
@@ -239,7 +240,9 @@ class PermitsController < ApplicationController
     @number_letters =  Vehicle::LETTERS
   end
 
+
   def daily_document_type
     @daily_document_type = [1, 2]
   end
+
 end

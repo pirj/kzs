@@ -2,6 +2,7 @@
 
 jQuery ->
 
+<<<<<<< HEAD
 
 
 
@@ -10,6 +11,8 @@ jQuery ->
 
 
 
+=======
+>>>>>>> need temporary
 #  carBrands = $('#permit_vehicle_fields optgroup' )
 #
 #  $('#permit_vehicle_attributes_vehicle_body').change ->
