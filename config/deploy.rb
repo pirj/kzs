@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
-require 'rvm/capistrano'
+# require 'rvm/capistrano'
 
 #selectel
 task :staging do
@@ -128,16 +128,8 @@ task :mercury do
   end
   
   namespace(:uwsgi) do
-    task :stop do
-      run "service uwsgi stop"
-     end
-  
-    task :start do
-      run "service uwsgi stop"
-    end
-  
     task :restart do
-      run "service uwsgi stop"
+      run "sudo /home/babrovka/scripts/uwsgiRestart"
     end
   end
   
