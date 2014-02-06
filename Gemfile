@@ -22,7 +22,6 @@ gem 'slim'
 
 gem 'simple_form'
 gem 'draper'
-
 gem 'will_paginate'
 
 gem 'inherited_resources'
