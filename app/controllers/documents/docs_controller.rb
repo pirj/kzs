@@ -1,3 +1,3 @@
 class Documents::DocsController < ResourceController
-layout 'base'
+  layout 'base'
 end

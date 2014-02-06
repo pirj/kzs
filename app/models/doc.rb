@@ -9,6 +9,8 @@ class Doc < ActiveRecord::Base
                   :sender_organisation_id, # организация отправитель
                   :status_cache, #кэш статуса для общей таблицы
                   :title # заголовок(тема)
+                  #:signed_at та дата когда документ был подписан(возможно кэш)
+                  #
 
   belongs_to :accountabe, polymorphic: true
 
@@ -19,7 +21,14 @@ class Doc < ActiveRecord::Base
   belongs_to :sender_organization, class_name: 'Organization'
   belongs_to :reciever_organization, class_name: 'Organization'
 
+  # TODO: add paranoia - this will handle the destruction
 
+  #TODO: document should have many document attachments
 
+  #TODO: document should have many attached documents
+
+  #TODO: add proper validations
+
+  #TODO: pdf generation logic needs to be changed
 
 end

@@ -1,7 +1,4 @@
 class Documents::MailsController < ResourceController
-layout 'base'
+  layout 'base'
 
-  def new
-    new!
-  end
 end
