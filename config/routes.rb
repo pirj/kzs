@@ -21,6 +21,12 @@ Kzs::Application.routes.draw do
   get '/documents/approve'
   get '/documents/prepare'
   get '/documents/send_document'
+
+
+  # TODO: @justvitalius need to refactor together with documents resources
+  get '/documents/mail/new' => 'documents#mail'
+  get '/documents/order/new' => 'documents#order'
+
   resources :documents do
     collection do
       get 'sents'
