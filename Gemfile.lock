@@ -318,6 +318,8 @@ DEPENDENCIES
   faker
   font-awesome-rails
   haml
+  has_scope
+  inherited_resources
   jquery-rails (~> 2.3.0)
   launchy
   machinist (>= 2.0.0.beta2)
@@ -327,6 +329,7 @@ DEPENDENCIES
   populator
   prawn
   rails (= 3.2.13)
+  responders
   rmagick
   rspec-rails
   russian (~> 0.6.0)

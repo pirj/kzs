@@ -1,39 +1,39 @@
 class Document < ActiveRecord::Base
   attr_accessible :deadline, # распоряжение срок исполнения
-                  #:file, убираем
-                  #:text,
-                  #:title,
-                  :sn, уникальный серийный номер - можно его опустить
-                  #:opened,
-                  #:for_approve,
-                  :confidential,только для гендиректора
-                  #:organization_id,
-                  #:recipient_id,
-                  :user_id, тот который правил последним
-                  #:approver_id,
-                  #:executor_id,
-                  #:sender_organization_id,
+                  :file, #убираем
+                  :text,
+                  :title,
+                  :sn, #уникальный серийный номер - можно его опустить
+                  :opened,
+                  :for_approve,
+                  :confidential,#только для гендиректора
+                  :organization_id,
+                  :recipient_id,
+                  :user_id, #тот который правил последним
+                  :approver_id,
+                  :executor_id,
+                  :sender_organization_id,
                   :document_conversation_id,
-                  #:deleted,
-                  #:archived,
-                  #:callback,
-                  #:prepared,
-                  #:draft,
-                  #:approved,
-                  #:document_type,
+                  :deleted,
+                  :archived,
+                  :callback,
+                  :prepared,
+                  :draft,
+                  :approved,
+                  :document_type,
                   :task_list_attributes, #рапоряжение
                   :document_ids,
                   :organization_ids,
-                  #:executor_ids, исполнитель - уполнопоченное лицо
-                  #:approver_ids, контрольное лицо - уполномоченное лицо
+                  :executor_ids,# исполнитель
+                  :approver_ids,# контрольное лицо - уполномоченное лицо
                   :document_attachments,
-                  #:attachment,
+                  :attachment,
                   :document_attachments_attributes,
-                  #:prepared_date,
-                  #:approved_date,
-                  #:date,
-                  #:sent,
-                  #:sent_date
+                  :prepared_date,
+                  :approved_date,
+                  :date,
+                  :sent,
+                  :sent_date
 
   attr_accessor :organization_ids, :executor_ids, :approver_ids
 

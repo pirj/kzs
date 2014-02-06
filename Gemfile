@@ -25,6 +25,9 @@ gem 'draper'
 
 gem 'will_paginate'
 
+gem 'inherited_resources'
+gem 'has_scope'
+gem 'responders'
 # gem 'texticle', "2.0", :require => 'texticle/rails'
 
 group :assets do

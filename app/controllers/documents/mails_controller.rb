@@ -1,3 +1,3 @@
-class Documents::MailsController < ApplicationController
+class Documents::MailsController < ResourceController
 
 end

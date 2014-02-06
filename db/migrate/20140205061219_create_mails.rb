@@ -5,5 +5,7 @@ class CreateMails < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :mails, :conversation_id
   end
 end
