@@ -17,35 +17,50 @@
 
   / Organization select code
   .row
-    .col-md-7
+    .col-sm-7
       / TODO: @justvitalius refactor this code to simple_form association
       = f.input( :organization_id, collection: @organizations, label_method: :title, \
                 input_html: { include_blank: false, class: ' js-chosen', multiple: true, data: {target: 'mail-organizations' } }, \
                 input_wrapper_html: { class: 'col-md-12' } \
                 )
-    .col-md-3
-      = link_to 'Все организации', '#', class: 'js-select-all-in-select control-label text-left link-muted-dashed', data: { target: 'document-organizations' }
+    .col-sm-3
+      = link_to 'Все организации', '#', class: 'js-select-all-in-select text-left link-muted-dashed', data: { target: 'document-organizations' }
 
+  .row
+    .col-sm-3
+      = f.input(  :deadline, as: :datepicker, \
+                  wrapper: :icon_prepend, \
+                  label: false, \
+                  input_html: { placeholder: 'дата исполнения'}, \
+                  input_wrapper_html: { class: 'col-sm-12' } \
+                )
+    .col-sm-3
+      .text-help.control-label.text-left Дата исполнения
 
   = f.input(  :approver_id, collection: @approvers, label_method: :first_name_with_last_name, \
-              input_html: { class: ' js-chosen' }, \
+              input_html: { class: ' js-chosen', data:{ placeholder: 'Подтверждающий' } }, \
               label: false \
             )
 
 
   = f.input(  :executor_id, collection: @approvers, label_method: :first_name_with_last_name, \
-                input_html: { class: ' js-chosen' }, \
+                input_html: { class: ' js-chosen', data:{ placeholder: 'Исполняющий' }}, \
                 label: false \
               )
 
   = f.input :text, input_html: { rows: 14 }
+
+
+  h4 Прикрепленные задачи
+  = f.fields_for :task_list do |builder|
+    = render 'documents/task_list_fields', f: builder
+
 
   h4 Прикрепленные файлы
   = f.fields_for :document_attachments do |builder|
     = render 'documents/document_attachment_fields', f: builder
     = link_to_add_attachments "Прикрепить файл", f, :document_attachments
 
-  / TODO: @justvitalius what means to ‘attach documents'
   h4.col-md-12
     a.addDocBut
       | Прикрепить документы
