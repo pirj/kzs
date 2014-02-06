@@ -151,5 +151,11 @@ task :mercury do
     end
   end
   
+  namespace(:populate) do
+    task :documents do
+      run %Q{cd #{latest_release} && bundle exec rake documents:create RAILS_ENV=production}
+    end
+  end
+  
   after "deploy", "deploy:cleanup"
 end
