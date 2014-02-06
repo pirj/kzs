@@ -1,8 +1,5 @@
-.page-title.row-fuild
-  .text-center
-    a.logo[href="#"]
-      img[alt="Менеджер КЗС" src="/assets/mkzs-logo.png"]
-.container.sign-in
+
+.container
   .row
     .text-center
       h1
@@ -20,28 +17,11 @@
           .col-sm-3
             = f.submit "Вход", :class => 'btn btn-default'
 
-  /#about.modal.fade[tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"]
-    .modal-dialog
-      .modal-content
-        .modal-header
-          button.close[type="button" data-dismiss="modal" aria-hidden="true"]
-            | ×
-          h4.modal-title.all-center
-            | Чо такое САКЭ?
-        .modal-body
-          p
-            | Система автоматизированного контроля за эксплуатацией Комплекса защитных сооружений Санкт-Петербурга — это веб-система, созданная компанией 
-            a[href="http://ziklon.ru/"]
-              | «Циклон»
-            |  для удобной организации документооборота, назначения задач, планирования сроков и этапов эксплуатации, учета труда, ресурсов, контроля за ситуацией на дамбе и других задач, связанных с эксплуатацией КЗС. Для начала работы в САКЭ вам необходимо авторизоваться или получить код доступа у ответственного в вашей огранизаци Система автоматизированного контроля за эксплуатацией Комплекса защитных сооружений Санкт-Петербурга — это веб-система, созданная компанией «Циклон» для удобной организации документооборота, назначения задач, планирования сроков и этапов эксплуатации, учета труда, ресурсов, контроля за ситуацией на дамбе и других задач, связанных с эксплуатацией КЗС. 
-            br
-            br
-            |  Для начала работы в САКЭ вам необходимо авторизоваться или получить код доступа у ответственного в вашей огранизации. 
-  .footer-helper
-footer.navbar-fixed-bottom
-  a#logo1.col-lg-7[href="#"]
+
+.login-footer.row
+  a#logo1.col-md-7[href="#"]
     img[src="/assets/logo-dir.png" alt=""]
-  a#logo2.col-lg-2[href="#"]
+  a#logo2.col-md-2[href="#"]
     img[src="/assets/logo-metro.png" alt=""]
-  a#logo3.col-lg-3[href="#"]
+  a#logo3.col-md-3[href="#"]
     img[src="/assets/logo-cyclone.png" alt=""]
