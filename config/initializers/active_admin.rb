@@ -19,7 +19,7 @@ ActiveAdmin.setup do |config|
   
   config.before_filter :check_admin_role
   
-  
+  config.on_unauthorized_access = :access_denied
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.

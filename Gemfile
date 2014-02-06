@@ -22,7 +22,6 @@ gem 'slim'
 
 gem 'simple_form'
 gem 'draper'
-
 gem 'will_paginate'
 
 # gem 'texticle', "2.0", :require => 'texticle/rails'

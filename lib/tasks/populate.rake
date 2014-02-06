@@ -13,28 +13,68 @@ namespace :csv do
         :id => row[0],
         :title => row[1],
         :description => row[2],        
-      })
-      
+      })  
     end
     puts "Permissions imported!"
   end
 end
 
-namespace :users do
-  task :create_admin => :environment do
-    if User.exists?(:username => 'admin')
-      puts "Admin user already exists"
-    else
-      User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :password => 'admin', :password_confirmation => 'admin')
-      user = User.find_by_username('admin')
-      user.sys_user = true
-      permissions = Permission.all
-      user.permissions << permissions
-      user.save!
-      puts "Admin user created"
+namespace :csv do
+  desc "Import permissions"
+  task :organizations => :environment do
+    Organization.destroy_all
+    Organization.reset_pk_sequence
+    csv_file_path = 'db/csv/organizations.csv'
+    CSV.foreach(csv_file_path) do |row|
+      row = Organization.create({
+        :id => row[0],
+        :title => row[1],   
+        :parent_id => row[2], 
+        :director_id => row[3],  
+        :short_title => row[4],  
+        :admin_id => row[5],  
+        :type_of_ownership => row[6]          
+      })
     end
+    puts "Organizations imported"    
   end
 end
+
+namespace :csv do
+  desc "Import permissions"
+  task :users => :environment do
+    
+    User.destroy_all
+    User.reset_pk_sequence
+    csv_file_path = 'db/csv/users.csv'
+    CSV.foreach(csv_file_path) do |row|
+      row = User.create({
+        :id => row[0],
+        :organization_id => row[1],   
+        :position => row[2], 
+        :first_name => row[3],  
+        :middle_name => row[4],  
+        :last_name => row[5],  
+        :username => row[6],       
+        :password => row[7],    
+        :password_confirmation => row[8],    
+        :sys_user => row[9]  
+      })
+      
+    end
+      puts "Users imported"
+    
+    permissions = Permission.all
+    User.all.each do |user|
+      user.permissions << permissions
+      user.save!
+    end
+    puts "Permissions addded"
+  
+  end
+end
+
+
 
 namespace :csv do
   desc "Import car brands"
@@ -73,23 +113,6 @@ namespace :csv do
     end
   end
 end
-
-
-namespace :organizations do
-  task :add_organizations => :environment do
-    Organization.destroy_all
-    Organization.reset_pk_sequence
-    csv_file_path = 'db/csv/organizations.csv'
-    CSV.foreach(csv_file_path) do |row|
-      row = UserDocumentType.create!({
-        :id => row[0],
-        :title => row[1]   
-      })
-      puts "Organizations imported"
-    end
-  end
-end
-
 
 namespace :documents do
   task :create => :environment do
@@ -133,5 +156,19 @@ end
 # end
 
 
-
+# namespace :users do
+#   task :create_admin => :environment do
+#     if User.exists?(:username => 'admin')
+#       puts "Admin user already exists"
+#     else
+#       User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :password => 'admin', :password_confirmation => 'admin')
+#       user = User.find_by_username('admin')
+#       user.sys_user = true
+#       permissions = Permission.all
+#       user.permissions << permissions
+#       user.save!
+#       puts "Admin user created"
+#     end
+#   end
+# end
 
