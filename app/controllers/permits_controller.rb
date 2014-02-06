@@ -243,6 +243,7 @@ class PermitsController < ApplicationController
 
   def daily_document_type
     @daily_document_type = [1, 2]
+
   end
 
 end
