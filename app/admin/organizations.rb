@@ -1,5 +1,7 @@
 ActiveAdmin.register Organization do
-
+    config.batch_actions = false
+    config.sort_order = "id_asc"
+    filter :title, :as => :string
 
      index do
        column :id

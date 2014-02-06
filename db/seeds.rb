@@ -1,3 +1,3 @@
-# create admin
 Rake::Task['csv:import_permissions'].invoke
-Rake::Task['users:create_admin'].invoke
+Rake::Task['csv:organizations'].invoke
+Rake::Task['csv:users'].invoke
