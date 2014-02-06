@@ -2,6 +2,14 @@
 
 jQuery ->
 
+
+
+
+  $("#permit_way_bill").on "change", ->
+    $(".permit_drivers").toggle()
+
+
+
 #  carBrands = $('#permit_vehicle_fields optgroup' )
 #
 #  $('#permit_vehicle_attributes_vehicle_body').change ->

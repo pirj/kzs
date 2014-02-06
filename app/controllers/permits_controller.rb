@@ -6,6 +6,7 @@ class PermitsController < ApplicationController
   before_filter :car_brand_types, only: [:edit, :user, :vehicle, :daily]
   before_filter :car_brands, only: [:edit, :user, :vehicle, :daily]
   before_filter :number_letters, only: [:edit, :vehicle, :daily]
+  before_filter :daily_document_type, only: [:edit, :daily]
 
 
   def index
@@ -238,6 +239,8 @@ class PermitsController < ApplicationController
     @number_letters =  Vehicle::LETTERS
   end
 
-
+  def daily_document_type
+    @daily_document_type = ['Паспорт', 'Военный билет']
+  end
 
 end
