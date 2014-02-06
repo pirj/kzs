@@ -240,7 +240,6 @@ class PermitsController < ApplicationController
   end
 
   def daily_document_type
-    @daily_document_type = ['Паспорт', 'Военный билет']
+    @daily_document_type = [1, 2]
   end
-
 end
