@@ -1,0 +1,13 @@
+= simple_form_for [:documents, resource], :html=>{:class=>"form form-horizontal"} do |f|
+  - (form_attributes-association_attributes).each_with_index do |attr, index|
+    = f.input attr.to_sym, :input_html=>{:class=>"input-xxlarge", :autofocus=>(index==0)}
+  - associations(:belongs_to).each do |assoc|
+    = f.association assoc.name.to_sym
+  - resource.document || resource.build_document
+  = f.simple_fields_for(:document) do |doc|
+    - (resource.document.attribute_names-['created_at', 'updated_at']).each do |attr|
+      = doc.input attr
+
+  .control-group
+    .controls
+      = f.submit :class=>"btn btn-success"
