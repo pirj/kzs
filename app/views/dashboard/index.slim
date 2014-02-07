@@ -1,0 +1,41 @@
+.wrapper
+  .page-title.row-fuild
+    .text-center
+      a.logo[href="#"]
+        img[alt="Менеджер КЗС" src="/assets/mkzs-logo.png"]
+
+  .container
+    section.main-desktop-title
+      h3 Главный рабочий стол
+
+      .row-fuild.clearfix.edit-nav
+        .col-md-3.col-md-offset-3.column
+          button.btn.default-primary.save type='button'
+            | Сохранить изменения
+
+        div id="exit-edit" class="col-md-3 column"
+          a type="button" href="#"
+            | Выйти из режима редактирования
+
+    div.row.clearfix
+      .col-md-12.column
+        .gridster
+          ul
+            li data-row="1" data-col="2" data-sizex="2" data-sizey="2" class="widget widget-docs"
+              a href="/documents"
+                span class="widget-name"
+                  | Документооборот
+
+            li data-row="1" data-col="1" data-sizex="2" data-sizey="2" class="widget widget-admission"
+              a href="/permits"
+                span class="widget-name"
+                  | Пропуска
+
+            li data-row="3" data-col="5" data-sizex="2" data-sizey="1" class="widget widget-org"
+              a href="/organizations"
+                span class="widget-name" Организации и сотрудники
+  .row.text-center
+    a href="#" class="btn-default btn-sm btn" id="edit-current-desktop" Редактировать рабочий стол
+    a class="btn-default btn-sm btn" id="cancel-edit-current-desktop" Отмена
+
+    = link_to "Выйти", destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn'
