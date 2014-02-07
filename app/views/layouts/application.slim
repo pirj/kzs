@@ -1,0 +1,17 @@
+doctype
+html
+  head
+    title Default Application Layout
+    = csrf_meta_tags
+    = yield(:head)
+  body
+    div
+      - unless controller?('devise/sessions')
+        #sidebar
+          = render 'shared/left'
+      .page
+        - if notice
+          .alert.alert-success= notice
+        - if alert
+          .alert.alert-error= alert
+        = yield
