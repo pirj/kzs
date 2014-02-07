@@ -1,0 +1,14 @@
+doctype
+html
+  head
+    title Kzs
+    script src="/assets/dashboard/jquery.min.js" type="text/javascript"
+    script src="/assets/dashboard/jquery.gridster.min.js" type="text/javascript"
+
+    = stylesheet_link_tag    "/assets/application", :media => "all"
+    = javascript_include_tag "/assets/dashboard/application"
+    = csrf_meta_tags
+    = yield(:head)
+  body
+    - unless controller?('devise/sessions')
+      = yield
