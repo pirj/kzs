@@ -5,7 +5,13 @@
 
 
 $(function(){
-
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token',
+                $('meta[name="csrf-token"]').attr('content'));
+            console.log($('meta[name="csrf-token"]').attr('content'));
+        }
+    });
     var request = $.ajax({
         url: "/dashboard.json",
         type: "GET",

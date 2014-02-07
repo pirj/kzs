@@ -74,7 +74,11 @@
           </ul>
         </li>
         <li class="exit">
-
+<%= if user_signed_in?
+        '123123'
+      else
+      '0'
+    end%>
           <%= link_to "Выйти", destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn' %>
         </li>
       </ul>

@@ -15,15 +15,9 @@
 
     .row
       .col-md-3
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       h2.col-md-3   1. Данные ТС
-=======
-      h2.col-md-3   1. Данные техсредства
->>>>>>> need temporary
-=======
-      h2.col-md-3   1. Данные ТС
->>>>>>> permit edition
+
     .form-item = f.input :permit_class, collection: @permit_types, input_html: {class: 'js-chosen form-control' }
       /# f.select(:permit_class, , { include_blank: false }, { class: 'form-control col-xs-5' })    #/label_method: :first_name_with_last_name
 
@@ -58,10 +52,7 @@
 
     .row
       .col-md-3
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> permit edition
+
       h2.col-md-3   2. Водители
     .form-item.controls
       .form-group.m-shorten
@@ -71,17 +62,7 @@
           = f.check_box :way_bill
           /TODO: @tag need hide Drivers title
           span.checkbox-label Согласно путевого листа
-<<<<<<< HEAD
-=======
-      h2.col-md-3   3. Водители
-    .form-item
-      label.control.checkbox
-        = f.check_box :way_bill
-        /TODO: @tag need hide Drivers title
-        span.checkbox-label Согласно путевого листа
->>>>>>> need temporary
-=======
->>>>>>> permit edition
+
 
   = f.input :drivers, collection: @drivers, type: 'search',  label_method: :first_name_with_last_name, input_html: { multiple: true, class: 'js-chosen js-input-with-icon', data: { placeholder: 'Выберите водителей' } }
   /span.input-group-icon.search
