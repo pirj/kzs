@@ -2,7 +2,7 @@
 module Organizations
   class ShowDecorator < Organizations::BaseDecorator
     decorates :organization
-    delegate_all
+    delegate :id
 
     ATTACH_ATTR = [:certificate_of_tax_registration, :articles_of_organization, :creation_resolution, :egrul_excerpt]
     USER_ATTR =   [:director, :accountant]
@@ -43,8 +43,10 @@ module Organizations
     # render connected user
     def user_info(method, *args)
       user = object.public_send(method)
-      label(method) +
-      h.link_to( user.first_name_with_last_name, h.user_path(user), class: 'link-dashed' )
+
+      out = label(method) +
+            h.link_to( user.first_name_with_last_name, h.user_path(user), class: 'link-dashed' )
+      out.html_safe
     end
 
     # render saved date

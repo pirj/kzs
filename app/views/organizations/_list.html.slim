@@ -21,9 +21,9 @@ table.table.js-row-clickable.m-table-replacement
           .col-sm-8
             .form-horizontal
               .form-group
-                .col-sm-3.control-label тип
+                .col-sm-3.control-label название
                 .col-sm-9
-                  h2.important = res
+                  h2 = res.full_title
                   h4.btn-link-muted.btn-no-hover = "#{res.users_count} человек в штате"
 
 
@@ -40,13 +40,14 @@ table.table.js-row-clickable.m-table-replacement
                   = res.director_avatar
                   = link_to res.director.first_name_with_last_name, user_path(res.director), class: 'link-dashed' if res.director
 
-              .col-sm-9.col-sm-offset-3
-                ul.list-unstyled
-                  li = link_to 'скачать все реквизиты', '#'
+              .form-group
+                .col-sm-9.col-sm-offset-3
+                  ul.list-unstyled
+                    li = link_to 'скачать все реквизиты', '#'
 
-              .col-sm-9.col-sm-offset-3
-                = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default'
-                = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
+                .col-sm-9.col-sm-offset-3
+                  = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default' if is_may_edit_organization(res.id)
+                  = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
 
           .col-sm-4
             h2.text-right = res.phone

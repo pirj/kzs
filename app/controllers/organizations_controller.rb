@@ -30,7 +30,7 @@ class OrganizationsController < ApplicationController
 
 
   def edit
-    unless is_may_edit_organization
+    unless is_may_edit_organization(params[:id])
       redirect_to organizations_path, notice: 'У вас нет прав редактировать выбранную организацию'
     end
     organization = Organization.find(params[:id])
@@ -79,9 +79,9 @@ class OrganizationsController < ApplicationController
   end
 
 
-  def is_may_edit_organization
-    # because of params[:id] is String and current_user.organization_id is Integer, we need coding integer to string for comparison
-    if params[:id] == current_user.organization_id.to_s && current_user.has_permission?(13)
+  def is_may_edit_organization id
+    # because id maybe String or Integer and current_user.organization_id is only Integer, we need coding integer to string for comparison
+    if id.to_s == current_user.organization_id.to_s && current_user.has_permission?(13)
       true
     else
       false
