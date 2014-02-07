@@ -58,30 +58,31 @@
       </div>
     </div>
   </div>
-  <footer class="row clearfix container">
-    <nav>
-      <ul class="col-md-9 col-md-offset-3 nav nav-pills bottom-nav clearfix">
-        <!--<li><a href="#" class="btn btn-primary btn-sm">Главный рабочий стол</a></li>-->
-        <!--<li><a href="#" class="btn btn-sm">Диспетчерская</a></li>-->
-        <!--<li><a href="#" class="btn btn-sm">Общение</a></li>-->
-        <li class="dropdown"><a href="#" class="btn btn-sm icon-cog" data-toggle="dropdown"></a>
-          <ul class="dropdown-menu" role="menu">
-            <!--<li><a href="#" class="icon-plus-1">Добавить рабочий стол</a></li>-->
-            <li><a href="#" class="icon-pencil" id="edit-current-desktop">Редактировать рабочий стол</a></li>
-            <li class="dropdown-arr"></li>
-            <li><a  class="icon-block-1" id="cancel-edit-current-desktop">Отмена</a></li>
+  <a href="#" class="icon-pencil" id="edit-current-desktop">Редактировать рабочий стол</a>
+  <!--<footer class="row clearfix container">-->
+    <!--<nav>-->
+      <!--<ul class="col-md-9 col-md-offset-3 nav nav-pills bottom-nav clearfix">-->
+        <!--&lt;!&ndash;<li><a href="#" class="btn btn-primary btn-sm">Главный рабочий стол</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li><a href="#" class="btn btn-sm">Диспетчерская</a></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;<li><a href="#" class="btn btn-sm">Общение</a></li>&ndash;&gt;-->
+        <!--<li class="dropdown"><a href="#" class="btn btn-sm icon-cog" data-toggle="dropdown"></a>-->
+          <!--<ul class="dropdown-menu" role="menu">-->
+            <!--&lt;!&ndash;<li><a href="#" class="icon-plus-1">Добавить рабочий стол</a></li>&ndash;&gt;-->
+            <!--<li><a href="#" class="icon-pencil" id="edit-current-desktop">Редактировать рабочий стол</a></li>-->
+            <!--<li class="dropdown-arr"></li>-->
+            <!--<li><a  class="icon-block-1" id="cancel-edit-current-desktop">Отмена</a></li>-->
 
-          </ul>
-        </li>
-        <li class="exit">
+          <!--</ul>-->
+        <!--</li>-->
+        <!--<li class="exit">-->
 <%= if user_signed_in?
-        '123123'
-      else
-      '0'
+#        '123123'
+#      else
+#      '0'
     end%>
-          <%= link_to "Выйти", destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn' %>
-        </li>
-      </ul>
-    </nav>
-  </footer>
+          <!--<%= link_to "Выйти", destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn' %>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</nav>-->
+  <!--</footer>-->
 </div>
