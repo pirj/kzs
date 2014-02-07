@@ -3,18 +3,18 @@ class Doc < ActiveRecord::Base
                   :accountable_type, #
                   :approver_id, # пользователь подписант
                   :body, # текст
+                  :confidential,#(флаг на прочтение)
                   :executor_id, # пользователь исполнитель
                   :reciever_organisation_id, # организация получатель
-                  #:author_id, # пользователь создатель
                   :sender_organisation_id, # организация отправитель
                   :status_cache, #кэш статуса для общей таблицы
                   :title # заголовок(тема)
-                  #:signed_at та дата когда документ был подписан(возможно кэш)
-                  #
+
+                  #TODO: кого хранить пользователя, создавшего или пользователя, который послденим изменил документ
+                  #TODO: после стейт машин необходимо добавить signed_at, - дата когда документ был подписан(возможно кэш)
 
   belongs_to :accountabe, polymorphic: true
 
-  #belongs_to :author, class_name: 'User'
   belongs_to :approver, class_name: 'User'
   belongs_to :executor, class_name: 'User'
 

@@ -7,6 +7,7 @@ class Mail < ActiveRecord::Base
   has_one :document, as: :accountable, class_name: 'Doc', dependent: :destroy
   accepts_nested_attributes_for :document
 
+
   def method_missing(method, *args)
     return document.send(method, *args) if document.respond_to?(method)
     super

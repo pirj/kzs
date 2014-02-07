@@ -1,15 +1,17 @@
 class CreateDocs < ActiveRecord::Migration
   def change
     create_table :docs do |t|
-      t.string :title
+      t.string :title, null: false
+      t.string :serial_number
       t.text :body
-      t.integer :sender_organisation_id
-      t.integer :reciever_organisation_id
-      t.integer :approver_id
-      t.integer :executor_id
+      t.boolean :confidential, null: false, default: false
+      t.integer :sender_organisation_id, null: false
+      t.integer :reciever_organisation_id, null: false
+      t.integer :approver_id, null: false
+      t.integer :executor_id, null: false
       t.string :status_cache
-      t.string :accountable_type
-      t.integer :accountable_id
+      t.string :accountable_type, null: false
+      t.integer :accountable_id, null: false
 
       t.timestamps
     end

@@ -16,8 +16,14 @@ Kzs::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   namespace :documents do
-    resources :docs#, only: 'index'
-    resources :mails#, except: 'index'
+    resources :docs, only: 'index'
+    #batch actions go on docs
+    resources :mails, except: 'index'
+    #member actions for status changes
+    resources :wirts, except: 'index'
+    #member actions for status changes
+    resources :report, except: 'index'
+    #member actions for status changes
   end
 
   match '/documents/batch' => 'documents#batch'
