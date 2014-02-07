@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   layout 'base'
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :is_may_edit_organization
   
   def index
     collection = Organization.order(sort_column + " " + sort_direction)
@@ -30,6 +30,9 @@ class OrganizationsController < ApplicationController
 
 
   def edit
+    unless is_may_edit_organization
+      redirect_to organizations_path, notice: 'У вас нет прав редактировать выбранную организацию'
+    end
     organization = Organization.find(params[:id])
     @users = User.for_organization(organization.id)
     @organization = Organizations::EditDecorator.decorate(organization)
@@ -74,4 +77,15 @@ class OrganizationsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
+
+
+  def is_may_edit_organization
+    # because of params[:id] is String and current_user.organization_id is Integer, we need coding integer to string for comparison
+    if params[:id] == current_user.organization_id.to_s && current_user.has_permission?(13)
+      true
+    else
+      false
+    end
+  end
+
 end
