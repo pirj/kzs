@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
-require 'rvm/capistrano'
+# require 'rvm/capistrano'
 
 #selectel
 task :staging do
@@ -128,16 +128,32 @@ task :mercury do
   end
   
   namespace(:uwsgi) do
-    task :stop do
-      run "service uwsgi stop"
-     end
-  
-    task :start do
-      run "service uwsgi stop"
-    end
-  
     task :restart do
-      run "service uwsgi stop"
+      run "sudo /home/babrovka/scripts/uwsgiRestart"
+    end
+  end
+  
+  namespace(:populate) do
+    task :permissions do
+      run %Q{cd #{latest_release} && bundle exec rake csv:import_permissions RAILS_ENV=production}
+    end
+  end
+  
+  namespace(:populate) do
+    task :users do
+      run %Q{cd #{latest_release} && bundle exec rake csv:users RAILS_ENV=production}
+    end
+  end
+  
+  namespace(:populate) do
+    task :organizations do
+      run %Q{cd #{latest_release} && bundle exec rake csv:organizations RAILS_ENV=production}
+    end
+  end
+  
+  namespace(:populate) do
+    task :documents do
+      run %Q{cd #{latest_release} && bundle exec rake documents:create RAILS_ENV=production}
     end
   end
   
