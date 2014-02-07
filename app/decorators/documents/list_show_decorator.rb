@@ -11,19 +11,23 @@ module Documents
     end
 
     def sender
-      h.link_to object.sender.title, h.organization_path(object.sender), class: 'link' if object.sender
+      if object.sender
+        h.link_to object.sender.title, h.organization_path(object.sender), class: 'link' if object.sender
+      end
     end
 
     def sender_name
-      object.sender.title
+      object.sender.try(:title)
     end
 
     def recipient
-      h.link_to object.recipient.title, h.organization_path(object.recipient), class: 'link' if object.recipient
+      if object.recipient
+        h.link_to object.recipient.title, h.organization_path(object.recipient), class: 'link' if object.recipient
+      end
     end
 
     def recipient_name
-      object.recipient.title
+      object.recipient.try(:title)
     end
 
     def recipient_avatar
@@ -62,9 +66,11 @@ module Documents
     # render
     # Sender_link --> Recipient_link
     def sender_to_recipient
-      h.link_to( sender_name, h.organization_path(object.sender), class: 'link link-muted' ) +
-      h.content_tag(:span, nil, class: 'fa fa-long-arrow-right text-muted')+
-      h.link_to( recipient_name, h.organization_path(object.recipient), class: 'link link-muted' )
+      if object.sender && object.recipient
+        h.link_to( sender_name, h.organization_path(object.sender), class: 'link link-muted' ) +
+        h.content_tag(:span, nil, class: 'fa fa-long-arrow-right text-muted')+
+        h.link_to( recipient_name, h.organization_path(object.recipient), class: 'link link-muted' )
+      end
     end
 
   end

@@ -117,10 +117,12 @@ end
 namespace :documents do
   task :create => :environment do
     Document.destroy_all
+    UserDocumentType.reset_pk_sequence
     Document.populate 40 do |d|
-      organization = Organization.all.sample
-      sender_organization = Organization.all.sample
+      organization = Organization.last
+      sender_organization = Organization.last
       d.organization_id = organization.id
+      d.recipient_id = organization.id
       d.sender_organization_id = sender_organization.id
       d.text = Populator.sentences(30..50)
       d.title = Faker::Lorem.words(3)
@@ -128,6 +130,7 @@ namespace :documents do
       d.approver_id = User.find_by_organization_id(sender_organization.id)
       d.sent = true
     end
+    puts 'Documents created'
   end
 end
 

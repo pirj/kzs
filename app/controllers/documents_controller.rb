@@ -40,8 +40,9 @@ class DocumentsController < ApplicationController
       documents # any other case
     end
 
-    # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
 
+    # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
+    # TODO: @justvitalius delete this method after testing.
     @documents = Documents::ListDecorator.decorate(Document.all, with: Documents::ListShowDecorator)
     @controller = params[:controller]
 
