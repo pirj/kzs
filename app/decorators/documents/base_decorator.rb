@@ -15,6 +15,14 @@ module Documents
       h.edit_document_path(object)
     end
 
+    def recipient_name
+      object.recipient.try(:title)
+    end
+
+    def sender_name
+      object.sender.try(:title)
+    end
+
     # отдает дату в указанном формате
     # obj.date :date_format
     #def date *args

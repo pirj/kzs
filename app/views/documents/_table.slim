@@ -1,4 +1,4 @@
-- attrs = [:number, :sender, :recipient, :type, :attachment, :status]
+- attrs = [:number_and_date, :sender_link, :recipient_link, :type, :attachment_icon, :status]
 table.table.js-row-clickable.m-table-replacement
   thead
     tr
@@ -10,50 +10,24 @@ table.table.js-row-clickable.m-table-replacement
     - collection.each do |resource|
       / simple row with short information
       tr data-id = resource.id
-        td = check_box_tag :selected_id, resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
+        td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
         - attrs.each do |attr|
           td = resource.send(attr.to_sym)
 
       /row with extra information
-      tr data-id = resource.id class = 'more-info js-more-info '
-        td[ colspan = "#{attrs.count}" ]
+      tr[ data-id=resource.id class='more-info js-more-info' ]
+        td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
+        td[ colspan=attrs.count-1 ]
+          h2 = resource.title_link
           .row
-            .col-sm-9
-              .form-horizontal
-                .form-group
-                  .col-sm-1
-                    input type="checkbox"
-                  .col-sm-2.control-label тип
-                  .col-sm-9 = resource.type
-                .form-group
-                  .col-sm-3.control-label номер и дата
-                  .col-sm-9
-                    span.extra.inline = resource.sn
-                    span.muted.inline = "/#{resource.date}"
-                .form-group
-                  .col-sm-3.control-label тема
-                  .col-sm-9
-                    h2 = resource.title
-                    = resource.sender_to_recipient
-                .form-group
-                  .col-sm-3.control-label исполнитель
-                  .col-sm-9 = resource.sender_avatar
-                    img.img-thumbnail.table-img-xs src="http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"
-                    a.link-dashed href="#"
-                .form-group
-                  .col-sm-3.control-label отправитель
-                  .col-sm-9  = resource.recipient_avatar
-                    img.img-thumbnail.table-img-xs src="http://cs312521.vk.me/v312521437/5ad5/Az2UeG2pTqg.jpg"
-                    a.link-dashed href="#"
-                .form-group
-                  .col-sm-3.control-label приложения
-                  .col-sm-9
-                    ul.list-unstyled
-                      li
-                        a.link href="#"
-                      li
-                        a.link href="#"
-                      li
-                        a.link href="#"
-
+            .col-sm-3
+              = resource.type
+              /= pdf_to_png(resource,190,270)
+            .col-sm-8
+              = resource.sender_to_recipient_links
+              = resource.number_and_date_with_label
+              = resource.executor_link_with_label
+              = resource.recipient_link_with_label
+              = resource.sender_link_with_label
+              = resource.attachments_count_with_label
         td = resource.status

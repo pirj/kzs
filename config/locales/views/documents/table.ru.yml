@@ -2,9 +2,16 @@ ru:
   documents:
     table:
       list_attrs:
-        number: '№/дата'
+        number_and_date: '№/дата'
         sender: Отправитель
         recipient: Получатель
-        document_type: Тип
-        attachment: ''
+        type: Тип
+        attachment_icon: ''
         status: Статус
+
+      document_labels:
+        number_and_date: Номер и дата
+        sender: Отправитель
+        executor: Исполнитель
+        recipient: Получатель
+        attachments_count: Приложения
