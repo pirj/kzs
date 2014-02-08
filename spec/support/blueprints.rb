@@ -31,3 +31,4 @@ end
 Report.blueprint do
   # Attributes here
 end
+

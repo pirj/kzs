@@ -1,6 +1,5 @@
 Kzs::Application.routes.draw do
 
-
   resources :licenses
 
 
