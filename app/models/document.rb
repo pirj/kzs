@@ -62,6 +62,7 @@ class Document < ActiveRecord::Base
 
   # TODO: add paranoia - this will handle the destruction
 
+  # TODO: manually cache initial state
   private
 
   #TODO: test manually

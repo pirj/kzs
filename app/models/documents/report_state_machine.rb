@@ -12,8 +12,7 @@ class Documents::ReportStateMachine
   transition from: :draft,      to: [:prepared, :trashed]
   transition from: :prepared,   to: [:sent, :trashed]
   transition from: :sent,       to: [:read, :trashed]
-  transition from: :read,       to: [:accepted, :trashed]
-  transition from: :read,       to: [:rejected, :trashed]
+  transition from: :read,       to: [:accepted, :rejected, :trashed]
 
 
 end

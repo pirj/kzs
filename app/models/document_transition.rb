@@ -11,6 +11,6 @@ class DocumentTransition < ActiveRecord::Base
 
   private
   def update_status_cache
-    document.update_attribute(:state, to_state)
+    document.update_attributes(state: to_state)
   end
 end

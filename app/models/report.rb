@@ -1,8 +1,11 @@
 class Report < ActiveRecord::Base
   include Accountable
 
-  attr_accessible :order_id
+  attr_accessible :order_id, :order
+
   belongs_to :order
+
+  validates_presence_of :order_id
 
   def state_machine
     Documents::ReportStateMachine.new(self, transition_class: DocumentTransition)
