@@ -3,14 +3,17 @@ class Documents::ReportStateMachine
 
   state :draft, initial: true
   state :prepared
-  state :signed
   state :sent
+  state :read
   state :accepted
+  state :rejected
   state :trashed
 
   transition from: :draft,      to: [:prepared, :trashed]
-  transition from: :prepared,      to: [:signed, :trashed]
-  transition from: :signed, to: [:sent, :trashed]
-  transition from: :sent, to: [:accepted, :trashed]
+  transition from: :prepared,   to: [:sent, :trashed]
+  transition from: :sent,       to: [:read, :trashed]
+  transition from: :read,       to: [:accepted, :trashed]
+  transition from: :read,       to: [:rejected, :trashed]
+
 
 end

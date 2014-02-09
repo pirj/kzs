@@ -31,6 +31,8 @@ class Document < ActiveRecord::Base
   # StateMachine transitions to keep track of state changes
   has_many :document_transitions
 
+  #TODO: add signed_at timestamp and a callback on state machines(m-be a superclass for all state machines)
+
   #TODO: Better switch to has_many :through.
   has_and_belongs_to_many :documents, class_name: "Document", uniq: true,
                           join_table: "document_relations",
@@ -43,6 +45,7 @@ class Document < ActiveRecord::Base
 
 
   after_save :create_png
+  #TODO: guards and callbacks on state_machines
 
   #TODO: test manually
   def self.text_search(query)
@@ -57,6 +60,7 @@ class Document < ActiveRecord::Base
   private
 
   #TODO: test manually
+  # m-be different generators for different documents
   def create_png
     pdf = DocumentPdf.new(self, 'show')
     pdf.render_file "tmp/document_#{self.id}.pdf"

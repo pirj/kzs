@@ -2,14 +2,16 @@ class Documents::MailStateMachine
   include Statesman::Machine
 
   state :draft, initial: true
-  state :signed
+  state :prepared
+  state :approved
   state :sent
   state :read
-  state :replied
   state :trashed
 
-  transition from: :draft,      to: [:sent, :trashed]
-  transition from: :signed, to: [:sent, :trashed]
-  transition from: :read, to: [:replied, :trashed]
+  transition from: :draft, to: [:prepared, :trashed]
+  transition from: :prepared, to: [:approved, :trashed]
+  transition from: :approved, to: [:sent, :prepared, :trashed]#какая то чушь получается - если подпись снята, то документ снова "подготовлен"
+  transition from: :sent, to: [:read, :trashed]
+  transition from: :read, to: [:trashed]
 
 end
