@@ -23,3 +23,12 @@ end
 License.blueprint do
 
 end
+
+Order.blueprint do
+  # Attributes here
+end
+
+Report.blueprint do
+  # Attributes here
+end
+

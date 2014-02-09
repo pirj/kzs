@@ -262,6 +262,7 @@ GEM
       activerecord (~> 3.0)
       activesupport (~> 3.0)
       polyamorous (~> 0.5.0)
+    statesman (0.2.1)
     temple (0.6.7)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
@@ -318,6 +319,8 @@ DEPENDENCIES
   faker
   font-awesome-rails
   haml
+  has_scope
+  inherited_resources
   jquery-rails (~> 2.3.0)
   launchy
   machinist (>= 2.0.0.beta2)
@@ -327,6 +330,7 @@ DEPENDENCIES
   populator
   prawn
   rails (= 3.2.13)
+  responders
   rmagick
   rspec-rails
   russian (~> 0.6.0)
@@ -336,6 +340,7 @@ DEPENDENCIES
   simple_form
   slim
   squeel
+  statesman
   therubyracer
   thin
   turbo-sprockets-rails3
