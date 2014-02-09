@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140208193007) do
+ActiveRecord::Schema.define(:version => 20140204091000) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -106,26 +106,6 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "docs", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "sender_organisation_id"
-    t.integer  "reciever_organisation_id"
-    t.integer  "approver_id"
-    t.integer  "executor_id"
-    t.string   "status_cache"
-    t.string   "accountable_type"
-    t.integer  "accountable_id"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-  end
-
-  add_index "docs", ["accountable_id", "accountable_type"], :name => "index_docs_on_accountable_id_and_accountable_type", :unique => true
-  add_index "docs", ["approver_id"], :name => "index_docs_on_approver_id"
-  add_index "docs", ["executor_id"], :name => "index_docs_on_executor_id"
-  add_index "docs", ["reciever_organisation_id"], :name => "index_docs_on_reciever_organisation_id"
-  add_index "docs", ["sender_organisation_id"], :name => "index_docs_on_sender_organisation_id"
-
   create_table "document_attachments", :force => true do |t|
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
@@ -145,16 +125,6 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.integer "document_id"
     t.integer "relational_document_id"
   end
-
-  create_table "document_transitions", :force => true do |t|
-    t.string  "to_state"
-    t.text    "metadata", :default => "{}"
-    t.integer "sort_key"
-    t.integer "doc_id"
-  end
-
-  add_index "document_transitions", ["doc_id"], :name => "index_document_transitions_on_doc_id"
-  add_index "document_transitions", ["sort_key", "doc_id"], :name => "index_document_transitions_on_sort_key_and_doc_id", :unique => true
 
   create_table "documents", :force => true do |t|
     t.string   "title"
@@ -225,25 +195,11 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.string   "type_of"
   end
 
-  create_table "mails", :force => true do |t|
-    t.integer  "conversation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "mails", ["conversation_id"], :name => "index_mails_on_conversation_id"
-
   create_table "open_notices", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "orders", :force => true do |t|
-    t.datetime "deadline"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "organizations", :force => true do |t|
@@ -343,14 +299,6 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  create_table "reports", :force => true do |t|
-    t.integer  "order_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "reports", ["order_id"], :name => "index_reports_on_order_id"
 
   create_table "responsible_users", :force => true do |t|
     t.integer  "document_id"

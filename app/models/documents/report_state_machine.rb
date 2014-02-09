@@ -1,4 +1,4 @@
-class ReportStateMachine
+class Documents::ReportStateMachine
   include Statesman::Machine
 
   state :draft, initial: true

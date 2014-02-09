@@ -1,23 +1,14 @@
 class Mail < ActiveRecord::Base
-  attr_accessible :conversation_id, :document_attributes
+  attr_accessible :conversation_id
 
-  #TODO: uncomment for REPLY functionality
-  #belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id'
-
-  has_one :document, as: :accountable, class_name: 'Doc', dependent: :destroy
-  accepts_nested_attributes_for :document
+  belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id'
 
   def state_machine
-    MailStateMachine.new(self, transition_class: DocumentTransition)
+    Documents::MailStateMachine.new(self, transition_class: DocumentTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
            to: :state_machine
-
-  def method_missing(method, *args)
-    return document.send(method, *args) if document.respond_to?(method)
-    super
-  end
 
 
 
