@@ -3,7 +3,7 @@ module Accountable
 
   included do
     attr_accessible :document_attributes
-    has_one :document, as: :accountable, class_name: 'Doc', dependent: :destroy
+    has_one :document, as: :accountable, dependent: :destroy
     accepts_nested_attributes_for :document
   end
 

@@ -20,11 +20,11 @@ class RecreateDocuments < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :docs, :approver_id
-    add_index :docs, :executor_id
-    add_index :docs, :sender_organization_id
-    add_index :docs, :recipient_organization_id
-    add_index :docs, [:accountable_id, :accountable_type], unique: true
+    add_index :documents, :approver_id
+    add_index :documents, :executor_id
+    add_index :documents, :sender_organization_id
+    add_index :documents, :recipient_organization_id
+    add_index :documents, [:accountable_id, :accountable_type], unique: true
 
   end
 
