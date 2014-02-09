@@ -7,7 +7,7 @@ class Doc < ActiveRecord::Base
                   :executor_id, # пользователь исполнитель
                   :reciever_organisation_id, # организация получатель
                   :sender_organisation_id, # организация отправитель
-                  :status_cache, #кэш статуса для общей таблицы
+                  :status, #кэш статуса для общей таблицы
                   :title # заголовок(тема)
 
                   #TODO: кого хранить пользователя, создавшего или пользователя, который послденим изменил документ
@@ -18,8 +18,10 @@ class Doc < ActiveRecord::Base
   belongs_to :approver, class_name: 'User'
   belongs_to :executor, class_name: 'User'
 
-  belongs_to :sender_organization, class_name: 'Organization'
-  belongs_to :reciever_organization, class_name: 'Organization'
+  belongs_to :sender_organisation, class_name: 'Organization'
+  belongs_to :reciever_organisation, class_name: 'Organization'
+
+  has_many :document_transitions
 
   # TODO: add paranoia - this will handle the destruction
 
@@ -30,5 +32,8 @@ class Doc < ActiveRecord::Base
   #TODO: add proper validations
 
   #TODO: pdf generation logic needs to be changed
+
+  {title: 'title mail', body: 'body mail', sender_organisation_id: 2, reciever_organisation_id: 1, approver_id: 1, executor_id: 1}
+  {title: 'title report', body: 'body report', sender_organisation_id: 2, reciever_organisation_id: 1, approver_id: 1, executor_id: 1}
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140204091000) do
+ActiveRecord::Schema.define(:version => 20140208193007) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -146,6 +146,16 @@ ActiveRecord::Schema.define(:version => 20140204091000) do
     t.integer "relational_document_id"
   end
 
+  create_table "document_transitions", :force => true do |t|
+    t.string  "to_state"
+    t.text    "metadata", :default => "{}"
+    t.integer "sort_key"
+    t.integer "doc_id"
+  end
+
+  add_index "document_transitions", ["doc_id"], :name => "index_document_transitions_on_doc_id"
+  add_index "document_transitions", ["sort_key", "doc_id"], :name => "index_document_transitions_on_sort_key_and_doc_id", :unique => true
+
   create_table "documents", :force => true do |t|
     t.string   "title"
     t.integer  "user_id"
@@ -228,6 +238,12 @@ ActiveRecord::Schema.define(:version => 20140204091000) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.datetime "deadline"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "organizations", :force => true do |t|
@@ -327,6 +343,14 @@ ActiveRecord::Schema.define(:version => 20140204091000) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "reports", :force => true do |t|
+    t.integer  "order_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "reports", ["order_id"], :name => "index_reports_on_order_id"
 
   create_table "responsible_users", :force => true do |t|
     t.integer  "document_id"

@@ -29,6 +29,8 @@ gem 'has_scope'
 gem 'responders'
 # gem 'texticle', "2.0", :require => 'texticle/rails'
 
+gem 'statesman'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
