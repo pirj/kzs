@@ -16,6 +16,11 @@ class Document < ActiveRecord::Base
 
   attr_accessible :document_attachments_attributes
 
+  attr_accessible :accountable,
+                  :approver,
+                  :executor,
+                  :recipient_organization,
+                  :sender_organization
 
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
@@ -44,7 +49,7 @@ class Document < ActiveRecord::Base
   alias_attribute :sn, :serial_number
 
 
-  after_save :create_png
+  #after_save :create_png
   #TODO: guards and callbacks on state_machines
 
   #TODO: test manually
@@ -53,7 +58,7 @@ class Document < ActiveRecord::Base
   end
 
   #TODO: validations
-  #validates_presence_of :title, :organization_id, :approver_id, :executor_id, :text
+  validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
 
   # TODO: add paranoia - this will handle the destruction
 
@@ -61,13 +66,13 @@ class Document < ActiveRecord::Base
 
   #TODO: test manually
   # m-be different generators for different documents
-  def create_png
-    pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "tmp/document_#{self.id}.pdf"
-    pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
-    thumb = pdf.scale(400, 520)
-    thumb.write "app/assets/images/document_#{self.id}.png"
-  end
+  #def create_png
+  #  pdf = DocumentPdf.new(self, 'show')
+  #  pdf.render_file "tmp/document_#{self.id}.pdf"
+  #  pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
+  #  thumb = pdf.scale(400, 520)
+  #  thumb.write "app/assets/images/document_#{self.id}.png"
+  #end
 
 
 end

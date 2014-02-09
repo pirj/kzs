@@ -4,13 +4,13 @@ class DocumentTransition < ActiveRecord::Base
   
   attr_accessible :to_state, :metadata, :sort_key
   
-  belongs_to :doc, inverse_of: :document_transitions
+  belongs_to :document, inverse_of: :document_transitions
 
 
   after_commit :update_status_cache
 
   private
   def update_status_cache
-    doc.update_attribute(:state, to_state)
+    document.update_attribute(:state, to_state)
   end
 end

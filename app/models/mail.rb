@@ -1,4 +1,5 @@
 class Mail < ActiveRecord::Base
+  include Accountable
   attr_accessible :conversation_id
 
   belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id'

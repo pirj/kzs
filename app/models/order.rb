@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  include Accountable
   attr_accessible :deadline
   has_one :report
 
