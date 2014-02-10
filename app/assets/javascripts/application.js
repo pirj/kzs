@@ -17,5 +17,3 @@
 //= require ckeditor/init
 //= require ckeditor/ckeditor
 //= require_directory ./dashboard
-//= require ./organizations
-//= require ./documents
