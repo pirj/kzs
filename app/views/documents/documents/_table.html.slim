@@ -6,14 +6,13 @@ table.table.js-row-clickable.m-table-replacement
       th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
       th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
       th = t('documents.table.list_attrs.type')
-      th = t('documents.table.list_attrs.attachment_icon')
       th = t('documents.table.list_attrs.status')
   tbody
     - collection.each do |resource|
       / simple row with short information
       tr data-id = resource.id
         td = check_box_tag :selected, resource.id, false, data:{ target: 'document' }
-        - attrs = [:number_and_date, :sender_link, :recipient_link, :type, :attachment_icon, :status]
+        - attrs = [:number_and_date, :sender_link, :recipient_link, :type, :status]
         - attrs.each do |attr|
           td = render_attr(resource, attr)
 
