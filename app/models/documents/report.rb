@@ -1,4 +1,4 @@
-class Report < ActiveRecord::Base
+class Documents::Report < ActiveRecord::Base
   include Accountable
 
   attr_accessible :order_id, :order
