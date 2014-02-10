@@ -12,6 +12,7 @@ gem 'therubyracer'
 gem "paperclip", "~> 3.0"
 gem "russian", "~> 0.6.0"
 gem 'devise'
+gem "ransack"
 
 gem "cancan"
 gem "ckeditor"

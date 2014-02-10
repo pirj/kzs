@@ -5,7 +5,6 @@ class DocumentsController < ApplicationController
 
   layout 'base'
 
-
   def index
     # check if user can view confindetnial documents
     # code since lines from 10 to 14 dont usage in this action, maybe delete them?
