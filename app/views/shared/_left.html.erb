@@ -12,10 +12,9 @@
         <%= link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do %>
             <i></i>
             <div class="text">Письма и распоряжения</div>
-            <!--TODO: @prikha stubbed aout this helper to take a look at new documents list-->
-            <%# unless indox(current_user) < 1  %>
-              <!--<span class="badge badge-important"><%#= indox(current_user) %></span>-->
-            <%# end %>
+            <% unless indox(current_user) < 1  %>
+              <span class="badge badge-important"><%= indox(current_user) %></span>
+            <% end %>
         <% end %>
         <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? ' active menu-link ' : 'menu-link ') do %>
             <i></i>

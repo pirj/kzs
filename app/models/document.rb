@@ -65,6 +65,12 @@ class Document < ActiveRecord::Base
     query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
   end
 
+  #Stub all missing scopes
+  scope :confidential, where(confidential: true)
+  scope :not_confidential, where(confidential: false)
+  scope :unread, where(state: 'sent')
+  scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
+
   # Stub out all missing methods
 
   # @date returns timestamp when the document recieved state approved
