@@ -5,7 +5,6 @@ class DocumentsController < ApplicationController
 
   layout 'base'
 
-
   def index
     # check if user can view confindetnial documents
     # code since lines from 10 to 14 dont usage in this action, maybe delete them?
@@ -217,6 +216,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # TODO: @justvitalius need to refactor or full destroy
   def new
     @document = Document.new
     @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
@@ -228,7 +228,30 @@ class DocumentsController < ApplicationController
     if params[:type] == nil
       redirect_to documents_path
     end
+
+    render layout: 'application'
   end
+
+  def mail
+    @document = Document.new
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    @task_list = @document.build_task_list
+    @organizations = Organization.where('id != ?', current_user.organization_id)
+  end
+
+  def order
+    @document = Document.new
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    @task_list = @document.build_task_list
+    @organizations = Organization.where('id != ?', current_user.organization_id)
+  end
+
 
   def edit
     @document = Document.find(params[:id])

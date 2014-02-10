@@ -1,0 +1,9 @@
+= content_for :page_header do
+  = header_back_btn documents_path
+  = header_title do
+    = content_tag :h1, 'Новое распоряжение'
+
+
+.row
+  .col-xs-12
+    = render 'documents/forms/order_form', resource: @document

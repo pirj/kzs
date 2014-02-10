@@ -315,12 +315,6 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "rights", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "statement_approvers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "statement_id"
@@ -412,13 +406,6 @@ ActiveRecord::Schema.define(:version => 20140208193007) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "user_rights", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "right_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

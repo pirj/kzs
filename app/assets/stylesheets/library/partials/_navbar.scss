@@ -51,11 +51,12 @@
 
   > li{
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
 
     // page title style
     &.brand{
       margin-left: 2*$navbar-padding-horizontal ;
+      max-width: 500px;
       &:first-child{margin-left: 0;} // if first in menu, than level by left edge
     }
 
@@ -122,6 +123,9 @@
   }
 }
 
+.navbar-right{
+  > li { vertical-align: middle; }
+}
 
 // Navbar form
 //
