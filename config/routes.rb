@@ -21,7 +21,7 @@ Kzs::Application.routes.draw do
     #member actions for status changes
     resources :orders, except: 'index'
     #member actions for status changes
-    resources :report, except: 'index'
+    resources :reports, except: 'index'
     #member actions for status changes
   end
 

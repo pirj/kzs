@@ -50,9 +50,9 @@ class Document < ActiveRecord::Base
 
 
   #after_save :create_png
+
   #TODO: guards and callbacks on state_machines
 
-  #TODO: test manually
   def self.text_search(query)
     query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
   end
