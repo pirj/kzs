@@ -81,6 +81,7 @@ class DocumentsController < ApplicationController
   end
 
 
+  
   # TODO: @prikha
   # Убрать этот экшен с глаз долой, чем быстрее, тем лучше.
   #
