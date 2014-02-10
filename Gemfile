@@ -51,6 +51,7 @@ gem 'faker'
 gem 'factory_girl_rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'hipchat'
 
 
 group :production do

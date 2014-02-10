@@ -1,7 +1,14 @@
 require 'bundler/capistrano'
 load 'config/recipes/base'
 load 'deploy/assets'
+require 'hipchat/capistrano'
 # require 'rvm/capistrano'
+
+
+set :hipchat_token, "9ccb22cbbd830fcd68cf2289a4f34b"
+set :hipchat_room_name, "430075"
+set :hipchat_announce, true
+
 
 #selectel
 task :staging do
