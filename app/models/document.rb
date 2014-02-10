@@ -54,7 +54,7 @@ class Document < ActiveRecord::Base
 
   #TODO: test manually
   def self.text_search(query)
-    query ? where("title ilike ? or body ilike ?", query) : scoped
+    query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
   end
 
   #TODO: validations
@@ -63,6 +63,8 @@ class Document < ActiveRecord::Base
   # TODO: add paranoia - this will handle the destruction
 
   # TODO: manually cache initial state
+  # here we can go with default value on column
+  # or disable initial state on state machine and call transition to it from the model
   private
 
   #TODO: test manually
