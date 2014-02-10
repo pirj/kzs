@@ -70,7 +70,7 @@ class Document < ActiveRecord::Base
   scope :not_confidential, where(confidential: false)
   scope :unread, where(state: 'sent')
   scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
-
+  scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
   # Stub out all missing methods
 
   # @date returns timestamp when the document recieved state approved
@@ -78,6 +78,24 @@ class Document < ActiveRecord::Base
     @date ||= document_transitions.where(to_state: 'approved').order('document_transitions.created_at DESC').pluck(:created_at).first
   end
 
+  #if a document was sent #documents_controller.rb
+  def sent
+    document_transitions.exists?(to_state: 'sent')
+  end
+
+  #maybe we should use a method_missing technique
+  def approved
+    document_transitions.exists?(to_state: 'approved')
+  end
+
+  def prepared
+    document_transitions.exists?(to_state: 'prepared')
+  end
+
+  # stub out user_id to replace it properly
+  def user_id
+    3
+  end
 
   # TODO: add paranoia - this will handle the destruction
 

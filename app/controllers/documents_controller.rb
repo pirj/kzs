@@ -80,6 +80,10 @@ class DocumentsController < ApplicationController
     redirect_to documents_path
   end
 
+
+  # TODO: @prikha
+  # Убрать этот экшен с глаз долой, чем быстрее, тем лучше.
+  #
   def action_list
     if params[:ids].count > 1
      @approve = @prepare = @send_document = true
@@ -94,12 +98,12 @@ class DocumentsController < ApplicationController
     else
      d = Document.find(params[:ids].first())
      @edit = d.user_id == current_user.id && d.prepared == false ? true : false
-     @show = d.sent && d.organization_id == current_user.organization_id ||
+     @show = d.sent && d.sender_organization_id == current_user.organization_id ||
              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
      @copy = d.sender_organization_id == current_user.organization.try(:id) ? true : false
-     @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
+     @reply =   !d.sent && d.sender_organization_id == current_user.organization_id ? true : false
      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
      @prepare = !d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false
      @create_draft =  !d.prepared
