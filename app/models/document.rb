@@ -47,18 +47,31 @@ class Document < ActiveRecord::Base
 
   alias_attribute :text, :body
   alias_attribute :sn, :serial_number
+  alias_attribute :sender, :sender_organization
+  alias_attribute :recipient, :recipient_organization
+  alias_attribute :document_type, :accountable_type #TODO: @prikha remove this misleading alias
+
 
 
   #after_save :create_png
 
   #TODO: guards and callbacks on state_machines
 
+
+  #TODO: validations
+  validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
+
   def self.text_search(query)
     query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
   end
 
-  #TODO: validations
-  validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
+  # Stub out all missing methods
+
+  # @date returns timestamp when the document recieved state approved
+  def date
+    @date ||= document_transitions.where(to_state: 'approved').order('document_transitions.created_at DESC').pluck(:created_at).first
+  end
+
 
   # TODO: add paranoia - this will handle the destruction
 
