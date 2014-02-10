@@ -334,8 +334,8 @@ DEPENDENCIES
   populator
   prawn
   rails (= 3.2.13)
-  responders
   ransack
+  responders
   rmagick
   rspec-rails
   russian (~> 0.6.0)
