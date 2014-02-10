@@ -11,17 +11,30 @@ Organization.blueprint do
   accountant_id {accountant.id}
   admin_id {admin.id}
 end
-#Post.make! {user: User.make!, subject: 'asd'}
 
 User.blueprint do
-  email { Faker::Internet.email}
+  username { Faker::Lorem.word }
+  email { Faker::Internet.email }
   pwd = Faker::Lorem.characters(9)
   password { pwd }
   password_confirmation { pwd }
 end
 
-License.blueprint do
-
+Group.blueprint do
+  title {Faker::Lorem.sentence}
 end
 
+Organization.blueprint do
+  title {Faker::Lorem.sentence}
+end
 
+Permit.blueprint do
+  number {Faker::Number.number(100)}
+end
+
+Vehicle.blueprint do
+  sn_number { 111 }
+  first_letter { 'A' }
+  second_letter { 'B' }
+  third_letter { 'C' }
+end

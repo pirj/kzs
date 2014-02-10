@@ -22,7 +22,7 @@ ActiveAdmin.register Vehicle do
        f.input :second_letter
        f.input :third_letter
        f.input :sn_region, :as => :string
-       f.input :vehicle_body, :as => :select, :collection => Vehicle::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
+       f.input :vehicle_body, :as => :select, :collection => Vehicle::VEHICLE_BODY.map { |a| [ t(a), a ] }, :include_blank => false
        f.input :users, :as => :check_boxes
      end
      f.actions

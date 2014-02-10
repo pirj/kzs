@@ -8,9 +8,10 @@ class Vehicle < ActiveRecord::Base
   has_many :vehicle_users
   has_many :users, :through => :vehicle_users
   
-  before_save :create_register_sn
+  #before_save :create_register_sn
   
   LETTERS = %w[A B E K M H O P C T Y X]
+  VEHICLE_BODY = %w[passenger_car truck special_car]
   
   def vehicle_title
     "#{register_sn}#{sn_region} #{brand} #{model}"
