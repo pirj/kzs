@@ -17,9 +17,7 @@ module Accountable
   private
 
   def setup_document
-    unless self.document_id
-      self.build_document
-    end
+    self.document ||= Document.new
   end
 
 end
