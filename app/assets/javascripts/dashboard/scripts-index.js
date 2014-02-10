@@ -77,7 +77,7 @@ $(function(){
         gridster.enable($('.gridster li'));
         gridster.enable_resize($('.gridster li'));
 
-        $('.editing .widget a').on('click', function(){
+        $('.wrapper .widget a').on('click', function(){
             return false
         });
 
@@ -130,7 +130,7 @@ $(function(){
            document.location = this.href;
                    });
 
-        $('.page.full').removeClass('editing');
+        $('.wrapper').removeClass('editing');
         $('.edit-nav').hide();
         $('.icon-resize-full-alt, .icon-resize-full, .icon-cancel-circled').remove();
         gridster.disable($('.gridster ul li'));
