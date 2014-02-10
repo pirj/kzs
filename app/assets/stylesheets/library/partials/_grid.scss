@@ -16,13 +16,42 @@
 .page-title {
   line-height: 42px;
   font-size: 22px;
-  height: 42px;
+
   color: #c7c7c7;
   background: #ededed;
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 20px;
+  & > a {
+    display: block;
+    margin: 0 auto;
+    height: 42px;
+    padding: 14px 0 0;
+    & > img {
+      vertical-align: top;
+    }
+  }
 }
+
+.fix-footer{                //use this block with min-height to content area
+  position: absolute;
+  height: 100px;
+  right: 0;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  a {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    margin: 15px 0;
+    img{
+
+    }
+  }
+}
+
 
 
 // mobile first defaults

@@ -3,14 +3,11 @@ html
   head
     title Kzs авторизация
 
-    = stylesheet_link_tag "library", :media => "all"
+    = stylesheet_link_tag "app", :media => "all"
     = yield(:head)
   body
     .wrapper
-      .page-title.row-fuild
-        .text-center
-          a.logo[href="#"]
-            img[alt="Менеджер КЗС" src="/assets/mkzs-logo.png"]
+      = render 'shared/page_title'
       .container.m-login-page
         .row.sign-in
           = yield

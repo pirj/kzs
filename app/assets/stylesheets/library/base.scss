@@ -59,7 +59,7 @@
 
 
 // Library page styles
-@import "only_library_styles";
+@import "pages/library";
 @import "docs";
-@import "loginpage";    //TODO: @tag need refactor
+@import "pages/loginpage";    //TODO: @tag need refactor
 @import "dashboard";    //TODO: @tag need refactor

@@ -3,10 +3,12 @@ html
   head
     title Kzs
 
-    = stylesheet_link_tag "library", :media => "all"
+    = stylesheet_link_tag "app", :media => "all"
     = javascript_include_tag "/assets/dashboard/application"
     = csrf_meta_tags
     = yield(:head)
   body
-    - unless controller?('devise/sessions')
-      = yield
+    .wrapper
+      = render 'shared/page_title'
+      - unless controller?('devise/sessions')
+        = yield
