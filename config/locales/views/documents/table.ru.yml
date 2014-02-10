@@ -3,8 +3,8 @@ ru:
     table:
       list_attrs:
         number_and_date: '№/дата'
-        sender: Отправитель
-        recipient: Получатель
+        sender_link: Отправитель
+        recipient_link: Получатель
         type: Тип
         attachment_icon: ''
         status: Статус
