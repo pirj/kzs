@@ -20,7 +20,7 @@ namespace :csv do
 end
 
 namespace :csv do
-  desc "Import permissions"
+  desc "Import Organizations"
   task :organizations => :environment do
     Organization.destroy_all
     Organization.reset_pk_sequence
@@ -115,22 +115,69 @@ namespace :csv do
 end
 
 namespace :documents do
+  desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'
   task :create => :environment do
     Document.destroy_all
-    UserDocumentType.reset_pk_sequence
-    Document.populate 40 do |d|
-      organization = Organization.last
-      sender_organization = Organization.last
-      d.organization_id = organization.id
-      d.recipient_id = organization.id
-      d.sender_organization_id = sender_organization.id
-      d.text = Populator.sentences(30..50)
-      d.title = Faker::Lorem.words(3)
-      d.user_id = User.find_by_organization_id(sender_organization.id)
-      d.approver_id = User.find_by_organization_id(sender_organization.id)
-      d.sent = true
+    Document.reset_pk_sequence
+
+    Documents::Mail.delete_all
+    Documents::Mail.reset_pk_sequence
+
+    organizations_count = Organization.count
+    users_count         = User.count
+
+    3.times do |i|
+      d = Documents::Mail.new
+      d.title = Faker::Lorem.words(12)
+      d.body = Populator.sentences(30..50)
+      d.confidential = false
+      d.executor = User.find(rand(1..users_count))
+      d.approver = User.find(rand(1..users_count))
+      d.recipient_organization = Organization.find(rand(1..organizations_count))
+      d.sender_organization    = Organization.find(rand(1..organizations_count))
+      d.save!
     end
-    puts 'Documents created'
+    puts 'Mail created'
+
+    Documents::Order.delete_all
+    Documents::Order.reset_pk_sequence
+
+    5.times do |i|
+      d = Documents::Order.new
+      d.title = Faker::Lorem.words(12)
+      d.body = Populator.sentences(30..50)
+      d.confidential = false
+      d.executor = User.find(rand(1..users_count))
+      d.approver = User.find(rand(1..users_count))
+      d.recipient_organization = Organization.find(rand(1..organizations_count))
+      d.sender_organization    = Organization.find(rand(1..organizations_count))
+
+      d.deadline = DateTime.now + rand(1..6).months
+
+      d.save!
+    end
+    puts 'Orders created'
+
+
+    Documents::Report.delete_all
+    Documents::Report.reset_pk_sequence
+
+    2.times do |d|
+      d = Documents::Report.new
+
+      d.title = Faker::Lorem.words(12)
+      d.body = Populator.sentences(30..50)
+      d.confidential = false
+      d.executor = User.find(rand(1..users_count))
+      d.approver = User.find(rand(1..users_count))
+      d.recipient_organization = Organization.find(rand(1..organizations_count))
+      d.sender_organization    = Organization.find(rand(1..organizations_count))
+
+      d.order = Documents::Order.find(rand(1..Documents::Order.count))
+
+      d.save!
+    end
+    puts 'Reports created'
   end
 end
 
