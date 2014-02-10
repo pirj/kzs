@@ -1,4 +1,4 @@
-class Mail < ActiveRecord::Base
+class Documents::Mail < ActiveRecord::Base
   include Accountable
   attr_accessible :conversation_id
 

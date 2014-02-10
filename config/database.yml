@@ -5,6 +5,12 @@ development:
   username:
   host: localhost
 
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: kzs_test
+  username:
+  host: localhost
 #selectel
 # production:
 #   adapter: postgresql

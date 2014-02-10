@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Documents::Order < ActiveRecord::Base
   include Accountable
   attr_accessible :deadline
   has_one :report
