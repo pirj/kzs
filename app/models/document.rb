@@ -1,93 +1,118 @@
 class Document < ActiveRecord::Base
-  attr_accessible :deadline, :file, :text, :title, :sn,
-                  :opened, :for_approve, :confidential,
-                  :organization_id, :recipient_id, :user_id, :approver_id, :executor_id, :sender_organization_id, :document_conversation_id,
-                  :deleted, :archived, :callback, :prepared, :draft, :approved,
-                  :document_type,
-                  :task_list_attributes,
-                  :document_ids, :organization_ids, :executor_ids, :approver_ids,
-                  :document_attachments, :attachment, :document_attachments_attributes,
-                  :prepared_date, :approved_date, :date,  :sent, :sent_date
+  attr_accessible :accountable_id, # Полиморфизм документов
+                  :accountable_type, #
+                  :approver_id, # пользователь подписант
+                  :body, # текст
+                  :confidential,#(флаг на прочтение)
+                  :executor_id, # пользователь исполнитель
+                  :recipient_organization_id, # организация получатель
+                  :sender_organization_id, # организация отправитель
+                  :state, #кэш текущего для общей таблицы
+                  :serial_number,
+                  :title # заголовок(тема)
 
-  attr_accessor :organization_ids, :executor_ids, :approver_ids
+                  #TODO: кого хранить пользователя, создавшего или пользователя, который послденим изменил документ
+                  #TODO: после стейт машин необходимо добавить signed_at, - дата когда документ был подписан(возможно кэш)
 
-  after_save :create_png
-  
+  attr_accessible :document_attachments_attributes
 
-  belongs_to :project
-  belongs_to :document_conversation
-  belongs_to :parent_document, class_name: "Document"
-  belongs_to :sender, foreign_key: :sender_organization_id, class_name: 'Organization'
-  belongs_to :recipient, foreign_key: :recipient_id, class_name: 'Organization'
-  has_many :statements
+  attr_accessible :accountable,
+                  :approver,
+                  :executor,
+                  :recipient_organization,
+                  :sender_organization
+
   has_many :document_attachments
-  has_one :task_list
-  has_one :task
-
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
-  accepts_nested_attributes_for :task_list, allow_destroy: true
 
+  belongs_to :accountabe, polymorphic: true
+
+  belongs_to :approver, class_name: 'User'
+  belongs_to :executor, class_name: 'User'
+
+  belongs_to :sender_organization, class_name: 'Organization'
+  belongs_to :recipient_organization, class_name: 'Organization'
+
+  # StateMachine transitions to keep track of state changes
+  has_many :document_transitions
+
+  #TODO: add signed_at timestamp and a callback on state machines(m-be a superclass for all state machines)
+
+  #TODO: Better switch to has_many :through.
   has_and_belongs_to_many :documents, class_name: "Document", uniq: true,
                           join_table: "document_relations",
                           foreign_key: "document_id",
                           association_foreign_key: "relational_document_id"
 
 
+  alias_attribute :text, :body
+  alias_attribute :sn, :serial_number
+  alias_attribute :sender, :sender_organization
+  alias_attribute :recipient, :recipient_organization
+  alias_attribute :document_type, :accountable_type #TODO: @prikha remove this misleading alias
 
-  validates :title, :organization_id, :approver_id, :executor_id, :text, :presence => true
 
 
-  scope :draft, -> { where(draft: true) }
-  scope :not_draft, -> { where(draft: false) }
+  #after_save :create_png
 
-  scope :prepared, -> { where(prepared: true) }
-  scope :approved, -> { where(approved: true) }
-  scope :not_approved, -> { where(approved: false) }
-  scope :sent, -> { where(sent: true) }
-  scope :not_sent, -> { where(sent: false) }
-  scope :unopened, -> { where(opened: false) }
+  #TODO: guards and callbacks on state_machines
 
-  scope :deleted, -> { where(deleted: true) }
-  scope :not_deleted, -> { where(deleted: false) }
 
-  scope :archived, -> { where(archived: true) }
-  scope :not_archived, -> { where(archived: false) }
-
-  scope :callback, -> { where(callback: true) }
-
-  scope :mails, -> { where(document_type: 'mail') }
-  scope :writs, -> { where(document_type: 'writ') }
-
-  scope :confidential, -> { where(confidential: true) }
-  scope :not_confidential, -> { where(confidential: false) }
-
-  scope :with_completed_tasks, includes(:task_list).where(:task_list => {:completed => true})
-  scope :with_completed_tasks_in_statement, includes(:statements).where(:statements => {:with_completed_task_list => true})
-
-  DOCUMENT_TYPES = ["mail", "writ"]
+  #TODO: validations
+  validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
 
   def self.text_search(query)
-    if query.present?
-      search(query)
-    else
-      scoped
-    end
-  end
-  
-  def self.with_statements
-    includes(:statements).where('documents.id in (?)',Document.writs)
-  end
-  
-  def self.without_statements
-    includes(:statements).where(:statements => {:id => nil})
+    query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
   end
 
-  def create_png
-    pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "tmp/document_#{self.id}.pdf"
-    pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
-    thumb = pdf.scale(400, 520)
-    thumb.write "app/assets/images/document_#{self.id}.png"
+  #Stub all missing scopes
+  scope :confidential, where(confidential: true)
+  scope :not_confidential, where(confidential: false)
+  scope :unread, where(state: 'sent')
+  scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
+  scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
+  # Stub out all missing methods
+
+  # @date returns timestamp when the document recieved state approved
+  def date
+    @date ||= document_transitions.where(to_state: 'approved').order('document_transitions.created_at DESC').pluck(:created_at).first
   end
+
+  #if a document was sent #documents_controller.rb
+  def sent
+    document_transitions.exists?(to_state: 'sent')
+  end
+
+  #maybe we should use a method_missing technique
+  def approved
+    document_transitions.exists?(to_state: 'approved')
+  end
+
+  def prepared
+    document_transitions.exists?(to_state: 'prepared')
+  end
+
+  # stub out user_id to replace it properly
+  def user_id
+    3
+  end
+
+  # TODO: add paranoia - this will handle the destruction
+
+  # TODO: manually cache initial state
+  # here we can go with default value on column
+  # or disable initial state on state machine and call transition to it from the model
+  private
+
+  #TODO: test manually
+  # m-be different generators for different documents
+  #def create_png
+  #  pdf = DocumentPdf.new(self, 'show')
+  #  pdf.render_file "tmp/document_#{self.id}.pdf"
+  #  pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
+  #  thumb = pdf.scale(400, 520)
+  #  thumb.write "app/assets/images/document_#{self.id}.png"
+  #end
+
 
 end

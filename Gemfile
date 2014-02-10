@@ -12,6 +12,7 @@ gem 'therubyracer'
 gem "paperclip", "~> 3.0"
 gem "russian", "~> 0.6.0"
 gem 'devise'
+gem "ransack"
 
 gem "cancan"
 gem "ckeditor"
@@ -24,7 +25,12 @@ gem 'simple_form'
 gem 'draper'
 gem 'will_paginate'
 
+gem 'inherited_resources'
+gem 'has_scope'
+gem 'responders'
 # gem 'texticle', "2.0", :require => 'texticle/rails'
+
+gem 'statesman'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

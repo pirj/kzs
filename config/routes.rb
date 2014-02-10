@@ -1,6 +1,5 @@
 Kzs::Application.routes.draw do
 
-
   resources :licenses
 
 
@@ -14,13 +13,30 @@ Kzs::Application.routes.draw do
   # Пользователи должны пройти контроль на права.
   # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
-  
+
+  namespace :documents do
+    resources :documents, only: 'index'
+    #batch actions go on docs
+    resources :mails, except: 'index'
+    #member actions for status changes
+    resources :orders, except: 'index'
+    #member actions for status changes
+    resources :reports, except: 'index'
+    #member actions for status changes
+  end
+
   match '/documents/batch' => 'documents#batch'
 
   get '/documents/action_list'
   get '/documents/approve'
   get '/documents/prepare'
   get '/documents/send_document'
+
+
+  # TODO: @justvitalius need to refactor together with documents resources
+  get '/documents/mail/new' => 'documents#mail'
+  get '/documents/order/new' => 'documents#order'
+
   resources :documents do
     collection do
       get 'sents'

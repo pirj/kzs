@@ -23,6 +23,10 @@ input[type="color"]{
   font-size: $input-font-size;
 }
 
+select{
+  width: 100%;
+}
+
 // Normalize non-controls
 //
 // Restyle and baseline non-control form elements.

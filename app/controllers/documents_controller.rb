@@ -5,45 +5,47 @@ class DocumentsController < ApplicationController
 
   layout 'base'
 
-
   def index
     # check if user can view confindetnial documents
     # code since lines from 10 to 14 dont usage in this action, maybe delete them?
-    if current_user.has_permission?(5)
-      documents = Document.all
-    else
-      documents = Document.not_confidential
-    end
+    # TODO: @prikha scope by visible_for_user
+
+    #if current_user.has_permission?(5)
+    #  documents = Document.all
+    #else
+    #  documents = Document.not_confidential
+    #end
+
     organization = current_user.organization_id
     current_user_id = current_user.id
 
-    #default scope
-    if params[:status_sort]
-      direction = params[:direction]
-      sort_type = "opened #{direction}", "sent #{direction}", "approved #{direction}", "prepared #{direction}"
-    else
-      sort_type = sort_column + " " + sort_direction
-    end
-
-    documents = Document.text_search(params[:query]).order(sort_type)
-                .not_deleted.not_archived.not_draft
-                .where{(sent == true) & (organization_id == organization) |
-                    (sender_organization_id == organization) & (user_id == current_user_id) |
-                    (sender_organization_id == organization) & (approver_id == current_user_id) |
-                    (approved == true) & (sender_organization_id == organization)}
-
-    @documents = if params[:type] == 'mails'
-      documents.mails # mails
-    elsif params[:type] == 'writs'
-      documents.writs # writs
-    else
-      documents # any other case
-    end
+    ##default scope
+    #if params[:status_sort]
+    #  direction = params[:direction]
+    #  sort_type = "opened #{direction}", "sent #{direction}", "approved #{direction}", "prepared #{direction}"
+    #else
+    #  sort_type = sort_column + " " + sort_direction
+    #end
+    #
+    #documents = Document.text_search(params[:query]).order(sort_type)
+    #            .not_deleted.not_archived.not_draft
+    #            .where{(sent == true) & (organization_id == organization) |
+    #                (sender_organization_id == organization) & (user_id == current_user_id) |
+    #                (sender_organization_id == organization) & (approver_id == current_user_id) |
+    #                (approved == true) & (sender_organization_id == organization)}
+    #
+    #@documents = if params[:type] == 'mails'
+    #  documents.mails # mails
+    #elsif params[:type] == 'writs'
+    #  documents.writs # writs
+    #else
+    #  documents # any other case
+    #end
 
 
     # @documents = @documents.paginate(:per_page => 20, :page => params[:page])
     # TODO: @justvitalius delete this method after testing.
-    @documents = Documents::ListDecorator.decorate(Document.all, with: Documents::ListShowDecorator)
+    @documents = Documents::ListDecorator.decorate(Document.includes(:sender_organization, :recipient_organization), with: Documents::ListShowDecorator)
     @controller = params[:controller]
 
     respond_to do |format|
@@ -78,6 +80,10 @@ class DocumentsController < ApplicationController
     redirect_to documents_path
   end
 
+
+  # TODO: @prikha
+  # Убрать этот экшен с глаз долой, чем быстрее, тем лучше.
+  #
   def action_list
     if params[:ids].count > 1
      @approve = @prepare = @send_document = true
@@ -92,12 +98,12 @@ class DocumentsController < ApplicationController
     else
      d = Document.find(params[:ids].first())
      @edit = d.user_id == current_user.id && d.prepared == false ? true : false
-     @show = d.sent && d.organization_id == current_user.organization_id ||
+     @show = d.sent && d.sender_organization_id == current_user.organization_id ||
              d.sender_organization_id == current_user.organization_id && d.user_id == current_user.id ||
              d.sender_organization_id == current_user.organization_id && d.approver_id == current_user.id ||
              d.approved && d.sender_organization_id == current_user.organization_id ? true : false
      @copy = d.sender_organization_id == current_user.organization.try(:id) ? true : false
-     @reply =   !d.sent && d.organization_id == current_user.organization_id ? true : false
+     @reply =   !d.sent && d.sender_organization_id == current_user.organization_id ? true : false
      @approve = !d.approved && d.approver_id == current_user.id && d.prepared ? true : false
      @prepare = !d.prepared && (d.user_id == current_user.id || d.approver_id == current_user.id) ? true : false
      @create_draft =  !d.prepared
@@ -214,6 +220,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # TODO: @justvitalius need to refactor or full destroy
   def new
     @document = Document.new
     @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
@@ -225,7 +232,30 @@ class DocumentsController < ApplicationController
     if params[:type] == nil
       redirect_to documents_path
     end
+
+    render layout: 'application'
   end
+
+  def mail
+    @document = Document.new
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    @task_list = @document.build_task_list
+    @organizations = Organization.where('id != ?', current_user.organization_id)
+  end
+
+  def order
+    @document = Document.new
+    @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
+    @executors = User.where(:organization_id => current_user.organization_id)
+    @recipients = User.where('organization_id != ?', current_user.organization_id)
+    @documents = Document.all
+    @task_list = @document.build_task_list
+    @organizations = Organization.where('id != ?', current_user.organization_id)
+  end
+
 
   def edit
     @document = Document.find(params[:id])
@@ -381,11 +411,23 @@ class DocumentsController < ApplicationController
 
 
   private
-  
+
+
+  # Due to table_aliasing rules we should provide proper association table alias
+  # more about "Table Aliasing" at http://apidock.com/rails/ActiveRecord/Associations/ClassMethods
   def sort_column
-    Document.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
-  end
-  
+      case params[:sort]
+        when *Document.column_names
+          params[:sort]
+        when 'sender'
+          'organizations.short_title'
+        when 'recipient'
+          'recipient_organizations_documents.short_title'
+        else
+          'created_at'
+      end
+end
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
   end

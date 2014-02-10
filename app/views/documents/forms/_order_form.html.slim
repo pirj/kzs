@@ -1,0 +1,84 @@
+= simple_form_for( resource,\
+                  html: {class: 'form-horizontal'},\
+                  defaults: { input_html: {class: 'form-control'},\
+                              input_wrapper_html: { class: 'col-sm-7' },\
+                              label: false, \
+                              wrapper: :inline \
+                              }) do |f|
+  - if action?('new')
+    = f.hidden_field :document_type, :value => params[:type]
+  - elsif action?('reply')
+    = f.hidden_field :document_type, :value => @original_document.document_type
+  - else
+    = f.hidden_field :document_type, :value => @document.document_type
+    = f.hidden_field :document_conversation_id, :value => @document_conversation_id
+
+  = f.input :title
+
+  / Organization select code
+  .row
+    .col-sm-7
+      / TODO: @justvitalius refactor this code to simple_form association
+      = f.input( :organization_id, collection: @organizations, label_method: :title, \
+                input_html: { include_blank: false, class: ' js-chosen', multiple: true, data: {target: 'mail-organizations' } }, \
+                input_wrapper_html: { class: 'col-md-12' } \
+                )
+    .col-sm-3
+      = link_to 'Все организации', '#', class: 'js-select-all-in-select text-left link-muted-dashed', data: { target: 'document-organizations' }
+
+  .row
+    .col-sm-3
+      = f.input(  :deadline, as: :datepicker, \
+                  wrapper: :icon_prepend, \
+                  label: false, \
+                  input_html: { placeholder: 'дата исполнения'}, \
+                  input_wrapper_html: { class: 'col-sm-12' } \
+                )
+    .col-sm-3
+      .text-help.control-label.text-left Дата исполнения
+
+  = f.input(  :approver_id, collection: @approvers, label_method: :first_name_with_last_name, \
+              input_html: { class: ' js-chosen', data:{ placeholder: 'Подтверждающий' } }, \
+              label: false \
+            )
+
+
+  = f.input(  :executor_id, collection: @approvers, label_method: :first_name_with_last_name, \
+                input_html: { class: ' js-chosen', data:{ placeholder: 'Исполняющий' }}, \
+                label: false \
+              )
+
+  = f.input :text, input_html: { rows: 14 }
+
+
+  h4 Прикрепленные задачи
+  = f.fields_for :task_list do |builder|
+    = render 'documents/task_list_fields', f: builder
+
+
+  h4 Прикрепленные файлы
+  = f.fields_for :document_attachments do |builder|
+    = render 'documents/document_attachment_fields', f: builder
+    = link_to_add_attachments "Прикрепить файл", f, :document_attachments
+
+  h4.col-md-12
+    a.addDocBut
+      | Прикрепить документы
+  .col-md-12.addDocuments
+    = hidden_field_tag "document[document_ids][]", nil
+    - @documents.each do |document|
+      label.checkbox
+        = check_box_tag "document[document_ids][]", document.id, @document.document_ids.include?(document.id), id: dom_id(document)
+        b
+          = document.title
+        /= if document.document_type.present? then t(document.document_type) end  || = Russian::strftime(document.created_at, "%d %B %Y %H:%M")
+
+  .row
+    .col-sm-7
+      = f.submit 'На подпись', class: 'btn btn-primary', name: 'prepare'
+
+      / TODO: @justvitalius WAT?
+      - if @document.user_id == current_user.id || action?('new')
+        = f.submit 'Сохранить в черновики'
+
+      = link_to 'Отмена', documents_path, class: 'btn link-muted'

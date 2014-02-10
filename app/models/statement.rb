@@ -1,7 +1,18 @@
 class Statement < ActiveRecord::Base
-  attr_accessible :title, :organization_id, :text, :file, :document_id, :user_ids, :document_ids,
-                  :statement_approver_ids, :approver_ids, :approver_id, :internal_approver_id
+  attr_accessible :title,
+                  :text,
+                  :file,
+                  :organization_id,
+                  :user_ids,
+                  :document_id,
+                  :document_ids,
+                  :statement_approver_ids,
+                  :approver_ids,
+                  :approver_id,
+                  :internal_approver_id
+
   attr_accessor :document_ids, :approver_ids, :internal_approver_id
+
   belongs_to :document
   has_many :statement_approvers
   has_many :users, through: :statement_approvers
