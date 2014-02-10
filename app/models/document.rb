@@ -7,7 +7,6 @@ class Document < ActiveRecord::Base
                   :executor_id, # пользователь исполнитель
                   :recipient_organization_id, # организация получатель
                   :sender_organization_id, # организация отправитель
-                  :state, #кэш текущего для общей таблицы
                   :serial_number,
                   :title # заголовок(тема)
 
@@ -21,6 +20,8 @@ class Document < ActiveRecord::Base
                   :executor,
                   :recipient_organization,
                   :sender_organization
+
+  attr_accessor :state #кэш текущего для общей таблицы
 
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
@@ -46,7 +47,7 @@ class Document < ActiveRecord::Base
 
 
   alias_attribute :text, :body
-  alias_attribute :sn, :serial_number
+  alias_attribute :sn,   :serial_number
   alias_attribute :sender, :sender_organization
   alias_attribute :recipient, :recipient_organization
   alias_attribute :document_type, :accountable_type #TODO: @prikha remove this misleading alias
