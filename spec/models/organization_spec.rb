@@ -17,16 +17,4 @@ describe Organization do
     it { should accept_nested_attributes_for(:licenses) }
   end
 
-  context 'check methods:' do
-    let!(:organization) {Organization.make!}
-    it 'director' do
-      organization.director.id == organization.director_id
-    end
-    it 'accountant' do
-      organization.accountant.id == organization.accountant_id
-    end
-    it 'admin' do
-      organization.admin.id == organization.admin_id
-    end
-  end
 end
