@@ -7,6 +7,11 @@ class Documents::DocumentsController < ResourceController
   end
 
   #TODO: @prikha now free for all (would be limited by initial scope!)
+  # uses params like so:
+  #     :state = 'approved'
+  #     :documents_ids = [1,4,6]
+  #
+
   def batch
     state = params[:state]
 
@@ -14,7 +19,7 @@ class Documents::DocumentsController < ResourceController
 
     @accountables = @documents.map(&:accountable)
 
-    if applicable_state?(@accountables, state)
+    if can?(ability_for(state), @documents) && applicable_state?(@accountables, state)
       @accountables.transition_to!(state)
       flash[:notice] = t('documents_updated')
     else
@@ -28,6 +33,7 @@ class Documents::DocumentsController < ResourceController
   def applicable_state?(accountables, state)
     accountables.map{|acc| acc.can_transition_to?(state)}.all?
   end
+
 
   def end_of_association_chain
     super.
