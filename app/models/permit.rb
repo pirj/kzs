@@ -2,7 +2,7 @@ class Permit < ActiveRecord::Base
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled,
                   :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes,
-                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number, user_id
+                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number, :user_id
   after_initialize :default_permit_class
 
   has_one :user
