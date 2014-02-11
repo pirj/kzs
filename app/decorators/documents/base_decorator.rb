@@ -23,6 +23,21 @@ module Documents
       object.sender.try(:title)
     end
 
+
+
+    # Humanize object type
+    def type_name
+      h.content_tag :span, class: 'important' do
+        I18n.t("activerecord.attributes.document.accountable_types.#{type}")
+      end
+    end
+
+
+    # Transform from Documents::Mail to documents_mail
+    def type
+      object.accountable_type.to_s.gsub('::', '_').downcase
+    end
+
     # отдает дату в указанном формате
     # obj.date :date_format
     #def date *args

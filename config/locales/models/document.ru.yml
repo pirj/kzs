@@ -44,3 +44,7 @@ ru:
         date:
         sent:
         sent_date:
+        accountable_types:
+          documents_mail: письмо
+          documents_order: распоряжение
+          documents_report: акт

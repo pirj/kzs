@@ -57,10 +57,6 @@ module Documents
     end
 
 
-    def type
-      h.content_tag :span, object.document_type, class: 'important'
-    end
-
     def status
       h.content_tag :span, 'заглушечка', class: 'label label-danger'
     end
