@@ -126,7 +126,7 @@ namespace :documents do
     organizations_count = Organization.count
     users_count         = User.count
 
-    3.times do |i|
+    5.times do |i|
       d = Documents::Mail.new
       d.title = Faker::Lorem.words(4)
       d.body = Populator.sentences(30..50)
@@ -162,7 +162,7 @@ namespace :documents do
     Documents::Report.delete_all
     Documents::Report.reset_pk_sequence
 
-    2.times do |d|
+    7.times do |d|
       d = Documents::Report.new
 
       d.title = Faker::Lorem.words(2)

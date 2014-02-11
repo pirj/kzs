@@ -2,20 +2,20 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
-gem "squeel"
+gem 'squeel'
 
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'execjs'
 gem 'therubyracer'
 
-gem "paperclip", "~> 3.0"
-gem "russian", "~> 0.6.0"
+gem 'paperclip', '~> 3.0'
+gem 'russian', '~> 0.6.0'
 gem 'devise'
-gem "ransack"
+gem 'ransack'
 
-gem "cancan"
-gem "ckeditor"
+gem 'cancan'
+gem 'ckeditor'
 gem 'activeadmin'
 gem 'awesome_nested_set'
 gem 'haml'
@@ -23,12 +23,12 @@ gem 'slim'
 
 gem 'simple_form'
 gem 'draper'
-gem 'will_paginate'
+gem 'kaminari'
 
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
-# gem 'texticle', "2.0", :require => 'texticle/rails'
+# gem 'texticle', '2.0', :require => 'texticle/rails'
 gem 'statesman'
 
 group :assets do

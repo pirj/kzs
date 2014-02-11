@@ -39,7 +39,8 @@ class Documents::DocumentsController < ResourceController
     super.
         where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
-        order(sort_column+' '+sort_direction)
+        order(sort_column+' '+sort_direction).
+        page(params[:page]).per(2)
   end
 
   def sort_column
