@@ -15,6 +15,10 @@
 
 .gridster {
   position:relative;
+  ul{
+    padding: 0;
+    height: 640px; width: 480px;
+  }
 }
 .gridster > * {
   margin: 0 auto;
