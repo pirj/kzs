@@ -727,7 +727,6 @@ $(function () {
         beforeSend: function (xhr) {
             xhr.setRequestHeader('X-CSRF-Token',
                 $('meta[name="csrf-token"]').attr('content'));
-            console.log($('meta[name="csrf-token"]').attr('content'));
         }
     });
     var request = $.ajax({
@@ -737,8 +736,6 @@ $(function () {
     });
 
     request.done(function (response) {
-
-
         if (response.desktop_conf[0]) {
             var i = 0;
             _.each(document.getElementsByClassName('widget'), function (widget) {
@@ -750,26 +747,25 @@ $(function () {
                     widget.setAttribute('data-sizey', response.desktop_conf[i][3]);
                 }
 
-
                 i++
 
             });
         }
-
     });
 
-    $(".gridster ul").gridster({
-        widget_margins: [10, 10],
-        widget_base_dimensions: [140, 140],
-        resize: {
-            enabled: true
+    var gridster = $(".gridster ul").gridster(
+        {
+            widget_margins: [10, 10],
+            widget_base_dimensions: [140, 140],
+            avoid_overlapped_widgets: true,
+            resize: {
+                enabled: true
+            }
         }
-    }).data('gridster');
-
-    var gridster = $(".gridster ul").gridster().data('gridster');
-
-    gridster.disable($('.gridster ul li'));
-    gridster.disable_resize($('.gridster ul li'));
+    ).data('gridster');
+    var widgets = $('.gridster li');
+    gridster.disable(widgets);
+    gridster.disable_resize(widgets);
 // Add widget
     $('.add-widget-btn').live('click', function () {
         gridster.add_widget('<li class="new">The HTML of the widget...</li>', 1, 1);
@@ -803,10 +799,15 @@ $(function () {
             return false
         });
 
+
+//save current position widgets
+
         $('.save').click(function () {
 
 
             var data = new Array();
+
+            console.log(gridster.serialize(widgets));
 
             _.each(document.getElementsByClassName('widget'), function (widget) {
 
@@ -820,12 +821,11 @@ $(function () {
                 data.push(Ar)
             })
 //            var data = {widgets: {docs: [1,2,4,5], mops: [1,2,4,5], loks: [1,2,4,5]}}
-            console.log(data);
+
             data = {
                 widgets: data
             }
 
-            console.log(data);
 
             var request = $.ajax({
                 url: "/save_desktop_configuration",

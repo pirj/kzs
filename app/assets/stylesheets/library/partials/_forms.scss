@@ -383,7 +383,7 @@ input[type="checkbox"],
     @include make-row();
     &.m-shorten{
       .col-sm-2{
-        width: 12%;
+     //   width: 12%;
       }
 
         .col-sm-6{
