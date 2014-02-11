@@ -21,7 +21,6 @@ class Document < ActiveRecord::Base
                   :recipient_organization,
                   :sender_organization
 
-  attr_accessor :state #кэш текущего для общей таблицы
 
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
