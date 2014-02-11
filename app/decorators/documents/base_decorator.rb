@@ -38,6 +38,17 @@ module Documents
       object.accountable_type.to_s.gsub('::', '_').downcase
     end
 
+    # TODO: @justvitalius sdsd
+
+    # TODO: @prikha how to get current_state from Document?
+    #       when i decorating DocumentsCollection by this decorator
+    #       it return Document class object for each of collection.
+    #def state_name
+    #  h.content_tag :span, class: 'label' do
+    #    I18n.t("activerecord.attributes.document.states.#{object.current_state}")
+    #  end
+    #end
+
     # отдает дату в указанном формате
     # obj.date :date_format
     #def date *args
