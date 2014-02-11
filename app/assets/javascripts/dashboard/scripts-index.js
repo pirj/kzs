@@ -807,7 +807,7 @@ $(function () {
 
 
         $('.wrapper .widget a').on('click', function () {
-         //   return false
+            return false
         });
 
 
