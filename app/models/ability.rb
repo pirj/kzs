@@ -4,7 +4,7 @@ class Ability
   def initialize(user)  
     
     alias_action :read, :update, :to => :crud
-    
+
     can :approve, Document if user.permissions.exists?('1')    
     can :create, Permit if user.permissions.exists?('6')
 

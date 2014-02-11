@@ -1,6 +1,6 @@
 class Documents::Mail < ActiveRecord::Base
   include Accountable
-  attr_accessible :conversation_id
+  attr_accessible :conversation_id, :conversation
 
   belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id'
 
@@ -11,7 +11,13 @@ class Documents::Mail < ActiveRecord::Base
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
            to: :state_machine
 
+  before_save :build_conversation
 
+  private
+
+  def build_conversation
+    self.conversation ||= build_conversation
+  end
 
   # TODO: add paranoia - this will handle the destruction
 
