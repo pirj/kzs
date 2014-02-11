@@ -31,6 +31,7 @@ class Documents::DocumentsController < ResourceController
 
   def end_of_association_chain
     super.
+        where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
         order(sort_column+' '+sort_direction)
   end
