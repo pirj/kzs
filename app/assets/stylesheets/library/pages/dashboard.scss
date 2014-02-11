@@ -374,6 +374,12 @@
   .icon-resize-full {
     top: 69px;
   }
+
+  &.disable{
+    opacity: 0.7;
+    box-shadow: 0 10px 110px black inset;
+  }
+
   &.widget-security {
     background: url("sec.png") no-repeat #52ade6;
   }
