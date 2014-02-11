@@ -128,7 +128,7 @@ namespace :documents do
 
     3.times do |i|
       d = Documents::Mail.new
-      d.title = Faker::Lorem.words(12)
+      d.title = Faker::Lorem.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -144,7 +144,7 @@ namespace :documents do
 
     5.times do |i|
       d = Documents::Order.new
-      d.title = Faker::Lorem.words(12)
+      d.title = Faker::Lorem.words(3)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -165,7 +165,7 @@ namespace :documents do
     2.times do |d|
       d = Documents::Report.new
 
-      d.title = Faker::Lorem.words(12)
+      d.title = Faker::Lorem.words(2)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
