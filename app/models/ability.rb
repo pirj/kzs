@@ -5,10 +5,12 @@ class Ability
     
     alias_action :read, :update, :to => :crud
 
+    #TODO: @babrovka
     # Make use of
     #https://github.com/ryanb/cancan/wiki/Fetching-Records
 
-    #Can switch to this:
+
+    #TODO: @babrovka Can switch to this:
     #can :assign_prepared_state, Documents::Mail, document:{sender_organization_id: user.organization_id}
     can :assign_prepared_state, Document, sender_organization_id: user.organization_id
     can :assign_approved_state, Document, sender_organization_id: user.organization_id, approver_id: user.id

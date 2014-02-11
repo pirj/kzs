@@ -11,7 +11,6 @@ class Documents::DocumentsController < ResourceController
   #     :state = 'approved'
   #     :documents_ids = [1,4,6]
   #
-
   def batch
     state = params[:state]
 
