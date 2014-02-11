@@ -29,7 +29,6 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
 # gem 'texticle', "2.0", :require => 'texticle/rails'
-gem 'mail'
 gem 'statesman'
 
 group :assets do

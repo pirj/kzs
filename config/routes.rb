@@ -21,6 +21,7 @@ Kzs::Application.routes.draw do
     #batch actions go on docs
     resources :mails, except: 'index' do
       get 'reply', on: :member
+      get 'assign_state', on: :member
     end
     #member actions for status changes
     resources :orders, except: 'index'

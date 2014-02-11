@@ -5,6 +5,12 @@ class Ability
     
     alias_action :read, :update, :to => :crud
 
+    #Can switch to this:
+    #can :assign_prepared_state, Documents::Mail, document:{sender_organization_id: user.organization_id}
+    can :assign_prepared_state, Document, sender_organization_id: user.organization_id
+    can :assign_approved_state, Document, sender_organization_id: user.organization_id, approver_id: user.id
+    can :assign_sent_state, Document, sender_organization_id: user.organization_id #TODO: add transition authorship
+
     can :approve, Document if user.permissions.exists?('1')    
     can :create, Permit if user.permissions.exists?('6')
 
