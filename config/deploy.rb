@@ -5,9 +5,7 @@ require 'hipchat/capistrano'
 # require 'rvm/capistrano'
 
 
-set :hipchat_token, "9ccb22cbbd830fcd68cf2289a4f34b"
-set :hipchat_room_name, "430075"
-set :hipchat_announce, false
+
 
 
 #selectel
@@ -119,6 +117,10 @@ task :mercury do
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
+  
+  set :hipchat_token, "9ccb22cbbd830fcd68cf2289a4f34b"
+  set :hipchat_room_name, "430075"
+  set :hipchat_announce, true
 
 
   namespace :deploy do
