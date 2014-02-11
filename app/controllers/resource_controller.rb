@@ -15,15 +15,11 @@ class ResourceController < ApplicationController
 
   private
   def end_of_association_chain
-    super.order(sort_column_full_name + " " + sort_direction)
+    super.order(sort_column + " " + sort_direction)
   end
 
   def sort_column
     resource_class.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
-  end
-
-  def sort_column_full_name
-    [resource_class.table_name,sort_column].join('.')
   end
 
   def sort_direction

@@ -29,7 +29,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
 # gem 'texticle', "2.0", :require => 'texticle/rails'
-
+gem 'mail'
 gem 'statesman'
 
 group :assets do
@@ -51,6 +51,7 @@ gem 'faker'
 gem 'factory_girl_rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'hipchat'
 
 
 group :production do
@@ -62,6 +63,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'zeus'
+  gem 'quiet_assets'
 end
 
 group :test do

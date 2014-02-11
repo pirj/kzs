@@ -4,7 +4,8 @@ table.table.js-row-clickable.m-table-replacement
     tr
       td = check_box_tag :selected, nil, false, class: 'js-select-rows-in-table', data:{ target: 'document' }
       - attrs.each do |attr|
-        th = t(".list_attrs.#{attr.to_s}")
+        /TODO: @prikha how to sort
+        th = sortable attr, t(".list_attrs.#{attr.to_s}")
 
   tbody
     - collection.each do |resource|

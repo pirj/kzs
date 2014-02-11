@@ -1,3 +1,4 @@
+# encoding: utf-8
 class OrganizationsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction, :is_may_edit_organization

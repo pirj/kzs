@@ -81,6 +81,7 @@ class DocumentsController < ApplicationController
   end
 
 
+  
   # TODO: @prikha
   # Убрать этот экшен с глаз долой, чем быстрее, тем лучше.
   #
@@ -221,6 +222,7 @@ class DocumentsController < ApplicationController
   end
 
   # TODO: @justvitalius need to refactor or full destroy
+  # TODO: @prikha no need at all
   def new
     @document = Document.new
     @approvers = User.approvers.where('organization_id = ?', current_user.organization_id)
@@ -255,7 +257,6 @@ class DocumentsController < ApplicationController
     @task_list = @document.build_task_list
     @organizations = Organization.where('id != ?', current_user.organization_id)
   end
-
 
   def edit
     @document = Document.find(params[:id])
@@ -312,9 +313,6 @@ class DocumentsController < ApplicationController
     end
   end
 
-
-
-  
   def callback
     @document = Document.find(params[:id])
     @document.sent = false
@@ -333,7 +331,6 @@ class DocumentsController < ApplicationController
       format.json 
     end
   end
-  
   
   def archive
     @document = Document.find(params[:id])
@@ -419,9 +416,9 @@ class DocumentsController < ApplicationController
       case params[:sort]
         when *Document.column_names
           params[:sort]
-        when 'sender'
+        when 'sender_link'
           'organizations.short_title'
-        when 'recipient'
+        when 'recipient_link'
           'recipient_organizations_documents.short_title'
         else
           'created_at'
