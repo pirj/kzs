@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
   def current_organization
     current_user.organization
   end
+
+  # Referenced in /app/models/ability.rb
+  # Referenced in /app/controllers/documents/*
+  def ability_for(state)
+    "assign_#{state}_state".to_sym
+  end
 end

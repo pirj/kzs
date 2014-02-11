@@ -2,11 +2,10 @@ class Documents::MailsController < ResourceController
   layout 'base'
   actions :all, except: [:index]
 
+  #TODO: we can check ability for Mail Order Report or for Document
   def assign_state
     state = params[:state]
-
-    ability_name = "assign_#{state}_state".to_sym
-    if user.can?(ability_name, resource) && resource.transition_to!(state)
+    if can?(ability_for(state), resource.document) && resource.transition_to!(state)
       redirect_to :back, notice: t("document_#{state}")
     else
       redirect_to :back, notice: t('access_denied')
