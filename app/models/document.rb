@@ -26,7 +26,7 @@ class Document < ActiveRecord::Base
   has_many :document_attachments
   accepts_nested_attributes_for :document_attachments, allow_destroy: true
 
-  belongs_to :accountabe, polymorphic: true, dependent: :destroy
+  belongs_to :accountable, polymorphic: true, dependent: :destroy
 
   belongs_to :approver, class_name: 'User'
   belongs_to :executor, class_name: 'User'
@@ -93,7 +93,7 @@ class Document < ActiveRecord::Base
     document_transitions.exists?(to_state: 'prepared')
   end
 
-  # stub out user_id to replace it properly
+  #TODO: @prikha stub out user_id to replace it properly
   def user_id
     3
   end

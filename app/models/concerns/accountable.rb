@@ -6,6 +6,8 @@ module Accountable
     has_one :document, as: :accountable, dependent: :destroy
     accepts_nested_attributes_for :document
 
+    validates_presence_of :document
+
     after_initialize :setup_document
   end
 

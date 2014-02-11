@@ -4,7 +4,7 @@ class Documents::Order < ActiveRecord::Base
   has_one :report
 
   attr_accessible :task_list_attributes #TODO: dependent strategy?
-  has_one :task_list
+  has_one :task_list, dependent: :destroy
   accepts_nested_attributes_for :task_list, allow_destroy: true
 
   def state_machine

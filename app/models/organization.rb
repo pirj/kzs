@@ -33,7 +33,6 @@ class Organization < ActiveRecord::Base
 
   has_many :licenses
 
-
   TYPEOFOWNERSHIP = [I18n::translate('activerecord.attributes.organization.llc'), I18n::translate('activerecord.attributes.organization.businessman')]
 
   accepts_nested_attributes_for :licenses, allow_destroy: true
