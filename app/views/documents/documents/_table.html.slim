@@ -7,45 +7,30 @@ table.table.js-row-clickable.m-table-replacement
       th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
       th = t('documents.table.list_attrs.type')
       th = t('documents.table.list_attrs.status')
+
   tbody
+    - attrs = [:number_and_date, :sender_link, :recipient_link, :type, :attachment_icon, :status]
     - collection.each do |resource|
       / simple row with short information
       tr data-id = resource.id
-        td = check_box_tag :selected, resource.id, false, data:{ target: 'document' }
-        - attrs = [:number_and_date, :sender_link, :recipient_link, :type, :status]
+        td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
         - attrs.each do |attr|
-          td = render_attr(resource, attr)
+          td = resource.send(attr.to_sym)
 
       /row with extra information
-      tr data-id = resource.id class = 'more-info js-more-info'
-        td colspan = attributes.count
-          .col-sm-8
-            .form-horizontal
-              .form-group
-                .col-sm-3.control-label модуль не готов
-              /  .col-sm-9
-              /    h2 = link_to res.title, res.path
-              /    h4.btn-link-muted.btn-no-hover = "#{res.users_count} человек в штате"
-              /
-              /
-              /.form-group
-              /  .col-sm-3.control-label руководитель
-              /  .col-sm-9
-              /    = res.director_avatar
-              /    = link_to res.director_full_name, user_path(res.director), class: 'link-dashed' if res.director
-              /
-              /
-              /.form-group
-              /  .col-sm-3.control-label контактное лицо
-              /  .col-sm-9
-              /    = res.director_avatar
-              /    = link_to res.director.full_name, user_path(res.director), class: 'link-dashed' if res.director
-              /
-              /.col-sm-9.col-sm-offset-3
-              /  ul.list-unstyled
-              /    li = link_to 'скачать все реквизиты', '#'
-              /
-              /.col-sm-9.col-sm-offset-3
-              /  = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default'
-              /  = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
-
+      tr[ data-id=resource.id class='more-info js-more-info' ]
+        td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
+        td[ colspan=attrs.count-1 ]
+          h2 = resource.title_link
+          .row
+            .col-sm-3
+              = resource.type
+              /= pdf_to_png(resource,190,270)
+            .col-sm-8
+              = resource.sender_to_recipient_links
+              = resource.number_and_date_with_label
+              = resource.executor_link_with_label
+              = resource.recipient_link_with_label
+              = resource.sender_link_with_label
+              = resource.attachments_count_with_label
+        td = resource.status
