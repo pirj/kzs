@@ -77,7 +77,7 @@ module Kzs
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['library.js', 'library.css', 'active_admin.css', 'active_admin.js']
+    config.assets.precompile += %w(library.js library.css active_admin.css active_admin.js app.css)
 
     #Machinist to automatically add a blueprint to your blueprints file whenever you generate a model
     config.generators do |g|
