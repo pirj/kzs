@@ -1,9 +1,12 @@
 .wrapper.m-dashboard-page{
+  h1{
+    color: #00bc80;
+  }
   min-height: 750px;
 
   position: relative;
   .container{
-    height: 565px;
+//    height: 565px;
   }
 }
 
