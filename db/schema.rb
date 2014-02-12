@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140212113033) do
+ActiveRecord::Schema.define(:version => 20140212145611) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,14 +94,15 @@ ActiveRecord::Schema.define(:version => 20140212113033) do
     t.string   "issued"
     t.date     "date"
     t.string   "guard_duty"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "id_series"
     t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
     t.integer  "lp_r"
     t.string   "register_sn"
+    t.boolean  "has_vehicle", :default => false
   end
 
   create_table "delete_notices", :force => true do |t|
@@ -109,6 +110,59 @@ ActiveRecord::Schema.define(:version => 20140212113033) do
     t.integer  "document_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "docs", :force => true do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.text     "text"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "recipient_id"
+    t.boolean  "sent",                     :default => false
+    t.integer  "approver_id"
+    t.boolean  "approved",                 :default => false
+    t.boolean  "opened",                   :default => false
+    t.boolean  "for_approve",              :default => false
+    t.boolean  "deleted",                  :default => false
+    t.boolean  "archived",                 :default => false
+    t.boolean  "callback",                 :default => false
+    t.boolean  "prepared",                 :default => false
+    t.boolean  "draft",                    :default => true
+    t.integer  "sender_organization_id"
+    t.string   "document_type"
+    t.boolean  "with_comments",            :default => false
+    t.boolean  "executed",                 :default => false
+    t.boolean  "for_confirmation",         :default => false
+    t.integer  "project_id"
+    t.boolean  "confidential",             :default => false
+    t.integer  "executor_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.string   "sn"
+    t.datetime "date"
+    t.integer  "version",                  :default => 1
+    t.integer  "document_conversation_id"
+    t.datetime "approved_date"
+    t.datetime "sent_date"
+    t.datetime "opened_date"
+    t.datetime "deteled_date"
+    t.datetime "prepared_date"
+    t.datetime "executed_date"
+    t.datetime "deadline"
+    t.integer  "ancestry"
+    t.boolean  "accepted",                 :default => false
+    t.boolean  "not_accepted",             :default => false
+    t.boolean  "with_completed_task_list", :default => false
+    t.datetime "accepted_date"
+    t.datetime "refuse_date"
   end
 
   create_table "document_attachments", :force => true do |t|
