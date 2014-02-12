@@ -76,7 +76,6 @@ class Document < ActiveRecord::Base
   scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
 
   #Actual methods
-
   # get an array of states that are applicable to this document.
   # it actually belongs to the state machine of a real document
   # among OfficialMail Order Report
@@ -90,6 +89,10 @@ class Document < ActiveRecord::Base
     self.class.new(document_attributes)
   end
 
+  # actual methods for one instance of Model
+  def single_applicable_states
+    %w(edit)
+  end
 
   # Stub out all missing methods
 

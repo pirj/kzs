@@ -12,7 +12,7 @@ table.table.js-row-clickable.m-table-replacement
     - attrs = [:number_and_date, :sender_link, :recipient_link, :type_name, :attachment_icon, :status]
     - collection.each do |resource|
       / simple row with short information
-      tr data-id = resource.id
+      tr[ data-id=resource.id data-server-actions=resource.actions ]
         td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
         - attrs.each do |attr|
           td = resource.send(attr.to_sym)

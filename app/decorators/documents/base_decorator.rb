@@ -38,7 +38,9 @@ module Documents
       object.accountable_type.to_s.gsub('::', '_').downcase
     end
 
-    # TODO: @justvitalius sdsd
+    def actions
+      (object.applicable_states + object.single_applicable_states).to_s
+    end
 
     # TODO: @prikha how to get current_state from Document?
     #       when i decorating DocumentsCollection by this decorator

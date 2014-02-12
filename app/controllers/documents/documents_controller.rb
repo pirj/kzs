@@ -8,6 +8,12 @@ class Documents::DocumentsController < ResourceController
     @documents = Documents::ListDecorator.decorate(collection, with: Documents::ListShowDecorator)
   end
 
+  # redirect to document-type edit-page
+  def edit
+    document = Document.find(params[:id]).accountable
+    redirect_to polymorphic_path(document)
+  end
+
   #TODO: @prikha now free for all (would be limited by initial scope!)
   # uses params like so:
   #     :state = 'approved'

@@ -22,13 +22,8 @@ ul.nav.nav-pills
       span Действия
       span.caret
     span.dropdown-arr
-    ul.dropdown-menu
-      li= link_to 'Создать копию' , '#'
-      li= link_to 'Редактировать' , '#'
-      li= link_to 'Подготовить'   , '#'
-      li= link_to 'Подписать'     , '#'
-      li= link_to 'Отправить'     , '#'
-      li= link_to 'Ответить'      , '#'
+    ul.dropdown-menu.js-documents-actions-list
+      li выберите документы
 
 
 = render 'table'

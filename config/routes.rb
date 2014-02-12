@@ -15,8 +15,7 @@ Kzs::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   namespace :documents do
-
-    resources :documents, path:'', only: 'index' do
+    resources :documents, path:'', only: ['index', 'edit'] do
       get 'batch', on: :collection
     end
 
