@@ -17,23 +17,25 @@ $(function () {
         dataType: "json"
     });
 
-    request.done(function (response) {
-        if (response.desktop_conf[0]) {
-            var i = 0;
-            _.each(document.getElementsByClassName('widget'), function (widget) {
-
-                if (response.desktop_conf[i]) {
-                    widget.setAttribute('data-row', response.desktop_conf[i][0]);
-                    widget.setAttribute('data-col', response.desktop_conf[i][1]);
-                    widget.setAttribute('data-sizex', response.desktop_conf[i][2]);
-                    widget.setAttribute('data-sizey', response.desktop_conf[i][3]);
-                }
-
-                i++
-
-            });
-        }
-    });
+//    request.done(function (response) {
+//        console.log('wasd');
+//        console.log(response);
+//        if (response.desktop_conf[0]) {
+//            var i = 0;
+//            _.each(document.getElementsByClassName('widget'), function (widget) {
+//
+//                if (response.desktop_conf[i]) {
+//                    widget.setAttribute('data-row', response.desktop_conf[i][0]);
+//                    widget.setAttribute('data-col', response.desktop_conf[i][1]);
+//                    widget.setAttribute('data-sizex', response.desktop_conf[i][2]);
+//                    widget.setAttribute('data-sizey', response.desktop_conf[i][3]);
+//                }
+//
+//                i++
+//
+//            });
+//        }
+//    });
 
     var gridster = $(".gridster > ul").gridster(
         {
