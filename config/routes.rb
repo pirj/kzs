@@ -19,7 +19,7 @@ Kzs::Application.routes.draw do
       get 'batch', on: :collection
     end
     #batch actions go on docs
-    resources :mails, except: 'index' do
+    resources :official_mails, except: 'index' do
       get 'reply', on: :member
       get 'assign_state', on: :member
     end

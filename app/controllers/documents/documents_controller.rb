@@ -2,6 +2,8 @@ class Documents::DocumentsController < ResourceController
   layout 'base'
   actions :index
 
+  has_scope :per, default: 3
+
   def index
     @documents = Documents::ListDecorator.decorate(collection, with: Documents::ListShowDecorator)
   end
@@ -38,8 +40,7 @@ class Documents::DocumentsController < ResourceController
     super.
         where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
-        order(sort_column+' '+sort_direction).
-        page(params[:page]).per(2)
+        order(sort_column+' '+sort_direction)
   end
 
   def sort_column
