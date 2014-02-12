@@ -15,4 +15,6 @@ class Documents::Order < ActiveRecord::Base
            to: :state_machine
 
 
+
+
 end

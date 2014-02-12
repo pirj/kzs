@@ -20,18 +20,20 @@ Kzs::Application.routes.draw do
       get 'batch', on: :collection
     end
 
-    resources :official_mails, except: 'index' do
+    resources :official_mails, path: 'mails', except: 'index' do
       get 'reply', on: :member
       get 'assign_state', on: :member
+      get 'copy', on: :member
     end
 
     resources :orders, except: 'index' do
       get 'assign_state', on: :member
+      get 'copy', on: :member
     end
 
     resources :reports, except: 'index' do
       get 'assign_state', on: :member
-
+      get 'copy', on: :member
     end
   end
 

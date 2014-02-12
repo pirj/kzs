@@ -73,8 +73,18 @@ class Document < ActiveRecord::Base
   scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
 
   #Actual methods
+
+  # get an array of states that are applicable to this document.
+  # it actually belongs to the state machine of a real document
+  # among OfficialMail Order Report
   def applicable_states
     accountable.state_machine.applicable_states
+  end
+
+  def safe_clone
+    whitelist = %w(title body confidential sender_organization_id recipient_organization_id approver_id executor_id)
+    document_attributes = self.attributes.keep_if{|k,v| whitelist.include?(k)}
+    self.class.new(document_attributes)
   end
 
 
