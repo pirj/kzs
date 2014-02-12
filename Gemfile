@@ -24,6 +24,7 @@ gem 'slim'
 gem 'simple_form'
 gem 'draper'
 gem 'kaminari'
+gem 'ransack'
 
 gem 'inherited_resources'
 gem 'has_scope'
