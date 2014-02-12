@@ -21,7 +21,7 @@ class Documents::DocumentsController < ResourceController
     @accountables = @documents.map(&:accountable)
 
     if can?(ability_for(state), @documents) && applicable_state?(@accountables, state)
-      @accountables.transition_to!(state)
+      @accountables.transition_to!(state, {user_id: current_user})
       flash[:notice] = t('documents_updated')
     else
       flash[:notice] = t('access_denied')
