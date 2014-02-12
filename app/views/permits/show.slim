@@ -58,12 +58,13 @@
 
     /h2 Разовый пропуск
 
-    div Имя: #{ @daily_pass.first_name }<br>
     div Фамилия: #{ @daily_pass.last_name }<br>
+    div Имя: #{ @daily_pass.first_name }<br>
     div Отчество: #{ @daily_pass.middle_name }<br>
     div Наименование документа: #{ @daily_pass.id_type }<br>
     div Его серия и номер: #{ @daily_pass.id_sn }<br>
     div Гос. номер и марка автотранспортного средства: #{ @daily_pass.vehicle }<br>
+    div Гос. Номер: #{permit_auto_number(@permit)}
     div Куда: #{ @daily_pass.object }<br>
     div К кому: #{ @daily_pass.person }<br>
     div Выдан: #{ @daily_pass.issued }<br>

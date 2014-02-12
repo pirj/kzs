@@ -27,8 +27,37 @@
       = f.input :id_type, collection: @daily_document_type, input_html: {class: 'js-chosen form-control ' },input_wrapper_html: { class: 'col-sm-3' }
       /= f.input :id_sn,  input_html: {class: ' form-control ' },input_wrapper_html: { class: 'col-sm-3' }
 
+      = f.input :id_series,  input_html: {class: 'form-control ' },input_wrapper_html: { class: 'col-sm-2' }
+      = f.input :id_number,  input_html: {class: 'form-control ' },input_wrapper_html: { class: 'col-sm-2' }
 
-      = f.input :vehicle,  input_html: {class: ' form-control ' }
+      /= f.input :vehicle,  input_html: {class: ' form-control ' }
+
+      = f.input :vehicle, collection: @car_brand_types, value_method: :title, input_html: {class: 'js-chosen form-control ' }
+      = f.input :auto_mark, collection: @car_brand_types, as: :grouped_select, group_method: :car_brands, input_html: {class: ' js-chosen-search form-control' }
+      = f.input :auto_model,input_html: {class: '  form-control' }
+      = f.simple_fields_for :vehicle do |vehicle|
+
+
+
+
+
+
+        - if @permit.new_record?
+
+          .form-item.controls
+            .form-group.m-shorten
+              .control-label.col-sm-3 Государственный регистрационный номер:
+              .col-sm-2 = vehicle.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8' }
+              .col-sm-3 = vehicle.input :sn_number,label: false, input_html: {class: 'form-control' }, input_wrapper_html: { class: 'col-sm-12' }
+              .col-sm-2 = vehicle.input :second_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
+              .col-sm-2 = vehicle.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
+
+
+          .form-item.controls
+            .form-group
+              .control-label.col-sm-3 Номер региона:
+              .col-sm-3 = vehicle.input :sn_region, collection: 01..199,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+
       = f.input :object,  input_html: {class: ' form-control ' }
       = f.input :person,  input_html: {class: 'form-control ' }
       = f.input :issued,  input_html: {class: ' form-control ' }
