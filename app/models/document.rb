@@ -23,7 +23,9 @@ class Document < ActiveRecord::Base
 
 
   has_many :document_attachments
-  accepts_nested_attributes_for :document_attachments, allow_destroy: true
+  # StateMachine transitions to keep track of state changes
+  # TODO: guards and callbacks on state_machines
+  has_many :document_transitions
 
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
@@ -33,8 +35,6 @@ class Document < ActiveRecord::Base
   belongs_to :sender_organization, class_name: 'Organization'
   belongs_to :recipient_organization, class_name: 'Organization'
 
-  # StateMachine transitions to keep track of state changes
-  has_many :document_transitions
 
   #TODO: add signed_at timestamp and a callback on state machines(m-be a superclass for all state machines)
 
@@ -44,6 +44,7 @@ class Document < ActiveRecord::Base
                           foreign_key: "document_id",
                           association_foreign_key: "relational_document_id"
 
+  accepts_nested_attributes_for :document_attachments, allow_destroy: true
 
   alias_attribute :text, :body
   alias_attribute :sn,   :serial_number
@@ -53,9 +54,8 @@ class Document < ActiveRecord::Base
 
 
 
-  #after_save :create_png
+  after_save :create_png
 
-  #TODO: guards and callbacks on state_machines
 
 
   #TODO: validations
