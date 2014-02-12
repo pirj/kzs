@@ -1,4 +1,4 @@
-class Documents::MailStateMachine
+class Documents::OfficialMailStateMachine
   include Statesman::Machine
 
   state :draft, initial: true

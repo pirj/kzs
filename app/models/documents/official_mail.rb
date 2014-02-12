@@ -1,21 +1,21 @@
-class Documents::Mail < ActiveRecord::Base
+class Documents::OfficialMail < ActiveRecord::Base
   include Accountable
   attr_accessible :conversation_id, :conversation
 
   belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id'
 
   def state_machine
-    Documents::MailStateMachine.new(self, transition_class: DocumentTransition)
+    Documents::OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
            to: :state_machine
 
-  before_save :build_conversation
+  before_save :assign_conversation_if_none
 
   private
 
-  def build_conversation
+  def assign_conversation_if_none
     self.conversation ||= build_conversation
   end
 

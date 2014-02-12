@@ -22,7 +22,7 @@ end
 namespace :csv do
   desc "Import Organizations"
   task :organizations => :environment do
-    Organization.destroy_all
+    Organization.delete_all
     Organization.reset_pk_sequence
     csv_file_path = 'db/csv/organizations.csv'
     CSV.foreach(csv_file_path) do |row|
@@ -117,17 +117,17 @@ end
 namespace :documents do
   desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'
   task :create => :environment do
-    Document.destroy_all
+    Document.delete_all
     Document.reset_pk_sequence
 
-    Documents::Mail.delete_all
-    Documents::Mail.reset_pk_sequence
+    Documents::OfficialMail.delete_all
+    Documents::OfficialMail.reset_pk_sequence
 
     organizations_count = Organization.count
     users_count         = User.count
 
     5.times do |i|
-      d = Documents::Mail.new
+      d = Documents::OfficialMail.new
       d.title = Faker::Lorem.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false

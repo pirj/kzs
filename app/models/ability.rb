@@ -11,7 +11,7 @@ class Ability
 
 
     #TODO: @babrovka Can switch to this:
-    #can :assign_prepared_state, Documents::Mail, document:{sender_organization_id: user.organization_id}
+    #can :assign_prepared_state, Documents::OfficialMail, document:{sender_organization_id: user.organization_id}
     can :assign_prepared_state, Document, sender_organization_id: user.organization_id
     can :assign_approved_state, Document, sender_organization_id: user.organization_id, approver_id: user.id
     can :assign_sent_state, Document, sender_organization_id: user.organization_id #TODO: add transition authorship
