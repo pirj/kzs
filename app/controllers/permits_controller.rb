@@ -239,6 +239,6 @@ class PermitsController < ApplicationController
   end
 
   def daily_document_type
-    @daily_document_type = [1, 2]
+    @daily_document_type = UserDocumentType.all
   end
 end
