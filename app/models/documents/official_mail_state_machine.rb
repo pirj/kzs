@@ -1,5 +1,6 @@
 class Documents::OfficialMailStateMachine
   include Statesman::Machine
+  include Documents::StateMachine
 
   state :draft, initial: true
   state :prepared

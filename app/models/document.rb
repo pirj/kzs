@@ -71,6 +71,13 @@ class Document < ActiveRecord::Base
   scope :unread, where(state: 'sent')
   scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
   scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
+
+  #Actual methods
+  def applicable_states
+    accountable.state_machine.applicable_states
+  end
+
+
   # Stub out all missing methods
 
   # @date returns timestamp when the document recieved state approved
@@ -102,6 +109,8 @@ class Document < ActiveRecord::Base
   # TODO: manually cache initial state
   # here we can go with default value on column
   # or disable initial state on state machine and call transition to it from the model
+
+
   private
 
   #TODO: test manually
