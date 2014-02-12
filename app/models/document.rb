@@ -51,6 +51,9 @@ class Document < ActiveRecord::Base
   alias_attribute :sender, :sender_organization
   alias_attribute :recipient, :recipient_organization
   alias_attribute :document_type, :accountable_type #TODO: @prikha remove this misleading alias
+  alias_attribute :date, :created_at
+  alias_attribute :organization_id, :sender_organization_id
+
 
 
 
@@ -59,7 +62,7 @@ class Document < ActiveRecord::Base
 
 
   #TODO: validations
-  validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
+  #validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
 
   def self.text_search(query)
     query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
@@ -125,13 +128,13 @@ class Document < ActiveRecord::Base
 
   #TODO: test manually
   # m-be different generators for different documents
-  #def create_png
-  #  pdf = DocumentPdf.new(self, 'show')
-  #  pdf.render_file "tmp/document_#{self.id}.pdf"
-  #  pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
-  #  thumb = pdf.scale(400, 520)
-  #  thumb.write "app/assets/images/document_#{self.id}.png"
-  #end
+  def create_png
+    pdf = DocumentPdf.new(self, 'show')
+    pdf.render_file "tmp/document_#{self.id}.pdf"
+    pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
+    thumb = pdf.scale(400, 520)
+    thumb.write "app/assets/images/document_#{self.id}.png"
+  end
 
 
 end
