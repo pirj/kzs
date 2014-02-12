@@ -5,7 +5,14 @@ class Documents::DocumentsController < ResourceController
   has_scope :per, default: 3
 
   def index
-    @documents = Documents::ListDecorator.decorate(collection, with: Documents::ListShowDecorator)
+    @search = end_of_association_chain.ransack(params[:q])
+    _documents = apply_scopes(@search.result(distinct: true))
+    @documents = Documents::ListDecorator.decorate(_documents, with: Documents::ListShowDecorator)
+
+    respond_to do |format|
+      format.html
+      format.js { render layout: false }
+    end
   end
 
   # redirect to document-type edit-page

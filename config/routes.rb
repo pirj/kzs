@@ -14,6 +14,7 @@ Kzs::Application.routes.draw do
   # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
 
+
   namespace :documents do
     resources :documents, path:'', only: ['index', 'edit'] do
       get 'batch', on: :collection

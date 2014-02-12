@@ -6,6 +6,8 @@
   = header_search_form collection_path, placeholder: 'поиск по документам'
 
 
+
+
 ul.nav.nav-pills
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-primary', data:{ toggle: 'dropdown' } do
@@ -17,6 +19,9 @@ ul.nav.nav-pills
       li= link_to 'распоряжение', new_polymorphic_path(Documents::Order)
       li= link_to 'акт', new_polymorphic_path(Documents::Report)
 
+
+= render 'filter'
+
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-default', data:{ toggle: 'dropdown' } do
       span Действия
@@ -25,6 +30,13 @@ ul.nav.nav-pills
     ul.dropdown-menu.js-documents-actions-list
       li выберите документы
 
+  li
+    = link_to 'Фильтр', '#', class: 'btn btn-default', data: { toggle: 'modal', target: '#myModal' }
+
+
+
 
 = render 'table'
 = paginate collection
+
+
