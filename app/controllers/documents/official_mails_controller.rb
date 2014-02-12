@@ -1,16 +1,10 @@
 class Documents::OfficialMailsController < ResourceController
+  include Documents::Base
+
   layout 'base'
   actions :all, except: [:index]
 
-  #TODO: we can check ability for Mail Order Report or for Document
-  def assign_state
-    state = params[:state]
-    if can?(ability_for(state), resource.document) && resource.transition_to!(state)
-      redirect_to :back, notice: t("document_#{state}")
-    else
-      redirect_to :back, notice: t('access_denied')
-    end
-  end
+
 
   def reply
     @parent_official_mail = end_of_association_chain.find(params[:id])
