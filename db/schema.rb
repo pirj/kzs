@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211130408) do
+ActiveRecord::Schema.define(:version => 20140212113033) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -100,11 +100,8 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
     t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
-    t.string   "lp_s1"
-    t.string   "lp_s2"
-    t.string   "lp_s3"
-    t.integer  "lp_n"
     t.integer  "lp_r"
+    t.string   "register_sn"
   end
 
   create_table "delete_notices", :force => true do |t|
