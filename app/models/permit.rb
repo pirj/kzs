@@ -33,7 +33,7 @@ class Permit < ActiveRecord::Base
 
   # TODO расписать назначение полей
   # TODO расписать валидацию для полей, не только presence
-  #validates  :start_date, :expiration_date, :presence => true
+  validates  :start_date, :expiration_date, :presence => true
   #validates  :number, :purpose, :start_date, :expiration_date, :requested_duration,
   #           :granted_area, :granted_object, :permit_type, :agreed, :canceled,
   #           :released, :issued, :permit_class, :vehicle_id, :date,
