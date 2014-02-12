@@ -210,10 +210,8 @@ class StatementsController < ApplicationController
   def task_list
     @statement = Statement.find(params[:id])
     @writ = Document.find(@statement.document_id)
-    @task_list = @statement.build_task_list.with_empty_tasks
-    # TODO из модели выносим метод
-    # @task_list = @statement.build_task_list
-    # @task_list.tasks.build
+    @task_list = @statement.build_task_list
+    @task_list.tasks.build
   end
   
   def refuse

@@ -24,12 +24,10 @@ test:
 #mercury
 production:
   adapter: postgresql
-  host: localhost
   encoding: utf8
-  database: sakedev
-  pool: 5
-  username: sakedev
-  password: OgyKQU3thbI8BdGU
+  database: kzs_development
+  username:
+  host: localhost
 
 # mars
 # production:
