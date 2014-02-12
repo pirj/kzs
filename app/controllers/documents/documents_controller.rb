@@ -20,8 +20,11 @@ class Documents::DocumentsController < ResourceController
 
     @accountables = @documents.map(&:accountable)
 
-    if can?(ability_for(state), @documents) && applicable_state?(@accountables, state)
-      @accountables.transition_to!(state, {user_id: current_user})
+    if batch_can?(state, @documents) && applicable_state?(@accountables, state)
+      @accountables.each do |accountable|
+        accountable.transition_to!(state, {user_id: current_user})
+      end
+
       flash[:notice] = t('documents_updated')
     else
       flash[:notice] = t('access_denied')
@@ -33,6 +36,10 @@ class Documents::DocumentsController < ResourceController
   private
   def applicable_state?(accountables, state)
     accountables.map{|acc| acc.can_transition_to?(state)}.all?
+  end
+
+  def batch_can?(state, documents)
+    documents.map{|doc| can?(ability_for(state), doc)}.all?
   end
 
 
