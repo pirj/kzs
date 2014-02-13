@@ -9,6 +9,8 @@ module VehiclesHelper
       "Грузовой автомобиль"
     elsif vehicle.vehicle_body == "special_car"
       "Спецтехника"
+    elsif vehicle.vehicle_body == "bus"
+      "Автобус"
     else
       nil
     end

@@ -11,7 +11,7 @@ class Vehicle < ActiveRecord::Base
   before_save :create_register_sn
   
   LETTERS = %w[A B E K M H O P C T Y X]
-  VEHICLE_BODY = %w[passenger_car truck special_car]
+  VEHICLE_BODY = %w[passenger_car truck special_car bus]
   
   def vehicle_title
     "#{register_sn}#{sn_region} #{brand} #{model}"

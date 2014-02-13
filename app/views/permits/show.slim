@@ -26,6 +26,15 @@
 
     div #{organization(@user.organization_id)} | #{@user.position }
 
+    div
+      span Срок действия от: &nbsp;
+      strong
+        = @permit.start_date.strftime("%d.%m.%y")
+      | &nbsp;
+      span до: &nbsp;
+      strong
+        = @permit.expiration_date.strftime("%d.%m.%y")
+
   - when 'vehicle'
 
     /h2 Пропуск на транспортное средство
@@ -39,8 +48,8 @@
 
     div Марка: #{@permit.vehicle.brand}
     div Модель: #{@permit.vehicle.model}
-    div Тип: #{vehicle_body(@permit.vehicle) }
-    div Номер: #{permit_auto_number(@permit)}
+    div Тип: #{@permit.vehicle.vehicle_body}
+    div Номер: #{permit_auto_number(@permit)} #{@permit.vehicle.sn_region}
 
     h3 Водители
 

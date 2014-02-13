@@ -84,6 +84,7 @@ namespace :csv do
     CarBrandType.create(:title => 'Легковые автомобили')
     CarBrandType.create(:title => 'Грузовики')
     CarBrandType.create(:title => 'Спецтехника')
+    CarBrandType.create(:title => 'Автобус')
 
     CarBrand.destroy_all
     CarBrand.reset_pk_sequence

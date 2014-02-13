@@ -27,6 +27,10 @@ class PermitsController < ApplicationController
       @permits = @permits.applications
     elsif params[:scope] == "daily"
       @permits = @permits.daily
+    elsif params[:scope] == "vehicles"
+      @permits = @permits.vehicles
+    elsif params[:scope] == "walkers"
+      @permits = @permits.walkers
     elsif params[:scope] == "for_print"
       @permits = @permits.for_print.walkers
     else

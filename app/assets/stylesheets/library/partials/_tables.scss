@@ -6,6 +6,11 @@
 table {
   max-width: 100%;
   background-color: $table-bg;
+  .subject {
+    a, span {
+      display: inline-block;
+    }
+  }
 }
 th {
   text-align: left;
