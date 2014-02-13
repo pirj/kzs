@@ -2,7 +2,7 @@ class Documents::DocumentsController < ResourceController
   layout 'base'
   actions :index
 
-  has_scope :per, default: 3, only: [:index]
+  has_scope :per, default: 10, only: [:index]
 
   def index
     @search = end_of_association_chain.ransack(params[:q])

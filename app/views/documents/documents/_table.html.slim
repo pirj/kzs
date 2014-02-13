@@ -9,7 +9,7 @@ table.table.js-row-clickable.m-table-replacement
       th = t('documents.table.list_attrs.status')
 
   tbody
-    - attrs = [:number_and_date, :sender_link, :recipient_link, :type_name, :attachment_icon, :status]
+    - attrs = [:number_and_date, :sender_link, :recipient_link, :type_name, :attachment_icon, :state]
     - collection.each do |resource|
       / simple row with short information
       tr[ data-id=resource.id data-server-actions=resource.actions ]
@@ -33,4 +33,4 @@ table.table.js-row-clickable.m-table-replacement
               = resource.recipient_link_with_label
               = resource.sender_link_with_label
               = resource.attachments_count_with_label
-        td = resource.status
+        td = resource.state

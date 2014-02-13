@@ -42,14 +42,20 @@ module Documents
       (object.applicable_states + object.single_applicable_states).to_s
     end
 
-    # TODO: @prikha how to get current_state from Document?
-    #       when i decorating DocumentsCollection by this decorator
-    #       it return Document class object for each of collection.
-    #def state_name
-    #  h.content_tag :span, class: 'label' do
-    #    I18n.t("activerecord.attributes.document.states.#{object.current_state}")
-    #  end
-    #end
+    def state
+      css_class = case object.accountable.current_state.to_sym
+                    when :draft then 'default'
+                    when :prepared then 'primary'
+                    when :approved then 'success'
+                    when :sent then 'warning'
+                    when :read then 'warning'
+                    when :trashed then 'danger'
+                    else 'default'
+                  end
+      h.content_tag :span, class: "label label-#{css_class}" do
+        I18n.t("activerecord.attributes.document.states.#{object.accountable.current_state}")
+      end
+    end
 
     # отдает дату в указанном формате
     # obj.date :date_format

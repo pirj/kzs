@@ -45,6 +45,17 @@ ru:
         sent:
         sent_date:
         accountable_types:
-          documents_mail: письмо
+          documents_officialmail: письмо
           documents_order: распоряжение
           documents_report: акт
+
+        states:
+          draft: черновик
+          prepared: подготовлен
+          approved: подтвержден
+          sent: отправлен
+          read: прочтен
+          trashed: удален
+          pending: ожидает
+          rejected: возвращен
+          accepted: принят

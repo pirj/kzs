@@ -30,13 +30,17 @@ window.app.documents =
     $list.empty()
     console.log actions
     out = []
-    _.each(actions, (action) ->
-      link = switch action
-        when 'edit' then window.app.documents.render_edit_link()
-        else window.app.documents.render_change_state_link(action)
+    if actions.length > 0
+      _.each(actions, (action) ->
+        link = switch action
+          when 'edit' then window.app.documents.render_edit_link()
+          else window.app.documents.render_change_state_link(action)
 
-      out.push(link)
-    )
+        out.push(link)
+      )
+    else
+      out.push('<li>выберите документы</li>')
+
     $list.html out.join('')
 
   render_edit_link: ->
@@ -45,7 +49,7 @@ window.app.documents =
       id = $el.parents('tr').data('id')
       "<li><a href='/documents/#{id}/edit'>редактировать</a></li>"
     else
-      ''
+      null
 
   render_change_state_link: (action)->
     $els = $('table .js-row-select:checked')
@@ -58,9 +62,20 @@ window.app.documents =
       )
       console.log ids
       _ids = ids.join(',')
-      "<li><a href='/documents/batch?document_ids[]=#{_ids}&state=#{action}'>#{action}</a></li>"
+
+      action_name = switch action
+                      when 'draft' then 'в черновики'
+                      when 'prepared' then 'подготовлены'
+                      when 'approved' then 'подтвердить'
+                      when 'sent' then 'отправить'
+                      when 'read' then 'прочесть'
+                      when 'trashed' then 'удалить'
+                      when 'accepted' then 'принять'
+                      when 'rejected' then 'возвратить'
+                      else 'не известное действие'
+      "<li><a href='/documents/batch?document_ids[]=#{_ids}&state=#{action}'>#{action_name}</a></li>"
     else
-      ''
+      null
 
 
 
