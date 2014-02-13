@@ -6,6 +6,7 @@
   = header_search_form collection_path, placeholder: 'поиск по документам'
 
 
+= render 'filter'
 
 
 ul.nav.nav-pills
@@ -20,7 +21,6 @@ ul.nav.nav-pills
       li= link_to 'акт', new_polymorphic_path(Documents::Report)
 
 
-= render 'filter'
 
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-default', data:{ toggle: 'dropdown' } do
