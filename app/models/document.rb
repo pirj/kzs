@@ -22,6 +22,7 @@ class Document < ActiveRecord::Base
                   :sender_organization
 
 
+
   has_many :document_attachments
   # StateMachine transitions to keep track of state changes
   # TODO: guards and callbacks on state_machines

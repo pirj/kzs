@@ -4,6 +4,8 @@ class Documents::DocumentsController < ResourceController
 
   has_scope :per, default: 10, only: [:index]
 
+
+
   def index
     @search = end_of_association_chain.ransack(params[:q])
     @search.build_condition
@@ -82,4 +84,5 @@ class Documents::DocumentsController < ResourceController
   def acceptable_sort_fields
     resource_class.column_names + %w(organizations.short_title recipient_organizations_documents.short_title)
   end
+
 end

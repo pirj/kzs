@@ -88,6 +88,9 @@ $ ->
     app.documents.render_actions_list(actions)
   )
 
+
+  # search filter
+  # by timeout updating search result count
   timer_id = 0
   $('.js-filter-form input').on('keyup blur', ->
     clearTimeout(timer_id)
@@ -102,6 +105,14 @@ $ ->
     , 500)
   )
 
+  # checkbox active/disable custom input
+  $('.js-active-input').on('change', ->
+    $el = $(@)
+    target = $el.data('target')
+    $target = $('body').find("[data-target='#{target}']").not('.js-active-input')
+    $target.prop('disabled', !$target.prop('disabled')).trigger('chosen:updated')
+    console.log $target
+  )
 
 #  for ransack
 #

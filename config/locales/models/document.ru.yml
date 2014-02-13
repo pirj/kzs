@@ -20,6 +20,7 @@ ru:
         sender_organization: отправитель
         recipient_organization_id: получатель
         recipient_organization_id: получатель
+
         accountable_types:
           documents_officialmail: письмо
           documents_order: распоряжение

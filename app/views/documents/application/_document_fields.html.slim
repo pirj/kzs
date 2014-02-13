@@ -1,8 +1,22 @@
+.form-group
+  .text-help.text-right.col-sm-2 Составитель
+  .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
 = f.input :title
-= f.input :body
+= f.association :recipient_organization, input_html: { class: 'js-chosen', multiple: true }
+= f.association :sender_organization, input_html: { class: 'js-chosen', disabled: true }
+= f.association :executor, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+= f.association :approver, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+
+.form-group
+  .col-sm-2.col-sm-offset-2
+    .checkbox
+      label.control-label
+        = check_box_tag :is_conformer?, nil, false, class: 'js-active-input', data: { target: 'new-mail-conformer' }
+        span согласовать с
+
+  .col-sm-6
+    = select_tag :conformer, options_from_collection_for_select(@users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-mail-conformer' }, disabled: 'disabled' if @users
+
+= f.input :body, input_html: { rows: 3 }
 = f.input :serial_number
 = f.input :confidential
-= f.association :sender_organization
-= f.association :recipient_organization
-= f.association :executor
-= f.association :approver
