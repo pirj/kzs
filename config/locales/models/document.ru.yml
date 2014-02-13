@@ -8,42 +8,18 @@ ru:
         few: "Документы"
 
     attributes:
-      document:
-        deadline:
-        file:
-        text:
-        title:
-        sn:
-        opened:
-        for_approve:
-        confidential:
-        organization_id:
-        recipient_id:
-        user_id:
-        approver_id:
-        executor_id:
-        sender_organization_id:
-        document_conversation_id:
-        deleted:
-        archived:
-        callback:
-        prepared:
-        draft:
-        approved:
-        document_type:
-        task_list_attributes:
-        document_ids:
-        organization_ids:
-        executor_ids:
-        approver_ids:
-        document_attachments:
-        attachment:
-        document_attachments_attributes:
-        prepared_date:
-        approved_date:
-        date:
-        sent:
-        sent_date:
+      document: &document_attributes
+        title: заголовок
+        serial_number: серийный номер
+        confidential: конфиденциально
+        approver_id: контрольное лицо
+        approver:    контрольное лицо
+        executor_id: исполнитель
+        executor:    исполнитель
+        sender_organization_id: отправитель
+        sender_organization: отправитель
+        recipient_organization_id: получатель
+        recipient_organization_id: получатель
         accountable_types:
           documents_officialmail: письмо
           documents_order: распоряжение
