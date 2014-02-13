@@ -1,19 +1,40 @@
 #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
   .modal-dialog
     .modal-content
-      = search_form_for @search, url: documents_documents_path, html: { class: 'form-horizontal', remote: true }do |f|
+      = search_form_for @search, url: documents_documents_path, \
+                        html: { class: 'form-horizontal js-filter-form', remote: true, data: {url: search_documents_documents_path } } \
+                        do |f|
         .modal-header
           h4#myModalLabel.modal-title Расширенный поиск по документам
         .modal-body
           .form-group
-            = f.condition_fields do |c|
-              = c.attribute_fields do |a|
-                = a.attribute_select
-              = c.predicate_select
-              = c.value_fields do |v|
-                = v.text_field :value
-            = f.label :title_cont, 'заголовок', class: 'control-label'
-            = f.text_field :title_cont, class: 'form-control'
+            = f.label :title_cont, 'заголовок содержит', class: 'control-label col-sm-3'
+            .col-sm-8= f.text_field :title_cont, class: 'form-control', autocomplete: 'off'
+          .form-group
+            = f.label :sender_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
+            .col-sm-8= f.text_field :sender_organization_title_cont, class: 'form-control', autocomplete: 'off'
+          .form-group
+            = f.label :recipient_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
+            .col-sm-8= f.text_field :recipient_organization_title_cont, class: 'form-control', autocomplete: 'off'
+          .form-group
+            = f.label :date_between, 'промежуток даты', class: 'control-label col-sm-3'
+            .col-sm-4
+              .input-group
+                .span.input-group-icon
+                  .fa.fa-calendar
+                = f.text_field :created_at_gteq, class: 'form-control js-datepicker'
+
+            .col-sm-4
+              .input-group
+                .span.input-group-icon
+                  .fa.fa-calendar
+                = f.text_field :created_at_lteq, class: 'form-control js-datepicker'
+
+
+
+
+          /= link_to_add_fields "Add Conditions", f, :condition
+
         .modal-footer
           .row
             .col-sm-6

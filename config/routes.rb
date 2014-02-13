@@ -18,6 +18,7 @@ Kzs::Application.routes.draw do
   namespace :documents do
     resources :documents, path:'', only: ['index', 'edit'] do
       get 'batch', on: :collection
+      post 'search', on: :collection
     end
 
     resources :official_mails, path: 'mails', except: 'index' do

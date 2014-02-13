@@ -2,7 +2,7 @@ class Documents::DocumentsController < ResourceController
   layout 'base'
   actions :index
 
-  has_scope :per, default: 3
+  has_scope :per, default: 3, only: [:index]
 
   def index
     @search = end_of_association_chain.ransack(params[:q])
@@ -10,9 +10,11 @@ class Documents::DocumentsController < ResourceController
 
     _documents = apply_scopes(@search.result(distinct: true))
     @documents = Documents::ListDecorator.decorate(_documents, with: Documents::ListShowDecorator)
+  end
 
+  def search
+    @documents = collection.ransack(params[:q]).result(distinct: true)
     respond_to do |format|
-      format.html
       format.js { render layout: false }
     end
   end

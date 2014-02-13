@@ -68,64 +68,34 @@ $ ->
   # select checkboxes to select tables rows and update 'actions' UIcontrol.
   # in each rows saves actions for it document.
   # if select several rows, than filtering it actions to same.
-
   $(".js-row-select").on('change', ->
     actions = app.documents.actions_by_rows(@)
     app.documents.render_actions_list(actions)
-#    current_actions = $(@).parents('tr').data('server-actions')
-#    # if checked
-#    if $(this).is(":checked")
-#      unless selected_actions.length > 0
-#        selected_actions = _.intersection(current_actions)
-#      else
-#        selected_actions = _.intersection(selected_actions, current_actions)
-#
-#    else
-#      all_checkboxes = $(@).parents('table').find('.js-row-select:checked')
-#      _selected_actions = []
-#      _.each(all_checkboxes, (checkbox) ->
-#        actions = $(checkbox).parents('tr').data('server-actions')
-#        unless _selected_actions.length > 0
-#          _selected_actions = _.intersection(actions)
-#          console.log _selected_actions
-#        else
-#          _selected_actions = _.intersection(_selected_actions, actions)
-#          console.log _selected_actions
-#      )
-#      _selected_actions
+  )
+
+  timer_id = 0
+  $('.js-filter-form input').on('keyup', ->
+    clearTimeout(timer_id)
+    timer_id = setTimeout( ->
+      data = $('.js-filter-form').serializeArray()
+      $.ajax
+        data: data
+        dataType: 'script'
+        type: 'POST'
+        url: $('.js-filter-form').data('url')
+
+    , 500)
   )
 
 
-
-#  ids = []
-#  $(".js-row-select").on('change', ->
-#    id = $(@).val()
-#    $(".js-update-element[data-target=document]").empty()
+#  for ransack
 #
-#    # if checked
-#    if $(this).is(":checked")
-#      ids.push id
-#      ids = ids.filter( (e, i, ids) -> ids.lastIndexOf(e) == i )
-#      $.ajax
-#        type: "GET"
-#        url: "/documents/action_list"
-#        datatype: "js"
-#        data:
-#          ids: ids
+#  $('form').on 'click', '.remove_fields', (event) ->
+#    $(this).closest('.field').remove()
+#    event.preventDefault()
 #
-#
-#    # if deckecked
-#    else
-#      num = ids.indexOf(id)
-#      ids.remove(num, num)
-#      ids = ids.filter( (e, i, ids) -> ids.lastIndexOf(e) == i )
-#      if ids.length > 0
-#        $.ajax
-#          type: "GET"
-#          url: "/documents/action_list"
-#          datatype: "js"
-#          data:
-#            ids: ids
-#
-#    return
-#  )
+#  $('form').on 'click', '.add_fields', (event) ->
+#    time = new Date().getTime()
+#    regexp = new RegExp($(this).data('id'), 'g')
+#    $(this).before($(this).data('fields').replace(regexp, time))
+#    event.preventDefault()
