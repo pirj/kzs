@@ -2,7 +2,7 @@
   .modal-dialog
     .modal-content
       = search_form_for @search, url: documents_documents_path, \
-                        html: { class: 'form-horizontal js-filter-form', remote: true, data: {url: search_documents_documents_path } } \
+                        html: { class: 'form-horizontal js-filter-form', data: {url: search_documents_documents_path } } \
                         do |f|
         .modal-header
           h4#myModalLabel.modal-title Расширенный поиск по документам

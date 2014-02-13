@@ -24,10 +24,11 @@ module Documents
     end
 
     def number_and_date
-      if object.sn || object.date
-        h.content_tag( :b, object.sn )+
-        h.content_tag( :span, " / #{object.date}", class: 'muted' )
-      end
+      h.content_tag :span, DateFormatter.new(object.created_at)
+      #if object.sn || object.date
+      #  h.content_tag( :b, object.sn )+
+      #  h.content_tag( :span, " / #{object.date}", class: 'muted' )
+      #end
     end
 
 
