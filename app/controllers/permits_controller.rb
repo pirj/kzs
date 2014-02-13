@@ -81,7 +81,6 @@ class PermitsController < ApplicationController
       drivers = params[:permit][:drivers]
       #drivers = drivers.delete_if{ |x| x.empty? }
 
-      @permit.save!
       if @permit.vehicle
         vehicle = @permit.vehicle
         vehicle.user_ids = drivers # TODO нет проверки, можно залить левые ids
@@ -90,7 +89,14 @@ class PermitsController < ApplicationController
 
       redirect_to @permit, notice: t('permit_request_created')
     else
-      render action: "user"
+      case @permit.permit_type
+        when 'user'
+          render action: 'user'
+        when 'vehicle'
+          render action: 'vehicle'
+        when 'daily'
+          render action: 'daily'
+      end
     end
   end
 
