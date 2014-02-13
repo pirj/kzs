@@ -1,8 +1,4 @@
 class Permit < ActiveRecord::Base
-  # TODO тесты
-  # TODO пропуск может быть удален ?
-  # TODO Если да: надо ли сохранять историю выдачи пропусков ? что делать со связями has_* (:dependent => :destroy) ?
-
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled,
                   :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes,
@@ -32,8 +28,10 @@ class Permit < ActiveRecord::Base
   # TODO :agreed, :canceled, :released, :issued - нужна stat machine
 
   # TODO расписать назначение полей
-  # TODO расписать валидацию для полей, не только presence
-  #validates  :start_date, :expiration_date, :presence => true
+
+  validates  :start_date, :expiration_date,
+              presence: { if: ->(f){ f.permit_type != 'daily'} }
+
   #validates  :number, :purpose, :start_date, :expiration_date, :requested_duration,
   #           :granted_area, :granted_object, :permit_type, :agreed, :canceled,
   #           :released, :issued, :permit_class, :vehicle_id, :date,
@@ -43,20 +41,6 @@ class Permit < ActiveRecord::Base
 
   TYPES = %w[user vehicle daily]
   PERMIT_CLASSES = %w[standart vip]
-
-  # TODO назначение метода ?
-  def temporary
-    self.start_date == self.expiration_date
-  end
-
-  # TODO назначение метода ?
-  def validity
-    if self.daily_pass.date
-      '1'
-    else
-      self.expiration_date
-    end
-  end
 
   protected
 

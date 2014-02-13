@@ -24,7 +24,7 @@ class DailyPass < ActiveRecord::Base
                   :lp_r,          # Номер региона
 
                   :date,    # ?????????
-                  :guard_duty # Кто выдал пропуск (охранник\охранный пункт)
+                  :guard_duty # какой пользователь выдал пропуск (нажал кнопку Выпустить)
 
   attr_accessor :first_letter, :second_letter, :third_letter, :sn_number
 
@@ -42,7 +42,7 @@ class DailyPass < ActiveRecord::Base
             :object, :person,
             presence: true
 
-  validates :issued, presence: true # TODO need date validation (Date.parse, date >= Time.now, etc...)
+  validates :issued, presence: true # TODO date validation ! daily_pass выдается только на текущий день !
 
   validates :vehicle,
             :auto_mark,

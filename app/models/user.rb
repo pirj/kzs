@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
-         
+
   attr_accessor :login
 
-  attr_accessible :phone, :position, :division, :info, :dob, :phone, 
-                  :work_status, :organization_id, :email, :password, :password_confirmation, 
+  attr_accessible :phone, :position, :division, :info, :dob, :phone,
+                  :work_status, :organization_id, :email, :password, :password_confirmation,
                   :avatar, :first_name, :last_name, :middle_name, :username, :right_ids, :remember_me,
                   :is_staff, :is_active, :is_superuser, :date_joined, :permission_ids, :group_ids,
                   :id_type, :id_sn, :id_issue_date, :id_issuer, :alt_name, :vehicle_ids, :login, :sys_user
@@ -31,18 +30,18 @@ class User < ActiveRecord::Base
   scope :approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '1'")
   scope :statement_approvers, joins('left outer join user_permissions on users.id=user_permissions.user_id').where("user_permissions.permission_id = '2'")
   scope :for_organization, lambda {|id=nil| where(organization_id: id) }
-                              
+
   WORK_STATUSES = %w[at_work ooo]
-  
+
   before_save :save_with_empty_password
-  
-  # validates :username, :first_name, :last_name, :middle_name,
+
+  validates :organization_id, :first_name, :last_name, :middle_name, presence: true
   #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
-            
+
   # validates :username, uniqueness: true
-  
+
   has_attached_file :avatar, :plugins => { :small => "48x48#", :large => "100x100#" }
-  
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -51,7 +50,7 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
-  
+
   def email_required?
     false
   end
@@ -59,34 +58,34 @@ class User < ActiveRecord::Base
   def email_changed?
     false
   end
-  
+
   def first_name_with_last_name
       "#{last_name} #{first_name}" if last_name && first_name
   end
-  
+
   def first_name_with_last_name_with_middle_name
       "#{last_name} #{first_name} #{middle_name}" if last_name && first_name && middle_name
   end
-  
+
   def last_name_with_initials
        "#{last_name} #{first_name.first}.#{middle_name.first}."
    end
-  
+
   def self.superusers_from_orgranization(organization_id)
         superuser.where(:organization_id => organization_id)
   end
-  
+
   def has_permission?(permission_id)
     permissions.exists?(permission_id)
   end
-  
 
-  def save_with_empty_password    
+
+  def save_with_empty_password
   end
-  
+
   def self.with_permit
     where{permit_id != nil}
   end
 
-  
+
 end
