@@ -12,4 +12,11 @@ class Documents::OrdersController < ResourceController
 
     render action: :new
   end
+
+  def show
+    show!{
+      @order = Documents::ShowDecorator.decorate(resource)
+    }
+  end
+
 end

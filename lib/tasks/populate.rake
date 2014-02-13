@@ -127,9 +127,9 @@ namespace :documents do
     organizations_count = Organization.count
     users_count         = User.count
 
-    5.times do |i|
+    20.times do |i|
       d = Documents::OfficialMail.new
-      d.title = Faker::Lorem.words(4)
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -143,9 +143,9 @@ namespace :documents do
     Documents::Order.delete_all
     Documents::Order.reset_pk_sequence
 
-    5.times do |i|
+    20.times do |i|
       d = Documents::Order.new
-      d.title = Faker::Lorem.words(3)
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -163,10 +163,9 @@ namespace :documents do
     Documents::Report.delete_all
     Documents::Report.reset_pk_sequence
 
-    7.times do |d|
+    10.times do |d|
       d = Documents::Report.new
-
-      d.title = Faker::Lorem.words(2)
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))

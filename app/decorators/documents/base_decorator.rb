@@ -3,6 +3,8 @@ module Documents
   class BaseDecorator < Draper::Decorator
     delegate_all
 
+    LABEL_COL_WIDTH = 3
+
     def path
       unless object.id.nil?
         h.documents_document_path(object)
@@ -25,7 +27,7 @@ module Documents
 
     # Humanize object type
     def type_name
-      h.content_tag :span, class: 'important' do
+      h.content_tag :span, class: 'text-important' do
         I18n.t("activerecord.attributes.document.accountable_types.#{type}")
       end
     end
@@ -55,12 +57,46 @@ module Documents
       end
     end
 
-    # отдает дату в указанном формате
-    # obj.date :date_format
-    #def date *args
-    #  opts = args.extract_options!
-    #  DateFormatter.new(object.date, args.first)
-    #end
+    # define two same link-with-label for Organization model.
+    %w(sender recipient).each do |attr|
+      define_method "#{attr}_link_with_label" do
+        element_wrapper object.send(attr) do
+          h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+              h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+        end
+      end
+    end
+
+    # define two same link-with-label for User model.
+    %w(executor approver).each do |attr|
+      define_method "#{attr}_link_with_label" do
+        element_wrapper object.send(attr) do
+          h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+        end
+      end
+    end
+
+
+    # render
+    # Sender_link --> Recipient_link
+    def sender_to_recipient_links
+      if object.sender && object.recipient
+        h.link_to( sender_name, h.organization_path(object.sender), class: 'link link-muted' ) +
+            h.content_tag(:span, nil, class: 'fa fa-long-arrow-right text-muted')+
+            h.link_to( recipient_name, h.organization_path(object.recipient), class: 'link link-muted' )
+      end
+    end
+
+    protected
+    # wrap elements to 'form-group' to form-horizontal render attributes with labels.
+    def element_wrapper(condition, &block)
+      if condition
+        h.content_tag( :div, class: 'form-group' ) do
+          yield
+        end
+      end
+    end
 
 
   end

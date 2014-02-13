@@ -12,4 +12,10 @@ class Documents::ReportsController < ResourceController
 
     render action: :new
   end
+
+  def show
+    show!{
+      @report = Documents::ShowDecorator.decorate(resource)
+    }
+  end
 end

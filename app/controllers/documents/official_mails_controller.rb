@@ -25,4 +25,10 @@ class Documents::OfficialMailsController < ResourceController
 
     render action: :new
   end
+
+  def show
+    show!{
+      @official_mail = Documents::ShowDecorator.decorate(resource)
+    }
+  end
 end

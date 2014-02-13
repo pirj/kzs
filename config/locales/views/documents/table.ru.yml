@@ -13,5 +13,6 @@ ru:
         number_and_date: Номер и дата
         sender: Отправитель
         executor: Исполнитель
+        approver: Подтвердитель
         recipient: Получатель
         attachments_count: Приложения
