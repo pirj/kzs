@@ -22,8 +22,16 @@ class Documents::DocumentsController < ResourceController
   # redirect to document-type edit-page
   def edit
     document = Document.find(params[:id]).accountable
+    redirect_to edit_polymorphic_path(document)
+  end
+
+
+  # redirect to document-type show-page
+  def show
+    document = Document.find(params[:id]).accountable
     redirect_to polymorphic_path(document)
   end
+
 
   #TODO: @prikha now free for all (would be limited by initial scope!)
   # uses params like so:

@@ -16,7 +16,7 @@ Kzs::Application.routes.draw do
 
 
   namespace :documents do
-    resources :documents, path:'', only: ['index', 'edit'] do
+    resources :documents, path:'', only: ['index', 'edit', 'show'] do
       get 'batch', on: :collection
       post 'search', on: :collection
     end

@@ -5,14 +5,12 @@ module Documents
 
     def path
       unless object.id.nil?
-        h.document_path(object)
-      else
-        h.new_document_path
+        h.documents_document_path(object)
       end
     end
 
     def edit_path
-      h.edit_document_path(object)
+      h.edit_documents_documents_path(object)
     end
 
     def recipient_name
