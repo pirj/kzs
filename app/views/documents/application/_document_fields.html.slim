@@ -17,6 +17,9 @@
   .col-sm-6
     = select_tag :conformer, options_from_collection_for_select(@users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-mail-conformer' }, disabled: 'disabled' if @users
 
+.form-group
+  .col-sm-offset-2.col-sm-5
+    = f.input :confidential, wrapper: :checkbox, input_html: { class: '' }
+
 = f.input :body, input_html: { rows: 3 }
 = f.input :serial_number
-= f.input :confidential

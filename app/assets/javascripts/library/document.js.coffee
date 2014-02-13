@@ -111,7 +111,6 @@ $ ->
     target = $el.data('target')
     $target = $('body').find("[data-target='#{target}']").not('.js-active-input')
     $target.prop('disabled', !$target.prop('disabled')).trigger('chosen:updated')
-    console.log $target
   )
 
 #  for ransack
