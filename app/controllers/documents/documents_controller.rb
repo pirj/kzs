@@ -6,6 +6,8 @@ class Documents::DocumentsController < ResourceController
 
   def index
     @search = end_of_association_chain.ransack(params[:q])
+    @search.build_condition
+
     _documents = apply_scopes(@search.result(distinct: true))
     @documents = Documents::ListDecorator.decorate(_documents, with: Documents::ListShowDecorator)
 
