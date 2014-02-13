@@ -32,7 +32,7 @@ module Documents
     end
 
 
-    # define two same link-with-label with several object atrributes.
+    # define two same link-with-label for Organization model.
     %w(sender recipient).each do |attr|
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
@@ -42,6 +42,15 @@ module Documents
       end
     end
 
+    # define two same link-with-label for User model.
+    %w(executor approver).each do |attr|
+      define_method "#{attr}_link_with_label" do
+        element_wrapper object.send(attr) do
+          h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+        end
+      end
+    end
 
     # define two same links with several object atrributes.
     %w(sender recipient).each do |attr|
@@ -53,9 +62,6 @@ module Documents
     end
 
 
-    def executor_link_with_label
-      h.content_tag :h2, 'кто я? я исполнитель?'
-    end
 
 
     def status

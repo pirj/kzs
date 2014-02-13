@@ -136,7 +136,7 @@ class Document < ActiveRecord::Base
     pdf.render_file "tmp/document_#{self.id}.pdf"
     pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
     thumb = pdf.scale(400, 520)
-    thumb.write "public/images/documents/document_#{self.id}.png"
+    thumb.write "public/system/documents/document_#{self.id}.png"
   end
 
 
