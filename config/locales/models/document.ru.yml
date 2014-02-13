@@ -9,22 +9,34 @@ ru:
 
     attributes:
       document: &document_attributes
-        title: заголовок
-        serial_number: серийный номер
-        confidential: конфиденциально
-        approver_id: контрольное лицо
-        approver:    контрольное лицо
-        executor_id: исполнитель
-        executor:    исполнитель
-        sender_organization_id: отправитель
-        sender_organization: отправитель
-        recipient_organization_id: получатель
-        recipient_organization_id: получатель
+        approver_id: Контрольное лицо
+        approver:    Контрольное лицо
+        body: Текст
+        confidential: Конфиденциально
+        executor_id: Исполнитель
+        executor:    Исполнитель
+        sender_organization_id: Организация-отправитель
+        sender_organization: Организация-отправитель
+        serial_number: Серийный номер
+        recipient_organization: Организация-получатель
+        recipient_organization_id: Организация-получатель
+        title: Заголовок
 
         accountable_types:
           documents_officialmail: письмо
           documents_order: распоряжение
           documents_report: акт
+
+        actions:
+          draft: в черновик
+          prepared: подготовить
+          approved: подтвердить
+          sent: отправить
+          read: прочитать
+          trashed: удалить
+          pending: поставить в очередь
+          rejected: вернуть
+          accepted: принять
 
         states:
           draft: черновик

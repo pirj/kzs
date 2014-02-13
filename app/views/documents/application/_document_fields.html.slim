@@ -1,9 +1,10 @@
 .form-group
-  .text-help.text-right.col-sm-2 Составитель
+  .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='составитель письма' ]
+    | Составитель
   .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
-= f.input :title
-= f.association :recipient_organization, input_html: { class: 'js-chosen', multiple: true }
-= f.association :sender_organization, input_html: { class: 'js-chosen', disabled: true }
+= f.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
+= f.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+= f.input :sender_organization_id, as: :hidden
 = f.association :executor, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 = f.association :approver, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
@@ -22,4 +23,3 @@
     = f.input :confidential, wrapper: :checkbox, input_html: { class: '' }
 
 = f.input :body, input_html: { rows: 3 }
-= f.input :serial_number

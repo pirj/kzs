@@ -10,5 +10,7 @@
   = f.input :conversation_id, as: :hidden
   = f.simple_fields_for :document  do |doc|
     = render 'documents/application/document_fields', f: doc
+
   .form-group
-    = f.submit :class=>'btn btn-primary'
+    .col-sm-offset-2.col-sm-5
+      = f.submit :class=>'btn btn-primary'
