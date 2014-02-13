@@ -409,6 +409,34 @@
 
   &.widget-weather {
     background: url("cloud.png") no-repeat #1bbc9b;
+    .status{
+      color: white;
+      margin-right: 55px;
+      .text{
+        text-align: left;
+        margin-left: 143px;
+        font-weight: 500;
+        width: 155px;
+        font-family: "open_sanslight";
+        font-size: 18px;
+        position: relative;
+        bottom: 25px;
+      }
+    }
+    .temp{
+      font-size: 64px;
+      font-family: "open_sanslight";
+      font-weight: 500px;
+    }
+    .date{
+      position: absolute;
+      bottom: 14px;
+      left: 19px;
+      font-size: 18px;
+      color: white;
+      font-family: "open_sanslight";
+      font-weight: 500px;
+    }
   }
 
   &.widget-org {

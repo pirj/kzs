@@ -2,6 +2,8 @@ $(function () {
 
     if ($('.wrapper').hasClass('m-dashboard-page')) {
 
+
+
         var weather = {}
         weather.req = $.ajax({
             url: 'http://api.openweathermap.org/data/2.5/weather?id=498817&mode=json&units=metric',
@@ -9,9 +11,8 @@ $(function () {
             dataType: "json"
         });
 
-        weather.req.done(function (response) {
-            //        console.log(response);
-        });
+
+
 
         $.ajaxSetup({
             beforeSend: function (xhr) {
@@ -26,7 +27,7 @@ $(function () {
         });
 
         requestCoord.done(function (response) {
-            //     console.log(response)
+            //  console.log(response)
         });
 
 
@@ -53,18 +54,31 @@ $(function () {
         gridster.disable_resize(widgets);
 
 
-
-
         //ищем блок погоды
         _.each(gridster.$widgets, function (w) {
-
-
             if (w.classList.contains('widget-weather')) {
-
                 weather.widget = w;
             };
         });
 
+
+        weather.req.done(function (response) {              //узнали погоду
+            weather.today = response;
+
+
+            document.getElementsByClassName('j-temp')[0].childNodes[0].innerHTML = weather.today.main.temp + '°C';
+            document.getElementsByClassName('j-status')[0].innerHTML = weather.today.weather[0].description;
+
+
+           // console.log($('.j-temp'));
+                //.text(weather.today.main.temp);   weather.widget
+
+        });
+
+
+
+
+       // console.log(weather.widget);
 
         gridster.disable_resize(weather.widget);
 
