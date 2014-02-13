@@ -89,7 +89,7 @@ $ ->
   )
 
   timer_id = 0
-  $('.js-filter-form input').on('keyup', ->
+  $('.js-filter-form input').on('keyup blur', ->
     clearTimeout(timer_id)
     timer_id = setTimeout( ->
       data = $('.js-filter-form').serializeArray()
