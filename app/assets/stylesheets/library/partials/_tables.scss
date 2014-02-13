@@ -110,6 +110,14 @@ th {
       margin-right: $padding-base-horizontal;
     }
 
+    .table-img-md{
+      border: 1px solid $input-border-color;
+      max-height: 200px;
+      max-width: 200px;
+      width: auto;
+      height: auto;
+    }
+
     .control-label{padding-top: 0;}
   }
 }

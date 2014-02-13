@@ -178,6 +178,6 @@ module DocumentsHelper
       thumb = pdf.scale(400, 520)
       thumb.write "public/system/documents/document_#{document.id}.png"
     end
-    image_tag "/system/documents/document_#{document.id}.png", style: 'background-color: white', size: "#{width}x#{height}" #replace to css
+    image_tag "/system/documents/document_#{document.id}.png", class: 'table-img-md'
   end
 end

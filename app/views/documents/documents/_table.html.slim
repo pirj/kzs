@@ -21,16 +21,17 @@ table.table.js-row-clickable.m-table-replacement
       tr[ data-id=resource.id class='more-info js-more-info' ]
         td = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
         td[ colspan=attrs.count-1 ]
-          h2 = resource.title_link
+          .row
+            h2.col-sm-12 = resource.title_link
           .row
             .col-sm-3
               = resource.type_name
               = pdf_to_png(resource,190,270)
             .col-sm-8
               = resource.sender_to_recipient_links
-              = resource.number_and_date_with_label
-              = resource.executor_link_with_label
-              = resource.recipient_link_with_label
-              = resource.sender_link_with_label
-              = resource.attachments_count_with_label
+              .row = resource.number_and_date_with_label
+              .row = resource.executor_link_with_label
+              .row = resource.recipient_link_with_label
+              .row = resource.sender_link_with_label
+              .row = resource.attachments_count_with_label
         td = resource.state
