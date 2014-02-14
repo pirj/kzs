@@ -12,8 +12,8 @@ namespace :csv do
       row = Permission.create!({
         :id => row[0],
         :title => row[1],
-        :description => row[2],        
-      })  
+        :description => row[2],
+      })
     end
     puts "Permissions imported!"
   end
@@ -28,49 +28,49 @@ namespace :csv do
     CSV.foreach(csv_file_path) do |row|
       row = Organization.create({
         :id => row[0],
-        :title => row[1],   
-        :parent_id => row[2], 
-        :director_id => row[3],  
-        :short_title => row[4],  
-        :admin_id => row[5],  
-        :type_of_ownership => row[6]          
+        :title => row[1],
+        :parent_id => row[2],
+        :director_id => row[3],
+        :short_title => row[4],
+        :admin_id => row[5],
+        :type_of_ownership => row[6]
       })
     end
-    puts "Organizations imported"    
+    puts "Organizations imported"
   end
 end
 
 namespace :csv do
   desc "Import permissions"
   task :users => :environment do
-    
+
     User.destroy_all
     User.reset_pk_sequence
     csv_file_path = 'db/csv/users.csv'
     CSV.foreach(csv_file_path) do |row|
       row = User.create({
         :id => row[0],
-        :organization_id => row[1],   
-        :position => row[2], 
-        :first_name => row[3],  
-        :middle_name => row[4],  
-        :last_name => row[5],  
-        :username => row[6],       
-        :password => row[7],    
-        :password_confirmation => row[8],    
-        :sys_user => row[9]  
+        :organization_id => row[1],
+        :position => row[2],
+        :first_name => row[3],
+        :middle_name => row[4],
+        :last_name => row[5],
+        :username => row[6],
+        :password => row[7],
+        :password_confirmation => row[8],
+        :sys_user => row[9]
       })
-      
+
     end
       puts "Users imported"
-    
+
     permissions = Permission.all
     User.all.each do |user|
       user.permissions << permissions
       user.save!
     end
     puts "Permissions addded"
-  
+
   end
 end
 
@@ -91,11 +91,27 @@ namespace :csv do
     csv_file_path = 'db/csv/car_brands.csv'
     CSV.foreach(csv_file_path) do |row|
       row = CarBrand.create!({
-        :title => row[0],   
+        :title => row[0],
         :car_brand_type_id => row[1],
       })
     end
     puts "Car brands imported!"
+  end
+end
+
+namespace :csv do
+  desc "Import car regions"
+  task :import_car_regions => :environment do
+    CarRegion.destroy_all
+    CarRegion.reset_pk_sequence
+    csv_file_path = 'db/csv/car_regions.csv'
+    CSV.foreach(csv_file_path) do |row|
+      CarRegion.create!({
+        :number => row[0],
+        :name => row[1],
+      })
+    end
+    puts "Car regions imported!"
   end
 end
 
@@ -108,7 +124,7 @@ namespace :csv do
     CSV.foreach(csv_file_path) do |row|
       row = UserDocumentType.create!({
         :id => row[0],
-        :title => row[1]   
+        :title => row[1]
       })
       puts "User Document Types created"
     end

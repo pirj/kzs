@@ -38,3 +38,7 @@ Vehicle.blueprint do
   second_letter { 'B' }
   third_letter { 'C' }
 end
+
+CarRegion.blueprint do
+  # Attributes here
+end
