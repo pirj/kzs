@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   before_save :save_with_empty_password
 
-  validates :organization_id, :first_name, :last_name, :middle_name, presence: true
+  validates :organization_id, :first_name, :last_name, :middle_name, :position, presence: true
   #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
 
   # validates :username, uniqueness: true

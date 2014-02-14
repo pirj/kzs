@@ -9,6 +9,8 @@ class PermitsController < ApplicationController
   before_filter :number_letters, only: [:create, :edit, :vehicle, :daily]
   before_filter :daily_document_type, only: [:create, :edit, :daily]
 
+  # TODO "authorize! :create, @permit" прописан не для всех action
+
   def index
     if params[:status_sort]
       direction = params[:direction]
@@ -78,13 +80,16 @@ class PermitsController < ApplicationController
     end
 
     if @permit.save
-      drivers = params[:permit][:drivers]
-      #drivers = drivers.delete_if{ |x| x.empty? }
-
       if @permit.vehicle
         vehicle = @permit.vehicle
-        vehicle.user_ids = drivers # TODO нет проверки, можно залить левые ids
-        vehicle.save!
+
+        if @permit.way_bill
+          vehicle.user_ids = nil # FIX вместо валидации "validates :user_ids" в модели Vehicle
+        else
+          drivers = params[:permit][:drivers]
+          vehicle.user_ids = drivers # TODO нет проверки, можно залить левые ids
+          vehicle.save!
+        end
       end
 
       redirect_to @permit, notice: t('permit_request_created')
@@ -117,16 +122,13 @@ class PermitsController < ApplicationController
   end
 
   def edit
-
     @permit = Permit.find(params[:id])
 
     if current_user.has_permission?(10) || @permit.organization_id == current_user.organization_id
-
       @drivers = User.with_permit
     else
       redirect_to :back, :alert => t('access_denied')
     end
-
   end
 
   def update
