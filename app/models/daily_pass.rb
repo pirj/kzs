@@ -40,7 +40,7 @@ class DailyPass < ActiveRecord::Base
   validates :permit_id, presence: true, on: :update
 
   validates :last_name, :first_name, :middle_name,
-            #:id_type,
+            :id_type,
             :id_series, :id_number,
             :object, :person,
             presence: true
@@ -50,12 +50,16 @@ class DailyPass < ActiveRecord::Base
   validates :vehicle,
             :auto_mark,
             :auto_model,
-            :first_letter,
+            presence: { if: :has_vehicle }
+
+  validates :register_sn, presence:  { if: ->{ :has_vehicle && !:has_russian_register_sn } }
+
+  validates :first_letter,
             :sn_number,
             :second_letter,
             :third_letter,
             :lp_r,
-            presence: { if: :has_vehicle }
+            presence: { if: ->{ :has_vehicle && :has_russian_register_sn } }
 
   private
 
