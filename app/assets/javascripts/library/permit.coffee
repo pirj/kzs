@@ -3,13 +3,20 @@
 jQuery ->
 
 
+  if document.getElementById('permit_vehicle_fields')
+    if document.getElementById('permit_way_bill').checked
+      $(".permit_drivers").hide()
 
+    $("#permit_way_bill").on "change", ->
+      $(".permit_drivers").toggle()
 
+  if document.getElementById('temporary_permit_fields')
+    $('.j-auto').hide()
+    if document.getElementById('permit_daily_pass_attributes_has_vehicle').checked
+      $('.j-auto').show()
 
-  $("#permit_way_bill").on "change", ->
-    $(".permit_drivers").toggle()
-
-
+    $("#permit_daily_pass_attributes_has_vehicle").on "change", ->
+      $(".j-auto").toggle()
 
 #  carBrands = $('#permit_vehicle_fields optgroup' )
 #

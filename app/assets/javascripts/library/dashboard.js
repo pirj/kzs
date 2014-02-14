@@ -6,7 +6,7 @@ $(function () {
 
         var weather = {}
         weather.req = $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?id=498817&mode=json&units=metric',
+            url: 'http://api.openweathermap.org/data/2.5/weather?id=540771&mode=json&units=metric', //540771 kronstadt //498817 spb
             type: "GET",
             dataType: "json"
         });

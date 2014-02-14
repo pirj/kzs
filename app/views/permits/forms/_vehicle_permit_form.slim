@@ -36,12 +36,12 @@
       - if @permit.new_record?
 
         .form-item.controls
-          .form-group.m-shorten
+          .form-group.m-shorten.m-number
             .control-label.col-sm-3 Государственный регистрационный номер:
-            .col-sm-2 = vehicle.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8' }
-            .col-sm-3 = vehicle.input :sn_number,label: false, input_html: {class: 'form-control' }, input_wrapper_html: { class: 'col-sm-12' }
+            .col-sm-2 = vehicle.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8 ' }
+            .col-sm-2 = vehicle.input :sn_number,label: false, input_html: {class: 'form-control' }, input_wrapper_html: { class: 'col-sm-12' }
             .col-sm-2 = vehicle.input :second_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
-            .col-sm-2 = vehicle.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
+            .col-sm-2 = vehicle.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8'  }
 
 
         .form-item.controls
