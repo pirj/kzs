@@ -1,8 +1,25 @@
-= f.input :title
-= f.input :body
-= f.input :serial_number
-= f.input :confidential
-= f.association :sender_organization
-= f.association :recipient_organization
-= f.association :executor
-= f.association :approver
+.form-group
+  .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='составитель письма' ]
+    | Составитель
+  .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
+= f.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
+= f.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+= f.input :sender_organization_id, as: :hidden
+= f.association :executor, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+= f.association :approver, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+
+.form-group
+  .col-sm-2.col-sm-offset-2
+    .checkbox
+      label.control-label
+        = check_box_tag :is_conformer?, nil, false, class: 'js-active-input', data: { target: 'new-mail-conformer' }
+        span согласовать с
+
+  .col-sm-6
+    = select_tag :conformer, options_from_collection_for_select(@users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-mail-conformer' }, disabled: 'disabled' if @users
+
+.form-group
+  .col-sm-offset-2.col-sm-5
+    = f.input :confidential, wrapper: :checkbox, input_html: { class: '' }
+
+= f.input :body, input_html: { rows: 3 }
