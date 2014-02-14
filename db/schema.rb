@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20140214111424) do
     t.string   "auto_mark"
     t.string   "auto_model"
     t.integer  "lp_r"
-    t.string   "register_sn"
+    t.string   "register_sn" # has_rf_register_sn
     t.boolean  "has_vehicle",   :default => false
     t.date     "issued"
     t.integer  "guard_duty_id"

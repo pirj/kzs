@@ -17,6 +17,8 @@ class DailyPass < ActiveRecord::Base
                   :auto_mark,   # Марка TC
                   :auto_model,  # Модель TC
                   # Государственный регистрационный номер ТС
+                  :has_russian_register_sn, # регистрационный номер РФ ?
+                  :register_sn,   # полный номер
                   :first_letter,  # 1я буква номера
                   :sn_number,     # Цифры номера
                   :second_letter, # 2я буква номера
@@ -58,6 +60,6 @@ class DailyPass < ActiveRecord::Base
   private
 
   def create_register_sn
-    self.register_sn = self.first_letter + self.sn_number + self.second_letter + self.third_letter if has_vehicle
+    self.register_sn = self.first_letter + self.sn_number + self.second_letter + self.third_letter if has_vehicle && has_russian_register_sn
   end
 end
