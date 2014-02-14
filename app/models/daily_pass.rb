@@ -24,7 +24,7 @@ class DailyPass < ActiveRecord::Base
                   :lp_r,          # Номер региона
 
                   :date,    # ?????????
-                  :guard_duty # какой пользователь выдал пропуск (нажал кнопку Выпустить)
+                  :guard_duty_id # какой пользователь выдал пропуск (нажал кнопку 'Выпустить')
 
   attr_accessor :first_letter, :second_letter, :third_letter, :sn_number
 
@@ -38,7 +38,8 @@ class DailyPass < ActiveRecord::Base
   validates :permit_id, presence: true, on: :update
 
   validates :last_name, :first_name, :middle_name,
-            :id_type, :id_series, :id_number,
+            #:id_type,
+            :id_series, :id_number,
             :object, :person,
             presence: true
 
@@ -57,6 +58,6 @@ class DailyPass < ActiveRecord::Base
   private
 
   def create_register_sn
-    self.register_sn = self.first_letter + self.sn_number + self.second_letter + self.third_letter
+    self.register_sn = self.first_letter + self.sn_number + self.second_letter + self.third_letter if has_vehicle
   end
 end

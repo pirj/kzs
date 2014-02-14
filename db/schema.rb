@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214102956) do
+ActiveRecord::Schema.define(:version => 20140214111424) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -92,17 +92,17 @@ ActiveRecord::Schema.define(:version => 20140214102956) do
     t.string   "object"
     t.string   "person"
     t.date     "date"
-    t.string   "guard_duty"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "id_series"
     t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
     t.integer  "lp_r"
     t.string   "register_sn"
-    t.boolean  "has_vehicle", :default => false
+    t.boolean  "has_vehicle",   :default => false
     t.date     "issued"
+    t.integer  "guard_duty_id"
   end
 
   create_table "delete_notices", :force => true do |t|

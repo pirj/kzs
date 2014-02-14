@@ -91,8 +91,11 @@ class PermitsController < ApplicationController
         if @permit.way_bill
           vehicle.user_ids = nil # FIX вместо валидации "validates :user_ids" в модели Vehicle
         else
+          # TODO нет проверки, можно залить левые ids
+          #drivers = params[:permit][:drivers].flatten.compact
+          #vehicle.user_ids = User.find(drivers).map(&:id)
           drivers = params[:permit][:drivers]
-          vehicle.user_ids = drivers # TODO нет проверки, можно залить левые ids
+          vehicle.user_ids = drivers
           vehicle.save!
         end
       end
@@ -196,6 +199,11 @@ class PermitsController < ApplicationController
   def release
     @permit = Permit.find(params[:id])
     @permit.released = true
+
+    if @permit.permit_type == 'daily'
+      @permit.daily_pass.guard_duty_id = current_user.id
+    end
+
     @permit.save
 
     respond_to do |format|
