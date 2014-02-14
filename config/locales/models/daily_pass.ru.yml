@@ -16,4 +16,4 @@ ru:
         vehicle: Тип ТС
         auto_model: Модель
         auto_mark: Марка
-
+        has_vehicle: Следует на транспортном средстве
