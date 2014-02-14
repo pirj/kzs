@@ -79,6 +79,11 @@ class PermitsController < ApplicationController
       @permit.expiration_date = Date.parse(params[:permit][:date])
     end
 
+    if @permit.permit_type == 'daily'
+      issued = params[:permit][:daily_pass_attributes].delete(:issued)
+      @permit.daily_pass.issued = Date.parse(issued) rescue nil # TODO вынести в валидацию
+    end
+
     if @permit.save
       if @permit.vehicle
         vehicle = @permit.vehicle
