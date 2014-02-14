@@ -6,7 +6,7 @@ class Vehicle < ActiveRecord::Base
                   :vehicle_body, # Тип ТС
                   :brand,        # Марка TC
                   :model,        # Модель TC
-                  :register_document, # TODO для чего это поле ?
+                  :register_document, # Номер свидетельства регистрации
                   # Государственный регистрационный номер ТС
                   :has_russian_register_sn, # регистрационный номер РФ ?
                   :register_sn,   # полный номер
