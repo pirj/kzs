@@ -13,8 +13,14 @@ describe Organization do
 
   context 'associations' do
     [:director, :accountant, :admin].map{|field| it {should belong_to(field).class_name('User')}}
-    it { should have_many :licenses }
+    it { should have_many :users }
+    it { should have_many(:licenses).dependent(:destroy) }
     it { should accept_nested_attributes_for(:licenses) }
+  end
+
+  context 'attached files' do
+    [:logo, :certificate_of_tax_registration, :creation_resolution, :articles_of_organization, :egrul_excerpt]
+    .map{|field|it { should have_attached_file(field) } }
   end
 
 end

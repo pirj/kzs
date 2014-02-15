@@ -27,11 +27,11 @@ class Organization < ActiveRecord::Base
   has_attached_file :egrul_excerpt
 
   has_many :users
+  has_many :licenses, dependent: :destroy
+
   belongs_to :director, foreign_key: :director_id, class_name: 'User'
   belongs_to :accountant, foreign_key: :accountant_id, class_name: 'User'
   belongs_to :admin, foreign_key: :admin_id, class_name: 'User'
-
-  has_many :licenses
 
   TYPEOFOWNERSHIP = [I18n::translate('activerecord.attributes.organization.llc'), I18n::translate('activerecord.attributes.organization.businessman')]
 
