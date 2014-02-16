@@ -13,11 +13,17 @@ Organization.blueprint do
 end
 
 User.blueprint do
+  organization = Organization.make!
+  pwd = Faker::Lorem.characters(9)
   username { Faker::Lorem.word }
   email { Faker::Internet.email }
-  pwd = Faker::Lorem.characters(9)
   password { pwd }
   password_confirmation { pwd }
+  organization_id { organization.id }
+  first_name { Faker::Lorem.word }
+  last_name { Faker::Lorem.word }
+  middle_name { Faker::Lorem.word }
+  position { Faker::Lorem.word }
 end
 
 Group.blueprint do
@@ -30,6 +36,9 @@ end
 
 Permit.blueprint do
   number {Faker::Number.number(100)}
+  permit_type {'vehicle' or 'user'}
+  start_date { Date.today }
+  expiration_date { Date.today + 5.days }
 end
 
 Vehicle.blueprint do
