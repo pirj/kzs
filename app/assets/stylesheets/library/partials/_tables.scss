@@ -6,6 +6,11 @@
 table {
   max-width: 100%;
   background-color: $table-bg;
+  .subject {
+    a, span {
+      display: inline-block;
+    }
+  }
 }
 th {
   text-align: left;
@@ -103,6 +108,14 @@ th {
       width: auto;
       height: auto;
       margin-right: $padding-base-horizontal;
+    }
+
+    .table-img-md{
+      border: 1px solid $input-border-color;
+      max-height: 200px;
+      max-width: 200px;
+      width: auto;
+      height: auto;
     }
 
     .control-label{padding-top: 0;}

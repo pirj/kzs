@@ -5,6 +5,16 @@ form.simple_form {
   padding-bottom: 20px;
 }
 
+.m-number{
+  .col-sm-2{
+
+    width: 12%;
+
+  }
+
+}
+
+
 // Defaults params for all styles
 select
 textarea
@@ -54,7 +64,6 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
   color: $label-color;
 }
 
@@ -266,6 +275,18 @@ input[type="checkbox"],
   @extend .text-help;
 }
 
+.label-icon-hint{
+  &:after{
+    font-family: FontAwesome;
+    content: "\f059";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+}
 // Form control sizing
 
 @include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);

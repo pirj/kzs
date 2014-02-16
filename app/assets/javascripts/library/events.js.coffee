@@ -2,6 +2,11 @@ $ ->
   # run code pretty:
   window.prettyPrint and prettyPrint()
 
+  # active boostrap tooltips
+  $(".js-label-hint").tooltip(
+    placement: 'right'
+  )
+
   # replace backslashes to nil word.
   # backslashes come from multiple lines slim partials.
   $.each($('.prettyprint'), ->
