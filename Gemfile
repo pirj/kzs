@@ -13,6 +13,8 @@ gem 'paperclip', '~> 3.0'
 gem 'russian', '~> 0.6.0'
 gem 'devise'
 gem 'ransack'
+gem 'populator'
+gem 'faker'
 
 gem 'cancan'
 gem 'ckeditor'
@@ -24,6 +26,8 @@ gem 'slim'
 gem 'simple_form'
 gem 'draper'
 gem 'kaminari'
+gem 'ransack'
+gem 'bootstrap-sass'
 
 gem 'inherited_resources'
 gem 'has_scope'
@@ -45,9 +49,6 @@ gem 'jquery-rails', '~> 2.3.0'
 gem 'prawn'
 gem 'rmagick', :require => 'RMagick'
 
-gem 'populator'
-gem 'faker'
-gem 'factory_girl_rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'hipchat'
@@ -66,14 +67,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'machinist', '>= 2.0.0.beta2'
-  gem 'shoulda-matchers'
-  gem 'populator'
-  gem 'faker'
 end

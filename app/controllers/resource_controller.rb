@@ -10,7 +10,7 @@ class ResourceController < ApplicationController
 
 
   respond_to :html,:js,:json
-  has_scope :page, default:1
+  has_scope :page, default: 1, only: [:index]
 
 
   private

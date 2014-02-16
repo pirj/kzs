@@ -12,3 +12,8 @@ ru:
         person: К кому
         issued: Выдан
         guard_duty: Караульная служба
+        auto_mark: Марка
+        vehicle: Тип ТС
+        auto_model: Модель
+        auto_mark: Марка
+        has_vehicle: Следует на транспортном средстве

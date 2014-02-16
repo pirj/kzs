@@ -1,7 +1,0 @@
-= simple_form_for resource, :html=>{:class=>"form-horizontal"} do |f|
-  = f.input :conversation_id, as: :hidden
-  = f.simple_fields_for :document  do |doc|
-    = render 'documents/application/document_fields', f: doc
-  .control-group
-    .controls
-      = f.submit :class=>"btn btn-success"

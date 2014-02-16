@@ -2,16 +2,44 @@ class Documents::DocumentsController < ResourceController
   layout 'base'
   actions :index
 
+  has_scope :per, default: 10, only: [:index]
+
+
+
   def index
-    @documents = Documents::ListDecorator.decorate(collection, with: Documents::ListShowDecorator)
+    @search = end_of_association_chain.ransack(params[:q])
+    @search.build_condition
+
+    _documents = apply_scopes(@search.result(distinct: true))
+    @documents = Documents::ListDecorator.decorate(_documents, with: Documents::ListShowDecorator)
   end
+
+  def search
+    @documents = collection.ransack(params[:q]).result(distinct: true)
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
+  # redirect to document-type edit-page
+  def edit
+    document = Document.find(params[:id]).accountable
+    redirect_to edit_polymorphic_path(document)
+  end
+
+
+  # redirect to document-type show-page
+  def show
+    document = Document.find(params[:id]).accountable
+    redirect_to polymorphic_path(document)
+  end
+
 
   #TODO: @prikha now free for all (would be limited by initial scope!)
   # uses params like so:
   #     :state = 'approved'
   #     :documents_ids = [1,4,6]
   #
-
   def batch
     state = params[:state]
 
@@ -19,8 +47,11 @@ class Documents::DocumentsController < ResourceController
 
     @accountables = @documents.map(&:accountable)
 
-    if can?(ability_for(state), @documents) && applicable_state?(@accountables, state)
-      @accountables.transition_to!(state)
+    if batch_can?(state, @documents) && applicable_state?(@accountables, state)
+      @accountables.each do |accountable|
+        accountable.transition_to!(state)
+      end
+
       flash[:notice] = t('documents_updated')
     else
       flash[:notice] = t('access_denied')
@@ -34,13 +65,16 @@ class Documents::DocumentsController < ResourceController
     accountables.map{|acc| acc.can_transition_to?(state)}.all?
   end
 
+  def batch_can?(state, documents)
+    documents.map{|doc| can?(ability_for(state), doc)}.all?
+  end
+
 
   def end_of_association_chain
     super.
         where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
-        order(sort_column+' '+sort_direction).
-        page(params[:page]).per(2)
+        order(sort_column+' '+sort_direction)
   end
 
   def sort_column
@@ -50,4 +84,5 @@ class Documents::DocumentsController < ResourceController
   def acceptable_sort_fields
     resource_class.column_names + %w(organizations.short_title recipient_organizations_documents.short_title)
   end
+
 end

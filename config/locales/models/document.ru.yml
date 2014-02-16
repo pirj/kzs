@@ -8,39 +8,43 @@ ru:
         few: "Документы"
 
     attributes:
-      document:
-        deadline:
-        file:
-        text:
-        title:
-        sn:
-        opened:
-        for_approve:
-        confidential:
-        organization_id:
-        recipient_id:
-        user_id:
-        approver_id:
-        executor_id:
-        sender_organization_id:
-        document_conversation_id:
-        deleted:
-        archived:
-        callback:
-        prepared:
-        draft:
-        approved:
-        document_type:
-        task_list_attributes:
-        document_ids:
-        organization_ids:
-        executor_ids:
-        approver_ids:
-        document_attachments:
-        attachment:
-        document_attachments_attributes:
-        prepared_date:
-        approved_date:
-        date:
-        sent:
-        sent_date:
+      document: &document_attributes
+        approver_id: Контрольное лицо
+        approver:    Контрольное лицо
+        body: Текст
+        confidential: Конфиденциально
+        executor_id: Исполнитель
+        executor:    Исполнитель
+        sender_organization_id: Организация-отправитель
+        sender_organization: Организация-отправитель
+        serial_number: Серийный номер
+        recipient_organization: Организация-получатель
+        recipient_organization_id: Организация-получатель
+        title: Заголовок
+
+        accountable_types:
+          documents_officialmail: письмо
+          documents_order: распоряжение
+          documents_report: акт
+
+        actions:
+          draft: в черновик
+          prepared: подготовить
+          approved: подтвердить
+          sent: отправить
+          read: прочитать
+          trashed: удалить
+          pending: поставить в очередь
+          rejected: вернуть
+          accepted: принять
+
+        states:
+          draft: черновик
+          prepared: подготовлен
+          approved: подтвержден
+          sent: отправлен
+          read: прочтен
+          trashed: удален
+          pending: ожидает
+          rejected: возвращен
+          accepted: принят

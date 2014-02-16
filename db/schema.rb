@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140211130408) do
+ActiveRecord::Schema.define(:version => 20140214160046) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
     t.integer  "car_brand_type_id"
   end
 
+  create_table "car_regions", :force => true do |t|
+    t.string   "number"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
     t.string   "data_content_type"
@@ -91,20 +98,19 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
     t.string   "vehicle"
     t.string   "object"
     t.string   "person"
-    t.string   "issued"
     t.date     "date"
-    t.string   "guard_duty"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.integer  "id_series"
     t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
-    t.string   "lp_s1"
-    t.string   "lp_s2"
-    t.string   "lp_s3"
-    t.integer  "lp_n"
-    t.integer  "lp_r"
+    t.string   "register_sn"
+    t.boolean  "has_vehicle",             :default => false
+    t.date     "issued"
+    t.integer  "guard_duty_id"
+    t.boolean  "has_russian_register_sn", :default => true
+    t.string   "lp_r"
   end
 
   create_table "delete_notices", :force => true do |t|
@@ -189,13 +195,13 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
     t.string   "type_of"
   end
 
-  create_table "mails", :force => true do |t|
+  create_table "official_mails", :force => true do |t|
     t.integer  "conversation_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
 
-  add_index "mails", ["conversation_id"], :name => "index_mails_on_conversation_id"
+  add_index "official_mails", ["conversation_id"], :name => "index_mails_on_conversation_id"
 
   create_table "open_notices", :force => true do |t|
     t.integer  "document_id"
@@ -365,13 +371,14 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
   end
 
   create_table "task_lists", :force => true do |t|
-    t.integer  "statement_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "document_id"
-    t.boolean  "completed",    :default => false
+    t.integer  "order_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "completed",  :default => false
     t.datetime "deadline"
   end
+
+  add_index "task_lists", ["order_id"], :name => "index_task_lists_on_order_id"
 
   create_table "tasks", :force => true do |t|
     t.integer  "task_list_id"
@@ -473,10 +480,11 @@ ActiveRecord::Schema.define(:version => 20140211130408) do
     t.string   "vehicle_body"
     t.string   "register_document"
     t.string   "register_sn"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "permit_id"
-    t.integer  "sn_region"
+    t.boolean  "has_russian_register_sn", :default => true
+    t.string   "sn_region"
   end
 
 end

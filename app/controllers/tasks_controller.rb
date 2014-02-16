@@ -22,7 +22,7 @@ class TasksController < ApplicationController
       @task.completed = true
       @task.save!  
       task_list = @task.task_list
-      if task_list.with_completed_tasks
+      if task_list.all_tasks_completed?
          task_list.completed = true
          task_list.save!
          if task_list.document_id.present?

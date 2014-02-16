@@ -14,20 +14,28 @@ Kzs::Application.routes.draw do
   # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
 
+
   namespace :documents do
-    resources :documents, path:'', only: 'index' do
+    resources :documents, path:'', only: ['index', 'edit', 'show'] do
       get 'batch', on: :collection
+      post 'search', on: :collection
     end
-    #batch actions go on docs
-    resources :mails, except: 'index' do
+
+    resources :official_mails, path: 'mails', except: 'index' do
       get 'reply', on: :member
       get 'assign_state', on: :member
+      get 'copy', on: :member
     end
-    #member actions for status changes
-    resources :orders, except: 'index'
-    #member actions for status changes
-    resources :reports, except: 'index'
-    #member actions for status changes
+
+    resources :orders, except: 'index' do
+      get 'assign_state', on: :member
+      get 'copy', on: :member
+    end
+
+    resources :reports, except: 'index' do
+      get 'assign_state', on: :member
+      get 'copy', on: :member
+    end
   end
 
   match '/documents/batch' => 'documents#batch'

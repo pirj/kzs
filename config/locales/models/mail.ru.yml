@@ -1,0 +1,11 @@
+ru:
+  activerecord:
+    models:
+      documents:
+        official_mail:
+          one: "Письмо"
+    attributes:
+      documents:
+        official_mail:
+          document:
+            <<: &document_attributes

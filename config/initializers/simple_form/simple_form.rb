@@ -31,7 +31,6 @@ SimpleForm.browser_validations = false
 #
 ## Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.boolean_style = :nested
   config.label_class = 'control-label'
 
   config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error',
@@ -56,6 +55,20 @@ SimpleForm.setup do |config|
     b.use :placeholder
 
     b.use :label
+    b.wrapper :input_wrapper, tag: 'div' do |bi|
+      bi.use :input
+    end
+    b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }
+  end
+
+  config.wrappers :inline_hint, :tag => 'div', :class => 'form-group', :error_class => 'error' do |b|
+    b.use :html5
+    b.use :placeholder
+
+    b.wrapper :label, tag: :label, class: 'control-label js-label-hint label-icon-hint' do |bl|
+      bl.use :label_text
+    end
     b.wrapper :input_wrapper, tag: 'div' do |bi|
       bi.use :input
     end
@@ -105,15 +118,17 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :checkbox, tag: :div, class: "checkbox", error_class: "has-error" do |b|
+  config.wrappers :checkbox, tag: :div, class: 'checkbox', error_class: "has-error" do |b|
+
+    b.optional :label
 
     # Form extensions
     b.use :html5
 
     # Form components
-    b.wrapper tag: :label do |ba|
+    b.wrapper tag: :label, class: 'control-label' do |ba|
       ba.use :input
-      ba.use :label_text
+      ba.use :label_text, wrap_with: { tag: :span }
     end
 
     b.use :hint,  wrap_with: { tag: :p, class: "help-block" }

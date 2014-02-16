@@ -1,5 +1,6 @@
 class Documents::OrderStateMachine
   include Statesman::Machine
+  include Documents::StateMachine
 
   state :draft, initial: true
   state :prepared

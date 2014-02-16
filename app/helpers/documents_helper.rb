@@ -176,8 +176,8 @@ module DocumentsHelper
       pdf.render_file "tmp/document_#{document.id}.pdf"
       pdf = Magick::Image.read("tmp/document_#{document.id}.pdf").first
       thumb = pdf.scale(400, 520)
-      thumb.write "app/assets/images/document_#{document.id}.png"
+      thumb.write "public/system/documents/document_#{document.id}.png"
     end
-    image_tag "document_#{document.id}.png", style: 'background-color: white', size: "#{width}x#{height}" #replace to css
+    image_tag "/system/documents/document_#{document.id}.png", class: 'table-img-md'
   end
 end

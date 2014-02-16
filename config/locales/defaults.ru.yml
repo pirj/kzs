@@ -1,6 +1,5 @@
 ru:
   helpers:
     submit:
-      organization:
-        create: "Создать"
-        update: "Сохранить"
+      create: Создать
+      update: Сохранить

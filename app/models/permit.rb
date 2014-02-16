@@ -1,8 +1,13 @@
 class Permit < ActiveRecord::Base
   attr_accessible :number, :purpose, :start_date, :expiration_date, :requested_duration,
                   :granted_area, :granted_object, :permit_type, :agreed, :canceled,
-                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes,
-                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number, :user_id
+                  :released, :issued,
+                  :permit_class, # Класс пропуска
+                  :vehicle_id, :date, :vehicle_attributes,
+                  :drivers, :user_attributes,
+                  :way_bill, # Согласно путевого листа
+                  :daily_pass_attributes, :vip_number, :user_id
+
   after_initialize :default_permit_class
 
   has_one :user
@@ -23,36 +28,28 @@ class Permit < ActiveRecord::Base
 
   attr_accessor :date, :drivers
 
-  fields = %w[:number, :purpose, :start_date, :expiration_date, :requested_duration,
-                  :granted_area, :granted_object, :permit_type, :agreed, :canceled,
-                  :released, :issued, :permit_class, :vehicle_id, :date, :vehicle_attributes,
-                  :drivers, :user_attributes, :way_bill, :daily_pass_attributes, :vip_number, :user_id]
+  # TODO нужен normalize_attributes
 
-  fields.map{|f| validates f, :presence => true}
+  # TODO :agreed, :canceled, :released, :issued - нужна stat machine
+
+  # TODO расписать назначение полей
+
+  validates  :start_date, :expiration_date,
+              presence: { if: ->(f){ f.permit_type != 'daily'} }
+
+  #validates  :number, :purpose, :start_date, :expiration_date, :requested_duration,
+  #           :granted_area, :granted_object, :permit_type, :agreed, :canceled,
+  #           :released, :issued, :permit_class, :vehicle_id, :date,
+  #           :drivers, :way_bill, :vip_number, :user_id,
+  #           :vehicle_attributes, :user_attributes, :daily_pass_attributes,
+  #           :presence => true
 
   TYPES = %w[user vehicle daily]
   PERMIT_CLASSES = %w[standart vip]
-  
-  def temporary
-    # TODO избыточная запись получается, можно просто:
-    # start_date == expiration_date
-    if self.start_date == self.expiration_date
-      true
-    else
-      false
-    end
-  end
-  
-  def validity 
-    if self.daily_pass.date
-      '1'
-    else
-      self.expiration_date
-    end
-  end
 
   protected
-    def default_permit_class
-      self.permit_class = PERMIT_CLASSES.first
-    end
+
+  def default_permit_class
+    self.permit_class = PERMIT_CLASSES.first
+  end
 end

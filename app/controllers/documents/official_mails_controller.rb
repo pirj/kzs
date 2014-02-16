@@ -1,0 +1,46 @@
+class Documents::OfficialMailsController < ResourceController
+  include Documents::Base
+
+  layout 'base'
+  actions :all, except: [:index]
+
+  before_filter :users, only: [:new, :edit]
+
+  def new
+    new!{
+      @official_mail.sender_organization_id = current_user.organization_id
+    }
+  end
+
+
+  def copy
+    @parent_official_mail = end_of_association_chain.find(params[:id])
+
+    @official_mail = end_of_association_chain.new
+    @official_mail.document = @parent_official_mail.document.safe_clone
+
+    render action: :new
+  end
+
+  def reply
+    @parent_official_mail = end_of_association_chain.find(params[:id])
+
+    conversation =  @parent_official_mail.conversation || @parent_official_mail.create_conversation
+
+    @official_mail = end_of_association_chain.new(conversation: conversation)
+    @official_mail.document.assign_attributes(sender_organization: current_organization,
+                                      recipient_organization: @parent_official_mail.sender_organization)
+
+    render action: :new
+  end
+
+  def show
+    show!{
+      @official_mail = Documents::ShowDecorator.decorate(resource)
+    }
+  end
+
+  def users
+    @users ||= User.where(organization_id: current_user.id)
+  end
+end

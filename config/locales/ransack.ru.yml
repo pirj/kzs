@@ -1,0 +1,70 @@
+ru:
+  ransack:
+    all: Все
+    and: И
+    any: Не важно
+    asc: По убыванию
+    attribute: Атрибут
+    combinator: Соединитель
+    condition: Условие
+    desc: По возрастанию
+    or: ИЛИ
+    predicate: Предикат
+    predicates:
+      blank: Пустой
+      cont: Содержит
+      cont_all: Содержит всё
+      cont_any: Содержит любое
+      does_not_match: Не совпадает
+      does_not_match_all: Не совпадает со всем
+      does_not_match_any: Не совпадает ни с чем
+      end: Оканчивается на
+      end_all: Оканчивается на (всё)
+      end_any: Оканчивается на (любое)
+      eq: Равно
+      eq_all: Совпадает со всем
+      eq_any: Совпадает с любым
+      'false': Ложь
+      gt: Больше чем
+      gt_all: Больше чем все
+      gt_any: Больше чем любое
+      gteq: Больше или равно
+      gteq_all: Больше или равно всему
+      gteq_any: Больше или равно любому
+      in: В
+      in_all: Во всех
+      in_any: В любом
+      lt: Меньше чем
+      lt_all: Меньше чем все
+      lt_any: Меньше чем любое
+      lteq: Меньше или равно
+      lteq_all: Меньше или равно всем
+      lteq_any: Меньше или равно любому
+      matches: Совпадает
+      matches_all: Совпадает со всем
+      matches_any: Совпадает с любым
+      not_cont: Не содержит
+      not_cont_all: Не содержит все
+      not_cont_any: Не содержит любое
+      not_end: ! 'Не оканчивается на '
+      not_end_all: Не оканчивается на все
+      not_end_any: Не оканчивается на любое
+      not_eq: Не равно
+      not_eq_all: Не равно всем
+      not_eq_any: Не равно любому
+      not_in: Не в
+      not_in_all: Не во всех
+      not_in_any: Не в любом
+      not_null: Не пустой
+      not_start: Не начинается с
+      not_start_all: Не начинается со всех
+      not_start_any: Не начинается с любого
+      'null': Пустой
+      present: Существует
+      start: Начинается с
+      start_all: Начинается со всех
+      start_any: Начинается с любого
+      'true': Истина
+    search: Поиск
+    sort: Сортировка
+    value: Значение

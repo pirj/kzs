@@ -6,8 +6,20 @@
       .dropdown.header
         h1.dropdown-toggle data-toggle="dropdown"
           a href="/permits"
+          - case params[:scope]
+            - when 'application'
+            | Новые заявки
+            - when 'expired'
+            | Просроченные
+            - when 'daily'
+            | Разовые пропуска
+            - when 'vehicles'
+            | Пропуска на транспорт
+            - when 'walkers'
+            | Пропуска на пеший проход
+            - else
             | Все пропуска
-            span.caret
+          span.caret
         ul.dropdown-menu role="menu"
           li
             a href="/permits?scope=application"
@@ -18,6 +30,18 @@
           li
             a href="/permits?scope=daily"
               | Разовые пропуска
+          li
+            a href="/permits?scope=vehicles"
+              | Пропуска на транспорт
+          li
+            a href="/permits?scope=walkers"
+              | Пропуска на пеший проход
+          - if params[:scope]
+            li
+              a href="/permits"
+                | Все пропуска
+
+
 
   = content_for :page_header_search do
     = header_search_form '#', placeholder: 'поиск по пропускам'

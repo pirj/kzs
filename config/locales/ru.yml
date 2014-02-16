@@ -40,8 +40,8 @@ ru:
   permit_successfully_updated: "Пропуск успешно изменен"
   permit_agreed: "Пропуск утвержден"
   permit_canceled: "Пропуск аннанулирован"
-  permit_released: "Пропус выпущен"
-  permit_issued: "Пропус выдан"
+  permit_released: "Пропуск выпущен"
+  permit_issued: "Пропуск выдан"
   permit_rejected: "Пропуск отклонен"
   documents_updated: "Документы изменены"
   only_mails_from_other_organizations_could_be_answered: "Отвечать можно только на письма из сторонних организаций"
@@ -50,6 +50,7 @@ ru:
   special_car: "Спец. техника"
   truck: "Грузовой автомобиль"
   passenger_car: "Легковой автомобиль"
+  bus: "Автобус"
   user: "Сотрудник"
   vehicle: "ТС"
   standart: "Стандартный"
@@ -154,3 +155,23 @@ ru:
     one: ru_one
     few: ru_few
     other: ru_other
+
+  Monday: "Понедельник"
+  Tuesday: "Вторник"
+  Wednesday: "Среда"
+  Thursday: "Четверг"
+  Friday: "Пятница"
+  Saturday: "Суббота"
+  Sunday: "Воскресенье"
+  January: Январь
+  February: Февраль
+  March: Март
+  April: Апрель
+  May: Май
+  June: Июнь
+  July: Июль
+  August: Август
+  September: Сентябрь
+  October: Октябрь
+  November: Ноябрь
+  December: Декабрь

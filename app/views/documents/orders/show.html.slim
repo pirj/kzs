@@ -1,0 +1,27 @@
+= content_for :page_header do
+  = header_back_btn documents_documents_path
+  = header_title do
+    .row
+      .col-sm-6
+        span.text-help ТИП:
+        span = resource.type_name
+
+      .col-sm-6
+        span.text-help СТАТУС:
+        span = resource.state
+
+
+= resource.title
+= resource.sender_to_recipient_links
+
+.row
+  .col-sm-7
+    .row
+      = resource.executor_link_with_label
+      = resource.approver_link_with_label
+      = resource.sender_link_with_label
+      = resource.recipient_link_with_label
+
+  .col-sm-5
+    = pdf_to_png(resource,190,270)
+

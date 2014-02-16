@@ -12,8 +12,8 @@ namespace :csv do
       row = Permission.create!({
         :id => row[0],
         :title => row[1],
-        :description => row[2],        
-      })  
+        :description => row[2],
+      })
     end
     puts "Permissions imported!"
   end
@@ -22,55 +22,55 @@ end
 namespace :csv do
   desc "Import Organizations"
   task :organizations => :environment do
-    Organization.destroy_all
+    Organization.delete_all
     Organization.reset_pk_sequence
     csv_file_path = 'db/csv/organizations.csv'
     CSV.foreach(csv_file_path) do |row|
       row = Organization.create({
         :id => row[0],
-        :title => row[1],   
-        :parent_id => row[2], 
-        :director_id => row[3],  
-        :short_title => row[4],  
-        :admin_id => row[5],  
-        :type_of_ownership => row[6]          
+        :title => row[1],
+        :parent_id => row[2],
+        :director_id => row[3],
+        :short_title => row[4],
+        :admin_id => row[5],
+        :type_of_ownership => row[6]
       })
     end
-    puts "Organizations imported"    
+    puts "Organizations imported"
   end
 end
 
 namespace :csv do
   desc "Import permissions"
   task :users => :environment do
-    
+
     User.destroy_all
     User.reset_pk_sequence
     csv_file_path = 'db/csv/users.csv'
     CSV.foreach(csv_file_path) do |row|
       row = User.create({
         :id => row[0],
-        :organization_id => row[1],   
-        :position => row[2], 
-        :first_name => row[3],  
-        :middle_name => row[4],  
-        :last_name => row[5],  
-        :username => row[6],       
-        :password => row[7],    
-        :password_confirmation => row[8],    
-        :sys_user => row[9]  
+        :organization_id => row[1],
+        :position => row[2],
+        :first_name => row[3],
+        :middle_name => row[4],
+        :last_name => row[5],
+        :username => row[6],
+        :password => row[7],
+        :password_confirmation => row[8],
+        :sys_user => row[9]
       })
-      
+
     end
       puts "Users imported"
-    
+
     permissions = Permission.all
     User.all.each do |user|
       user.permissions << permissions
       user.save!
     end
     puts "Permissions addded"
-  
+
   end
 end
 
@@ -84,17 +84,34 @@ namespace :csv do
     CarBrandType.create(:title => 'Легковые автомобили')
     CarBrandType.create(:title => 'Грузовики')
     CarBrandType.create(:title => 'Спецтехника')
+    CarBrandType.create(:title => 'Автобус')
 
     CarBrand.destroy_all
     CarBrand.reset_pk_sequence
     csv_file_path = 'db/csv/car_brands.csv'
     CSV.foreach(csv_file_path) do |row|
       row = CarBrand.create!({
-        :title => row[0],   
+        :title => row[0],
         :car_brand_type_id => row[1],
       })
     end
     puts "Car brands imported!"
+  end
+end
+
+namespace :csv do
+  desc "Import car regions"
+  task :import_car_regions => :environment do
+    CarRegion.destroy_all
+    CarRegion.reset_pk_sequence
+    csv_file_path = 'db/csv/car_regions.csv'
+    CSV.foreach(csv_file_path) do |row|
+      CarRegion.create!({
+        :number => row[0],
+        :name => row[1],
+      })
+    end
+    puts "Car regions imported!"
   end
 end
 
@@ -107,7 +124,7 @@ namespace :csv do
     CSV.foreach(csv_file_path) do |row|
       row = UserDocumentType.create!({
         :id => row[0],
-        :title => row[1]   
+        :title => row[1]
       })
       puts "User Document Types created"
     end
@@ -117,18 +134,18 @@ end
 namespace :documents do
   desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'
   task :create => :environment do
-    Document.destroy_all
+    Document.delete_all
     Document.reset_pk_sequence
 
-    Documents::Mail.delete_all
-    Documents::Mail.reset_pk_sequence
+    Documents::OfficialMail.delete_all
+    Documents::OfficialMail.reset_pk_sequence
 
     organizations_count = Organization.count
     users_count         = User.count
 
-    5.times do |i|
-      d = Documents::Mail.new
-      d.title = Faker::Lorem.words(4)
+    20.times do |i|
+      d = Documents::OfficialMail.new
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -142,9 +159,9 @@ namespace :documents do
     Documents::Order.delete_all
     Documents::Order.reset_pk_sequence
 
-    5.times do |i|
+    20.times do |i|
       d = Documents::Order.new
-      d.title = Faker::Lorem.words(3)
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
@@ -162,10 +179,9 @@ namespace :documents do
     Documents::Report.delete_all
     Documents::Report.reset_pk_sequence
 
-    7.times do |d|
+    10.times do |d|
       d = Documents::Report.new
-
-      d.title = Faker::Lorem.words(2)
+      d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
       d.executor = User.find(rand(1..users_count))

@@ -36,11 +36,11 @@ class PermitPdf < Prawn::Document
         draw_text "#{@daily.id_type}", :size => 13, :at => [160,235]
         draw_text "#{@daily.id_type}", :size => 13, :at => [450,235]
         
-        draw_text "#{@daily.id_sn}", :size => 13, :at => [120,216]
-        draw_text "#{@daily.id_sn}", :size => 13, :at => [410,216]
+        draw_text "#{@daily.id_series} #{ @daily.id_number } ", :size => 13, :at => [120,216]
+        draw_text "#{@daily.id_series} #{ @daily.id_number } ", :size => 13, :at => [410,216]
         
-        draw_text "#{@daily.vehicle}", :size => 13, :at => [25,179]
-        draw_text "#{@daily.vehicle}", :size => 13, :at => [315 ,179]
+        draw_text "#{@daily.register_sn} #{ @daily.auto_mark } #{ @daily.auto_model }", :size => 13, :at => [25,179]
+        draw_text "#{@daily.register_sn} #{ @daily.auto_mark } #{ @daily.auto_model }", :size => 13, :at => [315 ,179]
         
         draw_text "#{@daily.object}", :size => 13, :at => [80,143]
         draw_text "#{@daily.object}", :size => 13, :at => [370,143]

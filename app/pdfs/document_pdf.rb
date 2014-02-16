@@ -1,4 +1,5 @@
 # coding: utf-8
+# Need to install ImageMagick and Ghostscript
 class DocumentPdf < Prawn::Document
   include ActionView::Helpers::SanitizeHelper
 
@@ -37,9 +38,10 @@ class DocumentPdf < Prawn::Document
     move_down 10
     float {text "<color rgb='989898'>Номер документа: #{@document.sn}</color>", :size => 10, :inline_format => true}
     text "<color rgb='989898'>г. Санкт-Петербург</color>", :align => :right, :size => 10, :inline_format => true
-    if @document.date?
-      text "<color rgb='989898'>От #{@document.date.strftime('%d.%m.%Y')}</color>", :size => 10, :inline_format => true
-    end
+    # TODO: @justvitalius код ниже вызывает ошибку.
+    #if @document.date?
+    #  text "<color rgb='989898'>От #{@document.date.strftime('%d.%m.%Y')}</color>", :size => 10, :inline_format => true
+    #end
     move_down 30
     text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 30

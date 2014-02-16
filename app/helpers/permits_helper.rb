@@ -44,7 +44,7 @@ module PermitsHelper
 
  #  content_tag(:span, "Hello world!", class: 'wasd')
 
-
+    return permit.vehicle.register_sn
    return permit.vehicle.register_sn[0].to_s +  permit.vehicle.register_sn[1..3].to_s + permit.vehicle.register_sn[4..5].to_s + permit.vehicle.sn_region.to_s
   end
 end

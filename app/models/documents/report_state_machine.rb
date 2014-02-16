@@ -1,5 +1,6 @@
 class Documents::ReportStateMachine
   include Statesman::Machine
+  include Documents::StateMachine
 
   state :draft, initial: true
   state :prepared

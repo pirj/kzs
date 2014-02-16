@@ -17,23 +17,32 @@ table.table.m-table-append.js-row-clickable
           input type='checkbox'
         td
           span class='extra' = permit.id
-        td
+        td.subject
           - case permit.permit_type
             - when 'vehicle'
               =link_to permit
                 span class='extra'
                   = permit.vehicle.brand
+                  | &nbsp
                   = permit.vehicle.model
-                span class='muted'
-                  = permit_auto_number(permit)
+              span class='muted'
+                = permit_auto_number(permit)
+                | &nbsp;
+                = permit.vehicle.sn_region
             - when 'daily'
               =link_to permit
                 = permit.daily_pass.last_name
+                | &nbsp
                 = permit.daily_pass.first_name
+              - if permit.daily_pass.has_vehicle
+                span class='muted'
+                  = permit.daily_pass.auto_mark
+                  | &nbsp
+                  = permit.daily_pass.auto_model
             - when 'user'
               =link_to permit
                 = permit.user.try(:last_name)
-                |&nbsp
+                | &nbsp
                 = permit.user.try(:first_name)
               span class='muted'
                 = permit.user.try(:position)
@@ -48,9 +57,15 @@ table.table.m-table-append.js-row-clickable
               = image_tag('/assets/propusk-daily.png')
             - else
         td
-          = permit.start_date.strftime("%d.%m.%y") if permit.start_date
+          - if permit.permit_type == 'daily'
+            = permit.daily_pass.issued
+          - else
+            = permit.start_date.strftime("%d.%m.%y") if permit.start_date
         td
-          = permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date
+          - if permit.permit_type == 'daily'
+            = permit.daily_pass.issued
+          - else
+            = permit.expiration_date.strftime("%d.%m.%y") if permit.expiration_date
         td
           = permit_status(permit)
       tr.more-info.js-more-info.tr-hovered data-id=permit.id
@@ -67,6 +82,19 @@ table.table.m-table-append.js-row-clickable
             | Оставшийся срок действия:
             = permit_progress(permit)
         td colspan='1'
+      - if permit.permit_type == 'vehicle'
+        tr.more-info.js-more-info.tr-hovered data-id=permit.id
+
+
+            td colspan = 2
+            td colspan = 6
+              | Водители:
+              - if permit.way_bill
+                div Cогласно путевому листу
+              - else
+                ul
+                  - permit.vehicle.users.each do |user|
+                    li #{user.first_name_with_last_name} | #{user.position}
 
 
 
