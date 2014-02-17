@@ -56,7 +56,7 @@
     // page title style
     &.brand{
       margin-left: 2*$navbar-padding-horizontal ;
-      width: 500px;
+      max-width: 500px;
       &:first-child{margin-left: 0;} // if first in menu, than level by left edge
     }
 
