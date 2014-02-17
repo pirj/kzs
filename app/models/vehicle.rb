@@ -24,7 +24,7 @@ class Vehicle < ActiveRecord::Base
   validates :vehicle_body,
             :brand,
             :model,
-            :register_document,
+            #:register_document,
             presence: true
 
   validates :register_sn, presence: { unless: :has_russian_register_sn }
