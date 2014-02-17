@@ -1,5 +1,5 @@
 class ErrorsController < ApplicationController
+  layout 'base'
   def error_404
-    render layout: false
   end
 end
