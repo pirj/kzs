@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214160046) do
+ActiveRecord::Schema.define(:version => 20140217140548) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -101,8 +101,6 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
     t.date     "date"
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
-    t.integer  "id_series"
-    t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
     t.string   "register_sn"
@@ -111,6 +109,8 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
     t.integer  "guard_duty_id"
     t.boolean  "has_russian_register_sn", :default => true
     t.string   "lp_r"
+    t.string   "id_series"
+    t.string   "id_number"
   end
 
   create_table "delete_notices", :force => true do |t|
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
     t.integer  "document_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    end
   end
 
   create_table "document_attachments", :force => true do |t|
