@@ -34,8 +34,8 @@ class Permit < ActiveRecord::Base
 
   # TODO расписать назначение полей
 
-  validates  :start_date, :expiration_date,
-              presence: { if: ->(f){ f.permit_type != 'daily'} }
+  validates :start_date, date: { after_or_equal_to: Proc.new { Date.today } }, if: ->(f){ f.permit_type != 'daily'}
+  validates :expiration_date, date: { after_or_equal_to: :start_date },        if: ->(f){ f.permit_type != 'daily'}
 
   #validates  :number, :purpose, :start_date, :expiration_date, :requested_duration,
   #           :granted_area, :granted_object, :permit_type, :agreed, :canceled,

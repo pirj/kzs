@@ -16,7 +16,7 @@
     position: relative;
     display: block;
     > a {
-      font-size: $link-font-size;
+      font-size: $btn-font-size;
     }
     > a:not('.btn') {
       position: relative;
@@ -91,7 +91,7 @@
       color: $link-muted-color;
       line-height: $line-height-base;
       display: block;
-      padding: 5px 10px;
+      padding: $nav-tabs-vertical-padding $nav-tabs-horizontal-padding;
       border: 2px solid transparent;
       margin-bottom: -2px; //  is equal border-width because of bottom-border
       &:hover {

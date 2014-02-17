@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
     t.integer  "document_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    end
   end
 
   create_table "document_attachments", :force => true do |t|

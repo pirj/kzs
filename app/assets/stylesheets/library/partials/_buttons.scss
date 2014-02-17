@@ -4,16 +4,16 @@
 
 // Core buttons styles
 .btn {
+  font-weight: $btn-font-weight;
   display: inline-block;
   margin-bottom: 0; // For input.btn
-  font-weight: $btn-font-weight;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: none;
   white-space: nowrap;
-  @include button-size(0, $btn-default-padding, $btn-font-size, 1, $border-radius-base);
+  @include button-size($btn-vertical-padding, $btn-horizontal-padding, $btn-font-size, 1, $border-radius-base);
   @include user-select(none);
 
   &:first-letter{text-transform: uppercase;}

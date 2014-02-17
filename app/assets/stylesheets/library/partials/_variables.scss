@@ -7,6 +7,7 @@
 // --------------------------------------------------
 $global-link-font-size:   14px !default;
 $global-info-font-size:   13px !default;
+$global-btn-font-size:    13px !default;
 $global-base-font-size:   16px !default;
 
 // Grays
@@ -53,7 +54,7 @@ $link-unactive-color:         $gray-light !default;
 // Typography
 // -------------------------
 
-$font-family-sans-serif:  'open_sans', arial, sans-serif !default; //'open_sansregular'
+$font-family-sans-serif:  'open_sansregular', arial, sans-serif !default; //'open_sansregular'
 $font-family-sans-serif-italic:  'open_sansitalic', arial, sans-serif !default;
 $font-family-sans-serif-bold:  'open_sansbold', arial, sans-serif !default;
 $font-family-sans-serif-bold-italic:  'open_sansbold_italic', arial, sans-serif !default;
@@ -143,12 +144,15 @@ $table-simple-text-color:            $link-unactive-color !default;
 // -------------------------
 
 $btn-font-weight:                normal !default;
-$btn-font-size:                  $global-link-font-size;
+$btn-font-size:                  $global-btn-font-size;
 
 $btn-default-color:              #979797 !default;
 $btn-default-bg:                 #F2F2F2 !default;
 $btn-default-border:             #ccc !default;
 $btn-default-padding:            12px;
+
+$btn-vertical-padding:           .95em !default;
+$btn-horizontal-padding:         1.4em !default;
 
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 #1abc9c !default;
@@ -235,6 +239,8 @@ $dropdown-arrow-color:           $dropdown-bg;
 
 $dropdown-item-padding:          floor($btn-default-padding/3);
 $dropdown-link-padding:          $btn-default-padding - $dropdown-item-padding;
+$dropdown-link-vertical-padding:          .5em;
+$dropdown-link-horizontal-padding:        1em;
 
 // COMPONENT VARIABLES
 // --------------------------------------------------
@@ -381,6 +387,9 @@ $nav-tabs-active-link-hover-border-color:   #ddd !default;
 
 $nav-tabs-justified-link-border-color:            #ddd !default;
 $nav-tabs-justified-active-link-border-color:     $body-bg !default;
+
+$nav-tabs-vertical-padding:                 0.65em;
+$nav-tabs-horizontal-padding:               1.4em;
 
 // Pills
 $nav-pills-border-radius:                   $border-radius-base !default;

@@ -32,6 +32,7 @@ class DailyPass < ActiveRecord::Base
 
   belongs_to :permit
 
+  after_initialize :set_default_issued
   before_save :create_register_sn
 
   # --------------------------------------------------------------------------------------------------------------------
@@ -45,25 +46,32 @@ class DailyPass < ActiveRecord::Base
             :object, :person,
             presence: true
 
-  validates :issued, presence: true # TODO date validation ! daily_pass выдается только на текущий день !
+  validates :issued, date: { after_or_equal_to: Proc.new { Date.today },
+                             before_or_equal_to: Proc.new { Date.today }, message: :must_be_current_date }
 
   validates :vehicle,
             :auto_mark,
             :auto_model,
             presence: { if: :has_vehicle }
 
-  validates :register_sn, presence:  { if: ->{ :has_vehicle && !:has_russian_register_sn } }
+  validates :register_sn, presence:  { if: ->{ has_vehicle && !has_russian_register_sn } }
 
   validates :first_letter,
             :sn_number,
             :second_letter,
             :third_letter,
             :lp_r,
-            presence: { if: ->{ :has_vehicle && :has_russian_register_sn } }
+            presence: { if: ->{ has_vehicle && has_russian_register_sn } }
 
   private
 
   def create_register_sn
     self.register_sn = self.first_letter + self.sn_number + self.second_letter + self.third_letter if has_vehicle && has_russian_register_sn
+  end
+
+  protected
+
+  def set_default_issued
+    self.issued = Date.today if self.new_record? && self.issued.nil?
   end
 end

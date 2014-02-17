@@ -8,6 +8,7 @@ class PermitsController < ApplicationController
   before_filter :car_brands, only: [:create, :edit, :user, :vehicle, :daily]
   before_filter :number_letters, only: [:create, :edit, :vehicle, :daily]
   before_filter :daily_document_type, only: [:create, :edit, :daily]
+  before_filter :num_regions, only: [:create, :edit, :vehicle, :daily]
 
   # TODO "authorize! :create, @permit" прописан не для всех action
 
@@ -72,17 +73,6 @@ class PermitsController < ApplicationController
     last = Permit.last ? Permit.last.id + 1 : 1 # TODO баг, нет гарантии что в базе уже не появился документ с таким же номером
     @permit.number = (last).to_s
     @permit.organization_id = current_user.organization_id
-
-    # TODO если тут будет не дата, то упадем. Это надо вынести в валидацию модели.
-    if params[:permit][:date] && params[:permit][:date] != ''
-      @permit.start_date = Date.parse(params[:permit][:date])
-      @permit.expiration_date = Date.parse(params[:permit][:date])
-    end
-
-    if @permit.permit_type == 'daily'
-      issued = params[:permit][:daily_pass_attributes].delete(:issued)
-      @permit.daily_pass.issued = Date.parse(issued) rescue nil # TODO вынести в валидацию
-    end
 
     if @permit.save
       if @permit.vehicle
@@ -266,5 +256,9 @@ class PermitsController < ApplicationController
 
   def daily_document_type
     @daily_document_type = UserDocumentType.all
+  end
+
+  def num_regions
+    @regions = CarRegion.numbers
   end
 end
