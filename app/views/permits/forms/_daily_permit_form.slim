@@ -27,8 +27,18 @@
 
 
 
-      = f.input :id_type, collection: @daily_document_type, input_html: {class: 'js-chosen form-control ' },input_wrapper_html: { class: 'col-sm-3' }
-
+      = f.input :id_type, collection: @daily_document_type, input_html: {class: 'js-chosen form-control' },input_wrapper_html: { class: 'col-sm-3' }
+      .form-group.other-document-field
+        label.col-sm-3
+        .form-group
+          .col-sm-6  = text_field_tag 'other-document-field', nil , class: 'form-control col-sm-12', placeholder: 'Название документа'
+          = link_to '#', class: 'btn btn-icon pull-left', id: 'other-document-field-hide' do
+            .span.fa.fa-times-circle-o
+      .form-group
+        label.col-sm-3
+        div.col-sm-6
+          = link_to 'Другой документ', '#', class: 'btn-link link-dashed', id: 'other_document'
+      
       .form-item
         .form-group
           .control-label.col-sm-3 Его серия и номер:

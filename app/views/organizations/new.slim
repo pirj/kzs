@@ -1,0 +1,12 @@
+= content_for :page_header do
+  = header_back_btn organizations_path
+  = header_title do
+    h1
+      | Новая организация
+
+
+
+
+.row
+  .col-xs-12
+    = render 'form', resource: @organization

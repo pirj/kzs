@@ -33,7 +33,7 @@ jQuery ->
 #      return list.label is selectedType
 #    )
 
-  #$('permit_vehicle_attributes_brand_chosen').
+  #$('permit_vehicle_attributes_brand_chosen')
 
 
 
@@ -50,3 +50,12 @@ jQuery ->
 #    else
 #      $('#person_state_id').empty()
 #      $('#person_state_id').parent().hide()
+
+  $('a#other_document').on "click", ->
+    $('#permit_daily_pass_attributes_id_type').prop('disabled', 'disabled').trigger('chosen:updated')
+    $('.form-group.other-document-field').show()
+    $(this).hide()
+
+  $('#other-document-field-hide').on "click", ->
+    $('.form-group.other-document-field').hide()
+    $('a#other_document').show()
