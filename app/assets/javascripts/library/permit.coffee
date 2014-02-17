@@ -78,6 +78,7 @@ jQuery ->
     $('#permit_daily_pass_attributes_id_type').prop('disabled', 'disabled').trigger('chosen:updated')
     $('.form-group.other-document-field').show()
     $(this).hide()
+      return false
 
   $('#other-document-field-hide').on "click", ->
     $('.form-group.other-document-field').hide()
