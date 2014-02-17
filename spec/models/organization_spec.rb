@@ -20,7 +20,37 @@ describe Organization do
 
   context 'attached files' do
     [:logo, :certificate_of_tax_registration, :creation_resolution, :articles_of_organization, :egrul_excerpt]
-    .map{|field|it { should have_attached_file(field) } }
+    .map{ |field|it { should have_attached_file(field) } }
   end
 
+  context 'validate' do
+    it { should validate_presence_of(:admin_id) }
+    it { should validate_presence_of(:accountant_id) }
+    it { should validate_presence_of(:director_id) }
+  end
+
+  context 'valid string type fields' do
+    [:title, :logo_file_name, :logo_content_type, :phone, :mail, :inn, :short_title, :type_of_ownership, :legal_address, :actual_address,
+      :tax_authority_that_registered, :certificate_of_tax_registration_file_name, :certificate_of_tax_registration_content_type,
+      :creation_resolution_file_name, :creation_resolution_content_type, :articles_of_organization_file_name,
+      :articles_of_organization_content_type, :phone, :mail, :kpp, :ogrn, :bik, :egrul_excerpt_file_name, :egrul_excerpt_content_type,
+      :bank_title, :bank_address, :bank_correspondent_account, :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :organization_account]
+    .map{ |field| its(field) { should be_kind_of(String) } }
+  end
+
+  context 'valid integer type fields' do
+    [:parent_id, :lft, :rgt, :logo_file_size, :director_id, :admin_id, :certificate_of_tax_registration_file_size, :creation_resolution_file_size,
+     :articles_of_organization_file_size, :accountant_id, :egrul_excerpt_file_size]
+    .map{ |field| it { should be_kind_of(Integer) } }
+  end
+  context 'valid datetime type fields' do
+    [:created_at, :updated_at, :logo_updated_at, :date_of_registration, :certificate_of_tax_registration_updated_at, :creation_resolution_date,
+     :creation_resolution_updated_at, :articles_of_organization_updated_at, :egrul_excerpt_updated_at]
+    .map{ |field| it { should be_kind_of(Datetime) } }
+  end
+
+  context 'valid date type fields' do
+    [:egrul_registration_date]
+    .map{ |field| it { should be_kind_of(Date) } }
+  end
 end
