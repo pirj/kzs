@@ -5,7 +5,7 @@
       h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
       ul
         - @permit.errors.full_messages.each do |msg|
-          li= msg
+          li = msg
 
   = f.hidden_field :permit_type, value: 'user'
 

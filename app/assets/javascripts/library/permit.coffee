@@ -38,6 +38,15 @@ jQuery ->
       $(".j-num-ino").toggle()
       $(".j-num-rus").toggle()
 
+    $('.js-other_document').on "click", ->
+      $('#permit_daily_pass_attributes_id_type').prop('disabled', 'disabled').trigger('chosen:updated')
+      $('.form-group.other-document-field').show()
+      $(this).hide()
+
+    $('.js-other-document-field-hide').on "click", ->
+      $('.form-group.other-document-field').hide()
+      $('a#other_document').show()
+
 
 
 
@@ -74,12 +83,3 @@ jQuery ->
 #      $('#person_state_id').empty()
 #      $('#person_state_id').parent().hide()
 
-  $('a#other_document').on "click", ->
-    $('#permit_daily_pass_attributes_id_type').prop('disabled', 'disabled').trigger('chosen:updated')
-    $('.form-group.other-document-field').show()
-    $(this).hide()
-      return false
-
-  $('#other-document-field-hide').on "click", ->
-    $('.form-group.other-document-field').hide()
-    $('a#other_document').show()
