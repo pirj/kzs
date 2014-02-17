@@ -18,7 +18,7 @@ class Organization < ActiveRecord::Base
 
   acts_as_nested_set
 
-  validates :admin_id, :accountant_id, :director_id, presence: true
+  #validates :admin_id, :accountant_id, :director_id, presence: true
   # validates :short_title, :inn, :admin_id, :presence => true
   has_attached_file :logo, :plugins => { :pdf => "120x70#" }, :styles => { :medium => "300x300>"}
   has_attached_file :certificate_of_tax_registration

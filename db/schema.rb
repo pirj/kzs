@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     end
+  end
 
   create_table "document_attachments", :force => true do |t|
     t.string   "attachment_file_name"
@@ -419,8 +420,8 @@ ActiveRecord::Schema.define(:version => 20140214160046) do
   create_table "user_permissions", :force => true do |t|
     t.integer  "user_id"
     t.integer  "permission_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|
