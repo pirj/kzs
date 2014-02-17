@@ -269,7 +269,7 @@ class PermitsController < ApplicationController
     @daily_document_type = UserDocumentType.all
   end
 
-  def car_regions
-    @car_regions = CarRegion.numbers
+  def num_regions
+    @regions = CarRegion.numbers
   end
 end

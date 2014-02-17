@@ -35,7 +35,7 @@
 
       - if @permit.new_record?
 
-        .form-item.controls
+        .form-item.controls.j-num-rus
           .form-group.m-shorten.m-number
             .control-label.col-sm-3 Государственный регистрационный номер:
             .col-sm-2 = vehicle.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8 ' }
@@ -44,11 +44,28 @@
             .col-sm-2 = vehicle.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8'  }
 
 
-        .form-item.controls
+        .form-item.controls.j-num-rus
           .form-group
             .control-label.col-sm-3 Номер региона:
-            .col-sm-3 = vehicle.input :sn_region, collection: CarRegion.numbers,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+            .col-sm-3 = vehicle.input :sn_region, collection: @regions,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
 
+
+
+
+        .form-item.controls
+          .form-group.m-shorten
+            .control-label.col-sm-3
+              |
+            label.control.checkbox.col-sm-5
+              = vehicle.check_box :has_russian_register_sn, as: :boolean
+              /TODO: @tag need hide Drivers title
+              span.checkbox-label Номер российского образца
+
+
+        .form-item.controls.j-num-ino
+          .form-group
+            .control-label.col-sm-3 Регистрационный номер автомобиля:
+            .col-sm-6 = vehicle.input  :register_sn,label: false
 
     .row
       .col-md-3

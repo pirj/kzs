@@ -44,7 +44,7 @@
         = f.input :auto_model,input_html: {class: '  form-control' }
         - if @permit.new_record?
 
-          .form-item.controls
+          .form-item.controls.j-num-rus
             .form-group.m-shorten
               .control-label.col-sm-3 Государственный регистрационный номер:
               .col-sm-2 = f.input :first_letter, collection: @number_letters, label: false, input_html: {class: 'js-chosen form-control'}, input_wrapper_html: { class: 'col-sm-8' }
@@ -53,15 +53,30 @@
               .col-sm-2 = f.input :third_letter,collection: @number_letters,label: false, input_html: {class: 'js-chosen form-control' }, input_wrapper_html: { class: 'col-sm-8' }
 
 
-          .form-item.controls
+          .form-item.controls.j-num-rus
             .form-group
               .control-label.col-sm-3 Номер региона:
-              .col-sm-3 = f.input :lp_r, collection: 01..199,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+              .col-sm-3 = f.input :lp_r, collection: @regions,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+
+          .form-item.controls
+            .form-group.m-shorten
+              .control-label.col-sm-3
+                |
+              label.control.checkbox.col-sm-5
+                = f.check_box :has_russian_register_sn, as: :boolean
+                /TODO: @tag need hide Drivers title
+                span.checkbox-label Номер российского образца
+
+
+          .form-item.controls.j-num-ino
+            .form-group
+              .control-label.col-sm-3 Регистрационный номер автомобиля:
+              .col-sm-6 = f.input  :register_sn,label: false
 
 
       = f.input :object,  input_html: {class: ' form-control ' }
       = f.input :person,  input_html: {class: 'form-control ' }
-      = f.input :issued, as: :datepicker, wrapper: :icon_prepend, input_html: {class: ' form-control ' }
+      = f.input :issued, as: :datepicker, wrapper: :icon_prepend, input_html: {class: ' form-control ' }, input_wrapper_html: { class: 'col-sm-2' }
         /= f.input :guard_duty,  input_html: {class: ' form-control ' }
 
 

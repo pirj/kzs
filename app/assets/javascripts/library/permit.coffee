@@ -3,20 +3,43 @@
 jQuery ->
 
 
-  if document.getElementById('permit_vehicle_fields')
-    if document.getElementById('permit_way_bill').checked
+  if document.getElementById('permit_vehicle_fields')   #авто
+    if document.getElementById('permit_way_bill').checked   #путевой лист
       $(".permit_drivers").hide()
 
     $("#permit_way_bill").on "change", ->
       $(".permit_drivers").toggle()
 
-  if document.getElementById('temporary_permit_fields')
+
+    if document.getElementById('permit_vehicle_attributes_has_russian_register_sn').checked
+      $(".j-num-ino").hide()
+    else
+      $(".j-num-rus").hide()
+
+
+    $('#permit_vehicle_attributes_has_russian_register_sn').on "change", ->
+      $(".j-num-ino").toggle()
+      $(".j-num-rus").toggle()
+
+
+  if document.getElementById('temporary_permit_fields')  # разовый
     $('.j-auto').hide()
     if document.getElementById('permit_daily_pass_attributes_has_vehicle').checked
       $('.j-auto').show()
 
     $("#permit_daily_pass_attributes_has_vehicle").on "change", ->
       $(".j-auto").toggle()
+      if document.getElementById('permit_daily_pass_attributes_has_russian_register_sn').checked
+       $(".j-num-ino").hide()
+      else
+        $(".j-num-rus").hide()
+
+    $('#permit_daily_pass_attributes_has_russian_register_sn').on "change", ->
+      $(".j-num-ino").toggle()
+      $(".j-num-rus").toggle()
+
+
+
 
 #  carBrands = $('#permit_vehicle_fields optgroup' )
 #
