@@ -9,17 +9,22 @@
 
   = f.hidden_field :permit_type, value: 'user'
 
+  = f.input :user_id ,collection: @users, label_method: :first_name_with_last_name, input_html: {  class: 'js-chosen ', data: { placeholder: 'Выберите сотрудника' } }
+
+
   = f.simple_fields_for :user do |f|
 
     #permit_user_fields
       /h3 1. Личные данные
 
 
-      = f.input :last_name
-      = f.input :first_name
-      = f.input :middle_name
 
-      .form-item.controls
+
+      /= f.input :last_name
+      /= f.input :first_name
+      /= f.input :middle_name
+
+      /.form-item.controls
         .form-group
           .control-label.col-sm-3 Организация и должность:
 

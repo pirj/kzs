@@ -48,6 +48,7 @@ class PermitsController < ApplicationController
     @user = @permit.build_user
     @daily_pass = @permit.build_daily_pass
     @drivers = User.with_permit
+    @users = User.all
   end
 
   def vehicle

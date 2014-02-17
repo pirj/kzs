@@ -22,9 +22,10 @@
 
     div Номер: #{@permit.number}
 
-    div #{@user.last_name} #{@user.first_name}  #{@user.middle_name}
+    div #{user_with_full_name(@permit.user_id)}
+    /div #{@user.last_name} #{@user.first_name}  #{@user.middle_name}
 
-    div #{organization(@user.organization_id)} | #{@user.position }
+    /div #{organization(@user.organization_id)} | #{@user.position }
 
     div
       span Срок действия от: &nbsp;
