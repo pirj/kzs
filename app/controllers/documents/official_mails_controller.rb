@@ -41,6 +41,6 @@ class Documents::OfficialMailsController < ResourceController
   end
 
   def users
-    @users ||= User.where(organization_id: current_user.id)
+    @users ||= User.where(organization_id: current_user.organization_id).order('last_name DESC')
   end
 end
