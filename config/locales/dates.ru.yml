@@ -3,8 +3,16 @@ ru:
     formats:
       day: "%e %B, %a"
       full: "%d.%m.%Y"
-
   date:
     formats:
       day: "%e %B, %a"
       full: "%d.%m.%Y"
+  activerecord:
+    errors:
+      messages:
+        after: должна быть позже
+        after_or_equal_to: должна быть позже
+        before: не позже предыдущей даты
+        before_or_equal_to: не позже предыдущей даты или равна ей
+        not_a_date: не является датой
+        must_be_current_date: должна быть текущей датой

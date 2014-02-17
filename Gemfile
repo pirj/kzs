@@ -34,6 +34,7 @@ gem 'has_scope'
 gem 'responders'
 # gem 'texticle', '2.0', :require => 'texticle/rails'
 gem 'statesman'
+gem 'date_validator'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

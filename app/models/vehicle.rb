@@ -20,7 +20,6 @@ class Vehicle < ActiveRecord::Base
 
   validates :permit_id, presence: true, on: :update
 
-
   validates :vehicle_body,
             :brand,
             :model,

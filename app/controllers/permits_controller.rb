@@ -74,17 +74,6 @@ class PermitsController < ApplicationController
     @permit.number = (last).to_s
     @permit.organization_id = current_user.organization_id
 
-    # TODO если тут будет не дата, то упадем. Это надо вынести в валидацию модели.
-    if params[:permit][:date] && params[:permit][:date] != ''
-      @permit.start_date = Date.parse(params[:permit][:date])
-      @permit.expiration_date = Date.parse(params[:permit][:date])
-    end
-
-    if @permit.permit_type == 'daily'
-      issued = params[:permit][:daily_pass_attributes].delete(:issued)
-      @permit.daily_pass.issued = Date.parse(issued) rescue nil # TODO вынести в валидацию
-    end
-
     if @permit.save
       if @permit.vehicle
         vehicle = @permit.vehicle

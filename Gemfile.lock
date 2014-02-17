@@ -97,6 +97,8 @@ GEM
       compass (>= 0.12.2)
     daemons (1.1.9)
     database_cleaner (1.2.0)
+    date_validator (0.7.0)
+      activemodel (>= 3)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -326,6 +328,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails
   database_cleaner
+  date_validator
   devise
   draper
   execjs
