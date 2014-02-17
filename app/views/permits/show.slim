@@ -72,11 +72,16 @@
     div Отчество: #{ @daily_pass.middle_name }<br>
     div Наименование документа: #{ @daily_pass.id_type }<br>
     div Его серия и номер: #{ @daily_pass.id_series }  #{ @daily_pass.id_number } <br>
-    div Марка и модель автотранспортного средства: #{ @daily_pass.auto_mark }  #{ @daily_pass.auto_model }<br>
-    div Гос. Номер: #{@daily_pass.register_sn}
-    div Куда: #{ @daily_pass.object }<br>
-    div К кому: #{ @daily_pass.person }<br>
-    div Выдан: #{ @daily_pass.issued }<br>
+    - if @daily_pass.has_vehicle
+      div Следует на траспортном средстве
+      div Марка и модель автотранспортного средства: #{ @daily_pass.auto_mark }  #{ @daily_pass.auto_model }<br>
+      div Гос. Номер: #{@daily_pass.register_sn}
+      div Куда: #{ @daily_pass.object }<br>
+      div К кому: #{ @daily_pass.person }<br>
+      div Выдан: #{ @daily_pass.issued }<br>
+
+
+
     /div Дата: #{ @daily_pass.date.strftime('%d.%m.%y') if @daily_pass.date }<br>
     /div Дежурный охранник КПП: #{ @daily_pass.guard_duty }<br>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140214131040) do
+ActiveRecord::Schema.define(:version => 20140214160046) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20140214131040) do
     t.integer  "car_brand_type_id"
   end
 
+  create_table "car_regions", :force => true do |t|
+    t.string   "number"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
     t.string   "data_content_type"
@@ -98,12 +105,12 @@ ActiveRecord::Schema.define(:version => 20140214131040) do
     t.integer  "id_number"
     t.string   "auto_mark"
     t.string   "auto_model"
-    t.integer  "lp_r"
     t.string   "register_sn"
     t.boolean  "has_vehicle",             :default => false
     t.date     "issued"
     t.integer  "guard_duty_id"
     t.boolean  "has_russian_register_sn", :default => true
+    t.string   "lp_r"
   end
 
   create_table "delete_notices", :force => true do |t|
@@ -476,8 +483,8 @@ ActiveRecord::Schema.define(:version => 20140214131040) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.integer  "permit_id"
-    t.integer  "sn_region"
     t.boolean  "has_russian_register_sn", :default => true
+    t.string   "sn_region"
   end
 
 end

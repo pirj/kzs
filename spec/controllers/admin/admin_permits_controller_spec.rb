@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-
 describe Admin::PermitsController do
   render_views
   def valid_attributes
     { permit: {
-        number: 'number_new'
-    }
+        number: 'number_new',
+        start_date: Date.today,
+        expiration_date: Date.today + 5.days
+      }
     }
   end
   let!(:permit) { Permit.make!}

@@ -106,6 +106,7 @@ class PermitsController < ApplicationController
         when 'user'
           render action: 'user'
         when 'vehicle'
+          @drivers = User.with_permit
           render action: 'vehicle'
         when 'daily'
           render action: 'daily'

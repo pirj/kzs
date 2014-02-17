@@ -1,5 +1,5 @@
 module Documents::StateMachine
   def applicable_states
-    @applicable_states ||= self.class.states.select{|state| can_transition_to?(state)}
+    @applicable_states ||= self.class.successors[self.current_state]
   end
 end

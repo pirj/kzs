@@ -26,7 +26,7 @@ class Permit < ActiveRecord::Base
   scope :for_print, lambda { where("issued = ? AND rejected = ? AND canceled = ? AND expiration_date > ?", true, false, false, Date.today) }
   scope :applications, -> { where(agreed: false) }
 
-  attr_accessor :date, :drivers # TODO для чего эти методы ?
+  attr_accessor :date, :drivers
 
   # TODO нужен normalize_attributes
 
