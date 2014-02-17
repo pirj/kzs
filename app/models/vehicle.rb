@@ -35,11 +35,7 @@ class Vehicle < ActiveRecord::Base
             :sn_region,
             presence: { if: :has_russian_register_sn }
 
-  # TODO как валидировать это поле при создании новой записи ?
-  #validates  :user_ids,
-  #            presence: { if: ->(f){ f.permit.permit_type == 'vehicle' && f.permit.way_bill } }
-
-  attr_accessor :first_letter, :second_letter, :third_letter, :sn_number
+  attr_writer :first_letter, :second_letter, :third_letter, :sn_number
 
   belongs_to :permit
 
@@ -53,6 +49,22 @@ class Vehicle < ActiveRecord::Base
 
   def vehicle_title
     "#{register_sn}#{sn_region} #{brand} #{model}"
+  end
+
+  def first_letter
+    @first_letter || (self.has_russian_register_sn && self.register_sn && self.register_sn[0]) || nil
+  end
+
+  def second_letter
+    @second_letter || (self.has_russian_register_sn && self.register_sn && self.register_sn[-2]) || nil
+  end
+
+  def third_letter
+    @third_letter || (self.has_russian_register_sn && self.register_sn && self.register_sn[-1]) || nil
+  end
+
+  def sn_number
+    @sn_number || (self.has_russian_register_sn && self.register_sn && self.register_sn[1..-3]) || nil
   end
 
   private
