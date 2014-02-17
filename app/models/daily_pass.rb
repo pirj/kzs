@@ -52,14 +52,14 @@ class DailyPass < ActiveRecord::Base
             :auto_model,
             presence: { if: :has_vehicle }
 
-  validates :register_sn, presence:  { if: ->{ :has_vehicle && !:has_russian_register_sn } }
+  validates :register_sn, presence:  { if: ->{ has_vehicle && !has_russian_register_sn } }
 
   validates :first_letter,
             :sn_number,
             :second_letter,
             :third_letter,
             :lp_r,
-            presence: { if: ->{ :has_vehicle && :has_russian_register_sn } }
+            presence: { if: ->{ has_vehicle && has_russian_register_sn } }
 
   private
 
