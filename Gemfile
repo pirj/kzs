@@ -28,6 +28,7 @@ gem 'draper'
 gem 'kaminari'
 gem 'ransack'
 gem 'bootstrap-sass'
+gem 'bootstrap-sass-extras'
 
 gem 'inherited_resources'
 gem 'has_scope'

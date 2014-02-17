@@ -9,9 +9,9 @@
 .alert {
   padding: $alert-padding;
   margin-bottom: $line-height-computed;
-  border: 1px solid transparent;
   border-radius: $alert-border-radius;
-  margin-left: $sidebar-width-closed;
+  font-size: $btn-font-size;
+  border: 1px solid transparent;
   // Headings for larger alerts
   h4 {
     margin-top: 0;
@@ -31,23 +31,21 @@
   > p + p {
     margin-top: 5px;
   }
-}
 
-// Dismissable alerts
-//
-// Expand the right padding and account for the close button's positioning.
-
-.alert-dismissable {
- padding-right: ($alert-padding + 20);
+  padding-right: ($alert-padding + 20);
 
   // Adjust close link position
   .close {
     position: relative;
+    float: right;
     top: -2px;
     right: -21px;
     color: inherit;
+    font-size: 1.2em;
+    &, &:hover, &:active, &:visited{ text-decoration: none; cursor: pointer; }
   }
 }
+
 
 // Alternate styles
 //

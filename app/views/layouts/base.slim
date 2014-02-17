@@ -12,10 +12,10 @@ html
       #sidebar
         = render 'shared/left'
     .page
-      - if notice
-        .alert.alert-success= notice
-      - if alert
-        .alert.alert-error= alert
+      /- if notice
+      /  .alert.alert-success= notice
+      /- if alert
+      /  .alert.alert-error= alert
       .container
         / ===============================================================
         .navbar
@@ -24,5 +24,6 @@ html
           = yield :page_header_search
           = render 'application/header_user_bar'
         / ===============================================================
+        = bootstrap_flash
         = yield
 
