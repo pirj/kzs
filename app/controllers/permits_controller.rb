@@ -8,6 +8,7 @@ class PermitsController < ApplicationController
   before_filter :car_brands, only: [:create, :edit, :user, :vehicle, :daily]
   before_filter :number_letters, only: [:create, :edit, :vehicle, :daily]
   before_filter :daily_document_type, only: [:create, :edit, :daily]
+  before_filter :car_regions, only: [:create, :edit, :vehicle, :daily]
 
   # TODO "authorize! :create, @permit" прописан не для всех action
 
@@ -266,5 +267,9 @@ class PermitsController < ApplicationController
 
   def daily_document_type
     @daily_document_type = UserDocumentType.all
+  end
+
+  def car_regions
+    @car_regions = CarRegion.numbers
   end
 end
