@@ -106,7 +106,8 @@ $ ->
   )
 
   # checkbox active/disable custom input
-  $('.js-active-input').on('change', ->
+  # Important! Next event will works with iCheck plugin.
+  $('.js-active-input').on('ifChanged', ->
     $el = $(@)
     target = $el.data('target')
     $target = $('body').find("[data-target='#{target}']").not('.js-active-input')

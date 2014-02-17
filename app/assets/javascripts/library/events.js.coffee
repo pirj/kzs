@@ -40,9 +40,6 @@ $ ->
   #  disable_search: true !use chosen-container-single-nosearch
   )
 
-  # button
-  #$('.js-open').on "click", ->
-  #  document.location = $(this).attr "href"
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
@@ -80,3 +77,8 @@ $ ->
     )
   )()
 
+  # Initialize checkboxes by iCheck plugin
+  $('input[type="checkbox"], input[type="radio"]').iCheck(
+    checkboxClass: 'icheckbox_flat-green checkbox-inline'
+    radioClass: 'iradio_flat-green radio-inline'
+  )

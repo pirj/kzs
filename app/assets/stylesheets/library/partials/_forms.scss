@@ -7,9 +7,7 @@ form.simple_form {
 
 .m-number{
   .col-sm-2{
-
     width: 12%;
-
   }
 
 }
@@ -212,42 +210,23 @@ textarea.form-control {
 //
 // Indent the labels to position radios/checkboxes as hanging controls.
 
-.radio,
-.checkbox {
-  display: block;
-  min-height: $line-height-computed; // clear the floating input if there is no label text
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  vertical-align: middle;
-  label {
-    display: inline;
-    margin-bottom: 0;
-    font-weight: normal;
-    cursor: pointer;
-  }
-}
-.radio input[type="radio"],
-.radio-inline input[type="radio"],
-.checkbox input[type="checkbox"],
-.checkbox-inline input[type="checkbox"] {
-  float: left;
-  margin-left: -20px;
-}
-.radio + .radio,
-.checkbox + .checkbox {
-  margin-top: -5px; // Move up sibling radios or checkboxes for tighter spacing
-}
 
 // Radios and checkboxes on same line
 .radio-inline,
 .checkbox-inline {
   display: inline-block;
+  vertical-align: middle;
   padding-left: 20px;
   margin-bottom: 0;
-  vertical-align: middle;
   font-weight: normal;
   cursor: pointer;
+
+  & + span,
+  span + &{
+    vertical-align: middle;
+    padding-left: 0.5em;
+    cursor: pointer;
+  }
 }
 .radio-inline + .radio-inline,
 .checkbox-inline + .checkbox-inline {
