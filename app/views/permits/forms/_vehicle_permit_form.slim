@@ -47,7 +47,7 @@
         .form-item.controls
           .form-group
             .control-label.col-sm-3 Номер региона:
-            .col-sm-3 = vehicle.input :sn_region, collection: 01..199,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
+            .col-sm-3 = vehicle.input :sn_region, collection: CarRegion.numbers,label: false, input_html: {class: 'js-chosen-search form-control ' , input_wrapper_html: { class: 'col-sm-3' }}
 
 
     .row
