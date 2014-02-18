@@ -2,14 +2,17 @@
 
   - if @permit.errors.any?
     #error_explanation
-      h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
-      ul
-        - @permit.errors.full_messages.each do |msg|
-          li = msg
+      div.alert.alert-danger
+        a.close data-dismiss='alert'
+          |×
+        h4 Пожалуйста, исправьте некорректные поля:
+        ul
+          - @permit.errors.full_messages.each do |msg|
+            li= msg
 
   = f.hidden_field :permit_type, value: 'user'
 
-  = f.input :user_id ,collection: @users, label_method: :first_name_with_last_name, input_html: {  class: 'js-chosen ', data: { placeholder: 'Выберите сотрудника' } }
+  = f.input :user_id ,collection: @users, label_method: :first_name_with_last_name, input_html: {  class: 'js-chosen-search ', data: { placeholder: 'Выберите сотрудника' } }
 
 
   = f.simple_fields_for :user do |f|

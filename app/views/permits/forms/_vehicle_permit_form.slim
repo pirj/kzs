@@ -3,10 +3,13 @@
 
   - if @permit.errors.any?
     #error_explanation
-      h4 style: "color: #9a0000;"  Пожалуйста, исправьте некорректные поля:
-      ul
-        - @permit.errors.full_messages.each do |msg|
-          li= msg
+      div.alert.alert-danger
+        a.close data-dismiss='alert'
+          |×
+        h4 Пожалуйста, исправьте некорректные поля:
+        ul
+          - @permit.errors.full_messages.each do |msg|
+            li= msg
 
 
   #permit_vehicle_fields

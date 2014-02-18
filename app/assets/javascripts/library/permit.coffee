@@ -7,7 +7,7 @@ jQuery ->
     if document.getElementById('permit_way_bill').checked   #путевой лист
       $(".permit_drivers").hide()
 
-    $("#permit_way_bill").on "change", ->
+    $("#permit_way_bill").on "ifChanged", ->
       $(".permit_drivers").toggle()
 
 
@@ -17,7 +17,7 @@ jQuery ->
       $(".j-num-rus").hide()
 
 
-    $('#permit_vehicle_attributes_has_russian_register_sn').on "change", ->
+    $('#permit_vehicle_attributes_has_russian_register_sn').on "ifChanged", ->
       $(".j-num-ino").toggle()
       $(".j-num-rus").toggle()
 
@@ -27,16 +27,16 @@ jQuery ->
     if document.getElementById('permit_daily_pass_attributes_has_vehicle').checked
       $('.j-auto').show()
 
-    $("#permit_daily_pass_attributes_has_vehicle").on "change", ->
+    $("#permit_daily_pass_attributes_has_vehicle").on "ifChanged", ->
       $(".j-auto").toggle()
       if document.getElementById('permit_daily_pass_attributes_has_russian_register_sn').checked
        $(".j-num-ino").hide()
       else
         $(".j-num-rus").hide()
 
-    $('#permit_daily_pass_attributes_has_russian_register_sn').on "change", ->
+    $('#permit_daily_pass_attributes_has_russian_register_sn').on "ifChanged", ->
       $(".j-num-ino").toggle()
-      $(".j-num-rus").toggle()
+      $(".j-num-rus").toggle()                                                                              #dalee vanin kod
 
     otherDocInput = $('.js-other-document-field input#permit_daily_pass_attributes_document_type')
     

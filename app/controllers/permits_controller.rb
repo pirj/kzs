@@ -130,6 +130,8 @@ class PermitsController < ApplicationController
     else
       redirect_to :back, :alert => t('access_denied')
     end
+
+    @users = User.all
   end
 
   def update
