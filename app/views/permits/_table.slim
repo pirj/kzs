@@ -41,9 +41,7 @@ table.table.m-table-append.js-row-clickable
                   = permit.daily_pass.auto_model
             - when 'user'
               =link_to permit
-                = permit.user.try(:last_name)
-                | &nbsp
-                = permit.user.try(:first_name)
+                = user_with_full_name(permit.user_id)
               span class='muted'
                 = permit.user.try(:position)
             - else
