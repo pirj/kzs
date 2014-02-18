@@ -38,14 +38,31 @@ jQuery ->
       $(".j-num-ino").toggle()
       $(".j-num-rus").toggle()
 
-    $('.js-other_document').on "click", ->
-      $('#permit_daily_pass_attributes_id_type').prop('disabled', 'disabled').trigger('chosen:updated')
-      $('.form-group.other-document-field').show()
-      $(this).hide()
+    otherDocInput = $('.js-other-document-field #permit_daily_pass_attributes_id_type')
+    
+    viewOtherDocInput = () ->
+      otherDocInput.prop('disabled', 'disabled').trigger('chosen:updated')
+      $('.form-group.js-other-document-field').show().find(otherDocInput).prop('disabled', '').trigger('chosen:updated')
+      $('a.js-other_document').hide()
+
+    
+
+    $('a.js-other_document').on "click", ->
+      viewOtherDocInput()
 
     $('.js-other-document-field-hide').on "click", ->
-      $('.form-group.other-document-field').hide()
-      $('a#other_document').show()
+      $('.form-group.js-other-document-field').hide()
+      otherDocInput.prop('disabled', '').trigger('chosen:updated')
+      $('.js-other_document').show()
+
+    if otherDocInput.value
+      if otherDocInput[0].value.length == 1
+        viewOtherDocInput();
+        otherDocInput.val('')
+
+      
+
+    
 
 
 

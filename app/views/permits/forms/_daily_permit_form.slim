@@ -22,16 +22,11 @@
       = f.input :first_name,  input_html: {class: 'form-control ' }
       = f.input :middle_name,  input_html: {class: 'form-control ' }
 
-
-
-
-
-
       = f.input :id_type, collection: @daily_document_type, input_html: {class: 'js-chosen form-control' },input_wrapper_html: { class: 'col-sm-3' }
-      .form-group.other-document-field
+      .form-group.js-other-document-field
         label.col-sm-3
         .form-group
-          .col-sm-6  = f.text_field :id_type, class: 'form-control col-sm-12', placeholder: 'Название документа'
+          .col-sm-6  = f.text_field :id_type, class: 'form-control col-sm-12', placeholder: 'Название документа', disabled: 'disabled'
           = link_to '#', class: 'btn btn-icon pull-left js-other-document-field-hide' do
             .span.fa.fa-times-circle-o
       .form-group
