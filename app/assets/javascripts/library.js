@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
+//= require jquery.icheck
 //= require_tree ./plugins
 //= require chosen-jquery
 //= require ckeditor/init

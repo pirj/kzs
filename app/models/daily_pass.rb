@@ -28,7 +28,7 @@ class DailyPass < ActiveRecord::Base
                   :date,    # ?????????
                   :guard_duty_id # какой пользователь выдал пропуск (нажал кнопку 'Выпустить')
 
-  attr_accessor :first_letter, :second_letter, :third_letter, :sn_number
+  attr_writer :first_letter, :second_letter, :third_letter, :sn_number
 
   belongs_to :permit
 
@@ -62,6 +62,22 @@ class DailyPass < ActiveRecord::Base
             :third_letter,
             :lp_r,
             presence: { if: ->{ has_vehicle && has_russian_register_sn } }
+
+  def first_letter
+    @first_letter || self.has_vehicle && self.has_russian_register_sn && self.register_sn && self.register_sn[0] || nil
+  end
+
+  def second_letter
+    @second_letter || self.has_vehicle && self.has_russian_register_sn && self.register_sn && self.register_sn[-2] || nil
+  end
+
+  def third_letter
+    @third_letter || self.has_vehicle && self.has_russian_register_sn && self.register_sn && self.register_sn[-1] || nil
+  end
+
+  def sn_number
+    @sn_number || self.has_vehicle && self.has_russian_register_sn && self.register_sn && self.register_sn[1..-3] || nil
+  end
 
   private
 
