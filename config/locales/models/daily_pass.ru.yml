@@ -17,3 +17,10 @@ ru:
         auto_model: Модель
         auto_mark: Марка
         has_vehicle: Следует на транспортном средстве
+        document_types:
+            passport: паспорт
+            foreign_passport: иностранный паспорт
+            military_passport: военный билет
+            seaman_passport: паспорт моряка
+            officer_passport: офицерский билет
+            residence_permit:  вид на жительство

@@ -115,21 +115,24 @@ namespace :csv do
   end
 end
 
-namespace :csv do
-  desc "Import user document types"
-  task :import_user_document_types => :environment do
-    UserDocumentType.destroy_all
-    UserDocumentType.reset_pk_sequence
-    csv_file_path = 'db/csv/user_document_types.csv'
-    CSV.foreach(csv_file_path) do |row|
-      row = UserDocumentType.create!({
-        :id => row[0],
-        :title => row[1]
-      })
-      puts "User Document Types created"
-    end
-  end
-end
+
+# not uses
+# because of drop it table
+# namespace :csv do
+#   desc "Import user document types"
+#   task :import_user_document_types => :environment do
+#     UserDocumentType.destroy_all
+#     UserDocumentType.reset_pk_sequence
+#     csv_file_path = 'db/csv/user_document_types.csv'
+#     CSV.foreach(csv_file_path) do |row|
+#       row = UserDocumentType.create!({
+#         :id => row[0],
+#         :title => row[1]
+#       })
+#       puts "User Document Types created"
+#     end
+#   end
+# end
 
 namespace :documents do
   desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'

@@ -3,7 +3,7 @@ class DailyPass < ActiveRecord::Base
                   # Посетитель
                   :last_name, :first_name, :middle_name, # Фамилия Имя Отчество
                   # Документ посетителя
-                  :id_type,   # Вид документа
+                  :document_type,   # Вид документа
                   :id_series, # серия документа
                   :id_number, # номер документа
 
@@ -41,7 +41,7 @@ class DailyPass < ActiveRecord::Base
   validates :permit_id, presence: true, on: :update
 
   validates :last_name, :first_name, :middle_name,
-            :id_type,
+            :document_type,
             :id_series, :id_number,
             :object, :person,
             presence: true
@@ -62,6 +62,16 @@ class DailyPass < ActiveRecord::Base
             :third_letter,
             :lp_r,
             presence: { if: ->{ has_vehicle && has_russian_register_sn } }
+
+
+  DOCUMENT_TYPES = [
+    I18n.t('activerecord.attributes.daily_pass.document_types.passport'),
+    I18n.t('activerecord.attributes.daily_pass.document_types.foreign_passport'),
+    I18n.t('activerecord.attributes.daily_pass.document_types.military_passport'),
+    I18n.t('activerecord.attributes.daily_pass.document_types.seaman_passport'),
+    I18n.t('activerecord.attributes.daily_pass.document_types.officer_passport'),
+    I18n.t('activerecord.attributes.daily_pass.document_types.residence_permit'),
+  ]
 
   def first_letter
     @first_letter || self.has_vehicle && self.has_russian_register_sn && self.register_sn && self.register_sn[0] || nil

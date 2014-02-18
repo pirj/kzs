@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217140548) do
+ActiveRecord::Schema.define(:version => 20140218104421) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(:version => 20140217140548) do
     t.string   "last_name"
     t.string   "first_name"
     t.string   "middle_name"
-    t.string   "id_type"
+    t.string   "document_type"
     t.string   "vehicle"
     t.string   "object"
     t.string   "person"
@@ -401,12 +401,6 @@ ActiveRecord::Schema.define(:version => 20140217140548) do
     t.text     "desktop_conf"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "user_document_types", :force => true do |t|
-    t.string   "title"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "user_groups", :force => true do |t|

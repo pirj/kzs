@@ -10,6 +10,7 @@ class PermitsController < ApplicationController
   before_filter :daily_document_type, only: [:create, :edit, :daily]
   before_filter :num_regions, only: [:create, :edit, :vehicle, :daily]
 
+
   # TODO "authorize! :create, @permit" прописан не для всех action
 
   def index
@@ -256,7 +257,7 @@ class PermitsController < ApplicationController
   end
 
   def daily_document_type
-    @daily_document_type = UserDocumentType.all
+    @daily_document_type ||= DailyPass::DOCUMENT_TYPES.map{ |t| [t, t] }
   end
 
   def num_regions
