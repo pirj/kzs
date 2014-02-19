@@ -24,7 +24,12 @@ module Documents
     end
 
     def number_and_date
-      h.content_tag :span, DateFormatter.new(object.created_at)
+      if object.approved_at
+        h.content_tag :span, DateFormatter.new(object.approved_at)
+      else
+        ""
+      end
+
       #if object.sn || object.date
       #  h.content_tag( :b, object.sn )+
       #  h.content_tag( :span, " / #{object.date}", class: 'muted' )

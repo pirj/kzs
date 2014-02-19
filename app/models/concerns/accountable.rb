@@ -8,7 +8,12 @@ module Accountable
 
     validates_presence_of :document
 
+    #TODO @prikha write why is it nessesary instead of moving it to
+    #TODO clean after document list is done
     after_initialize :setup_document
+
+    #TODO important! save initial transition inside controller
+
   end
 
   def method_missing(method, *args)

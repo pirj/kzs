@@ -11,7 +11,6 @@ class Document < ActiveRecord::Base
                   :title # заголовок(тема)
 
                   #TODO: кого хранить пользователя, создавшего или пользователя, который послденим изменил документ
-                  #TODO: после стейт машин необходимо добавить signed_at, - дата когда документ был подписан(возможно кэш)
 
   attr_accessible :document_attachments_attributes
 
@@ -52,7 +51,6 @@ class Document < ActiveRecord::Base
   alias_attribute :sender, :sender_organization
   alias_attribute :recipient, :recipient_organization
   alias_attribute :document_type, :accountable_type #TODO: @prikha remove this misleading alias
-  alias_attribute :date, :created_at
   alias_attribute :organization_id, :sender_organization_id
 
 

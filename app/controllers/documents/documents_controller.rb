@@ -72,9 +72,10 @@ class Documents::DocumentsController < ResourceController
 
   def end_of_association_chain
     super.
-        where(sender_organization_id: current_organization.id).
+        #where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
-        order('approved_at nulls first').
+        select('documents.*').
+        order('documents.approved_at nulls first').
         order(sort_column+' '+sort_direction)
   end
 
