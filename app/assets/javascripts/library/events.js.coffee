@@ -82,3 +82,7 @@ $ ->
     checkboxClass: 'icheckbox_flat-green checkbox-inline'
     radioClass: 'iradio_flat-green radio-inline'
   )
+
+
+  # Initialize popover
+  $('[data-toggle="popover"]').popover(html: true)

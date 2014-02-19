@@ -2,15 +2,23 @@
 
 module DocumentsHelper
 
-  #TODO: @prikha this must be rudimentary. Take a look at next cleanup
-  def indox(current_user)
-    if current_user.has_permission?(5)
-      @count ||= Document.unread.sent_to(current_user.organization_id).count
-    else
-      @count ||= Document.unread.not_confidential.sent_to(current_user.organization_id).count
-    end
-    @count
+
+  def render_document_status_bar doc
+    content_tag :div do
+      content_tag( :div, class: '_doc-status'.html_safe ) do
+        content_tag( :div, )
+      end
+    end.gsub('\n', '')
   end
+
+
+  def last_status_date doc
+    content_tag :div do
+      content_tag(:div, 'последний статус назначен')+
+      content_tag(:div,)
+    end
+  end
+
 
   def pdf_to_png(document, width, height)
     #TODO: in production after clear database this code "unless...end" must remove
