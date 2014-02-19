@@ -6,7 +6,8 @@ class ResourceController < ApplicationController
                 :attributes,
                 :form_attributes,
                 :sort_column,
-                :sort_direction
+                :sort_direction,
+                :current_organization_users
 
 
   respond_to :html,:js,:json
@@ -42,6 +43,10 @@ class ResourceController < ApplicationController
     assoc=resource_class.reflect_on_all_associations
     assoc.select!{|a| a.macro==macro.to_sym} unless macro.blank?
     assoc
+  end
+
+  def current_organization_users
+    @_current_organization_users ||= User.where(organization_id: current_user.organization_id)
   end
 
 end
