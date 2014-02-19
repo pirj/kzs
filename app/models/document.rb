@@ -56,8 +56,6 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
 
-
-
   after_save :create_png
 
 
@@ -65,8 +63,17 @@ class Document < ActiveRecord::Base
   #TODO: validations
   #validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
 
+  #TODO: do you really still need it?
   def self.text_search(query)
     query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
+  end
+
+  #
+  # With Document.compose_serial_number_for you just make sure
+  # that giving serial_numbers is Document`s responsibility
+  #
+  def self.serial_number_for(document)
+    "H-#{document.id}"
   end
 
   #Stub all missing scopes

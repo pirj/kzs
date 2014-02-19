@@ -20,7 +20,8 @@ class Documents::OrderStateMachine
   transition from: :read,       to: [:pending, :trashed]
   transition from: :pending,    to: [:rejected, :accepted, :trashed]
 
-
-
+  after_transition(to: :approved) do |accountable, transition|
+    Documents::Accounter.approve(accountable)
+  end
 
 end
