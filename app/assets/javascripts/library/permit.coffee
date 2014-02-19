@@ -38,20 +38,21 @@ jQuery ->
       $(".j-num-ino").toggle()
       $(".j-num-rus").toggle()                                                                              #dalee vanin kod
 
-    otherDocInput = $('.js-other-document-field input#permit_daily_pass_attributes_document_type')
+    otherDocInput = $('.js-hidden-field input#permit_daily_pass_attributes_document_type')
     
     viewOtherDocInput = () ->
       $('select#permit_daily_pass_attributes_document_type').prop('disabled', 'disabled').trigger('chosen:updated')
-      $('.form-group.js-other-document-field').show().find(otherDocInput).prop('disabled', '').trigger('chosen:updated')
+      $('.form-group.js-hidden-field').show().find(otherDocInput).prop('disabled', '').trigger('chosen:updated')
       $('a.js-other_document').hide()
 
     $('a.js-other_document').on "click", ->
       viewOtherDocInput()
 
     $('.js-other-document-field-hide').on "click", ->
-      $('.form-group.js-other-document-field').hide()
-      otherDocInput.prop('disabled', '').trigger('chosen:updated')
+      $('.form-group.js-hidden-field').hide()
+      $('select#permit_daily_pass_attributes_document_type').prop('disabled', '').trigger('chosen:updated')
       $('.js-other_document').show()
+
 
     if otherDocInput[0].value
       viewOtherDocInput()
