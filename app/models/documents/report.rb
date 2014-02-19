@@ -1,3 +1,4 @@
+# coding: utf-8
 class Documents::Report < ActiveRecord::Base
   include Accountable
 
@@ -5,7 +6,7 @@ class Documents::Report < ActiveRecord::Base
 
   belongs_to :order
 
-  validates_presence_of :order_id
+  validates :order_id, presence: { message: 'Акт невозможно создать без распоряжения' }
 
   def state_machine
     Documents::ReportStateMachine.new(self, transition_class: DocumentTransition)

@@ -1,0 +1,48 @@
+= simple_form_for resource, \
+                  :html=>{:class=>"form-horizontal"}, \
+                  defaults: { input_html: {class: 'form-control'}, \
+                              input_wrapper_html: { class: 'col-sm-8' }, \
+                              label_html: { class: 'col-sm-2' }, \
+                              wrapper: :inline \
+                            } \
+                  do |f|
+
+
+  - unless resource.errors.empty?
+    .row
+      .alert.alert-danger.col-sm-offset-2.col-sm-8
+        - resource.errors.messages.each do |v, k|
+          - k.each do |mes|
+            p = mes
+
+  = f.hidden_field :order_id
+
+  = f.simple_fields_for :document  do |doc|
+    .form-group
+      .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='составитель письма' ]
+        | Составитель
+      .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
+    = doc.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
+    = doc.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+    = doc.input :sender_organization_id, as: :hidden
+    = doc.association :executor, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :approver, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+
+
+    / блок СОГЛАСОВАТЬ С?
+    .form-group
+      .col-sm-2.col-sm-offset-2
+        .checkbox
+          label.control-label
+            = check_box_tag :is_conformer?, nil, false, class: 'js-active-input', data: { target: 'new-order-conformer' }
+            span согласовать с
+
+      .col-sm-6
+        = select_tag :conformer, options_from_collection_for_select(current_organization_users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-order-conformer' }, disabled: 'disabled' if current_organization_users
+    /========
+
+    = doc.input :body, input_html: { rows: 3 }
+
+  .form-group
+    .col-sm-offset-2.col-sm-5
+      = f.submit :class=>'btn btn-primary'

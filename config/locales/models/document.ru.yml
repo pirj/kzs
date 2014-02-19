@@ -48,3 +48,9 @@ ru:
           pending: ожидает
           rejected: возвращен
           accepted: принят
+
+      documents/report:
+        body: текст акта
+      documents/order:
+        deadline: дата исполнения
+        body: текст распоряжения

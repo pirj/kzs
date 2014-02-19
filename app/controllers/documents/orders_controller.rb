@@ -13,6 +13,12 @@ class Documents::OrdersController < ResourceController
     render action: :new
   end
 
+  def new
+    new! do
+      @order.sender_organization_id = current_user.organization_id
+    end
+  end
+
   def show
     show!{
       @order = Documents::ShowDecorator.decorate(resource)
