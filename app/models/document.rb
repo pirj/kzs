@@ -132,13 +132,7 @@ class Document < ActiveRecord::Base
 
   # TODO: add paranoia - this will handle the destruction
 
-  # TODO: manually cache initial state
-  # here we can go with default value on column
-  # or disable initial state on state machine and call transition to it from the model
-
-
   private
-
   #TODO: test manually
   # m-be different generators for different documents
   def create_png
@@ -148,6 +142,4 @@ class Document < ActiveRecord::Base
     thumb = pdf.scale(400, 520)
     thumb.write "public/system/documents/document_#{self.id}.png"
   end
-
-
 end

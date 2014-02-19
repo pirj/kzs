@@ -74,6 +74,7 @@ class Documents::DocumentsController < ResourceController
     super.
         where(sender_organization_id: current_organization.id).
         includes(:sender_organization, :recipient_organization).
+        order('approved_at nulls first').
         order(sort_column+' '+sort_direction)
   end
 
