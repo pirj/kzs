@@ -48,6 +48,7 @@ ru:
           pending: ожидает
           rejected: возвращен
           accepted: принят
+          unsaved: произошла ошибка сохранения документа
 
       documents/report:
         body: текст акта

@@ -23,11 +23,11 @@ module PageHeaderHelper
 
   # render search form with single input for page header
   # args mapping to form input
-  def header_search_form path, *args
-    form_tag path, class: 'navbar-form navbar-left' do
+  def header_search_form(path, form_options={}, text_field_options={})
+    form_tag path, {class: 'navbar-form navbar-left'}.merge(form_options) do
       content_tag(:div, class: 'input-group') do
-        text_field_tag(:q, nil, {class: 'form-control js-input-with-icon' }.merge(*args))+
-        content_tag(:span, nil, class: 'input-group-icon search')
+        text_field_tag(:quick, params[:quick], {class: 'form-control js-input-with-icon'}.merge(text_field_options))+
+            content_tag(:span, nil, class: 'input-group-icon search')
       end
     end
   end

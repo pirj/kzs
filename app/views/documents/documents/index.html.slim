@@ -3,7 +3,7 @@
     h1= resource_class.model_name.human
 
 = content_for :page_header_search do
-  = header_search_form collection_path, placeholder: 'поиск по документам'
+  = header_search_form collection_path,{method: 'get'}, {placeholder: 'поиск по документам'}
 
 
 = render 'filter'

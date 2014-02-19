@@ -4,22 +4,27 @@ class Documents::DocumentsController < ResourceController
 
   has_scope :per, default: 10, only: [:index]
 
-
-
   def index
-    @search = end_of_association_chain.ransack(params[:q])
-    @search.build_condition
+    @search = collection.ransack(params[:q])
 
-    _documents = apply_scopes(@search.result(distinct: true))
-    @documents = Documents::ListDecorator.decorate(_documents, with: Documents::ListShowDecorator)
+    documents = if params[:quick]
+      collection.lookup(params[:quick])
+    else
+      @search.result(distinct: true)
+    end
+
+    @documents = Documents::ListDecorator.decorate(documents, with: Documents::ListShowDecorator)
   end
 
+  # Нужен только для посчета количества документов, которые подходят по всем параметрам
+  #
   def search
-    @documents = collection.ransack(params[:q]).result(distinct: true)
+    @documents = end_of_association_chain.ransack(params[:q]).result(distinct: true)
     respond_to do |format|
       format.js { render layout: false }
     end
   end
+
 
   # redirect to document-type edit-page
   def edit

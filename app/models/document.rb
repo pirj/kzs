@@ -56,28 +56,27 @@ class Document < ActiveRecord::Base
 
   after_save :create_png
 
-
+  #New Scopes
+  scope :lookup, ->(query){where('title ilike :query or serial_number ilike :query', query: "%#{query}%")}
 
   #TODO: validations
   #validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
-
-  #TODO: do you really still need it?
-  def self.text_search(query)
-    query ? where('title ilike :query or body ilike :query', query: "%#{query}%") : scoped
-  end
 
   #
   # With Document.compose_serial_number_for you just make sure
   # that giving serial_numbers is Document`s responsibility
   #
+  #
   def self.serial_number_for(document)
-    "H-#{document.id}"
+    "Д-#{document.id}"
   end
 
   #Stub all missing scopes
   scope :confidential, where(confidential: true)
   scope :not_confidential, where(confidential: false)
+
   scope :unread, where(state: 'sent')
+
   scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
   scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
 
