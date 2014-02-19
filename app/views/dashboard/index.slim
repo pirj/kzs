@@ -1,4 +1,3 @@
-# #encoding: utf-8
 .container
   .row.text-center
     h1 Главный рабочий стол
@@ -12,60 +11,59 @@
         a.link-muted type="button" href="#"
           | Выйти из режима редактирования
 
-  div.row.clearfix
-    .col-md-12
-      .gridster
-        ul
-          li data-row='1' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-docs'
-            a href='/documents'
-              span.widget-name
-                | Документооборот
 
-          li data-row='1' data-col='2' data-sizex='1' data-sizey='1' class='widget widget-admission'
-            a href='/permits'
-              span.widget-name
-                | Пропуска
+  .gridster
+    ul
+      li data-row='1' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-docs'
+        a href='/documents'
+          span.widget-name
+            | Документооборот
 
-          li data-row='1' data-col='3' data-sizex='1' data-sizey='1' class='widget widget-org'
-            a href='/organizations'
-              span.widget-name
-                | Организации и сотрудники
+      li data-row='1' data-col='2' data-sizex='1' data-sizey='1' class='widget widget-admission'
+        a href='/permits'
+          span.widget-name
+            | Пропуска
 
-          li data-row='1' data-col='4' data-sizex='1' data-sizey='1' class='widget widget-library disable'
-            a href='#'
-              span.widget-name
-                | Библиотека
+      li data-row='3' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-org'
+        a href='/organizations'
+          span.widget-name
+            | Организации и сотрудники
 
-          li data-row='1' data-col='5' data-sizex='1' data-sizey='1' class='widget widget-security disable'
-            a href='#'
-              span.widget-name
-                | Охрана
+      li data-row='5' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-library disable'
+        a href='#'
+          span.widget-name
+            | Библиотека
 
-          li data-row='1' data-col='6' data-sizex='1' data-sizey='1' class='widget widget-profile disable'
-            a href='#'
-              span.widget-name
-                | Профиль
+      li data-row='4' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-security disable'
+        a href='#'
+          span.widget-name
+            | Охрана
 
-          li data-row='2' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-chat disable'
-            a href='#'
-              span.widget-name Чат
+      li data-row='1' data-col='6' data-sizex='1' data-sizey='1' class='widget widget-profile disable'
+        a href='#'
+          span.widget-name
+            | Профиль
 
-          li data-row='2' data-col='2' data-sizex='2' data-sizey='2' class='widget widget-weather'
-            /span.widget-name Погода
-            div.status.text-right
-              .temp.j-temp
-                span.num
-              .text.j-status
-                /| Неизвестно
-            div.date.text-left
-              = t(Time.now.strftime('%A'))
-              | &nbsp;
-              = t(Time.now.strftime('%d'))
-              | &nbsp;
-              = t(Time.now.strftime('%B'))
+      li data-row='2' data-col='1' data-sizex='1' data-sizey='1' class='widget widget-chat disable'
+        a href='#'
+          span.widget-name Чат
 
-.row.fix-footer
-  a href='#' class='btn-default btn-sm btn' id='edit-current-desktop' Редактировать рабочий стол
-  /a class='btn-default btn-sm btn' id='cancel-edit-current-desktop' Отмена
+      li data-row='2' data-col='2' data-sizex='2' data-sizey='2' class='widget widget-weather'
+        /span.widget-name Погода
+        div.status.text-right
+          .temp.j-temp
+            span.num
+          .text.j-status
+            /| Неизвестно
+        div.date.text-left
+          = t(Time.now.strftime('%A'))
+          | &nbsp;
+          = t(Time.now.strftime('%d'))
+          | &nbsp;
+          = t(Time.now.strftime('%B'))
 
-  = link_to 'Выйти', destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn'
+  .row.text-center
+    a href='#' class='btn-default btn-sm btn' id='edit-current-desktop' Редактировать рабочий стол
+    /a class='btn-default btn-sm btn' id='cancel-edit-current-desktop' Отмена
+
+    = link_to 'Выйти', destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn'

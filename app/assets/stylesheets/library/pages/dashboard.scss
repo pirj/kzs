@@ -1,17 +1,10 @@
-.wrapper.m-dashboard-page{
-  h1{
-    color: #00bc80;
-  }
-  min-height: 750px;
-
-  position: relative;
-  .container{
-//    height: 565px;
-  }
+/*variables*/
+@mixin widget-text(){
+  text-shadow: 1px 0px 2px rgba(0,0,0,0.5);
+  //font-family: "open_sansregular", arial, sans-serif;
+  font-family: "open_sanslight";
+  color: #fff;
 }
-
-
-
 
 /*gridster*/
 
@@ -335,12 +328,7 @@
     bottom: 11px;
     left: 10px;
     font-size: 18px;
-    color: #fff;
-    z-index: 150;
-    font-weight:100;
-    text-shadow: 1px 0px 2px rgba(0,0,0,0.3);
-    font-family: "open_sanslight";
-    font-weight: 500px;
+    @include widget-text();
   }
   .icon-resize-full-alt, .icon-resize-full {
     display: none;
@@ -384,10 +372,6 @@
     top: 69px;
   }
 
-  &.disable{
-    opacity: 0.7;
-    box-shadow: 0 10px 110px black inset;
-  }
 
   &.widget-security {
     background: url("sec.png") no-repeat #52ade6;
@@ -415,20 +399,20 @@
       color: white;
       margin-right: 55px;
       .text{
-        text-align: left;
-        margin-left: 143px;
-        font-weight: 500;
+        text-align: right;
         width: 155px;
-        font-family: "open_sanslight";
+        @include widget-text();
         font-size: 18px;
-        position: relative;
-        bottom: 25px;
+        position: absolute;
+        top: 95px;
+        right: 30px;
       }
     }
     .temp{
       font-size: 64px;
-      font-family: "open_sanslight";
-      font-weight: 500px;
+      @include widget-text();
+      position: relative;
+      left: 30px;
     }
     .date{
       position: absolute;
@@ -436,8 +420,7 @@
       left: 19px;
       font-size: 18px;
       color: white;
-      font-family: "open_sanslight";
-      font-weight: 500px;
+      @include widget-text();
     }
   }
 
@@ -467,6 +450,13 @@
     font-size: 12px;
     font-weight: 500;
     letter-spacing: -0.5px;
+  }
+
+
+  &.disable{
+    opacity: 0.7;
+    box-shadow: 0 10px 80px black inset;
+    background-color: #6D6D6D;
   }
 }
 

@@ -1,33 +1,48 @@
 $(function () {
 
-    if ($('.wrapper').hasClass('m-dashboard-page')) {
+    if ($('.wrapper').hasClass('js-dashboard-page')) {          //вместо роутинга
+
+
+        function meteoReq() {
+            var respo;
+            var Request = $.ajax({
+                url: 'http://api.openweathermap.org/data/2.5/weather?id=540771&mode=json&units=metric', //540771 kronstadt //498817 spb
+                type: "GET",
+                dataType: "json"
+            });
+
+            return Request;
+        }
 
 
 
-        var weather = {}
-        weather.req = $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?id=540771&mode=json&units=metric', //540771 kronstadt //498817 spb
-            type: "GET",
-            dataType: "json"
-        });
 
 
+
+
+
+        var weather =  new Object;
+
+
+
+        console.log(weather.req);
 
 
         $.ajaxSetup({
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('X-CSRF-Token',
-                    $('meta[name="csrf-token"]').attr('content'));
-            }
+
         });
         var requestCoord = $.ajax({
             url: "/dashboard.json",
             type: "GET",
-            dataType: "json"
+            dataType: "json",
+            settings: {beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-Token',
+                    $('meta[name="csrf-token"]').attr('content'));}
+            }
         });
 
         requestCoord.done(function (response) {
-            //  console.log(response)
+           // console.log(response)
         });
 
 
@@ -49,7 +64,12 @@ $(function () {
         ).data('gridster');
 
 
+
+
         var widgets = $('.gridster li');
+
+
+
         gridster.disable(widgets);
         gridster.disable_resize(widgets);
 
@@ -62,25 +82,85 @@ $(function () {
         });
 
 
-        weather.req.done(function (response) {              //узнали погоду
+
+        meteoReq().done(function (response) {              //узнали погоду
             weather.today = response;
+     //   console.log(weather.today );
 
-
-            document.getElementsByClassName('j-temp')[0].childNodes[0].innerHTML = weather.today.main.temp + '°C';
-            document.getElementsByClassName('j-status')[0].innerHTML = weather.today.weather[0].description;
+        document.getElementsByClassName('j-temp')[0].childNodes[0].innerHTML = weather.today.main.temp.toFixed(1) + '°C';
+        document.getElementsByClassName('j-status')[0].innerHTML = weather.today.weather[0].description;
 
 
            // console.log($('.j-temp'));
                 //.text(weather.today.main.temp);   weather.widget
+        });
 
+
+
+        function saveWidget() {
+            var newdata = gridster.serialize(widgets);
+            console.log();
+            var request = $.ajax({
+                url: "/save_desktop_configuration",
+                type: "POST",
+                dataType: "json",
+                data: {wasd: '123'}
+            });
+
+
+
+            $('#exit-edit a').click();
+
+        };
+
+       // console.log(weather.widget);
+
+        gridster.disable_resize(weather.widget);
+
+
+
+
+
+
+
+
+
+
+
+
+// Click mouse and ...
+
+
+
+
+        console.log(document.getElementsByClassName('widget'));
+        widgets.mousedown(function(e){
+            console.log(e);
+
+            editTime = setTimeout(function(){
+                console.log(123);
+            }, 1500);
+        });
+
+        $('.widget').mouseup(function(){
+            clearTimeout(editTime)
         });
 
 
 
 
-       // console.log(weather.widget);
 
-        gridster.disable_resize(weather.widget);
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Add widget
@@ -122,39 +202,8 @@ $(function () {
 
  //save current position widgets
 
-            $('.save').click(function () {
+            $('.save').on('click', saveWidget());
 
-                var data = new Array();
-
-                var newdata = gridster.serialize(widgets);
-
-                _.each(document.getElementsByClassName('widget'), function (widget) {
-
-                    var name = widget.classList[1];
-                    var Ar = new Array;
-                    Ar.push(widget.getAttribute('data-row'))
-                    Ar.push(widget.getAttribute('data-col'))
-                    Ar.push(widget.getAttribute('data-sizex'))
-                    Ar.push(widget.getAttribute('data-sizey'))
-
-                    data.push(Ar)
-                })
-//            var data = {widgets: {docs: [1,2,4,5], mops: [1,2,4,5], loks: [1,2,4,5]}}
-
-                data = {
-                    widgets: data
-                }
-
-                var request = $.ajax({
-                    url: "/save_desktop_configuration",
-                    type: "POST",
-                    dataType: "json",
-                    data: newdata
-                });
-
-                $('#exit-edit a').click();
-
-            });
 
 
         })/*.data('gridster')*/;
