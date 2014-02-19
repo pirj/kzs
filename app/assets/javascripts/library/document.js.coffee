@@ -83,7 +83,7 @@ $ ->
   # select checkboxes to select tables rows and update 'actions' UIcontrol.
   # in each rows saves actions for it document.
   # if select several rows, than filtering it actions to same.
-  $(".js-row-select").on('change', ->
+  $(".js-row-select").on('ifChanged', ->
     actions = app.documents.actions_by_rows(@)
     app.documents.render_actions_list(actions)
   )
