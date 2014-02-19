@@ -2,13 +2,15 @@ class Documents::OfficialMailStateMachine
   include Statesman::Machine
   include Documents::StateMachine
 
-  state :draft, initial: true
+  state :unsaved, initial: true
+  state :draft
   state :prepared
   state :approved
   state :sent
   state :read
   state :trashed
 
+  transition from: :unsaved, to: [:draft, :prepared, :trashed]
   transition from: :draft, to: [:prepared, :trashed]
   transition from: :prepared, to: [:approved, :trashed]
   transition from: :approved, to: [:sent, :trashed]

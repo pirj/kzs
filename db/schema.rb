@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218104421) do
+ActiveRecord::Schema.define(:version => 20140219124243) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20140218104421) do
     t.integer  "accountable_id",                               :null => false
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
+    t.datetime "approved_at"
   end
 
   add_index "documents", ["accountable_id", "accountable_type"], :name => "index_documents_on_accountable_id_and_accountable_type", :unique => true
@@ -329,6 +330,12 @@ ActiveRecord::Schema.define(:version => 20140218104421) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "rights", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "statement_approvers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "statement_id"
@@ -415,6 +422,13 @@ ActiveRecord::Schema.define(:version => 20140218104421) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "user_rights", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "right_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
