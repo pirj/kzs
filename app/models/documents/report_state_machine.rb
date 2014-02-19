@@ -18,7 +18,7 @@ class Documents::ReportStateMachine
   transition from: :read,       to: [:accepted, :rejected, :trashed]
 
   after_transition(to: :accepted) do |accountable, transition|
-    Documents::Accounter.approve(accountable)
+    Documents::Accounter.sign(accountable)
   end
 
 end

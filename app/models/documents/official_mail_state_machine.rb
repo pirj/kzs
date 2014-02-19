@@ -18,7 +18,7 @@ class Documents::OfficialMailStateMachine
   transition from: :read, to: [:trashed]
 
   after_transition(to: :approved) do |accountable, transition|
-    Documents::Accounter.approve(accountable)
+    Documents::Accounter.sign(accountable)
   end
 
 end

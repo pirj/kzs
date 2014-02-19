@@ -104,9 +104,11 @@ class Document < ActiveRecord::Base
 
   # Stub out all missing methods
 
+  # TODO replace it with actual getter method call
   # @date returns timestamp when the document recieved state approved
   def date
-    @date ||= document_transitions.where(to_state: 'approved').order('document_transitions.created_at DESC').pluck(:created_at).first
+    approved_at
+    #@date ||= document_transitions.where(to_state: 'approved').order('document_transitions.created_at DESC').pluck(:created_at).first
   end
 
   #if a document was sent #documents_controller.rb
