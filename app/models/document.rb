@@ -56,8 +56,10 @@ class Document < ActiveRecord::Base
 
   after_save :create_png
 
+  after_create :save_initial_state
+
   #New Scopes
-  scope :lookup, ->(query){where('title ilike :query or serial_number ilike :query', query: "%#{query}%")}
+  scope :lookup, ->(query){where('documents.title ilike :query or documents.  serial_number ilike :query', query: "%#{query}%")}
 
   #TODO: validations
   #validates_presence_of :title, :sender_organization_id, :recipient_organization_id, :approver_id, :executor_id, :body
@@ -130,6 +132,13 @@ class Document < ActiveRecord::Base
   # TODO: add paranoia - this will handle the destruction
 
   private
+  #TODO: Сохраняем первоначальный стейт таким вот колбэком,
+  # потом вынесем это в контроллер чтобы можно было сразу подготовить документ в обход черновика.
+  # это кстати поможет нам кэшить переведенное значение. по которому можно фильтровать.
+  def save_initial_state
+    accountable.transition_to!(:draft)
+  end
+
   #TODO: test manually
   # m-be different generators for different documents
   def create_png

@@ -74,7 +74,7 @@ class Documents::DocumentsController < ResourceController
     documents.map{|doc| can?(ability_for(state), doc)}.all?
   end
 
-#TODO enable or delete pushing unapproved records up
+  # TODO enable or delete pushing unapproved records up
   def end_of_association_chain
     super.
         where(sender_organization_id: current_organization.id).
