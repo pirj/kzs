@@ -9,24 +9,13 @@
     <div class="menu-dir">
       <div class="menu-link documents <%= 'active' if controller?("documents") %>"><i></i><div class="text">Документооборот</div><b></b></div>
       <div class="child-dir">
+        <em>Under constuction...</em>
         <%= link_to documents_documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do %>
             <i></i>
-            <div class="text">Письма и распоряжения</div>
+            <div class="text">Все документы</div>
             <% unless indox(current_user) < 1  %>
               <span class="badge badge-important"><%= indox(current_user) %></span>
             <% end %>
-        <% end %>
-        <%= link_to drafts_documents_path, :class => (controller?("documents") && action?('drafts') ? ' active menu-link ' : 'menu-link ') do %>
-            <i></i>
-            <div class="text">Черновики</div>
-        <% end %>
-        <%= link_to statements_path, :class => (controller?("statements") ? 'active menu-link ' : 'menu-link ') do %>
-            <i></i>
-            <div class="text">Акты</div>
-            
-              <% unless statement_indox(current_user) < 1 %> 
-                <span class="badge badge-important"><%= statement_indox(current_user) %></span>  
-              <% end %>
         <% end %>
       </div>
     </div>

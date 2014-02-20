@@ -29,7 +29,8 @@ ActiveAdmin.register User do
        f.input :first_name
        f.input :middle_name
        f.input :last_name
-       f.input :id_type, :as => :select, :collection => UserDocumentType.scoped, :include_blank => false
+       # TODO nullified collection with UserDocumentType
+       f.input :id_type, :as => :select, :collection => [], :include_blank => false
        f.input :id_sn
        f.input :id_issue_date
        f.input :id_issuer
