@@ -39,7 +39,9 @@ module Documents
     end
 
     def actions
-      (object.applicable_states + object.single_applicable_actions).to_s
+      collection = object.applicable_states || []
+      single = object.single_applicable_actions || []
+      (collection + single).to_s
     end
 
     def state

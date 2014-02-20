@@ -63,11 +63,12 @@
 @import 'plugins/datepicker';
 @import 'plugins/nested-forms';
 
-
-
 // Library page styles
 @import "pages/library";
 @import "pages/docs";
 @import "pages/loginpage";
 @import "pages/dashboard";
 @import "pages/errors";
+
+// Widgets classes
+@import "widgets/doc-state";

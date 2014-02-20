@@ -960,3 +960,18 @@
     }
   }
 }
+
+
+
+@mixin links-active-states{
+  &:hover, &:focus, &:active{
+    @content;
+  }
+}
+
+
+@mixin links-all-states{
+  &, &:visited, &:hover, &:focus, &:active{
+    @content;
+  }
+}

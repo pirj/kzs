@@ -1,0 +1,41 @@
+._doc-state{
+  $color: #bbb;
+
+  min-width: 300px;
+
+  & __header{
+    padding: 20px 20px 10px;
+
+    h5, h6{ @extend .text-help !optional; }
+    h3, h4{ font-family: $font-family-sans-serif-light}
+
+    h3, h4, h5, h6{
+      color: $color;
+      text-align: center;
+      display: block;
+      padding: 0;
+    }
+  }
+
+  & __progress{
+    margin: 0 10px 20px;
+  }
+
+  & __actions{
+    a{
+      display: block;
+      padding: 10px 20px;
+      border-top: 1px solid $color;
+
+      @include links-all-states{
+        text-decoration: none;
+        color: $color;
+        cursor: pointer;
+      }
+
+      @include links-active-states{
+        background: #000;
+      }
+    }
+  }
+}

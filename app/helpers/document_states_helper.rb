@@ -7,7 +7,7 @@ module DocumentStatesHelper
       content_tag( :div, class: '_doc-state'.html_safe ) do
         last_state_date(doc).html_safe +
         status_progress_bar(doc).html_safe +
-        states_actions(doc).html_safe
+        states_bar_buttons(doc).html_safe
       end.html_safe
     end.gsub('\n', '')
   end
@@ -35,11 +35,19 @@ module DocumentStatesHelper
     end.html_safe
   end
 
-  def states_actions doc
-    content_tag(:div, class: '_doc-state__actions') do
+  def states_action_links doc
+    if doc.applicable_states
       doc.applicable_states.map do |state|
         link_to( t("activerecord.attributes.document.states.actions.#{state}" ), batch_documents_documents_path( document_ids: [doc.id], state: state) )
-      end.join('').html_safe +
+      end.join('').html_safe
+    else
+      ''
+    end.html_safe
+  end
+
+  def states_bar_buttons doc
+    content_tag(:div, class: '_doc-state__actions') do
+      states_action_links(doc).html_safe +
       link_to( 'история статусов', '#' ) +
       link_to( 'отмена', '#', class: 'js-close-status-wrap' )
     end.html_safe
