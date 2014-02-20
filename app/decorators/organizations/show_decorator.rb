@@ -2,7 +2,7 @@
 module Organizations
   class ShowDecorator < Organizations::BaseDecorator
     decorates :organization
-    delegate :id
+    delegate :id, :licenses
 
     ATTACH_ATTR = [:certificate_of_tax_registration, :articles_of_organization, :creation_resolution, :egrul_excerpt]
     USER_ATTR =   [:director, :accountant]

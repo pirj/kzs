@@ -14,7 +14,8 @@ class Organization < ActiveRecord::Base
                   :type_of_ownership,
                   :certificate_of_tax_registration, :creation_resolution, :articles_of_organization, :logo, :egrul_excerpt,
                   :kpp, :ogrn, :bik, :ogrn, :bik,
-                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :bank_title
+                  :bank_bik, :bank_inn, :bank_kpp, :bank_okved, :bank_title,
+                  :licenses_attributes
 
   acts_as_nested_set
 

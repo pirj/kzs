@@ -1,8 +1,12 @@
 .tab-pane#licenses
-  .col-sm-offset-4.col-sm-8
+  .col-sm-offset-4.col-sm-8.b-offset-sm
     h2 Лицензии
-  = f.simple_fields_for :licenses do |l| 
-    = l.input :type_of, \
+    = f.link_to_add :licenses, class: 'link link-success big-link', data: { target: ''} do
+      span.fa.fa-plus-circle
+      span Добавить
+  = f.simple_fields_for :licenses do |l|
+    = l.link_to_remove "Удалить", class: 'text-danger btn-link pull-right'
+    = l.input :type_of,
               collection: License::TYPE_OF.map{ |type| [t("activerecord.attributes.license.types.#{type}"), type.to_s ] }, \
               input_wrapper_html: { class: 'col-sm-3' }, \
               input_html: { class: 'js-chosen form-control', data: { placeholder: 'организация' } }, \
@@ -13,5 +17,3 @@
     = l.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
     = l.input :issued_by, as: :text, input_html: { rows:2, placeholder: "Федеральное агентство по строительству и жилищно-коммунальному хозяйству" }  
     = l.input :image, as: :filename
-    = l.link_to_remove "Remove this task"
-  = f.link_to_add "Add a task", :licenses

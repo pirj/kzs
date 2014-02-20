@@ -23,6 +23,7 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'slim'
 
+gem 'nested_form'
 gem 'simple_form'
 gem 'draper'
 gem 'kaminari'

@@ -68,32 +68,21 @@
   } %></pre>
 </div>
 
-
-<p>Скрытый инпут пасаны</p>
-
+<p>Вызов/сокрытие скрытого поля формы</p>
 <div class="bs-example">
-  <input id="permit_permit_type" name="permit[permit_type]" type="hidden" value="vehicle">
-</div>
-
-<div class="highlight">
-
-  <p>Вызов/сокрытие скрытого поля формы</p>
-
-  <div class="bs-example">
-    <div class="form-group js-hidden-field">
-      <label class="col-sm-3"></label>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <input class="form-control col-sm-12" id="permit_daily_pass_attributes_document_type" name="permit[daily_pass_attributes][document_type]" placeholder="Название документа" size="30" type="text" value="doc"/>
-        </div>
-        <a href="#" class="btn btn-icon pull-left js-other-document-field-hide">
-          <span class="span fa fa-times-circle-o"></span>
-        </a>
+  <div class="form-group js-hidden-field">
+    <label class="col-sm-3"></label>
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input class="form-control col-sm-12" id="permit_daily_pass_attributes_document_type" name="permit[daily_pass_attributes][document_type]" placeholder="Название документа" size="30" type="text" value="doc"/>
       </div>
+      <a href="#" class="btn btn-icon pull-left js-other-document-field-hide">
+        <span class="span fa fa-times-circle-o"></span>
+      </a>
     </div>
   </div>
 </div>
-
+<div class="highlight">
   <ul class="nav nav-pills">
     <li><a href="#hidden-input-slim" data-toggle="tab">slim</a></li>
 
@@ -102,14 +91,15 @@
 
   <div class="tab-content">
     <div class="tab-pane" id="hidden-input-slim">
-      <pre class="prettyprint linenums lang-ruby">
-         <%= html_escape %q{
-        = f.hidden_field :permit_type, value: 'vehicle'
-                         } %>
+    <pre class="prettyprint linenums lang-ruby">
+       <%= html_escape %q{
+      = f.hidden_field :permit_type, value: 'vehicle'
+                       } %>
 
-       </pre>
+     </pre>
     </div>
   </div>
 
 </div>
+
 

@@ -14,7 +14,23 @@
   @include btn-link-dashed-style($link-muted-color, $link-muted-hover-color);
 }
 
-
 .link + .fa, .fa + .link{
   margin-left: 5px;
+}
+
+.link{
+  span + .fa,
+  .fa + span{
+    margin-left: 5px;
+  }
+}
+
+.link-success{
+  @extend .text-success !optional;
+}
+
+/*sizes*/
+
+.big-link {
+  font-size: 22px;
 }

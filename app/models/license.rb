@@ -2,7 +2,7 @@
 # TODO: @neodelf
 # where is rspec???
 class License < ActiveRecord::Base
-  attr_accessible :typeof, :number, :issuance, :deadline, :issued_by, :image, :organization_id
+  attr_accessible :type_of, :number, :issuance, :deadline, :issued_by, :image, :organization_id
 
   belongs_to :organization
 
