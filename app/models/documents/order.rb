@@ -10,7 +10,7 @@ class Documents::Order < ActiveRecord::Base
   accepts_nested_attributes_for :task_list, allow_destroy: true
 
   def state_machine
-    Documents::OrderStateMachine.new(self, transition_class: DocumentTransition)
+    OrderStateMachine.new(self, transition_class: DocumentTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,

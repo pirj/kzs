@@ -1,4 +1,4 @@
-module Accountable
+module Documents::Accountable
   extend ActiveSupport::Concern
 
   included do

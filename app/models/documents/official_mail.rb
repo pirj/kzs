@@ -5,7 +5,7 @@ class Documents::OfficialMail < ActiveRecord::Base
   belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id', autosave: true
 
   def state_machine
-    Documents::OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
+    OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,

@@ -3,7 +3,7 @@
 module TasksHelper
   
   def task_status(task)
-    if task.completed
+    if task.completed?
       "Выполнена"
     else
       "Не выполнена"

@@ -9,7 +9,7 @@ class Documents::Report < ActiveRecord::Base
   validates :order_id, presence: { message: 'Акт невозможно создать без распоряжения' }
 
   def state_machine
-    Documents::ReportStateMachine.new(self, transition_class: DocumentTransition)
+    ReportStateMachine.new(self, transition_class: DocumentTransition)
   end
 
   delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
