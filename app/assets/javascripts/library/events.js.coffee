@@ -86,3 +86,7 @@ $ ->
 
   # Initialize popover
   $('[data-toggle="popover"]').popover(html: true)
+  # Hide all another popover when one will opening
+  $('[data-toggle="popover"]').on('show.bs.popover', ->
+    $('[data-toggle="popover"]').not(@).popover('hide')
+  )

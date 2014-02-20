@@ -3,10 +3,12 @@ ru:
     formats:
       day: "%e %B, %a"
       full: "%d.%m.%Y"
+      full_words: "%d %B %Y"
   date:
     formats:
       day: "%e %B, %a"
       full: "%d.%m.%Y"
+      full_words: "%d %B %Y"
   activerecord:
     errors:
       messages:

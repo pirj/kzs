@@ -72,6 +72,7 @@ class Documents::DocumentsController < ResourceController
 
   def batch_can?(state, documents)
     documents.map{|doc| can?(ability_for(state), doc)}.all?
+    true
   end
 
   # TODO enable or delete pushing unapproved records up

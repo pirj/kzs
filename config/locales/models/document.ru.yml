@@ -50,6 +50,17 @@ ru:
           accepted: принят
           unsaved: произошла ошибка сохранения документа
 
+          actions:
+            draft: в черновик
+            prepared: подготовить
+            approved: подписать
+            sent: отправить
+            read: прочитать
+            trashed: удалить
+            pending: отложить
+            rejected: вернуть
+            accepted: принять
+
       documents/report:
         body: текст акта
       documents/order:

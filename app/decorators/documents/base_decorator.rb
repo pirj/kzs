@@ -39,7 +39,7 @@ module Documents
     end
 
     def actions
-      (object.applicable_states + object.single_applicable_states).to_s
+      (object.applicable_states + object.single_applicable_actions).to_s
     end
 
     def state

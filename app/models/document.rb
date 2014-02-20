@@ -97,8 +97,18 @@ class Document < ActiveRecord::Base
   end
 
   # actual methods for one instance of Model
-  def single_applicable_states
+  def single_applicable_actions
     %w(edit)
+  end
+
+  # only actual states which shows to user
+  def sorted_states
+    accountable.state_machine.class.states - %w(trashed unsaved)
+  end
+
+  # ordinal number current-state of sorted states
+  def current_state_number
+    sorted_states.index(accountable.current_state)
   end
 
   # Stub out all missing methods

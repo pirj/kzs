@@ -17,7 +17,7 @@ class Ability
     can :assign_approved_state, Document, sender_organization_id: user.organization_id, approver_id: user.id
     can :assign_sent_state, Document, sender_organization_id: user.organization_id #TODO: add transition authorship
 
-    can :approve, Document if user.permissions.exists?('1')    
+    can :approve, Document if user.permissions.exists?('1')
     can :create, Permit if user.permissions.exists?('6')
 
     if user.sys_user
