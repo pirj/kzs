@@ -3,8 +3,8 @@ module DocumentStatesHelper
 
   # render result module to views and interact with document states
   def render_document_status_bar doc
-    content_tag :div, class: 'js-status-wrap' do
-      content_tag( :div, class: '_doc-state'.html_safe ) do
+    content_tag :div do
+      content_tag( :div, class: '_doc-state js-document-state-popover'.html_safe ) do
         last_state_date(doc).html_safe +
         status_progress_bar(doc).html_safe +
         states_bar_buttons(doc).html_safe
@@ -48,8 +48,14 @@ module DocumentStatesHelper
   def states_bar_buttons doc
     content_tag(:div, class: '_doc-state__actions') do
       states_action_links(doc).html_safe +
-      link_to( 'история статусов', '#' ) +
-      link_to( 'отмена', '#', class: 'js-close-status-wrap' )
+      link_to( history_documents_document_path(doc), remote: true ) do
+        content_tag(:span, nil, class: 'fa fa-clock-o') +
+        content_tag(:span, 'история статусов')
+      end.html_safe +
+      link_to( '#', class: 'js-document-state-close-popover' ) do
+        content_tag(:span, nil, class: 'fa fa-ban') +
+        content_tag(:span, 'отмена')
+      end.html_safe
     end.html_safe
   end
 

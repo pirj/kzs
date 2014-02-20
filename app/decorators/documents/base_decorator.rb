@@ -54,7 +54,7 @@ module Documents
                     when :trashed then 'danger'
                     else 'default'
                   end
-      h.link_to '#', class: "label label-#{css_class}", data: { content: h.html_escape( h.render_document_status_bar(object) ), toggle: 'popover', placement: 'left' } do
+      h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: 'left' } do
         I18n.t("activerecord.attributes.document.states.#{object.accountable.current_state}")
       end
     end

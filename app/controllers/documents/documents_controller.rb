@@ -65,6 +65,13 @@ class Documents::DocumentsController < ResourceController
     redirect_to collection_path, notice: flash[:notice]
   end
 
+  def history
+    @transitions = Document.find(params[:id]).document_transitions
+    respond_to do |format|
+      format.js{ render layout: false }
+    end
+  end
+
   private
   def applicable_state?(accountables, state)
     accountables.map{|acc| acc.can_transition_to?(state)}.all?

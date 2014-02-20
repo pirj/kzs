@@ -84,9 +84,24 @@ $ ->
   )
 
 
-  # Initialize popover
-  $('[data-toggle="popover"]').popover(html: true)
-  # Hide all another popover when one will opening
-  $('[data-toggle="popover"]').on('show.bs.popover', ->
-    $('[data-toggle="popover"]').not(@).popover('hide')
+  # custom initialize popover
+  $('.js-document-state-link').on('click', ->
+    $('.js-document-state-link').popover('destroy').filter(@).popover(html: true, animation: false).popover('show').trigger('document_state:show')
+  )
+
+  # set strong 'height' and 'width' for popover wrapper
+  $('.js-document-state-link').on('document_state:show', ->
+    popover = $(@).next().find('.js-document-state-popover')
+    popover.css('height': popover.height(), width: popover.width() )
+  )
+
+  # click on 'back' button
+  $(document).on('click', '.js-document-state-back-link', ->
+    $(@).closest('.popover').prev().popover('show').trigger('document_state:show')
+  )
+
+  # close this 'cancel button' popover
+  $(document).on('click', '.js-document-state-close-popover', ->
+    console.log @
+    $(@).closest('.popover').prev().popover('destroy')
   )

@@ -16,6 +16,7 @@
   text-decoration: none;
   white-space: nowrap;
   vertical-align: baseline;
+  cursor: pointer;
 
   // Add hover effects, but only for links
   &[href] {

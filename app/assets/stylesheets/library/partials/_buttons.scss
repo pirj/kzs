@@ -79,6 +79,13 @@
 
 .btn-primary { @include button-variant($btn-primary-color, $btn-primary-bg);}
 
+.btn-invert {
+  background: transparent;
+  color: $gray-light;
+  border: 1px solid $gray-light;
+  border-radius: $input-border-radius;
+}
+
 .btn-icon{
   border-radius: 1.6em;
   .fa, .icon{
@@ -133,6 +140,11 @@
   }
 }
 
+// --------------------------------------------------
+// Button sizes
+.btn-sm{
+  @include button-size($btn-vertical-padding/2, $btn-horizontal-padding/2, $btn-font-size, 1, $border-radius-base);
+}
 
 
 // --------------------------------------------------

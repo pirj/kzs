@@ -24,8 +24,10 @@ Kzs::Application.routes.draw do
       # match '/documents/batch' => 'documents#batch'
       # GOOD
       get 'batch', on: :collection
-
       post 'search', on: :collection
+      member do
+        get 'history'
+      end
     end
 
     resources :official_mails, path: 'mails', except: 'index' do
