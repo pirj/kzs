@@ -83,6 +83,7 @@ module Kzs
     #Machinist to automatically add a blueprint to your blueprints file whenever you generate a model
     config.generators do |g|
       g.fixture_replacement :machinist
+      g.test_framework :rspec
     end
   end
 end

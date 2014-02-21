@@ -82,7 +82,7 @@ SimpleForm.setup do |config|
 
     b.use :label
     b.wrapper :input_wrapper, tag: 'div', class: 'input-group' do |bi|
-      bi.use :icon, class: 'input-group-icon', tag: 'div'
+      bi.use :icon,wrap_with:{ class: 'input-group-icon', tag: 'div' }
       bi.use :input
     end
 
@@ -97,7 +97,7 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
-        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
+        prepend.use :label
         prepend.use :input
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
@@ -111,7 +111,7 @@ SimpleForm.setup do |config|
     b.wrapper tag: 'div', class: 'controls' do |input|
       input.wrapper tag: 'div', class: 'input-group' do |prepend|
         prepend.use :input
-        prepend.use :label , class: 'input-group-addon' ###Please note setting class here fro the label does not currently work (let me know if you know a workaround as this is the final hurdle)
+        prepend.use :label
       end
       input.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
       input.use :error, wrap_with: { tag: 'span', class: 'help-block has-error' }

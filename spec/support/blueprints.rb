@@ -51,3 +51,17 @@ end
 CarRegion.blueprint do
   # Attributes here
 end
+
+Document.blueprint do
+  title {Faker::Lorem.sentence}
+  body {Faker::Lorem.paragraph}
+  sender_organization { Organization.make! }
+  recipient_organization { Organization.make! }
+  approver {User.make!}
+  executor {User.make!}
+end
+
+Documents::OfficialMail.blueprint do
+  document
+  recipients(3)
+end

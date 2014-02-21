@@ -19,6 +19,8 @@ module Documents
       clone :document
     end
 
+    #TODO: validate recipients or recipient_organization to be present
+
     private
     # TODO: add paranoia - this will handle the destruction
   end

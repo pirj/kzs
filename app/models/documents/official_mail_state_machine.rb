@@ -35,7 +35,7 @@ class Documents::OfficialMailStateMachine
         dup.recipient_organization = recipient
         dup.save!
 
-        Document::Accounter.sign(dup)
+        Documents::Accounter.sign(dup)
       end
       accountable.recipients.delete_all
       end
