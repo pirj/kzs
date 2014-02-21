@@ -148,7 +148,7 @@ class Document < ActiveRecord::Base
   # потом вынесем это в контроллер чтобы можно было сразу подготовить документ в обход черновика.
   # это кстати поможет нам кэшить переведенное значение. по которому можно фильтровать.
   def save_initial_state
-    #accountable.transition_to!(:draft)
+    accountable.transition_to!(:draft)
   end
 
   #TODO: test manually
