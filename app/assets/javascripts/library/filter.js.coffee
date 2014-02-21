@@ -47,6 +47,8 @@ $ ->
     input_name = "q[#{$input.data('name')}_#{$elem.val()}]"
     $input.prop('name', input_name)
     console.log $input.prop('name')
+
+    $(document).trigger('filter:update')
   )
 
   # выбираем новый атрибут поиска «дата» или «название»
@@ -57,4 +59,5 @@ $ ->
     $new_query_html = $("#{app.query_source}[data-type='#{$elem.val()}']").html()
 
     $query_container.html($new_query_html)
+    $(document).trigger('filter:update')
   )

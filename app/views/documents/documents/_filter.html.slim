@@ -48,27 +48,27 @@
           .js-filter-row-query-source data-type='title'
             .form-group
               = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :title_cont, autocomplete: 'off'
+              = f.text_field :title_cont, autocomplete: 'off', data: { name: 'title' }
 
           .js-filter-row-query-source data-type='sender'
             .form-group
               = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :sender_organization_id_eq, autocomplete: 'off'
+              = f.text_field :sender_organization_id_eq, autocomplete: 'off', data: { name: 'sender' }
 
           .js-filter-row-query-source data-type='recipient'
             .form-group
               = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :recipient_organization_id_eq, autocomplete: 'off'
+              = f.text_field :recipient_organization_id_eq, autocomplete: 'off', data: { name: 'recipient' }
 
           .js-filter-row-query-source data-type='date'
             .form-group
-              = f.text_field :created_at_lteq, autocomplete: 'off'
+              = f.text_field :created_at_gteq, autocomplete: 'off'
               = f.text_field :created_at_lteq, autocomplete: 'off'
 
-          .js-filter-row-query-source data-type='created_at'
+          .js-filter-row-query-source data-type='approved_at'
             .form-group
-              = f.text_field :created_at_lteq, autocomplete: 'off'
-              = f.text_field :created_at_lteq, autocomplete: 'off'
+              = f.text_field :approved_at_lteq, autocomplete: 'off'
+              = f.text_field :approved_at_lteq, autocomplete: 'off'
 
 
 
