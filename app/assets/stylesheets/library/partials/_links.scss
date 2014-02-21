@@ -2,6 +2,10 @@
   @include btn-link-style($link-color, $link-hover-color);
 }
 
+.link-success{
+  @include btn-link-style($link-success-color, $link-success-hover-color);
+}
+
 .link-muted{
   @include btn-link-style($link-muted-color, $link-muted-hover-color);
 }
@@ -12,6 +16,11 @@
 
 .link-muted-dashed{
   @include btn-link-dashed-style($link-muted-color, $link-muted-hover-color);
+}
+
+.link-nounderline{
+  text-decoration: none;
+  border: none;
 }
 
 .link + .fa, .fa + .link{
@@ -25,9 +34,7 @@
   }
 }
 
-.link-success{
-  @extend .text-success !optional;
-}
+
 
 /*sizes*/
 
