@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    models:
+      documents:
+        report:
+          one: "Письмо"
+    attributes:
+      documents:
+        report:
+          document:
+            <<: &document_attributes
+    errors:
+      models:
+        documents:
+         report:
+          order_id:
+            presence: 'Акт невозможно создать без распоряжения'
+

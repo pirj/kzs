@@ -78,6 +78,9 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
 end
 
 group :test do

@@ -25,5 +25,4 @@ class Documents::OrderStateMachine
   after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
   end
-
 end

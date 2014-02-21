@@ -20,5 +20,4 @@ class Documents::ReportStateMachine
   after_transition(to: :accepted) do |accountable, transition|
     Documents::Accounter.sign(accountable)
   end
-
 end

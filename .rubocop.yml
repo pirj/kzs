@@ -1,0 +1,31 @@
+# For all options see https://github.com/bbatsov/rubocop/tree/master/config
+
+AllCops:
+  Excludes:
+    - app/pdfs/**
+    - spec/**
+    - script/**
+    - public/**
+    - config/**
+    - db/**
+    - doc/**
+    - lib/**
+    - vendor/**
+
+StringLiterals:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+SignalException:
+  Enabled: false
+
+# Avoid methods longer than 30 lines of code
+MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 15
+
+# Don't require utf-8 encoding comment
+Encoding:
+  Enabled: false

@@ -3,13 +3,20 @@ module Documents
     include Accountable
     attr_accessible :conversation_id, :conversation
 
-    belongs_to :conversation, class_name: 'DocumentConversation', foreign_key: 'conversation_id', autosave: true
+    belongs_to :conversation,
+               class_name: 'DocumentConversation',
+               foreign_key: 'conversation_id',
+               autosave: true
 
     def state_machine
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
     end
 
-    delegate :allowed_transitions, :can_transition_to?, :transition_to!, :transition_to, :current_state,
+    delegate :allowed_transitions,
+             :can_transition_to?,
+             :transition_to!,
+             :transition_to,
+             :current_state,
              to: :state_machine
 
     has_and_belongs_to_many :recipients, class_name: 'Organization'
@@ -19,10 +26,7 @@ module Documents
       clone :document
     end
 
-    #TODO: validate recipients or recipient_organization to be present
-
-    private
+    # TODO: validate recipients or recipient_organization to be present
     # TODO: add paranoia - this will handle the destruction
   end
 end
-

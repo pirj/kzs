@@ -21,27 +21,26 @@ class Documents::OfficialMailStateMachine
     Documents::Accounter.sign(accountable)
   end
 
-  #there should be much recipients
+  # there should be much recipients
   before_transition(to: :approved) do |accountable, transition|
     if accountable.recipients.any?
       ActiveRecord::Base.transaction do
-      #use original record as a valuable container too
-      accountable.recipient_organization = accountable.recipients.delete(accountable.recipients.first).first
+        # use original record as a valuable container too
+        first_recipient = accountable.recipients.first
+        accountable.recipients.delete(first_recipient)
+        accountable.recipient_organization = first_recipient
 
-      #then duplicate all others
-      accountable.recipients.map do |recipient|
+        # then duplicate all others
+        accountable.recipients.map do |recipient|
 
-        dup = accountable.amoeba_dup
-        dup.recipient_organization = recipient
-        dup.save!
+          dup = accountable.amoeba_dup
+          dup.recipient_organization = recipient
+          dup.save!
 
-        Documents::Accounter.sign(dup)
-      end
-      accountable.recipients.delete_all
+          Documents::Accounter.sign(dup)
+        end
+        accountable.recipients.delete_all
       end
     end
   end
-
-
-
 end
