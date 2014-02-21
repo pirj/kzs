@@ -12,7 +12,7 @@ describe Documents::OfficialMail do
       end
 
       it 'should create additional transactions' do
-        expect{mail.transition_to!(:approved)}.to change(DocumentTransition.count).by(7)
+        expect{mail.transition_to!(:approved)}.to change{DocumentTransition.count}.by(7)
       end
     end
 

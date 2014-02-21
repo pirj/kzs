@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221070254) do
+ActiveRecord::Schema.define(:version => 20140221193542) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(:version => 20140221070254) do
     t.text     "body"
     t.boolean  "confidential",              :default => false, :null => false
     t.integer  "sender_organization_id",                       :null => false
-    t.integer  "recipient_organization_id",                    :null => false
+    t.integer  "recipient_organization_id"
     t.integer  "approver_id",                                  :null => false
     t.integer  "executor_id",                                  :null => false
     t.string   "state"

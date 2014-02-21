@@ -53,16 +53,17 @@ class Document < ActiveRecord::Base
   after_create :save_initial_state
 
   # New Scopes
-  scope :lookup, lambda(query) do
+  scope :lookup, lambda { |query|
     where { title.matches("%#{query}%") | serial_number.matches("%#{query}%") }
-  end
+  }
 
   validates_presence_of :title,
                         :sender_organization_id,
-                        :recipient_organization_id,
                         :approver_id,
                         :executor_id,
                         :body
+
+  validates_presence_of :recipient_organization_id, unless: :can_have_many_recipients?
 
   # Stub all missing scopes
   scope :confidential, where(confidential: true)
@@ -139,7 +140,7 @@ class Document < ActiveRecord::Base
 
   # TODO: @prikha stub out user_id to replace it properly
   def user_id
-    3
+    User.first.id
   end
 
   # TODO: add paranoia - this will handle the destruction
@@ -148,6 +149,10 @@ class Document < ActiveRecord::Base
 
   def save_initial_state
     accountable.transition_to!(:draft) unless document_transitions.any?
+  end
+
+  def can_have_many_recipients?
+    accountable_type == 'Documents::OfficialMail'
   end
 
   # TODO: remove this nightmare

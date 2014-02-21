@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    models:
+      documents:
+        official_mail:
+          one: "Письмо"
+    attributes:
+      documents:
+        official_mail:
+          document:
+            <<: &document_attributes
+    errors:
+      models:
+        documents:
+          official_mail:
+            attributes:
+              recipient_ids:
+                blank: Выберите хотябы одного адресата.

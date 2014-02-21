@@ -30,9 +30,9 @@ class DocumentPdf < Prawn::Document
     text "<color rgb='989898'>тел/факс: #{@organization.phone}", :align => :left, :size => 10, :inline_format => true
     text "<color rgb='989898'>#{@organization.mail}", :align => :left, :size => 10, :inline_format => true
     move_down 30
-    if @document.document_type == 'mail'
+    if @document.accountable_type == 'Documents::OfficialMail'
       text "Письмо", :align => :center, :size => 20
-    elsif @document.document_type == 'writ'
+    elsif @document.accountable_type == 'Documents::Order'
       text "Распоряжение", :align => :center, :size => 20
     end
     move_down 10
@@ -45,7 +45,7 @@ class DocumentPdf < Prawn::Document
     move_down 30
     text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 30
-    writ_tasks if @document.document_type == 'writ' && @document.task_list.present?
+    writ_tasks if @document.accountable_type == 'writ' && @document.task_list.present?
     move_down 60
     float {text "Генеральный директор", :size => 10, :inline_format => true}
     move_down 10
