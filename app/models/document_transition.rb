@@ -13,5 +13,6 @@ class DocumentTransition < ActiveRecord::Base
   private
   def update_status_cache
     document.update_column(:state, to_state)
+    document.update_column(:updated_at, Time.now)
   end
 end

@@ -56,7 +56,6 @@ class Documents::DocumentsController < ResourceController
       @accountables.each do |accountable|
         accountable.transition_to!(state)
       end
-
       flash[:notice] = t('documents_updated')
     else
       flash[:notice] = t('access_denied')
