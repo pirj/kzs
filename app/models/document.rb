@@ -1,3 +1,5 @@
+# coding: utf-8
+
 class Document < ActiveRecord::Base
   attr_accessible :accountable_id, # Полиморфизм документов
                   :accountable_type, #
