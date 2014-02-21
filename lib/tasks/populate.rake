@@ -137,6 +137,8 @@ end
 namespace :documents do
   desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'
   task :create => :environment do
+
+
     Document.delete_all
     Document.reset_pk_sequence
 

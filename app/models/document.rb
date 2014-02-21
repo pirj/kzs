@@ -148,7 +148,7 @@ class Document < ActiveRecord::Base
   # потом вынесем это в контроллер чтобы можно было сразу подготовить документ в обход черновика.
   # это кстати поможет нам кэшить переведенное значение. по которому можно фильтровать.
   def save_initial_state
-    accountable.transition_to!(:draft)
+    #accountable.transition_to!(:draft)
   end
 
   #TODO: test manually
@@ -158,6 +158,9 @@ class Document < ActiveRecord::Base
     pdf.render_file "tmp/document_#{self.id}.pdf"
     pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
     thumb = pdf.scale(400, 520)
+
+    directory_name = Rails.root.join('public/system/documents/')
+    Dir.mkdir(directory_name) unless File.exists?(directory_name)
     thumb.write "public/system/documents/document_#{self.id}.png"
   end
 end
