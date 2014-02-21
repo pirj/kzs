@@ -66,26 +66,8 @@ task :mercury do
   end
   
   namespace(:populate) do
-    task :permissions do
-      run %Q{cd #{latest_release} && bundle exec rake csv:import_permissions RAILS_ENV=production}
-    end
-  end
-  
-  namespace(:populate) do
-    task :users do
-      run %Q{cd #{latest_release} && bundle exec rake csv:users RAILS_ENV=production}
-    end
-  end
-  
-  namespace(:populate) do
-    task :organizations do
-      run %Q{cd #{latest_release} && bundle exec rake csv:organizations RAILS_ENV=production}
-    end
-  end
-  
-  namespace(:populate) do
-    task :documents do
-      run %Q{cd #{latest_release} && bundle exec rake documents:create RAILS_ENV=production}
+    task :data do
+      run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=production}
     end
   end
   

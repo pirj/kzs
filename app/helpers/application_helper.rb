@@ -2,7 +2,12 @@
 module ApplicationHelper
 
   def pageTitle
-    t(controller.controller_name)
+    base_title = "САКЭ КЗС"
+    if @title.nil?
+      base_title
+    else
+      "#{base_title} | #{@title}"
+    end
   end
 
 
