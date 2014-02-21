@@ -5,8 +5,8 @@
 = f.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
 = f.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
 = f.input :sender_organization_id, as: :hidden
-= f.association :executor, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
-= f.association :approver, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+= f.association :executor, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+= f.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
 .form-group
   .col-sm-2.col-sm-offset-2
