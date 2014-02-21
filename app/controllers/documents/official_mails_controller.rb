@@ -35,11 +35,10 @@ class Documents::OfficialMailsController < ResourceController
   end
 
   def show
-    show!{
-      @official_mail = Documents::ShowDecorator.decorate(resource)
-    }
+    show!{ @official_mail = Documents::ShowDecorator.decorate(resource) }
   end
 
+  #TODO @prikha make private as it is not an action
   def users
     @users ||= User.where(organization_id: current_user.organization_id).order('last_name DESC')
   end

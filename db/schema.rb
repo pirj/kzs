@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219124243) do
+ActiveRecord::Schema.define(:version => 20140221070254) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -204,6 +204,11 @@ ActiveRecord::Schema.define(:version => 20140219124243) do
 
   add_index "official_mails", ["conversation_id"], :name => "index_mails_on_conversation_id"
 
+  create_table "official_mails_organizations", :id => false, :force => true do |t|
+    t.integer "official_mail_id", :null => false
+    t.integer "organization_id",  :null => false
+  end
+
   create_table "open_notices", :force => true do |t|
     t.integer  "document_id"
     t.integer  "user_id"
@@ -330,6 +335,12 @@ ActiveRecord::Schema.define(:version => 20140219124243) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "rights", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "statement_approvers", :force => true do |t|
     t.integer  "user_id"
     t.integer  "statement_id"
@@ -416,6 +427,13 @@ ActiveRecord::Schema.define(:version => 20140219124243) do
     t.integer  "permission_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "user_rights", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "right_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

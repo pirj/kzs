@@ -21,4 +21,26 @@ class Documents::OfficialMailStateMachine
     Documents::Accounter.sign(accountable)
   end
 
+  #there should be much recipients
+  before_transition(to: :approved) do |accountable, transition|
+    ActiveRecord::Base.transaction do
+      #use original record as a valuable container too
+      accountable.recipient_organization = accountable.recipients.delete(accountable.recipients.first).first
+
+      #then duplicate all others
+      accountable.recipients.map do |recipient|
+
+        dup = accountable.amoeba_dup
+        dup.recipient_organization = recipient
+        dup.save!
+
+
+        dup.transition_to!(:approved) #for all others go transition to :approved
+      end
+      accountable.recipients.delete_all
+    end
+  end
+
+
+
 end

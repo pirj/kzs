@@ -1,5 +1,4 @@
 # coding: utf-8
-
 class Document < ActiveRecord::Base
   attr_accessible :accountable_id, # Полиморфизм документов
                   :accountable_type, #
@@ -58,7 +57,8 @@ class Document < ActiveRecord::Base
 
   after_save :create_png
 
-  after_create :save_initial_state
+  #TODO MOVE TO CONTROLLERS
+  #after_create :save_initial_state
 
   #New Scopes
   scope :lookup, ->(query){where('documents.title ilike :query or documents.  serial_number ilike :query', query: "%#{query}%")}
@@ -83,6 +83,8 @@ class Document < ActiveRecord::Base
 
   scope :sent_to, ->(organization_id){where(recipient_organization_id: organization_id)}
   scope :approved, joins(:document_transitions).where(document_transitions:{to_state: 'approved'})
+  # TODO default scope for non trashed records
+  # this is also applicable for associated records.
 
   #Actual methods
   # get an array of states that are applicable to this document.
@@ -96,6 +98,11 @@ class Document < ActiveRecord::Base
     whitelist = %w(title body confidential sender_organization_id recipient_organization_id approver_id executor_id)
     document_attributes = self.attributes.keep_if{|k,v| whitelist.include?(k)}
     self.class.new(document_attributes)
+  end
+
+  amoeba do
+    enable
+    clone [:document_transitions]
   end
 
   # actual methods for one instance of Model
@@ -147,9 +154,9 @@ class Document < ActiveRecord::Base
   #TODO: Сохраняем первоначальный стейт таким вот колбэком,
   # потом вынесем это в контроллер чтобы можно было сразу подготовить документ в обход черновика.
   # это кстати поможет нам кэшить переведенное значение. по которому можно фильтровать.
-  def save_initial_state
-    accountable.transition_to!(:draft)
-  end
+  #def save_initial_state
+  #  accountable.transition_to!(:draft)
+  #end
 
   #TODO: test manually
   # m-be different generators for different documents

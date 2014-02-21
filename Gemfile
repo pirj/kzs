@@ -4,40 +4,62 @@ gem 'rails', '3.2.13'
 gem 'pg'
 gem 'squeel'
 
-gem 'capistrano'
-gem 'rvm-capistrano'
 gem 'execjs'
 gem 'therubyracer'
 
 gem 'paperclip', '~> 3.0'
-gem 'russian', '~> 0.6.0'
 gem 'devise'
 gem 'ransack'
+
+gem 'russian', '~> 0.6.0'
+
 gem 'populator'
 gem 'faker'
 
 gem 'cancan'
-gem 'ckeditor'
+
+gem 'amoeba'
+
+
 gem 'activeadmin'
 gem 'awesome_nested_set'
+
 gem 'haml'
 gem 'slim'
 
 gem 'nested_form'
 gem 'simple_form'
-gem 'draper'
 gem 'kaminari'
-gem 'ransack'
+
+gem 'ckeditor'
+
 gem 'bootstrap-sass'
 gem 'bootstrap-sass-extras'
+
 gem 'icheck-rails'
+
+gem 'ransack'
+gem 'draper'
 
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
-# gem 'texticle', '2.0', :require => 'texticle/rails'
-gem 'statesman'
+gem 'statesman', '~> 0.3'
+
 gem 'date_validator'
+
+gem 'jquery-rails', '~> 2.3.0'
+
+gem 'prawn'
+gem 'rmagick', :require => 'RMagick'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+gem 'hipchat'
+
+group :production do
+  gem 'thin'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -49,25 +71,13 @@ group :assets do
   gem 'turbo-sprockets-rails3'
 end
 
-gem 'jquery-rails', '~> 2.3.0'
-gem 'prawn'
-gem 'rmagick', :require => 'RMagick'
-
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
-gem 'hipchat'
-
-
-group :production do
-  gem 'thin'
-end
-
-
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'zeus'
   gem 'quiet_assets'
+  gem 'capistrano'
+  gem 'rvm-capistrano'
 end
 
 group :test do

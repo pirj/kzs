@@ -12,6 +12,13 @@ module Documents
     delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
              to: :state_machine
 
+    has_and_belongs_to_many :recipients, class_name: 'Organization'
+
+    amoeba do
+      exclude_field :conversation
+      clone :document
+    end
+
     private
     # TODO: add paranoia - this will handle the destruction
   end
