@@ -23,7 +23,8 @@ class Documents::OfficialMailStateMachine
 
   #there should be much recipients
   before_transition(to: :approved) do |accountable, transition|
-    ActiveRecord::Base.transaction do
+    if accountable.recipients.any?
+      ActiveRecord::Base.transaction do
       #use original record as a valuable container too
       accountable.recipient_organization = accountable.recipients.delete(accountable.recipients.first).first
 
@@ -34,10 +35,10 @@ class Documents::OfficialMailStateMachine
         dup.recipient_organization = recipient
         dup.save!
 
-
-        dup.transition_to!(:approved) #for all others go transition to :approved
+        Document::Accounter.sign(dup)
       end
       accountable.recipients.delete_all
+      end
     end
   end
 

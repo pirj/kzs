@@ -9,7 +9,7 @@ module Documents
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
     end
 
-    delegate :can_transition_to?, :transition_to!, :transition_to, :current_state,
+    delegate :allowed_transitions, :can_transition_to?, :transition_to!, :transition_to, :current_state,
              to: :state_machine
 
     has_and_belongs_to_many :recipients, class_name: 'Organization'

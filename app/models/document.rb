@@ -58,7 +58,7 @@ class Document < ActiveRecord::Base
   after_save :create_png
 
   #TODO MOVE TO CONTROLLERS
-  #after_create :save_initial_state
+  after_create :save_initial_state
 
   #New Scopes
   scope :lookup, ->(query){where('documents.title ilike :query or documents.  serial_number ilike :query', query: "%#{query}%")}
@@ -154,9 +154,9 @@ class Document < ActiveRecord::Base
   #TODO: Сохраняем первоначальный стейт таким вот колбэком,
   # потом вынесем это в контроллер чтобы можно было сразу подготовить документ в обход черновика.
   # это кстати поможет нам кэшить переведенное значение. по которому можно фильтровать.
-  #def save_initial_state
-  #  accountable.transition_to!(:draft)
-  #end
+  def save_initial_state
+    accountable.transition_to!(:draft) unless document_transitions.any?
+  end
 
   #TODO: test manually
   # m-be different generators for different documents
