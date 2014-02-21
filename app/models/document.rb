@@ -155,7 +155,7 @@ class Document < ActiveRecord::Base
   # m-be different generators for different documents
   def create_png
     pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "tmp/document_#{self.id}.pdf"
+    pdf.render_file "#{Rails.root}/tmp/document_#{self.id}.pdf"
     pdf = Magick::Image.read("tmp/document_#{self.id}.pdf").first
     thumb = pdf.scale(400, 520)
 
