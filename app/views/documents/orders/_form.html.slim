@@ -9,14 +9,14 @@
 
   = f.simple_fields_for :document  do |doc|
     .form-group
-      .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='составитель письма' ]
+      .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='тот, кто создает письмо' ]
         | Составитель
       .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
-    = doc.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
-    = doc.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+    = doc.input :title
+    = doc.association :recipient_organization, label_html: { title: 'укажите организацию, которой будет назначено это распоряжение' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
     = doc.input :sender_organization_id, as: :hidden
-    = doc.association :executor, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :executor, collection: current_organization_users, label_html: { title: 'укажите исполнителя, если это другой сотрудник вашей компании. По умолчанию, составитель и есть исполниель' }, wrapper: :inline_hint, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_html: { title: 'укажите кто подпишет этот документ' }, wrapper: :inline_hint, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
     = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-2' }
 
