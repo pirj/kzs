@@ -78,10 +78,11 @@ $ ->
   )()
 
   # Initialize checkboxes by iCheck plugin
-  $('input[type="checkbox"], input[type="radio"]').iCheck(
-    checkboxClass: 'icheckbox_flat-green checkbox-inline'
-    radioClass: 'iradio_flat-green radio-inline'
-  )
+  if jQuery.fn.iCheck != undefined
+    $('input[type="checkbox"], input[type="radio"]').iCheck(
+      checkboxClass: 'icheckbox_flat-green checkbox-inline'
+      radioClass: 'iradio_flat-green radio-inline'
+    )
 
 
   # custom initialize popover
