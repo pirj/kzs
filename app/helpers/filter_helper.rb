@@ -1,3 +1,4 @@
+# coding:utf-8
 module FilterHelper
   def link_to_add_fields(name, f, type)
     new_object = f.object.send "build_#{type}"
@@ -6,5 +7,23 @@ module FilterHelper
       render(type.to_s + "_fields", f: builder)
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+  end
+
+
+  def document_filter_options
+    [
+        ['название', 'title'],
+        ['организация получатель', 'recipient'],
+        ['организация отправитель', 'sender'],
+        ['дата создания', 'created_date'],
+        ['дата подписания', 'date'],
+    ]
+  end
+
+  def document_filter_string_query_conditions
+    [
+        ['содержит', 'cont'],
+        ['исключает', 'not_cont']
+    ]
   end
 end

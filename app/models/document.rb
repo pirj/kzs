@@ -65,7 +65,7 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :recipient_organization_id, unless: :can_have_many_recipients?
 
-  # Stub all missing scopes
+  
   scope :confidential, where(confidential: true)
   scope :not_confidential, where(confidential: false)
 
@@ -73,7 +73,7 @@ class Document < ActiveRecord::Base
 
   scope :sent_to, ->(id) { where(recipient_organization_id: id) }
   scope :approved, joins(:document_transitions)
-  .where(document_transitions: { to_state: 'approved' })
+                    .where(document_transitions: { to_state: 'approved' })
 
   amoeba do
     enable

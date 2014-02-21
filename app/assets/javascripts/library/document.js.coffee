@@ -89,22 +89,6 @@ $ ->
   )
 
 
-  # search filter
-  # by timeout updating search result count
-  timer_id = 0
-  $('.js-filter-form input').on('keyup blur', ->
-    clearTimeout(timer_id)
-    timer_id = setTimeout( ->
-      data = $('.js-filter-form').serializeArray()
-      $.ajax
-        data: data
-        dataType: 'script'
-        type: 'POST'
-        url: $('.js-filter-form').data('url')
-
-    , 500)
-  )
-
   # checkbox active/disable custom input
   # Important! Next event will works with iCheck plugin.
   $('.js-active-input').on('ifChanged', ->
@@ -114,8 +98,7 @@ $ ->
     $target.prop('disabled', !$target.prop('disabled')).trigger('chosen:updated')
   )
 
-#  for ransack
-#
+##  for ransack
 #  $('form').on 'click', '.remove_fields', (event) ->
 #    $(this).closest('.field').remove()
 #    event.preventDefault()

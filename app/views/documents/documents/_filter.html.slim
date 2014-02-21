@@ -7,33 +7,71 @@
         .modal-header
           h4#myModalLabel.modal-title Расширенный поиск по документам
         .modal-body
-          .form-group
-            = f.label :title_cont, 'заголовок содержит', class: 'control-label col-sm-3'
-            .col-sm-8= f.text_field :title_cont, class: 'form-control', autocomplete: 'off'
-          .form-group
-            = f.label :sender_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
-            .col-sm-8= f.text_field :sender_organization_title_cont, class: 'form-control', autocomplete: 'off'
-          .form-group
-            = f.label :recipient_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
-            .col-sm-8= f.text_field :recipient_organization_title_cont, class: 'form-control', autocomplete: 'off'
-          .form-group
-            = f.label :date_between, 'промежуток даты', class: 'control-label col-sm-3'
-            .col-sm-4
-              .input-group
-                .span.input-group-icon
-                  .fa.fa-calendar
-                = f.text_field :created_at_gteq, class: 'form-control js-datepicker'
 
-            .col-sm-4
-              .input-group
-                .span.input-group-icon
-                  .fa.fa-calendar
-                = f.text_field :created_at_lteq, class: 'form-control js-datepicker'
+          /.form-group
+          /  = f.label :sender_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
+          /  .col-sm-8= f.text_field :sender_organization_title_cont, class: 'form-control', autocomplete: 'off'
+          /.form-group
+          /  = f.label :recipient_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
+          /  .col-sm-8= f.text_field :recipient_organization_title_cont, class: 'form-control', autocomplete: 'off'
+          /.form-group
+          /  = f.label :date_between, 'промежуток даты', class: 'control-label col-sm-3'
+          /  .col-sm-4
+          /    .input-group
+          /      .span.input-group-icon
+          /        .fa.fa-calendar
+          /      = f.text_field :created_at_gteq, class: 'form-control js-datepicker'
+          /
+          /  .col-sm-4
+          /    .input-group
+          /      .span.input-group-icon
+          /        .fa.fa-calendar
+          /      = f.text_field :created_at_lteq, class: 'form-control js-datepicker'
 
 
+          .js-filter-container
+            = link_to 'add option', '#', class: 'link-success js-filter-add-row-btn'
 
 
-          /= link_to_add_fields "Add Conditions", f, :condition
+        .hidden
+          / целая дефолтная строка
+          .js-filter-option-row-source
+            .js-filter-row
+              .form-group
+                = select_tag :filter_attribute, options_for_select(document_filter_options), class: 'js-filter-attribute'
+                .js-filter-query
+                  .form-group
+                    = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+                    = f.text_field :title_cont, autocomplete: 'off', data: { name: 'title' }
+
+          / отдельные свойства поиска
+          .js-filter-row-query-source data-type='title'
+            .form-group
+              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+              = f.text_field :title_cont, autocomplete: 'off'
+
+          .js-filter-row-query-source data-type='sender'
+            .form-group
+              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+              = f.text_field :sender_organization_id_eq, autocomplete: 'off'
+
+          .js-filter-row-query-source data-type='recipient'
+            .form-group
+              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+              = f.text_field :recipient_organization_id_eq, autocomplete: 'off'
+
+          .js-filter-row-query-source data-type='date'
+            .form-group
+              = f.text_field :created_at_lteq, autocomplete: 'off'
+              = f.text_field :created_at_lteq, autocomplete: 'off'
+
+          .js-filter-row-query-source data-type='created_at'
+            .form-group
+              = f.text_field :created_at_lteq, autocomplete: 'off'
+              = f.text_field :created_at_lteq, autocomplete: 'off'
+
+
+
 
         .modal-footer
           .row
