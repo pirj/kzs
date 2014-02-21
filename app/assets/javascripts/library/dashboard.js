@@ -1,10 +1,9 @@
 $(function () {
 
-    if ($('.wrapper').hasClass('js-dashboard-page')) {          //вместо роутинга
+    if ($('.wrapper').hasClass('js-dashboard-page2')) {          //вместо роутинга
 
 
         function meteoReq() {
-            var respo;
             var Request = $.ajax({
                 url: 'http://api.openweathermap.org/data/2.5/weather?id=540771&mode=json&units=metric', //540771 kronstadt //498817 spb
                 type: "GET",
