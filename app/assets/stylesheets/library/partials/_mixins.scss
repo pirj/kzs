@@ -468,11 +468,15 @@
   &:active,
   &.active {
     color: $color;
-    background-color: darken($background, 8%);
+    @if $background != transparent{
+      background-color: darken($background, 8%);
+    }
   }
   .open & { &.dropdown-toggle {
     color: $color;
-    background-color: darken($background, 8%);
+    @if $background != transparent{
+      background-color: darken($background, 8%);
+    }
   } }
   &:active,
   &.active {

@@ -20,8 +20,6 @@ ul.nav.nav-pills
       li= link_to 'распоряжение', new_polymorphic_path(Documents::Order)
       li= link_to 'акт', new_polymorphic_path(Documents::Report)
 
-
-
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-default', data:{ toggle: 'dropdown' } do
       span Действия
@@ -34,6 +32,8 @@ ul.nav.nav-pills
     = link_to '#', class: 'btn btn-default', data: { toggle: 'modal', target: '.js-document-filter-modal' } do
       span.fa.fa-filter
       span Фильтр
+
+  li = link_to 'сбросить фильтрацию', documents_documents_path, class: 'btn btn-link-muted'
 
 
 

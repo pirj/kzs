@@ -1,6 +1,7 @@
 $ ->
   window.app =
     add_btn: '.js-filter-add-row-btn'
+    remove_row_btn: '.js-filter-row-remove-btn'
     default_row_source: '.js-filter-option-row-source'
     query_source: '.js-filter-row-query-source'
     filter_container: '.js-filter-container'
@@ -38,6 +39,11 @@ $ ->
     # html-template должен быть обернут в js класс со словом source, сам этот класс не переносится, а вставляется только его содержимое
     $(@).before($(app.default_row_source).html())
     $(document).trigger('filter:update')
+  )
+
+  # удаляем текущую строку с параметрами фильтрации
+  $(document).on('click', app.remove_row_btn, ->
+    $(@).closest(app.query_row_container).empty()
   )
 
   # меняем имя стринга так, чтобы отправлять на сервер для поиска отправлялось с префиксом из селекта

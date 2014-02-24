@@ -96,6 +96,14 @@
 }
 
 
+.btn-mega-primary{
+  @include button-variant($btn-primary-bg, transparent);
+  display: block;
+  border: 2px dashed $btn-primary-bg;
+  border-radius: $border-radius-base*3;
+}
+
+
 // set each 'span' word on new line
 .btn-divide-by-word{
   line-height: normal;
@@ -144,6 +152,10 @@
 // Button sizes
 .btn-sm{
   @include button-size($btn-vertical-padding/2, $btn-horizontal-padding/2, $btn-font-size, 1, $border-radius-base);
+}
+
+.btn-big{
+  @include button-size($btn-vertical-padding, $btn-horizontal-padding, $btn-font-size*1.3, 1, $border-radius-base);
 }
 
 

@@ -30,7 +30,9 @@
 
 
           .js-filter-container
-            = link_to 'добавить параметр фильтрации', '#', class: 'link-success js-filter-add-row-btn'
+            = link_to '#', class: 'btn btn-big btn-mega-primary js-filter-add-row-btn' do
+              span.fa.fa-plus-circle
+              span добавить параметр фильтрации
 
 
         .hidden
@@ -38,12 +40,16 @@
           .js-filter-option-row-source
             .js-filter-row
               .form-group
-                .col-sm-4
+                .col-sm-3
                   = select_tag :filter_attribute, options_for_select(document_filter_options), class: 'js-filter-attribute'
-                .col-sm-8.js-filter-query
+                .col-sm-7.js-filter-query
                   .form-group
                     .col-sm-5 = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
                     .col-sm-7 = f.text_field :title_cont, autocomplete: 'off', class: 'form-control', data: { name: 'title' }
+                .col-sm-2
+                  = link_to '#', class: 'btn link-danger js-filter-row-remove-btn' do
+                    span.fa.fa-minus-circle
+                    span убрать
 
           / отдельные свойства поиска
           .js-filter-row-query-source data-type='title'

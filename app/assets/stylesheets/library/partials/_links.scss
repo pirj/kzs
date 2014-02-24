@@ -10,6 +10,10 @@
   @include btn-link-style($link-muted-color, $link-muted-hover-color);
 }
 
+.link-danger{
+  @include btn-link-style($brand-danger, darken($brand-danger, 10%));
+}
+
 .link-dashed{
   @include btn-link-dashed-style($link-color, $link-hover-color);
 }
