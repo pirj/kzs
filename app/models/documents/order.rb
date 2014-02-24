@@ -19,5 +19,7 @@ module Documents
              :transition_to,
              :current_state,
              to: :state_machine
+
+
   end
 end

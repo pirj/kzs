@@ -63,6 +63,7 @@ ru:
 
       documents/report:
         body: текст акта
+        order: Распоряжение
       documents/order:
         deadline: дата исполнения
         body: текст распоряжения

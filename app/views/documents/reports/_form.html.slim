@@ -10,33 +10,37 @@
 
   = render 'documents/application/error_label', resource: resource
 
-  = f.hidden_field :order_id
 
   = f.simple_fields_for :document  do |doc|
     .form-group
       .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='составитель письма' ]
         | Составитель
       .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
-    = doc.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
-    = doc.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
-    = doc.input :sender_organization_id, as: :hidden
-    = doc.association :executor, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+
+    / блок ИСПОЛНИТЕЛЬ ?
+    .form-group
+      = doc.label :executor, class: 'col-sm-2 control-label'
+      .col-sm-1
+        .checkbox
+          = check_box_tag :is_executor?, nil, false, class: 'js-active-input', data: { target: 'document-is-executor' }
+      .col-sm-7
+        = doc.select :executor_id, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'document-is-executor' } } if current_organization_users
+    /========
+
+    = f.association :order, collection: @available_orders, label_method: :unique_title ,\
+                    label_html: { title: 'распоряжение, к которому выбирается акт' }, \
+                    wrapper: :inline_hint, \
+                    input_html: { class: 'js-chosen-search', data: { placeholder: 'номер или название распоряжения, к которому создается акт' }} if @available_orders
+
+    .form-group
+      .text-help.col-sm-8.col-sm-offset-2 Организация-получатель выбирается автоматически по выбранному распоряжению
+
+    = doc.hidden_field :sender_organization_id
     = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
 
-    / блок СОГЛАСОВАТЬ С?
-    .form-group
-      .col-sm-2.col-sm-offset-2
-        .checkbox
-          label.control-label
-            = check_box_tag :is_conformer?, nil, false, class: 'js-active-input', data: { target: 'new-order-conformer' }
-            span согласовать с
-
-      .col-sm-6
-        = select_tag :conformer, options_from_collection_for_select(current_organization_users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-order-conformer' }, disabled: 'disabled' if current_organization_users
-    /========
-
-    = doc.input :body, input_html: { rows: 3 }
+    = doc.input :title, placeholder: 'укажите тему', label_html: { title: 'тема письма' }, wrapper: :inline_hint
+    = doc.input :body, input_html: { rows: 7 }
 
   .form-group
     .col-sm-offset-2.col-sm-5

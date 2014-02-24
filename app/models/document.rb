@@ -75,6 +75,10 @@ class Document < ActiveRecord::Base
   scope :approved, joins(:document_transitions)
                     .where(document_transitions: { to_state: 'approved' })
 
+  scope :orders, where(accountable_type: 'Documents::Order')
+  scope :mails, where(accountable_type: 'Documents::Mail')
+  scope :reports, where(accountable_type: 'Documents::Report')
+
   amoeba do
     enable
     clone [:document_transitions]
@@ -103,6 +107,11 @@ class Document < ActiveRecord::Base
     )
     document_attributes = attributes.keep_if { |k, _| whitelist.include?(k) }
     self.class.new(document_attributes)
+  end
+
+  # title and unique-number together
+  def unique_title
+    "#{Document.serial_number_for(self)} — #{self.title}"
   end
 
   # actual methods for one instance of Model
