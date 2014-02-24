@@ -62,9 +62,11 @@
       /    = t(Time.now.strftime('%B'))
 
 
-  .row.text-center
-    a href='#' class='btn-default btn-sm btn' id='edit-current-desktop' Редактировать рабочий стол
-    a href='#' class='btn-default btn-sm btn' id='get-current-desktop' get
+  .row.text-center.js-btns
+    a href='#' class='btn-default btn-sm btn js-dashboard-edit'  Редактировать рабочий стол
+    a href='#' class='btn-default btn-sm btn  js-dashboard-save  '  Сохранить
+    a href='#' class='btn-default btn-sm btn  js-dashboard-cancel  '  Отменить
+
     /a class='btn-default btn-sm btn' id='cancel-edit-current-desktop' Отмена
 
     = link_to 'Выйти', destroy_user_session_path, method: :delete, :class => 'btn-default btn-sm btn'

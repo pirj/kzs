@@ -8,7 +8,7 @@ url =
   save: '/save_desktop_configuration'
 
 default_widgets= [
-  {"col":1,"row":1,"size_x":1,"size_y":1,"name":"Документооборот","class":"widget-docs","href":"/documents"},
+  {"col":1,"row":1,"size_x":1,"size_y":1,"name":"Документы","class":"widget-docs","href":"/documents"},
   {"col":2,"row":1,"size_x":1,"size_y":1,"name":"Пропуска","class":"widget-admission","href":"/permits"},
   {"col":3,"row":1,"size_x":1,"size_y":1,"name":"Организации и сотрудники","class":"widget-org","href":"/organizations"},
   {"col":4,"row":1,"size_x":1,"size_y":1,"name":"Библиотека","class":"widget-library disable"},
@@ -22,8 +22,12 @@ template =
   widget: "<li class='{{class}} widget'>{{#href}}<a href='{{href}}'>{{/href}}<span class='widget-name'>{{name}}</span>{{#href}}</a>{{/href}}</li>"
 # functions
 
+weather = {
+
+}
+
 sendRequest = (url, type, protect, data) ->
-  console.log((data))
+
   if protect
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content") #settings?
@@ -33,16 +37,12 @@ sendRequest = (url, type, protect, data) ->
     url: url
     type: type
     dataType: "json"
-    data: (if type=='POST' then data else '')
-
+    data: (if type=='POST' then {'data': data} else '')
   )
-  _request
+
+  _request                       #TODO: done - need?
 
 # Classes
-
-class Widget
-  constructor: (data) ->
-
 
 class Dashboard
   settings:
@@ -60,46 +60,96 @@ class Dashboard
     this.body = dom.gridster(     #body == object gridster || widgets == grister.widgets
       this.settings
     ).data('gridster')
+    this.loading()
+    this.editoff()
 
   save: =>
-    newData = JSON.stringify(this.body.serialize())
-    console.log(newData)
-    sendRequest(url.save, 'POST', true, newData)
+    newData = (this.body.serialize()) #JSON.stringify
 
+    _.each default_widgets, (a) ->
 
+    _.each newData, (widget, wKey) ->
+      _.each widget, (prop, key) ->
+        default_widgets[wKey][key] = prop
+
+    sendRequest(url.save, 'POST', true, JSON.stringify(default_widgets))
+
+    this.editoff()
+    (callback = () ->
+      $('.js-btns .btn').toggle()
+    )()
 
   addwidget: (widget) ->
 
     html = Mustache.to_html(template.widget, widget)
     this.body.add_widget(html, widget.size_x,widget.size_y,widget.col,widget.row)
 
-  get: (n) =>
-    s = sendRequest(url.positions, 'GET', true)
-    console.log(s)
+  get: (n) =>                   #n  - number dashboard
+    $.when(sendRequest(url.positions, 'GET', true))#.then (data, textStatus) ->
 
   loading: =>
     that = this
-    _.each default_widgets, (widget)->
-      that.addwidget(widget)
+
+    $.when(sendRequest(url.positions, 'GET', true)).then (data, textStatus) ->
+      if data is null
+        a = default_widgets
+      else
+        a = data.desktop_conf
+      _.each a, (widget)->
+        that.addwidget(widget)
+
+      _.each that.body.$widgets, (w) ->
+
+        if w.classList.contains('widget-weather')
+
+          weather.widget = w
+
+
+
+    (->
+      $('.js-btns .js-dashboard-save').hide()
+      $('.js-btns .js-dashboard-cancel').hide()
+    )()
                   #TODO: weater disable
 
   editon: =>
-    console.log(this)
+
     this.body.enable()
     this.body.enable_resize()
-    $('.widget a').on 'click', ->
-      return false
+    $('.widget a').on 'click', (e) ->
+      e.preventDefault()
+      #return false
 
+    (callback = () ->
+      $('.js-btns .btn').toggle()
+    )()
+
+    $('h1').html('Режим редактирования')
+    #console.log(this.body.$widgets[7])
+    #this.body.disable_resize(this.body.$widgets[7]);
   editoff: =>
-    this.body.disable()
-    this.body.disable_resize()
 
+    this.body.disable() if $(".gridster > ul")
+    this.body.disable_resize() if this.body.disable_resize()
+    $('h1').html('Главный рабочий стол')
+
+
+    $('.widget a').on 'click', (e) ->
+      console.log(this.href)
+      document.location = this.href
+  cancel: =>
+
+    this.editoff()
+    (callback = () ->
+      $('.js-btns .btn').toggle()
+    )()
 # start flow
-
 $ ->
-  dashboard = new Dashboard($(".gridster > ul"))
-  dashboard.loading()
-  dashboard.editoff()
 
-  $('#edit-current-desktop').on 'click', dashboard.editon
-  $('#get-current-desktop').on 'click', dashboard.save
+  if document.location.pathname == "/"
+    dashboard = new Dashboard($(".gridster > ul"))
+#   dashboard.loading()
+#   dashboard.editoff()
+    $('.js-dashboard-edit').on 'click', dashboard.editon
+    $('.js-dashboard-save').on 'click', dashboard.save
+    $('.js-dashboard-cancel').on 'click', dashboard.cancel

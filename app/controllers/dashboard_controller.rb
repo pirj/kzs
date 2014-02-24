@@ -20,13 +20,8 @@ class DashboardController < ApplicationController
   end
   
   def save_desktop_configuration
-    #UserDesktopConfiguration.create(:user_id => current_user.id, :desktop_conf => params[:widgets])
-    a = params#[:widgets]
-
-    render json: a[1]
-
-   # UserDesktopConfiguration.where(user_id: current_user.id).first.update_attributes(desktop_conf: a)
-   # render :nothing => true
-  #  render text: params
+    configuration = UserDesktopConfiguration.where(user_id: current_user.id).first
+    configuration.update_attribute(:desktop_conf, params[:data])
+    head :ok
   end
 end
