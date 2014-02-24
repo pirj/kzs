@@ -12,6 +12,8 @@ class DashboardController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @desktop }
+
+
     end
 
 
@@ -19,7 +21,12 @@ class DashboardController < ApplicationController
   
   def save_desktop_configuration
     #UserDesktopConfiguration.create(:user_id => current_user.id, :desktop_conf => params[:widgets])
-    UserDesktopConfiguration.where(user_id: current_user.id).first.update_attributes(desktop_conf: params[:widgets] )
-    render :nothing => true
+    a = params#[:widgets]
+
+    render json: a[1]
+
+   # UserDesktopConfiguration.where(user_id: current_user.id).first.update_attributes(desktop_conf: a)
+   # render :nothing => true
+  #  render text: params
   end
 end
