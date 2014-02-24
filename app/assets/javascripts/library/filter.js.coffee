@@ -1,5 +1,6 @@
 $ ->
   window.app =
+    filter_form: '.js-filter-form'
     add_btn: '.js-filter-add-row-btn'
     remove_row_btn: '.js-filter-row-remove-btn'
     default_row_source: '.js-filter-option-row-source'
@@ -16,15 +17,15 @@ $ ->
   # search filter
   # by timeout updating search result count
   timer_id = 0
-  $(document).on('keyup blur change filter:update', '.js-filter-form', ->
+  $(document).on('keyup blur change filter:update', app.filter_form, ->
     clearTimeout(timer_id)
     timer_id = setTimeout( ->
-      data = $('.js-filter-form').serializeArray()
+      data = $(app.filter_form).serializeArray()
       $.ajax
         data: data
         dataType: 'script'
         type: 'POST'
-        url: $('.js-filter-form').data('url')
+        url: $(app.filter_form).data('url')
 
     , 200)
   )
@@ -38,7 +39,7 @@ $ ->
   $(document).on('click', app.add_btn, ->
     # html-template должен быть обернут в js класс со словом source, сам этот класс не переносится, а вставляется только его содержимое
     $(@).before($(app.default_row_source).html())
-    $(document).trigger('filter:update')
+    $(app.filter_form).trigger('filter:update')
   )
 
   # удаляем текущую строку с параметрами фильтрации
@@ -55,7 +56,7 @@ $ ->
     input_name = "q[#{$input.data('name')}_#{$elem.val()}]"
     $input.prop('name', input_name)
 
-    $(document).trigger('filter:update')
+    $(app.filter_form).trigger('filter:update')
   )
 
   # выбираем новый атрибут поиска «дата» или «название»
@@ -66,6 +67,11 @@ $ ->
     $new_query_html = $("#{app.query_source}[data-type='#{$elem.val()}']").html()
 
     $query_container.html($new_query_html)
-    $(document).trigger('filter:update')
+    $(app.filter_form).trigger('filter:update')
+  )
+
+  # обрабатываем клики на стилизованных чекбоксах
+  $(document).on('ifChanged', "#{app.filter_container} input[type=checkbox]", ->
+    $(app.filter_form).trigger('filter:update')
   )
 

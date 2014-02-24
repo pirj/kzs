@@ -133,7 +133,7 @@
       border-radius: $nav-pills-border-radius;
     }
     + li {
-      margin-left: 2px;
+      margin-left: $padding-base-horizontal;
     }
 
     // Active state
