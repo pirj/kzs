@@ -17,7 +17,7 @@
 
 = f.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
-= f.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+= f.association :recipient_organization, label_html: { title: 'получатели' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' } }
 = f.input :sender_organization_id, as: :hidden
 
 
@@ -26,5 +26,5 @@
     = f.label :confidential, class: 'control-label js-label-hint label-icon-hint', title: 'этот документ прочтут только получатели' do
       = f.check_box :confidential
       span Конфиденциально
-= f.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
-= f.input :body, input_html: { rows: 3 }
+= f.input :title, placeholder: 'укажите тему', label_html: { title: 'тема письма' }, wrapper: :inline_hint
+= f.input :body, input_html: { rows: 6 }
