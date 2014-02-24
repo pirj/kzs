@@ -63,7 +63,7 @@ class Document < ActiveRecord::Base
                         :executor_id,
                         :body
 
-  validates_presence_of :recipient_organization_id, unless: :can_have_many_recipients?
+  validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
 
   
   scope :confidential, where(confidential: true)

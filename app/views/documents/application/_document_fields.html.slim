@@ -23,7 +23,8 @@
 
 .form-group
   .col-sm-offset-2.col-sm-5
-    = f.input :confidential, wrapper: :checkbox, input_html: { class: '' }
-
+    = f.label :confidential, class: 'control-label js-label-hint label-icon-hint', title: 'этот документ прочтут только получатели' do
+      = f.check_box :confidential
+      span Конфиденциально
 = f.input :title, label_html: { title: 'тема письма' }, wrapper: :inline_hint
 = f.input :body, input_html: { rows: 3 }

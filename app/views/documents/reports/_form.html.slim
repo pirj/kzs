@@ -8,12 +8,7 @@
                   do |f|
 
 
-  - unless resource.errors.empty?
-    .row
-      .alert.alert-danger.col-sm-offset-2.col-sm-8
-        - resource.errors.messages.each do |v, k|
-          - k.each do |mes|
-            p = mes
+  = render 'documents/application/error_label', resource: resource
 
   = f.hidden_field :order_id
 

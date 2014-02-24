@@ -259,11 +259,11 @@ input[type="checkbox"],
     font-family: FontAwesome;
     content: "\f059";
     display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
     color: inherit;
     font-size: inherit;
+    margin-right: -20px;
+    margin-top: -30px;
+    margin-bottom: 10px;
   }
 }
 // Form control sizing
