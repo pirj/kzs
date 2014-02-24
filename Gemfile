@@ -19,7 +19,7 @@ gem 'faker'
 gem 'cancan'
 
 gem 'amoeba'
-
+gem 'mustache'
 
 gem 'activeadmin'
 gem 'awesome_nested_set'
