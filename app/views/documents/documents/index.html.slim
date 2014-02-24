@@ -31,7 +31,9 @@ ul.nav.nav-pills
       li выберите документы
 
   li
-    = link_to 'Фильтр', '#', class: 'btn btn-default', data: { toggle: 'modal', target: '.js-document-filter-modal' }
+    = link_to '#', class: 'btn btn-default', data: { toggle: 'modal', target: '.js-document-filter-modal' } do
+      span.fa.fa-filter
+      span Фильтр
 
 
 
