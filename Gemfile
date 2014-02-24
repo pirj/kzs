@@ -20,7 +20,7 @@ gem 'cancan'
 
 gem 'amoeba'
 gem 'mustache'
-
+gem 'smt_rails'
 gem 'activeadmin'
 gem 'awesome_nested_set'
 
