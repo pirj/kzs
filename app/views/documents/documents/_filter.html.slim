@@ -1,4 +1,4 @@
-#myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+#myModal.modal.fade.js-document-filter-modal aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
   .modal-dialog
     .modal-content
       = search_form_for @search, url: documents_documents_path, \
@@ -30,7 +30,7 @@
 
 
           .js-filter-container
-            = link_to 'add option', '#', class: 'link-success js-filter-add-row-btn'
+            = link_to 'добавить параметр фильтрации', '#', class: 'link-success js-filter-add-row-btn'
 
 
         .hidden
@@ -38,37 +38,37 @@
           .js-filter-option-row-source
             .js-filter-row
               .form-group
-                = select_tag :filter_attribute, options_for_select(document_filter_options), class: 'js-filter-attribute'
-                .js-filter-query
+                .col-sm-4
+                  = select_tag :filter_attribute, options_for_select(document_filter_options), class: 'js-filter-attribute'
+                .col-sm-8.js-filter-query
                   .form-group
-                    = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-                    = f.text_field :title_cont, autocomplete: 'off', data: { name: 'title' }
+                    .col-sm-5 = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+                    .col-sm-7 = f.text_field :title_cont, autocomplete: 'off', class: 'form-control', data: { name: 'title' }
 
           / отдельные свойства поиска
           .js-filter-row-query-source data-type='title'
             .form-group
-              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :title_cont, autocomplete: 'off', data: { name: 'title' }
+              .col-sm-5 = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
+              .col-sm-7 = f.text_field :title_cont, autocomplete: 'off', data: { name: 'title' }
 
           .js-filter-row-query-source data-type='sender'
             .form-group
-              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :sender_organization_id_eq, autocomplete: 'off', data: { name: 'sender' }
+              /.col-sm-12 = f.text_field :sender_organization_id_eq, autocomplete: 'off', class: 'form-control', data: { name: 'sender_organization_id' }
+              .col-sm-12 = f.text_field :sender_organization_short_title_cont, autocomplete: 'off', class: 'form-control', data: { name: 'sender_organization_id' }
 
           .js-filter-row-query-source data-type='recipient'
             .form-group
-              = select_tag :option_types, options_for_select(document_filter_string_query_conditions)
-              = f.text_field :recipient_organization_id_eq, autocomplete: 'off', data: { name: 'recipient' }
+              .col-sm-12 = f.text_field :recipient_organization_short_title_cont, autocomplete: 'off', class: 'form-control', data: { name: 'recipient_organization_id' }
 
-          .js-filter-row-query-source data-type='date'
+          .js-filter-row-query-source data-type='created_at'
             .form-group
-              = f.text_field :created_at_gteq, autocomplete: 'off'
-              = f.text_field :created_at_lteq, autocomplete: 'off'
+              .col-sm-6 = f.text_field :created_at_gteq, autocomplete: 'off', class: 'form-control'
+              .col-sm-6 = f.text_field :created_at_lteq, autocomplete: 'off', class: 'form-control'
 
           .js-filter-row-query-source data-type='approved_at'
             .form-group
-              = f.text_field :approved_at_lteq, autocomplete: 'off'
-              = f.text_field :approved_at_lteq, autocomplete: 'off'
+              .col-sm-6 = f.text_field :approved_at_lteq, autocomplete: 'off', class: 'form-control'
+              .col-sm-6 = f.text_field :approved_at_lteq, autocomplete: 'off', class: 'form-control'
 
 
 
@@ -79,6 +79,6 @@
               .js-filter-result-count.text-left
             .col-sm-6
               = f.submit 'найти', class: 'btn btn-primary'
-              = link_to 'отмена', '#', class: 'link-muted', data: { dismiss: 'modal' }
+              = link_to 'отмена', '#', class: 'btn link-muted', data: { dismiss: 'modal' }
 
 

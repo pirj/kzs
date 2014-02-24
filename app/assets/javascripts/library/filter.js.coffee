@@ -4,6 +4,7 @@ $ ->
     default_row_source: '.js-filter-option-row-source'
     query_source: '.js-filter-row-query-source'
     filter_container: '.js-filter-container'
+    query_row_container: '.js-filter-row'
     query_container: '.js-filter-query'
     attribute_select: '.js-filter-attribute'
 
@@ -14,7 +15,7 @@ $ ->
   # search filter
   # by timeout updating search result count
   timer_id = 0
-  $(document).on('keyup blur', '.js-filter-form', ->
+  $(document).on('keyup blur change filter:update', '.js-filter-form', ->
     clearTimeout(timer_id)
     timer_id = setTimeout( ->
       data = $('.js-filter-form').serializeArray()
@@ -24,9 +25,10 @@ $ ->
         type: 'POST'
         url: $('.js-filter-form').data('url')
 
-    , 500)
+    , 200)
   )
 
+  # всем инпутам и селектам выставляем свойство disabled, чтобы не отправлять лишнее на сервер
   $(document).on('filter:update', ->
     $("#{app.filter_container} input,  #{ app.filter_container} select").prop('disabled', '')
   )
@@ -46,18 +48,18 @@ $ ->
 
     input_name = "q[#{$input.data('name')}_#{$elem.val()}]"
     $input.prop('name', input_name)
-    console.log $input.prop('name')
 
     $(document).trigger('filter:update')
   )
 
   # выбираем новый атрибут поиска «дата» или «название»
-  # и заменяем текущую строку с поисковой строкой на подходящую
-  $(document).on('change', app.attribute_select, ->
+  # и заменяем текущую строку с инпутом на подходящую
+  $(document).on('change', "#{app.filter_container} #{app.attribute_select}", ->
     $elem = $(@)
-    $query_container = $elem.next(app.query_container)
+    $query_container = $elem.closest(app.query_row_container).find(app.query_container)
     $new_query_html = $("#{app.query_source}[data-type='#{$elem.val()}']").html()
 
     $query_container.html($new_query_html)
     $(document).trigger('filter:update')
   )
+

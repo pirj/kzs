@@ -1,3 +1,17 @@
+window.global =
+  chosen:
+    disable_search_threshold: 1
+    no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+    disable_search: true
+
+  chosen_search:
+    disable_search_threshold: 1
+    no_results_text: "Ничего не найдено."
+    placeholder_text_multiple: " "
+    placeholder_text_single: " "
+
 $ ->
   # run code pretty:
   window.prettyPrint and prettyPrint()
@@ -23,22 +37,10 @@ $ ->
   )
 
   # chosen
-  $( ".js-chosen" ).chosen(
-    disable_search_threshold: 1
-    no_results_text: "Ничего не найдено."
-    placeholder_text_multiple: " "
-    placeholder_text_single: " "
-    disable_search: true
-  )
+  $( ".js-chosen" ).chosen( global.chosen )
 
   # chosen-search
-  $( ".js-chosen-search" ).chosen(
-    disable_search_threshold: 1
-    no_results_text: "Ничего не найдено."
-    placeholder_text_multiple: " "
-    placeholder_text_single: " "
-  #  disable_search: true !use chosen-container-single-nosearch
-  )
+  $( ".js-chosen-search" ).chosen( global.chosen_search )
 
 
   # events to colorizing input and it icon

@@ -13,9 +13,9 @@ module FilterHelper
   def document_filter_options
     [
         ['название', 'title'],
-        ['организация получатель', 'recipient'],
-        ['организация отправитель', 'sender'],
-        ['дата создания', 'created_date'],
+        ['получатель', 'recipient'],
+        ['отправитель', 'sender'],
+        ['дата создания', 'created_at'],
         ['дата подписания', 'approved_at'],
     ]
   end
