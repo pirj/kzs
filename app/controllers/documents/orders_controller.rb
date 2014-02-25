@@ -13,12 +13,6 @@ class Documents::OrdersController < ResourceController
   end
 
 
-  def new
-    new! do
-      @order.sender_organization_id = current_user.organization_id
-    end
-  end
-
   def show
     show! { @order = Documents::ShowDecorator.decorate(resource) }
   end
@@ -26,6 +20,7 @@ class Documents::OrdersController < ResourceController
   def create
     @order = Documents::Order.new(params[:documents_order])
     @order.sender_organization = current_organization
+    @order.executor ||= current_user
     create!
   end
 end
