@@ -208,4 +208,29 @@ h3{
 }
 
 
+.b-task {
+  font-family: "open_sanslight", arial, sans-serif;
+  .b-task-title{
+    color: gray;
+  }
+  .b-task-num{
+    color: gray;
+
+  }
+  .b-task-date{
+    text-align: right;
+  }
+
+  &.m-task-completed{
+    .b-task-title,.b-task-num{
+      color: rgb(42,182,107);
+    }
+  }
+  & > .col-sm-1 {
+    max-width:50px;
+  }
+
+
+
+}
 

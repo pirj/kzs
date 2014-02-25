@@ -13,15 +13,7 @@ module Documents
       end
     end
 
-    def number_and_date_with_label
-      element_wrapper object.sn || object.date do
-        h.content_tag( :div, I18n.t("documents.table.document_labels.number_and_date"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-        h.content_tag( :div, class: "link col-sm-#{12-LABEL_COL_WIDTH}" ) do
-          h.content_tag( :b, object.sn )+
-          h.content_tag( :span, " / #{object.date}", class: 'muted' )
-        end
-      end
-    end
+
 
     def number_and_date
       if object.approved_at

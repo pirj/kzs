@@ -90,14 +90,41 @@ module Documents
       end
     end
 
+    def number_and_date_with_label
+      element_wrapper object.serial_number || object.approved_at do
+        h.content_tag( :div, I18n.t("documents.table.document_labels.number_and_date"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
+              h.content_tag( :b, object.serial_number, class: 'link' )+
+                  h.content_tag( :span, " / #{approved_at}", class: 'muted' )
+            end
+      end
+    end
+
+    def deadline_date
+      element_wrapper object.deadline || object.deadline do
+        h.content_tag( :div, I18n.t("documents.table.document_labels.deadline"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
+              h.content_tag( :span, "#{deadline}", class: 'muted' )
+            end
+      end
+    end
+
     protected
     # wrap elements to 'form-group' to form-horizontal render attributes with labels.
     def element_wrapper(condition, &block)
       if condition
-        h.content_tag( :div, class: 'form-group' ) do
+        h.content_tag( :div, class: 'form-group row' ) do
           yield
         end
       end
+    end
+
+    def approved_at
+      DateFormatter.new(object.approved_at, :long)
+    end
+
+    def deadline
+      DateFormatter.new(object.deadline)
     end
 
 

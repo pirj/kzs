@@ -14,7 +14,12 @@ class Documents::OrdersController < ResourceController
 
 
   def show
-    show! { @order = Documents::ShowDecorator.decorate(resource) }
+    show!{
+      @order = Documents::ShowDecorator.decorate(resource)
+      @tasks = Tasks::ListDecorator.decorate(@order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
+      @tasks2 = resource #@order.tasks.order('created_at ASC')
+
+    }
   end
 
   def create

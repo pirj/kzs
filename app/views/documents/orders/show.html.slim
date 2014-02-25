@@ -13,15 +13,25 @@
 
 = resource.title
 = resource.sender_to_recipient_links
+/= resource.class
 
 .row
+  br
   .col-sm-7
     .row
+      = resource.number_and_date_with_label
       = resource.executor_link_with_label
+      = resource.deadline_date
       = resource.approver_link_with_label
-      = resource.sender_link_with_label
-      = resource.recipient_link_with_label
+      /= resource.sender_link_with_label
+      /= resource.recipient_link_with_label
+
 
   .col-sm-5
     = pdf_to_png(resource,190,270)
+
+.row
+  h2.col-sm-12 Задачи:
+  - @tasks.each do |t|
+    = t.task_body
 
