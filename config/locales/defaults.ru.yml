@@ -3,3 +3,10 @@ ru:
     submit:
       create: Создать
       update: Сохранить
+      documents:
+        to:
+          draft: В черновик
+          prepared: Подготовлено
+          approved: Подписать
+          trashed: Удалить
+

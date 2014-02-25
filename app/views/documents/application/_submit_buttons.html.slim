@@ -1,0 +1,4 @@
+- submittable_transitions(resource).each do |state|
+  button name="name" type="transition_to" value="#{state}" class="btn btn-primary"
+    = t("helpers.submit.documents.to.#{state}")
+

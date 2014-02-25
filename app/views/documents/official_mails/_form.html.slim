@@ -44,5 +44,5 @@
 
   .form-group
     .col-sm-offset-2.col-sm-5
-      = f.submit :class=>'btn btn-primary'
+      = render 'documents/application/submit_buttons', f: f
       = link_to 'отмена', documents_documents_path, class: 'btn link-muted'

@@ -49,9 +49,6 @@ class Document < ActiveRecord::Base
 
   after_save :create_png
 
-  # TODO: move to controllers
-  after_create :save_initial_state
-
   # New Scopes
   scope :lookup, lambda { |query|
     where { title.matches("%#{query}%") | serial_number.matches("%#{query}%") }
@@ -155,11 +152,6 @@ class Document < ActiveRecord::Base
   # TODO: add paranoia - this will handle the destruction
 
   private
-
-  def save_initial_state
-    accountable.transition_to!(:draft) unless document_transitions.any?
-  end
-
   def can_have_many_recipients?
     accountable_type == 'Documents::OfficialMail'
   end
