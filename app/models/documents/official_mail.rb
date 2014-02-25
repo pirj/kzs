@@ -1,7 +1,7 @@
 module Documents
   class OfficialMail < ActiveRecord::Base
     include Accountable
-    attr_accessible :conversation_id, :conversation, :recipient_ids
+    attr_accessible :conversation_id, :conversation, :recipient_ids, :recipients
 
     belongs_to :conversation,
                class_name: 'DocumentConversation',
