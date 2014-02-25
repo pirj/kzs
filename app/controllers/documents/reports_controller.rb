@@ -23,6 +23,7 @@ class Documents::ReportsController < ResourceController
     @report = Documents::Report.new(params[:documents_report])
     @report.sender_organization = current_organization
     @report.recipient_organization = @report.order.sender_organization
+    @report.executor ||= current_user
     create!
   end
 
