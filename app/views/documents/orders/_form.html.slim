@@ -47,6 +47,22 @@
 
 
 
+    = f.simple_fields_for :task_list do |task_list_builder|
+      = task_list_builder.simple_fields_for :tasks do |task_builder|
+        = render 'documents/orders/task_fields', f: task_builder
+
+    = link_to_add_task 'Add task', f
+
+
+#task-model.modal.fade.js-tasks-task-modal aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header создание задачи
+
+
+
+ 
+
 
   .form-group
     .col-sm-offset-2.col-sm-5

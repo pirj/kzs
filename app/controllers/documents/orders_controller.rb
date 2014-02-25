@@ -12,6 +12,15 @@ class Documents::OrdersController < ResourceController
   end
 
 
+  def new
+    new! do
+      @order.sender_organization_id = current_user.organization_id
+      @order.build_task_list
+      @order.task_list.tasks.build
+    end
+  end
+
+
   def show
     show!{
       @tasks = Tasks::ListDecorator.decorate(@order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
