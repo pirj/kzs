@@ -1,2 +1,10 @@
-= f.input :task, input_html: { rows: 2 }
-= f.input :deadline, as: :datepicker, wrapper: :icon_prepend
+.js-task-container
+  .js-task-form-fields
+    = f.input :task, input_html: { rows: 2, data: { target: 'js-task-title' } }
+    = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_html: { data: { target: 'js-task-deadline' } }
+
+  .js-task-form-inserted-values
+    .js-task-title
+    .js-task-body
+    .js-task-deadline
+    .js-task-remove

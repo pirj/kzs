@@ -49,19 +49,25 @@
 
     = f.simple_fields_for :task_list do |task_list_builder|
       = task_list_builder.simple_fields_for :tasks do |task_builder|
+        .js-tasks-main-form
         = render 'documents/orders/task_fields', f: task_builder
 
-    = link_to_add_task 'Add task', f
+      = link_to_add_task 'Add task', task_list_builder
 
 
-#task-model.modal.fade.js-tasks-task-modal aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-  .modal-dialog
-    .modal-content
-      .modal-header создание задачи
+  #task-model.modal.fade.js-tasks-add-modal aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+    .modal-dialog
+      .modal-content
+        .modal-header создание задачи
+        .modal-body.js-tasks-modal-form
+        .modal-footer
+          = link_to 'назначить', '#', class: 'js-tasks-modal-save-btn'
+          = link_to 'назначить и добавить еще одну', '#', class: 'js-tasks-modal-add-new-task-btn'
+          = link_to 'отмена', '#', class: 'js-tasks-modal-cancel-btn'
 
 
 
- 
+
 
 
   .form-group

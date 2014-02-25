@@ -4,7 +4,7 @@ module TasksHelper
   def link_to_add_task title, f
     new_object = f.object.send(:tasks).klass.new
     id = new_object.object_id
-    fields = f.fields_for(:tasks, new_object, child_index: id) do |builder|
+    fields = f.simple_fields_for(:tasks, new_object, child_index: id) do |builder|
       render(:tasks.to_s.singularize + "_fields", f: builder)
     end
     link_to(title, '#', class: "js-tasks-add-task", data: {id: id, fields: fields.gsub("\n", "")})
