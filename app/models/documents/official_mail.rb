@@ -32,7 +32,7 @@ module Documents
 
     def recipients_present?
       msg = I18n.t('activerecord.errors.models.documents.official_mail.attributes.recipient_ids.blank')
-      errors.add(:recipient_ids, msg) unless recipients.any?
+      errors.add('documents/official_mail.recipient_ids', msg) unless recipients.any?
     end
 
     # TODO: add paranoia - this will handle the destruction

@@ -67,3 +67,6 @@ ru:
       documents/order:
         deadline: дата исполнения
         body: текст распоряжения
+      documents/official_mail:
+        recipients: Получатели
+        recipient_ids: Получатели
