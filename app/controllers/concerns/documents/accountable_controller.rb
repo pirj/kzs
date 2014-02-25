@@ -28,7 +28,7 @@ module Documents::AccountableController
 
   def assign_state
     state = params[:state]
-    if can?(ability_for(state), resource.document) && resource.transition_to!(state)
+    if can_apply_state?(state, resource) && resource.transition_to!(state)
       redirect_to :back, notice: t("document_#{state}")
     else
       redirect_to :back, notice: t('access_denied')

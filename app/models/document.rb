@@ -1,5 +1,7 @@
 # coding: utf-8
 class Document < ActiveRecord::Base
+  # TODO: remove attributes that never should be assigned using mass-assignment
+
   attr_accessible :accountable_id,
                   :accountable_type,
                   :approver_id,

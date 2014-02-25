@@ -1,4 +1,7 @@
-- resource.allowed_transitions.each do |state|
-  button name="name" type="transition_to" value="#{state}" class="btn btn-primary"
-    = t("helpers.submit.documents.to.#{state}")
+- if resource.new_record?
+  = submit_accountable("draft")
+  = submit_accountable("prepared")
+- else
+  - resource.allowed_transitions.each do |state|
+    = submit_accountable(state) if can_apply_state?(state, resource)
 

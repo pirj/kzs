@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :authenticate_user!
 
-  helper_method :current_organizatio
+  helper_method :current_organization, :can_apply_state?, :ability_for
   
   def access_denied(exception)
     redirect_to root_path, :alert => t('access_denied')
@@ -24,7 +24,11 @@ class ApplicationController < ActionController::Base
   # Referenced in /app/models/ability.rb
   # Referenced in /app/controllers/documents/*
   def ability_for(state)
-    "assign_#{state}_state".to_sym
+    "apply_#{state}".to_sym
+  end
+
+  def can_apply_state?(state, accountable)
+    can?(ability_for(state), accountable)
   end
 
   unless Rails.application.config.consider_all_requests_local
