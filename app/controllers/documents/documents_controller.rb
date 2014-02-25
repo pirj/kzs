@@ -54,7 +54,7 @@ class Documents::DocumentsController < ResourceController
 
     if batch_can?(state, @documents) && applicable_state?(@accountables, state)
       @accountables.each do |accountable|
-        accountable.transition_to!(state)
+        accountable.transition_to!(state, {user_id: current_user.id})
       end
       flash[:notice] = t('documents_updated')
     else
