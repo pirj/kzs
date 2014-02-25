@@ -14,8 +14,7 @@ module Documents
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
     end
 
-    delegate :allowed_transitions,
-             :can_transition_to?,
+    delegate :can_transition_to?,
              :transition_to!,
              :transition_to,
              :current_state,

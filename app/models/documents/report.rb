@@ -14,7 +14,6 @@ module Documents
     end
 
     delegate :can_transition_to?,
-             :allowed_transitions,
              :transition_to!,
              :transition_to,
              :current_state,

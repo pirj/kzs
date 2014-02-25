@@ -14,8 +14,12 @@ module Documents::Accountable
     #TODO clean after document list is done
     after_initialize :setup_document
 
-    #TODO important! save initial transition inside controller
 
+  end
+
+  def allowed_transitions
+    states = state_machine.allowed_transitions
+    new_record? ? (states - %w(trashed)) : states
   end
 
   def method_missing(method, *args)
