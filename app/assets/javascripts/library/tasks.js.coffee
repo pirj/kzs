@@ -1,6 +1,7 @@
 $ ->
   window.app.tasks =
     add_task_btn: '.js-tasks-add-task'
+    task_remove_btn: '.js-task-remove'
     main_form_container: '.js-tasks-main-form'
     add_task_modal: '.js-tasks-add-modal'
     modal_task_container: '.js-tasks-modal-form'
@@ -50,6 +51,11 @@ $ ->
     T.$main_form_container.append(T.$add_task_modal_task_container.html())
 
     T.$add_task_modal.modal('hide')
+  )
+
+  # remove inserted task to main-form
+  $(document).on('click', T.task_remove_btn, (e) ->
+    $(e.target).closest('.js-task-container').empty()
   )
 
 

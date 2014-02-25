@@ -7,7 +7,10 @@ module TasksHelper
     fields = f.simple_fields_for(:tasks, new_object, child_index: id) do |builder|
       render(:tasks.to_s.singularize + "_fields", f: builder)
     end
-    link_to(title, '#', class: "js-tasks-add-task", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to'#', class: 'js-tasks-add-task btn btn-mega-primary btn-big', data: {id: id, fields: fields.gsub("\n", "")} do
+      content_tag(:span, nil, class: 'fa fa-plus-circle') +
+      content_tag(:span, 'добавить задачу')
+    end.html_safe
   end
   
   #def task_status(task)
