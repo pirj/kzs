@@ -4,15 +4,6 @@ class Documents::OfficialMailsController < ResourceController
   layout 'base'
   actions :all, except: [:index]
 
-  before_filter :users, only: [:new, :edit]
-
-  def new
-    new!{
-      @official_mail.sender_organization_id = current_user.organization_id
-    }
-  end
-
-
   def copy
     @parent_official_mail = end_of_association_chain.find(params[:id])
 
@@ -25,11 +16,13 @@ class Documents::OfficialMailsController < ResourceController
   def reply
     @parent_official_mail = end_of_association_chain.find(params[:id])
 
-    conversation =  @parent_official_mail.conversation || @parent_official_mail.create_conversation
+    conversation =
+        @parent_official_mail.conversation || @parent_official_mail.create_conversation
 
     @official_mail = end_of_association_chain.new(conversation: conversation)
-    @official_mail.document.assign_attributes(sender_organization: current_organization,
-                                      recipient_organization: @parent_official_mail.sender_organization)
+    @official_mail.document.assign_attributes(
+        sender_organization: current_organization,
+        recipient_organization: @parent_official_mail.sender_organization)
 
     render action: :new
   end
@@ -38,8 +31,11 @@ class Documents::OfficialMailsController < ResourceController
     show!{ @official_mail = Documents::ShowDecorator.decorate(resource) }
   end
 
-  #TODO @prikha make private as it is not an action
-  def users
-    @users ||= User.where(organization_id: current_user.organization_id).order('last_name DESC')
+  def create
+    @official_mail =
+        Documents::OfficialMail.new(params[:documents_official_mail])
+
+    @official_mail.sender_organization = current_organization
+    create!
   end
 end

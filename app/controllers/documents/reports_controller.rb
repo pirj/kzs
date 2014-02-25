@@ -4,7 +4,7 @@ class Documents::ReportsController < ResourceController
   layout 'base'
   actions :all, except: [:index]
 
-  before_filter :available_orders
+  helper_method :orders_collection_for_select
 
   def copy
     @parent_report = end_of_association_chain.find(params[:id])
@@ -15,38 +15,20 @@ class Documents::ReportsController < ResourceController
     render action: :new
   end
 
-  def new
-    new! do
-      @report.sender_organization_id = current_user.organization_id
-    end
-  end
-
   def show
-    show!{
-      @report = Documents::ShowDecorator.decorate(resource)
-    }
+    show! { @report = Documents::ShowDecorator.decorate(resource) }
   end
 
   def create
-    create!{
-      @report.recipient_organization = sender_organization_by_order
-    }
+    @report = Documents::Report.new(params[:documents_report])
+    @report.sender_organization = current_organization
+    @report.recipient_organization = @report.order.sender_organization
+    create!
   end
 
+  private
 
-  def update
-    update!{
-      @report.recipient_organization = sender_organization_by_order
-    }
-  end
-
-  protected
-  def available_orders
-    @available_orders = Document.orders.approved
-  end
-
-  def sender_organization_by_order
-    order = Document.where(id: params[:documents_report][:order_id]).includes(:sender_organization).first
-    order.nil?? nil : order.sender_organization
+  def orders_collection_for_select
+    @orders_collection_for_select ||= Documents::Order.with_state('approved')
   end
 end

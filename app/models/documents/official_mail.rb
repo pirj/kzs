@@ -21,7 +21,6 @@ module Documents
              :current_state,
              to: :state_machine
 
-
     amoeba do
       exclude_field :conversation
       clone :document
@@ -33,7 +32,7 @@ module Documents
 
     def recipients_present?
       msg = I18n.t('activerecord.errors.models.documents.official_mail.attributes.recipient_ids.blank')
-      errors.add(:recipient_ids, msg) unless self.recipients.any?
+      errors.add(:recipient_ids, msg) unless recipients.any?
     end
 
     # TODO: add paranoia - this will handle the destruction

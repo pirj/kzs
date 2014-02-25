@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Documents::OfficialMail do
   let(:mail){ Documents::OfficialMail.make! }
   before { mail.transition_to!(:prepared) }
-
   context 'with 3 recipients' do
 
     context 'when being approved' do

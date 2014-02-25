@@ -46,7 +46,7 @@ class ResourceController < ApplicationController
   end
 
   def current_organization_users
-    @_current_organization_users ||= User.where(organization_id: current_user.organization_id)
+    @_current_organization_users ||= User.where(organization_id: current_organization.id)
   end
 
 end

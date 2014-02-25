@@ -27,7 +27,7 @@
         = doc.select :executor_id, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'document-is-executor' } } if current_organization_users
     /========
 
-    = f.association :order, collection: @available_orders, label_method: :unique_title ,\
+    = f.association :order, collection: orders_collection_for_select, label_method: :unique_title ,\
                     label_html: { title: 'распоряжение, к которому выбирается акт' }, \
                     wrapper: :inline_hint, \
                     input_html: { class: 'js-chosen-search', data: { placeholder: 'номер или название распоряжения, к которому создается акт' }} if @available_orders
@@ -35,7 +35,6 @@
     .form-group
       .text-help.col-sm-8.col-sm-offset-2 Организация-получатель выбирается автоматически по выбранному распоряжению
 
-    = doc.hidden_field :sender_organization_id
     = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
 

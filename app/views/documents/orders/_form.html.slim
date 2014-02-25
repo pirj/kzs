@@ -1,5 +1,5 @@
 = simple_form_for resource, \
-                  :html=>{:class=>"form-horizontal"}, \
+                  :html=>{:class=>'form-horizontal'}, \
                   defaults: { input_html: {class: 'form-control'}, \
                               input_wrapper_html: { class: 'col-sm-8' }, \
                               label_html: { class: 'col-sm-2' }, \
@@ -38,14 +38,9 @@
 
     = doc.association :approver, collection: current_organization_users, label_html: { title: 'укажите кто подпишет этот документ' }, wrapper: :inline_hint, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 
-
     = doc.association :recipient_organization, label_html: { title: 'укажите организацию, которой будет назначено это распоряжение' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' }}
-    = doc.input :sender_organization_id, as: :hidden
-
 
     = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-2' }
-
-
 
     = doc.input :title, placeholder: 'укажите тему'
     = doc.input :body, input_html: { rows: 6 }

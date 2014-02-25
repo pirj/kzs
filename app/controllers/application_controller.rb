@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :authenticate_user!
+
+  helper_method :current_organizatio
   
   def access_denied(exception)
     redirect_to root_path, :alert => t('access_denied')
