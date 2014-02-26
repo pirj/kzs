@@ -1,5 +1,4 @@
 class Documents::OrdersController < ResourceController
-  include Documents::Base
 
   layout 'base'
   actions :all, except: [:index]
@@ -15,10 +14,8 @@ class Documents::OrdersController < ResourceController
 
   def show
     show!{
-      @order = Documents::ShowDecorator.decorate(resource)
       @tasks = Tasks::ListDecorator.decorate(@order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
-      @tasks2 = resource #@order.tasks.order('created_at ASC')
-
+      @order = Documents::ShowDecorator.decorate(resource)
     }
   end
 
