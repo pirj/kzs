@@ -13,7 +13,11 @@ class Documents::OfficialMailsController < ResourceController
   end
 
   def reply
-    @parent_official_mail = end_of_association_chain.find(params[:id])
+    # TODO-prikha: need refactor next code.
+    # In document-view exists only Document.id,
+    # but reply action works with Mail.id
+    mail_id = Document.find(params[:id]).accountable.id
+    @parent_official_mail = end_of_association_chain.find(mail_id)
     @official_mail = end_of_association_chain.new(conversation: conversation)
 
     conversation =
