@@ -34,4 +34,7 @@
   h2.col-sm-12 Задачи:
   - @tasks.each do |t|
     = t.task_body
-
+br
+.row
+  h2.col-sm-12 Прикрепленные документы:
+  = attach_doc @order

@@ -13,4 +13,8 @@ module DocumentsHelper
     end
     image_tag "/system/documents/document_#{document.id}.png", class: 'table-img-md'
   end
+
+  def attach_doc(doc)
+    '123415'
+  end
 end
