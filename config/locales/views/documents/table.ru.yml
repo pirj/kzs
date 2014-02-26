@@ -5,6 +5,7 @@ ru:
         number_and_date: '№/дата'
         sender_link: Отправитель
         recipient_link: Получатель
+        title: Тема
         type: Тип
         attachment_icon: ''
         status: Статус

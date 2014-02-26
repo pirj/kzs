@@ -5,12 +5,13 @@ table.table.js-row-clickable.m-table-replacement
       th = t('documents.table.list_attrs.number_and_date')
       th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
       th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
+      th = resource_sortable 'title', t('documents.table.list_attrs.title')
       th = t('documents.table.list_attrs.type')
       th
       th = t('documents.table.list_attrs.status')
 
   tbody
-    - attrs = [:number_and_date, :sender_link, :recipient_link, :type_name, :attachment_icon, :state]
+    - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon, :state]
     - collection.each do |resource|
       / simple row with short information
       tr[ data-id=resource.id data-server-actions=resource.actions ]
