@@ -1,4 +1,5 @@
 class Documents::OrdersController < ResourceController
+  include Documents::AccountableController
 
   layout 'base'
   actions :all, except: [:index]

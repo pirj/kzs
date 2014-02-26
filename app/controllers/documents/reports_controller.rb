@@ -1,5 +1,5 @@
 class Documents::ReportsController < ResourceController
-  include Documents::Base
+  include Documents::AccountableController
 
   layout 'base'
   actions :all, except: [:index]
