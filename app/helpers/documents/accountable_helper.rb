@@ -6,6 +6,6 @@ module Documents::AccountableHelper
   end
 
   def submit_accountable(state, html_class = 'btn-primary')
-    button_with_content(t("helpers.submit.documents.to.#{state}"), name: "transition_to", value: state, class: "btn #{html_class}")
+    button_with_content(t("helpers.submit.documents.to.#{state}"), name: 'transition_to', type: 'submit', value: state, class: "btn #{html_class}")
   end
 end
