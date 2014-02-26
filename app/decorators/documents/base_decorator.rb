@@ -103,9 +103,14 @@ module Documents
     def creator_with_label
       element_wrapper object.creator do
         h.content_tag( :div, I18n.t("documents.table.document_labels.creator"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+      end
+    end
 
-              h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
-
+    def conformer_link_with_label
+      element_wrapper object.conformers do
+        h.content_tag( :div, 'wasd', class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :b, 'wasd', class: 'link' )
       end
     end
 
