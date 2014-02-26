@@ -33,7 +33,8 @@
                     input_html: { class: 'js-chosen-search', data: { placeholder: 'номер или название распоряжения, к которому создается акт' }}
 
     .form-group
-      .text-help.col-sm-8.col-sm-offset-2 Организация-получатель выбирается автоматически по выбранному распоряжению
+      .control-label.col-sm-2 Организация-получатель
+      .text-help.col-sm-8 будет выбрана автоматически из распоряжения
 
     = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
 

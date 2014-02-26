@@ -20,7 +20,7 @@ ru:
         serial_number: Серийный номер
         recipient_organization: Организация-получатель
         recipient_organization_id: Организация-получатель
-        title: Заголовок
+        title: Тема
 
         accountable_types:
           documents_officialmail: письмо
