@@ -153,7 +153,7 @@ namespace :documents do
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
       d.approver = User.find(rand(1..users_count))
-      d.recipient_organization = Organization.find(rand(1..organizations_count))
+      d.recipients << Organization.find(rand(1..organizations_count))
       d.sender_organization    = Organization.find(rand(1..organizations_count))
       d.save!
     end
@@ -161,6 +161,10 @@ namespace :documents do
 
     Documents::Order.delete_all
     Documents::Order.reset_pk_sequence
+    TaskList.destroy_all
+    TaskList.reset_pk_sequence
+    Task.destroy_all
+    Task.reset_pk_sequence
 
     20.times do |i|
       d = Documents::Order.new
@@ -171,8 +175,21 @@ namespace :documents do
       d.approver = User.find(rand(1..users_count))
       d.recipient_organization = Organization.find(rand(1..organizations_count))
       d.sender_organization    = Organization.find(rand(1..organizations_count))
-
-
+      task_list = d.build_task_list
+      4.times do |t|
+        t = Task.new
+        t.task_list_id = task_list.id
+        t.task = Populator.words(2)
+        completed = true
+        document_id = d.id
+        executor_organization_id = d.recipient_organization
+        sender_organization_id = d.sender_organization
+        deadline = DateTime.now + rand(1..6).months
+        t.save!
+        task_list.tasks << t
+      end
+      task_list.save!
+      
       d.deadline = DateTime.now + rand(1..6).months
 
       d.save!
