@@ -8,7 +8,7 @@ module Documents::Accountable
 
     validates_presence_of :document
 
-    scope :with_state, ->(state) { includes(:document).where('documents.state = ?', state) }
+    scope :with_state, ->(state) { includes(:document).where('documents.state' => state) }
 
     #TODO @prikha write why is it nessesary instead of moving it to
     #TODO clean after document list is done

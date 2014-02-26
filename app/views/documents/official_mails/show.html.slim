@@ -23,3 +23,8 @@
   .col-sm-5
     = pdf_to_png(resource,190,270)
 
+.row
+  .col-sm-6.col-sm-offset-3
+    - history.each do |letter|
+      = letter.inspect
+      hr

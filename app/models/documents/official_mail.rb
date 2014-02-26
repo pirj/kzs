@@ -8,7 +8,18 @@ module Documents
                foreign_key: 'conversation_id',
                autosave: true
 
+    has_many :conversation_mails, through: :conversation, source: :official_mails
+
     has_and_belongs_to_many :recipients, class_name: 'Organization'
+
+    def history_for(o_id)
+      conversation_mails.
+          includes{document}.
+          where do
+        (document.sender_organization_id.eq(o_id)) |
+        ((document.state.in %w(sent read)) & document.recipient_organization_id.eq(o_id))
+      end
+    end
 
     def state_machine
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)

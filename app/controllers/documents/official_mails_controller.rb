@@ -1,6 +1,8 @@
 class Documents::OfficialMailsController < ResourceController
   include Documents::AccountableController
 
+  helper_method :history
+
   def copy
     @parent_official_mail = end_of_association_chain.find(params[:id])
 
@@ -33,5 +35,11 @@ class Documents::OfficialMailsController < ResourceController
         Documents::OfficialMail.new(params[:documents_official_mail])
     @official_mail.sender_organization = current_organization
     super
+  end
+
+  private
+
+  def history
+    @history ||= resource.history_for(current_organization.id)
   end
 end
