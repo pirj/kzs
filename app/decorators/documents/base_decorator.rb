@@ -44,7 +44,7 @@ module Documents
       (collection + single).to_s
     end
 
-    def state
+    def state popover_position = :left
       css_class = case object.accountable.current_state.to_sym
                     when :draft then 'default'
                     when :prepared then 'primary'
@@ -54,7 +54,7 @@ module Documents
                     when :trashed then 'danger'
                     else 'default'
                   end
-      h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: 'left' } do
+      h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: popover_position.to_s } do
         I18n.t("activerecord.attributes.document.states.#{object.accountable.current_state}")
       end
     end

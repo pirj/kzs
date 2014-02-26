@@ -35,7 +35,7 @@
               - %w{Documents::Report Documents::Order Documents::OfficialMail}.each do |name|
                 li.checkbox
                   = label_tag "q_accountable_type_in_#{name.downcase.gsub('::', '')}", class: 'control-label' do
-                    = f.check_box :accountable_type_in, { multiple: true }, name
+                    = f.check_box :accountable_type_in, { multiple: true, checked: true }, name
                     span = t("activerecord.attributes.document.accountable_types.#{name.downcase.gsub('::','_')}")
 
             = link_to '#', class: 'btn btn-big btn-mega-primary js-filter-add-row-btn' do
