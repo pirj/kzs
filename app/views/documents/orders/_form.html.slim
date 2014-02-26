@@ -33,7 +33,7 @@
             span согласовать с
 
       .col-sm-6
-        = select_tag :conformer, options_from_collection_for_select(current_organization_users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-order-conformer' }, disabled: 'disabled' if current_organization_users
+        = doc.select :conformer_ids, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'new-order-conformer' }, multiple: true } if current_organization_users if current_organization_users
       /========
 
     = doc.association :approver, collection: current_organization_users, label_html: { title: 'укажите кто подпишет этот документ' }, wrapper: :inline_hint, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
@@ -44,7 +44,6 @@
 
     = doc.input :title, placeholder: 'укажите тему'
     = doc.input :body, input_html: { rows: 6 }
-
 
 
     = f.simple_fields_for :task_list do |task_list_builder|
