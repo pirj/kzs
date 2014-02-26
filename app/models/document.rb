@@ -9,6 +9,7 @@ class Document < ActiveRecord::Base
                   :confidential,
                   :executor_id,
                   :creator_id,
+                  :conformers, :conformer_ids,
                   :recipient_organization_id,
                   :sender_organization_id,
                   :serial_number,
@@ -31,6 +32,7 @@ class Document < ActiveRecord::Base
   belongs_to :approver, class_name: 'User'
   belongs_to :executor, class_name: 'User'
   belongs_to :creator, class_name: 'User'
+  has_and_belongs_to_many :conformers, class_name: 'User'
 
   belongs_to :sender_organization, class_name: 'Organization'
   belongs_to :recipient_organization, class_name: 'Organization'
