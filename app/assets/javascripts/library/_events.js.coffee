@@ -13,6 +13,10 @@ window.global =
     placeholder_text_multiple: " "
     placeholder_text_single: " "
 
+  datepicker:
+    showOtherMonths: true
+    dateFormat: "dd.mm.yy"
+
 $ ->
   # run code pretty:
   window.prettyPrint and prettyPrint()
@@ -32,10 +36,7 @@ $ ->
   $('.dropdown-toggle').dropdown()
 
   # datepicker
-  $( ".js-datepicker" ).datepicker(
-    showOtherMonths: true
-    dateFormat: "dd-mm-yy"
-  )
+  $( ".js-datepicker" ).datepicker( global.datepicker )
 
   # chosen
   $( ".js-chosen" ).chosen( global.chosen )

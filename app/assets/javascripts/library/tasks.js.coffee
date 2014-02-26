@@ -8,6 +8,10 @@ $ ->
     modal_cancel_btn: '.js-tasks-modal-cancel-btn'
     modal_add_new_btn: '.js-tasks-modal-add-new-task-btn'
     modal_save_btn: '.js-tasks-modal-save-btn'
+    task_form:
+      task_container: '.js-task-container'
+      inputs_container: '.js-task-form-fields'
+      html_container: '.js-task-form-inserted-values'
 
 
   T = app.tasks
@@ -15,7 +19,10 @@ $ ->
   T.$add_task_modal_task_container = T.$add_task_modal.find(T.modal_task_container)
   T.$main_form_container =  $(T.main_form_container)
 
-  # Open modal for new T.
+  # hide all inputs by on after page loaded
+  $(T.main_form_container).find('input, textarea, select').closest('.form-group').hide()
+
+  # Open modal for new task
   $(document).on('click', T.add_task_btn, (e) ->
     e.preventDefault()
     # replace '0' to 'now timestamp' in task-form
@@ -23,6 +30,8 @@ $ ->
     regexp = new RegExp($(this).data('id'), 'g')
 
     T.$add_task_modal_task_container.html($(@).data('fields').replace(regexp, time))
+    T.$add_task_modal_task_container.find(T.task_form.html_container).hide()
+    T.$add_task_modal_task_container.find(T.task_form.inputs_container).show()
     T.$add_task_modal.modal('show')
   )
 
@@ -37,15 +46,15 @@ $ ->
       val = $elem.val()
 
       $elem.attr('value', val)
-      $target = $elem.closest('.js-task-container').find(".js-task-form-inserted-values .#{$elem.data('target')}")
+      $target = $elem.closest(T.task_form.task_container).find("#{T.task_form.html_container} .#{$elem.data('target')}")
       $target.text(val)
     )
 
     # hide form inputs
-    T.$add_task_modal_task_container.find('.js-task-form-fields').hide()
+    T.$add_task_modal_task_container.find(T.task_form.inputs_container).hide()
 
-    # show form labels
-    T.$add_task_modal_task_container.find('.js-task-form-inserted-values').show()
+    # show form decorated labels
+    T.$add_task_modal_task_container.find(T.task_form.html_container).show()
 
     # move this inputs to main form
     T.$main_form_container.append(T.$add_task_modal_task_container.html())
@@ -53,7 +62,7 @@ $ ->
     T.$add_task_modal.modal('hide')
   )
 
-  # remove inserted task to main-form
+  # remove inserted task from main-form
   $(document).on('click', T.task_remove_btn, (e) ->
     $(e.target).closest('.js-task-container').empty()
   )
