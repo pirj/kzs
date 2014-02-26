@@ -40,6 +40,7 @@ class Documents::DocumentsController < ResourceController
   end
 
 
+  # TODO-prikha: next method needs change from GET to POST
   #TODO: @prikha now free for all (would be limited by initial scope!)
   # uses params like so:
   #     :state = 'approved'

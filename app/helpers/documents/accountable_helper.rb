@@ -15,4 +15,10 @@ module Documents::AccountableHelper
     options.reverse_merge!(type: 'submit')
     button_tag(options, &block)
   end
+
+  def change_state_link_to resource, state, options={}
+    link_to t("activerecord.attributes.document.actions.#{state}"),
+            batch_documents_documents_path(state: state, document_ids: [resource.document.id]),
+            options
+  end
 end

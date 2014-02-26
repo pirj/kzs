@@ -1,8 +1,19 @@
 - if resource.new_record?
   = submit_accountable("prepared", class: 'btn btn-primary')
   = submit_accountable("draft")
-  = link_to 'отменить', documents_documents_path, class: 'btn link-muted'
 - else
-  - resource.allowed_transitions.each do |state|
+  - %w(prepared approved sent accept read pending accept).each do |state|
+    = submit_accountable(state, class: 'btn btn-primary') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
+
+  - %w(rejected).each do |state|
+    = submit_accountable(state, class: 'btn btn-danger') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
+
+  - %w(draft).each do |state|
+    = submit_accountable(state, class: 'btn btn-default') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
+
+  / TODO-justvitalius: next code ignores order and importance of buttons.
+  /- resource.allowed_transitions.each do |state|
     = submit_accountable(state) if can_apply_state?(state, resource)
+
+= link_to 'отменить', documents_documents_path, class: 'btn link-muted'
 
