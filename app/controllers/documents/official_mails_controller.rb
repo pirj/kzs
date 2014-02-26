@@ -39,8 +39,13 @@ class Documents::OfficialMailsController < ResourceController
   def create
     @official_mail =
         Documents::OfficialMail.new(params[:documents_official_mail])
-    @official_mail.creator = current_user
     @official_mail.sender_organization = current_organization
+    @official_mail.creator = current_user
+    super
+  end
+
+  def update
+    resource.creator = current_user
     super
   end
 

@@ -12,14 +12,15 @@ module Documents
 
     has_and_belongs_to_many :recipients, class_name: 'Organization'
 
-    def history_for(o_id)
-      conversation_mails.
-          includes{document}.
-          where do
-        (document.sender_organization_id.eq(o_id)) |
-        ((document.state.in %w(sent read)) & document.recipient_organization_id.eq(o_id))
-      end
-    end
+    validate :recipients_present?
+
+    scope :from_or_to, ->(o_id){
+      includes{document}.where do
+          (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
+        end
+    }
+
+    scope :approved, includes{document}.where{document.approved_at.not_eq(nil)}
 
     def state_machine
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
@@ -36,7 +37,9 @@ module Documents
       clone :document
     end
 
-    validate :recipients_present?
+    def history_for(o_id)
+      conversation_mails.approved.from_or_to(o_id).order{document.approved_at.desc}
+    end
 
     # actual methods for one instance of Model
     def single_applicable_actions
@@ -49,7 +52,5 @@ module Documents
       msg = I18n.t('activerecord.errors.models.documents.official_mail.attributes.recipient_ids.blank')
       errors.add('documents/official_mail.recipient_ids', msg) unless recipients.any?
     end
-
-    # TODO: add paranoia - this will handle the destruction
   end
 end

@@ -38,9 +38,7 @@ class Documents::OrdersController < ResourceController
   end
 
   def update
-
-    update!{
-      @order.creator = current_user
-    }
+    resource.creator = current_user
+    super
   end
 end

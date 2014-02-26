@@ -31,6 +31,11 @@ class Documents::ReportsController < ResourceController
     super
   end
 
+  def update
+    resource.creator = current_user
+    super
+  end
+
 
   private
 
