@@ -29,7 +29,8 @@ class Documents::OfficialMailsController < ResourceController
         creator: current_user
     )
 
-    render action: :new
+    # render reply template
+    #render action: :new
   end
 
   def show

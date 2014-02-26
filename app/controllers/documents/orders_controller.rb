@@ -19,7 +19,7 @@ class Documents::OrdersController < ResourceController
     @order.approver = report.order.approver
     @order.recipient_organization = report.sender_organization
     @order.sender_organization = current_user.organization
-    @order.title = "В ответ на Акт №#{report.sn}"
+    @order.title = "В ответ на Акт №#{report.serial_number}"
     @order.build_task_list
     @order.task_list.tasks.build
   end
