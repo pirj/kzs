@@ -41,7 +41,7 @@ class Documents::OfficialMailsController < ResourceController
         Documents::OfficialMail.new(params[:documents_official_mail])
     @official_mail.creator = current_user
     @official_mail.sender_organization = current_organization
-    create!
+    super
   end
 
   private
