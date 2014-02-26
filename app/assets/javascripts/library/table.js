@@ -1,7 +1,7 @@
 // TODO: @tagir need refactor. This code must have a default modificator value instead of two modificators.
 /**
- * Created by shine on 28.01.14.
- */
+* Created by shine on 28.01.14.
+*/
 $(document).ready(function(){
 
         var actions = {

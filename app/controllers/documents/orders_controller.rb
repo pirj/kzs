@@ -13,6 +13,15 @@ class Documents::OrdersController < ResourceController
   end
 
 
+  def new
+    new! do
+      @order.sender_organization_id = current_user.organization_id
+      @order.build_task_list
+      @order.task_list.tasks.build
+    end
+  end
+
+
   def show
     show!{
       @tasks = Tasks::ListDecorator.decorate(@order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
@@ -24,6 +33,13 @@ class Documents::OrdersController < ResourceController
     @order = Documents::Order.new(params[:documents_order])
     @order.sender_organization = current_organization
     @order.executor ||= current_user
+    @order.creator = current_user
     create!
+  end
+
+  def update
+    update!{
+      @order.creator = current_user
+    }
   end
 end

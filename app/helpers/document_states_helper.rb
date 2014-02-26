@@ -36,6 +36,10 @@ module DocumentStatesHelper
   end
 
   def states_action_links doc
+
+    # go to Document if current model is Report, Order or Mail.
+    doc = doc.document if doc.respond_to?(:document)
+
     if doc.applicable_states
       doc.applicable_states.map do |state|
         link_to( t("activerecord.attributes.document.states.actions.#{state}" ), batch_documents_documents_path( document_ids: [doc.id], state: state) )

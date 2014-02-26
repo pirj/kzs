@@ -1,0 +1,15 @@
+.js-task-container
+  .js-task-form-fields
+    = f.input :task, input_html: { rows: 2, data: { target: 'js-task-title' } }
+    = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_html: { data: { target: 'js-task-deadline' } }
+
+  .js-task-form-inserted-values
+    .form-control
+      .col-sm-7
+        = link_to f.object.task, '#', class: 'js-task-title'
+        .js-task-body
+      .col-sm-3.js-task-deadline = f.object.deadline.try(:strftime, '%d.%m.%y')
+      .col-sm-2
+        = link_to '#', class: 'link-danger js-task-remove' do
+          span.fa.fa-minus-circle
+          span убрать

@@ -1,3 +1,4 @@
+window.app = {}
 window.global =
   chosen:
     disable_search_threshold: 1

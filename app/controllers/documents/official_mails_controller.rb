@@ -13,7 +13,11 @@ class Documents::OfficialMailsController < ResourceController
   end
 
   def reply
-    @parent_official_mail = end_of_association_chain.find(params[:id])
+    # TODO-prikha: need refactor next code.
+    # In document-view exists only Document.id,
+    # but reply action works with Mail.id
+    mail_id = Document.find(params[:id]).accountable.id
+    @parent_official_mail = end_of_association_chain.find(mail_id)
     @official_mail = end_of_association_chain.new(conversation: conversation)
 
     conversation =
@@ -21,7 +25,9 @@ class Documents::OfficialMailsController < ResourceController
 
     @official_mail.document.assign_attributes(
         sender_organization: current_organization,
-        recipient_organization: @parent_official_mail.sender_organization)
+        recipient_organization: @parent_official_mail.sender_organization,
+        creator: current_user
+    )
 
     render action: :new
   end
@@ -33,8 +39,9 @@ class Documents::OfficialMailsController < ResourceController
   def create
     @official_mail =
         Documents::OfficialMail.new(params[:documents_official_mail])
+    @official_mail.creator = current_user
     @official_mail.sender_organization = current_organization
-    super
+    create!
   end
 
   private

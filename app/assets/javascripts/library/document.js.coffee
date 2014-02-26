@@ -1,4 +1,3 @@
-window.app = {}
 window.app.documents =
   selected_actions: []
   actions_by_rows: (checkbox) ->
@@ -34,6 +33,7 @@ window.app.documents =
       _.each(actions, (action) ->
         link = switch action
           when 'edit' then window.app.documents.render_edit_link()
+          when 'reply' then window.app.documents.render_reply_link()
           else window.app.documents.render_change_state_link(action)
 
         out.push(link)
@@ -48,6 +48,15 @@ window.app.documents =
     if $el.length == 1
       id = $el.parents('tr').data('id')
       "<li><a href='/documents/#{id}/edit'>редактировать</a></li>"
+    else
+      null
+
+
+  render_reply_link: ->
+    $el = $('table .js-row-select:checked')
+    if $el.length == 1
+      id = $el.parents('tr').data('id')
+      "<li><a href='/documents/mails/#{id}/reply'>ответить</a></li>"
     else
       null
 
