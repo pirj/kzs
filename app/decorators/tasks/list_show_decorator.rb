@@ -9,15 +9,21 @@ module Tasks
       if object.completed
         m ='m-task-completed'
       end
-
       h.content_tag(:div, class: 'b-task row ' + m) do
         check + num + title_and_comment + date
       end
-
     end
 
+
+    def task_body_completed
+      h.content_tag(:div, class: 'b-task row m-act ' ) do
+        num + title_and_comment + date
+      end
+    end
+
+
     def title_and_comment
-      h.content_tag( :div,title+comment, class: 'col-sm-8')
+      h.content_tag( :div,h.content_tag( :div,title, class: 'b-task-title ')+comment, class: 'col-sm-8')
     end
 
     def num
@@ -26,7 +32,7 @@ module Tasks
 
     def title
       if object.task
-        h.content_tag( :div,object.task, class: 'b-task-title ')
+        object.task
       end
     end
 

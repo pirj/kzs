@@ -25,3 +25,7 @@
   .col-sm-5
     = pdf_to_png(resource,190,270)
 
+.row
+  h2.col-sm-12 Выполненные задачи:
+  - @tasks.each do |t|
+    = t.task_body_completed

@@ -172,6 +172,7 @@ namespace :documents do
       d.recipient_organization = Organization.find(rand(1..organizations_count))
       d.sender_organization    = Organization.find(rand(1..organizations_count))
 
+
       d.deadline = DateTime.now + rand(1..6).months
 
       d.save!

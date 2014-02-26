@@ -16,7 +16,10 @@ class Documents::ReportsController < ResourceController
   end
 
   def show
-    show! { @report = Documents::ShowDecorator.decorate(resource) }
+    show! { @report = Documents::ShowDecorator.decorate(resource)
+            order = Documents::Order.find(resource.order_id)
+            @tasks = Tasks::ListDecorator.decorate(order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
+            }
   end
 
   def create
