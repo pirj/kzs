@@ -1,5 +1,4 @@
 class Documents::ReportsController < ResourceController
-  include Documents::Base
 
   layout 'base'
   actions :all, except: [:index]
@@ -24,8 +23,10 @@ class Documents::ReportsController < ResourceController
     @report.sender_organization = current_organization
     @report.recipient_organization = @report.order.sender_organization
     @report.executor ||= current_user
+    @report.creator = current_user
     create!
   end
+
 
   private
 

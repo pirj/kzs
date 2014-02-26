@@ -21,7 +21,9 @@ class Documents::OfficialMailsController < ResourceController
 
     @official_mail.document.assign_attributes(
         sender_organization: current_organization,
-        recipient_organization: @parent_official_mail.sender_organization)
+        recipient_organization: @parent_official_mail.sender_organization,
+        creator: current_user
+    )
 
     render action: :new
   end
@@ -33,8 +35,9 @@ class Documents::OfficialMailsController < ResourceController
   def create
     @official_mail =
         Documents::OfficialMail.new(params[:documents_official_mail])
+    @official_mail.creator = current_user
     @official_mail.sender_organization = current_organization
-    super
+    create!
   end
 
   private

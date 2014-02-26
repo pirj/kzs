@@ -32,6 +32,13 @@ class Documents::OrdersController < ResourceController
     @order = Documents::Order.new(params[:documents_order])
     @order.sender_organization = current_organization
     @order.executor ||= current_user
+    @order.creator = current_user
     create!
+  end
+
+  def update
+    update!{
+      @order.creator = current_user
+    }
   end
 end
