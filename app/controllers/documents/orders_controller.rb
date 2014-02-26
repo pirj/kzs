@@ -1,3 +1,4 @@
+# coding: utf-8
 class Documents::OrdersController < ResourceController
   include Documents::AccountableController
 
@@ -10,6 +11,17 @@ class Documents::OrdersController < ResourceController
     @order.document = @parent_order.document.safe_clone
 
     render action: :new
+  end
+
+  def reject
+    report = Documents::Report.find(params[:id])
+    @order = Documents::Order.new
+    @order.approver = report.order.approver
+    @order.recipient_organization = report.sender_organization
+    @order.sender_organization = current_user.organization
+    @order.title = "В ответ на Акт №#{report.sn}"
+    @order.build_task_list
+    @order.task_list.tasks.build
   end
 
 

@@ -39,6 +39,7 @@ Kzs::Application.routes.draw do
     resources :orders, except: 'index' do
       get 'assign_state', on: :member
       get 'copy', on: :member
+      get 'reject', on: :member
     end
 
     resources :reports, except: 'index' do
