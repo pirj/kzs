@@ -57,18 +57,24 @@
   #task-model.modal.fade.js-tasks-add-modal aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
     .modal-dialog
       .modal-content
-        .modal-header создание задачи
+        .modal-header
+          h4.modal-title Создание задачи
         .modal-body.js-tasks-modal-form
         .modal-footer
-          = link_to 'назначить', '#', class: 'js-tasks-modal-save-btn'
-          = link_to 'назначить и добавить еще одну', '#', class: 'js-tasks-modal-add-new-task-btn'
-          = link_to 'отмена', '#', class: 'js-tasks-modal-cancel-btn'
+          .btn-block.text-left
+            = link_to '#', class: 'btn btn-primary js-tasks-modal-save-btn' do
+              span.fa.fa-plus-circle
+              span назначить
+            = link_to '#', class: 'btn btn-primary-light js-tasks-modal-add-new-task-btn' do
+              span.fa.fa-plus-circle
+              span назначить и добавить еще одну
+            = link_to 'отмена', '#', class: 'btn link-muted js-tasks-modal-cancel-btn'
 
 
 
 
 
-
+  br
   .form-group
     .col-sm-offset-2.col-sm-5
       = render 'documents/application/submit_buttons', f: f

@@ -161,6 +161,10 @@ $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 #1abc9c !default;
 $btn-primary-border:             darken($btn-primary-bg, 5%) !default;
 
+$btn-primary-light-color:        #fff !default;
+$btn-primary-light-bg:           $brand-primary !default;
+$btn-primary-light-border:       darken($btn-primary-light-bg, 5%) !default;
+
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;
 $btn-success-border:             darken($btn-success-bg, 5%) !default;
