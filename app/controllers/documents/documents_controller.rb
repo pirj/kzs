@@ -83,13 +83,17 @@ class Documents::DocumentsController < ResourceController
   end
 
   # TODO enable or delete pushing unapproved records up
+  # using such lines:
+  #   select('documents.*').
+  #   order('documents.approved_at nulls first').
+
   def end_of_association_chain
-    super.
-        where(sender_organization_id: current_organization.id).
-        includes(:sender_organization, :recipient_organization).
-        #select('documents.*').
-        #order('documents.approved_at nulls first').
-        order(sort_column+' '+sort_direction)
+    where do
+      (sender_organization_id.eq(current_organization.id) & state.not.in(['draft']))|
+      (recipient_organization_id.eq(current_organization.id) & state.in(states_for_recipient))
+    end.
+    includes(:sender_organization, :recipient_organization).
+    order(sort_column+' '+sort_direction)
   end
 
   def sort_column
@@ -98,6 +102,12 @@ class Documents::DocumentsController < ResourceController
 
   def acceptable_sort_fields
     resource_class.column_names + %w(organizations.short_title recipient_organizations_documents.short_title)
+  end
+
+  # TODO this couples state machines of all documents to controller
+  # it breaks Single Responsibility Principle and introduces huge maintenance fee
+  def states_for_recipient
+    %w(sent read pending accepted rejected)
   end
 
 end
