@@ -16,8 +16,9 @@ $ ->
   F = app.filter
 
   # закрываем инпуты, чтобы они не передавались на сервер
-  $("#{app.default_row_source} input, #{F.default_row_source} select").prop('disabled', 'disabled')
-  $("#{F.query_source} input, #{F.query_source} select").prop('disabled', 'disabled')
+#  $("#{app.default_row_source} input, #{F.default_row_source} select").prop('disabled', 'disabled')
+  $(F.default_row_source).find('input, select').prop('disabled', 'disabled')
+  $(F.query_source).find('input, select').prop('disabled', 'disabled')
 
 
   # search filter
