@@ -53,7 +53,7 @@ class Documents::DocumentsController < ResourceController
 
     @accountables = @documents.map(&:accountable)
 
-    if batch_can?(state, @documents) && applicable_state?(@accountables, state)
+    if batch_can?(state, @accountables)
       @accountables.each do |accountable|
         accountable.transition_to!(state, {user_id: current_user.id})
       end
@@ -74,12 +74,14 @@ class Documents::DocumentsController < ResourceController
   end
 
   private
-  def applicable_state?(accountables, state)
-    accountables.map{|acc| acc.can_transition_to?(state)}.all?
-  end
 
-  def batch_can?(state, documents)
-    documents.map{|doc| can_apply_state?(state, doc.accountable)}.all?
+  def batch_can?(state, accountables)
+    cans = accountables.map do |accountable|
+      a = accountable.can_transition_to?(state)
+      b = can_apply_state?(state, accountable)
+      a && b
+    end
+    cans.all?
   end
 
   # TODO enable or delete pushing unapproved records up

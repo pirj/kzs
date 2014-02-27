@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
   end
 
   def can_apply_state?(state, accountable)
-    can?(ability_for(state), accountable)
+    ability_name = ability_for(state)
+    can?(ability_name, accountable)
   end
 
   unless Rails.application.config.consider_all_requests_local

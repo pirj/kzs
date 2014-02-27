@@ -39,6 +39,8 @@ class Documents::OfficialMailStateMachine
           Documents::Accounter.sign(dup)
         end
         accountable.recipients.delete_all
+        accountable.save!
+        true
       end
     end
   end

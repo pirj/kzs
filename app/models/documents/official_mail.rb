@@ -42,7 +42,7 @@ module Documents
 
     def recipients_present?
       msg = I18n.t('activerecord.errors.models.documents.official_mail.attributes.recipient_ids.blank')
-      errors.add('documents/official_mail.recipient_ids', msg) unless recipients.any?
+      errors.add('documents/official_mail.recipient_ids', msg) unless recipient_organization || recipients.any?
     end
   end
 end
