@@ -25,6 +25,8 @@ module Documents
 
 
 
+
+
     # Humanize object type
     def type_name
       h.content_tag :span, class: 'text-important' do
@@ -108,10 +110,30 @@ module Documents
     end
 
     def conformer_link_with_label
-      element_wrapper object.conformers do
-        h.content_tag( :div, 'wasd', class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-            h.content_tag( :b, object.conformers.length, class: 'link' )
+      if object.conformers.empty?
+
+      else
+
+
+
+
+        a = h.content_tag( :div, I18n.t("documents.table.document_labels.conformer"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :div, (wasd), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+        h.content_tag(:div, a, class: "row form-group")
+
+
       end
+
+      #  element_wrapper object.conformers do
+      #  h.content_tag( :div, 'wasd', class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+      #      h.content_tag( :b, object.conformers.length, class: 'link' )
+      #end
+    end
+
+    def wasd
+      object.conformers.map do |user|
+        user.first_name_with_last_name
+      end.join(', ')
     end
 
     def deadline_date
@@ -122,10 +144,13 @@ module Documents
               h.content_tag( :span, "#{deadline}", class: 'muted' )
             end
       end
-
-
     end
 
+
+    def body
+      h.content_tag( :span, "#{object.body}", class: 'doc-text' )
+
+    end
 
     def related_order_link_with_label
       element_wrapper object.class == Documents::Report do

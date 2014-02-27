@@ -7,6 +7,10 @@
   height: 100%;
   @include container-fixed();
 }
+.content-container {
+  @include container-fixed();
+}
+
 
 .wrapper{
   height: 100%;

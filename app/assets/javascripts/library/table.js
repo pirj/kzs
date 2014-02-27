@@ -9,11 +9,14 @@ $(document).ready(function(){
                 target.toggle();
                 elem.addClass('tr-slim')
             },
-            replace: function(elem, target){
+            replace: function(elem, target, visible){
+                console.log('show!');
                 elem.toggle();
+             //   visible.show()
                 target.toggle();
             },
             close: function(table){
+                console.log(table.find('.js-more-info'))
                 table.find('tr').show();
                 table.find('.js-more-info').hide();
                 table.find('tr.tr-slim').removeClass('tr-slim');
@@ -29,17 +32,18 @@ $(document).ready(function(){
 
         $(document).on('click', '.js-row-clickable tr', function(e) {
 
-
+            console.log('click!')
             var $elem, $target, id;
             e.preventDefault();
-            $elem = $(this);
+            $elem = $(this).find($('.js-info'));
 
             $thisTable = $((this.parentNode).parentNode);
+            $visible = $(this).find('.js-visible');
 
-            id = $elem.data('id');
-            $target = $elem.siblings(".js-more-info[data-id=" + id + "]");
-
-            if (!$elem.hasClass('js-more-info')) {actions.close($thisTable);}
+            id = $(this).data('id');
+            $target =  $(this).find(".js-more-info");
+           // console.log( $target )
+//            if (!$elem.hasClass('js-more-info')) {actions.close($thisTable);}
 
             if ((id != null) && $target.length > 0) {               //существует ссылка и связанный обьект
                 _.each((this.parentNode).parentNode.classList, function(a){
@@ -49,11 +53,11 @@ $(document).ready(function(){
                         case 'm-table-append':
 
                             actions.append($elem, $target);
-                        break
+                            break
 
-                        case 'm-table-replacement':
-                            actions.replace($elem, $target);
-                        break
+                        default:
+                            actions.replace($elem, $target, $visible);
+
                     }
                 })
             }

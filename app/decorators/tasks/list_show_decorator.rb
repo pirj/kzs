@@ -9,7 +9,7 @@ module Tasks
       if object.completed
         m ='m-task-completed'
       end
-      h.content_tag(:div, class: 'b-task row ' + m) do
+      h.content_tag(:div, class: 'b-task row content-container ' + m) do
         check + num + title_and_comment + date
       end
     end

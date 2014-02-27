@@ -14,7 +14,7 @@
 = resource.title
 = resource.sender_to_recipient_links
 
-.row
+.row.content-container
   .col-sm-7
     .row
       = resource.number_and_date_with_label
@@ -25,8 +25,8 @@
   .col-sm-5
     = pdf_to_png(resource,190,270)
 
-.row
-  = resource.title
+/.row
+  = resource.body
 
 = render 'documents/application/change_state_links', resource: resource
 
