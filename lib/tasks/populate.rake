@@ -145,6 +145,8 @@ namespace :documents do
 
     organizations_count = Organization.count
     users_count         = User.count
+    
+    sender_organization = Organization.find(rand(1..organizations_count))
 
     20.times do |i|
       d = Documents::OfficialMail.new
@@ -153,7 +155,8 @@ namespace :documents do
       d.confidential = false
       d.executor = User.find(rand(1..users_count))
       d.approver = User.find(rand(1..users_count))
-      d.recipients << Organization.find(rand(1..organizations_count))
+      d.recipients << Organization.where('id != ?', sender_organization.id).last
+      d.conformers << sender_organization.users.last
       d.sender_organization    = Organization.find(rand(1..organizations_count))
       d.save!
     end
@@ -179,8 +182,12 @@ namespace :documents do
       4.times do |t|
         t = Task.new
         t.task_list_id = task_list.id
+<<<<<<< HEAD
+        t.body = Populator.words(2)
+=======
         t.title = Populator.words(2)
         t.body = Populator.words(10)
+>>>>>>> c3c1ff769284d58f6b45138a703fce305194f544
         completed = true
         document_id = d.id
         executor_organization_id = d.recipient_organization
