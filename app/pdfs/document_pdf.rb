@@ -10,7 +10,7 @@ class DocumentPdf < Prawn::Document
   def initialize(document, view)
     super(top_margin: 30)
     @document = document
-    @organization = Organization.find(@document.sender_organization_id)
+    @organization = @document.sender_organization
     
     if User.exists?(@organization.director_id) then @director = User.find(@organization.director_id) end
     
@@ -26,26 +26,28 @@ class DocumentPdf < Prawn::Document
     stroke_horizontal_rule
     move_down 5
     float {text "<color rgb='989898'>#{@organization.legal_address}</color>", :size => 10, :inline_format => true}
-    text "<color rgb='989898'>В #{Organization.find(@document.organization_id).title}", :align => :right, :size => 10, :inline_format => true
+    text "<color rgb='989898'>В #{@document.recipient_organization.title}", :align => :right, :size => 10, :inline_format => true
     text "<color rgb='989898'>тел/факс: #{@organization.phone}", :align => :left, :size => 10, :inline_format => true
     text "<color rgb='989898'>#{@organization.mail}", :align => :left, :size => 10, :inline_format => true
     move_down 30
-    if @document.accountable_type == 'Documents::OfficialMail'
-      text "Письмо", :align => :center, :size => 20
-    elsif @document.accountable_type == 'Documents::Order'
-      text "Распоряжение", :align => :center, :size => 20
+
+    case @document.accountable_type.to_s
+      when 'Documents::OfficialMail' then text( "Письмо", :align => :center, :size => 20)
+      when 'Documents::Order' then text( "Распоряжение", :align => :center, :size => 20)
+      when 'Documents::Report' then text( "Акт", :align => :center, :size => 20)
     end
+
     move_down 10
-    float {text "<color rgb='989898'>Номер документа: #{@document.sn}</color>", :size => 10, :inline_format => true}
+    float {text "<color rgb='989898'>Номер документа: #{@document.serial_number}</color>", :size => 10, :inline_format => true}
     text "<color rgb='989898'>г. Санкт-Петербург</color>", :align => :right, :size => 10, :inline_format => true
     # TODO: @justvitalius код ниже вызывает ошибку.
     #if @document.date?
     #  text "<color rgb='989898'>От #{@document.date.strftime('%d.%m.%Y')}</color>", :size => 10, :inline_format => true
     #end
     move_down 30
-    text "#{remove_html(@document.text)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
+    text "#{remove_html(@document.body)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 30
-    writ_tasks if @document.accountable_type == 'writ' && @document.task_list.present?
+    writ_tasks
     move_down 60
     float {text "Генеральный директор", :size => 10, :inline_format => true}
     move_down 10
@@ -63,8 +65,13 @@ class DocumentPdf < Prawn::Document
   end
   
   def writ_tasks
-    @document.task_list.tasks.each.with_index(1) do |task, i|
-      text "#{i}) #{task.task}", :size => 10, :inline_format => true, :indent_paragraphs => 60
+    if @document.accountable_type == 'Documents::Order'
+      order = @document.accountable
+      if order.task_list.present? && order.tasks.present?
+        order.tasks.each.with_index(1) do |task, i|
+          text "#{i}) #{task.title}", :size => 10, :inline_format => true, :indent_paragraphs => 60
+        end
+      end
     end
   end
   

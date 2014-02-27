@@ -164,13 +164,14 @@ class Document < ActiveRecord::Base
 
   # TODO: remove this nightmare
   def create_png
+    path = Rails.root.join("public/system/documents/")
+
     pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "#{Rails.root}/tmp/document_#{id}.pdf"
-    pdf = Magick::Image.read("tmp/document_#{id}.pdf").first
+    pdf.render_file "#{path}document_#{id}.pdf"
+    pdf = Magick::Image.read("#{path}document_#{id}.pdf").first
     thumb = pdf.scale(400, 520)
 
-    directory_name = Rails.root.join('public/system/documents/')
-    Dir.mkdir(directory_name) unless File.exists?(directory_name)
-    thumb.write "public/system/documents/document_#{id}.png"
+    Dir.mkdir(path) unless File.exists?(path)
+    thumb.write "#{path}document_#{id}.png"
   end
 end
