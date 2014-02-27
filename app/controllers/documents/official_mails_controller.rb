@@ -54,6 +54,6 @@ class Documents::OfficialMailsController < ResourceController
   private
 
   def history
-    @history ||= resource.history_for(current_organization.id)
+    @history ||= Documents::ListDecorator.decorate resource.history_for(current_organization.id), with: Documents::ListShowDecorator
   end
 end
