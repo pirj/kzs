@@ -146,9 +146,10 @@ namespace :documents do
     organizations_count = Organization.count
     users_count         = User.count
     
-    sender_organization = Organization.find(rand(1..organizations_count))
+    
 
     20.times do |i|
+      sender_organization = Organization.find(rand(1..organizations_count))
       d = Documents::OfficialMail.new
       d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
