@@ -110,7 +110,7 @@ module Documents
     def conformer_link_with_label
       element_wrapper object.conformers do
         h.content_tag( :div, 'wasd', class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-            h.content_tag( :b, 'wasd', class: 'link' )
+            h.content_tag( :b, object.conformers.length, class: 'link' )
       end
     end
 
