@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   #TODO: does deadline have to be in every model?
-  attr_accessible :task_list_id, :task, :deadline
+  attr_accessible :task_list_id, :title, :deadline, :body
 
   belongs_to :task_list
   belongs_to :document #TODO delete if not needed

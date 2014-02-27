@@ -19,7 +19,7 @@
 @import "partials/buttons";
 @import "partials/links";
 @import "partials/texts";
-@import "partials/page-offsets";
+@import "partials/b-offsets";
 
 // Components
 //@import "partials/component-animations";
@@ -72,3 +72,4 @@
 
 // Widgets classes
 @import "widgets/doc-state";
+@import "widgets/task";

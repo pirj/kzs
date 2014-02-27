@@ -30,8 +30,12 @@ $ ->
     regexp = new RegExp($(this).data('id'), 'g')
 
     T.$add_task_modal_task_container.html($(@).data('fields').replace(regexp, time))
+
+    # show inputs and hide html-proofs with values
     T.$add_task_modal_task_container.find(T.task_form.html_container).hide()
+    T.$add_task_modal_task_container.find("#{T.task_form.inputs_container} .js-datepicker").datepicker(global.datepicker)
     T.$add_task_modal_task_container.find(T.task_form.inputs_container).show()
+
     T.$add_task_modal.modal('show')
   )
 

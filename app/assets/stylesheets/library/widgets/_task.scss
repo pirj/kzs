@@ -1,0 +1,7 @@
+._task{
+  @extend .form-group !optional;
+  @extend .form-control !optional;
+  height: auto;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
