@@ -17,11 +17,11 @@ class Documents::OfficialMailsController < ResourceController
     # In document-view exists only Document.id,
     # but reply action works with Mail.id
     mail_id = Document.find(params[:id]).accountable.id
+    @parent_official_mail = end_of_association_chain.find(mail_id)
 
     conversation =
         @parent_official_mail.conversation || @parent_official_mail.create_conversation
 
-    @parent_official_mail = end_of_association_chain.find(mail_id)
     @official_mail = end_of_association_chain.new(conversation_id: conversation.id)
 
     @official_mail.document.assign_attributes(
