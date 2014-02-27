@@ -65,3 +65,6 @@ Documents::OfficialMail.blueprint do
   document
   recipients(3)
 end
+OrdersConversation.blueprint do
+  # Attributes here
+end

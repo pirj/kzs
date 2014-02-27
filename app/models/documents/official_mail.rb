@@ -14,14 +14,6 @@ module Documents
 
     validate :recipients_present?
 
-    scope :from_or_to, ->(o_id){
-      includes{document}.where do
-          (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
-        end
-    }
-
-    scope :approved, includes{document}.where{document.approved_at.not_eq(nil)}
-
     def state_machine
       OfficialMailStateMachine.new(self, transition_class: DocumentTransition)
     end

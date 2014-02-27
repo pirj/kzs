@@ -10,6 +10,14 @@ module Documents::Accountable
 
     scope :with_state, ->(state) { includes(:document).where('documents.state' => state) }
 
+    scope :from_or_to, ->(o_id){
+      includes{document}.where do
+        (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
+      end
+    }
+
+    scope :approved, includes{document}.where{document.approved_at.not_eq(nil)}
+
     #TODO @prikha write why is it nessesary instead of moving it to
     #TODO clean after document list is done
     after_initialize :setup_document

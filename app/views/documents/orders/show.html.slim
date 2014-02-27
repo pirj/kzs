@@ -39,3 +39,12 @@ br
 .row
   h2.col-sm-12 Прикрепленные документы:
   = attach_doc @order
+
+.row
+  h2.col-sm-12 История распоряжений и актов:
+  - structured_history.each do |order|
+    .well
+      = order.inspect
+      hr
+      = order.report.inspect
+    hr

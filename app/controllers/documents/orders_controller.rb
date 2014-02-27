@@ -5,6 +5,8 @@ class Documents::OrdersController < ResourceController
   layout 'base'
   actions :all, except: [:index]
 
+  helper_method :history
+
   def copy
     @parent_order = end_of_association_chain.find(params[:id])
     @order = @parent_order.clone
@@ -53,4 +55,11 @@ class Documents::OrdersController < ResourceController
     resource.creator = current_user
     super
   end
+
+  private
+
+  def history
+    @history ||= resource.history_for(current_organization.id)
+  end
+
 end
