@@ -12,7 +12,7 @@ class Documents::ReportStateMachine
   state :trashed
 
   transition from: :unsaved,  to: [:draft, :prepared, :trashed]
-  transition from: :draft,    to: [:prepared, :trashed]
+  transition from: :draft,    to: [:draft, :prepared, :trashed]
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
   transition from: :sent,     to: [:read, :trashed]
   transition from: :read,     to: [:accepted, :rejected, :trashed]
