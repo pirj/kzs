@@ -48,9 +48,7 @@ class Documents::DocumentsController < ResourceController
   #
   def batch
     state = params[:state]
-
     @documents = end_of_association_chain.find(params[:document_ids])
-
     @accountables = @documents.map(&:accountable)
 
     if batch_can?(state, @accountables)

@@ -6,19 +6,15 @@ class Documents::OrderStateMachine
   state :prepared
   state :approved
   state :sent
-  state :read
-  state :pending
-  state :rejected
   state :accepted
+  state :rejected
   state :trashed
 
   transition from: :unsaved,  to: [:draft, :prepared, :trashed]
   transition from: :draft,    to: [:draft, :prepared, :trashed]
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
-  transition from: :approved, to: [:sent, :prepared, :trashed]
-  transition from: :sent,     to: [:read, :trashed]
-  transition from: :read,     to: [:pending, :trashed]
-  transition from: :pending,  to: [:rejected, :accepted, :trashed]
+  transition from: :approved, to: [:sent]
+  transition from: :sent,     to: [:rejected, :accepted]
 
   after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
