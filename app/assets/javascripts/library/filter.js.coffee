@@ -1,5 +1,7 @@
 $ ->
   window.app.filter =
+    modal:
+      container: '.js-document-filter-modal'
     filter_form: '.js-filter-form'
     add_btn: '.js-filter-add-row-btn'
     remove_row_btn: '.js-filter-row-remove-btn'
@@ -14,8 +16,10 @@ $ ->
   F = app.filter
 
   # закрываем инпуты, чтобы они не передавались на сервер
-  $("#{app.default_row_source} input, #{F.default_row_source} select").prop('disabled', 'disabled')
-  $("#{F.query_source} input, #{F.query_source} select").prop('disabled', 'disabled')
+#  $("#{app.default_row_source} input, #{F.default_row_source} select").prop('disabled', 'disabled')
+  $(F.default_row_source).find('input, select').prop('disabled', 'disabled')
+  $(F.query_source).find('input, select').prop('disabled', 'disabled')
+
 
   # search filter
   # by timeout updating search result count
@@ -33,8 +37,12 @@ $ ->
     , 200)
   )
 
-  # всем инпутам и селектам выставляем свойство disabled, чтобы не отправлять лишнее на сервер
+  # делаем действия каждый раз,когда форма фильтра обновляется
   $(document).on('filter:update', ->
+
+    console.log $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
+
+    # всем инпутам и селектам выставляем свойство disabled, чтобы не отправлять лишнее на сервер
     $("#{F.filter_container} input,  #{ F.filter_container} select").prop('disabled', '')
   )
 
@@ -77,4 +85,3 @@ $ ->
   $(document).on('ifChanged', "#{F.filter_container} input[type=checkbox]", ->
     $(F.filter_form).trigger('filter:update')
   )
-

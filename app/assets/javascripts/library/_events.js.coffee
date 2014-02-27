@@ -36,7 +36,7 @@ $ ->
   $('.dropdown-toggle').dropdown()
 
   # datepicker
-  $( ".js-datepicker" ).datepicker( global.datepicker )
+  $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
 
   # chosen
   $( ".js-chosen" ).chosen( global.chosen )

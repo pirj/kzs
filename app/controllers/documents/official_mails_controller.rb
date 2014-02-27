@@ -16,7 +16,7 @@ class Documents::OfficialMailsController < ResourceController
     # TODO-prikha: need refactor next code.
     # In document-view exists only Document.id,
     # but reply action works with Mail.id
-    mail_id = Document.find(params[:id]).accountable.id
+    mail_id = Document.find(params[:id]).accountable_id
     @parent_official_mail = end_of_association_chain.find(mail_id)
 
     conversation =
@@ -31,7 +31,7 @@ class Documents::OfficialMailsController < ResourceController
     )
 
     # render reply template
-    #render action: :new
+    # render action: :new
   end
 
   def show

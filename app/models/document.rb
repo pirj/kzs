@@ -8,7 +8,7 @@ class Document < ActiveRecord::Base
                   :body,
                   :confidential,
                   :executor_id,
-                  :creator_id,
+                  :creator_id, :creator,
                   :conformers, :conformer_ids,
                   :recipient_organization_id,
                   :sender_organization_id,

@@ -8,7 +8,7 @@ Kzs::Application.routes.draw do
 #  match '/library' => 'admin/users#index'
 #  match '/library' => 'library#library'
 # GOOD
-  get "library/library"
+  get 'library' => 'library#library'
 
   devise_for :users
 
