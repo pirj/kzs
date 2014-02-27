@@ -20,7 +20,11 @@ class Documents::OrderStateMachine
     Documents::Accounter.sign(accountable)
   end
 
-  guard_transition(to: [:accepted, :rejected]) do |order|
+  guard_transition(to: :accepted) do |order|
+    Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
+  end
+
+  guard_transition(to: :rejected) do |order|
     Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
   end
 end
