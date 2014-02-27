@@ -156,6 +156,7 @@ namespace :documents do
       d.executor = User.find(rand(1..users_count))
       d.approver = User.find(rand(1..users_count))
       d.recipients << Organization.where('id != ?', sender_organization.id).last
+      d.recipient_organization = Organization.where('id != ?', sender_organization.id).last #to be deprecated
       d.conformers << sender_organization.users.last
       d.sender_organization    = Organization.find(rand(1..organizations_count))
       d.save!
