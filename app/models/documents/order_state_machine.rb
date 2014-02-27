@@ -17,7 +17,6 @@ class Documents::OrderStateMachine
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
   transition from: :approved, to: [:sent, :prepared, :trashed]
   transition from: :sent,     to: [:read, :trashed]
-  transition from: :read,     to: [:trashed]
   transition from: :read,     to: [:pending, :trashed]
   transition from: :pending,  to: [:rejected, :accepted, :trashed]
 
