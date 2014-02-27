@@ -14,9 +14,13 @@ class Documents::OrderStateMachine
   transition from: :draft,    to: [:draft, :prepared, :trashed]
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
   transition from: :approved, to: [:sent]
-  transition from: :sent,     to: [:rejected, :accepted]
+  transition from: :sent,     to: [:accepted, :rejected]
 
   after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
+  end
+
+  guard_transition(to: [:accepted, :rejected]) do |order|
+    Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
   end
 end
