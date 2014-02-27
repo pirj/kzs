@@ -71,6 +71,12 @@ $ ->
     $(e.target).closest('.js-task-container').empty()
   )
 
+  # hide modal window by 'cancel' btn
+  $(document).on('click', T.modal_cancel_btn, ->
+    $(T.add_task_modal).modal('hide')
+  )
+
+
 
 
 
