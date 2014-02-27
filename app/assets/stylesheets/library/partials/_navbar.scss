@@ -57,6 +57,7 @@
     &.brand{
       margin-left: 2*$navbar-padding-horizontal ;
       max-width: 500px;
+      min-width: 400px;
       &:first-child{margin-left: 0;} // if first in menu, than level by left edge
     }
 

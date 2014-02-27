@@ -31,8 +31,11 @@ module Tasks
     end
 
     def title
-      if object.task
-        object.task
+      # TODO-tagir: лучше заменить на запись типа
+      #     object.title if object.title
+      #
+      if object.title
+        object.title
       end
     end
 

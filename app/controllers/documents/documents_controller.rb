@@ -59,10 +59,11 @@ class Documents::DocumentsController < ResourceController
       end
       flash[:notice] = t('documents_updated')
     else
-      flash[:notice] = t('access_denied')
+      flash[:error] = t('access_denied')
     end
 
-    redirect_to collection_path, notice: flash[:notice]
+    #redirect_to collection_path, notice: flash[:notice], error: flash[:error]
+    redirect_to :back, notice: flash[:notice], error: flash[:error]
   end
 
   def history

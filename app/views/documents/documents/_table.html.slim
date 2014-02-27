@@ -27,8 +27,8 @@ table.table.js-row-clickable.m-table-replacement
             h2.col-sm-12 = resource.title_link
           .row
             .col-sm-3
-              = resource.type_name
-              = pdf_to_png(resource,190,270)
+              div= resource.type_name
+              div= pdf_to_png(resource,190,270)
             .col-sm-8
               = resource.sender_to_recipient_links
               .row = resource.number_and_date_with_label
