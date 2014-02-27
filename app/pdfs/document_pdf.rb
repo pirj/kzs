@@ -26,7 +26,7 @@ class DocumentPdf < Prawn::Document
     stroke_horizontal_rule
     move_down 5
     float {text "<color rgb='989898'>#{@organization.legal_address}</color>", :size => 10, :inline_format => true}
-    text "<color rgb='989898'>В #{@document.recipient_organization.title}", :align => :right, :size => 10, :inline_format => true
+    text "<color rgb='989898'>В #{@document.recipient_organization.try(:title)}", :align => :right, :size => 10, :inline_format => true
     text "<color rgb='989898'>тел/факс: #{@organization.phone}", :align => :left, :size => 10, :inline_format => true
     text "<color rgb='989898'>#{@organization.mail}", :align => :left, :size => 10, :inline_format => true
     move_down 30
