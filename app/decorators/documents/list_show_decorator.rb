@@ -2,7 +2,7 @@
 module Documents
   class ListShowDecorator < Documents::BaseDecorator
     decorates :document
-    delegate_all
+    delegate :title
 
 
 

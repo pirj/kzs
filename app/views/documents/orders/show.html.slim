@@ -44,9 +44,9 @@
 
 .row
   h2.col-sm-12 История распоряжений и актов:
-  - structured_history.each do |order|
+  = render 'documents/documents/table', collection: structured_history
+  /= structured_history.inspect
+  /- structured_history.each do |order|
     .well
       = order.inspect
-      hr
-      = order.report.inspect
-    hr
+

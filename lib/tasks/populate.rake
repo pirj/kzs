@@ -179,7 +179,8 @@ namespace :documents do
       4.times do |t|
         t = Task.new
         t.task_list_id = task_list.id
-        t.task = Populator.words(2)
+        t.title = Populator.words(2)
+        t.body = Populator.words(10)
         completed = true
         document_id = d.id
         executor_organization_id = d.recipient_organization
