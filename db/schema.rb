@@ -402,7 +402,7 @@ ActiveRecord::Schema.define(:version => 20140227054224) do
 
   create_table "tasks", :force => true do |t|
     t.integer  "task_list_id"
-    t.text     "task"
+    t.text     "title"
     t.boolean  "completed",                :default => false
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
@@ -414,6 +414,7 @@ ActiveRecord::Schema.define(:version => 20140227054224) do
     t.integer  "creator_id"
     t.integer  "approver_id"
     t.text     "executor_comment"
+    t.text     "body"
   end
 
   create_table "user_desktop_configurations", :force => true do |t|
