@@ -83,6 +83,16 @@ class Document < ActiveRecord::Base
   scope :mails, where(accountable_type: 'Documents::Mail')
   scope :reports, where(accountable_type: 'Documents::Report')
 
+
+  # TODO this couples state machines of all documents to controller
+  # it breaks Single Responsibility Principle and introduces huge maintenance fee
+  scope :visible_for,  ->(org_id){
+    where do
+      (sender_organization_id.eq(org_id) & state.not_eq('draft'))|
+      (recipient_organization_id.eq(org_id) & state.in(%w(sent read pending accepted rejected)))
+    end
+  }
+
   amoeba do
     enable
     clone [:document_transitions]
