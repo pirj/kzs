@@ -25,7 +25,7 @@ module Documents
 
     def link_to_pdf(options={})
       _object = (object.respond_to?(:document)) ? object.document : object
-      h.link_to "/system/documents/document_#{_object.id}.pdf" do
+      h.link_to "/system/documents/document_#{_object.id}.pdf", target: '_blank' do
         h.image_tag("/system/documents/document_#{_object.id}.png", options)
       end
     end
