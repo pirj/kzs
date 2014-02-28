@@ -23,7 +23,12 @@ module Documents
       object.sender.try(:title)
     end
 
-
+    def link_to_pdf(options={})
+      _object = (object.respond_to?(:document)) ? object.document : object
+      h.link_to "/system/documents/document_#{_object.id}.pdf" do
+        h.image_tag("/system/documents/document_#{_object.id}.png", options)
+      end
+    end
 
 
 

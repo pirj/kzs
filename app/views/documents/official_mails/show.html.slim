@@ -24,7 +24,9 @@
       /= resource.conformer_link_with_label
       = resource.approver_link_with_label
   .col-sm-5
-    = image_tag("/system/documents/document_#{resource.document.id}.png", class: 'table-img-md')
+    /= link_to "/system/documents/document_#{resource.document.id}.pdf" do
+      = image_tag("/system/documents/document_#{resource.document.id}.png", class: 'table-img-md')
+    = resource.link_to_pdf
 
 /.row
   = resource.body
