@@ -36,6 +36,8 @@ module Documents
       define_method "#{attr}_link" do
         if object.send(attr)
           h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link")
+        else
+          h.link_to( object.accountable.recipients.first.try(:title), '#', class: "link") if object.accountable_type == 'Documents::OfficialMail'
         end
       end
     end
