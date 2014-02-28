@@ -128,9 +128,10 @@ class Document < ActiveRecord::Base
     "#{Document.serial_number_for(self)} — #{self.title}"
   end
 
+  # TODO-justvitalius: please, get it ffrom here
   # actual methods for one instance of Model
   def single_applicable_actions
-    %w(edit)
+    %w(edit) if %w(draft prepared).include?(self.accountable.current_state)
   end
 
   # only actual states which shows to user

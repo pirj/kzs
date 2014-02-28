@@ -33,9 +33,12 @@ module Documents
       conversation_mails.approved.from_or_to(o_id).order{document.approved_at.desc}
     end
 
+    # TODO-justvitalius: please, get it ffrom here
     # actual methods for one instance of Model
     def single_applicable_actions
-      %w(edit reply)
+      array = %w(reply)
+      array += %w(edit) if %w(draft prepared).include?(self.accountable.current_state)
+      array
     end
 
     private
