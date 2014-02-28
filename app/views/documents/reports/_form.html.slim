@@ -19,7 +19,7 @@
 
     / блок ИСПОЛНИТЕЛЬ ?
     .form-group
-      = doc.label :executor, class: 'col-sm-2 control-label'
+      = doc.label :executor, class: 'col-sm-2 control-label label-icon-hint js-label-hint', title: 'Лицо, указанное в документе, как исполнитель'
       .col-sm-1
         .checkbox
           = check_box_tag :is_executor?, nil, false, class: 'js-active-input', data: { target: 'document-is-executor' }
@@ -28,18 +28,18 @@
     /========
 
     = f.association :order, collection: orders_collection_for_select, label_method: :unique_title ,\
-                    label_html: { title: 'распоряжение, к которому выбирается акт' }, \
+                    label_html: { title: 'Распоряжение, подлежащие закрытию актом. Только с выполненными задачами' }, \
                     wrapper: :inline_hint, \
                     input_html: { class: 'js-chosen-search', data: { placeholder: 'номер или название распоряжения, к которому создается акт' }}
 
     .form-group
       .control-label.col-sm-2 Организация-получатель
-      .text-help.col-sm-8 будет выбрана автоматически из распоряжения
+      .text-help.control-label.text-left.col-sm-8 будет выбрана автоматически из распоряжения
 
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }, label_html: { title: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица' }, wrapper: :inline_hint
 
 
-    = doc.input :title, placeholder: 'укажите тему', label_html: { title: 'тема письма' }, wrapper: :inline_hint
+    = doc.input :title
     = doc.input :body, input_html: { rows: 7 }
 
   .form-group
