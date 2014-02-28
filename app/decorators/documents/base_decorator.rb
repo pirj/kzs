@@ -47,6 +47,12 @@ module Documents
     end
 
     def state popover_position = :left
+      model_scope = object.accountable_type.downcase.gsub('documents::','')
+      a = (object.sender_organization.id == h.current_user.organization_id) ? '_sender' : '_recipient'
+
+      state = object.accountable.current_state.to_s
+      state += (state.to_sym == :sent) ? a : ''
+
       css_class = case object.accountable.current_state.to_sym
                     when :draft then 'default'
                     when :prepared then 'primary'
@@ -57,7 +63,7 @@ module Documents
                     else 'default'
                   end
       h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: popover_position.to_s } do
-        I18n.t("activerecord.attributes.document.states.#{object.accountable.current_state}")
+        I18n.t("activerecord.attributes.document.states.#{model_scope}.#{state}")
       end
     end
 

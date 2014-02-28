@@ -39,16 +39,36 @@ ru:
           accepted: принять
 
         states:
-          draft: черновик
-          prepared: подготовлен
-          approved: подтвержден
-          sent: отправлен
-          read: прочтен
-          trashed: удален
-          pending: ожидает
-          rejected: возвращен
-          accepted: принят
-          unsaved: произошла ошибка сохранения документа
+          officialmail:
+            draft: черновик
+            prepared: подготовлено
+            approved: подписано
+            sent_recipient: получено
+            sent_sender: отправлено
+            trashed: удалено
+            unsaved: произошла ошибка сохранения документа
+
+          order:
+            draft: черновик
+            prepared: подготовлено
+            approved: подписано
+            sent_recipient: получено
+            sent_sender: отправлено
+            accepted: исполнено
+            rejected: отклонено
+            trashed: удален
+            unsaved: произошла ошибка сохранения документа
+
+          report:
+            draft: черновик
+            prepared: подготовлен
+            approved: подписан
+            sent_recipient: получен
+            sent_sender: отправлен
+            accepted: исполнен
+            rejected: отклонен
+            trashed: удален
+            unsaved: произошла ошибка сохранения документа
 
           actions:
             draft: в черновик

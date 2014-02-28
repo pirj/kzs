@@ -1,6 +1,7 @@
 class Documents::OrderStateMachine
   include Statesman::Machine
 
+  # TODO-prikha: Добавить статус read, он присваивается,когда организация получатель открывает его.
   state :unsaved, initial: true
   state :draft
   state :prepared
