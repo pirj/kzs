@@ -4,8 +4,9 @@
   min-width: 300px;
   max-height: 400px;
 //  overflow-y: scroll;
-
-  & __header{
+}
+._doc-state__header{
+    $color: $gray-light;
     padding: 20px 20px 10px;
 
     h5, h6{ @extend .text-help !optional; }
@@ -23,11 +24,12 @@
     .h4{padding-bottom: 12px;}
   }
 
-  & __progress{
+._doc-state__progress{
     margin: 0 10px 20px;
   }
 
-  & __actions{
+._doc-state__actions{
+  $color: $gray-light;
     $padding: 10px 20px;
     a{
       display: block;
@@ -55,4 +57,3 @@
       padding: $padding;
     }
   }
-}
