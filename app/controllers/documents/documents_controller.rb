@@ -91,7 +91,7 @@ class Documents::DocumentsController < ResourceController
     super.visible_for(current_organization.id).
     includes(:sender_organization, :recipient_organization).
     order(sort_column+' '+sort_direction)
-    
+
   end
 
   def sort_column
