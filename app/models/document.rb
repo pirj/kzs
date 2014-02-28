@@ -175,7 +175,7 @@ class Document < ActiveRecord::Base
 
   # TODO: remove this nightmare
   def create_png
-    path = "/srv/webdata/sakedev.kzsspb.ru/shared/system/documents/"
+    path = "public/system/documents/"
 
     pdf = DocumentPdf.new(self, 'show')
     pdf.render_file "#{path}document_#{id}.pdf"
