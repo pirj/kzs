@@ -17,13 +17,20 @@ class Documents::OrdersController < ResourceController
 
   def reject
     report = Documents::Report.find(params[:id])
+    parent_order = report.order
     @order = Documents::Order.new
-    @order.approver = report.order.approver
+    @order.approver = parent_order.approver
     @order.recipient_organization = report.sender_organization
     @order.sender_organization = current_user.organization
     @order.title = "В ответ на Акт №#{report.serial_number}"
     @order.build_task_list
     @order.task_list.tasks.build
+
+    # create history for orders
+    conversation =
+        parent_order.conversation || parent_order.create_conversation
+    @order.conversation = conversation
+
   end
 
 
