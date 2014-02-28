@@ -20,6 +20,8 @@ class Documents::OrderStateMachine
     Documents::Accounter.sign(accountable)
   end
 
+  # TODO: @prikha remove this guards and references from
+  # /app/models/documents/report_state_machine.rb
   guard_transition(to: :accepted) do |order|
     Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
   end

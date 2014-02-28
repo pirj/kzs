@@ -16,7 +16,19 @@ class Documents::ReportStateMachine
   transition from: :approved, to: [:sent]
   transition from: :sent,     to: [:accepted, :rejected]
 
-  after_transition(to: :accepted) do |accountable, transition|
+  after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
   end
+
+  # TODO: @prikha remove this guards and references from
+  # /app/models/documents/order_state_machine.rb
+
+  after_transition(to: :accepted) do |report, transition|
+    report.order.transition_to!(:accepted,transition.metadata)
+  end
+
+  after_transition(to: :rejected) do |report, transition|
+    report.order.transition_to!(:rejected,transition.metadata)
+  end
+
 end

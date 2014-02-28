@@ -89,7 +89,7 @@ class Document < ActiveRecord::Base
   scope :visible_for,  ->(org_id){
     where do
       (sender_organization_id.eq(org_id) & state.not_eq('draft'))|
-      (recipient_organization_id.eq(org_id) & state.in(%w(sent read pending accepted rejected)))
+      (recipient_organization_id.eq(org_id) & state.in(%w(sent accepted rejected)))
     end
   }
 
