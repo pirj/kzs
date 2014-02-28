@@ -30,7 +30,7 @@
 
 
   .col-sm-5
-    = pdf_to_png(resource,190,270)
+    = image_tag("/system/documents/document_#{resource.document.id}.png", class: 'table-img-md')
 
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
