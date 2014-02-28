@@ -40,6 +40,6 @@ class Documents::ReportsController < ResourceController
   private
 
   def orders_collection_for_select
-    @orders_collection_for_select ||= Documents::Order.with_state('approved')
+    @orders_collection_for_select ||= Documents::Order.with_state('sent').to(current_organization.id)
   end
 end

@@ -10,6 +10,10 @@ module Documents::Accountable
 
     scope :with_state, ->(state) { includes(:document).where('documents.state' => state) }
 
+    scope :from, ->(o_id) { includes(:document).where('documents.sender_organization_id' => o_id) }
+
+    scope :to, ->(o_id) { includes(:document).where('documents.recipient_organization_id' => o_id) }
+
     scope :from_or_to, ->(o_id){
       includes{document}.where do
         (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
