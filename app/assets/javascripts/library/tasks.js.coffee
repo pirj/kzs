@@ -52,6 +52,7 @@ $ ->
       val = $elem.val()
 
       $elem.attr('value', val)
+      console.log val
       $target = $elem.closest(T.task_form.task_container).find("#{T.task_form.html_container} .#{$elem.data('target')}")
       $target.text(val)
     )

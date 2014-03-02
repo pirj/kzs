@@ -2,12 +2,12 @@
   .js-task-form-fields
     = f.input :title, input_html: { rows: 1, data: { target: 'js-task-title' } }
     = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_html: { data: { target: 'js-task-deadline' } }, input_wrapper_html: { class: 'col-sm-3' }
-    = f.input :body, input_html: { rows: 3, data: { target: 'js-task-title' } }
+    = f.input :body, input_html: { rows: 3, data: { target: 'js-task-body' } }
 
   .js-task-form-inserted-values
     ._task
       .col-sm-7
-        = link_to f.object.title, '#', class: 'js-task-title'
+        .text-help.js-task-title = f.object.title
         .text-help.js-task-body = f.object.body
       .col-sm-3.js-task-deadline = f.object.deadline.try(:strftime, '%d.%m.%Y')
       .col-sm-2
