@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-layout 'base'
+  layout 'base'
 
   def index
     @users = User.all
@@ -29,27 +29,27 @@ layout 'base'
 
   def create
     @user = User.new(params[:user])
-    
-    
+
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to users_path, notice: t("user_successfully_created") }
-      else
-        format.html { render action: "new" }
+      format.html do
+        if @user.save
+          redirect_to users_path, notice: t("user_successfully_created")
+        else
+          render action: "new"
+        end
       end
     end
-
   end
 
   def update
     @user = User.find(params[:id])
-      if @user.update_attributes(params[:user])
-        flash[:notice] = t("user_successfully_updated")
-        sign_in(@user, :bypass => true)
-        redirect_to users_path
-      else
-        render :action => 'edit'
-      end
+    if @user.update_attributes(params[:user])
+      flash[:notice] = t("user_successfully_updated")
+      sign_in(@user, bypass: true)
+      redirect_to users_path
+    else
+      render action: 'edit'
+    end
   end
 
   def destroy
@@ -61,5 +61,4 @@ layout 'base'
       format.json { head :no_content }
     end
   end
-
 end

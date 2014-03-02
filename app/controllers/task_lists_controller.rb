@@ -1,4 +1,4 @@
-# TODO this would not work too
+# TODO: important! this would not work too
 class TaskListsController < ApplicationController
   def create
     @task_list = TaskList.new(params[:task_list])
@@ -9,21 +9,18 @@ class TaskListsController < ApplicationController
     document = Document.find(@statement.document_id)
     document.with_comments = true
     document.save
-    
-    
+
     if @task_list.save
       assign_organizations_to_tasks(@statement)
-      redirect_to statement_path(@statement), notice: t("task_list_successfully_created")
+      redirect_to statement_path(@statement),
+                  notice: t("task_list_successfully_created")
     else
       render action: "new"
     end
-    
-
   end
-  
-  
+
   private
-    
+
   def assign_organizations_to_tasks(document)
     document.task_list.tasks.each do |task|
       task.deadline = document.task_list.deadline
@@ -32,5 +29,4 @@ class TaskListsController < ApplicationController
       task.save!
     end
   end
-  
 end
