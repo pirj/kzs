@@ -41,9 +41,9 @@ class DocumentPdf < Prawn::Document
     float {text "<color rgb='989898'>Номер документа: #{@document.serial_number}</color>", :size => 10, :inline_format => true}
     text "<color rgb='989898'>г. Санкт-Петербург</color>", :align => :right, :size => 10, :inline_format => true
     # TODO: @justvitalius код ниже вызывает ошибку.
-    #if @document.date?
-    #  text "<color rgb='989898'>От #{@document.date.strftime('%d.%m.%Y')}</color>", :size => 10, :inline_format => true
-    #end
+    if @document.date
+      text "<color rgb='989898'>От #{@document.date.strftime('%d.%m.%Y')}</color>", :size => 10, :inline_format => true
+    end
     move_down 30
     text "#{remove_html(@document.body)}", :size => 10, :inline_format => true, :indent_paragraphs => 60, :align => :justify
     move_down 30
