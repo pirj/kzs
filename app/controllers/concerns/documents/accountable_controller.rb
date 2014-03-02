@@ -3,8 +3,11 @@ module Documents::AccountableController
 
   included do
     layout 'base'
+    before_filter :mark_as_read, only: :show
     actions :all, except: [:index]
   end
+
+
 
   def create
     create! do |success, failure|
@@ -41,4 +44,13 @@ module Documents::AccountableController
     {user_id: current_user.id}
   end
 
+  def mark_as_read
+    if can_mark_as_read?
+      resource.document.update_column(:read_at, Time.now)
+    end
+  end
+
+  def can_mark_as_read?
+    resource.recipient_organization && resource.recipient_organization.director == current_user
+  end
 end

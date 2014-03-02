@@ -53,16 +53,22 @@ module Documents
 
     def state popover_position = :left
       model_scope = object.accountable_type.downcase.gsub('documents::','')
-      a = (object.sender_organization.id == h.current_user.organization_id) ? '_sender' : '_recipient'
 
-      state = object.accountable.current_state.to_s
-      state += (state.to_sym == :sent) ? a : ''
 
-      css_class = case object.accountable.current_state.to_sym
+
+      state = if object.state.to_sym == :sent && object.read_at != nil
+        'read'
+      elsif object.state.to_sym == :sent && object.read_at == nil
+        (object.sender_organization.id == h.current_user.organization_id) ? 'sent_sender' : 'sent_recipient'
+      else
+        object.state
+      end
+      css_class = case state.to_sym
                     when :draft then 'default'
                     when :prepared then 'primary'
                     when :approved then 'success'
-                    when :sent then 'warning'
+                    when :sent_sender then 'warning'
+                    when :sent_recipient then 'warning'
                     when :read then 'warning'
                     when :trashed then 'danger'
                     else 'default'

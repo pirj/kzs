@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140227054224) do
+ActiveRecord::Schema.define(:version => 20140302070425) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20140227054224) do
     t.datetime "updated_at",                                   :null => false
     t.datetime "approved_at"
     t.integer  "creator_id"
+    t.datetime "read_at"
   end
 
   add_index "documents", ["accountable_id", "accountable_type"], :name => "index_documents_on_accountable_id_and_accountable_type", :unique => true

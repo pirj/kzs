@@ -39,12 +39,15 @@ ru:
           accepted: принять
 
         states:
+          document_states: &document_states
+
           officialmail:
             draft: черновик
             prepared: подготовлено
             approved: подписано
             sent_recipient: получено
             sent_sender: отправлено
+            read: прочитано
             trashed: удалено
             unsaved: произошла ошибка сохранения документа
 
@@ -54,6 +57,7 @@ ru:
             approved: подписано
             sent_recipient: получено
             sent_sender: отправлено
+            read: прочитано
             accepted: исполнено
             rejected: отклонено
             trashed: удален
@@ -65,6 +69,7 @@ ru:
             approved: подписан
             sent_recipient: получен
             sent_sender: отправлен
+            read: прочтен
             accepted: исполнен
             rejected: отклонен
             trashed: удален
