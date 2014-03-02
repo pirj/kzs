@@ -1,15 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   before_filter :authenticate_user!
 
   helper_method :current_organization, :can_apply_state?, :ability_for
-  
+
   def access_denied(exception)
-    redirect_to root_path, :alert => t('access_denied')
+    redirect_to root_path, alert: t('access_denied')
   end
-  
-  
+
   private
 
   # Overwriting the sign_out redirect path method
@@ -33,10 +32,11 @@ class ApplicationController < ActionController::Base
   end
 
   unless Rails.application.config.consider_all_requests_local
-    rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+    rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }
   end
 
   private
+
   def render_error(status, exception)
     respond_to do |format|
       format.html { render template: "errors/error_#{status}", layout: 'application', status: status }
@@ -44,5 +44,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def renderable_exceptions
+    [ActionController::RoutingError,
+     ActionController::UnknownController,
+     ::AbstractController::ActionNotFound,
+     ActiveRecord::RecordNotFound]
+  end
 end

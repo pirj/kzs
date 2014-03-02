@@ -3,7 +3,7 @@
   = header_title do
     h1 = @organization.full_title
     div
-      - if is_may_edit_organization(@organization.id)
+      - if may_edit_organization?(@organization.id)
         = link_to @organization.edit_path, class: 'link-muted' do
           span.fa.fa-edit
           span Редактировать
