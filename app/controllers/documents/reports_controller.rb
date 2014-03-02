@@ -16,10 +16,13 @@ class Documents::ReportsController < ResourceController
   end
 
   def show
-    show! { @report = Documents::ShowDecorator.decorate(resource)
-            order = Documents::Order.find(resource.order_id)
-            @tasks = Tasks::ListDecorator.decorate(order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
-            }
+    show! do
+      @report = Documents::ShowDecorator.decorate(resource)
+      order = Documents::Order.find(resource.order_id)
+      tasks = order.tasks.order('created_at ASC')
+      @tasks = Tasks::ListDecorator.decorate tasks,
+                                             with: Tasks::ListShowDecorator
+    end
   end
 
   def create
@@ -36,10 +39,11 @@ class Documents::ReportsController < ResourceController
     super
   end
 
-
   private
 
   def orders_collection_for_select
-    @orders_collection_for_select ||= Documents::Order.with_state('sent').to(current_organization.id)
+    @orders_collection_for_select ||= Documents::Order
+                                      .with_state('sent')
+                                      .to(current_organization.id)
   end
 end

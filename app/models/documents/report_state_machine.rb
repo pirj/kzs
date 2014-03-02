@@ -24,11 +24,10 @@ class Documents::ReportStateMachine
   # /app/models/documents/order_state_machine.rb
 
   after_transition(to: :accepted) do |report, transition|
-    report.order.transition_to!(:accepted,transition.metadata)
+    report.order.transition_to!(:accepted, transition.metadata)
   end
 
   after_transition(to: :rejected) do |report, transition|
-    report.order.transition_to!(:rejected,transition.metadata)
+    report.order.transition_to!(:rejected, transition.metadata)
   end
-
 end

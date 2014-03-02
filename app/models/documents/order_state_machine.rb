@@ -1,7 +1,6 @@
 class Documents::OrderStateMachine
   include Statesman::Machine
 
-  # TODO-prikha: Добавить статус read, он присваивается,когда организация получатель открывает его.
   state :unsaved, initial: true
   state :draft
   state :prepared
@@ -24,10 +23,14 @@ class Documents::OrderStateMachine
   # TODO: @prikha remove this guards and references from
   # /app/models/documents/report_state_machine.rb
   guard_transition(to: :accepted) do |order|
-    Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
+    Documents::Report.where(order_id: order.id).with_state(guarded).exists?
   end
 
   guard_transition(to: :rejected) do |order|
-    Documents::Report.where(order_id: order.id).with_state(%w(sent accepted rejected)).exists?
+    Documents::Report.where(order_id: order.id).with_state(guarded).exists?
+  end
+
+  def guarded
+    %w(sent accepted rejected)
   end
 end

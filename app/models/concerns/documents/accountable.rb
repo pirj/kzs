@@ -8,24 +8,25 @@ module Documents::Accountable
 
     validates_presence_of :document
 
+    # rubocop:disable LineLength
     scope :with_state, ->(state) { includes(:document).where('documents.state' => state) }
 
     scope :from, ->(o_id) { includes(:document).where('documents.sender_organization_id' => o_id) }
 
     scope :to, ->(o_id) { includes(:document).where('documents.recipient_organization_id' => o_id) }
 
-    scope :from_or_to, ->(o_id){
-      includes{document}.where do
+    scope :from_or_to, lambda { |o_id|
+      includes { document }.where do
         (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
       end
     }
 
-    scope :approved, includes{document}.where{document.approved_at.not_eq(nil)}
+    scope :approved, includes { document }.where { document.approved_at.not_eq(nil) }
+    # rubocop:enable LineLength
 
-    #TODO @prikha write why is it nessesary instead of moving it to
-    #TODO clean after document list is done
+    # TODO: @prikha write why is it nessesary instead of moving it to
+    # TODO: clean after document list is done
     after_initialize :setup_document
-
 
   end
 
@@ -44,5 +45,4 @@ module Documents::Accountable
   def setup_document
     self.document ||= Document.new
   end
-
 end

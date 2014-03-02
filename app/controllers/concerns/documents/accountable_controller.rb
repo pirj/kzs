@@ -7,8 +7,6 @@ module Documents::AccountableController
     actions :all, except: [:index]
   end
 
-
-
   def create
     create! do |success, failure|
       success.html do
@@ -29,6 +27,7 @@ module Documents::AccountableController
     end
   end
 
+# rubocop:disable LineLength
   def assign_state
     state = params[:state]
     if can_apply_state?(state, resource) && resource.transition_to!(state, default_metadata)
@@ -37,20 +36,23 @@ module Documents::AccountableController
       redirect_to :back, notice: t('access_denied')
     end
   end
+# rubocop:enable LineLength
 
   private
 
   def default_metadata
-    {user_id: current_user.id}
+    { user_id: current_user.id }
   end
 
   def mark_as_read
     if can_mark_as_read?
-      resource.document.update_column(:read_at, Time.now)
+      document = resource.document
+      document.update_column(:read_at, Time.now)
     end
   end
 
   def can_mark_as_read?
-    resource.recipient_organization && resource.recipient_organization.director == current_user
+    resource.recipient_organization &&
+    resource.recipient_organization.director == current_user
   end
 end

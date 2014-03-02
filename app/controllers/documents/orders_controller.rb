@@ -30,9 +30,7 @@ class Documents::OrdersController < ResourceController
     conversation =
         parent_order.conversation || parent_order.create_conversation
     @order.conversation = conversation
-
   end
-
 
   def new
     new! do
@@ -42,10 +40,11 @@ class Documents::OrdersController < ResourceController
     end
   end
 
-
   def show
     @order = Documents::ShowDecorator.decorate(resource)
-    @tasks = Tasks::ListDecorator.decorate(@order.tasks.order('created_at ASC'), with: Tasks::ListShowDecorator)
+    tasks = @order.tasks.order('created_at ASC')
+    @tasks = Tasks::ListDecorator.decorate tasks,
+                                           with: Tasks::ListShowDecorator
     show!
   end
 
@@ -67,5 +66,4 @@ class Documents::OrdersController < ResourceController
   def history
     @history ||= resource.history_for(current_organization.id)
   end
-
 end

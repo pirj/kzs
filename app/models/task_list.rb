@@ -3,23 +3,23 @@ class TaskList < ActiveRecord::Base
   belongs_to :order
   has_many :tasks
   accepts_nested_attributes_for :tasks, allow_destroy: true
-  
+
   scope :completed, -> { where(completed: true) }
 
   after_commit :finalize, if: :all_tasks_complete?
-  
+
   def progress
-    if self.tasks.present?
+    if tasks.present?
       total = tasks.count.to_f
       completed = tasks.completed.count.to_f
-      (completed/total*100).ceil
+      (completed / total * 100).ceil
     else
       0
     end
   end
-  
+
   def all_tasks_completed?
-    self.tasks.count == self.tasks.completed.count
+    tasks.count == tasks.completed.count
   end
 
   private

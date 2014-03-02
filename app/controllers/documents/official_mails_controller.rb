@@ -12,10 +12,12 @@ class Documents::OfficialMailsController < ResourceController
     render action: :new
   end
 
+  # TODO-prikha: need refactor next code.
+  # In document-view exists only Document.id,
+  # but reply action works with Mail.id
+
+  # rubocop:disable LineLength
   def reply
-    # TODO-prikha: need refactor next code.
-    # In document-view exists only Document.id,
-    # but reply action works with Mail.id
     mail_id = Document.find(params[:id]).accountable_id
     @parent_official_mail = end_of_association_chain.find(mail_id)
 
@@ -33,9 +35,10 @@ class Documents::OfficialMailsController < ResourceController
     # render reply template
     # render action: :new
   end
+  # rubocop:enable LineLength
 
   def show
-    show!{ @official_mail = Documents::ShowDecorator.decorate(resource) }
+    show! { @official_mail = Documents::ShowDecorator.decorate(resource) }
   end
 
   def create
@@ -54,6 +57,12 @@ class Documents::OfficialMailsController < ResourceController
   private
 
   def history
-    @history ||= Documents::ListDecorator.decorate resource.history_for(current_organization.id), with: Documents::ListShowDecorator
+    @history ||=
+        Documents::ListDecorator.decorate mail_history,
+                                          with: Documents::ListShowDecorator
+  end
+
+  def mail_history
+    resource.history_for(current_organization.id)
   end
 end
