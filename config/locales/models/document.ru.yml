@@ -47,6 +47,7 @@ ru:
             approved: подписано
             sent_recipient: получено
             sent_sender: отправлено
+            sent: отправлено
             read: прочитано
             trashed: удалено
             unsaved: произошла ошибка сохранения документа
@@ -57,6 +58,7 @@ ru:
             approved: подписано
             sent_recipient: получено
             sent_sender: отправлено
+            sent: отправлено
             read: прочитано
             accepted: исполнено
             rejected: отклонено
@@ -69,6 +71,7 @@ ru:
             approved: подписан
             sent_recipient: получен
             sent_sender: отправлен
+            sent: отправлен
             read: прочтен
             accepted: исполнен
             rejected: отклонен
