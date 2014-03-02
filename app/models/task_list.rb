@@ -5,9 +5,8 @@ class TaskList < ActiveRecord::Base
   accepts_nested_attributes_for :tasks, allow_destroy: true
   
   scope :completed, -> { where(completed: true) }
-  
-  #TODO: @prikha do nothing for now
-  #after_save :update_statement
+
+  after_commit :finalize, if: :all_tasks_complete?
   
   def progress
     if self.tasks.present?
@@ -25,12 +24,7 @@ class TaskList < ActiveRecord::Base
 
   private
 
-  # TODO: @prikha removed old code
-  #def update_statement
-  #  if self.completed && self.order
-  #  end
-  #end
-  
-
-    
+  def finalize
+    update_column :completed, true
+  end
 end
