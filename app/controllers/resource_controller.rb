@@ -9,18 +9,14 @@ class ResourceController < ApplicationController
                 :sort_direction,
                 :current_organization_users
 
-
-  respond_to :html,:js,:json
+  respond_to :html, :js, :json
   has_scope :page, default: 1, only: [:index]
 
-
   private
-  #def end_of_association_chain
-  #  super.order(sort_column + " " + sort_direction)
-  #end
 
   def sort_column
-    resource_class.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+    column_names = resource_class.column_names
+    column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
   end
 
   def sort_direction
@@ -36,17 +32,19 @@ class ResourceController < ApplicationController
   end
 
   def association_attributes
-    associations(:belongs_to).map{|a| a.options[:foreign_key] || "#{a.name}_id"}
+    associations(:belongs_to).map do |assoc|
+      assoc.options[:foreign_key] || "#{assoc.name}_id"
+    end
   end
 
-  def associations(macro=nil)
-    assoc=resource_class.reflect_on_all_associations
-    assoc.select!{|a| a.macro==macro.to_sym} unless macro.blank?
+  def associations(macro = nil)
+    assoc = resource_class.reflect_on_all_associations
+    assoc.select! { |a| a.macro == macro.to_sym } unless macro.blank?
     assoc
   end
 
   def current_organization_users
-    @_current_organization_users ||= User.where(organization_id: current_user.organization_id).order('first_name ASC')
+    @current_organization_users ||=
+        current_organization.users.order('first_name ASC')
   end
-
 end

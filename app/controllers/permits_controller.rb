@@ -2,14 +2,13 @@ class PermitsController < ApplicationController
   layout 'base'
   helper_method :sort_column, :sort_direction
 
-  before_filter :organizations, only: [:create, :edit, :user, :vehicle, :daily]       #TODO: @vit need refactor
+  before_filter :organizations, only: [:create, :edit, :user, :vehicle, :daily]       # TODO: @vit need refactor
   before_filter :permit_types, only: [:create, :edit, :user, :vehicle, :daily]
   before_filter :car_brand_types, only: [:create, :edit, :user, :vehicle, :daily]
   before_filter :car_brands, only: [:create, :edit, :user, :vehicle, :daily]
   before_filter :number_letters, only: [:create, :edit, :vehicle, :daily]
   before_filter :daily_document_type, only: [:create, :edit, :daily]
   before_filter :num_regions, only: [:create, :edit, :vehicle, :daily]
-
 
   # TODO "authorize! :create, @permit" прописан не для всех action
 
@@ -38,7 +37,7 @@ class PermitsController < ApplicationController
     elsif params[:scope] == "for_print"
       @permits = @permits.for_print.walkers
     else
-      @permits = @permits.where{(agreed == true) || (rejected == true)}
+      @permits = @permits.where { (agreed == true) || (rejected == true) }
     end
   end
 
@@ -84,8 +83,8 @@ class PermitsController < ApplicationController
           vehicle.user_ids = nil # FIX вместо валидации "validates :user_ids" в модели Vehicle
         else
           # TODO нет проверки, можно залить левые ids
-          #drivers = params[:permit][:drivers].flatten.compact
-          #vehicle.user_ids = User.find(drivers).map(&:id)
+          # drivers = params[:permit][:drivers].flatten.compact
+          # vehicle.user_ids = User.find(drivers).map(&:id)
           drivers = params[:permit][:drivers]
           vehicle.user_ids = drivers
           vehicle.save!
@@ -95,13 +94,13 @@ class PermitsController < ApplicationController
       redirect_to @permit, notice: t('permit_request_created')
     else
       case @permit.permit_type
-        when 'user'
-          render action: 'user'
-        when 'vehicle'
-          @drivers = User.with_permit
-          render action: 'vehicle'
-        when 'daily'
-          render action: 'daily'
+      when 'user'
+        render action: 'user'
+      when 'vehicle'
+        @drivers = User.with_permit
+        render action: 'vehicle'
+      when 'daily'
+        render action: 'daily'
       end
     end
   end
@@ -112,7 +111,7 @@ class PermitsController < ApplicationController
     @daily_pass = @permit.daily_pass
     respond_to do |format|
       format.html
-      format.js {@permit = @permit}
+      format.js { @permit = @permit }
       format.pdf do
         pdf = PermitPdf.new(@permit, view_context)
         send_data pdf.render, filename: "permit#{@permit.id}.pdf",
@@ -128,7 +127,7 @@ class PermitsController < ApplicationController
     if current_user.has_permission?(10) || @permit.organization_id == current_user.organization_id
       @drivers = User.with_permit
     else
-      redirect_to :back, :alert => t('access_denied')
+      redirect_to :back, alert: t('access_denied')
     end
 
     @users = User.all
@@ -139,7 +138,7 @@ class PermitsController < ApplicationController
 
     if @permit.permit_type == 'vehicle'
       drivers = params[:permit][:drivers]
-      drivers = drivers.delete_if{ |x| x.empty? }
+      drivers = drivers.delete_if { |x| x.empty? }
     end
 
     if @permit.update_attributes(params[:permit])
@@ -149,7 +148,8 @@ class PermitsController < ApplicationController
         vehicle.save!
       end
 
-      redirect_to permit_path(@permit), notice: t('permit_successfully_updated')
+      redirect_to permit_path(@permit),
+                  notice: t('permit_successfully_updated')
     else
       organizations
       render action: "edit"
@@ -162,10 +162,7 @@ class PermitsController < ApplicationController
     @permit.rejected = false
     @permit.save
 
-    respond_to do |format|
-      format.html { redirect_to permit_path(@permit), notice: t('permit_agreed') }
-      format.json
-    end
+    redirect_to permit_path(@permit), notice: t('permit_agreed')
   end
 
   def reject
@@ -174,10 +171,7 @@ class PermitsController < ApplicationController
     @permit.rejected = true
     @permit.save
 
-    respond_to do |format|
-      format.html { redirect_to permit_path(@permit), notice: t('permit_rejected') }
-      format.json
-    end
+    redirect_to permit_path(@permit), notice: t('permit_rejected')
   end
 
   def cancel
@@ -185,10 +179,7 @@ class PermitsController < ApplicationController
     @permit.canceled = true
     @permit.save
 
-    respond_to do |format|
-      format.html { redirect_to permit_path(@permit), notice: t('permit_canceled') }
-      format.json
-    end
+    redirect_to permit_path(@permit), notice: t('permit_canceled')
   end
 
   def release
@@ -201,10 +192,7 @@ class PermitsController < ApplicationController
 
     @permit.save
 
-    respond_to do |format|
-      format.html { redirect_to permit_path(@permit), notice: t('permit_released') }
-      format.json
-    end
+    redirect_to permit_path(@permit), notice: t('permit_released')
   end
 
   def issue
@@ -212,17 +200,14 @@ class PermitsController < ApplicationController
     @permit.issued = true
     @permit.save
 
-    respond_to do |format|
-      format.html { redirect_to permit_path(@permit), notice: t('permit_issued') }
-      format.json
-    end
+    redirect_to permit_path(@permit), notice: t('permit_issued')
   end
 
   def group_print
-    @permits = Permit.where(:id => params[:permit_ids])
+    @permits = Permit.where(id: params[:permit_ids])
 
     pdf = PermitGroupPrintPdf.new(@permits, view_context)
-    # TODO желательно в будущем вынести генерацию pdf, например, в delayed_job (или аналог)
+    # TODO: move pdf generation in backgroung (delayed_job for ex)
     send_data pdf.render, filename: "permits.pdf",
                           type: "application/pdf",
                           disposition: "inline"
@@ -242,8 +227,8 @@ class PermitsController < ApplicationController
     @organizations = Organization.all
   end
 
-  def permit_types            #TODO: @vit need check
-    @permit_types ||= Permit::PERMIT_CLASSES.map{ |a| [ t(a), a ] }
+  def permit_types            # TODO: @vit need check
+    @permit_types ||= Permit::PERMIT_CLASSES.map { |a| [t(a), a] }
   end
 
   def car_brand_types
@@ -259,7 +244,7 @@ class PermitsController < ApplicationController
   end
 
   def daily_document_type
-    @daily_document_type ||= DailyPass::DOCUMENT_TYPES.map{ |t| [t, t] }
+    @daily_document_type ||= DailyPass::DOCUMENT_TYPES.map { |t| [t, t] }
   end
 
   def num_regions
