@@ -1,0 +1,9 @@
+var $tasks = $(app.tasks.order_tasks_list.form + ' input[type=checkbox]');
+var $completed_tasks = $(app.tasks.order_tasks_list.form + ' input[type=checkbox]:checked');
+
+if ($tasks.length == $completed_tasks.length){
+  console.log('equals');
+  $('.js-orders-new-report-btn').show();
+}else{
+  $('.js-orders-new-report-btn').hide();
+}

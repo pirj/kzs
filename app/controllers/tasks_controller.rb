@@ -2,6 +2,7 @@
 class TasksController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+
   def index
     @tasks = Task.order(sort_column + " " + sort_direction)
     if params[:scope] == "expired"
@@ -39,6 +40,15 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes(params[:task])
+
+    respond_to do |format|
+      format.js { render layout: false }
+    end
   end
 
   private

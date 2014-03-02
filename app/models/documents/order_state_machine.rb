@@ -30,7 +30,7 @@ class Documents::OrderStateMachine
     Documents::Report.where(order_id: order.id).with_state(guarded).exists?
   end
 
-  def guarded
+  def self.guarded
     %w(sent accepted rejected)
   end
 end

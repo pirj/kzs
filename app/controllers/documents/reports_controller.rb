@@ -6,6 +6,15 @@ class Documents::ReportsController < ResourceController
 
   helper_method :orders_collection_for_select
 
+  def new
+    @report = Documents::Report.new
+    if params[:order_id].present?
+      order = Documents::Order.find(params[:order_id])
+      @report.order = order
+    end
+    new!
+  end
+
   def copy
     @parent_report = end_of_association_chain.find(params[:id])
 

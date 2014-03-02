@@ -1,7 +1,7 @@
 Kzs::Application.routes.draw do
   root :to => 'dashboard#index'
 
-  resources :licenses
+  #resources :licenses
   #get "/users/sign_out" => "sessions#destroy"
 
 # TODO BAD
@@ -107,7 +107,7 @@ Kzs::Application.routes.draw do
 
   # TODO GOOD
   # define only routes you do need
-  resources :tasks, only: [:index, :show] do
+  resources :tasks, only: [:index, :update] do
     #TODO EQUIVALENT
     # get 'execute', on: :member
     member do

@@ -34,14 +34,23 @@
 
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
-  - @tasks.each do |t|
-    = t.task_body
+  - @tasks.each do |task|
+    = simple_form_for task, html: { remote: true, class: 'js-tasks-order-task-form' } do |f|
+      = f.input :completed, label: false
+      = task.title
+      = task.body
+
+  /- @tasks.each do |t|
+  /  = t.task_body
 
 .row.b-offset-sm
   h2.col-sm-12 Прикрепленные документы:
   = attach_doc @order
 
-.b-offset-sm= render 'documents/application/change_state_links', resource: resource
+.b-offset-sm
+  = render 'documents/application/change_state_links', resource: resource
+  - css_class = 'hidden' unless resource.tasks.count == resource.tasks.completed.count
+  = link_to 'Создать Акт', new_documents_report_path(order_id: resource.id), class: "btn btn-primary js-orders-new-report-btn #{css_class}"
 
 .row
   h2.col-sm-12 История распоряжений и актов:

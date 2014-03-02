@@ -1,5 +1,7 @@
 $ ->
   window.app.tasks =
+    order_tasks_list:
+      form: '.js-tasks-order-task-form'
     add_task_btn: '.js-tasks-add-task'
     task_remove_btn: '.js-task-remove'
     main_form_container: '.js-tasks-main-form'
@@ -76,7 +78,11 @@ $ ->
     $(T.add_task_modal).modal('hide')
   )
 
-
+  # submit form on task checked over ajax
+  $(document).on('ifChanged', "#{T.order_tasks_list.form} input", (e) ->
+    $form = $(e.target).closest(T.order_tasks_list.form)
+    $form.submit()
+  )
 
 
 
