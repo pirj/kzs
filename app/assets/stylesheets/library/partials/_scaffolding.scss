@@ -98,7 +98,15 @@ img {
 
 //border around img
 .img-bordered {
+  @extend .img-container !optional;
   border: 1px solid $thumbnail-border;
+}
+
+.img-container {
+  display: inline-block;
+  img {
+    width: 100%;
+  }
 }
 
 // Horizontal rules
