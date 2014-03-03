@@ -68,12 +68,12 @@ ru:
           report:
             draft: черновик
             prepared: подготовлен
-            approved: подписан
+            approved: согласован
             sent_recipient: получен
             sent_sender: отправлен
             sent: отправлен
             read: прочтен
-            accepted: исполнен
+            accepted: подписан
             rejected: отклонен
             trashed: удален
             unsaved: произошла ошибка сохранения документа
