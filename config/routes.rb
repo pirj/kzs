@@ -143,10 +143,10 @@ Kzs::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  # added for redirect to customization error in /errors/error_404
-  unless Rails.application.config.consider_all_requests_local
-    match '*not_found', to: 'errors#error_404'
-  end
+  # # added for redirect to customization error in /errors/error_404
+  # unless Rails.application.config.consider_all_requests_local
+  #   match '*not_found', to: 'errors#error_404'
+  # end
 
   get 'errors/error_404'
 
