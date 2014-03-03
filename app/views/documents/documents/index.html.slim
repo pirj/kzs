@@ -33,6 +33,10 @@ ul.nav.nav-pills
       span.fa.fa-filter
       span Фильтр
 
+  li
+    = link_to request.url, class: 'btn btn-default' do
+      span.fa.fa-refresh
+
   li = link_to 'сбросить фильтрацию', documents_documents_path, class: 'btn btn-link-muted'
 
 
