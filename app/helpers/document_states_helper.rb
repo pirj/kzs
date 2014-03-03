@@ -50,6 +50,7 @@ module DocumentStatesHelper
   end
 
   def states_bar_buttons doc
+    doc = doc.document if doc.respond_to?(:document)
     content_tag(:div, class: '_doc-state__actions') do
       states_action_links(doc).html_safe +
       link_to( history_documents_document_path(doc), remote: true ) do

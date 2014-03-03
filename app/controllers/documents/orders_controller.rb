@@ -53,6 +53,8 @@ class Documents::OrdersController < ResourceController
     @order.sender_organization = current_organization
     @order.executor ||= current_user
     @order.creator = current_user
+    @order.build_task_list if resource.task_list.blank?
+    @order.task_list.tasks.build if resource.task_list.blank?
     super
   end
 
