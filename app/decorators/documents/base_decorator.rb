@@ -159,7 +159,7 @@ module Documents
         files = h.content_tag(:div,
           (object.document_attachments.map do |file|
 
-            h.link_to( file.attachment_file_name, file[:url], class: 'col-sm-12 link ' )
+            h.link_to( file.attachment_file_name, file.attachment.url, class: 'col-sm-12 link ' )
           end.join(', ').html_safe)   , class: '')
         h.content_tag(:div, title.html_safe + files, class: 'row')
       end
