@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
     can?(ability_name, accountable)
   end
 
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }
-  end
+  # unless Rails.application.config.consider_all_requests_local
+  #   rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }
+  # end
 
   private
 
