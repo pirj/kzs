@@ -1,33 +1,8 @@
 ru:
   activerecord:
-    models:
-      document:
-        one: "Документ"
-        other: "Документы"
-        many: "Документы"
-        few: "Документы"
-
-    attributes:
-      document: &document_attributes
-        approver_id: Контрольное лицо
-        approver:    Контрольное лицо
-        body: Текст
-        confidential: Конфиденциально
-        executor_id: Исполнитель
-        executor:    Исполнитель
-        sender_organization_id: Организация-отправитель
-        sender_organization: Организация-отправитель
-        serial_number: Серийный номер
-        recipient_organization: Организация-получатель
-        recipient_organization_id: Организация-получатель
-        title: Тема
-
-        accountable_types:
-          documents_officialmail: письмо
-          documents_order: распоряжение
-          documents_report: акт
-
-        actions:
+    document:
+      document_state:
+        to_state:
           draft: в черновик
           prepared: подготовить
           approved: подтвердить
@@ -38,7 +13,7 @@ ru:
           rejected: отклонить
           accepted: подписать
 
-        states:
+        officialmail:
           draft: черновик
           prepared: подготовлено
           approved: подписано
@@ -48,17 +23,6 @@ ru:
           read: прочитано
           trashed: удалено
           unsaved: произошла ошибка сохранения документа
-
-          officialmail:
-            draft: черновик
-            prepared: подготовлено
-            approved: подписано
-            sent_recipient: получено
-            sent_sender: отправлено
-            sent: отправлено
-            read: прочитано
-            trashed: удалено
-            unsaved: произошла ошибка сохранения документа
 
           order:
             draft: черновик
@@ -96,13 +60,3 @@ ru:
             pending: отложить
             rejected: вернуть
             accepted: принять
-
-      documents/report:
-        body: текст акта
-        order: Распоряжение
-      documents/order:
-        deadline: дата исполнения
-        body: текст распоряжения
-      documents/official_mail:
-        recipients: Получатели
-        recipient_ids: Получатели
