@@ -2,7 +2,7 @@
   = submit_accountable(f, "prepared", class: 'btn btn-primary')
   = submit_accountable(f, "draft")
 - else
-  - %w(prepared approved sent accept read pending accept).each do |state|
+  - %w(prepared).each do |state|
     = submit_accountable(f, state, class: 'btn btn-primary') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
   - %w(rejected).each do |state|

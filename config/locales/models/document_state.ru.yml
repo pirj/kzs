@@ -16,13 +16,9 @@ ru:
         to_state:
           draft: в черновик
           prepared: подготовить
-          approved: подтвердить
+          approved: подписать
           sent: отправить
-          read: прочитать
           trashed: удалить
-          pending: поставить в очередь
-          rejected: отклонить
-          accepted: подписать
 
 
       documents/order:
