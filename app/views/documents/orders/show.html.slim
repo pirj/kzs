@@ -36,7 +36,7 @@
   h2.col-sm-12 Задачи:
   - @tasks.each do |task|
     = simple_form_for task, html: { remote: true, class: 'js-tasks-order-task-form' } do |f|
-      .form-group
+      .form-group.row
         .col-sm-1 = f.input :completed, label: false
         .col-sm-3
           = task.title
