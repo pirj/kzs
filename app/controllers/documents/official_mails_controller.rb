@@ -46,11 +46,13 @@ class Documents::OfficialMailsController < ResourceController
         Documents::OfficialMail.new(params[:documents_official_mail])
     @official_mail.sender_organization = current_organization
     @official_mail.creator = current_user
+    @official_mail.executor ||= current_user
     super
   end
 
   def update
     resource.creator = current_user
+    resource.executor ||= current_user
     super
   end
 
