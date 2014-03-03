@@ -58,7 +58,7 @@ module Documents
     def recipients_present?
       msg = I18n.t('activerecord.errors.models.documents.official_mail.attributes.recipient_ids.blank')
       unless recipient_organization || recipients.any?
-        errors.add('documents/official_mail.recipient_ids', msg)
+        errors.add('recipient_ids', msg)
       end
     end
     # rubocop:enable LineLength
