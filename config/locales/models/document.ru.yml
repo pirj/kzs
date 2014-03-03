@@ -35,8 +35,8 @@ ru:
           read: прочитать
           trashed: удалить
           pending: поставить в очередь
-          rejected: вернуть
-          accepted: принять
+          rejected: отклонить
+          accepted: подписать
 
         states:
           document_states: &document_states
