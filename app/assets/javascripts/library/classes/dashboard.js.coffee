@@ -91,7 +91,8 @@ class Dashboard
     that = this
 
     $.when(sendRequest(url.positions, 'GET', true)).then (data, textStatus) ->
-      if data is null
+
+      if data.desktop_conf is null
         a = default_widgets
       else
         a = data.desktop_conf
