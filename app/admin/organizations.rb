@@ -29,7 +29,6 @@ ActiveAdmin.register Organization do
          f.input :parent_id, :as => :select, :collection => Organization.scoped
          f.input :logo, :as => :file
          f.input :phone
-         f.input :official_mail
          f.input :date_of_registration
          f.input :tax_authority_that_registered
          f.input :certificate_of_tax_registration, :as => :file
