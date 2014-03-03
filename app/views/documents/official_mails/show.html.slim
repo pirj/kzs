@@ -26,7 +26,7 @@
   .col-sm-5
     /= link_to "/system/documents/document_#{resource.document.id}.pdf" do
       = image_tag("/system/documents/document_#{resource.document.id}.png", class: 'table-img-md')
-    = resource.link_to_pdf
+    = resource.link_to_pdf class: 'img-bordered'
 
 
 = resource.attached_files
