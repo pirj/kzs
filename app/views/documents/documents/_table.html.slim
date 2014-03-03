@@ -1,6 +1,7 @@
 - unless collection.empty?
   .row
-    h2.col-sm-12 История распоряжений и актов:
+    - if defined? title
+      h2.col-sm-12 = title
     table.table.js-row-clickable.m-table-replacement
       thead
         tr

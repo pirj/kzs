@@ -18,15 +18,15 @@
 .row
   br
   .col-sm-7
-    .row
-      = resource.number_and_date_with_label
-      = resource.creator_with_label
-      = resource.executor_link_with_label
-      = resource.conformer_link_with_label
-      = resource.deadline_date
-      = resource.approver_link_with_label
-      /= resource.sender_link_with_label
-      /= resource.recipient_link_with_label
+
+    = resource.number_and_date_with_label
+    = resource.creator_with_label
+    = resource.executor_link_with_label
+    = resource.conformer_link_with_label
+    = resource.deadline_date
+    = resource.approver_link_with_label
+    /= resource.sender_link_with_label
+    /= resource.recipient_link_with_label
 
 
   .col-sm-5
@@ -49,6 +49,9 @@
 .row.b-offset-sm
   h2.col-sm-12 Прикрепленные документы:
   = attach_doc @order
+
+.row
+  = resource.attached_files
 
 .b-offset-sm
   = render 'documents/application/change_state_links', resource: resource

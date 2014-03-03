@@ -135,7 +135,7 @@ module Documents
 
 
         a = h.content_tag( :div, I18n.t("documents.table.document_labels.conformer"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-            h.content_tag( :div, (wasd), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+            h.content_tag( :div, (conformers_list), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
         h.content_tag(:div, a, class: "row form-group")
 
 
@@ -147,10 +147,22 @@ module Documents
       #end
     end
 
-    def wasd
+    def conformers_list
       object.conformers.map do |user|
         user.first_name_with_last_name
       end.join(', ')
+    end
+
+    def attached_files
+      if object.document_attachments.present?
+        title = h.content_tag(:h2, 'Прикрепленные файлы:', class: 'col-sm-12')
+        files = h.content_tag(:div,
+          (object.document_attachments.map do |file|
+
+            h.link_to( file.attachment_file_name, file[:url], class: 'col-sm-12 link ' )
+          end.join(', ').html_safe)   , class: '')
+        h.content_tag(:div, title.html_safe + files, class: 'row')
+      end
     end
 
     def deadline_date
