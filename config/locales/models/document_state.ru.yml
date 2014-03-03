@@ -1,7 +1,18 @@
 ru:
   activerecord:
     document:
-      document_state:
+      documents/official_mail:
+        state:
+          draft: черновик
+          prepared: подготовлено
+          approved: подписано
+          sent_recipient: получено
+          sent_sender: отправлено
+          sent: отправлено
+          read: прочитано
+          trashed: удалено
+          unsaved: произошла ошибка сохранения документа
+
         to_state:
           draft: в черновик
           prepared: подготовить
@@ -13,7 +24,9 @@ ru:
           rejected: отклонить
           accepted: подписать
 
-        officialmail:
+
+      documents/order:
+        state:
           draft: черновик
           prepared: подготовлено
           approved: подписано
@@ -21,42 +34,45 @@ ru:
           sent_sender: отправлено
           sent: отправлено
           read: прочитано
-          trashed: удалено
+          accepted: исполнено
+          rejected: отклонено
+          trashed: удален
           unsaved: произошла ошибка сохранения документа
 
-          order:
-            draft: черновик
-            prepared: подготовлено
-            approved: подписано
-            sent_recipient: получено
-            sent_sender: отправлено
-            sent: отправлено
-            read: прочитано
-            accepted: исполнено
-            rejected: отклонено
-            trashed: удален
-            unsaved: произошла ошибка сохранения документа
+        to_state:
+          draft: в черновик
+          prepared: подготовить
+          approved: подтвердить
+          sent: отправить
+          read: прочитать
+          trashed: удалить
+          pending: поставить в очередь
+          rejected: отклонить
+          accepted: подписать
 
-          report:
-            draft: черновик
-            prepared: подготовлен
-            approved: согласован
-            sent_recipient: получен
-            sent_sender: отправлен
-            sent: отправлен
-            read: прочтен
-            accepted: подписан
-            rejected: отклонен
-            trashed: удален
-            unsaved: произошла ошибка сохранения документа
 
-          actions:
-            draft: в черновик
-            prepared: подготовить
-            approved: подписать
-            sent: отправить
-            read: прочитать
-            trashed: удалить
-            pending: отложить
-            rejected: вернуть
-            accepted: принять
+      documents/report:
+        state:
+          draft: черновик
+          prepared: подготовлен
+          approved: согласован
+          sent_recipient: получен
+          sent_sender: отправлен
+          sent: отправлен
+          read: прочтен
+          accepted: подписан
+          rejected: отклонен
+          trashed: удален
+          unsaved: произошла ошибка сохранения документа
+
+        to_state:
+          draft: в черновик
+          prepared: подготовить
+          approved: подтвердить
+          sent: отправить
+          read: прочитать
+          trashed: удалить
+          pending: поставить в очередь
+          rejected: отклонить
+          accepted: подписать
+
