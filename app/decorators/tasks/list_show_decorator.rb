@@ -15,15 +15,15 @@ module Tasks
     end
 
 
-    def task_body_completed
+    def task_body_completed(i)
       h.content_tag(:div, class: 'b-task row m-act ' ) do
-        num + title_and_comment + date
+        h.content_tag(:span,i.to_s.html_safe,class: 'col-sm-2  text-right') + title_and_comment + date
       end
     end
 
 
     def title_and_comment
-      h.content_tag( :div,h.content_tag( :div,title, class: 'b-task-title ')+comment, class: 'col-sm-8')
+      h.content_tag( :div,h.content_tag( :div,title, class: 'b-task-title ')+comment, class: 'col-sm-7')
     end
 
     def num
@@ -40,7 +40,7 @@ module Tasks
     end
 
     def date
-      h.content_tag( :span, DateFormatter.new(object.created_at), class: 'span col-sm-2 b-task-date')
+      h.content_tag( :span, DateFormatter.new(object.created_at), class: 'span col-sm-2 b-task-date text-left')
     end
 
     def comment

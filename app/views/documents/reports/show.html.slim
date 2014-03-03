@@ -28,8 +28,8 @@
 
 .row.b-offset-sm
   h2.col-sm-12 Выполненные задачи:
-  - @tasks.each do |t|
-    = t.task_body_completed
+  - @tasks.each.with_index(1) do |t, i|
+    = t.task_body_completed(i)
 
 = resource.attached_files
 .padding-block
