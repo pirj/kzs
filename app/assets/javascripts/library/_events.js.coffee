@@ -17,6 +17,7 @@ window.global =
     showOtherMonths: true
     dateFormat: "dd.mm.yy"
 
+
 $ ->
   # run code pretty:
   window.prettyPrint and prettyPrint()
@@ -110,3 +111,6 @@ $ ->
     console.log @
     $(@).closest('.popover').prev().popover('destroy')
   )
+
+  # initialize styling file attach button with file-title near attach button
+  $('.js-filestyle-with-title').filestyle()
