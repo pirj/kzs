@@ -188,7 +188,6 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     lumberjack (1.0.4)
-    machinist (2.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -413,7 +412,6 @@ DEPENDENCIES
   jquery-rails (~> 2.3.0)
   kaminari
   launchy
-  machinist (>= 2.0.0.beta2)
   mustache
   nested_form
   paperclip (~> 3.0)

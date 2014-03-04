@@ -5,7 +5,7 @@
         | Авторизуйтесь, пожалуйста
   .row
     .col-sm-4.col-sm-offset-4
-      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form" }) do |f|
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form spec-login-form" }) do |f|
         .row
           .col-sm-9
             .form-group

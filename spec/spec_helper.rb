@@ -2,8 +2,8 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'paperclip/matchers'
+require 'capybara/rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -13,6 +13,7 @@ require 'paperclip/matchers'
 # end with _spec.rb. You can configure this pattern with with the --pattern
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -43,6 +44,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Devise::TestHelpers, :type => :controller
-
   config.include Paperclip::Shoulda::Matchers
 end
+
