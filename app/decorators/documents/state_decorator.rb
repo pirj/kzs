@@ -15,6 +15,10 @@ module Documents
       translates_state 'to_state', state
     end
 
+    def current_state
+      accountable.current_state
+    end
+
 
     protected
 

@@ -52,18 +52,19 @@ module Documents
     end
 
     def state popover_position = :left
-      model_scope = object.accountable_type.downcase.gsub('documents::','')
+      doc = Documents::StateDecorator.decorate(object)
 
-
-
-      state = if object.state.to_sym == :sent && object.read_at != nil
-        'read'
-      elsif object.state.to_sym == :sent && object.read_at == nil
-        (object.sender_organization.id == h.current_user.organization_id) ? 'sent_sender' : 'sent_recipient'
-      else
-        object.state
-      end
-      css_class = case state.to_sym
+      #model_scope = object.accountable_type.downcase.gsub('documents::','')
+      #
+      #state = if object.state == 'sent' && object.read_at != nil
+      #          'read'
+      #        elsif object.state == 'sent' && object.read_at == nil
+      #          (object.sender_organization.id == h.current_user.organization_id) ? 'sent_sender' : 'sent_recipient'
+      #        else
+      #          object.state
+      #        end
+      css_class = 'primary'
+      css_class = case doc.current_state.to_sym
                     when :draft then 'default'
                     when :prepared then 'primary'
                     when :approved then 'success'
@@ -73,8 +74,9 @@ module Documents
                     when :trashed then 'danger'
                     else 'default'
                   end
+
       h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: popover_position.to_s } do
-        I18n.t("activerecord.attributes.document.states.#{model_scope}.#{state}")
+        doc.current_humanize_state
       end
     end
 
