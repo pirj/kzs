@@ -74,7 +74,6 @@ ActiveAdmin.register Organization do
           image_tag row.logo.url(:pdf)
         end
         row :phone
-        row :official_mail
       end
      end
 end
