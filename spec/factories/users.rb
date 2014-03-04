@@ -1,14 +1,20 @@
-# Read about factories at http://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
+  sequence(:email) { | n | "user#{n}@mail.com" }
+  sequence(:first_name) { | n | "Ivan_#{n}" }
+  sequence(:last_name) { | n | "Shestakovich_#{n}" }
+
   factory :user do
-    sequence(:email) { | n | "example#{n}@example.com" }
+    email { generate(:email) }
+
+    first_name { generate(:first_name) }
+    last_name { generate(:last_name) }
+    middle_name 'Valerievich'
+
+    position 'SAKE-man'
+    organization { FactoryGirl.create(:sender_organization) }
+
     password "password"
     password_confirmation "password"
-
-  end
-
-  factory :admin, :parent => :user do
 
   end
 end

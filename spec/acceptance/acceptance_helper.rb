@@ -1,8 +1,8 @@
 require 'spec_helper'
-
 require 'database_cleaner'
-
 require 'capybara/poltergeist'
+
+
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
