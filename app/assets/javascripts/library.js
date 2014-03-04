@@ -23,3 +23,8 @@
 //= require library/permit
 //= require ckeditor/ckeditor
 //= require_tree ./library
+
+
+if (Window === undefined){
+    Window = window
+}

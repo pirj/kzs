@@ -7,6 +7,10 @@ Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
 
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

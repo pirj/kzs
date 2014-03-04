@@ -13,6 +13,4 @@ feature "Users may authenitacting", %q{} do
       expect(page).to have_content('Авторизуйтесь, пожалуйста')
     end
   end
-
-
 end
