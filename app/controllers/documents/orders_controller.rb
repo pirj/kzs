@@ -15,6 +15,7 @@ class Documents::OrdersController < ResourceController
     render action: :new
   end
 
+  # TODO: @justvitalius why do we get Report by id in Orders controller?
   def reject
     report = Documents::Report.find(params[:id])
     parent_order = report.order
@@ -27,9 +28,12 @@ class Documents::OrdersController < ResourceController
     @order.task_list.tasks.build
 
     # create history for orders
-    conversation =
-        parent_order.conversation || parent_order.create_conversation
-    @order.conversation = conversation
+    unless parent_order.conversation_id
+      parent_order.create_conversation
+      parent_order.save!
+    end
+
+    @order.conversation = parent_order.conversation
   end
 
   def new
