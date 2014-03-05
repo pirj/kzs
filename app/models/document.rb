@@ -33,7 +33,6 @@ class Document < ActiveRecord::Base
   belongs_to :executor, class_name: 'User'
   belongs_to :creator, class_name: 'User'
   has_and_belongs_to_many :conformers, class_name: 'User'
-  before_destroy {|document| document.conformers.clear}
 
   belongs_to :sender_organization, class_name: 'Organization'
   belongs_to :recipient_organization, class_name: 'Organization'
@@ -55,6 +54,7 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
+  before_destroy {|document| document.conformers.clear}
 
   # New Scopes
   scope :lookup, lambda { |query|
