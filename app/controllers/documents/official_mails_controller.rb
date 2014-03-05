@@ -4,10 +4,8 @@ class Documents::OfficialMailsController < ResourceController
   helper_method :history
 
   def copy
-    @parent_official_mail = end_of_association_chain.find(params[:id])
-
-    @official_mail = end_of_association_chain.new
-    @official_mail.document = @parent_official_mail.document.safe_clone
+    initial = end_of_association_chain.find(params[:id])
+    @official_mail = initial.amoeba_dup
 
     render action: :new
   end

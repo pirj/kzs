@@ -27,10 +27,6 @@ module Documents
 
     validates :deadline, date: { after: Proc.new{ Time.now + 3.days } }
 
-    # TODO: this does not work for orders without task list
-    # scope :completed, ->(){joins(:task_list)
-    # .where('task_lists.completed' => true)}
-
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)
     end
@@ -40,6 +36,11 @@ module Documents
              :transition_to,
              :current_state,
              to: :state_machine
+
+    amoeba do
+      exclude_field :conversation
+      clone :document
+    end
 
     def completed?
       task_list && task_list.completed

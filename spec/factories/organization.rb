@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :organization do
+    title { Faker::Lorem.words(4)}
+    short_title { Faker::Lorem.words(4)}
 
     #director { create(:user) }
     #accountant { create(:user) }

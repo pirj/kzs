@@ -94,7 +94,14 @@ class Document < ActiveRecord::Base
   }
 
   amoeba do
-    enable
+    include_field :title
+    include_field :body
+    include_field :confidential
+    include_field :sender_organization_id
+    include_field :recipient_organization_id
+    include_field :approver_id
+    include_field :executor_id
+
     clone [:document_transitions]
   end
 
@@ -107,20 +114,6 @@ class Document < ActiveRecord::Base
 
   def applicable_states
     accountable.allowed_transitions
-  end
-
-  def safe_clone
-    whitelist = %w(
-      title
-      body
-      confidential
-      sender_organization_id
-      recipient_organization_id
-      approver_id
-      executor_id
-    )
-    document_attributes = attributes.keep_if { |k, _| whitelist.include?(k) }
-    self.class.new(document_attributes)
   end
 
   # title and unique-number together

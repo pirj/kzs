@@ -16,11 +16,8 @@ class Documents::ReportsController < ResourceController
   end
 
   def copy
-    @parent_report = end_of_association_chain.find(params[:id])
-
-    @report = end_of_association_chain.new
-    @report.document = @parent_report.document.safe_clone
-
+    initial = end_of_association_chain.find(params[:id])
+    @report = initial.amoeba_dup
     render action: :new
   end
 
