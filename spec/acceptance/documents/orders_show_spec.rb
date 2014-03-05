@@ -80,18 +80,18 @@ feature "Users review order", %q{} do
     end
   end
 
-  describe 'executer custom placeholder', js: true do
-    let(:path) { new_documents_order_path }
-
-    it 'should be render custom placeholder' do
-      visit path
-      sign_in_with user.email, 'password'
-
-      within '.spec-order-field-show' do
-        expect(page).to have_content 'Нажмите галку, чтобы выбрать'
-      end
-    end
-  end
+  #describe 'executer custom placeholder', js: true do
+  #  let(:path) { new_documents_order_path }
+  #
+  #  it 'should be render custom placeholder' do
+  #    visit path
+  #    sign_in_with user.email, 'password'
+  #
+  #    within '.spec-order-field-show' do
+  #      expect(page).to have_content 'Нажмите галку, чтобы выбрать'
+  #    end
+  #  end
+  #end
 
   describe 'special tranlsates for sent states for recipient and sender' do
 
@@ -107,7 +107,7 @@ feature "Users review order", %q{} do
       expect(sender_user).to_not eq recipient_user
     end
 
-    context 'sender' do
+    context 'user from sender organization' do
       background do
         page.driver.submit :delete, destroy_user_session_path, {}
         visit path
@@ -121,7 +121,7 @@ feature "Users review order", %q{} do
       end
     end
 
-    context 'recipient' do
+    context 'user from recipient organization' do
       background do
         page.driver.submit :delete, destroy_user_session_path, {}
         visit path
