@@ -12,17 +12,16 @@ class Documents::OfficialMailsController < ResourceController
     render action: :new
   end
 
-  # TODO-prikha: need refactor next code.
-  # In document-view exists only Document.id,
-  # but reply action works with Mail.id
-
   # rubocop:disable LineLength
   def reply
-    mail_id = Document.find(params[:id]).accountable_id
-    @parent_official_mail = end_of_association_chain.find(mail_id)
+    @parent_official_mail = end_of_association_chain.find(params[:id])
 
-    conversation =
-        @parent_official_mail.conversation || @parent_official_mail.create_conversation
+    unless @parent_official_mail.conversation
+      @parent_official_mail.create_conversation
+      @parent_official_mail.save!
+    end
+
+    conversation = @parent_official_mail.conversation
 
     @official_mail = end_of_association_chain.new(conversation_id: conversation.id)
 

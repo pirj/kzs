@@ -8,8 +8,7 @@ module Documents
 
     belongs_to :conversation,
                class_name: 'DocumentConversation',
-               foreign_key: 'conversation_id',
-               autosave: true
+               foreign_key: 'conversation_id'
 
     has_many :conversation_mails,
              through: :conversation,
@@ -42,7 +41,7 @@ module Documents
         .order { document.approved_at.desc }
     end
 
-    # TODO-justvitalius: please, get it ffrom here
+    # TODO-justvitalius: please, get it from here
     # actual methods for one instance of Model
     def single_applicable_actions
       array = %w(reply)
