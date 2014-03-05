@@ -1,6 +1,42 @@
 # coding: utf-8
 require 'csv'
 require 'faker'
+require 'spreadsheet'
+
+namespace :excel do
+  desc "Import organizations"
+  task organizations: :environment do
+    sheet_name = 'Организации'
+    xls_file_path = 'db/excel/organizations.xls' 
+    raise "Can't find #{xls_file_path}" unless File.exists? xls_file_path
+    
+    # Удаляем старое    
+    Organization.delete_all
+    Organization.reset_pk_sequence
+
+    # Открываем книгу
+    book = Spreadsheet.open xls_file_path
+
+    org_sheet = book.worksheet sheet_name
+    raise "Sheet #{org_sheet} doesn't exists" unless org_sheet
+
+    puts org_sheet.name
+    org_sheet.each_with_index do |row, index|
+      next if index == 0
+      
+      Organization.create({
+        id: row[0],
+        title: row[1],
+        parent_id: row[2],
+        director_id: row[3],
+        short_title: row[4],
+        admin_id: row[5],
+        type_of_ownership: row[6]
+      })
+    end
+    puts 'Organizations imported'
+  end
+end
 
 namespace :csv do
   desc "Import permissions"
