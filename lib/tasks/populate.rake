@@ -3,24 +3,32 @@ require 'csv'
 require 'faker'
 require 'spreadsheet'
 
+# Получает данные листа xls-файла
+# Возвращает объект Spreadsheet::Worksheet
+def get_xls_spreadsheet file_path, sheet_name
+  # Файл не существует?
+  raise "Can't find #{file_path}" unless File.exists? file_path
+
+  book = Spreadsheet.open file_path
+  sheet = book.worksheet sheet_name
+
+  # Лист не существует?
+  raise "Sheet #{sheet} doesn't exists" unless sheet
+
+  return sheet
+end
+
 namespace :excel do
   desc "Import organizations"
   task organizations: :environment do
-    sheet_name = 'Организации'
-    xls_file_path = 'db/excel/organizations.xls' 
-    raise "Can't find #{xls_file_path}" unless File.exists? xls_file_path
-    
+    # Получаем данные
+    org_sheet = get_xls_spreadsheet 'db/excel/organizations_users.xls', 'Организации'
+
     # Удаляем старое    
     Organization.delete_all
     Organization.reset_pk_sequence
 
-    # Открываем книгу
-    book = Spreadsheet.open xls_file_path
-
-    org_sheet = book.worksheet sheet_name
-    raise "Sheet #{org_sheet} doesn't exists" unless org_sheet
-
-    puts org_sheet.name
+    # Создаем объекты
     org_sheet.each_with_index do |row, index|
       next if index == 0
       
@@ -35,6 +43,45 @@ namespace :excel do
       })
     end
     puts 'Organizations imported'
+  end
+end
+
+namespace :excel do
+  desc "Import users"
+  task users: :environment do
+    # Получаем данные
+    users_sheet = get_xls_spreadsheet 'db/excel/organizations_users.xls', 'Пользователи'
+
+    # Удаляем старое
+    User.destroy_all
+    User.reset_pk_sequence
+
+    # Добавляем пользователей
+    users_sheet.each_with_index do |row, index|
+      next if index == 0
+
+      User.create({
+        id: row[0],
+        organization_id: row[1],
+        position: row[2],
+        first_name: row[3],
+        middle_name: row[4],
+        last_name: row[5],
+        username: row[6],
+        password: row[7],
+        password_confirmation: row[8],
+        sys_user: row[9]
+      })
+    end
+    puts "Users imported"
+
+    # Добавляем полномочия
+    permissions = Permission.all
+    User.all.each do |user|
+      user.permissions << permissions
+      user.save!
+    end
+    puts "Permissions addded"
   end
 end
 
