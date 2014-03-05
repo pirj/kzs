@@ -41,7 +41,7 @@ namespace :csv do
 end
 
 namespace :csv do
-  desc "Import permissions"
+  desc "Import users"
   task :users => :environment do
 
     User.destroy_all
