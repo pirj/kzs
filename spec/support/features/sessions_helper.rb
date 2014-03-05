@@ -1,5 +1,6 @@
 module Features
   module SessionsHelper
+
     def sign_in_with(email, password)
       within '.spec-login-form' do
         fill_in 'user[login]', with: email
@@ -10,9 +11,9 @@ module Features
       #find('form').click('войти')
     end
 
-    def prepare_testing_area
-      visit path
-      sign_in_with admin.email, '12345678'
+    def sign_out
+      page.driver.submit :delete, destroy_user_session_path, {}
     end
+
   end
 end

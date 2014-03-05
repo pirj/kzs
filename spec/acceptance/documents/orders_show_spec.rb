@@ -6,6 +6,7 @@ feature "Users review order", %q{} do
   let(:recipient_user) { order.recipient_organization.admin }
   let(:sender_user) { order.sender_organization.admin }
   let!(:order) { FactoryGirl.create(:order) }
+  let(:path) {  documents_order_path(order) }
 
 
   background do
@@ -17,7 +18,7 @@ feature "Users review order", %q{} do
     context 'sender' do
       it 'should edit with draft state' do
         order.transition_to!(:draft)
-        visit documents_order_path(order)
+        visit path
 
         # expect default conditions
         within '.spec-doc-state-field' do
@@ -39,7 +40,7 @@ feature "Users review order", %q{} do
       it 'should edit with prepared state' do
         order.transition_to!(:draft)
         order.transition_to!(:prepared)
-        visit documents_order_path(order)
+        visit path
 
         # expect default conditions
         within '.spec-doc-state-field' do
@@ -62,7 +63,7 @@ feature "Users review order", %q{} do
         order.transition_to!(:draft)
         order.transition_to!(:prepared)
         order.transition_to!(:approved)
-        visit documents_order_path(order)
+        visit path
 
         # expect default conditions
         within '.spec-doc-state-field' do
@@ -73,10 +74,6 @@ feature "Users review order", %q{} do
           expect(page).to_not have_content 'редактировать'
         end
       end
-    end
-
-    context 'recipient' do
-      pending 'should not review a order'
     end
   end
 
@@ -93,9 +90,8 @@ feature "Users review order", %q{} do
   #  end
   #end
 
-  describe 'special tranlsates for sent states for recipient and sender' do
+  describe 'special translates for sent states for recipient and sender' do
 
-    let(:path) { documents_order_path(order) }
     background do
       order.transition_to!(:draft)
       order.transition_to!(:prepared)
@@ -123,7 +119,7 @@ feature "Users review order", %q{} do
 
     context 'user from recipient organization' do
       background do
-        page.driver.submit :delete, destroy_user_session_path, {}
+        sign_out
         visit path
         sign_in_with recipient_user.email, 'password'
       end
@@ -135,5 +131,91 @@ feature "Users review order", %q{} do
       end
     end
   end
+
+  describe '"read" status after recipient director open a document' do
+    background do
+      order.transition_to!(:draft)
+      order.transition_to!(:prepared)
+      order.transition_to!(:approved)
+      order.transition_to!(:sent)
+
+      sign_out
+    end
+    context 'recipient director has not yet open document' do
+      context 'recipient organization' do
+        let(:recipient_user) { order.recipient_organization.accountant }
+        let(:recipient_director) { order.recipient_organization.director }
+
+
+        scenario 'should not be "read" when open regular user' do
+          visit path
+          sign_in_with recipient_user.email, 'password'
+
+          within '.spec-doc-state-field' do
+            expect(page).to have_content 'получено'
+          end
+        end
+
+        scenario 'should be "read" when open director' do
+          visit path
+          sign_in_with recipient_director.email, 'password'
+          within '.spec-doc-state-field' do
+            expect(page).to have_content 'прочитано'
+          end
+        end
+      end
+
+      context 'sender organization' do
+        let(:sender_user) { order.sender_organization.accountant }
+
+        scenario 'should not be "read" when open regular user' do
+          visit path
+          sign_in_with sender_user.email, 'password'
+
+          within '.spec-doc-state-field' do
+            expect(page).to have_content 'отправлено'
+          end
+        end
+      end
+    end
+
+    context 'recipient director opens a document' do
+      let(:recipient_user) { order.recipient_organization.accountant }
+      let(:recipient_director) { order.recipient_organization.director }
+      let(:sender_user) { order.sender_organization.accountant }
+
+      background do
+        visit path
+        sign_in_with recipient_director.email, 'password'
+        sign_out
+      end
+
+      context 'recipient organization users' do
+        it 'should be "read" status for all users' do
+          visit path
+          sign_in_with recipient_user.email, 'password'
+
+          within '.spec-doc-state-field' do
+            expect(page).to have_content 'получено'
+          end
+        end
+      end
+
+      context 'sender organization users' do
+        it 'should be "read" status for all users' do
+          visit path
+          sign_in_with sender_user.email, 'password'
+
+          within '.spec-doc-state-field' do
+            expect(page).to have_content 'получено'
+          end
+        end
+      end
+    end
+  end
+
+
+
+
 
 end

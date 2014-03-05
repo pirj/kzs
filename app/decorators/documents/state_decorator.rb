@@ -5,7 +5,7 @@ module Documents
 
     # translating current state in 'now state' style
     def current_humanize_state
-      humanize_state accountable.current_state
+      humanize_state current_state
     end
 
     # translating state name in 'now state' style
@@ -20,7 +20,11 @@ module Documents
 
     # not-translated current state
     def current_state
-      accountable.current_state
+      if accountable.current_state == 'sent' && object.read_at != nil
+        'read'
+      else
+        accountable.current_state
+      end
     end
 
     # return css class name for current state
@@ -35,9 +39,8 @@ module Documents
                     when :draft then 'default'
                     when :prepared then 'primary'
                     when :approved then 'success'
-                    when :sent_sender then 'warning'
-                    when :sent_recipient then 'warning'
-                    when :read then 'warning'
+                    when :sent then 'warning'
+                    when :read then 'danger'
                     when :trashed then 'danger'
                     else 'default'
                   end
@@ -61,7 +64,7 @@ module Documents
 
     # some extra translates for sender and recipients user roles
     def state_postfix
-      if current_state.to_sym == :sent
+      if current_state == 'sent'
         if h.current_user.organization == accountable.sender_organization
           '_sender'
         elsif h.current_user.organization == accountable.recipient_organization
@@ -71,17 +74,6 @@ module Documents
         end
       end
     end
-
-    #model_scope = object.accountable_type.downcase.gsub('documents::','')
-    #
-    #state = if object.state == 'sent' && object.read_at != nil
-    #          'read'
-    #        elsif object.state == 'sent' && object.read_at == nil
-    #          (object.sender_organization.id == h.current_user.organization_id) ? 'sent_sender' : 'sent_recipient'
-    #        else
-    #          object.state
-    #        end
-
 
   end
 end
