@@ -3,13 +3,16 @@ FactoryGirl.define do
     title 'title'
     body 'body'
 
-    sender_organization { FactoryGirl.create(:full_sender_organization) }
-    recipient_organization { FactoryGirl.create(:full_recipient_organization) }
-    approver { FactoryGirl.create(:user) }
-    executor { FactoryGirl.create(:user) }
-    creator { FactoryGirl.create(:user) }
+    sender_organization { FactoryGirl.create(:sender_organization) }
+    recipient_organization { FactoryGirl.create(:recipient_organization) }
 
     deadline { DateTime.now + 10.days }
 
+    after(:build) do |instance, ev|
+      user = instance.sender_organization.admin
+      instance.approver = user
+      instance.executor = user
+      instance.creator = user
+    end
   end
 end

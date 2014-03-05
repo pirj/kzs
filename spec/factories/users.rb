@@ -11,7 +11,7 @@ FactoryGirl.define do
     middle_name 'Valerievich'
 
     position 'SAKE-man'
-    organization { FactoryGirl.create(:sender_organization) }
+    organization { FactoryGirl.create(:simple_organization) }
 
     password "password"
     password_confirmation "password"

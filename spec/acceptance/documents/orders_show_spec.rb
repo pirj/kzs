@@ -2,7 +2,7 @@ require 'acceptance/acceptance_helper'
 
 feature "Users review order", %q{} do
 
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:recipient_user) { order.recipient_organization.admin }
   let(:sender_user) { order.sender_organization.admin }
   let!(:order) { FactoryGirl.create(:order) }
@@ -93,7 +93,7 @@ feature "Users review order", %q{} do
     end
   end
 
-  describe 'special sent states for recipient and sender' do
+  describe 'special tranlsates for sent states for recipient and sender' do
 
     let(:path) { documents_order_path(order) }
     background do
@@ -101,8 +101,6 @@ feature "Users review order", %q{} do
       order.transition_to!(:prepared)
       order.transition_to!(:approved)
       order.transition_to!(:sent)
-
-      visit path
     end
 
     it 'should not equals recipient-user and sender-user' do
@@ -110,6 +108,12 @@ feature "Users review order", %q{} do
     end
 
     context 'sender' do
+      background do
+        page.driver.submit :delete, destroy_user_session_path, {}
+        visit path
+        sign_in_with sender_user.email, 'password'
+      end
+
       it 'should render sender-state name' do
         within '.spec-doc-state-field' do
           expect(page).to have_content 'отправлено'

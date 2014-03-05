@@ -2,6 +2,7 @@
 module Documents
   class BaseDecorator < Draper::Decorator
     delegate_all
+    decorates :document
 
     LABEL_COL_WIDTH = 3
 
@@ -52,31 +53,10 @@ module Documents
     end
 
     def state popover_position = :left
-      doc = Documents::StateDecorator.decorate(object)
+      doc_state = Documents::StateDecorator.decorate(object)
 
-      #model_scope = object.accountable_type.downcase.gsub('documents::','')
-      #
-      #state = if object.state == 'sent' && object.read_at != nil
-      #          'read'
-      #        elsif object.state == 'sent' && object.read_at == nil
-      #          (object.sender_organization.id == h.current_user.organization_id) ? 'sent_sender' : 'sent_recipient'
-      #        else
-      #          object.state
-      #        end
-      css_class = 'primary'
-      css_class = case doc.current_state.to_sym
-                    when :draft then 'default'
-                    when :prepared then 'primary'
-                    when :approved then 'success'
-                    when :sent_sender then 'warning'
-                    when :sent_recipient then 'warning'
-                    when :read then 'warning'
-                    when :trashed then 'danger'
-                    else 'default'
-                  end
-
-      h.link_to '#', class: "label label-#{css_class} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: popover_position.to_s } do
-        doc.current_humanize_state
+      h.link_to '#', class: "label label-#{doc_state.css_class_for_current_state} js-document-state-link", data: { content: h.html_escape( h.render_document_status_bar(object) ), placement: popover_position.to_s } do
+        doc_state.current_humanize_state
       end
     end
 
