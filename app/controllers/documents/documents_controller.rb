@@ -14,7 +14,7 @@ class Documents::DocumentsController < ResourceController
     end
   end
 
-  has_scope :with_state do |controller, scope, value|
+  has_scope :with_state, default: 'all_but_draft' do |controller, scope, value|
     case value
       when 'draft' then scope.draft
       when 'prepared' then scope.prepared
