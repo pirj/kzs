@@ -14,5 +14,14 @@ FactoryGirl.define do
       instance.executor = user
       instance.creator = user
     end
+
+    factory :order_with_attachments do
+      after(:create) do |instance, ev|
+        # create attached orders
+      end
+    end
+
   end
+
+
 end
