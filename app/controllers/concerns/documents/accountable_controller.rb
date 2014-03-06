@@ -23,19 +23,19 @@ module Documents::AccountableController
         resource.transition_to!(params[:transition_to], default_metadata)
         redirect_to documents_documents_path
       end
-      failure.html { render action: 'new' }
+      failure.html { render action: 'edit' }
     end
   end
 
 # rubocop:disable LineLength
-  def assign_state
-    state = params[:state]
-    if can_apply_state?(state, resource) && resource.transition_to!(state, default_metadata)
-      redirect_to :back, notice: t("document_#{state}")
-    else
-      redirect_to :back, notice: t('access_denied')
-    end
-  end
+#  def assign_state
+#    state = params[:state]
+#    if can_apply_state?(state, resource) && resource.transition_to!(state, default_metadata)
+#      redirect_to :back, notice: t("document_#{state}")
+#    else
+#      redirect_to :back, notice: t('access_denied')
+#    end
+#  end
 # rubocop:enable LineLength
 
   private

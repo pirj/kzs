@@ -7,13 +7,14 @@ class Documents::OrdersController < ResourceController
 
   helper_method :history
 
-  def copy
-    initial = end_of_association_chain.find(params[:id])
-    @order = initial.amoeba_dup
-        render action: :new
-  end
+  #def copy
+  #  initial = end_of_association_chain.find(params[:id])
+  #  @order = initial.amoeba_dup
+  #      render action: :new
+  #end
 
   # TODO: @justvitalius why do we get Report by id in Orders controller?
+  #
   def reject
     report = Documents::Report.find(params[:id])
     parent_order = report.order

@@ -11,6 +11,8 @@
   - %w(draft).each do |state|
     = submit_accountable(f, state, class: 'btn btn-default') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
+  / TODO: @prikha посмотреть.
+
   / TODO-justvitalius: next code ignores order and importance of buttons.
   /- resource.allowed_transitions.each do |state|
     = submit_accountable(state) if can_apply_state?(state, resource)

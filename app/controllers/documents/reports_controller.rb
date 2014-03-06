@@ -15,11 +15,11 @@ class Documents::ReportsController < ResourceController
     new!
   end
 
-  def copy
-    initial = end_of_association_chain.find(params[:id])
-    @report = initial.amoeba_dup
-    render action: :new
-  end
+  #def copy
+  #  initial = end_of_association_chain.find(params[:id])
+  #  @report = initial.amoeba_dup
+  #  render action: :new
+  #end
 
   def show
     show! do

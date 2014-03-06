@@ -3,13 +3,14 @@ class Documents::OfficialMailsController < ResourceController
 
   helper_method :history
 
-  def copy
-    initial = end_of_association_chain.find(params[:id])
-    @official_mail = initial.amoeba_dup
+  #def copy
+  #  initial = end_of_association_chain.find(params[:id])
+  #  @official_mail = initial.amoeba_dup
+  #  render action: :new
+  #end
 
-    render action: :new
-  end
 
+   # TODO: @prikha Move to another controller
   # rubocop:disable LineLength
   def reply
     @parent_official_mail = end_of_association_chain.find(params[:id])
