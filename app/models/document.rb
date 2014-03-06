@@ -56,11 +56,6 @@ class Document < ActiveRecord::Base
   after_save :create_png
   before_destroy {|document| document.conformers.clear}
 
-  # New Scopes
-  scope :lookup, lambda { |query|
-    where { title.matches("%#{query}%") | serial_number.matches("%#{query}%") }
-  }
-
   validates_presence_of :title,
                         :sender_organization_id,
                         :approver_id,
@@ -70,28 +65,43 @@ class Document < ActiveRecord::Base
   validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
 
   
-  scope :confidential, where(confidential: true)
-  scope :not_confidential, where(confidential: false)
-
-  scope :unread, where(state: 'sent')
-
   scope :sent_to, ->(id) { where(recipient_organization_id: id) }
-  scope :approved, joins(:document_transitions)
-                    .where(document_transitions: { to_state: 'approved' })
 
-  scope :orders, where(accountable_type: 'Documents::Order')
-  scope :mails, where(accountable_type: 'Documents::Mail')
-  scope :reports, where(accountable_type: 'Documents::Report')
+  # New Scopes
+  scope :lookup, lambda { |query|
+    joins(:sender_organization, :recipient_organization)
+    .where { title.matches("%#{query}%") | serial_number.matches("%#{query}%") | sender_organization.short_title.matches("%#{query}%") | recipient_organization.short_title.matches("%#{query}%") }
+  }
+
+
+  #Scope by state
+  scope :draft,    -> { where(state: 'draft') }
+  scope :prepared,  -> { where(state: 'prepared') }
+  scope :approved,  -> { where(state: 'approved') }
+
+  scope :not_draft, -> { where{ state.not_eq('draft') } }
+
+  #Scope by type
+  scope :orders, -> { where(accountable_type: 'Documents::Order') }
+  scope :mails,  -> { where(accountable_type: 'Documents::OfficialMail') }
+  scope :reports,-> { where(accountable_type: 'Documents::Report') }
 
 
   # TODO this couples state machines of all documents to controller
   # it breaks Single Responsibility Principle and introduces huge maintenance fee
   scope :visible_for,  ->(org_id){
     where do
-      (sender_organization_id.eq(org_id) & state.not_eq('draft'))|
+      sender_organization_id.eq(org_id) |
       (recipient_organization_id.eq(org_id) & state.in(%w(sent accepted rejected)))
     end
   }
+
+  # TODO: default scope for non trashed records
+  #   this is also applicable for associated records.
+
+  def self.serial_number_for(document)
+    "Д-#{document.id}"
+  end
 
   amoeba do
     include_field :title
@@ -103,13 +113,6 @@ class Document < ActiveRecord::Base
     include_field :executor_id
 
     clone [:document_transitions]
-  end
-
-  # TODO: default scope for non trashed records
-  #   this is also applicable for associated records.
-
-  def self.serial_number_for(document)
-    "Д-#{document.id}"
   end
 
   def applicable_states

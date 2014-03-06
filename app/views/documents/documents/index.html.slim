@@ -3,7 +3,7 @@
     h1 Документы
 
 = content_for :page_header_search do
-  = header_search_form collection_path,{method: 'get'}, {placeholder: 'поиск по документам'}
+  = render 'quick_search_for'
 
 
 = render 'filter'
@@ -37,7 +37,7 @@ ul.nav.nav-pills
     = link_to request.url, class: 'btn btn-default' do
       span.fa.fa-refresh
 
-  li = link_to 'сбросить фильтрацию', documents_documents_path, class: 'btn btn-link-muted'
+  li = link_to 'сбросить фильтрацию', documents_path, class: 'btn btn-link-muted'
 
 
 

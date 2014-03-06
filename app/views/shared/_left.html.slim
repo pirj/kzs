@@ -1,0 +1,29 @@
+aside.l-page__column.left
+  nav.b-sidebar
+    a#main-b.main href="/"
+      .icon
+        span
+        span
+        span
+      .text Виджеты
+    .menu-dir
+      div class=(controller?("documents") ? "menu-link documents active" : "menu-link documents")
+        = link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do
+          i
+          .text Документооборот
+      .child-dir
+        = link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do
+          i
+          .text Все документы
+        = link_to 'drafts', documents_path(with_state:'draft')
+        = link_to 'perpared', documents_path(with_state:'prepared')
+        = link_to 'approved', documents_path(with_state:'approved')
+        = link_to 'mails', documents_path(with_type: 'mails')
+        = link_to 'orders', documents_path(with_type: 'orders')
+        = link_to 'reports', documents_path(with_type: 'reports')
+    = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
+      i
+      .text Пропуска
+    = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
+      i
+      .text Организации

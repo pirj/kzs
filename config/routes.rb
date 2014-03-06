@@ -18,6 +18,8 @@ Kzs::Application.routes.draw do
   # https://github.com/galetahub/ckeditor#cancan-integration
   mount Ckeditor::Engine => '/ckeditor'
 
+  # a convenient alias
+  get '/documents' => 'documents/documents#index', as: :documents
   namespace :documents do
     resources :documents, path:'', only: ['index', 'edit', 'show'] do
       # TODO BAD
@@ -25,9 +27,8 @@ Kzs::Application.routes.draw do
       # GOOD
       get 'batch', on: :collection
       post 'search', on: :collection
-      member do
-        get 'history'
-      end
+
+      get 'history', on: :member
     end
 
     resources :official_mails, path: 'mails', except: 'index' do

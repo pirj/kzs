@@ -4,6 +4,26 @@ class Documents::DocumentsController < ResourceController
 
   has_scope :per, default: 10, only: [:index]
 
+  has_scope :with_type do |controller, scope, value|
+    case value
+      when 'orders' then scope.orders
+      when 'mails' then scope.mails
+      when 'reports' then scope.reports
+      else
+        scope
+    end
+  end
+
+  has_scope :with_state do |controller, scope, value|
+    case value
+      when 'draft' then scope.draft
+      when 'prepared' then scope.prepared
+      when 'approved' then scope.approved
+      else
+        scope.not_draft
+    end
+  end
+
   def index
     @search = collection.ransack(params[:q])
 
@@ -88,7 +108,8 @@ class Documents::DocumentsController < ResourceController
   #   order('documents.approved_at nulls first').
 
   def end_of_association_chain
-    super.visible_for(current_organization.id)
+    super
+    .visible_for(current_organization.id)
     .includes(:sender_organization, :recipient_organization)
     .order(sort_column + ' ' + sort_direction)
   end
@@ -98,7 +119,8 @@ class Documents::DocumentsController < ResourceController
   end
 
   def sort_column
-    sort_fields.include?(params[:sort]) ? params[:sort] : 'updated_at'
+    column = sort_fields.include?(params[:sort]) ? params[:sort] : 'updated_at'
+    avoid_ambiguous(column)
   end
 
   def sort_fields
@@ -107,5 +129,13 @@ class Documents::DocumentsController < ResourceController
 
   def complex_sort_fields
     %w(organizations.short_title recipient_organizations_documents.short_title)
+  end
+
+  def avoid_ambiguous(column_name)
+    column_name.match('\.') ? column_name : [resource_table_name, column_name].join('.')
+  end
+
+  def resource_table_name
+    resource_class.table_name
   end
 end
