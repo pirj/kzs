@@ -28,8 +28,8 @@ class Ability
     can :apply_draft,    Documents::Order, document:{sender_organization_id: user.organization_id}
     can :apply_prepared, Documents::Order, document:{sender_organization_id: user.organization_id}
     can :apply_approved, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_accepted, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_rejected, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
+    #can :apply_accepted, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
+    #can :apply_rejected, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
     can :apply_sent,     Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
     can :apply_sent,     Documents::Order, document:{sender_organization_id: user.organization_id, creator_id: user.id}
     can :apply_trashed,  Documents::Order, document:{sender_organization_id: user.organization_id}

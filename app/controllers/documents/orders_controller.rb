@@ -14,7 +14,7 @@ class Documents::OrdersController < ResourceController
   #end
 
   # TODO: @justvitalius why do we get Report by id in Orders controller?
-  #
+  # в reports#show на 37 строке линк на данный экшн
   def reject
     report = Documents::Report.find(params[:id])
     parent_order = report.order
