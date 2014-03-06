@@ -104,14 +104,14 @@ class Document < ActiveRecord::Base
   end
 
   amoeba do
-    include_field :title
-    include_field :body
-    include_field :confidential
-    include_field :sender_organization_id
-    include_field :recipient_organization_id
-    include_field :approver_id
-    include_field :executor_id
-
+    #include_field :title
+    #include_field :body
+    #include_field :confidential
+    #include_field :sender_organization_id
+    #include_field :recipient_organization_id
+    #include_field :approver_id
+    #include_field :executor_id
+    enable
     clone [:document_transitions]
   end
 

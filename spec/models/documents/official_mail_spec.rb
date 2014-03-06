@@ -1,17 +1,22 @@
 require 'spec_helper'
 
 describe Documents::OfficialMail do
-  let(:mail){ Documents::OfficialMail.make! }
+  let(:mail){ FactoryGirl.create(:mail_with_many_recipients) }
   before { mail.transition_to!(:prepared) }
   context 'with 3 recipients' do
 
     context 'when being approved' do
       it 'should create additional mail records' do
-        expect{mail.transition_to!(:approved)}.to change{Documents::OfficialMail.count}.by(2)
+        recipients_count = mail.recipients.count
+        incrementation = recipients_count - 1
+        expect{mail.transition_to!(:approved)}.to change{Documents::OfficialMail.count}.by(incrementation)
       end
 
       it 'should create additional transactions' do
-        expect{mail.transition_to!(:approved)}.to change{DocumentTransition.count}.by(7)
+        transition_count = mail.document_transitions.count
+        recipients_count = mail.recipients.count
+        incrementation = (transition_count * (recipients_count - 1) + recipients_count)
+        expect{mail.transition_to!(:approved)}.to change{DocumentTransition.count}.by(incrementation)
       end
     end
 
