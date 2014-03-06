@@ -2,7 +2,11 @@ FactoryGirl.define do
   factory :mail, class: Documents::OfficialMail do
     title 'title'
     body 'body'
-    sender_organization { FactoryGirl.create(:sender_organization) }
+    sender_organization
+
+    factory :mail_with_direct_recipient do
+      recipient_organization
+    end
 
     factory :mail_with_many_recipients do
       recipients {

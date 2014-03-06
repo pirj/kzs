@@ -1,9 +1,25 @@
 require 'spec_helper'
 
 describe Documents::OfficialMail do
-  let(:mail){ FactoryGirl.create(:mail_with_many_recipients) }
-  before { mail.transition_to!(:prepared) }
-  context 'with 3 recipients' do
+  context 'without recipients' do
+    subject { build(:mail)}
+    it { should_not be_valid }
+  end
+
+  context 'with one direct recipient' do
+    subject { build(:mail_with_direct_recipient) }
+    it { should be_valid }
+  end
+
+  context 'with many recipients' do
+    subject { build(:mail_with_many_recipients) }
+    it { should be_valid }
+  end
+
+  context 'mail multiplication' do
+    let(:mail){ create(:mail_with_many_recipients) }
+    before { mail.transition_to!(:prepared) }
+
 
     context 'when being approved' do
       it 'should create additional mail records' do

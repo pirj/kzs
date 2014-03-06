@@ -9,19 +9,22 @@ module Documents::Accountable
     validates_presence_of :document
 
     # rubocop:disable LineLength
-    scope :with_state, ->(state) { includes(:document).where('documents.state' => state) }
+    default_scope { includes(:document) }
 
-    scope :from, ->(o_id) { includes(:document).where('documents.sender_organization_id' => o_id) }
+    scope :with_state, ->(state) { where('documents.state' => state) }
 
-    scope :to, ->(o_id) { includes(:document).where('documents.recipient_organization_id' => o_id) }
+    scope :from, ->(o_id) { where('documents.sender_organization_id' => o_id) }
+
+    scope :to, ->(o_id) { where('documents.recipient_organization_id' => o_id) }
 
     scope :from_or_to, lambda { |o_id|
-      includes { document }.where do
+      where do
         (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
       end
     }
 
-    scope :approved, includes { document }.where { document.approved_at.not_eq(nil) }
+    scope :approved, -> { where { document.approved_at.not_eq(nil) } }
+
     # rubocop:enable LineLength
 
     # TODO: @prikha write why is it nessesary instead of moving it to

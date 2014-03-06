@@ -10,7 +10,7 @@ class Documents::OrderStateMachine
   state :rejected
   state :trashed
 
-  transition from: :unsaved,  to: [:draft, :prepared, :trashed]
+  transition from: :unsaved,  to: [:draft, :prepared]
   transition from: :draft,    to: [:draft, :prepared, :trashed]
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
   transition from: :approved, to: [:sent]
@@ -20,8 +20,9 @@ class Documents::OrderStateMachine
     Documents::Accounter.sign(accountable)
   end
 
-  # TODO: @prikha remove this guards and references from
-  # /app/models/documents/report_state_machine.rb
+  # The following guards are for the purpose of cross-validation
+  # check that none of the Ordres would be accepted or rejceted
+  # until they have matching report
   guard_transition(to: :accepted) do |order|
     Documents::Report.where(order_id: order.id).with_state(guarded).exists?
   end
@@ -30,7 +31,9 @@ class Documents::OrderStateMachine
     Documents::Report.where(order_id: order.id).with_state(guarded).exists?
   end
 
-  def self.guarded
+  private
+
+  def guarded
     %w(sent accepted rejected)
   end
 end

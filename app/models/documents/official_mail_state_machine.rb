@@ -8,12 +8,16 @@ class Documents::OfficialMailStateMachine
   state :sent
   state :trashed
 
-  transition from: :unsaved,  to: [:draft, :prepared, :trashed]
+  transition from: :unsaved,  to: [:draft, :prepared]
   transition from: :draft,    to: [:draft, :prepared, :trashed]
   transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
   transition from: :approved, to: [:sent]
 
-  after_transition(to: :approved) do |accountable, transition|
+  guard_transition to: :trashed do |mail|
+    !mail.new_record?
+  end
+
+    after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
   end
 
