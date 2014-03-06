@@ -8,14 +8,14 @@ feature "Users attach existed documents to creating document", %q{} do
     end
   end
 
+  let(:order) { FactoryGirl.create(:order_with_attachments) }
   let(:path) { new_documents_order_path }
+  let(:user) { order.sender_organization.admin }
 
   describe 'Show attached documents in document edit-form' do
     context 'existed order with attachments' do
-      let!(:order) { FactoryGirl.create(:order_with_attachments) }
       let(:attached_count) { order.attached_documents.count }
       let(:path) { edit_documents_order_path(order) }
-      let(:user) { order.sender_organization.admin }
 
       background do
         visit path
@@ -57,6 +57,12 @@ feature "Users attach existed documents to creating document", %q{} do
   end
 
   describe 'Single page for attaching documents' do
+    scenario 'Open single page from edit-form' do
+      visit path
+      sign_in_with user.email, 'password'
+
+      click_on 'Прикрепить документ'
+    end
 
     describe 'Show attached documents' do
       describe 'Show documents list'

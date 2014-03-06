@@ -2,10 +2,10 @@ require 'acceptance/acceptance_helper'
 
 feature "Users review order", %q{} do
 
+  let!(:order) { FactoryGirl.create(:order) }
   let(:user) { FactoryGirl.create(:user) }
   let(:recipient_user) { order.recipient_organization.admin }
   let(:sender_user) { order.sender_organization.admin }
-  let!(:order) { FactoryGirl.create(:order) }
   let(:path) {  documents_order_path(order) }
 
 
@@ -120,20 +120,18 @@ feature "Users review order", %q{} do
   end
 
   describe '"read" status after recipient director open a document' do
+    let(:recipient_user) { order.recipient_organization.accountant }
+    let(:recipient_director) { order.recipient_organization.director }
     background do
+      sign_out
       order.transition_to!(:draft)
       order.transition_to!(:prepared)
       order.transition_to!(:approved)
       order.transition_to!(:sent)
-
-      sign_out
     end
+
     context 'recipient director has not yet open document' do
       context 'recipient organization' do
-        let(:recipient_user) { order.recipient_organization.accountant }
-        let(:recipient_director) { order.recipient_organization.director }
-
-
         scenario 'should not be "read" when open regular user' do
           visit path
           sign_in_with recipient_user.email, 'password'
@@ -148,6 +146,7 @@ feature "Users review order", %q{} do
           sign_in_with recipient_director.email, 'password'
           within '.spec-doc-state-field' do
             expect(page).to have_content 'прочитано'
+            #expect(page).to have_content "#{order.recipient_organization.inspect}"
           end
         end
       end
@@ -170,7 +169,7 @@ feature "Users review order", %q{} do
           sign_in_with recipient_user.email, 'password'
 
           within '.spec-doc-state-field' do
-            expect(page).to have_content 'получено'
+            expect(page).to have_content 'прочитано'
           end
         end
       end
@@ -181,7 +180,7 @@ feature "Users review order", %q{} do
           sign_in_with sender_user.email, 'password'
 
           within '.spec-doc-state-field' do
-            expect(page).to have_content 'получено'
+            expect(page).to have_content 'прочитано'
           end
         end
       end

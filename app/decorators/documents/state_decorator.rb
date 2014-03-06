@@ -6,6 +6,8 @@ module Documents
     # translating current state in 'now state' style
     def current_humanize_state
       humanize_state current_state
+      #"#{object.read_at.to_s} - #{accountable.read_at.to_s} - #{h.current_user.id} #{object.recipient_organization.director.id} "
+      #"#{accountable.recipient_organization.inspect}"
     end
 
     # translating state name in 'now state' style
@@ -20,7 +22,7 @@ module Documents
 
     # not-translated current state
     def current_state
-      if accountable.current_state == 'sent' && object.read_at != nil
+      if accountable.current_state == 'sent' && accountable.read_at != nil
         'read'
       else
         accountable.current_state
