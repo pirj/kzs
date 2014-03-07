@@ -3,6 +3,7 @@ module Documents::AccountableController
 
   included do
     layout 'base'
+    before_filter :assign_read_state_if_director, only: :show
     before_filter :mark_as_read, only: :show
     actions :all, except: [:index]
   end
@@ -44,15 +45,19 @@ module Documents::AccountableController
     { user_id: current_user.id }
   end
 
-  def mark_as_read
-    if can_mark_as_read?
+  def assign_read_state_if_director
+    if director?
       document = resource.document
       document.update_column(:read_at, Time.now)
     end
   end
 
-  def can_mark_as_read?
+  def director?
     resource.recipient_organization &&
     resource.recipient_organization.director == current_user
+  end
+
+  def mark_as_read
+    resource.mark_as_read!(for: current_user)
   end
 end

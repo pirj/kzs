@@ -27,4 +27,8 @@ module DocumentsHelper
     $(".j-doc-attach").on("click", function(e){alert("Данный раздел находится в разработке");})
 });</script>').html_safe
   end
+
+  def unread_class(document)
+    document.unread?(current_user) ? 'unread' : 'read'
+  end
 end

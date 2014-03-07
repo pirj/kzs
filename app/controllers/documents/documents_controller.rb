@@ -37,6 +37,8 @@ class Documents::DocumentsController < ResourceController
     list_decorator = Documents::ListDecorator
     each_decorator = Documents::ListShowDecorator
 
+    documents = documents.with_read_marks_for(current_user)
+
     @documents = list_decorator.decorate documents, with: each_decorator
   end
 

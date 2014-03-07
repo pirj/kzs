@@ -2,7 +2,7 @@
 module Documents
   class ListShowDecorator < Documents::BaseDecorator
     decorates :document
-    delegate :title
+    delegate :title, :unread?
 
 
 
@@ -12,7 +12,6 @@ module Documents
         h.link_to object.title, path, class: 'link'
       end
     end
-
 
 
     def number_and_date

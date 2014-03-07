@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
 
   WORK_STATUSES = %w[at_work ooo]
 
+  acts_as_reader
+
   before_save :save_with_empty_password
 
   validates :organization_id, :first_name, :last_name, :middle_name, :position, presence: true

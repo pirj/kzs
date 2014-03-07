@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  helper_method :current_organization, :can_apply_state?, :ability_for
+  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_inbox
 
   def access_denied(exception)
     redirect_to root_path, alert: t('access_denied')
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     root_path
+  end
+
+  def documents_inbox
+    @documents_inbox ||= Documents::Inbox.new(current_user, current_organization)
   end
 
   def current_organization
@@ -34,8 +38,6 @@ class ApplicationController < ActionController::Base
   # unless Rails.application.config.consider_all_requests_local
   #   rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }
   # end
-
-  private
 
   # def render_error(status, exception)
   #   respond_to do |format|

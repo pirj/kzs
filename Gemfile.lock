@@ -369,6 +369,8 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unread (0.3.1)
+      activerecord (>= 3)
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.3.2)
@@ -442,6 +444,7 @@ DEPENDENCIES
   thin
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
+  unread (~> 0.3.1)
   wicked_pdf
   wkhtmltopdf-binary (= 0.9.9.1)
   zeus (= 0.13.4.pre2)

@@ -2,23 +2,31 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 gem 'pg'
+
+
+# ActiveRecord Query DSL
 gem 'squeel'
+# Search object processor
+gem 'ransack'
 
 gem 'execjs'
 gem 'therubyracer'
 
 gem 'paperclip', '~> 3.0'
 gem 'devise'
-gem 'ransack'
+
 
 gem 'russian', '~> 0.6.0'
 
 gem 'populator'
 gem 'faker'
 
+# Authorization rules
 gem 'cancan'
 
+# ActiveRecord object duplication DSL
 gem 'amoeba'
+
 gem 'mustache'
 gem 'smt_rails'
 gem 'activeadmin'
@@ -27,10 +35,13 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'slim'
 
+# Form Builders
 gem 'nested_form'
 gem 'simple_form'
+# Pagination
 gem 'kaminari'
 
+# WYSIWYG Editor
 gem 'ckeditor'
 
 gem 'bootstrap-sass'
@@ -38,18 +49,25 @@ gem 'bootstrap-sass-extras'
 
 gem 'icheck-rails'
 
-gem 'ransack'
+# Decorators
 gem 'draper'
 
+# Ease REST controllers creation
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
+
+# State Machine decoupled from model itself
 gem 'statesman', '~> 0.3'
+
+# Object read/unread management
+gem 'unread', '~> 0.3.1'
 
 gem 'date_validator'
 
 gem 'jquery-rails', '~> 2.3.0'
 
+# PDF thing
 gem 'prawn'
 gem 'rmagick', :require => 'RMagick'
 gem 'wicked_pdf'
@@ -92,5 +110,4 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
-  #gem 'machinist', '>= 2.0.0.beta2'
 end

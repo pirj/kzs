@@ -64,9 +64,6 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
 
-  
-  scope :sent_to, ->(id) { where(recipient_organization_id: id) }
-
   # New Scopes
   scope :lookup, lambda { |query|
     joins(:sender_organization, :recipient_organization)
@@ -86,7 +83,6 @@ class Document < ActiveRecord::Base
   scope :mails,  -> { where(accountable_type: 'Documents::OfficialMail') }
   scope :reports,-> { where(accountable_type: 'Documents::Report') }
 
-
   # TODO this couples state machines of all documents to controller
   # it breaks Single Responsibility Principle and introduces huge maintenance fee
   scope :visible_for,  ->(org_id){
@@ -96,12 +92,24 @@ class Document < ActiveRecord::Base
     end
   }
 
+  scope :to, ->(org) { where(recipient_organization_id: org) }
+  scope :from, ->(org) { where(sender_organization_id: org) }
+
+  # Means that document once passed through *sent* state
+  scope :passed_state, ->(state) {
+    joins(:document_transitions)
+    .where('document_transitions.to_state' => state)
+  }
+  scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
+
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
 
   def self.serial_number_for(document)
     "Д-#{document.id}"
   end
+
+  acts_as_readable
 
   amoeba do
     #include_field :title
