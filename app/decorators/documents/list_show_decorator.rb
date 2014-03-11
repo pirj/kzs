@@ -4,9 +4,6 @@ module Documents
     decorates :document
     delegate :title, :unread?
 
-
-
-
     def title_link
       if object.title
         h.link_to object.title, path, class: 'link'

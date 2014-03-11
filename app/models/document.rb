@@ -102,6 +102,7 @@ class Document < ActiveRecord::Base
   }
   scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
 
+
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
 

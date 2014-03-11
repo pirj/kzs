@@ -29,6 +29,8 @@ module DocumentsHelper
   end
 
   def unread_class(document)
-    document.unread?(current_user) ? 'unread' : 'read'
+    readable = Document.inbox(current_organization).exists?(id: document.id)
+    unread = document.unread?(current_user)
+    (readable && unread) ? 'unread' : 'read'
   end
 end
