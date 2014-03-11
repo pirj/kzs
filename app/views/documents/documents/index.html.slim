@@ -1,6 +1,56 @@
-= content_for :page_header do
+/= content_for :page_header do
   = header_title do
     h1 Документы
+
+
+= content_for :page_header do
+  / TODO: @vit need refactor
+  = header_title do
+    .dropdown.header
+      h1.dropdown-toggle data-toggle="dropdown"
+        a href="/documents"
+        - case params[:scope]
+          - when 'drafts'
+          | Черновики
+          - when 'prepared'
+          | Подготовленные
+          - when 'approved'
+          | Утвержденные
+          - when 'mails'
+          | Письма
+          - when 'orders'
+          | Распоряжения
+          - when 'reports'
+          | Акты
+          - else
+          | Документы
+        span.caret
+      ul.dropdown-menu role="menu"
+        - if params[:scope]
+          li
+            a href="/documents"
+              | Все документы
+        li
+          a href="/documents?scope=drafts"
+            | Черновики
+        li
+          a href="/documents?scope=prepared"
+            | Подготовленные
+        li
+          a href="/documents?scope=approved"
+            | Утвержденные
+        li
+          a href="/documents?scope=mails"
+            | Письма
+        li
+          a href="/documents?scope=orders"
+            | Распоряжения
+        li
+          a href="/documents?scope=reports"
+            | Акты
+
+
+
 
 = content_for :page_header_search do
   = render 'quick_search_for'
