@@ -654,17 +654,18 @@ $thumbnail-caption-padding:   9px !default;
 
 // Badges
 // -------------------------
-//$badge-color:                 #fff !default;
-//$badge-link-hover-color:      #fff !default;
-//$badge-bg:                    $gray-light !default;
-//
-//$badge-active-color:          $link-color !default;
-//$badge-active-bg:             #fff !default;
-//
-//$badge-font-weight:           bold !default;
-//$badge-line-height:           1 !default;
-//$badge-border-radius:         10px !default;
+$badge-font-size:             10px;
+$badge-padding:               .4em .4em;
+$badge-line-height:           1 !default;
+$badge-border-radius:         $border-radius-base !default;
 
+$badge-bg:                    $color-red !default;
+$badge-color:                 #fff !default;
+$badge-link-hover-color:      #fff !default;
+
+$badge-active-bg:             $color-red-darker !default;
+$badge-active-color:          $link-color !default;
+$badge-link-hover-color:      #fff !default;
 
 // Breadcrumbs
 // -------------------------
