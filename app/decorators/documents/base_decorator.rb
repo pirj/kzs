@@ -136,10 +136,10 @@ module Documents
     end
 
     def attached_files
-      if object.document_attachments.present?
+      if object.document_attached_files.present?
         title = h.content_tag(:h2, 'Прикрепленные файлы:', class: 'col-sm-12')
         files = h.content_tag(:div,
-          (object.document_attachments.map do |file|
+          (object.document_attached_files.map do |file|
 
             h.link_to( file.attachment_file_name, file.attachment.url, class: 'col-sm-12 link ', target: '_blank' )
           end.join('  ').html_safe)   , class: '')

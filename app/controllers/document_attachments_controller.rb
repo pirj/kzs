@@ -1,6 +1,6 @@
-class DocumentAttachmentsController < ApplicationController
+class DocumentAttachedFilesController < ApplicationController
   def destroy
-    @attachment = DocumentAttachment.find(params[:id])
+    @attachment = DocumentAttachedFile.find(params[:id])
     @attachment.destroy
 
     respond_to do |format|

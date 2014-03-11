@@ -40,15 +40,15 @@ module Documents
 
 
     def attachment_icon
-      if object.document_attachments.length > 0
+      if object.document_attached_files.length > 0
         h.content_tag :span, nil, class: 'fa fa-paperclip icon'
       end
     end
 
     def attachments_count_with_label
-      element_wrapper object.document_attachments.length > 0 do
+      element_wrapper object.document_attached_files.length > 0 do
         h.content_tag(:span, I18n.t("documents.table.document_labels.attachments_count"), class: "text-help col-sm-#{LABEL_COL_WIDTH}")+
-        h.content_tag( :span, object.document_attachments.try(:count), class: "link col-sm-#{12-LABEL_COL_WIDTH}")
+        h.content_tag( :span, object.document_attached_files.try(:count), class: "link col-sm-#{12-LABEL_COL_WIDTH}")
       end
     end
 

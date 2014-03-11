@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20140319055356) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "document_attachments", :force => true do |t|
+  create_table "document_attached_files", :force => true do |t|
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -402,8 +402,9 @@ ActiveRecord::Schema.define(:version => 20140319055356) do
 
   create_table "task_lists", :force => true do |t|
     t.integer  "order_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "completed",  :default => false
     t.datetime "deadline"
   end
 

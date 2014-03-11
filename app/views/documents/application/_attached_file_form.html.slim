@@ -1,13 +1,13 @@
-/- unless doc_builder.object.document_attachments.empty?
-  /  /= doc_builder.object.document_attachments
-  /  = (doc_builder.object.document_attachments.last.inspect)
-  //= doc_builder.object.document_attachments.url
+/- unless doc_builder.object.document_attached_files.empty?
+  /  /= doc_builder.object.document_attached_files
+  /  = (doc_builder.object.document_attached_files.last.inspect)
+  //= doc_builder.object.document_attached_files.url
 
 = f.fields_for :document, wrapper: false do |doc_builder|
-  = doc_builder.simple_fields_for :document_attachments do |builder|
+  = doc_builder.simple_fields_for :document_attached_files do |builder|
     = builder.input :attachment, input_html: { class: 'js-filestyle-with-title' }, label: false
 
-  = doc_builder.link_to_add :document_attachments, class: 'btn btn-big btn-mega-primary' do
+  = doc_builder.link_to_add :document_attached_files, class: 'btn btn-big btn-mega-primary' do
     span.fa.fa-plus-circle
     span Прикрепить файл
 br

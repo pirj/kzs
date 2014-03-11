@@ -130,7 +130,7 @@ Kzs::Application.routes.draw do
   end
 
   resources :projects
-  resources :document_attachments
+  resources :document_attached_files
   resources :task_lists
 
   #match '/save_desktop_configuration' => 'dashboard#save_desktop_configuration', :via => :post

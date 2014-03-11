@@ -1,4 +1,4 @@
-class DocumentAttachment < ActiveRecord::Base
+class DocumentAttachedFile < ActiveRecord::Base
   attr_accessible :attachment
   belongs_to :document
 

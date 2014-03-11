@@ -15,15 +15,15 @@ class Document < ActiveRecord::Base
                   :serial_number,
                   :title
 
-  attr_accessible :document_attachments_attributes
-
   attr_accessible :accountable,
                   :approver,
                   :executor,
                   :recipient_organization,
                   :sender_organization
 
-  has_many :document_attachments
+  attr_accessible :document_attached_files_attributes
+
+  has_many :document_attached_files
 
   has_many :document_transitions
 
@@ -45,7 +45,7 @@ class Document < ActiveRecord::Base
                           foreign_key: "document_id",
                           association_foreign_key: "relational_document_id"
 
-  accepts_nested_attributes_for :document_attachments, allow_destroy: true
+  accepts_nested_attributes_for :document_attached_files, allow_destroy: true
 
   alias_attribute :text, :body
   alias_attribute :sn,   :serial_number
