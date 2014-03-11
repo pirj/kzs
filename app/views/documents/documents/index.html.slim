@@ -9,7 +9,7 @@
     .dropdown.header
       h1.dropdown-toggle data-toggle="dropdown"
         a href="/documents"
-        - case params[:scope]
+        - case params[:with_state]
           - when 'drafts'
           | Черновики
           - when 'prepared'
@@ -28,25 +28,25 @@
       ul.dropdown-menu role="menu"
         - if params[:scope]
           li
-            a href="/documents"
+            = link_to documents_path do
               | Все документы
         li
-          a href="/documents?scope=drafts"
+          = link_to documents_path(with_state:'draft') do
             | Черновики
         li
-          a href="/documents?scope=prepared"
+          = link_to documents_path(with_state:'prepared') do
             | Подготовленные
         li
-          a href="/documents?scope=approved"
+          = link_to documents_path(with_state:'approved') do
             | Утвержденные
         li
-          a href="/documents?scope=mails"
+          = link_to documents_path(with_state:'mails') do
             | Письма
         li
-          a href="/documents?scope=orders"
+          = link_to documents_path(with_state:'orders') do
             | Распоряжения
         li
-          a href="/documents?scope=reports"
+          = link_to documents_path(with_state:'reports') do
             | Акты
 
 
