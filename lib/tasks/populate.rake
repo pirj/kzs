@@ -212,11 +212,11 @@ namespace :documents do
         t.task_list_id = task_list.id
         t.title = Populator.words(2)
         t.body = Populator.words(10)
-        completed = true
-        document_id = d.id
-        executor_organization_id = d.recipient_organization
-        sender_organization_id = d.sender_organization
-        deadline = DateTime.now + rand(1..6).months
+        t.completed = true
+        t.document_id = d.id
+        t.executor_organization_id = d.recipient_organization
+        t.sender_organization_id = d.sender_organization
+        t.deadline = DateTime.now + rand(1..6).months
         t.save!
         task_list.tasks << t
       end
