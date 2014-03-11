@@ -14,22 +14,23 @@ form.simple_form {
 
 
 // Defaults params for all styles
-select
-textarea
-input[type="text"]
-input[type="password"]
-input[type="datetime"]
-input[type="datetime-local"]
-input[type="date"]
-input[type="month"]
-input[type="time"]
-input[type="week"]
-input[type="number"]
-input[type="email"]
-input[type="url"]
-input[type="search"]
-input[type="tel"]
-input[type="color"]{
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="checkbox"]{
   font-size: $input-font-size;
 }
 
