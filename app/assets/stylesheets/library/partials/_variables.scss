@@ -31,6 +31,37 @@ $brand-info:            #5fc6f9 !default;
 
 $brand-rich-info:       #1ba0e1 !default;
 
+
+$color-sea-green: #1abc9c;
+$color-sea-green-darker: #16a085;
+
+$color-green: #2ecc71;
+$color-green-darker: #27ae60;
+
+$color-sky-blue: #3490db;
+$color-sky-blue-darker: #2980b9;
+
+$color-magenta: #9b59b6;
+$color-magenta-darker: #8e44ad;
+
+$color-stern-blue: #34495e;
+$color-stern-blue-darker: #2c3e50;
+
+$color-yellow: #f1c40f;
+$color-yellow-darker: #f39c12;
+
+$color-orange: #e67e22;
+$color-orange-darker: #d35400;
+
+$color-red: #e74c3c;
+$color-red-darker: #c0392b;
+
+$color-cloud: #ecf0f1;
+$color-cloud-darker: #bdc3c7;
+
+$color-gray: #95a5a6;
+$color-gray-darker: #7f8c8d;
+
 // Scaffolding
 // -------------------------
 
@@ -399,9 +430,21 @@ $nav-tabs-vertical-padding:                 0.65em;
 $nav-tabs-horizontal-padding:               1.4em;
 
 // Pills
+$nav-pills-container-bg:                    $color-gray;
+$nav-pills-container-padding:               $padding-base-horizontal $padding-base-vertical!default;
+$nav-pills-link-padding:                    $btn-vertical-padding $btn-horizontal-padding !default;
 $nav-pills-border-radius:                   $border-radius-base !default;
-$nav-pills-active-link-hover-bg:            $component-active-bg !default;
-$nav-pills-active-link-hover-color:         $component-active-color !default;
+$nav-pills-font-size:                       $global-btn-font-size !default;
+
+$nav-pills-active-link-bg:                  $color-sky-blue !default;
+$nav-pills-active-link-hover-bg:            $color-sky-blue-darker !default;
+$nav-pills-active-link-color:               white !default;
+$nav-pills-active-link-hover-color:         white !default;
+
+$nav-pills-link-bg:                         transparent !default;
+$nav-pills-link-hover-bg:                   $color-gray-darker !default;
+$nav-pills-link-color:                      black !default;
+$nav-pills-link-hover-color:                black !default;
 
 
 // Pagination
@@ -611,17 +654,18 @@ $thumbnail-caption-padding:   9px !default;
 
 // Badges
 // -------------------------
-//$badge-color:                 #fff !default;
-//$badge-link-hover-color:      #fff !default;
-//$badge-bg:                    $gray-light !default;
-//
-//$badge-active-color:          $link-color !default;
-//$badge-active-bg:             #fff !default;
-//
-//$badge-font-weight:           bold !default;
-//$badge-line-height:           1 !default;
-//$badge-border-radius:         10px !default;
+$badge-font-size:             10px;
+$badge-padding:               .4em .4em;
+$badge-line-height:           1 !default;
+$badge-border-radius:         $border-radius-base !default;
 
+$badge-bg:                    $color-red !default;
+$badge-color:                 #fff !default;
+$badge-link-hover-color:      #fff !default;
+
+$badge-active-bg:             $color-red-darker !default;
+$badge-active-color:          $link-color !default;
+$badge-link-hover-color:      #fff !default;
 
 // Breadcrumbs
 // -------------------------

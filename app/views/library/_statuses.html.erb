@@ -1,24 +1,50 @@
 <h2 id='statuses'>Статусы</h2>
+  <table class="table">
+    <tr>
+      <td>
+        <span class="label label-success">Success</span>
+      </td>
+      <td>
+        <%= highlight_code %q{ content_tag :span, 'success', class: 'label label-success'  }%>
+      </td>
+    </tr>
 
-<div class="bs-example">
-  <span class="label label-success">Success</span>
-  <span class="label label-default">Default</span>
-  <span class="label label-primary">Primary</span>
-  <span class="label label-warning">Warning</span>
-  <span class="label label-danger">Danger</span>
-</div>
-<div class="highlight">
-  <pre class="prettyprint lang-html"><%= html_escape %q{
-  <span class="label label-success">Success</span>
-  <span class="label label-default">Default</span>
-  <span class="label label-primary">Primary</span>
-  <span class="label label-warning">Warning</span>
-  <span class="label label-danger">Danger</span>
+    <tr>
+      <td>
+        <span class="label label-default">default</span>
+      </td>
+      <td>
+        <%= highlight_code %q{ content_tag :span, 'default', class: 'label label-default'  }%>
+      </td>
+    </tr>
 
-  <a href="#" class="label label-success">Success</a>
-  <a href="#" class="label label-default">Default</a>
-  <a href="#" class="label label-primary">Primary</a>
-  <a href="#" class="label label-warning">Warning</a>
-  <a href="#" class="label label-danger">Danger</a>
-  }%></pre>
+    <tr>
+      <td>
+        <span class="label label-primary">primary</span>
+      </td>
+      <td>
+        <%= highlight_code %q{ content_tag :span, 'primary', class: 'label label-primary'  }%>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="label label-warning">warning</span>
+      </td>
+      <td>
+        <%= highlight_code %q{ content_tag :span, 'warning', class: 'label label-warning'  }%>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <span class="label label-danger">danger</span>
+      </td>
+      <td>
+        <%= highlight_code %q{ content_tag :span, 'danger', class: 'label label-danger'  }%>
+      </td>
+    </tr>
+
+  </table>
+
 </div>

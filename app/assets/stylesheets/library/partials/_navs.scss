@@ -75,6 +75,18 @@
   }
 }
 
+// Nav inline
+// -------------------------
+.nav-inline{
+  > li {
+    float: left;
+
+    + li{
+      margin-left: $padding-base-horizontal;
+    }
+  }
+}
+
 
 // Tabs
 // -------------------------
@@ -125,22 +137,32 @@
 // Pills
 // -------------------------
 .nav-pills {
+  background-color: $nav-pills-container-bg;
+  padding: $nav-pills-container-padding;
+  border-radius: $nav-pills-border-radius;
+
   > li {
     float: left;
 
     // Links rendered as pills
     > a {
       border-radius: $nav-pills-border-radius;
+      background-color: $nav-pills-link-bg;
+      color: $nav-pills-link-color;
+      padding: $nav-pills-link-padding;
+      display: inline-block;
+      @include links-all-states{
+        text-decoration: none;
+      }
     }
     + li {
       margin-left: $padding-base-horizontal;
     }
 
     // Active state
-    &.active > a:not('.btn') {
-      &,
-      &:hover,
-      &:focus {
+    // TODO-justvitalius: need not styling .btn objects
+    &.active > a {
+      @include links-all-states{
         color: $nav-pills-active-link-hover-color;
         background-color: $nav-pills-active-link-hover-bg;
 

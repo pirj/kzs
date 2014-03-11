@@ -1,6 +1,6 @@
 require 'acceptance/acceptance_helper'
 
-feature "Users review order", %q{} do
+feature "Users edit and create an order", %q{} do
 
   let!(:user) { FactoryGirl.create(:user) }
   let!(:order) { FactoryGirl.create(:order) }

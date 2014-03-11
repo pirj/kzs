@@ -5,18 +5,25 @@
 
 // Base classes
 .badge {
+  $top: -10px;
+  $left: 5px;
+
+  background-color: $badge-bg;
+  border-radius: $badge-border-radius;
+  color: $badge-color;
+  font-family: $font-family-sans-serif-bold;
+  font-size: $badge-font-size;
+  line-height: $badge-line-height;
+  padding: $badge-padding;
+  margin-left: $left;
+  margin-top: $top;
   display: inline-block;
   min-width: 10px;
-  padding: 3px 7px;
-  font-size: $font-size-small;
-  font-weight: $badge-font-weight;
-  color: $badge-color;
-  line-height: $badge-line-height;
   vertical-align: baseline;
   white-space: nowrap;
   text-align: center;
-  background-color: $badge-bg;
-  border-radius: $badge-border-radius;
+  position: absolute;
+
 
   // Empty badges collapse automatically (not available in IE8)
   &:empty {
@@ -35,10 +42,7 @@ a.badge {
 }
 
 // Quick fix for labels/badges in buttons
-.btn .badge {
-  position: relative;
-  top: -1px;
-}
+.btn .badge {}
 
 // Account for counters in navs
 a.list-group-item.active > .badge,

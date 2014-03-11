@@ -16,6 +16,11 @@
         | Составитель
       .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
 
+    = doc.input :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, checkbox_text: 'VIT CHECKBOX'
+    = doc.input :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name
+    = doc.input :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, label: false
+
+
     / блок ИСПОЛНИТЕЛЬ ?
     .form-group.spec-order-field-show
       = doc.label :executor, class: 'col-sm-2 control-label label-icon-hint js-label-hint', title: 'Лицо, указанное в документе, как исполнитель'
