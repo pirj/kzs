@@ -443,5 +443,5 @@ DEPENDENCIES
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   wicked_pdf
-  wkhtmltopdf-binary
+  wkhtmltopdf-binary (= 0.9.9.1)
   zeus (= 0.13.4.pre2)
