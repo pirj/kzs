@@ -38,6 +38,17 @@ th {
     background: $table-bg-hover;
   }
 
+
+  tr{
+    th, td{
+      &:first-child{ border-left: 3px solid transparent;}
+    }
+  }
+
+  .tr-unread{
+    td:first-child{ border-left-color: red; }
+  }
+
   // Cells
   > thead,
   > tbody,

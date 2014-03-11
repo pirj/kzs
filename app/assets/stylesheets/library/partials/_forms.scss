@@ -29,10 +29,11 @@ input[type="email"],
 input[type="url"],
 input[type="search"],
 input[type="tel"],
-input[type="color"],
-input[type="checkbox"]{
+input[type="checkbox"],
+input[type="color"]{
   font-size: $input-font-size;
 }
+
 
 select{
   width: 100%;
