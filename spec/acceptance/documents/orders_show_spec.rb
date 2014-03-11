@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'acceptance/acceptance_helper'
 
 feature "Users review order", %q{} do
@@ -187,7 +188,7 @@ feature "Users review order", %q{} do
     end
   end
 
-  describe 'form fill add fields and save' do
+  describe 'form fill add fields and save order' do
     let(:path) { new_documents_order_path }
       background do
         visit path
@@ -212,8 +213,7 @@ feature "Users review order", %q{} do
         expect(page).to have_content 'не может быть пустым'
         save_and_open_page
       end
-    end
-
+  end
 
   describe 'executer custom placeholder', js: true do
 

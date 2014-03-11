@@ -10,6 +10,7 @@
 /test_images
 /.idea
 .DS_Store
+.powrc
 
 # Ignore assets and database.yml
 /public/assets

@@ -1,3 +1,15 @@
+$icon-permit-stan: -13px -164px;
+$icon-permit-hover: -83px -164px;
+$icon-permit-active: -153px -164px;
+
+$icon-contragent-stan: -13px -430px;
+$icon-contragent-hover: -83px -430px;
+$icon-contragent-active: -153px -430px;
+
+$icon-documents-stan: -13px -230px;
+$icon-documents-hover: -83px -230px;
+$icon-documents-active: -152px -230px;
+
 .l-page__column.left {
   z-index: 25;
   float: left;
@@ -101,7 +113,9 @@
           span {
             background-color: white;
           }
-          .text{color: #fff!important;}
+          .text {
+            color: #fff !important;
+          }
         }
       }
 
@@ -125,6 +139,24 @@
       }
     }
 
+    .sidebar-header {
+
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 12px;
+
+
+      .text {
+        display: inline-block;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        max-height: 22px;
+        width: 0;
+        transition: width 1s ease;
+      }
+    }
     .menu-link {
       margin-left: 10px;
       text-align: center;
@@ -136,9 +168,7 @@
       background-color: white;
       position: relative;
       text-decoration: none;
-      &:hover {
-        background-color: #76d4ce;
-      }
+
       .counter {
         position: absolute;
         right: -5px;
@@ -178,24 +208,7 @@
           background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAABFCAYAAABzPHcEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAALNJREFUeNpi%2FP%2F%2FPwMRQJqJgTigQ6xCR0YirAYZdpcYE8OAWIEBZCIezAPED%2F8TUARy1vL%2FUIBPUc9%2FJIDLuqX%2F0QCyAiYgjoC5CR2wAH3kBgonqO%2BUcHmd8T%2BRcUhszIwqHFU4qnBU4ajCUYWjCoHYA4g7gPg%2BXpVoFXskroodV1NhGTEKYY2PPmIUwhSvIEYh0Q0kGAa1XP4T24i7R0yA%2FwPiFcTGzH5GYpuuxCpkAwgwAEABi254DNFjAAAAAElFTkSuQmCC) no-repeat;
           background-size: 10px 60px;
         }
-        &:hover{
-          background-color: white;
-        }
 
-        &.contragent:hover {
-          i {
-            background-color: white;
-
-
-          }
-        }
-
-        &.permits:hover {
-          i {
-            background-color: white;
-            background-position: -153px -164px;
-          }
-        }
 
       }
 
@@ -219,96 +232,6 @@
         z-index: 10;
       }
 
-      &.documents {
-        i {
-          background-position: -13px -230px;
-          cursor: pointer;
-        }
-        &:hover i {
-          //  background-color: #76d4ce;
-          background-position: -83px -230px;
-        }
-        &.active i {
-          background-position: -152px -230px;
-          //  background-position: -153px -230px;
-        }
-
-        &.active:hover {
-          background-color: #fff;
-        }
-      }
-      .open {
-        .documents i {
-          background-position: -83px -230px;
-
-        }
-
-      }
-
-      &.permits {
-        i {
-          background-position: -13px -164px; ///300
-          width: 38px;
-        }
-        &:hover i {
-          background-color: #76d4ce;
-          background-position: -83px -164px;
-        }
-        &.active i {
-          background-position: -153px -164px;
-        }
-
-      }
-
-
-      &.contragent {
-        i {
-          width: 38px;
-          background-position: -13px -430px;
-        }
-        &:hover i {
-          background-color: #76d4ce;
-          background-position: -83px -430px;
-        }
-        &.active i {
-          background-position: -153px -430px;
-        }
-
-      }
-
-      &.letters {
-        .icon {
-          background-position: left -25px;
-        }
-
-        &:hover .icon {
-          background-color: #76d4ce;
-          background-position: -35px -25px;
-        }
-        &.active .icon {
-          background-position: -70px -25px;
-        }
-        &.active:hover .icon {
-          background-color: #9ad8ff;
-        }
-      }
-      &.bubble {
-        .icon {
-          background-position: left -48px;
-        }
-        &:hover .icon {
-          background-color: #76d4ce;
-          background-position: -35px -48px;
-        }
-        &.active .icon {
-          background-position: -70px -48px;
-        }
-        &.active:hover .icon {
-          background-color: #9ad8ff;
-        }
-
-      }
-
     }
 
   }
@@ -317,8 +240,9 @@
     position: fixed;
     box-shadow: 1px 0 5px gray;
 
-    .main  {
-      .text{display: inline-block;
+    .main {
+      .text {
+        display: inline-block;
         vertical-align: super;
         margin-left: 10px;
         margin-right: 45px;
@@ -330,12 +254,12 @@
         font-size: 16px;
         transition: width ease 0.1s;
         &:hover {
-          color: white!important;
-        }}
+          color: white !important;
+        }
+      }
 
-
-      &:hover{
-        .text{
+      &:hover {
+        .text {
           color: white;
         }
       }
@@ -345,7 +269,7 @@
       cursor: pointer;
       width: 220px;
       text-align: left;
-      padding-left: 8px;
+      //padding-left: 8px;
       vertical-align: super;
       transition: width ease 0.1s;
 
@@ -366,24 +290,8 @@
         }
       }
 
-      &.documents:hover {
-        background-color: #9ad8ff !important;
-        i {
-          background-position: -83px -230px !important;
-        }
-      }
 
 
-
-
-      &:hover {
-        //background-color: white;
-        background-color: #9ad8ff;
-        i{
-          //background-color: #9ad8ff;
-        }
-
-      }
     }
     .menu-link.active {
       border-radius: 12px;
@@ -407,12 +315,12 @@
       &.open {
         > .menu-link {
           margin-bottom: 0;
-
+          padding-left: 0;
           background-color: #9ad8ff;
           border-radius: 12px 12px 0 0 !important;
         }
         .child-dir {
-          padding: 13px 2px;
+          //          padding: 13px 2px;
           margin-bottom: 20px;
           margin-left: 10px;
           width: 220px;
@@ -421,11 +329,11 @@
           border: 1px solid #9ad8ff;
           overflow: hidden;
           background-color: white;
-          margin-top: -6px;
+          margin-top: 0px;
           position: relative;
           bottom: 1px;
           .menu-link {
-            margin-left: 0px;
+            margin-left: 8px;
             width: 200px;
             font-size: 14px;
             text-align: left;
@@ -474,5 +382,122 @@
       }
     }
   }
+}
+
+//цвета
+
+#sidebar {
+  aside {
+    //закрытый сайдбар
+    .menu-link {
+      &:hover {
+        background-color: #76d4ce;
+      }
+      &.active:hover {
+        background-color: #fff;
+      }
+
+      /*dosc*/
+      &.documents {
+        //standart
+        i {
+          background-position: $icon-documents-stan;
+          cursor: pointer;
+        }
+        &:hover i {
+          background-position: $icon-documents-hover;
+        }
+        &.active i {
+          background-position: $icon-documents-active;
+        }
+
+        &.active:hover {
+          background-color: #fff;
+        }
+      }
+      /*permits*/
+      &.permits {
+        i {
+          background-position: $icon-permit-stan;
+        }
+        &:hover i {
+          background-position: $icon-permit-hover;
+        }
+        &.active i {
+          background-position: $icon-permit-active;
+        }
+      }
+      /*orgaanizations*/
+      &.contragent {
+        i {
+          background-position: $icon-contragent-stan;
+        }
+        &:hover i {
+          background-position: $icon-contragent-hover;
+        }
+        &.active i {
+          background-position: $icon-contragent-active;
+        }
+
+      }
+    }
+
+  }
+  aside.m-open {
+    //открытый сайдбар
+    .menu-link {
+      &:hover{
+          background-color: #76d4ce;
+      }
+      &.active:hover {
+          background-color: #9ad8ff;
+          i {
+            background-color: transparent;
+          }
+    }
+  }
+
+  .menu-dir {
+    //далее папка
+
+      .documents{
+        .sidebar-header {
+          i {
+            background-position: $icon-documents-stan ;
+          }
+        }
+      }
+      .documents:hover {
+        background-color: #9ad8ff ;
+        i {
+          background-position: $icon-documents-hover ;
+        }
+      }
+      .documents.active {
+        //background-color: #9ad8ff ;
+        i {
+          background-position: $icon-documents-active ;
+        }
+      }
+
+
+    &.open {
+      .documents{
+        .sidebar-header {
+          i {
+            background-position: $icon-documents-active ;
+          }
+        }
+      }
+      .documents:hover {
+        background-color: #9ad8ff ;
+        i {
+          background-position: $icon-documents-hover ;
+        }
+      }
+    }
+  }
+}
+
 }
 

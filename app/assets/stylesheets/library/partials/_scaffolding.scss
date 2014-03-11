@@ -99,7 +99,9 @@ img {
 //border around img
 .img-bordered {
   @extend .img-container !optional;
-  border: 1px solid $thumbnail-border;
+  border: 2px solid #f2f2f2;
+  max-width: 160px;
+  border-radius: 2px;
 }
 
 .img-container {

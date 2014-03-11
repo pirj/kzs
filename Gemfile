@@ -53,7 +53,7 @@ gem 'jquery-rails', '~> 2.3.0'
 gem 'prawn'
 gem 'rmagick', :require => 'RMagick'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', '0.9.9.1'
 
 gem 'hipchat'
 
