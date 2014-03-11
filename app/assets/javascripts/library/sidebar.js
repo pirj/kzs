@@ -36,20 +36,23 @@ $(document).ready(function () {
 
 
 
-    $('.menu-dir div.menu-link').click(function () {                //логика работы раскрывающихся папок
-
-        var childDir = $(this).next();
+    $('.menu-dir .sidebar-header').click(function (e) {                //логика работы раскрывающихся папок
+        e.preventDefault();
+        var childDir = $(this).parent().next();
 
 
         if (panel.hasClass('m-open')) {
             if (childDir.parent().hasClass('open')) {
+                console.log(1);
                 childDir.parent().toggleClass('open');
                 childDir.css({'height': 0});
             }
             else {
+
+                console.log(childDir);
                 childDir.parent().toggleClass('open');
                 var counter = childDir.children('.menu-link').length;
-                childDir.css({'height': ((counter + 1) * 50) + 'px'});
+                childDir.css({'height': ((counter + 1) * 52) + 'px'});
             }
             /*$('.l-page__column').mouseleave(function () {
                 childDir.parent().removeClass('open');
@@ -57,7 +60,7 @@ $(document).ready(function () {
             });*/
         }
         else {
-            document.location.href = childDir.find('.menu-link')[0].getAttribute('href');
+            document.location.href = $('.sidebar-header ')[0].getAttribute('href');
         }
 
 

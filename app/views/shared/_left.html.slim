@@ -7,20 +7,21 @@ aside.l-page__column.left
         span
       .text Виджеты
     .menu-dir
-      div class=(controller?("documents") ? "menu-link documents active" : "menu-link documents")
-        = link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do
+      div class=(controller_name == 'documents' ? "menu-link documents active" : "menu-link documents")
+        = link_to documents_path, :class => (controller_name == 'documents' ? 'active sidebar-header ' : 'sidebar-header ') do
           i
           .text Документооборот
+          b
       .child-dir
-        = link_to documents_path, :class => (controller?("documents") ? 'menu-link active' : 'menu-link ') do
+        = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
           i
           .text Все документы
-        = link_to 'drafts', documents_path(with_state:'draft')
-        = link_to 'perpared', documents_path(with_state:'prepared')
-        = link_to 'approved', documents_path(with_state:'approved')
-        = link_to 'mails', documents_path(with_type: 'mails')
-        = link_to 'orders', documents_path(with_type: 'orders')
-        = link_to 'reports', documents_path(with_type: 'reports')
+          = link_to 'drafts', documents_path(with_state:'draft'), class: 'menu-link'
+          = link_to 'perpared', documents_path(with_state:'prepared'), class: 'menu-link'
+          = link_to 'approved', documents_path(with_state:'approved'), class: 'menu-link'
+          = link_to 'mails', documents_path(with_type: 'mails'), class: 'menu-link'
+          = link_to 'orders', documents_path(with_type: 'orders'), class: 'menu-link'
+          = link_to 'reports', documents_path(with_type: 'reports'), class: 'menu-link'
     = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
       i
       .text Пропуска
