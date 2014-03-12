@@ -11,7 +11,7 @@ class Documents::Inbox
 
   # Accepts :orders, :mails, :reports in
   # symbols or strings
-  def count_by_type(type)
+  def count_by_type(type=nil)
     type = type.to_s
     case type
       when 'orders' then order_count
