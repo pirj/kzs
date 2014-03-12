@@ -24,16 +24,14 @@ class Documents::OrderStateMachine
   # check that none of the Ordres would be accepted or rejceted
   # until they have matching report
   guard_transition(to: :accepted) do |order|
-    Documents::Report.where(order_id: order.id).with_state(guarded).exists?
+    Documents::Report.where(order_id: order.id).with_state(guarded).count > 0
   end
 
   guard_transition(to: :rejected) do |order|
-    Documents::Report.where(order_id: order.id).with_state(guarded).exists?
+    Documents::Report.where(order_id: order.id).with_state(guarded).count > 0
   end
 
-  private
-
-  def guarded
+  def self.guarded
     %w(sent accepted rejected)
   end
 end

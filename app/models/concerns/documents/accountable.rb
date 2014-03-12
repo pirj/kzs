@@ -9,7 +9,7 @@ module Documents::Accountable
     validates_presence_of :document
 
     # rubocop:disable LineLength
-    default_scope { includes(:document) }
+    default_scope includes(:document)
 
     scope :with_state, ->(state) { where('documents.state' => state) }
 
