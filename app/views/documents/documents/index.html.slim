@@ -58,15 +58,6 @@
 
 = render 'filter'
 
-/ remove start
-br
-= "Всего входящих непрочитанных документов: #{documents_inbox.count}"
-br
-= "Писем: #{documents_inbox.mail_count} | "
-= "Распоряжений: #{documents_inbox.order_count} | "
-= "Актов: #{documents_inbox.report_count}"
-/ remove end
-
 ul.nav.nav-inline.btn-block
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-primary', data:{ toggle: 'dropdown' } do
