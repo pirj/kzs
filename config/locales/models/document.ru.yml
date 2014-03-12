@@ -9,18 +9,20 @@ ru:
 
     attributes:
       document: &document_attributes
-        approver_id: Контрольное лицо
-        approver:    Контрольное лицо
-        body: Текст
-        confidential: Конфиденциально
-        executor_id: Исполнитель
-        executor:    Исполнитель
-        sender_organization_id: Организация-отправитель
-        sender_organization: Организация-отправитель
-        serial_number: Серийный номер
-        recipient_organization: Организация-получатель
-        recipient_organization_id: Организация-получатель
-        title: Тема
+        approver_id:                Контрольное лицо
+        approver:                   Контрольное лицо
+        body:                       Текст
+        confidential:               Конфиденциально
+        conformers:                 Согласующие
+        conformer_ids:              Согласующие
+        executor_id:                Исполнитель
+        executor:                   Исполнитель
+        sender_organization_id:     Организация-отправитель
+        sender_organization:        Организация-отправитель
+        serial_number:              Серийный номер
+        recipient_organization:     Организация-получатель
+        recipient_organization_id:  Организация-получатель
+        title:                      Тема
 
         accountable_types:
           documents_officialmail: письмо

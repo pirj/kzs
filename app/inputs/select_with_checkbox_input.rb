@@ -12,15 +12,20 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
 
   protected
 
+  def updated_html_options
+    required_options = { data: { target: uniq_name }, disabled: :disabled, class: 'js-chosen' }
+    input_html_options.merge!(required_options)
+  end
+
   def select
     label_method, value_method = detect_collection_methods
 
-    input_html_options.merge!(data: { target: uniq_name })
+
 
     template.content_tag(:div, class: "col-sm-#{12-check_box_col}") do
       @builder.collection_select(
           attribute_name, collection, value_method, label_method,
-          input_options, input_html_options
+          input_options, updated_html_options
       )
     end
   end
