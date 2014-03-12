@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def documents_inbox
-    @documents_inbox ||= Documents::Inbox.new(current_user, current_organization)
+    @documents_inbox ||= Documents::InboxDecorator.new(pure_inbox)
+  end
+
+  def pure_inbox
+    Documents::Inbox.new(current_user, current_organization)
   end
 
   def current_organization

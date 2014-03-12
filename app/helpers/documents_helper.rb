@@ -28,9 +28,4 @@ module DocumentsHelper
 });</script>').html_safe
   end
 
-  def unread_class(document)
-    readable = Document.inbox(current_organization).exists?(id: document.id)
-    unread = document.unread?(current_user)
-    (readable && unread) ? 'tr-unread' : 'tr-read'
-  end
 end

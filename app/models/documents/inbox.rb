@@ -6,21 +6,39 @@ class Documents::Inbox
   end
 
   def count
-    @count = @scope.inbox(@organization).unread_by(@user).count
+    @count = incoming.count
+  end
+
+  # Accepts :orders, :mails, :reports in
+  # symbols or strings
+  def count_by_type(type)
+    type = type.to_s
+    case type
+      when 'orders' then order_count
+      when 'mails' then mail_count
+      when 'reports' then report_count
+      else
+        count
+    end
   end
 
   def mail_count
     @mail_count ||=
-        @scope.inbox(@organization).mails.unread_by(@user).count
+        incoming.mails.count
   end
 
   def order_count
     @order_count ||=
-        @scope.inbox(@organization).orders.unread_by(@user).count
+        incoming.orders.count
   end
 
   def report_count
     @report_count ||=
-        @scope.inbox(@organization).reports.unread_by(@user).count
+        incoming.reports.count
   end
+  
+  def incoming
+    @scope.inbox(@organization).unread_by(@user)
+  end
+
 end

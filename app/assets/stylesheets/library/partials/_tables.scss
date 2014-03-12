@@ -46,7 +46,7 @@ th {
   }
 
   .tr-unread{
-    td:first-child{ border-left-color: red; }
+    td:first-child{ border-left-color: $color-sky-blue-darker; }
   }
 
   // Cells
