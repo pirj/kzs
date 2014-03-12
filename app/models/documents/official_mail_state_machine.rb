@@ -17,7 +17,7 @@ class Documents::OfficialMailStateMachine
     !mail.new_record?
   end
 
-    after_transition(to: :approved) do |accountable, transition|
+  after_transition(to: :approved) do |accountable, transition|
     Documents::Accounter.sign(accountable)
   end
 

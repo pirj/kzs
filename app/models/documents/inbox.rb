@@ -11,14 +11,14 @@ class Documents::Inbox
 
   # Accepts :orders, :mails, :reports in
   # symbols or strings
-  def count_by_type(type=nil)
+  def count_by_type(type = nil)
     type = type.to_s
     case type
-      when 'orders' then order_count
-      when 'mails' then mail_count
-      when 'reports' then report_count
-      else
-        count
+    when 'orders' then order_count
+    when 'mails' then mail_count
+    when 'reports' then report_count
+    else
+      count
     end
   end
 
@@ -36,9 +36,8 @@ class Documents::Inbox
     @report_count ||=
         incoming.reports.count
   end
-  
+
   def incoming
     @scope.inbox(@organization).unread_by(@user)
   end
-
 end

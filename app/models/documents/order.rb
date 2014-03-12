@@ -25,7 +25,7 @@ module Documents
     has_many :tasks, through: :task_list
     accepts_nested_attributes_for :task_list, allow_destroy: true
 
-    validates :deadline, date: { after: Proc.new{ Time.now + 3.days } }
+    validates :deadline, date: { after: proc { Time.now + 3.days } }
 
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)

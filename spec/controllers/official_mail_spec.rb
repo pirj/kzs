@@ -4,9 +4,6 @@ describe Documents::OfficialMailsController do
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { user.organization }
 
-
-
-
   describe "GET new" do
     it "has a 200 status code" do
       visit new_documents_official_mail_path
@@ -43,6 +40,5 @@ describe Documents::OfficialMailsController do
         inbox_mail.unread?(user).should be_false
       }
     end
-
   end
 end
