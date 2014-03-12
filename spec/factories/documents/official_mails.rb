@@ -22,5 +22,9 @@ FactoryGirl.define do
       instance.executor = user
       instance.creator = user
     end
+
+    after(:create) do |instance,ev|
+      instance.transition_to!('draft')
+    end
   end
 end

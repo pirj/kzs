@@ -4,7 +4,8 @@ module Documents
     delegate_all
 
     def badge(type=nil)
-      h.content_tag(:span, count_by_type(type) ,class: 'badge')
+      counter = count_by_type(type)
+      h.content_tag(:span, counter,class: 'badge') unless counter<1
     end
 
     def row_class(document)
