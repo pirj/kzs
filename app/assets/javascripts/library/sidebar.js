@@ -17,15 +17,15 @@ $(document).ready(function () {
     var removeId = 0;
 
 
-//    function closeSidebar() {
-//
-//        removeId = setTimeout(function() {
-//            $('.l-page__column').removeClass('m-open');
-//            $('.menu-dir').removeClass('open');
-//            $('.child-dir').css({'height': '0px'});
-//
-//        }, 800)
-//    }
+    function closeSidebar() {
+
+        removeId = setTimeout(function() {
+            $('.l-page__column').removeClass('m-open');
+            $('.menu-dir').removeClass('open');
+            $('.child-dir').css({'height': '0px'});
+
+        }, 800)
+    }
 
 
     panel.mouseleave(function(){closeSidebar()});
