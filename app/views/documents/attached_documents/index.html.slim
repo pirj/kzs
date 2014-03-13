@@ -1,0 +1,10 @@
+= content_for :page_header do
+  = header_title do
+    h1 Прикрепленные документы
+
+h2 = params
+
+/ = @attached_documents.each do |ad|
+/   = puts ad
+
+
