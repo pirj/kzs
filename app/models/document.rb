@@ -25,6 +25,14 @@ class Document < ActiveRecord::Base
 
   has_many :document_attached_files
 
+  # Приложенные документы
+  has_and_belongs_to_many :attached_documents,
+                          class_name: "Document",
+                          uniq: true,
+                          join_table: "attached_documents_relations",
+                          foreign_key: "document_id",
+                          association_foreign_key: "attached_document_id"
+
   has_many :document_transitions
 
   belongs_to :accountable, polymorphic: true, dependent: :destroy

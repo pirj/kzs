@@ -53,6 +53,15 @@ ActiveRecord::Schema.define(:version => 20140319055356) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "attached_documents_relations", :force => true do |t|
+    t.integer  "document_id"
+    t.integer  "attached_document_id"
+    t.boolean  "temp"
+    t.boolean  "to_delete"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "car_brand_types", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
