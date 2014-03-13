@@ -44,6 +44,21 @@
           .text-help = task.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
 
+  - @tasks.each do |task2|
+    = task2.completed
+
+  = @task_list.tasks.each do |a|
+    = a
+  = form_for @task_list do |task_list_builder|
+    = task_list_builder.simple_fields_for :tasks do |task|
+      .form-group.row
+        .col-sm-1 = task.input :completed, label: false
+        = task
+        /.col-sm-3
+          = task.title
+          .text-help = task.body
+        /.col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
+
   /- @tasks.each do |t|
   /  = t.task_body
 

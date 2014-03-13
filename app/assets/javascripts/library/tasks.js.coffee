@@ -79,9 +79,22 @@ $ ->
     $(T.add_task_modal).modal('hide')
   )
 
+
+
   # submit form on task checked over ajax
-  $(document).on('ifChanged', "#{T.order_tasks_list.form} input", (e) ->
+  $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
     $form = $(e.target).closest(T.order_tasks_list.form)
+#   $(T.order_tasks_list.form)
+
+#    taskCheck = $('.task_completed .checkbox-inline')
+#    l = taskCheck.length
+#
+#    _.each taskCheck, (t) ->
+#
+#      l-- if t.classList.contains('checked')
+#    console.log l
+
+
     $form.submit()
   )
 

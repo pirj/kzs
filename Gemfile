@@ -110,4 +110,9 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
+<<<<<<< HEAD
+=======
+  gem 'test_after_commit'
+  #gem 'machinist', '>= 2.0.0.beta2'
+>>>>>>> add test fot task_list
 end

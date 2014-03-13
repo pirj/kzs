@@ -2,11 +2,14 @@ class TaskList < ActiveRecord::Base
   attr_accessible :order_id, :tasks_attributes, :deadline
   belongs_to :order
   has_many :tasks
+
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
   scope :completed, -> { where(completed: true) }
 
-  after_commit :finalize, if: :all_tasks_complete?
+  after_commit :finalize, if: :all_tasks_completed?
+
+
 
   def progress
     if tasks.present?
@@ -19,12 +22,12 @@ class TaskList < ActiveRecord::Base
   end
 
   def all_tasks_completed?
-    tasks.count == tasks.completed.count
+    tasks.count == tasks.completed.count if tasks.count > 0
   end
 
   private
 
   def finalize
-    update_column :completed, true
+    update_column(:completed, true)
   end
 end

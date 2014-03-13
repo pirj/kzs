@@ -19,6 +19,15 @@ class TaskListsController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+    #@task.update_attributes(params[:task])
+
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
+
   private
 
   def assign_organizations_to_tasks(document)

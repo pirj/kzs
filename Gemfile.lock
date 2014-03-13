@@ -346,6 +346,7 @@ GEM
       polyamorous (~> 0.5.0)
     statesman (0.3.0)
     temple (0.6.7)
+    test_after_commit (0.2.2)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -440,6 +441,7 @@ DEPENDENCIES
   spreadsheet
   squeel
   statesman (~> 0.3)
+  test_after_commit
   therubyracer
   thin
   turbo-sprockets-rails3
