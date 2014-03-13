@@ -19,6 +19,8 @@ $icon-documents-active: -152px -230px;
   height: 100%;
   transition: width ease 0.1s;
 
+
+  .badge { margin-top: 0; }
 }
 
 #sidebar {
@@ -240,6 +242,8 @@ $icon-documents-active: -152px -230px;
     position: fixed;
     box-shadow: 1px 0 5px gray;
 
+
+
     .main {
       .text {
         display: inline-block;
@@ -350,17 +354,9 @@ $icon-documents-active: -152px -230px;
               display: inline-block;
               top: 9px;
             }
-            .badge {
-              top: 10px;
-            }
             &:hover {
               background-color: #9ad8ff;
               color: white;
-
-              .badge {
-                background-color: white;
-                color: #e63d4d;
-              }
             }
           }
         }

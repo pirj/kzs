@@ -36,7 +36,7 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
     template.check_box_tag("is_#{attribute_name}".to_sym, nil, false, class: 'js-active-input', data: { target: uniq_name  })
   end
 
-  def checkbox_title &block
+  def checkbox_title(&block)
     template.label_tag("is_#{attribute_name}".to_sym)  do
       yield +
       template.content_tag(:span, checkbox_text)
@@ -63,7 +63,7 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
   end
 
   def uniq_name
-    @_select_with_checkbox_input_uniq_time ||= "#{attribute_name}-#{(DateTime.now.to_f*10**5).to_i.to_s}"
+    @select_with_checkbox_input_uniq_time ||= "#{attribute_name}-#{(DateTime.now.to_f*10**5).to_i.to_s}"
   end
 
 end
