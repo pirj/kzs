@@ -83,6 +83,9 @@ $ ->
 
   # submit form on task checked over ajax
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
+#    console.log(123)
+#    console.log("#{T.order_tasks_list.form}")
+
     $form = $(e.target).closest(T.order_tasks_list.form)
 #   $(T.order_tasks_list.form)
 

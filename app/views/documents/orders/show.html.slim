@@ -35,7 +35,7 @@
 
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
-  - @tasks.each do |task|
+  /- @tasks.each do |task|
     = simple_form_for task, html: { remote: true, class: 'js-tasks-order-task-form' } do |f|
       .form-group.row
         .col-sm-1 = f.input :completed, label: false
@@ -44,19 +44,16 @@
           .text-help = task.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
 
-  - @tasks.each do |task2|
-    = task2.completed
 
-  = @task_list.tasks.each do |a|
-    = a
-  = form_for @task_list do |task_list_builder|
-    = task_list_builder.simple_fields_for :tasks do |task|
+
+  = simple_form_for @task_list, html: { remote: true, class: 'js-tasks-order-task-form' } do |task_list_builder|
+
+    = task_list_builder.simple_fields_for :tasks do |task_builder|
       .form-group.row
-        .col-sm-1 = task.input :completed, label: false
-        = task
-        /.col-sm-3
-          = task.title
-          .text-help = task.body
+        .col-sm-1 = task_builder.input :completed, label: false, disabled: task_list_builder.object.completed?
+        .col-sm-3
+          = task_builder.object.title
+          .text-help = task_builder.object.body
         /.col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
 
   /- @tasks.each do |t|

@@ -20,8 +20,9 @@ class TaskListsController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id])
-    #@task.update_attributes(params[:task])
+    @task_list = TaskList.find(params[:id])
+    @task_list.update_attributes(params[:task_list])
+    #@id = params[:task_list]
 
     respond_to do |format|
       format.js { render layout: false }
