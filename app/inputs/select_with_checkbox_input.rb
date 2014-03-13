@@ -6,15 +6,17 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
     out <<  template.content_tag(:div, class: 'row') do
               checkbox_with_title + select
             end
-
+    #out = updated_html_options.inspect
     out.html_safe
   end
 
   protected
 
   def updated_html_options
-    required_options = { data: { target: uniq_name }, disabled: :disabled, class: 'js-chosen' }
-    input_html_options.merge!(required_options)
+    required_options = { data: { target: uniq_name }, disabled: :disabled }
+    input_html_classes.push('js-chosen') # добавляем, чтобы включить chosen
+    input_html_options[:data].merge!(required_options[:data]) if input_html_options[:data].present? # иначе никак не слить data атрибуты,чтобы не потерять их из разных мест
+    required_options.merge(input_html_options) # окончательно сливаем элементы первого уровня
   end
 
   def select
