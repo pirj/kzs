@@ -12,6 +12,7 @@ window.app.documents =
       result = app.documents.selected_actions
     else
       all_checkboxes = $(checkbox).parents('table').find('.js-row-select').filter(':checked')
+
       _selected_actions = []
       _.each(all_checkboxes, (checkbox) ->
         actions = $(checkbox).parents('tr').data('server-actions')
@@ -95,6 +96,12 @@ $ ->
   $(".js-row-select").on('ifChanged', ->
     actions = app.documents.actions_by_rows(@)
     app.documents.render_actions_list(actions)
+  )
+  $(".js-select-all-in-table").on('ifChanged', ->
+    $(".js-row-select").iCheck('toggle');
+
+#    actions = app.documents.actions_by_rows(@)
+#    app.documents.render_actions_list(actions)
   )
 
 
