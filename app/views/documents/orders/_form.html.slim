@@ -16,7 +16,7 @@
         | Составитель
       .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
 
-    = doc.association :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' } }
+    = doc.association :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' } }, label_hint: 'Лицо, указанное в документе, как исполнитель'
     = doc.association :conformers, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, label_text: nil, checkbox_text: 'Согласовать с'
 
     // блок ИСПОЛНИТЕЛЬ ?
@@ -41,11 +41,11 @@
     /    = doc.select :conformer_ids, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'new-order-conformer' }, multiple: true } if current_organization_users if current_organization_users
     /  /========
 
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, label_html: { title: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, label_hint: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица', input_html: { class: 'js-chosen' }
 
     = doc.association :recipient_organization, label_html: { title: 'Организации-получатели документа' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
 
-    = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-2' }, label_html: { title: 'Дата, к которой распоряжение должно быть исполнено', class: 'label-icon-hint js-label-hint col-sm-2' }
+    = f.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой распоряжение должно быть исполнено'
 
     = doc.input :title
     = doc.input :body, input_html: { rows: 6 }

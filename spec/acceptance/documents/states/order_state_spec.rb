@@ -139,11 +139,23 @@ feature "Users view actions for order", %q{} do
 
     context 'sent is current state' do
       context 'tasks not completed' do
-        it 'should not have "create report"'
+        context 'sender' do
+          it 'should not have "create report"'
+        end
+
+        context 'recipient' do
+          it 'should not have "create report"'
+        end
       end
 
       context 'tasks completed' do
-        it 'should have "create report"'
+        context 'sender' do
+          it 'should not have "create report"'
+        end
+
+        context 'recipient' do
+          it 'should have "create report"'
+        end
       end
 
     end
