@@ -15,7 +15,6 @@ $ ->
       inputs_container: '.js-task-form-fields'
       html_container: '.js-task-form-inserted-values'
 
-
   T = app.tasks
   T.$add_task_modal =  $(T.add_task_modal)
   T.$add_task_modal_task_container = T.$add_task_modal.find(T.modal_task_container)
@@ -37,10 +36,8 @@ $ ->
     T.$add_task_modal_task_container.find(T.task_form.html_container).hide()
     T.$add_task_modal_task_container.find("#{T.task_form.inputs_container} .js-datepicker").datepicker(global.datepicker)
     T.$add_task_modal_task_container.find(T.task_form.inputs_container).show()
-
     T.$add_task_modal.modal('show')
   )
-
 
   # Add edited task to hidden area in parent-model form
   $(document).on('click', T.modal_save_btn, (e) ->
@@ -79,25 +76,9 @@ $ ->
     $(T.add_task_modal).modal('hide')
   )
 
-
-
   # submit form on task checked over ajax
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
-#    console.log(123)
-#    console.log("#{T.order_tasks_list.form}")
-
     $form = $(e.target).closest(T.order_tasks_list.form)
-#   $(T.order_tasks_list.form)
-
-#    taskCheck = $('.task_completed .checkbox-inline')
-#    l = taskCheck.length
-#
-#    _.each taskCheck, (t) ->
-#
-#      l-- if t.classList.contains('checked')
-#    console.log l
-
-
     $form.submit()
   )
 

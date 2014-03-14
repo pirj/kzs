@@ -54,7 +54,7 @@
         .col-sm-3
           = task_builder.object.title
           .text-help = task_builder.object.body
-        /.col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
+        .col-sm-2.col-sm-offset-2 = DateFormatter.new(task_builder.object.deadline) if task_builder.object.deadline
 
   /- @tasks.each do |t|
   /  = t.task_body

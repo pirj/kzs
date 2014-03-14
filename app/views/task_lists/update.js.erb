@@ -1,10 +1,8 @@
 var $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]');
 var $completed_tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]:checked');
-console.log($tasks);
 if ($tasks.length == $completed_tasks.length){
     //   if (confirm('Все задачи распоряжения выполнены?')){
     _.each($tasks, function(t) {
-        console.log('опа!');
         $(t).iCheck('disable')
     })
     // }
