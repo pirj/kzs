@@ -32,6 +32,8 @@ SimpleForm.browser_validations = false
 ## Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.label_class = 'control-label'
+  config.required_by_default = false
+  config.label_text = lambda { |label, required| "#{label}" }
 
   config.wrappers :bootstrap3, tag: 'div', class: 'form-group', error_class: 'has-error',
                   defaults: { input_html: { class: 'default_class' } } do |b|
