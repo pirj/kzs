@@ -2,6 +2,24 @@ $ ->
   window.app.tasks =
     order_tasks_list:
       form: '.js-tasks-order-task-form'
+
+    order_tasks_form:
+      container: '.js-tasks-main-form'
+      add_task_btn: '.js-tasks-add-task'
+
+    task:
+      container: '.js-task-container'
+      remove_btn: '.js-task-remove'
+      inputs_container: '.js-task-form-fields'
+      html_container: '.js-task-form-inserted-values'
+
+    create_modal:
+      elem: '.js-tasks-add-modal'
+      form_container: '.js-tasks-modal-form'
+      cancel: '.js-tasks-modal-cancel-btn'
+      submit: '.js-tasks-modal-save-btn'
+
+
     add_task_btn: '.js-tasks-add-task'
     task_remove_btn: '.js-task-remove'
     main_form_container: '.js-tasks-main-form'
@@ -16,6 +34,9 @@ $ ->
       html_container: '.js-task-form-inserted-values'
 
   T = app.tasks
+  T.create_modal.$elem = $(T.create_modal.elem)
+  T.create_modal.$form_container = $(T.create_modal.form_container)
+
   T.$add_task_modal =  $(T.add_task_modal)
   T.$add_task_modal_task_container = T.$add_task_modal.find(T.modal_task_container)
   T.$main_form_container =  $(T.main_form_container)
@@ -23,23 +44,27 @@ $ ->
   # hide all inputs by on after page loaded
   $(T.main_form_container).find('input, textarea, select').closest('.form-group').hide()
 
-  # Open modal for new task
-  $(document).on('click', T.add_task_btn, (e) ->
+  # создание новой таски в модальном окне
+  $(document).on('click', T.order_tasks_form.add_task_btn, (e) ->
     e.preventDefault()
     # replace '0' to 'now timestamp' in task-form
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
 
-    T.$add_task_modal_task_container.html($(@).data('fields').replace(regexp, time))
+    html_source = $(@).data('fields').replace(regexp, time)
 
-    # show inputs and hide html-proofs with values
-    T.$add_task_modal_task_container.find(T.task_form.html_container).hide()
-    T.$add_task_modal_task_container.find("#{T.task_form.inputs_container} .js-datepicker").datepicker(global.datepicker)
-    T.$add_task_modal_task_container.find(T.task_form.inputs_container).show()
-    T.$add_task_modal.modal('show')
+    # вставляем данный код в модальное окно
+    T.create_modal.$form_container.html(html_source)
+
+    # показываем форму, скрываем все остальное
+    T.create_modal.$form_container.find(T.task.html_container).hide()
+    T.create_modal.$form_container.find('.js-datepicker').datepicker(global.datepicker)
+    T.create_modal.$form_container.find(T.task.inputs_container).show()
+
+    T.create_modal.$elem.modal('show')
   )
 
-  # Add edited task to hidden area in parent-model form
+  # при клике на кнопку сабмита
   $(document).on('click', T.modal_save_btn, (e) ->
     e.preventDefault()
     # apply all inserted values to inputs and  labels
