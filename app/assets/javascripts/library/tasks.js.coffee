@@ -84,30 +84,20 @@ $ ->
 
     if e.type is 'ifChecked'
 
-
       $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]')
       $completed_tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]:checked') #throw RuntimeException("exit")#('Ошибка!')
 
-      console.log ($tasks.length-$completed_tasks.length)
-
       if $tasks.length-$completed_tasks.length==0
-        if confirm("Шура ты здоров?")
+        if confirm("Вы уверены? Отменить невозможно!")
           $(e.target).closest('.j-task').addClass('m-task-completed')
           $form = $(e.target).closest(T.order_tasks_list.form)
           $form.submit()
         else
           location.reload()
-      #alert("Вы нажали кнопку отмена")
-#      console.log($completed_tasks)
-
       else
-
         $(e.target).closest('.j-task').addClass('m-task-completed')
         $form = $(e.target).closest(T.order_tasks_list.form)
         $form.submit()
-
-
-
     else
       $(e.target).closest('.j-task').removeClass('m-task-completed')
       $form = $(e.target).closest(T.order_tasks_list.form)
