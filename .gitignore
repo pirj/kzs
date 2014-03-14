@@ -7,7 +7,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/test_images
+/test_images/*
 /.idea
 .DS_Store
 .powrc
