@@ -34,7 +34,7 @@ class Documents::ReportsController < ResourceController
   def create
     @report = Documents::Report.new(params[:documents_report])
     @report.sender_organization = current_organization
-    @report.recipient_organization = @report.order.sender_organization
+    @report.recipient_organization = @report.order.sender_organization if @report.order
     @report.executor ||= current_user
     @report.creator = current_user
     super
