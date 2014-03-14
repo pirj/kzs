@@ -6,7 +6,6 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
     out <<  template.content_tag(:div, class: 'row') do
               checkbox_with_title + select
             end
-    #out = updated_html_options.inspect
     out.html_safe
   end
 
@@ -21,9 +20,6 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
 
   def select
     label_method, value_method = detect_collection_methods
-
-
-
     template.content_tag(:div, class: "col-sm-#{12-check_box_col}") do
       @builder.collection_select(
           attribute_name, collection, value_method, label_method,
@@ -37,9 +33,9 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
   end
 
   def checkbox_title(&block)
-    template.label_tag("is_#{attribute_name}".to_sym)  do
+    template.label_tag("is_#{attribute_name}".to_sym, class: 'control-label')  do
       yield +
-      template.content_tag(:span, checkbox_text)
+      template.content_tag(:span, checkbox_text, checkbox_options)
     end
   end
 
@@ -57,6 +53,9 @@ class SelectWithCheckboxInput < SimpleForm::Inputs::CollectionInput
     end
   end
 
+  def checkbox_options
+    { class: 'js-label-hint label-icon-hint', title: checkbox_hint} if has_checkbox_hint?
+  end
 
   def check_box_col
     has_checkbox_text? ? 4 : 1

@@ -16,8 +16,19 @@
         | Составитель
       .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
 
-    = doc.association :executor, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' } }, label_hint: 'Лицо, указанное в документе, как исполнитель'
-    = doc.association :conformers, as: :select_with_checkbox, collection: current_organization_users, label_method: :first_name_with_last_name, label_text: nil, checkbox_text: 'Согласовать с'
+    = doc.association :executor, as: :select_with_checkbox, \
+                      collection: current_organization_users, \
+                      label_method: :first_name_with_last_name, \
+                      input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' } }, \
+                      label_hint: 'Лицо, указанное в документе, как исполнитель'
+
+    = doc.association :conformers, as: :select_with_checkbox, \
+                      collection: current_organization_users, \
+                      label_method: :first_name_with_last_name, \
+                      selects_checkbox: { text: 'Согласовать с', hint: 'Лица, согласующие документ перед его подписанием' }, \
+                      label: false, \
+                      input_html: { multiple: true }, \
+                      input_wrapper_html: { class: 'col-sm-offset-2 col-sm-8' }
 
     // блок ИСПОЛНИТЕЛЬ ?
     /.form-group.spec-order-field-show

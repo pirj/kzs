@@ -10,10 +10,10 @@ module SimpleForm
 
       end
 
-
+      # expand label options by new hint options
       def label_html_options
         label_options = super
-        if label_hint?
+        if has_label_hint?
           label_options[:class].push('js-label-hint label-icon-hint')
           label_options[:title] = label_hint
         end
@@ -29,7 +29,7 @@ module SimpleForm
         { title: label_hint }
       end
 
-      def label_hint?
+      def has_label_hint?
         label_hint.present?
       end
 
