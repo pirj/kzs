@@ -115,7 +115,6 @@
   color: $input-border-color;
 
   &.search:after{
-    color: $input-border-color;
     font-family: FontAwesome;
     content: "\f002";
     position: absolute;
@@ -189,4 +188,10 @@
   &:active {
     z-index: 2;
   }
+}
+
+// ERRORS STYLES
+.error .input-group-icon{
+  border-color: $color-red;
+  color: $color-red;
 }
