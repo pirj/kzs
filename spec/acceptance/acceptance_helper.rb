@@ -11,6 +11,8 @@ RSpec.configure do |config|
     Capybara::Poltergeist::Driver.new(app, js_errors: false)
   end
 
+  Capybara.ignore_hidden_elements = false
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -39,6 +41,7 @@ RSpec.configure do |config|
 
   config.include Features::SelectDatesAndTimesHelper, type: :feature
   config.include Features::SessionsHelper, type: :feature
+  config.include Features::ChosenHelper, type: :feature
 
 
   # autosave errors screenshots

@@ -55,14 +55,14 @@ class Document < ActiveRecord::Base
 
   after_save :create_png
   before_destroy {|document| document.conformers.clear}
-
-  validates_presence_of :title,
-                        :sender_organization_id,
-                        :approver_id,
-                        :executor_id,
-                        :body
-
-  validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
+  #
+  #validates_presence_of :title,
+  #                      :sender_organization_id,
+  #                      :approver_id,
+  #                      :executor_id,
+  #                      :body
+  #
+  #validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
 
   # New Scopes
   scope :lookup, lambda { |query|
