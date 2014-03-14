@@ -1,7 +1,50 @@
-._task{
+
+$el: '._task';
+
+#{$el}{
   @extend .form-group !optional;
-  @extend .form-control !optional;
   height: auto;
   margin-left: 0 !important;
   margin-right: 0 !important;
+  font-family: "open_sanslight", arial, sans-serif;
+
+  &.m-new-task{
+    @extend .form-control !optional;
+  }
+
+  #{$el}-title{
+    color: gray;
+  }
+
+  #{$el}-num{
+    display: inline;
+
+    color: gray;
+    &:after{
+      content: '. '
+    }
+  }
+  #{$el}-date{
+    text-align: right;
+  }
+  #{$el}-comment{
+    font-size: 12px;
+  }
+
+  &.m-task-completed{
+    #{$el}-title, #{$el}-num{
+      color: rgb(42,182,107);
+    }
+  }
+
+
+  &.m-act{
+    #{$el}-num, #{$el}-title{
+      color: #1ba0e1;
+    }
+    & > .col-sm-8{
+      width: 75%;
+    }
+  }
 }
+

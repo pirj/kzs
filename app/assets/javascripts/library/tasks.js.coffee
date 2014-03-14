@@ -78,6 +78,7 @@ $ ->
 
   # submit form on task checked over ajax
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
+    $(e.target).closest('.j-task').toggleClass('m-task-completed')
     $form = $(e.target).closest(T.order_tasks_list.form)
     $form.submit()
   )

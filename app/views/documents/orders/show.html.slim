@@ -30,14 +30,23 @@
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
 
-  = simple_form_for @task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
 
+  - i = 0
+  = simple_form_for @task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
+    /= task_list_builder.object.tasks.each.with_index do |task, index|
     = task_list_builder.simple_fields_for :tasks do |task_builder|
-      .form-group.row
-        .col-sm-1 = task_builder.input :completed, label: false, disabled: task_list_builder.object.completed?
-        .col-sm-3
-          = task_builder.object.title
-          .text-help = task_builder.object.body
+      - is_completed = task_builder.object.completed?
+
+      .form-group.row._task.j-task class=('m-task-completed' if is_completed)
+        .col-sm-1
+          = task_builder.input :completed, label: false, disabled: task_list_builder.object.completed?
+        .col-sm-7
+
+          ._task-title
+            ._task-num = i = i+1
+            = task_builder.object.title
+
+          ._task-comment = task_builder.object.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task_builder.object.deadline) if task_builder.object.deadline
 
 .row.b-offset-sm
