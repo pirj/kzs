@@ -30,7 +30,7 @@ feature "Users review reports", %q{} do
       select_from_chosen label = 'Контрольное лицо'
 
       expect { click_button 'подготовить' }.to change(Documents::Report, :count).by(1)
-      expect(page).to have_content 'не может быть пустым'
+      expect(page).to_not have_content 'не может быть пустым'
       expect(current_path).to_not eq(new_documents_report_path)
     end
 
