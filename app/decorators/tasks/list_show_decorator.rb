@@ -16,14 +16,14 @@ module Tasks
 
 
     def task_body_completed(i)
-      h.content_tag(:div, class: '_task row m-act ' ) do
-        h.content_tag(:span,i.to_s.html_safe,class: 'col-sm-2  text-right') + title_and_comment + date
+      h.content_tag(:div, class: '_task row m-act content-container' ) do
+        h.content_tag(:span,i.to_s.html_safe,class: 'col-sm-1  text-right') + title_and_comment + date
       end
     end
 
 
     def title_and_comment
-      h.content_tag( :div,h.content_tag( :div,title, class: '_task-title ')+comment, class: 'col-sm-7')
+      h.content_tag( :div,h.content_tag( :div,title, class: '_task-title ')+comment, class: 'col-sm-8')
     end
 
     def num

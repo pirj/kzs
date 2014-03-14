@@ -77,10 +77,42 @@ $ ->
   )
 
   # submit form on task checked over ajax
+
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
-    $(e.target).closest('.j-task').toggleClass('m-task-completed')
-    $form = $(e.target).closest(T.order_tasks_list.form)
-    $form.submit()
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    if e.type is 'ifChecked'
+
+
+      $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]')
+      $completed_tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]:checked') #throw RuntimeException("exit")#('Ошибка!')
+
+      console.log ($tasks.length-$completed_tasks.length)
+
+      if $tasks.length-$completed_tasks.length==0
+        if confirm("Шура ты здоров?")
+          $(e.target).closest('.j-task').addClass('m-task-completed')
+          $form = $(e.target).closest(T.order_tasks_list.form)
+          $form.submit()
+        else
+          location.reload()
+      #alert("Вы нажали кнопку отмена")
+#      console.log($completed_tasks)
+
+      else
+
+        $(e.target).closest('.j-task').addClass('m-task-completed')
+        $form = $(e.target).closest(T.order_tasks_list.form)
+        $form.submit()
+
+
+
+    else
+      $(e.target).closest('.j-task').removeClass('m-task-completed')
+      $form = $(e.target).closest(T.order_tasks_list.form)
+      $form.submit()
+
   )
 
 
