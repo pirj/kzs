@@ -23,7 +23,7 @@ module Features
     #  end
     #end
 
-    def select_from_multiple_choosen(label)
+    def select_from_multiple_chosen(label)
       field_id = find_field(label, visible: false)[:id]
       chosen = find("##{field_id}_chosen")
       chosen.click

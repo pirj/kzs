@@ -25,7 +25,7 @@ feature "Users review mails", %q{} do
     scenario 'should create new one mail' do
 
       select_from_chosen label = 'Контрольное лицо'
-      select_from_multiple_choosen label = 'Получатели'
+      select_from_multiple_chosen label = 'Получатели'
 
       expect { click_button 'подготовить' }.to change(Documents::OfficialMail, :count).by(1)
       expect(page).to_not have_content 'не может быть пустым'
