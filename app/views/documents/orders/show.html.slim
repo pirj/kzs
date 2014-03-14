@@ -9,12 +9,9 @@
       .col-sm-6
         span.text-help СТАТУС:
         span.spec-doc-state-field = resource.state :bottom
-        /span.spec-doc-state-field = resource.current_state
-
 
 = resource.title
 = resource.sender_to_recipient_links
-/= resource.class
 
 .row
   br
@@ -26,27 +23,14 @@
     = resource.conformer_link_with_label
     = resource.deadline_date
     = resource.approver_link_with_label
-    /= resource.sender_link_with_label
-    /= resource.recipient_link_with_label
-
 
   .col-sm-5
     = resource.link_to_pdf class: 'img-bordered'
 
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
-  /- @tasks.each do |task|
-    = simple_form_for task, html: { remote: true, class: 'js-tasks-order-task-form' } do |f|
-      .form-group.row
-        .col-sm-1 = f.input :completed, label: false
-        .col-sm-3
-          = task.title
-          .text-help = task.body
-        .col-sm-2.col-sm-offset-2 = DateFormatter.new(task.deadline) if task.deadline
 
-
-
-  = simple_form_for @task_list, html: { remote: true, class: 'js-tasks-order-task-form' } do |task_list_builder|
+  = simple_form_for @task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
 
     = task_list_builder.simple_fields_for :tasks do |task_builder|
       .form-group.row
@@ -56,13 +40,9 @@
           .text-help = task_builder.object.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task_builder.object.deadline) if task_builder.object.deadline
 
-  /- @tasks.each do |t|
-  /  = t.task_body
-
 .row.b-offset-sm
   h2.col-sm-12 Прикрепленные документы:
   = attach_doc @order
-
 
 = resource.attached_files
 .padding-block
@@ -73,8 +53,3 @@
   = link_to 'Создать Акт', new_documents_report_path(order_id: resource.id), class: "btn btn-primary js-orders-new-report-btn #{css_class}"
 
   = render 'documents/documents/table', collection: structured_history
-  /= structured_history.inspect
-  /- structured_history.each do |order|
-    .well
-      = order.inspect
-
