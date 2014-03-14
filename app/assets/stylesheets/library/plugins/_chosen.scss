@@ -178,3 +178,13 @@
 }
 
 
+
+
+// ERRORS STYLES
+.error {
+  .chosen-container-single, .chosen-container-multi{
+    border:  $input-border;
+    border-color: $color-red;
+    border-radius: $border-radius-base;
+  }
+}

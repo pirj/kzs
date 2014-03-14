@@ -87,7 +87,9 @@ class Documents::DocumentsController < ResourceController
   end
 
   def history
-    @transitions = Document.find(params[:id]).document_transitions
+    document = Document.find(params[:id])
+    @transitions = document.document_transitions
+    @document = Documents::StateDecorator.decorate document
     respond_to do |format|
       format.js { render layout: false }
     end

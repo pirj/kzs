@@ -11,6 +11,7 @@
   - collection.each do |transition|
     .h6
       / TODO-justvitalius: refactor to decorator
-      = t("activerecord.attributes.document.states.order.#{transition.to_state}")
+      /= t("activerecord.attributes.document.states.order.#{transition.to_state}")
+      = @document.humanize_state transition.to_state
       = " — "
       = DateFormatter.new(transition.created_at, :full)

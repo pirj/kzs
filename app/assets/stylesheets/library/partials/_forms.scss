@@ -408,3 +408,10 @@ input[type="checkbox"],
     }
   }
 }
+
+// ERRORS STYLES
+.error .form-control{
+  border: $input-border;
+  border-color: $color-red;
+  border-radius: $border-radius-base;
+}

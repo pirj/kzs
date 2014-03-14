@@ -55,7 +55,7 @@ module Documents
     # return translated for state and state-action from locale.yml
     def translates_state scope, state
       prefix = accountable.class.to_s.underscore
-      I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}#{state_postfix}")
+      I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}#{state_postfix(state)}")
     end
 
     # return Documents::Order class (or Report, or Mail)
@@ -65,8 +65,8 @@ module Documents
     end
 
     # some extra translates for sender and recipients user roles
-    def state_postfix
-      if current_state == 'sent'
+    def state_postfix state
+      if state == 'sent'
         if h.current_user.organization == accountable.sender_organization
           '_sender'
         elsif h.current_user.organization == accountable.recipient_organization
