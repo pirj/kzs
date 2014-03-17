@@ -152,7 +152,9 @@ output {
 // input[type="tel"]
 // input[type="color"]
 
-.form-control {
+
+// shadow form-control class for next inheritance
+%form-control{
   background-color: $input-bg;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: $input-border;
@@ -161,7 +163,6 @@ output {
   display: block;
   line-height: $line-height-base;
   font-size: $input-font-size;
-  height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   outline-width: 0;
   padding: $padding-base-vertical $padding-base-horizontal;
   vertical-align: middle;
@@ -188,8 +189,12 @@ output {
     cursor: not-allowed;
     background-color: $input-bg-disabled;
   }
+}
 
-  // [converter] extracted textarea& to textarea.form-control
+
+.form-control {
+  height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+  @extend %form-control !optional;
 }
 
 // Reset height for `textarea`s

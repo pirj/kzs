@@ -9,8 +9,8 @@
       .col-sm-7
         .text-help.js-task-title = f.object.title
         .text-help.js-task-body = f.object.body
-      .col-sm-3.js-task-deadline = f.object.deadline.try(:strftime, '%d.%m.%Y')
+      .col-sm-3.js-task-deadline = DateFormatter.new(f.object.deadline) if f.object.deadline
       .col-sm-2
-        = link_to '#', class: 'link-danger js-task-remove' do
+        = link_to '#', class: 'link link-danger js-task-remove' do
           span.fa.fa-minus-circle
           span убрать

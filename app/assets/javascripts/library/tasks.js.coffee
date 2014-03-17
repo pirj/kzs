@@ -90,39 +90,37 @@ $ ->
       $target = T.order_tasks_form.$container.find("##{id}")
       $target.val(val)
       $target.attr('value', val)
-#      console.log val
-#      $target = $elem.closest(T.task_form.task_container).find("#{T.task_form.html_container} .#{$elem.data('target')}")
-#      $target.text(val)
     )
 
-    # hide form inputs
+    # скрываем форму, показываем красивый html с задачей
     T.$add_task_modal_task_container.find(T.task_form.inputs_container).hide()
-
-    # show form decorated labels
     T.$add_task_modal_task_container.find(T.task_form.html_container).show()
-
-    # move this inputs to main form
     T.$main_form_container.append(T.$add_task_modal_task_container.html())
+
+    T.create_modal.$form_container.find(T.task.html_container).show()
+    T.create_modal.$form_container.find(T.task.inputs_container).hide()
 
     T.$add_task_modal.modal('hide')
   )
 
-  # remove inserted task from main-form
+  # удаляем задачу из формы документа
   $(document).on('click', T.task_remove_btn, (e) ->
+    e.preventDefault()
     $(e.target).closest('.js-task-container').empty()
   )
 
-  # hide modal window by 'cancel' btn
+  # скрываем модальное окно
   $(document).on('click', T.modal_cancel_btn, ->
+    e.preventDefault()
     $(T.add_task_modal).modal('hide')
   )
 
   # submit form on task checked over ajax
-
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
     e.preventDefault()
     e.stopImmediatePropagation()
-
+    # TODO-tagir: класс для javascript называется js- а не j-
+    # TODO-tagir: перенеси свои классы типа '.js-tasks-order-task-form' в начало файла в переменные в раздел 'order_tasks_list'
     if e.type is 'ifChecked'
 
       $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]')

@@ -2,14 +2,14 @@
 $el: '._task';
 
 #{$el}{
-  @extend .form-group !optional;
+  @include clearfix();
+  margin-left: 0;
+  margin-right: 0;
   height: auto;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
   font-family: "open_sanslight", arial, sans-serif;
 
   &.m-new-task{
-    @extend .form-control !optional;
+    @extend %form-control !optional;
   }
 
   #{$el}-title{
@@ -41,9 +41,6 @@ $el: '._task';
   &.m-act{
     #{$el}-num, #{$el}-title{
       color: #1ba0e1;
-    }
-    & > .col-sm-8{
-      width: 75%;
     }
   }
 }

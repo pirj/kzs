@@ -32,9 +32,12 @@
 }
 
 .link{
+  // padding between icon and text.
+  // each must be inserting in 'span'
+  .fa + span,
   span + .fa,
-  .fa + span{
-    margin-left: 5px;
+  span + .caret{
+    margin-left: 0.5em;
   }
 }
 
