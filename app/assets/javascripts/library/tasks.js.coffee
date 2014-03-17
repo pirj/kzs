@@ -37,6 +37,8 @@ $ ->
   T.create_modal.$elem = $(T.create_modal.elem)
   T.create_modal.$form_container = $(T.create_modal.form_container)
 
+  T.order_tasks_form.$container = $(T.order_tasks_form.container)
+
   T.$add_task_modal =  $(T.add_task_modal)
   T.$add_task_modal_task_container = T.$add_task_modal.find(T.modal_task_container)
   T.$main_form_container =  $(T.main_form_container)
@@ -45,6 +47,8 @@ $ ->
   $(T.main_form_container).find('input, textarea, select').closest('.form-group').hide()
 
   # создание новой таски в модальном окне
+  # при открытии модального окна, клонируем в него заготовку под форму.
+  # и в этой заготовке управляем видимостью элементов
   $(document).on('click', T.order_tasks_form.add_task_btn, (e) ->
     e.preventDefault()
     # replace '0' to 'now timestamp' in task-form
@@ -53,7 +57,7 @@ $ ->
 
     html_source = $(@).data('fields').replace(regexp, time)
 
-    # вставляем данный код в модальное окно
+    # вставляем обработанную форму заготовку код в модальное окно
     T.create_modal.$form_container.html(html_source)
 
     # показываем форму, скрываем все остальное
@@ -65,18 +69,30 @@ $ ->
   )
 
   # при клике на кнопку сабмита
+  # клонируем заготовку формы в форму распоряжения
+  # клонируем выбранные значения из формы модального окна
+  # уничтожаем форму в модальном окне
   $(document).on('click', T.modal_save_btn, (e) ->
     e.preventDefault()
-    # apply all inserted values to inputs and  labels
-    _$inputs = T.$add_task_modal_task_container.find('input, textarea, select')
-    _.each(_$inputs, (input) ->
-      $elem = $(input)
-      val = $elem.val()
 
-      $elem.attr('value', val)
-      console.log val
-      $target = $elem.closest(T.task_form.task_container).find("#{T.task_form.html_container} .#{$elem.data('target')}")
-      $target.text(val)
+    # клонируем форму заготовку в форму распоряжения
+    task_form = T.create_modal.$form_container.html()
+    T.order_tasks_form.$container.append(task_form)
+
+#    # клонируем все введенные значения в новую форму
+    _$inputs = T.create_modal.$form_container.find('input, textarea, select')
+    _.each(_$inputs, (input) ->
+      $input = $(input)
+      val = $input.val()
+      id = $input.attr('id')
+
+      # берем объект в форме документа, куда положить значение
+      $target = T.order_tasks_form.$container.find("##{id}")
+      $target.val(val)
+      $target.attr('value', val)
+#      console.log val
+#      $target = $elem.closest(T.task_form.task_container).find("#{T.task_form.html_container} .#{$elem.data('target')}")
+#      $target.text(val)
     )
 
     # hide form inputs
