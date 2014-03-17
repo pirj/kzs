@@ -6,60 +6,57 @@ $(document).ready(function(){
 
         var actions = {
             append: function(elem, target){
-                target.toggle();
-                elem.addClass('tr-slim')
+                $('.js-info').removeClass('tr-slim');
+                $('.js-more-info').hide();
+                target.show();
+                console.log(elem)
+                elem.addClass('tr-slim');
+                target.addClass('tr-slim');
             },
-            replace: function(elem, target, visible){
-                console.log('show!');
+            replace: function(elem, target){
+                $('.tr-slim').removeClass('tr-slim');
+                $('.js-info').show();
+                $(".js-more-info").hide();
+
+                console.log(elem)
                 elem.toggle();
              //   visible.show()
+
+
+                target.closest('tr').addClass('tr-slim');
                 target.toggle();
-            },
-            close: function(table){
-                console.log(table.find('.js-more-info'))
-                table.find('tr').show();
-                table.find('.js-more-info').hide();
-                table.find('tr.tr-slim').removeClass('tr-slim');
             }
         }
 
         $(document).on('click', '.js-row-clickable tr a, .js-row-clickable tr input', function(e) {
             e.stopPropagation();
-
-            // return false;
         })
-
 
         $(document).on('click', '.js-row-clickable tr', function(e) {
 
-            console.log('click!')
             var $elem, $target, id;
             e.preventDefault();
-            $elem = $(this).find($('.js-info'));
 
-            $thisTable = $((this.parentNode).parentNode);
-            $visible = $(this).find('.js-visible');
+            $elem = $(this).find($('.js-info'));
+            $elemAppend = $(this).closest($('.js-info'));
 
             id = $(this).data('id');
             $target =  $(this).find(".js-more-info");
-           // console.log( $target )
-//            if (!$elem.hasClass('js-more-info')) {actions.close($thisTable);}
+            $targetAppend = $(this).next();
 
-            if ((id != null) && $target.length > 0) {               //существует ссылка и связанный обьект
-                _.each((this.parentNode).parentNode.classList, function(a){
 
-                    switch (a) {
+            if (($(this).closest('.table')).hasClass('m-table-append')){
 
-                        case 'm-table-append':
 
-                            actions.append($elem, $target);
-                            break
-
-                        default:
-                            actions.replace($elem, $target, $visible);
-
-                    }
-                })
+                        actions.append($elemAppend, $targetAppend);
             }
+
+                   else {
+
+                        actions.replace($elem, $target);
+
+                }
+
         });
 });
+

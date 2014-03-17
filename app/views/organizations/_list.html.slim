@@ -10,14 +10,14 @@ table.table.js-row-clickable.m-table-replacement
     - collection.each do |res|
       / simple row with short information
       tr data-id = res.id
-        td = link_to res.full_title, res.path
-        td = res.director_name
-        td = res.users_count
-        td = res.phone
+        td.js-info = link_to res.full_title, res.path
+        td.js-info = res.director_name
+        td.js-info = res.users_count
+        td.js-info = res.phone
 
-      / row with extra information
-      tr data-id = res.id class = 'more-info js-more-info'
-        td colspan = attrs.count
+           / row with extra information
+
+        td[data-id=res.id class='more-info js-more-info'  colspan =attrs.count]
           .col-sm-8
             .form-horizontal
               .form-group
@@ -45,7 +45,7 @@ table.table.js-row-clickable.m-table-replacement
                   ul.list-unstyled
                     li = link_to 'скачать все реквизиты', '#'
 
-                .col-sm-9.col-sm-offset-3
+                .col-sm-12.col-sm-offset-3
                   = link_to 'редактировать данные', res.edit_path, class: 'btn btn-default' if may_edit_organization?(res.id)
                   = link_to 'открыть анкету контрагента', res.path, class: 'btn btn-default'
 
