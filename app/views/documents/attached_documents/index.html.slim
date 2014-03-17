@@ -2,9 +2,29 @@
   = header_title do
     h1 Прикрепленные документы
 
-h2 = params
+= button_to 'Готово', confirm_documents_official_mail_attached_documents_path(@accountable.id)
+= link_to 'Отмена', documents_official_mail_path(@accountable.id)
 
-/ = @attached_documents.each do |ad|
-/   = puts ad
+h2 Сессия: на добавление 
+= "#{@to_attach}"
 
+h2 Сессия: на удаление
+= "#{@to_detach}"
+
+h2 Уже прикрепленные
+- @attached_documents.each do |ad|
+  div
+    = link_to 'Открепить', documents_official_mail_attached_document_path(id: ad.id), method: :delete
+    |  
+    = "ID: #{ad.id}, title: #{ad.title}"
+
+h2 Еще не прикрепленные
+- @attachable_documents.each do |d|
+  div
+    = link_to 'Прикрепить', documents_official_mail_attached_documents_path(params: {attached_id: d.id}), method: :post
+    |  
+    = "ID: #{d.id}, title: #{d.title}"
+
+
+    
 

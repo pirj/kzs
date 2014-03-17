@@ -30,21 +30,42 @@ Kzs::Application.routes.draw do
       get 'history', on: :member
     end
 
-    resources :official_mails, path: 'mails', except: 'index' do
-      get 'reply', on: :member
-      get 'assign_state', on: :member
-      get 'copy', on: :member
+    resources :official_mails, path: 'mails' do
+      member do
+        get 'reply'
+        get 'assign_state'
+        get 'copy'
+      end
+
+      # Приложенные документы
+      resources :attached_documents, only: [:index, :create, :destroy] do
+        post 'confirm', on: :collection
+      end
     end
 
     resources :orders, except: 'index' do
-      get 'assign_state', on: :member
-      get 'copy', on: :member
-      get 'reject', on: :member
+      member do
+        get 'assign_state'
+        get 'copy'
+        get 'reject'
+      end
+
+      # Приложенные документы
+      resources :attached_documents, only: [:index, :create, :destroy] do
+        post 'confirm', on: :collection
+      end
     end
 
     resources :reports, except: 'index' do
-      get 'assign_state', on: :member
-      get 'copy', on: :member
+      member do
+        get 'assign_state'
+        get 'copy'
+      end
+
+      # Приложенные документы
+      resources :attached_documents, only: [:index, :create, :destroy] do
+        post 'confirm', on: :collection
+      end
     end
   end
 
