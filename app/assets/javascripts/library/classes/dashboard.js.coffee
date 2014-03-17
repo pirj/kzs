@@ -22,9 +22,10 @@ template =
   widget: "<li class='{{class}} widget'>{{#href}}<a href='{{href}}'>{{/href}}<span class='widget-name'>{{name}}</span>{{#href}}</a>{{/href}}</li>"
 # functions
 
-weather = {
-
+window.widgets = {                  # This object contains references to widgets
 }
+
+
 
 sendRequest = (url, type, protect, data) ->
 
@@ -55,6 +56,7 @@ class Dashboard
       enabled: true
     avoid_overlapped_widgets: true
     autogenerate_stylesheet: true
+    widget_selector: 'li'
 
   constructor: (dom) ->
     this.body = dom.gridster(     #body == object gridster || widgets == grister.widgets
@@ -62,6 +64,8 @@ class Dashboard
     ).data('gridster')
     this.loading()
     this.editoff()
+
+    #this.datainit()
 
   save: =>
     newData = (this.body.serialize()) #JSON.stringify
@@ -90,7 +94,7 @@ class Dashboard
   loading: =>
     that = this
 
-    $.when(sendRequest(url.positions, 'GET', true)).then (data, textStatus) ->
+    $.when(sendRequest(url.positions, 'GET', true)).done (data, textStatus) ->
 
       if data.desktop_conf is null
         a = default_widgets
@@ -98,20 +102,23 @@ class Dashboard
         a = data.desktop_conf
       _.each a, (widget)->
         that.addwidget(widget)
-
       _.each that.body.$widgets, (w) ->
 
-        if w.classList.contains('widget-weather')
+        window.widgets[w.classList[0]] = w
 
-          weather.widget = w
-
-
+      that.datainit()                                                   #callback for initialization -data function.
 
     (->
-      $('.js-btns .js-dashboard-save').hide()
+      $('.js-btns .js-dashboard-save').hide()                         #hide buttons
       $('.js-btns .js-dashboard-cancel').hide()
     )()
                   #TODO: weater disable
+
+  datainit: =>
+    datablock = $('.hidden-data-block')
+
+    new_docs_badge = datablock.find('.data-new_docs')[0].innerHTML
+    window.widgets['widget-docs'].innerHTML += new_docs_badge
 
   editon: =>
 
@@ -126,8 +133,6 @@ class Dashboard
     )()
 
     $('h1').html('Режим редактирования')
-    #console.log(this.body.$widgets[7])
-    #this.body.disable_resize(this.body.$widgets[7]);
   editoff: =>
 
     this.body.disable() if $(".gridster > ul")
@@ -144,13 +149,15 @@ class Dashboard
     (callback = () ->
       $('.js-btns .btn').toggle()
     )()
+
+
+
 # start flow
 $ ->
 
   if document.location.pathname == "/"
     dashboard = new Dashboard($(".gridster > ul"))
-#   dashboard.loading()
-#   dashboard.editoff()
+
     $('.js-dashboard-edit').on 'click', dashboard.editon
     $('.js-dashboard-save').on 'click', dashboard.save
     $('.js-dashboard-cancel').on 'click', dashboard.cancel

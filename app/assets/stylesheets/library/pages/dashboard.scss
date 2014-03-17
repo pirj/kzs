@@ -8,7 +8,9 @@
 
 /*gridster*/
 
-
+.hidden-data-block{
+  display: none;
+}
 .gridster {
   position:relative;
   ul{
@@ -323,6 +325,13 @@
 
 
 .widget {
+  .badge{
+    position: absolute;
+    right: 12px;
+    bottom: 15px;
+    width: auto;
+    border-radius: 7px;
+  }
   .widget-name {
     position: absolute;
     bottom: 11px;
