@@ -40,10 +40,12 @@ $ ->
   # делаем действия каждый раз,когда форма фильтра обновляется
   $(document).on('filter:update', ->
 
-    console.log $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
+    $( ".js-datepicker" ).filter(':visible').datepicker(global.datepicker)
 
     # всем инпутам и селектам выставляем свойство disabled, чтобы не отправлять лишнее на сервер
     $("#{F.filter_container} input,  #{ F.filter_container} select").prop('disabled', '')
+
+    $( ".js-chosen" ).filter(':visible').chosen(global.chosen)
   )
 
   # добавляем новую строку с выбором «атрибута поиска» и самим поисковым полем

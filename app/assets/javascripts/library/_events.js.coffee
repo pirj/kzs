@@ -39,12 +39,9 @@ $ ->
   # datepicker
   $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
 
-  # chosen
-  $( ".js-chosen" ).chosen( global.chosen )
 
   # chosen-search
-  $( ".js-chosen-search" ).chosen( global.chosen_search )
-
+  $( ".js-chosen-search" ).filter(':visible').chosen( global.chosen_search )
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
