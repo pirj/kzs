@@ -77,18 +77,4 @@ feature "Users review order", %q{} do
     end
   end
 
-  # TODO-justVitalius отрефакторить
-  describe 'executer custom placeholder', js: true do
-
-    scenario 'should not be "read" when open regular user' do
-      visit path
-      sign_in_with sender_user.email, 'password'
-
-      within '.spec-doc-state-field' do
-        expect(page).to have_content 'Отправлено'
-      end
-    end
-  end
-
-
 end

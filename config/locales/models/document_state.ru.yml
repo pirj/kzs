@@ -3,15 +3,15 @@ ru:
     document:
       documents/official_mail:
         state:
-          draft: черновик
-          prepared: подготовлено
-          approved: подписано
-          sent_recipient: получено
-          sent_sender: отправлено
-          sent: отправлено
-          read: прочитано
-          trashed: удалено
-          unsaved: произошла ошибка сохранения документа
+          draft: Черновик
+          prepared: Подготовлено
+          approved: Подписано
+          sent_recipient: Получено
+          sent_sender: Отправлено
+          sent: Отправлено
+          read: Прочитано
+          trashed: Удалено
+          unsaved: Произошла ошибка сохранения документа
 
         to_state:
           draft: В черновики
@@ -23,17 +23,17 @@ ru:
 
       documents/order:
         state:
-          draft: черновик
-          prepared: подготовлено
-          approved: подписано
-          sent_recipient: получено
-          sent_sender: отправлено
-          sent: отправлено
-          read: прочитано
-          accepted: исполнено
-          rejected: отклонено
-          trashed: удален
-          unsaved: произошла ошибка сохранения документа
+          draft: Черновик
+          prepared: Подготовлено
+          approved: Подписано
+          sent_recipient: Получено
+          sent_sender: Отправлено
+          sent: Отправлено
+          read: Прочитано
+          accepted: Исполнено
+          rejected: Отклонено
+          trashed: Удален
+          unsaved: Произошла ошибка сохранения документа
 
         to_state:
           draft: В черновики
@@ -49,17 +49,17 @@ ru:
 
       documents/report:
         state:
-          draft: черновик
-          prepared: подготовлен
-          approved: согласован
-          sent_recipient: получен
-          sent_sender: отправлен
-          sent: отправлен
-          read: прочтен
-          accepted: подписан
-          rejected: отклонен
-          trashed: удален
-          unsaved: произошла ошибка сохранения документа
+          draft: Черновик
+          prepared: Подготовлен
+          approved: Согласован
+          sent_recipient: Получен
+          sent_sender: Отправлен
+          sent: Отправлен
+          read: Прочтен
+          accepted: Подписан
+          rejected: Отклонен
+          trashed: Удален
+          unsaved: Произошла ошибка сохранения документа
 
         to_state:
           draft: В черновики

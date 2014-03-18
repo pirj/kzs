@@ -22,7 +22,7 @@ shared_examples_for 'sent_state_translatable' do
 
       scenario 'should render sender-state translate' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content /отправлен/
+          expect(page).to have_content /Отправлен/
         end
       end
     end
@@ -36,7 +36,7 @@ shared_examples_for 'sent_state_translatable' do
 
       scenario 'should render recipient-state translate' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content /получен/
+          expect(page).to have_content /Получен/
         end
       end
     end

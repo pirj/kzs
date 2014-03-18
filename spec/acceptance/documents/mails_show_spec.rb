@@ -27,18 +27,16 @@ feature "Users review mails", %q{} do
       select_from_chosen label = 'Контрольное лицо'
       select_from_multiple_chosen label = 'Получатели'
 
-      expect { click_button 'подготовить' }.to change(Documents::OfficialMail, :count).by(1)
+      expect { click_button 'Подготовить' }.to change(Documents::OfficialMail, :count).by(1)
       expect(page).to_not have_content 'не может быть пустым'
       expect(page).to_not have_content 'Выберите хотябы одного адресата'
       expect(current_path).to_not eq(new_documents_official_mail_path)
     end
 
     scenario 'should not create new mail' do
-        expect { click_button 'подготовить' }.to_not change(Documents::OfficialMail, :count)
-        expect(current_path).to_not eq(new_documents_official_mail_path)
-        expect(page).to have_content 'Выберите хотябы одного адресата'
-        #page.save_screenshot("#{Rails.root.join("test_images")}/name.png", full: true)
-        #save_and_open_page
+      expect { click_button 'Подготовить' }.to_not change(Documents::OfficialMail, :count)
+      expect(current_path).to_not eq(new_documents_official_mail_path)
+      expect(page).to have_content 'Выберите хотябы одного адресата'
     end
   end
 end
