@@ -9,7 +9,7 @@ shared_examples_for 'sent_state_translatable' do
       visit path
     end
 
-    it 'should not equals recipient-user and sender-user' do
+    scenario 'should not equals recipient-user and sender-user' do
       expect(sender_user).to_not eq recipient_user
     end
 
@@ -20,7 +20,7 @@ shared_examples_for 'sent_state_translatable' do
         sign_in_with sender_user.email, 'password'
       end
 
-      it 'should render sender-state name' do
+      scenario 'should render sender-state translate' do
         within '.spec-doc-state-field' do
           expect(page).to have_content 'отправлено'
         end
@@ -34,7 +34,7 @@ shared_examples_for 'sent_state_translatable' do
         sign_in_with recipient_user.email, 'password'
       end
 
-      it 'should render recipient-state name' do
+      scenario 'should render recipient-state translate' do
         within '.spec-doc-state-field' do
           expect(page).to have_content 'получено'
         end

@@ -17,7 +17,7 @@ module Documents
 
     # translating state name in 'next state' style
     def to_humanize_state(state)
-      translates_state 'to_state', state, prefix: false
+      translates_to_state 'to_state', state
     end
 
     # not-translated current state
@@ -52,16 +52,17 @@ module Documents
 
     protected
 
-    # return translated for state and state-action from locale.yml
-    def translates_state(scope, state, *opts)
-      args = opts.extract_options!
-
+    # return translated for state from locale.yml
+    def translates_state(scope, state)
       prefix = accountable.class.to_s.underscore
-
       postfix = state_postfix(state)
-      postfix = '' unless args.delete(:prefix)
-
       I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}#{postfix}")
+    end
+
+    # return translated for and state-action from locale.yml
+    def translates_to_state(scope, state)
+      prefix = accountable.class.to_s.underscore
+      I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}")
     end
 
     # return Documents::Order class (or Report, or Mail)
