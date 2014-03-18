@@ -1,8 +1,8 @@
 span.spec-doc-action-buttons
-  - %w(approved sent accept read pending accept).each do |state|
+  - %w(prepared approved sent accept read pending accept).each do |state|
     = change_state_link_to(resource, state, class: 'btn btn-primary') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
-  = link_to 'редактировать', edit_polymorphic_path(resource.object), class: 'btn btn-default' if resource.allowed_transitions.include?('prepared')
+  = link_to 'Редактировать', edit_polymorphic_path(resource.object), class: 'btn btn-default' if resource.allowed_transitions.include?('prepared')
 
   - %w(rejected).each do |state|
     = change_state_link_to(resource, state, class: 'btn btn-danger') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)

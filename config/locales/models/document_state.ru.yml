@@ -14,11 +14,11 @@ ru:
           unsaved: произошла ошибка сохранения документа
 
         to_state:
-          draft: в черновик
-          prepared: подготовить
-          approved: подписать
-          sent: отправить
-          trashed: удалить
+          draft: В черновики
+          prepared: Подготовить
+          approved: Подписать
+          sent: Отправить
+          trashed: Удалить
 
 
       documents/order:
@@ -36,15 +36,15 @@ ru:
           unsaved: произошла ошибка сохранения документа
 
         to_state:
-          draft: в черновик
-          prepared: подготовить
-          approved: подтвердить
-          sent: отправить
-          read: прочитать
-          trashed: удалить
-          pending: поставить в очередь
-          rejected: отклонить
-          accepted: подписать
+          draft: В черновики
+          prepared: Подготовить
+          approved: Подписать
+          sent: Отправить
+          read: Прочитать
+          trashed: Удалить
+          pending: Поставить в очередь
+          rejected: Отклонить
+          accepted: Подписать
 
 
       documents/report:
@@ -62,13 +62,13 @@ ru:
           unsaved: произошла ошибка сохранения документа
 
         to_state:
-          draft: в черновик
-          prepared: подготовить
-          approved: подтвердить
-          sent: отправить
-          read: прочитать
-          trashed: удалить
-          pending: поставить в очередь
-          rejected: отклонить
-          accepted: подписать
+          draft: В черновики
+          prepared: Подготовить
+          approved: Подписать
+          sent: Отправить
+          read: Прочитать
+          trashed: Удалить
+          pending: Поставить в очередь
+          rejected: Отклонить
+          accepted: Подписать
 
