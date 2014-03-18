@@ -4,23 +4,25 @@ class Documents::DocumentsController < ResourceController
 
   has_scope :per, default: 10, only: [:index]
 
-  has_scope :with_type do |controller, scope, value|
+  has_scope :with_type, except: [:batch] do |controller, scope, value|
     case value
-      when 'orders' then scope.orders
-      when 'mails' then scope.mails
-      when 'reports' then scope.reports
-      else
-        scope
+    when 'orders' then scope.orders
+    when 'mails' then scope.mails
+    when 'reports' then scope.reports
+    else
+      scope
     end
   end
 
-  has_scope :with_state, default: 'all_but_draft' do |controller, scope, value|
+  has_scope :with_state,
+            default: 'all_but_draft',
+            except: [:batch] do |controller, scope, value|
     case value
-      when 'draft' then scope.draft
-      when 'prepared' then scope.prepared
-      when 'approved' then scope.approved
-      else
-        scope.not_draft
+    when 'draft' then scope.draft
+    when 'prepared' then scope.prepared
+    when 'approved' then scope.approved
+    else
+      scope.not_draft
     end
   end
 
@@ -71,7 +73,7 @@ class Documents::DocumentsController < ResourceController
   #
   def batch
     state = params[:state]
-    @documents = end_of_association_chain.find(params[:document_ids])
+    @documents = collection.find(params[:document_ids])
     @accountables = @documents.map(&:accountable)
 
     if batch_can?(state, @accountables)
@@ -97,6 +99,7 @@ class Documents::DocumentsController < ResourceController
 
   private
 
+  # TODO: might be extracted out
   def batch_can?(state, accountables)
     cans = accountables.map do |accountable|
       a = accountable.can_transition_to?(state)
@@ -136,7 +139,11 @@ class Documents::DocumentsController < ResourceController
   end
 
   def avoid_ambiguous(column_name)
-    column_name.match('\.') ? column_name : [resource_table_name, column_name].join('.')
+    if column_name.match('\.')
+      column_name
+    else
+      [resource_table_name, column_name].join('.')
+    end
   end
 
   def resource_table_name

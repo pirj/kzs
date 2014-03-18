@@ -1,0 +1,11 @@
+ru:
+  shared:
+    documents:
+      menu_items:
+        all: Все документы
+        draft: Черновики
+        prepared: Подготовленные
+        approved: Подписанные
+        mails: Письма
+        orders: Распоражения
+        reports: Акты

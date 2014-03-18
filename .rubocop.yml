@@ -21,6 +21,9 @@ Documentation:
 SignalException:
   Enabled: false
 
+AsciiComments:
+  Enabled: false
+
 # Avoid methods longer than 30 lines of code
 MethodLength:
   CountComments: false  # count full line comments?

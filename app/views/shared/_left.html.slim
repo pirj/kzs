@@ -16,12 +16,12 @@ aside.l-page__column.left
       .child-dir
         = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
           i
-          .text Все документы
-          -%w(drafts prepared approved).each do |state|
-            = link_to t(".#{state}"), documents_path(with_state: state), class: 'menu-link'
+          .text= humanize_documents_menu_item_name(:all)
+          -%w(draft prepared approved).each do |state|
+            = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
           -%w(mails orders reports).each do |doctype|
-            = link_to documents_path(with_type: doctype), class: 'btn menu-link' do
-              = t(".#{doctype}")
+            = link_to documents_path(with_type: doctype), class: 'menu-link' do
+              = humanize_documents_menu_item_name(doctype)
               = documents_inbox.badge(doctype)
     = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
       i

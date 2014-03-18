@@ -15,11 +15,11 @@ class Documents::ReportsController < ResourceController
     new!
   end
 
-  #def copy
-  #  initial = end_of_association_chain.find(params[:id])
-  #  @report = initial.amoeba_dup
-  #  render action: :new
-  #end
+  # def copy
+  #   initial = end_of_association_chain.find(params[:id])
+  #   @report = initial.amoeba_dup
+  #   render action: :new
+  # end
 
   def show
     show! do
@@ -34,9 +34,13 @@ class Documents::ReportsController < ResourceController
   def create
     @report = Documents::Report.new(params[:documents_report])
     @report.sender_organization = current_organization
-    @report.recipient_organization = @report.order.sender_organization if @report.order
-    @report.executor ||= current_user
     @report.creator = current_user
+
+    if @report.order
+      @report.recipient_organization = @report.order.sender_organization
+    end
+
+    @report.executor ||= current_user
     super
   end
 

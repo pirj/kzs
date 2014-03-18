@@ -28,4 +28,8 @@ module DocumentsHelper
 });</script>').html_safe
   end
 
+  def humanize_documents_menu_item_name(key)
+    I18n.t("shared.documents.menu_items.#{key}")
+  end
+
 end
