@@ -20,7 +20,8 @@ class DatepickerInput < SimpleForm::Inputs::StringInput
 
   def input_html_options
     # because of original text_field-method override decorates date methods
-    super.merge!( value: @builder.object.send(attribute_name) )
+    formatted_date = DateFormatter.new @builder.object.send(attribute_name)
+    super.merge!(value: formatted_date)
   end
 
   def icon

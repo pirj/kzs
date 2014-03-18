@@ -2,6 +2,9 @@ module Documents
   class Order < ActiveRecord::Base
     include Accountable
     attr_accessible :deadline
+    attr_accessible :task_list_attributes
+
+
     has_one :report
 
     # includes approved_reports for history
@@ -9,6 +12,8 @@ module Documents
             class_name: 'Documents::Report',
             include: :document,
             conditions: 'documents.approved_at IS NOT NULL'
+
+    has_one :task_list, dependent: :destroy
 
     # TODO: @prikha dumb but working history
     # refactor if possible
@@ -20,12 +25,12 @@ module Documents
              through: :conversation,
              source: :orders
 
-    attr_accessible :task_list_attributes
-    has_one :task_list, dependent: :destroy
     has_many :tasks, through: :task_list
+
+
     accepts_nested_attributes_for :task_list, allow_destroy: true
 
-    validates :deadline, date: { after: proc { Time.now + 3.days } }
+    validates :deadline, timeliness: { on_or_after: lambda { DateTime.now + 3.days }, type: :date }
 
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)
