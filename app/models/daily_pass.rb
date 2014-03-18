@@ -46,8 +46,8 @@ class DailyPass < ActiveRecord::Base
             :object, :person,
             presence: true
 
-  validates :issued, date: { after_or_equal_to: Proc.new { Date.today },
-                             before_or_equal_to: Proc.new { Date.today }, message: :must_be_current_date }
+  validates :issued, timeliness: {on_or_after: lambda { Date.today },
+                             on_or_before: lambda { Date.today }, message: :must_be_current_date }
 
   validates :vehicle,
             :auto_mark,
