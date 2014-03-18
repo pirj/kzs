@@ -63,7 +63,9 @@ gem 'statesman', '~> 0.3'
 # Object read/unread management
 gem 'unread', '~> 0.3.1'
 
-gem 'date_validator'
+#gem 'date_validator'
+gem 'validates_timeliness'
+
 
 gem 'jquery-rails', '~> 2.3.0'
 

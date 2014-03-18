@@ -108,8 +108,6 @@ GEM
       compass (>= 0.12.2)
     daemons (1.1.9)
     database_cleaner (1.2.0)
-    date_validator (0.7.0)
-      activemodel (>= 3)
     devise (3.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -348,6 +346,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    timeliness (0.3.7)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -362,6 +361,8 @@ GEM
       json (>= 1.8.0)
     unread (0.3.1)
       activerecord (>= 3)
+    validates_timeliness (3.0.14)
+      timeliness (~> 0.3.6)
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.3.2)
@@ -390,7 +391,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   compass-rails
   database_cleaner
-  date_validator
   devise
   draper
   execjs
@@ -437,6 +437,7 @@ DEPENDENCIES
   turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   unread (~> 0.3.1)
+  validates_timeliness
   wicked_pdf
   wkhtmltopdf-binary (= 0.9.9.1)
   zeus (= 0.13.4.pre2)
