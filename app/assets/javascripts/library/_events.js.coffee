@@ -16,6 +16,7 @@ window.global =
   datepicker:
     showOtherMonths: true
     dateFormat: "dd.mm.yy"
+    minDate: new Date()
 
 
 $ ->
@@ -33,15 +34,15 @@ $ ->
     $(@).html($(@).html().replace(/\\/g, ''))
   )
 
+  # chosen-search
+  $( ".js-chosen-search" ).filter(':visible').chosen( global.chosen_search )
+  $( ".js-chosen" ).filter(':visible').chosen( global.chosen )
+
   # dropdown
   $('.dropdown-toggle').dropdown()
 
   # datepicker
   $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
-
-
-  # chosen-search
-  $( ".js-chosen-search" ).filter(':visible').chosen( global.chosen_search )
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->

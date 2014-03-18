@@ -19,7 +19,6 @@ $ ->
       cancel: '.js-tasks-modal-cancel-btn'
       submit: '.js-tasks-modal-save-btn'
 
-
     add_task_btn: '.js-tasks-add-task'
     task_remove_btn: '.js-task-remove'
     main_form_container: '.js-tasks-main-form'
@@ -33,6 +32,8 @@ $ ->
       inputs_container: '.js-task-form-fields'
       html_container: '.js-task-form-inserted-values'
 
+
+
   T = app.tasks
   T.create_modal.$elem = $(T.create_modal.elem)
   T.create_modal.$form_container = $(T.create_modal.form_container)
@@ -42,6 +43,9 @@ $ ->
   T.$add_task_modal =  $(T.add_task_modal)
   T.$add_task_modal_task_container = T.$add_task_modal.find(T.modal_task_container)
   T.$main_form_container =  $(T.main_form_container)
+
+
+
 
   # hide all inputs by on after page loaded
   $(T.main_form_container).find('input, textarea, select').closest('.form-group').hide()
@@ -62,7 +66,14 @@ $ ->
 
     # показываем форму, скрываем все остальное
     T.create_modal.$form_container.find(T.task.html_container).hide()
-    T.create_modal.$form_container.find('.js-datepicker').datepicker(global.datepicker)
+    
+    #  set_task_deadline: -> Собирает даду дедлайна, передает в глобал для пикеров зависимых от дедлайна
+    date = $(".js-datepicker.js-deadline").datepicker('getDate')
+    opts = _.extend(global.datepicker, maxDate: date)
+
+    T.create_modal.$form_container.find('.js-datepicker').datepicker(opts)
+
+#    T.create_modal.$form_container.find(max_date_for_new_datepickers)
     T.create_modal.$form_container.find(T.task.inputs_container).show()
 
     T.create_modal.$elem.modal('show')
