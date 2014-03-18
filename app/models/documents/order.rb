@@ -4,7 +4,10 @@ module Documents
     attr_accessible :deadline
     attr_accessible :task_list_attributes
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> my little test
     has_one :report
 
     # includes approved_reports for history
@@ -25,12 +28,16 @@ module Documents
              through: :conversation,
              source: :orders
 
+
+    has_one :task_list, dependent: :destroy
+
     has_many :tasks, through: :task_list
 
 
     accepts_nested_attributes_for :task_list, allow_destroy: true
 
     validates :deadline, timeliness: { on_or_after: lambda { DateTime.now + 3.days }, type: :date }
+
 
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)

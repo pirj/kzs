@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Documents::Order do
 
+
   let(:order) { create(:order) }
 
   describe 'deadline' do
@@ -28,4 +29,20 @@ describe Documents::Order do
 
     end
   end
+
+  describe 'has been minimum 1 task' do
+
+    context 'with order in draft status' do
+
+      let(:resource) { FactoryGirl.create :device }
+      subject { build(:order) }
+      it 'tasks number >= 1' do
+        subject.should
+      end
+
+      it { should  }
+    end
+  end
+
+
 end

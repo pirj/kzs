@@ -15,6 +15,7 @@ FactoryGirl.define do
       instance.approver = user
       instance.executor = user
       instance.creator = user
+      #instance.build_task_list
     end
 
     after(:create) do |instance,ev|

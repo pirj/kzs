@@ -3,6 +3,7 @@ class TaskList < ActiveRecord::Base
   belongs_to :order
   has_many :tasks
 
+
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
   # TODO: move to decorator
