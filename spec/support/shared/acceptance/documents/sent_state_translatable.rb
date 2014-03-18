@@ -15,14 +15,14 @@ shared_examples_for 'sent_state_translatable' do
 
     context 'user from sender organization' do
       background do
-        page.driver.submit :delete, destroy_user_session_path, {}
+        sign_out
         visit path
         sign_in_with sender_user.email, 'password'
       end
 
       scenario 'should render sender-state translate' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content 'отправлено'
+          expect(page).to have_content /отправлен/
         end
       end
     end
@@ -36,7 +36,7 @@ shared_examples_for 'sent_state_translatable' do
 
       scenario 'should render recipient-state translate' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content 'получено'
+          expect(page).to have_content /получен/
         end
       end
     end

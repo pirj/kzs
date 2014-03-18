@@ -22,16 +22,16 @@ feature "Users review order", %q{} do
 
         # expect default conditions
         within '.spec-doc-state-field' do
-          expect(page).to have_content 'черновик'
+          expect(page).to have_content 'Черновик'
         end
 
         within '.spec-doc-action-buttons' do
-          expect(page).to have_content 'редактировать'
+          expect(page).to have_content 'Редактировать'
         end
 
         # expect actions
         within '.spec-doc-action-buttons' do
-          click_on 'редактировать'
+          click_on 'Редактировать'
         end
 
         expect(current_path).to eq edit_documents_order_path(order)
@@ -44,16 +44,16 @@ feature "Users review order", %q{} do
 
         # expect default conditions
         within '.spec-doc-state-field' do
-          expect(page).to have_content 'подготовлено'
+          expect(page).to have_content 'Подготовлено'
         end
 
         within '.spec-doc-action-buttons' do
-          expect(page).to have_content 'редактировать'
+          expect(page).to have_content 'Редактировать'
         end
 
         # expect actions
         within '.spec-doc-action-buttons' do
-          click_on 'редактировать'
+          click_on 'Редактировать'
         end
 
         expect(current_path).to eq edit_documents_order_path(order)
@@ -67,11 +67,11 @@ feature "Users review order", %q{} do
 
         # expect default conditions
         within '.spec-doc-state-field' do
-          expect(page).to have_content 'подписан'
+          expect(page).to have_content 'Подписан'
         end
 
         within '.spec-doc-action-buttons' do
-          expect(page).to_not have_content 'редактировать'
+          expect(page).to_not have_content 'Редактировать'
         end
       end
     end
@@ -85,7 +85,7 @@ feature "Users review order", %q{} do
       sign_in_with sender_user.email, 'password'
 
       within '.spec-doc-state-field' do
-        expect(page).to have_content 'отправлено'
+        expect(page).to have_content 'Отправлено'
       end
     end
   end
