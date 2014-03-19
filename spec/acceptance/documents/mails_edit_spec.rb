@@ -34,7 +34,7 @@ feature "Users review mails", %q{} do
     end
 
     scenario 'should not create new mail' do
-      expect { click_button 'Подготовить' }.to_not change(Documents::OfficialMail, :count)
+      expect { click_button 'Подготовить' }.to_not change(Documents::OfficialMail, :count).by(0)
       expect(current_path).to_not eq(new_documents_official_mail_path)
       expect(page).to have_content 'Выберите хотябы одного адресата'
     end
