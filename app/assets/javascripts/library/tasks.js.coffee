@@ -101,15 +101,18 @@ $ ->
       $target = T.order_tasks_form.$container.find("##{id}")
       $target.val(val)
       $target.attr('value', val)
+      console.log $target
+
+      # переносим вбитые значения в поле отображения
+      $target.closest(T.task.container).find(".#{$input.data('target')}").text(val)
     )
 
-    # скрываем форму, показываем красивый html с задачей
-    T.$add_task_modal_task_container.find(T.task_form.inputs_container).hide()
-    T.$add_task_modal_task_container.find(T.task_form.html_container).show()
-    T.$main_form_container.append(T.$add_task_modal_task_container.html())
+#    T.$add_task_modal_task_container.find(T.task_form.inputs_container).hide()
+#    T.$add_task_modal_task_container.find(T.task_form.html_container).show()
 
-    T.create_modal.$form_container.find(T.task.html_container).show()
-    T.create_modal.$form_container.find(T.task.inputs_container).hide()
+    # скрываем форму, показываем красивый html с задачей
+    T.order_tasks_form.$container.find(T.task.html_container).show()
+    T.order_tasks_form.$container.find(T.task.inputs_container).hide()
 
     T.$add_task_modal.modal('hide')
   )
