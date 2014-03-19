@@ -4,10 +4,7 @@ module Documents
     attr_accessible :deadline
     attr_accessible :task_list_attributes
 
-<<<<<<< HEAD
 
-=======
->>>>>>> my little test
     has_one :report
 
     # includes approved_reports for history
@@ -38,7 +35,6 @@ module Documents
 
     validates :deadline, timeliness: { on_or_after: lambda { DateTime.now + 3.days }, type: :date }
 
-
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)
     end
@@ -65,5 +61,8 @@ module Documents
         .includes(:approved_report)
         .order { document.approved_at.desc }
     end
+
+
+
   end
 end

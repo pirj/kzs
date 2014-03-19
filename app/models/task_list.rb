@@ -6,7 +6,17 @@ class TaskList < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
+
   # TODO: move to decorator
+
+  scope :completed, -> { where(completed: true) }
+
+  after_commit :finalize, if: :all_tasks_completed?
+
+  validates :deadline, presence: true
+
+
+
   def progress
     if tasks.present?
       total = tasks.count.to_f
