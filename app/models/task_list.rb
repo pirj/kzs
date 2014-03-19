@@ -13,7 +13,7 @@ class TaskList < ActiveRecord::Base
 
   after_commit :finalize, if: :all_tasks_completed?
 
-  validates :deadline, presence: true
+  #validates :deadline, presence: true
 
 
 

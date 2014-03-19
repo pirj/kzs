@@ -3,16 +3,15 @@ ru:
     document:
       documents/official_mail:
         state:
-
-          draft: черновик
-          prepared: подготовлено
-          approved: подписано
-          sent_recipient: получено ▼
-          sent_sender: отправлено ▲
-          sent: отправлено ▲
-          read: прочитано
-          trashed: удалено
-          unsaved: произошла ошибка сохранения документа
+          draft: Черновик
+          prepared: Подготовлено
+          approved: Подписано
+          sent_recipient: Получено ▼
+          sent_sender: Отправлено ▲
+          sent: Отправлено ▲
+          read: Прочитано
+          trashed: Удалено
+          unsaved: Произошла ошибка сохранения документа
 
         to_state:
           draft: В черновики
