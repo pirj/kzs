@@ -25,6 +25,9 @@ module Documents
              through: :conversation,
              source: :orders
 
+
+    has_one :task_list, dependent: :destroy
+
     has_many :tasks, through: :task_list
 
 
@@ -58,5 +61,8 @@ module Documents
         .includes(:approved_report)
         .order { document.approved_at.desc }
     end
+
+
+
   end
 end

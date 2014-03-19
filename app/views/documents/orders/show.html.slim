@@ -33,6 +33,7 @@
 
   - i = 0
   = simple_form_for resource.task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
+    / TODO-tagir: удаляй своевременно неиспользуемый код
     /= task_list_builder.object.tasks.each.with_index do |task, index|
     = task_list_builder.simple_fields_for :tasks do |task_builder|
       - is_completed = task_builder.object.completed?

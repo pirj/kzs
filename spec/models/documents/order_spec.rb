@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Documents::Order do
 
+
+
   let(:order) { create(:order) }
 
   describe 'deadline' do
@@ -28,4 +30,44 @@ describe Documents::Order do
 
     end
   end
+
+
+
+  let(:order) { FactoryGirl.create :order }
+
+
+  #it { order.tasks should have_at_least(1).tasks }
+  #it 'blah' do
+  #  expect(order.tasks).to eq 0
+  #end
+
+
+  describe 'should have at least 1 task' do
+
+
+    context 'empty tasks' do
+      it 'should not be valid' do
+        order.task_list.tasks = []
+        expect(order).to_not be_valid
+      end
+    end
+
+    context 'have 1 task' do
+      it 'should be valid' do
+        order.task_list.tasks.last.delete
+        expect(order.tasks.length).to eq 1
+        expect(order).to be_valid
+      end
+    end
+
+    context 'have several tasks' do
+      it 'should be valid' do
+        expect(order).to be_valid
+      end
+    end
+  end
+
+
 end
+
+
