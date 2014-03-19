@@ -24,10 +24,6 @@ shared_examples_for 'simple_state_workflow' do
           visit path
         end
 
-        scenario 'should have "edit" state' do
-          expect(page).to have_content 'Редактировать'
-        end
-
         scenario 'should have "approved" state' do
           expect(page).to have_content 'Подписать'
         end

@@ -15,5 +15,6 @@ feature "Users view states for Report", %q{} do
   it_behaves_like 'sent_state_translatable'
   it_behaves_like 'readable_state'
   it_behaves_like 'simple_state_workflow'
+  it_behaves_like 'document_editable'
 
 end

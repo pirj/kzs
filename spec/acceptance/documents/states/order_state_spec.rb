@@ -15,6 +15,7 @@ feature "Users view states for Order", %q{} do
   it_behaves_like 'sent_state_translatable'
   it_behaves_like 'readable_state'
   it_behaves_like 'simple_state_workflow'
+  it_behaves_like 'document_editable'
 
   context 'show page' do
     describe 'translates special states from work-flow' do
