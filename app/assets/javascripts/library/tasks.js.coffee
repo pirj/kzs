@@ -132,6 +132,7 @@ $ ->
     e.stopImmediatePropagation()
     # TODO-tagir: класс для javascript называется js- а не j-
     # TODO-tagir: перенеси свои классы типа '.js-tasks-order-task-form' в начало файла в переменные в раздел 'order_tasks_list'
+    # TODO-tagir: после if не оствляем пустую строку
     if e.type is 'ifChecked'
 
       $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]')

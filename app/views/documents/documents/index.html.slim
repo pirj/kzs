@@ -30,6 +30,8 @@
           li
             = link_to documents_path do
               | Все документы
+        / TODO-tagir: слудющие строки можно записать в одну вот так:
+        / li = linkt_to 'черновики', documents_path()
         li
           = link_to documents_path(with_state:'draft') do
             | Черновики
