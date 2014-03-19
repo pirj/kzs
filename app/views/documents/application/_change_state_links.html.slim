@@ -11,7 +11,7 @@ span.spec-doc-action-buttons
   - %w(draft).each do |state|
     = change_state_link_to(resource, state, class: 'btn btn-default') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
-  = link_to 'test', resource_path if resource.recipients.include?(current_user.organization)
+  = link_to 'test', resource_path if resource.recipients.include?(current_organization)
 
 
 / TODO-justvitalius: next code ignores order and importance of buttons.
