@@ -37,5 +37,9 @@ feature "Users review mails", %q{} do
       expect(current_path).to_not eq(new_documents_official_mail_path)
       expect(page).to have_content 'Выберите хотябы одного адресата'
     end
+
+    scenario 'should not create new mail' do
+
+    end
   end
 end
