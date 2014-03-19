@@ -7,32 +7,32 @@ describe TaskList do
 
 
   # TODO-tagir: поменяй здесь названия методов на те, что в самой модели
-  # сейчас тесты проходятю
+  # сейчас тесты проходят
 
-  describe '#update_status' do
-    context 'all tasks completed' do
+  describe '#completed' do
+    subject { task_list.completed }
+
+    context 'with finished tasks' do
 
       before do
         task_list.tasks.each do |t|
-          t.completed = true
+          t.update_attributes(completed: true)
         end
-        task_list.save!
       end
 
 
-      it 'should be done' do
-        expect(task_list.completed).to be_true
-      end
+      it { should be_true }
 
-      it 'should save status' do
+
+      it 'should persist' do
         task_list.reload
-        expect(task_list.completed).to be_true
+        task_list.completed.should be_true
       end
     end
 
 
 
-    context 'several tasks uncompleted' do
+    context 'with incomplete tasks' do
       before do
         task_list.tasks.each do |t|
           t.completed = true
@@ -42,9 +42,7 @@ describe TaskList do
         task_list.save!
       end
 
-      it 'should not be done' do
-        expect(task_list.completed).to be_false
-      end
+      it { should be_false }
 
       it 'should save status' do
         task_list.reload

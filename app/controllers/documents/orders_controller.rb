@@ -48,8 +48,6 @@ class Documents::OrdersController < ResourceController
     tasks = @order.tasks.order('created_at ASC')
     @tasks = Tasks::ListDecorator.decorate tasks,
                                            with: Tasks::ListShowDecorator
-    @task_list = @order.task_list
-    @newtasks = @task_list.tasks
     show!
   end
 

@@ -5,12 +5,7 @@ class TaskList < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
-  scope :completed, -> { where(completed: true) }
-
-  after_commit :finalize, if: :all_tasks_completed?
-
-
-
+  # TODO: move to decorator
   def progress
     if tasks.present?
       total = tasks.count.to_f
@@ -21,13 +16,9 @@ class TaskList < ActiveRecord::Base
     end
   end
 
-  def all_tasks_completed?
-    tasks.count == tasks.completed.count if tasks.count > 0
+  def completed
+    tasks.count > 0 && tasks.count == tasks.completed.count
   end
 
-  private
-
-  def finalize
-    update_column(:completed, true)
-  end
+  alias_method :completed?, :completed
 end
