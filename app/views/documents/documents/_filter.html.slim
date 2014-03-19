@@ -7,31 +7,8 @@
         .modal-header
           h4#myModalLabel.modal-title Расширенный поиск по документам
         .modal-body
-
-          /.form-group
-          /  = f.label :sender_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
-          /  .col-sm-8= f.text_field :sender_organization_title_cont, class: 'form-control', autocomplete: 'off'
-          /.form-group
-          /  = f.label :recipient_organization_title_cont, 'организация содержит', class: 'control-label col-sm-3'
-          /  .col-sm-8= f.text_field :recipient_organization_title_cont, class: 'form-control', autocomplete: 'off'
-          /.form-group
-          /  = f.label :date_between, 'промежуток даты', class: 'control-label col-sm-3'
-          /  .col-sm-4
-          /    .input-group
-          /      .span.input-group-icon
-          /        .fa.fa-calendar
-          /      = f.text_field :created_at_gteq, class: 'form-control js-datepicker'
-          /
-          /  .col-sm-4
-          /    .input-group
-          /      .span.input-group-icon
-          /        .fa.fa-calendar
-          /      = f.text_field :created_at_lteq, class: 'form-control js-datepicker'
-
-
-
           .js-filter-container
-            .nav.nav-pills
+            .nav.nav-inline
               - %w{Documents::Report Documents::Order Documents::OfficialMail}.each do |name|
                 li.checkbox
                   = label_tag "q_accountable_type_in_#{name.downcase.gsub('::', '')}", class: 'control-label' do
