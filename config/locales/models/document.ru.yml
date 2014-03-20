@@ -7,6 +7,11 @@ ru:
         many: "Документы"
         few: "Документы"
 
+      documents/official_mail: Письмо
+      documents/report: Акт
+      documents/order: распоряжение
+
+
     attributes:
       document: &document_attributes
         approver_id:                Контрольное лицо

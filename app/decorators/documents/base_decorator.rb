@@ -24,6 +24,14 @@ module Documents
       object.sender.try(:title)
     end
 
+    def uniq_name_link
+      title = I18n.t("activerecord.models.#{object.accountable.class.to_s.underscore}")
+      postfix = object.serial_number.blank? ? '(не отправлено)' : "№#{object.serial_number}"
+      h.link_to path, class: 'link' do
+        "#{title} #{postfix}"
+      end.html_safe
+    end
+
     def link_to_pdf(options={})
       _object = (object.respond_to?(:document)) ? object.document : object
       h.link_to "/system/documents/document_#{_object.id}.pdf", class: 'img-bordered', target: '_blank' do
@@ -109,24 +117,11 @@ module Documents
     end
 
     def conformer_link_with_label
-      if object.conformers.empty?
-
-      else
-
-
-
-
+      unless object.conformers.empty?
         a = h.content_tag( :div, I18n.t("documents.table.document_labels.conformer"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
             h.content_tag( :div, (conformers_list), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
         h.content_tag(:div, a, class: "row form-group")
-
-
       end
-
-      #  element_wrapper object.conformers do
-      #  h.content_tag( :div, 'wasd', class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-      #      h.content_tag( :b, object.conformers.length, class: 'link' )
-      #end
     end
 
     def conformers_list
@@ -160,7 +155,6 @@ module Documents
 
     def body
       h.content_tag( :span, "#{object.body}", class: 'doc-text' )
-
     end
 
     def related_order_link_with_label

@@ -40,7 +40,7 @@
 @import "partials/progress-bars";
 //@import "partials/list-group";
 //@import "partials/panels";
-//@import "partials/wells";
+@import "partials/wells";
 //@import "partials/close";
 @import "partials/errors";
 
@@ -73,3 +73,4 @@
 // Widgets classes
 @import "widgets/doc-state";
 @import "widgets/task";
+@import "widgets/document";

@@ -58,11 +58,15 @@
       .col-sm-12
         .tab-content
           .tab-pane.active#documents
-            = render 'documents/application/attached_documents', f: f
-            /= link_to 'добавить документ', polymorphic_path([resource, :attached_documents])
-            = submit_button name: 'attached_documents', class: 'btn btn-big btn-mega-primary' do
-              span.fa.fa-plus-circle
-              span Добавить документ
+            = render 'documents/application/attached_documents_form', f: f
+
+            / Умная кнопка «добавить документ»
+            - if resource.new_record?
+              = submit_button name: 'attached_documents', class: 'btn btn-big btn-mega-primary' do
+                span.fa.fa-plus-circle
+                span Добавить документ
+            - else
+              = link_to 'Добавить документ', polymorphic_path([resource, :attached_documents])
 
           .tab-pane#files
             = render 'documents/application/attached_file_form', f: f

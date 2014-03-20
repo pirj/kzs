@@ -62,13 +62,15 @@ feature "Users attach existed documents to creating document", %q{} do
   end
 
   describe 'Single page for attaching documents' do
-    let(:attach_path) { 'attach_documents_document_path(document)' }
+    let(:path) { polymorphic_path([document, :attached_documents]) }
 
     scenario 'Open single page from edit-form' do
       visit edit_path
-      click_on 'Прикрепить документ'
-      expect(current_page).to eq path
+      click_on 'Добавить документ'
+      expect(current_path).to eq path
     end
+
+    pending 'Open single page from new-form'
 
     describe 'Show previosly attached documents' do
 

@@ -2,10 +2,24 @@
   = header_title do
     h1 Прикрепленные документы
 
-= button_to 'Готово', polymorphic_path(['confirm', @accountable, :attached_documents]) 
+= button_to 'Готово', polymorphic_path(['confirm', @accountable, :attached_documents])
 = link_to 'Отмена', polymorphic_path(@accountable)
+.form-horizontal
+  .form-group
+    .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее документ в системе' ]
+      | Составитель
+    .text-help.col-sm-8= "#{@accountable.creator.first_name_with_last_name}"
+  .form-group
+    .text-help.text-right.col-sm-2 Тема
+    .text-help.col-sm-8= "#{@accountable.title}"
 
-h2 Сессия: на добавление 
+
+= render 'attached_documents', collection: @attached_documents, parent: @accountable
+
+= button_to 'Готово', confirm_documents_official_mail_attached_documents_path(@accountable.id)
+= link_to 'Отмена', documents_official_mail_path(@accountable.id)
+
+h2 Сессия: на добавление
 = "#{@to_attach}"
 
 h2 Сессия: на удаление
@@ -14,8 +28,9 @@ h2 Сессия: на удаление
 h2 Уже прикрепленные
 - @attached_documents.each do |ad|
   div
-    = link_to 'Открепить', polymorphic_path([@accountable, :attached_document], id: ad.id), method: :delete 
+    = link_to 'Открепить', polymorphic_path([@accountable, :attached_document], id: ad.id), method: :delete
     |  
+
     = "ID: #{ad.id}, title: #{ad.title}"
 
 h2 Еще не прикрепленные

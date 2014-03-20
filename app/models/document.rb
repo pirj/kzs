@@ -54,7 +54,8 @@ class Document < ActiveRecord::Base
                           association_foreign_key: "relational_document_id"
 
   accepts_nested_attributes_for :document_attached_files, allow_destroy: true
-  accepts_nested_attributes_for :attached_documents, :allow_destroy => true
+  accepts_nested_attributes_for :attached_documents,
+                                :allow_destroy => true
 
   alias_attribute :text, :body
   alias_attribute :sn,   :serial_number

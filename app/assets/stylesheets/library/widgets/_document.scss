@@ -1,0 +1,16 @@
+$el: '._document';
+
+#{$el}{
+  @extend .b-offset-sm !optional;
+  @include clearfix();
+}
+
+#{$el}__img{
+  float: left;
+  max-height: 80px;
+  margin-right: $padding-base-horizontal;
+  img { height: 100%; width: auto; }
+}
+#{$el}__title, #{$el}__controls, #{$el}__organizations-links{
+  @extend .b-offset-xs !optional;
+}
