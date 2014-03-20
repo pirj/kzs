@@ -1,5 +1,5 @@
 class Documents::AttachedDocumentsController < ApplicationController
-  layout 'base'
+  layout 'simple'
 
   def index
     document = get_document(params)

@@ -10,7 +10,13 @@
   margin-bottom: 20px;
   background-color: $well-bg;
   border: $well-border;
-  border-radius: $border-radius-base;
+  border-radius: $well-border-radius;
+}
+
+.well-active{
+  @extend .well !optional;
+  border: $well-active-border;
+  background-color: $well-active-bg;
 }
 
 // Sizes
