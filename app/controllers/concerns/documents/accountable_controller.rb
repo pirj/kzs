@@ -11,8 +11,14 @@ module Documents::AccountableController
   def create
     create! do |success, failure|
       success.html do
-        resource.transition_to!(params[:transition_to], default_metadata)
-        redirect_to documents_documents_path
+        if params.has_key?(:transition_to)
+          resource.transition_to!(params[:transition_to], default_metadata)
+          redirect_to documents_documents_path
+
+        # Когда прикрепляем документы, то сохраняем данный документ в БД. Иначе как крепить файлы то???
+        elsif params.has_key?(:attached_documents)
+          redirect_to polymorphic_path([resource, :attached_documents])
+        end
       end
       failure.html { render action: 'new' }
     end

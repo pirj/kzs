@@ -38,6 +38,12 @@ FactoryGirl.define do
           FactoryGirl.create(:recipient_organization)
         end
       }
+
+      factory :mail_with_attached_documents do
+        after(:create) do |instance, ev|
+          instance.attached_documents << FactoryGirl.create(:mail_with_direct_recipient).document << FactoryGirl.create(:mail_with_direct_recipient).document
+        end
+      end
     end
 
     # Подписанная, с адресатом
@@ -59,7 +65,5 @@ FactoryGirl.define do
         instance.attached_documents << attachment.document
       end
     end
-
-    
   end
 end

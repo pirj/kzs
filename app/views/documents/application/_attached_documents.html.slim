@@ -1,0 +1,6 @@
+.spec-attached-documents
+  /= f.object.attached_documents.inspect
+  = f.fields_for :document do |doc_builder|
+    = doc_builder.fields_for :attached_documents do |builder|
+      = builder.object.title
+      = builder.link_to_remove 'убрать'
