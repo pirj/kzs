@@ -1,3 +1,8 @@
+/- unless doc_builder.object.document_attachments.empty?
+  /  /= doc_builder.object.document_attachments
+  /  = (doc_builder.object.document_attachments.last.inspect)
+  //= doc_builder.object.document_attachments.url
+
 = f.fields_for :document, wrapper: false do |doc_builder|
   = doc_builder.simple_fields_for :document_attachments do |builder|
     = builder.input :attachment, input_html: { class: 'js-filestyle-with-title' }, label: false
