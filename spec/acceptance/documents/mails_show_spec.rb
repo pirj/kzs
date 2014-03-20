@@ -27,7 +27,6 @@ feature "User review mail", %q{} do
     end
 
     context 'recipient' do
-      let(:path) { new_documents_official_mail_path }
       background do
         visit path
         sign_in_with recipient_user.email, 'password'
