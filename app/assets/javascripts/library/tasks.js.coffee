@@ -68,8 +68,9 @@ $ ->
     T.create_modal.$form_container.find(T.task.html_container).hide()
     
     #  set_task_deadline: -> Собирает даду дедлайна, передает в глобал для пикеров зависимых от дедлайна
-    date = $(".js-datepicker.js-deadline").datepicker('getDate')
+    date = $('.js-datepicker.js-deadline').datepicker('getDate')
     opts = _.extend(global.datepicker, maxDate: date)
+
 
     T.create_modal.$form_container.find('.js-datepicker').datepicker(opts)
 
