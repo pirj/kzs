@@ -1,30 +1,25 @@
 require 'spec_helper'
 
 describe TaskList do
+  subject { task_list.completed }
 
-  let!(:task_list) { FactoryGirl.create(:task_list) }
-  let!(:tasks) { 5.times.map {FactoryGirl.create(:task, task_list: task_list) }}
-
-
-  # TODO-tagir: поменяй здесь названия методов на те, что в самой модели
-  # сейчас тесты проходят
+  let(:task_list) { FactoryGirl.create(:task_list) }
 
   describe '#completed' do
-    subject { task_list.completed }
+
+    before do
+      tasks = 5.times.map { FactoryGirl.create(:task, task_list: task_list) }
+      task_list.tasks << tasks
+      task_list.tasks.each do |t|
+        t.completed = true
+        t.save!
+      end
+    end
 
     context 'with finished tasks' do
-
-      before do
-        task_list.tasks.each do |t|
-          t.update_attributes(completed: true)
-        end
-      end
-
-
       it { should be_true }
 
-
-      it 'should persist' do
+      it 'should persist over reloading' do
         task_list.reload
         task_list.completed.should be_true
       end
@@ -34,17 +29,13 @@ describe TaskList do
 
     context 'with incomplete tasks' do
       before do
-        task_list.tasks.each do |t|
-          t.completed = true
-        end
-
-        task_list.tasks.last.completed = false
-        task_list.save!
+        task = task_list.tasks.last
+        task.update_attributes(completed: false)
       end
 
       it { should be_false }
 
-      it 'should save status' do
+      it 'should persist over reloading' do
         task_list.reload
         expect(task_list.completed).to be_false
       end
