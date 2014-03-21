@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Documents::OfficialMail do
+  context 'common document interface' do
+    subject{ build(:mail) }
+    it("#title should respond"){ expect{subject.title}.to_not raise_error }
+    it("#body should respond"){ expect{subject.body}.to_not raise_error }
+    it("#recipient_organization should respond"){ expect{subject.recipient_organization}.to_not raise_error }
+    it("#sender_organziation should respond"){ expect{subject.sender_organization}.to_not raise_error }
+  end
+
   context 'without recipients' do
     subject { build(:mail)}
     it { should_not be_valid }
@@ -53,5 +61,43 @@ describe Documents::OfficialMail do
         Document.where(state: 'approved').pluck(:serial_number).all?.should be_true
       end
     end
+  end
+
+  describe '#history_for' do
+
+    let(:initial) { FactoryGirl.create(:approved_mail) }
+    let(:reply) { FactoryGirl.create(:approved_mail) }
+    let(:some_approved) { FactoryGirl.create(:approved_mail) }
+    let(:reply_approved_not_sent) { FactoryGirl.create(:approved_mail) }
+    let(:sndr) { FactoryGirl.create(:simple_organization)}
+    let(:rsvr) { FactoryGirl.create(:simple_organization)}
+    let(:conversation) { DocumentConversation.create! }
+
+    before do
+      initial.sender_organization = sndr
+      initial.recipient_organization = rsvr
+      initial.save!
+
+      reply.sender_organization = rsvr
+      reply.recipient_organization = sndr
+      reply.save!
+      reply.transition_to! :sent
+
+      reply_approved_not_sent.sender_organization = rsvr
+      reply_approved_not_sent.recipient_organization = sndr
+      reply_approved_not_sent.save!
+
+
+
+      conversation.official_mails << [initial, reply, reply_approved_not_sent]
+    end
+
+    subject { initial.history_for(sndr.id) }
+
+    its(:count) { should be(2) }
+    it { should include initial }
+    it { should include reply }
+    it { should_not include some_approved }
+    it { should_not include reply_approved_not_sent }
   end
 end

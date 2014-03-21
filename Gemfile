@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.17'
 gem 'pg'
 
 
@@ -85,7 +85,8 @@ group :production do
 end
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails',   '~> 3.2.6'
+  gem 'tilt', '~>1.3.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
@@ -104,6 +105,7 @@ group :development, :test do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
+  gem 'bullet'
 end
 
 group :test do

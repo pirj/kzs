@@ -7,40 +7,32 @@ class Documents::ReportsController < ResourceController
   helper_method :orders_collection_for_select
 
   def new
-    @report = Documents::Report.new
-    if params[:order_id].present?
-      order = Documents::Order.find(params[:order_id])
-      @report.order = order
+    @report = Documents::Report.new.tap do |report|
+      report.build_document
+      report.order_id = params[:order_id] if params[:order_id]
     end
+
     new!
   end
 
-  # def copy
-  #   initial = end_of_association_chain.find(params[:id])
-  #   @report = initial.amoeba_dup
-  #   render action: :new
-  # end
-
   def show
-    show! do
-      @report = Documents::ShowDecorator.decorate(resource)
-      order = Documents::Order.find(resource.order_id)
-      tasks = order.tasks.order('created_at ASC')
-      @tasks = Tasks::ListDecorator.decorate tasks,
-                                             with: Tasks::ListShowDecorator
-    end
+    @report = Documents::ShowDecorator.decorate(resource)
+    order = Documents::Order.find(resource.order_id)
+    tasks = order.tasks.order('created_at ASC')
+    @tasks = Tasks::ListDecorator.decorate tasks,
+                                           with: Tasks::ListShowDecorator
+    show!
   end
 
   def create
-    @report = Documents::Report.new(params[:documents_report])
-    @report.sender_organization = current_organization
-    @report.creator = current_user
-
-    if @report.order
-      @report.recipient_organization = @report.order.sender_organization
+    @report = Documents::Report.new(params[:documents_report]).tap do |report|
+      report.sender_organization = current_organization
+      report.creator = current_user
+      report.executor ||= current_user
+      if report.order # TODO: Возможно ли создание акта без Распоряжения?
+        report.recipient_organization = report.order.sender_organization
+      end
     end
-
-    @report.executor ||= current_user
     super
   end
 

@@ -41,12 +41,12 @@ feature "Users edit and create an order", %q{} do
 
         expect { click_button 'Подготовить' }.to change(Documents::Order, :count).by(1)
         expect(page).to_not have_content 'не может быть пустым'
-        expect(current_path).to eq(documents_documents_path)
+        expect(current_path).to eq(documents_path)
       end
 
       scenario 'should not create new order' do
         expect { click_button 'Подготовить' }.to_not change(Documents::Order, :count)
-        expect(current_path).to_not eq(documents_documents_path)
+        expect(current_path).to_not eq(documents_path)
         expect(page).to have_content 'не может быть пустым'
         #save_and_open_page
       end

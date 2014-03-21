@@ -83,8 +83,6 @@ class Document < ActiveRecord::Base
   scope :mails,  -> { where(accountable_type: 'Documents::OfficialMail') }
   scope :reports,-> { where(accountable_type: 'Documents::Report') }
 
-  # TODO this couples state machines of all documents to controller
-  # it breaks Single Responsibility Principle and introduces huge maintenance fee
   scope :visible_for,  ->(org_id){
     where do
       sender_organization_id.eq(org_id) |

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 
 describe Admin::VehiclesController do
+  before { pending }
   render_views
   def valid_attributes
     { vehicle: {

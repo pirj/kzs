@@ -3,8 +3,8 @@ module Documents::OrdersHelper
   def structured_history
     array = []
     history.each do |order|
-      array << Documents::ListShowDecorator.decorate(order.document)
-      array << Documents::ListShowDecorator.decorate(order.approved_report.document) if order.approved_report
+      array << Documents::ListShowDecorator.decorate(order)
+      array << Documents::ListShowDecorator.decorate(order.approved_report) if order.approved_report
     end
 
     array

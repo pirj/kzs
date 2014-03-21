@@ -15,8 +15,6 @@ FactoryGirl.define do
       instance.approver = user
       instance.executor = user
       instance.creator = user
-      #instance.task_list.tasks << FactoryGirl.create(:task)
-      #instance.build_task_list
     end
 
     after(:create) do |instance,ev|
@@ -29,8 +27,12 @@ FactoryGirl.define do
       end
     end
 
-
-
+    factory :approved_order do
+      after(:create) do |instance, ev|
+        instance.transition_to! :prepared
+        instance.transition_to! :approved
+      end
+    end
 
   end
 end

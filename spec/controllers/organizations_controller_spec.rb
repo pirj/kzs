@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe OrganizationsController do
+  before { pending }
+
   def valid_attributes
     { organization: {
         title: Faker::Lorem.sentence,

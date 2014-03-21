@@ -4,7 +4,6 @@ module Documents
     attr_accessible :deadline
     attr_accessible :task_list_attributes
 
-
     has_one :report
 
     # includes approved_reports for history
@@ -30,10 +29,12 @@ module Documents
 
     has_many :tasks, through: :task_list
 
-
     accepts_nested_attributes_for :task_list, allow_destroy: true
 
-    validates :deadline, timeliness: { on_or_after: lambda { DateTime.now + 3.days }, type: :date }
+    validates :deadline, timeliness: {
+        on_or_after: -> { DateTime.now + 3.days },
+        type: :date
+    }
 
     def state_machine
       OrderStateMachine.new(self, transition_class: DocumentTransition)
@@ -54,10 +55,10 @@ module Documents
       task_list && task_list.completed
     end
 
-    def history_for(org_id)
+    def history_for(o_id)
       conversation_orders
         .approved
-        .from_or_to(org_id)
+        .from_or_to(o_id)
         .includes(:approved_report)
         .order { document.approved_at.desc }
     end

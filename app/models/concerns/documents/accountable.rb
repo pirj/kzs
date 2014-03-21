@@ -19,17 +19,14 @@ module Documents::Accountable
 
     scope :from_or_to, lambda { |o_id|
       where do
-        (document.sender_organization_id.eq(o_id) | document.recipient_organization_id.eq(o_id))
+        (document.sender_organization_id.eq(o_id) |
+            (document.recipient_organization_id.eq(o_id) & document.state.in(%w(sent accepted rejected))))
       end
     }
 
     scope :approved, -> { where { document.approved_at.not_eq(nil) } }
 
     # rubocop:enable LineLength
-
-    # TODO: @prikha write why is it nessesary instead of moving it to
-    # TODO: clean after document list is done
-    after_initialize :setup_document
 
   end
 
@@ -39,13 +36,8 @@ module Documents::Accountable
   end
 
   def method_missing(method, *args)
+    self.document ||= Document.new
     return document.send(method, *args) if document.respond_to?(method)
     super
-  end
-
-  private
-
-  def setup_document
-    self.document ||= Document.new
   end
 end

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :report, class: Documents::Report do
+ factory :report, class: Documents::Report do
 
     title 'title'
     body 'body'

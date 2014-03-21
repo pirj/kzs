@@ -36,11 +36,12 @@ class Documents::OrdersController < ResourceController
   end
 
   def new
-    new! do
-      @order.sender_organization_id = current_user.organization_id
-      @order.build_task_list
-      @order.task_list.tasks.build
+    @order = Documents::Order.new.tap do |order|
+      order.build_document
+      order.build_task_list
+      order.task_list.tasks.build
     end
+    new!
   end
 
   def show
@@ -56,13 +57,14 @@ class Documents::OrdersController < ResourceController
   end
 
   def create
-    @order = Documents::Order.new(params[:documents_order])
-    @order.sender_organization = current_organization
-    @order.executor ||= current_user
-    @order.creator = current_user
-    @order.build_task_list if resource.task_list.blank?
-    @order.task_list.tasks.build if resource.task_list.blank?
-    super
+  @order = Documents::Order.new(params[:documents_order]).tap do |order|
+    order.sender_organization = current_organization
+    order.creator = current_user
+    order.executor ||= current_user
+    order.build_task_list if order.task_list.blank?
+    order.task_list.tasks.build if order.task_list.blank?
+  end
+  super
   end
 
   def update

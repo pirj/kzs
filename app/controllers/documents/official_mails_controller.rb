@@ -3,11 +3,12 @@ class Documents::OfficialMailsController < ResourceController
 
   helper_method :history
 
-  # def copy
-  #   initial = end_of_association_chain.find(params[:id])
-  #   @official_mail = initial.amoeba_dup
-  #   render action: :new
-  # end
+  def new
+    @official_mail = Documents::OfficialMail.new.tap do |mail|
+      mail.build_document
+    end
+    new!
+  end
 
    # TODO: @prikha Move to another controller
   # rubocop:disable LineLength
@@ -21,16 +22,12 @@ class Documents::OfficialMailsController < ResourceController
 
     conversation = @parent_official_mail.conversation
 
-    @official_mail = end_of_association_chain.new(conversation_id: conversation.id)
-
-    @official_mail.document.assign_attributes(
-        sender_organization: current_organization,
-        recipient_organization: @parent_official_mail.sender_organization,
-        creator: current_user
-    )
-
-    # render reply template
-    # render action: :new
+    @official_mail = end_of_association_chain.new.tap do |mail|
+      mail.conversation_id = conversation.id
+      mail.build_document.tap do |doc|
+        doc.recipient_organization = @parent_official_mail.sender_organization
+      end
+    end
   end
   # rubocop:enable LineLength
 
@@ -39,11 +36,13 @@ class Documents::OfficialMailsController < ResourceController
   end
 
   def create
+    attributes = params[:documents_official_mail]
     @official_mail =
-        Documents::OfficialMail.new(params[:documents_official_mail])
-    @official_mail.sender_organization = current_organization
-    @official_mail.creator = current_user
-    @official_mail.executor ||= current_user
+        Documents::OfficialMail.new(attributes).tap do |mail|
+          mail.sender_organization = current_organization
+          mail.creator = current_user
+          mail.executor ||= current_user
+        end
     super
   end
 

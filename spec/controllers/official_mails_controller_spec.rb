@@ -31,8 +31,6 @@ describe Documents::OfficialMailsController do
     describe('GET mail') do
       it('sould be 200') do
         visit documents_official_mail_path(mail)
-        puts response.inspect
-        puts documents_official_mail_path(mail)
         response.status.should eq 200
       end
       xit('should mark mail as read for current user'){

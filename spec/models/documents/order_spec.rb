@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe Documents::Order do
 
-
-
   let(:order) { create(:order) }
 
   describe 'deadline' do
@@ -31,15 +29,43 @@ describe Documents::Order do
     end
   end
 
+  describe('#history_for') do
+    let(:initial_order) { FactoryGirl.create(:approved_order) }
+    let(:reply) { FactoryGirl.create(:approved_order) }
+    let(:some_approved) { FactoryGirl.create(:approved_order) }
+    let(:reply_approved_not_sent) { FactoryGirl.create(:approved_order) }
+    let(:sndr) { FactoryGirl.create(:simple_organization)}
+    let(:rsvr) { FactoryGirl.create(:simple_organization)}
+    let(:conversation) { OrdersConversation.create! }
+
+    before do
+      initial_order.sender_organization = sndr
+      initial_order.recipient_organization = rsvr
+      initial_order.save!
+
+      reply.sender_organization = rsvr
+      reply.recipient_organization = sndr
+      reply.save!
+      reply.transition_to! :sent
+
+      reply_approved_not_sent.sender_organization = rsvr
+      reply_approved_not_sent.recipient_organization = sndr
+      reply_approved_not_sent.save!
 
 
-  let(:order) { FactoryGirl.create :order }
 
+      conversation.orders << [initial_order, reply, reply_approved_not_sent]
+    end
 
-  #it { order.tasks should have_at_least(1).tasks }
-  #it 'blah' do
-  #  expect(order.tasks).to eq 0
-  #end
+    subject { initial_order.history_for(sndr.id) }
+
+    its(:count) { should be(2) }
+    it { should include initial_order }
+    it { should include reply }
+    it { should_not include some_approved }
+    it { should_not include reply_approved_not_sent }
+  end
+
 
 
   describe 'should have at least 1 task' do
@@ -69,5 +95,3 @@ describe Documents::Order do
 
 
 end
-
-

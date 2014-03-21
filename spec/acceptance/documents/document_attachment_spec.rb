@@ -2,6 +2,7 @@
 require 'acceptance/acceptance_helper'
 
 feature "Users attach existed documents to creating document", %q{} do
+  before { pending }
 
   let!(:documents) do
     5.times.map do |i|

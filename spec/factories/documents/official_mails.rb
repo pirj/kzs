@@ -6,6 +6,13 @@ FactoryGirl.define do
 
     factory :mail_with_direct_recipient do
       recipient_organization
+
+      factory :approved_mail do
+        after(:create) do |instance, ev|
+          instance.transition_to! :prepared
+          instance.transition_to! :approved
+        end
+      end
     end
 
     factory :mail_with_many_recipients do

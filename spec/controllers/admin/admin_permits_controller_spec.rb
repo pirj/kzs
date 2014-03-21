@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Admin::PermitsController do
+  before { pending }
   render_views
   def valid_attributes
     { permit: {
