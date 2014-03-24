@@ -4,9 +4,9 @@ FactoryGirl.define do
     short_title "Simple Organization"
   end
 
-  factory :sender_organization, class: Organization do
-    title "OOO Sender Organization"
-    short_title "Sender Organization"
+  factory :organization do
+    title "OOO Organization"
+    short_title "Organization"
 
     after(:create) do |instance, ev|
       instance.admin = FactoryGirl.create(:user, organization: instance)
@@ -14,17 +14,10 @@ FactoryGirl.define do
       instance.director = FactoryGirl.create(:user, organization: instance)
       instance.save!
     end
+
+    factory :sender_organization, class: Organization
+    factory :recipient_organization, class: Organization
   end
 
-  factory :recipient_organization, class: Organization do
-    title "OOO Recipient Organization"
-    short_title "Recipient Organization"
-
-    after(:create) do |instance, ev|
-      instance.admin = FactoryGirl.create(:user, organization: instance)
-      instance.accountant = FactoryGirl.create(:user, organization: instance)
-      instance.director = FactoryGirl.create(:user, organization: instance)
-      instance.save!
-    end
-  end
+  
 end
