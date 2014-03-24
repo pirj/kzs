@@ -1,3 +1,4 @@
+/ список прикрепленных документов
 .well-active
   .row
     - collection.each do |attach|
@@ -13,3 +14,5 @@
             = link_to polymorphic_path([parent, :attached_document], id: attach), method: :delete, class: 'link link-danger' do
               span.fa.fa-minus-circle
               span убрать
+    - unless collection.any?
+      p.text-important Прикрепленных документов нет

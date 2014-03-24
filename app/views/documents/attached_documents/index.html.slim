@@ -1,3 +1,4 @@
+/ Новый код
 = content_for :page_header do
   = header_title do
     h1 Прикрепленние документов
@@ -22,6 +23,10 @@
 
 
 = render 'attached_documents', collection: @attached_documents, parent: @accountable
+
+
+/ ======================================================================================================================
+/ Код от Владимира
 
 = button_to 'Готово', confirm_documents_official_mail_attached_documents_path(@accountable.id)
 = link_to 'Отмена', documents_official_mail_path(@accountable.id)
