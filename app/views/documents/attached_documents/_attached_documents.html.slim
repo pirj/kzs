@@ -7,8 +7,6 @@
         ._document__img = attach.link_to_pdf
         ._document__title = attach.uniq_name_link
         ._document__organizations-links = attach.sender_to_recipient_links
-        / вторая строка является эквивалентом для первой,только она общая для всех видов документов
-        /= link_to 'убрать', documents_official_mail_attached_document_path(id: attach.id), method: :delete
         ._document__controls
           = link_to polymorphic_path([parent, :attached_document], id: attach), method: :delete, class: 'link link-danger' do
             span.fa.fa-minus-circle

@@ -4,12 +4,12 @@
   table.table.js-row-clickable.m-table-replacement
     thead
       th
-      th №/дата
+      th = t('documents.table.list_attrs.number_and_date')
       th Отправитель
       th Получатель
       th Тема
-      th Тип
-      th Статус
+      th = t('documents.table.list_attrs.type')
+      th = t('documents.table.list_attrs.status')
     tbody
       - collection.each do |doc|
         tr

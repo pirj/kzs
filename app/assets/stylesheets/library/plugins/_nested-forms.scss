@@ -1,3 +1,9 @@
 .fields {
-  margin-bottom: 50px;
+  @extend .b-offset-sm !optional;
+}
+
+.fields-inline{
+  .fields{
+    display: inline;
+  }
 }
