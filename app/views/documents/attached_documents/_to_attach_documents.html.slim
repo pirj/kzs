@@ -1,0 +1,27 @@
+/ collection — вся коллекция документов, которая потенциально может быть подключена
+/ parent — родительский документ,к которому прикрепляется документ
+/ attached_collection — уже прикрепленная коллекция.
+table.table.js-row-clickable.m-table-replacement
+  thead
+    th
+    th №/дата
+    th Отправитель
+    th Получатель
+    th Тема
+    th Тип
+    th Статус
+  tbody
+    - collection.each do |doc|
+      tr
+        td
+          = link_to documents_official_mail_attached_documents_path(params: {attached_id: doc.id}), method: :post, class: 'link link-success' do
+            span.fa.fa-plus-square
+
+        td = doc.number_and_date
+        td = doc.sender_link
+        td = doc.recipient_link
+        td = doc.title
+        td = doc.type_name
+        td
+          - doc_state = Documents::StateDecorator.decorate doc
+          = content_tag :span, doc_state.current_humanize_state, class: "label label-#{doc_state.css_class_for_current_state}"
