@@ -650,13 +650,13 @@ $thumbnail-caption-padding:   9px !default;
 // Wells
 // -------------------------
 $well-bg:                     transparent !default;
-$well-border:                 3px solid $color-gray !default;
-$well-border-radius:          $border-radius-base*5 !default;
+$well-border:                 1px solid $color-cloud-darker !default;
+$well-border-radius:          $border-radius-base*3 !default;
 
 
 $well-active-bg:                     transparent !default;
 $well-active-border:                 3px solid $color-sea-green !default;
-$well-active-border-radius:          $border-radius-base*5 !default;
+$well-active-border-radius:          $border-radius-base*3 !default;
 
 
 

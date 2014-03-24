@@ -3,7 +3,11 @@ $img-width: 80px;
 
 #{$el}{
   @extend .b-offset-sm !optional;
+  @extend .col-sm-6 !optional;
   @include clearfix();
+  display: inline-block;
+  float: none;
+  vertical-align: top;
 }
 
 #{$el}__img{
