@@ -1,7 +1,6 @@
 Kzs::Application.routes.draw do
   root :to => 'dashboard#index'
 
-  #resources :licenses
   #get "/users/sign_out" => "sessions#destroy"
 
 # TODO BAD
