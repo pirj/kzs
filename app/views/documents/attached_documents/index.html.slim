@@ -6,8 +6,7 @@
 = content_for :page_header_controls do
   .nav.navbar-nav.navbar-right
     .btn-block
-      /= button_to 'Готово', confirm_documents_official_mail_attached_documents_path(@accountable.id), class: 'btn btn-primary'
-      = link_to 'Готово', confirm_documents_official_mail_attached_documents_path(@accountable.id), class: 'btn btn-primary', method: :post
+      = link_to 'Готово', polymorphic_path([:confirm, @accountable, :attached_documents]), class: 'btn btn-primary', method: :post
       = link_to 'Отмена', polymorphic_path([@accountable]), class: 'btn btn-link-muted'
 
 = button_to 'Готово', polymorphic_path(['confirm', @accountable, :attached_documents])

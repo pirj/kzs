@@ -1,6 +1,6 @@
 / collection — вся коллекция документов, которая потенциально может быть подключена
 / parent — родительский документ,к которому прикрепляется документ
-.well
+.well.b-offset-xl
   table.table.js-row-clickable.m-table-replacement
     thead
       th
@@ -26,6 +26,9 @@
           td
             - doc_state = Documents::StateDecorator.decorate doc
             = content_tag :span, doc_state.current_humanize_state, class: "label label-#{doc_state.css_class_for_current_state}"
+
+
+= paginate collection
 
   - unless collection.any?
     p.text-important Нет документов, доступных к прикреплению

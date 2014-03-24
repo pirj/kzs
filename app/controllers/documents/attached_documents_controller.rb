@@ -1,6 +1,7 @@
 class Documents::AttachedDocumentsController < ApplicationController
   layout 'simple'
 
+
   def index
     document = get_document(params)
     @accountable = document.accountable
