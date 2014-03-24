@@ -77,4 +77,11 @@ feature "Users review order", %q() do
     end
   end
 
+  describe 'correct user permissions' do
+    it 'wasd' do
+
+    end
+  end
+
+
 end
