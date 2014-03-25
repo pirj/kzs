@@ -7,7 +7,7 @@ module Documents::AccountableController
     before_filter :mark_as_read, only: :show
     actions :all, except: [:index]
   end
-
+  # TODO: @prikha remove if-else mess.
   def create
     create! do |success, failure|
       success.html do
