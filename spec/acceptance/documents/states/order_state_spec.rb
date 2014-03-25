@@ -1,4 +1,4 @@
-require 'spec/acceptance/acceptance_helper'
+require 'acceptance/acceptance_helper'
 
 feature "Users view states for Order", %q{} do
   let(:document) { FactoryGirl.create(:order) }
