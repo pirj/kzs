@@ -31,6 +31,19 @@
   - @tasks.each.with_index(1) do |t, i|
     = t.task_body_completed(i)
 
+.row.b-offset-sm
+  .col-sm-12
+    h3 Прикрепленные документы
+    - resource.attached_documents.each do |attach_doc|
+      ._document
+        - attach = Documents::ShowDecorator.decorate(attach_doc)
+        ._document__img = attach.link_to_pdf
+        ._document__title = attach.uniq_name
+        ._document__organizations-links = attach.sender_to_recipient_links
+        
+    - if resource.attached_documents.empty?
+      span.text-important нет ни одного прикрепленного документа
+
 = resource.attached_files
 .padding-block
 = render 'documents/application/change_state_links', resource: resource

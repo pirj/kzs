@@ -29,8 +29,6 @@
 
 .row.b-offset-sm
   h2.col-sm-12 Задачи:
-
-
   - i = 0
   = simple_form_for resource.task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
     / TODO-tagir: удаляй своевременно неиспользуемый код
@@ -50,9 +48,20 @@
           ._task-comment = task_builder.object.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task_builder.object.deadline) if task_builder.object.deadline
 
+
+
 .row.b-offset-sm
-  h2.col-sm-12 Прикрепленные документы:
-  = attach_doc @order
+  .col-sm-12
+    h3 Прикрепленные документы
+    - resource.attached_documents.each do |attach_doc|
+      ._document
+        - attach = Documents::ShowDecorator.decorate(attach_doc)
+        ._document__img = attach.link_to_pdf
+        ._document__title = attach.uniq_name
+        ._document__organizations-links = attach.sender_to_recipient_links
+
+    - if resource.attached_documents.empty?
+      span.text-important нет ни одного прикрепленного документа
 
 = resource.attached_files
 .padding-block

@@ -3,7 +3,7 @@ module Documents
   class BaseDecorator < Draper::Decorator
     delegate_all
     decorates :document
-    delegate :document
+    delegate :document, :attached_documents
 
     LABEL_COL_WIDTH = 3
 
@@ -26,11 +26,14 @@ module Documents
     end
 
     def uniq_name_link
+      h.link_to uniq_name, path, class: 'link'
+    end
+
+    def uniq_name
       title = I18n.t("activerecord.models.#{object.accountable.class.to_s.underscore}")
       postfix = object.serial_number.blank? ? '(не отправлено)' : "№#{object.serial_number}"
-      h.link_to path, class: 'link' do
-        "#{title} #{postfix}"
-      end.html_safe
+
+      "#{title} #{postfix}"
     end
 
     def link_to_pdf(options={})
