@@ -26,6 +26,7 @@ module Tasks
     end
 
 
+
     def title_and_comment
       h.content_tag( :div,h.content_tag( :div,title, class: '_task-title ')+comment, class: 'col-sm-8')
     end

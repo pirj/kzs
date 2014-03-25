@@ -79,30 +79,43 @@ feature "Users review order", %q() do
 
   describe 'correct user permissions' do
     context 'sender' do
-      it 'see tasks' do
+      it 'must see tasks' do
         visit path
         within '.spec-doc-tasks' do
-          #find('.iCheck-helper')#.click #.all
-          #click_on
           expect(page).to have_content 'task title'
         end
 
       end
 
-      it 'not allows to manage tasks' do
-
+      it 'not allows to manage tasks', :js => true  do
+        visit path
+        i = all('.spec-task-checkbox.disabled').count
+        expect(all('.spec-task-checkbox').count).to eq(i)
       end
     end
 
     context 'recipient' do
-      it 'allows to manage tasks' do
+      it 'allows to manage tasks', :js => true  do
+        sign_out_js
+        sign_in_with recipient_user.email, 'password'
+        visit path
+
+        i = all('.spec-task-checkbox.disabled').count
+
+        expect(all('.spec-task-checkbox').count).to_not eq(i)
+
+          ##n = 0
+        ##while i > 0
+        ##  #find('#task_list_tasks_attributes_'+n+'_completed').click
+        ##  n+=1
+        ##end
+        #
+        #save_and_open_page
 
       end
-
 
     end
 
   end
-
 
 end

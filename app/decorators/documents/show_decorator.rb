@@ -14,6 +14,8 @@ module Documents
       
     end
 
-
+    def task_input_disable_status(id)
+      id == object.sender.id
+    end
   end
 end

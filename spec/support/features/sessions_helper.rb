@@ -14,5 +14,10 @@ module Features
     def sign_out
       page.driver.submit :delete, destroy_user_session_path, {}
     end
+
+    def sign_out_js
+      find('.spec-user-logout').click
+    end
+
   end
 end
