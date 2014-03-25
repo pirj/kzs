@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140319055356) do
+ActiveRecord::Schema.define(:version => 20140325135515) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20140319055356) do
   end
 
   create_table "attached_documents_relations", :force => true do |t|
-    t.integer  "document_id"
-    t.integer  "attached_document_id"
+    t.integer "document_id"
+    t.integer "attached_document_id"
   end
 
   create_table "car_brand_types", :force => true do |t|
