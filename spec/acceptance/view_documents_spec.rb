@@ -8,7 +8,7 @@ feature "List documents page correctly works", %q() do
   describe 'mail has a button to answer' do
 
     it 'view documents page opened' do
-      sign_in user
+      sign_in_with user.email, "password"
       visit doc_page_path
       expect(page).to have_content('Документы')
     end
