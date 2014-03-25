@@ -32,7 +32,7 @@ class Documents::OfficialMailsController < ResourceController
         end
     if @parent_mail.save
         story = Documents::History.new(@parent_mail)
-        story.add_by_accountable @official_mail
+        story.add @official_mail
         resource.transition_to!(params[:transition_to], default_metadata)
         redirect_to documents_path
     else

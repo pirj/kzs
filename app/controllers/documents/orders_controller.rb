@@ -33,8 +33,8 @@ class Documents::OrdersController < ResourceController
     end
 
     if @order.save
-      story = Documents::History.new(@parent_order)
-      story.add_by_accountable(@order)
+      story = Documents::History.new @parent_order
+      story.add @order
       @order.transition_to!(params[:transition_to], default_metadata)
     else
       render action: 'reject'

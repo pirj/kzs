@@ -38,8 +38,8 @@ class Documents::ReportsController < ResourceController
 
       # TODO: This should go away on the next round
       if @report.order
-        story = Documents::History.new(@report.order)
-        story.add_by_accountable(@report)
+        story = Documents::History.new @report.order
+        story.add @report
       end
 
       resource.transition_to!(params[:transition_to], default_metadata)
