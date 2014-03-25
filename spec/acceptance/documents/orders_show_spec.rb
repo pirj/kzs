@@ -78,9 +78,30 @@ feature "Users review order", %q() do
   end
 
   describe 'correct user permissions' do
-    it 'wasd' do
+    context 'sender' do
+      it 'see tasks' do
+        visit path
+        within '.spec-doc-tasks' do
+          #find('.iCheck-helper')#.click #.all
+          #click_on
+          expect(page).to have_content 'task title'
+        end
+
+      end
+
+      it 'not allows to manage tasks' do
+
+      end
+    end
+
+    context 'recipient' do
+      it 'allows to manage tasks' do
+
+      end
+
 
     end
+
   end
 
 

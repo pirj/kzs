@@ -27,7 +27,7 @@
   .col-sm-5
     = resource.link_to_pdf class: 'img-bordered'
 
-.row.b-offset-sm
+.row.b-offset-sm.spec-doc-tasks
   h2.col-sm-12 Задачи:
   - i = 0
   = simple_form_for resource.task_list, html: { remote: true, class: 'js-tasks-order-task-form content-container' } do |task_list_builder|
