@@ -47,7 +47,7 @@ Kzs::Application.routes.draw do
       member do
         get 'assign_state'
         get 'reject'
-        post 'reject', to: :reject_create
+        post 'reject', to: :create_reject
       end
 
       # Приложенные документы

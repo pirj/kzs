@@ -10,17 +10,35 @@ class Documents::OrdersController < ResourceController
   # TODO: @justvitalius why do we get Report by id in Orders controller?
   # в reports#show на 37 строке линк на данный экшн
   def reject
-    report = Documents::Report.find(params[:id])
-    parent_order = report.order
-    @order = Documents::Order.new
-    @order.approver = parent_order.approver
-    @order.recipient_organization = report.sender_organization
-    @order.sender_organization = current_user.organization
-    @order.title = "В ответ на Акт №#{report.serial_number}"
-    @order.build_task_list
-    @order.task_list.tasks.build
+    @parent_order = Documents::Order.find(params[:id])
 
-    #TODO @prikha create history here
+    @order = Documents::Order.new.tap do |order|
+      order.approver = @parent_order.approver
+      order.recipient_organization = @parent_order.sender_organization
+      order.sender_organization = current_organization
+      order.title = "В ответ на Акт №#{report.serial_number}"
+      order.build_task_list
+      order.task_list.tasks.build
+    end
+  end
+
+  def create_reject
+    @parent_order = Documents::Order.find(params[:id])
+    @order = Documents::Order.new(params[:documents_order]).tap do |order|
+      order.sender_organization = current_organization
+      order.creator = current_user
+      order.executor ||= current_user
+      order.build_task_list if order.task_list.blank?
+      order.task_list.tasks.build if order.task_list.blank?
+    end
+
+    if @order.save
+      story = Documents::History.new(@parent_order)
+      story.add_by_accountable(@order)
+      @order.transition_to!(params[:transition_to], default_metadata)
+    else
+      render action: 'reject'
+    end
 
   end
 
