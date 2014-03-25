@@ -14,7 +14,6 @@ require 'capybara/rails'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
-
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -43,8 +42,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include Devise::TestHelpers, :type => :controller
-  #config.include Paperclip::Shoulda::Matchers
+  config.include Devise::TestHelpers, type: :controller
+  # config.include Paperclip::Shoulda::Matchers
   config.include FactoryGirl::Syntax::Methods
 end
-

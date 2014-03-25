@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-
 describe Admin::VehiclesController do
   before { pending }
   render_views
   def valid_attributes
     { vehicle: {
-        sn_number: 222
+      sn_number: 222
     }
     }
   end
-  let!(:vehicle) { Vehicle.make!}
-  let!(:user) { User.make!(sys_user: true)}
+  let!(:vehicle) { Vehicle.make! }
+  let!(:user) { User.make!(sys_user: true) }
   before :each do
     sign_in(user)
   end
@@ -32,8 +31,8 @@ describe Admin::VehiclesController do
 
   context 'POST create' do
     it 'new object Vehicle' do
-      expect { post :create, valid_attributes
-      }.to change(Vehicle, :count).by(1)
+      expect do post :create, valid_attributes
+      end.to change(Vehicle, :count).by(1)
     end
     it 'redirect' do
       post :create, valid_attributes
@@ -59,23 +58,22 @@ describe Admin::VehiclesController do
 
   context 'PUT update' do
     it 'assigns the requested vehicle as @vehicle' do
-      put :update, id: vehicle.id, vehicle: {sn_number: '222'}
+      put :update, id: vehicle.id, vehicle: { sn_number: '222' }
       assigns(:vehicle).sn_number.should eq('222')
     end
     it 'redirect' do
-      put :update, id: vehicle.id, vehicle: {sn_number: '222'}
+      put :update, id: vehicle.id, vehicle: { sn_number: '222' }
       response.should redirect_to(admin_vehicle_path(vehicle.id))
     end
   end
 
-
   context 'DELETE destroy' do
     it 'destroy vehicle' do
-      expect { delete :destroy, {id: vehicle.id}
-      }.to change(Vehicle, :count).by(-1)
+      expect do delete :destroy, id: vehicle.id
+      end.to change(Vehicle, :count).by(-1)
     end
     it 'redirect' do
-      delete :destroy, {id: vehicle.id}
+      delete :destroy, id: vehicle.id
       response.should redirect_to(admin_vehicles_path)
     end
   end

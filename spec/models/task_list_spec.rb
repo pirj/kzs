@@ -25,8 +25,6 @@ describe TaskList do
       end
     end
 
-
-
     context 'with incomplete tasks' do
       before do
         task = task_list.tasks.last
@@ -40,7 +38,6 @@ describe TaskList do
         expect(task_list.completed).to be_false
       end
     end
-
 
   end
 end

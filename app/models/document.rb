@@ -45,6 +45,8 @@ class Document < ActiveRecord::Base
   belongs_to :sender_organization, class_name: 'Organization'
   belongs_to :recipient_organization, class_name: 'Organization'
 
+  belongs_to :flow, class_name: 'Documents::Flow'
+
   # TODO: refactor this
   has_and_belongs_to_many :documents,
                           class_name: "Document",
@@ -121,14 +123,8 @@ class Document < ActiveRecord::Base
   acts_as_readable
 
   amoeba do
-    #include_field :title
-    #include_field :body
-    #include_field :confidential
-    #include_field :sender_organization_id
-    #include_field :recipient_organization_id
-    #include_field :approver_id
-    #include_field :executor_id
     enable
+    exclude_field :flow
     clone [:document_transitions]
   end
 
@@ -183,6 +179,7 @@ class Document < ActiveRecord::Base
   # TODO: add paranoia - this will handle the destruction
 
   private
+
   def can_have_many_recipients?
     accountable_type == 'Documents::OfficialMail'
   end

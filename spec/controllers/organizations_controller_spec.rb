@@ -5,7 +5,7 @@ describe OrganizationsController do
 
   def valid_attributes
     { organization: {
-        title: Faker::Lorem.sentence,
+      title: Faker::Lorem.sentence,
     }
     }
   end
@@ -26,9 +26,9 @@ describe OrganizationsController do
 
   context 'POST create' do
     it 'new object Organization' do
-      expect {
+      expect do
         post :create, valid_attributes
-      }.to change(Organization, :count).by(1)
+      end.to change(Organization, :count).by(1)
     end
     it 'redirect' do
       post :create, valid_attributes
@@ -54,7 +54,7 @@ describe OrganizationsController do
   end
 
   context 'GET show' do
-    #let!(:organization) { Organization.make! }
+    # let!(:organization) { Organization.make! }
     it 'response status and template with decorator' do
       get :show, id: organization.id
       assigns(:organization).should be_decorated_with Organizations::ShowDecorator
@@ -68,24 +68,23 @@ describe OrganizationsController do
 
   context 'PUT update' do
     it 'assigns the requested organization as @organization' do
-      put :update, id: organization.id, organization: {title: 'new title'}
+      put :update, id: organization.id, organization: { title: 'new title' }
       assigns(:organization).title.should eq('new title')
     end
     it 'redirect' do
-      put :update, id: organization.id, organization: {title: 'new title'}
+      put :update, id: organization.id, organization: { title: 'new title' }
       response.should redirect_to(edit_organization_path(organization.id))
     end
 
   end
 
-
   context 'DELETE destroy' do
     it 'destroy organization' do
-      expect { delete :destroy, {id: organization.id}
-      }.to change(Organization, :count).by(-1)
+      expect do delete :destroy, id: organization.id
+      end.to change(Organization, :count).by(-1)
     end
     it 'redirect' do
-      delete :destroy, {id: organization.id}
+      delete :destroy, id: organization.id
       response.should redirect_to(organizations_path)
     end
   end

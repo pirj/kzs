@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-
 describe Admin::GroupsController do
   before { pending }
   render_views
   def valid_attributes
     { group: {
-        title: 'title_new'
+      title: 'title_new'
     }
     }
   end
-  let!(:group) { Group.make!}
-  let!(:user) { User.make!(sys_user: true)}
+  let!(:group) { Group.make! }
+  let!(:user) { User.make!(sys_user: true) }
   before :each do
     sign_in(user)
   end
@@ -32,8 +31,8 @@ describe Admin::GroupsController do
 
   context 'POST create' do
     it 'new object Group' do
-      expect { post :create, valid_attributes
-      }.to change(Group, :count).by(1)
+      expect do post :create, valid_attributes
+      end.to change(Group, :count).by(1)
     end
     it 'redirect' do
       post :create, valid_attributes
@@ -59,23 +58,22 @@ describe Admin::GroupsController do
 
   context 'PUT update' do
     it 'assigns the requested group as @group' do
-      put :update, id: group.id, group: {title: 'title_new'}
+      put :update, id: group.id, group: { title: 'title_new' }
       assigns(:group).title.should eq('title_new')
     end
     it 'redirect' do
-      put :update, id: group.id, group: {title: 'title_new'}
+      put :update, id: group.id, group: { title: 'title_new' }
       response.should redirect_to(admin_group_path(group.id))
     end
   end
 
-
   context 'DELETE destroy' do
     it 'destroy group' do
-      expect { delete :destroy, {id: group.id}
-      }.to change(Group, :count).by(-1)
+      expect do delete :destroy, id: group.id
+      end.to change(Group, :count).by(-1)
     end
     it 'redirect' do
-      delete :destroy, {id: group.id}
+      delete :destroy, id: group.id
       response.should redirect_to(admin_groups_path)
     end
   end

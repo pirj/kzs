@@ -1,7 +1,7 @@
 ## fun coding: UTF-8
-#require 'machinist/active_record'
+# require 'machinist/active_record'
 #
-#Organization.blueprint do
+# Organization.blueprint do
 #  director = User.make!
 #  accountant = User.make!
 #  admin = User.make!
@@ -10,9 +10,9 @@
 #  director_id {director.id}
 #  accountant_id {accountant.id}
 #  admin_id {admin.id}
-#end
+# end
 #
-#User.blueprint do
+# User.blueprint do
 #  organization = Organization.make!
 #  pwd = Faker::Lorem.characters(9)
 #  username { Faker::Lorem.word }
@@ -24,47 +24,47 @@
 #  last_name { Faker::Lorem.word }
 #  middle_name { Faker::Lorem.word }
 #  position { Faker::Lorem.word }
-#end
+# end
 #
-#Group.blueprint do
+# Group.blueprint do
 #  title {Faker::Lorem.sentence}
-#end
+# end
 #
-#Organization.blueprint do
+# Organization.blueprint do
 #  title {Faker::Lorem.sentence}
-#end
+# end
 #
-#Permit.blueprint do
+# Permit.blueprint do
 #  number {Faker::Number.number(100)}
 #  permit_type {'vehicle' or 'user'}
 #  start_date { Date.today }
 #  expiration_date { Date.today + 5.days }
-#end
+# end
 #
-#Vehicle.blueprint do
+# Vehicle.blueprint do
 #  sn_number { 111 }
 #  first_letter { 'A' }
 #  second_letter { 'B' }
 #  third_letter { 'C' }
-#end
+# end
 #
-#CarRegion.blueprint do
+# CarRegion.blueprint do
 #  # Attributes here
-#end
+# end
 #
-#Document.blueprint do
+# Document.blueprint do
 #  title {Faker::Lorem.sentence}
 #  body {Faker::Lorem.paragraph}
 #  sender_organization { Organization.make! }
 #  recipient_organization { Organization.make! }
 #  approver {User.make!}
 #  executor {User.make!}
-#end
+# end
 #
-#Documents::OfficialMail.blueprint do
+# Documents::OfficialMail.blueprint do
 #  document
 #  recipients(3)
-#end
-#OrdersConversation.blueprint do
+# end
+# OrdersConversation.blueprint do
 #  # Attributes here
-#end
+# end

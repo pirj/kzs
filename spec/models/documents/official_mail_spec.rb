@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe Documents::OfficialMail do
   context 'common document interface' do
-    subject{ build(:mail) }
-    it("#title should respond"){ expect{subject.title}.to_not raise_error }
-    it("#body should respond"){ expect{subject.body}.to_not raise_error }
-    it("#recipient_organization should respond"){ expect{subject.recipient_organization}.to_not raise_error }
-    it("#sender_organziation should respond"){ expect{subject.sender_organization}.to_not raise_error }
+    subject { build(:mail) }
+    it("#title should respond") { expect { subject.title }.to_not raise_error }
+    it("#body should respond") { expect { subject.body }.to_not raise_error }
+    it("#recipient_organization should respond") { expect { subject.recipient_organization }.to_not raise_error }
+    it("#sender_organziation should respond") { expect { subject.sender_organization }.to_not raise_error }
   end
 
   context 'without recipients' do
-    subject { build(:mail)}
+    subject { build(:mail) }
     it { should_not be_valid }
   end
 
@@ -25,32 +25,31 @@ describe Documents::OfficialMail do
   end
 
   context 'mail multiplication' do
-    let(:mail){ create(:mail_with_many_recipients) }
+    let(:mail) { create(:mail_with_many_recipients) }
     before { mail.transition_to!(:prepared) }
-
 
     context 'when being approved' do
       it 'should create additional mail records' do
         recipients_count = mail.recipients.count
         incrementation = recipients_count - 1
-        expect{mail.transition_to!(:approved)}.to change{Documents::OfficialMail.count}.by(incrementation)
+        expect { mail.transition_to!(:approved) }.to change { Documents::OfficialMail.count }.by(incrementation)
       end
 
       it 'should create additional transactions' do
         transition_count = mail.document_transitions.count
         recipients_count = mail.recipients.count
         incrementation = (transition_count * (recipients_count - 1) + recipients_count)
-        expect{mail.transition_to!(:approved)}.to change{DocumentTransition.count}.by(incrementation)
+        expect { mail.transition_to!(:approved) }.to change { DocumentTransition.count }.by(incrementation)
       end
     end
 
     context 'after transition' do
-      before{ mail.transition_to!(:approved)}
+      before { mail.transition_to!(:approved) }
 
       context 'original mail' do
-        subject{mail}
-        its(:serial_number){should_not be_nil}
-        its(:approved_at){should_not be_nil}
+        subject { mail }
+        its(:serial_number) { should_not be_nil }
+        its(:approved_at) { should_not be_nil }
       end
 
       it 'should assign timestamp to all cloned documents' do
@@ -69,8 +68,8 @@ describe Documents::OfficialMail do
     let(:reply) { FactoryGirl.create(:approved_mail) }
     let(:some_approved) { FactoryGirl.create(:approved_mail) }
     let(:reply_approved_not_sent) { FactoryGirl.create(:approved_mail) }
-    let(:sndr) { FactoryGirl.create(:simple_organization)}
-    let(:rsvr) { FactoryGirl.create(:simple_organization)}
+    let(:sndr) { FactoryGirl.create(:simple_organization) }
+    let(:rsvr) { FactoryGirl.create(:simple_organization) }
     let(:conversation) { DocumentConversation.create! }
 
     before do
@@ -86,8 +85,6 @@ describe Documents::OfficialMail do
       reply_approved_not_sent.sender_organization = rsvr
       reply_approved_not_sent.recipient_organization = sndr
       reply_approved_not_sent.save!
-
-
 
       conversation.official_mails << [initial, reply, reply_approved_not_sent]
     end

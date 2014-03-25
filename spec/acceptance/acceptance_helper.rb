@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'database_cleaner'
 require 'capybara/poltergeist'
 
-
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
@@ -26,7 +25,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
@@ -38,11 +37,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-
   config.include Features::SelectDatesAndTimesHelper, type: :feature
   config.include Features::SessionsHelper, type: :feature
   config.include Features::ChosenHelper, type: :feature
-
 
   # autosave errors screenshots
   # source http://viget.com/extend/auto-saving-screenshots-on-test-failures-other-capybara-tricks
@@ -61,5 +58,3 @@ RSpec.configure do |config|
   end
 
 end
-
-

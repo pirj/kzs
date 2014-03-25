@@ -33,7 +33,20 @@ class Documents::ReportsController < ResourceController
         report.recipient_organization = report.order.sender_organization
       end
     end
-    super
+
+    if @report.save
+
+      # TODO: This should go away on the next round
+      if @report.order
+        story = Documents::History.new(@report.order)
+        story.add_by_accountable(@report)
+      end
+
+      resource.transition_to!(params[:transition_to], default_metadata)
+      redirect_to documents_path
+    else
+      render action: 'new'
+    end
   end
 
   def update

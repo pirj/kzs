@@ -4,6 +4,7 @@ AllCops:
   Excludes:
     - app/pdfs/**
     - script/**
+    - spec/**
     - public/**
     - config/**
     - db/**

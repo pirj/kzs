@@ -13,23 +13,32 @@ class Documents::OfficialMailsController < ResourceController
    # TODO: @prikha Move to another controller
   # rubocop:disable LineLength
   def reply
-    @parent_official_mail = end_of_association_chain.find(params[:id])
-
-    unless @parent_official_mail.conversation
-      @parent_official_mail.create_conversation
-      @parent_official_mail.save!
-    end
-
-    conversation = @parent_official_mail.conversation
-
+    @parent_mail = end_of_association_chain.find(params[:id])
     @official_mail = end_of_association_chain.new.tap do |mail|
-      mail.conversation_id = conversation.id
       mail.build_document.tap do |doc|
-        doc.recipient_organization = @parent_official_mail.sender_organization
+        doc.recipient_organization = @parent_mail.sender_organization
       end
     end
   end
   # rubocop:enable LineLength
+
+  def create_reply
+    @parent_mail = end_of_association_chain.find(params[:id])
+    @official_mail =
+        Documents::OfficialMail.new(attributes).tap do |mail|
+          mail.sender_organization = current_organization
+          mail.creator = current_user
+          mail.executor ||= current_user
+        end
+    if @parent_mail.save
+        story = Documents::History.new(@parent_mail)
+        story.add_by_accountable @official_mail
+        resource.transition_to!(params[:transition_to], default_metadata)
+        redirect_to documents_path
+    else
+      render action: 'reply'
+    end
+  end
 
   def show
     show! { @official_mail = Documents::ShowDecorator.decorate(resource) }
@@ -56,11 +65,12 @@ class Documents::OfficialMailsController < ResourceController
 
   def history
     @history ||=
-        Documents::ListDecorator.decorate mail_history,
+        Documents::ListDecorator.decorate history_scope,
                                           with: Documents::ListShowDecorator
   end
 
-  def mail_history
-    resource.history_for(current_organization.id)
+  def history_scope
+    story = Documents::History.new(resource)
+    story.fetch_documents_for current_organization
   end
 end

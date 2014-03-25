@@ -15,10 +15,10 @@ describe Documents::OfficialMailsController do
     sign_in user
   end
   describe 'open unread mail' do
-    let(:mail){
+    let(:mail)do
       FactoryGirl.create(:mail_with_direct_recipient)
-    }
-    let(:inbox_mail){
+    end
+    let(:inbox_mail)do
       inbox_mail = FactoryGirl.build(:mail)
       inbox_mail.recipient_organization = organization
       inbox_mail.save!
@@ -26,17 +26,18 @@ describe Documents::OfficialMailsController do
       inbox_mail.transition_to!(:approved)
       inbox_mail.transition_to!(:sent)
       inbox_mail
-    }
+    end
 
     describe('GET mail') do
       it('sould be 200') do
         visit documents_official_mail_path(mail)
+
         response.status.should eq 200
       end
-      xit('should mark mail as read for current user'){
+      xit('should mark mail as read for current user')do
         visit documents_official_mail_path(inbox_mail)
         inbox_mail.unread?(user).should be_false
-      }
+      end
     end
   end
 end

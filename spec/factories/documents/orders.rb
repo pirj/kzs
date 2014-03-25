@@ -17,10 +17,9 @@ FactoryGirl.define do
       instance.creator = user
     end
 
-    after(:create) do |instance,ev|
+    after(:create) do |instance, ev|
       instance.transition_to!('draft')
     end
-
 
     factory :order_with_attachments do
       after(:create) do |instance, ev|

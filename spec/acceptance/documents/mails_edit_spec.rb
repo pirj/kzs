@@ -2,11 +2,11 @@
 
 require 'acceptance/acceptance_helper'
 
-feature "Users review mails", %q{} do
+feature "Users review mails", %q() do
 
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { user.organization }
-  let!(:users) { 5.times.map{ create(:user, organization: organization ) } }
+  let!(:users) { 5.times.map { create(:user, organization: organization) } }
   let(:recipient_user) { mail.recipient_organization.admin }
   let(:sender_user) { mail.sender_organization.admin }
   let!(:mail) { FactoryGirl.create(:mail_with_many_recipients) }

@@ -42,13 +42,13 @@
           = link_to documents_path(with_state:'approved') do
             | Утвержденные
         li
-          = link_to documents_path(with_state:'mails') do
+          = link_to documents_path(with_type:'mails') do
             | Письма
         li
-          = link_to documents_path(with_state:'orders') do
+          = link_to documents_path(with_type:'orders') do
             | Распоряжения
         li
-          = link_to documents_path(with_state:'reports') do
+          = link_to documents_path(with_type:'reports') do
             | Акты
 
 

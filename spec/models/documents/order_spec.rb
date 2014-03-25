@@ -32,10 +32,14 @@ describe Documents::Order do
   describe('#history_for') do
     let(:initial_order) { FactoryGirl.create(:approved_order) }
     let(:reply) { FactoryGirl.create(:approved_order) }
+
     let(:some_approved) { FactoryGirl.create(:approved_order) }
+
     let(:reply_approved_not_sent) { FactoryGirl.create(:approved_order) }
-    let(:sndr) { FactoryGirl.create(:simple_organization)}
-    let(:rsvr) { FactoryGirl.create(:simple_organization)}
+
+    let(:sndr) { FactoryGirl.create(:simple_organization) }
+    let(:rsvr) { FactoryGirl.create(:simple_organization) }
+
     let(:conversation) { OrdersConversation.create! }
 
     before do
@@ -52,8 +56,6 @@ describe Documents::Order do
       reply_approved_not_sent.recipient_organization = sndr
       reply_approved_not_sent.save!
 
-
-
       conversation.orders << [initial_order, reply, reply_approved_not_sent]
     end
 
@@ -66,10 +68,7 @@ describe Documents::Order do
     it { should_not include reply_approved_not_sent }
   end
 
-
-
   describe 'should have at least 1 task' do
-
 
     context 'empty tasks' do
       it 'should not be valid' do
@@ -92,6 +91,5 @@ describe Documents::Order do
       end
     end
   end
-
 
 end

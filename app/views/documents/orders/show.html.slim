@@ -71,4 +71,4 @@
   - css_class = 'simple-hide' unless resource.tasks.count == resource.tasks.completed.count
   = link_to 'Создать Акт', new_documents_report_path(order_id: resource.id), class: "btn btn-primary js-orders-new-report-btn #{css_class}"
 
-  = render 'documents/documents/table', collection: structured_history
+  = render 'documents/documents/table', collection: history

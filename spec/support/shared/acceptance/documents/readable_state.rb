@@ -21,7 +21,7 @@ shared_examples_for 'readable_state' do
 
       it 'should render sender-state name' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content /Отправлен/
+          expect(page).to have_content(/Отправлен/)
         end
       end
     end
@@ -35,7 +35,7 @@ shared_examples_for 'readable_state' do
 
       it 'should render recipient-state name' do
         within '.spec-doc-state-field' do
-          expect(page).to have_content /Получен/
+          expect(page).to have_content(/Получен/)
         end
       end
     end

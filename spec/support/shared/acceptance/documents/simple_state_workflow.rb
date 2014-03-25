@@ -43,5 +43,5 @@ shared_examples_for 'simple_state_workflow' do
       end
     end
   end
-  
+
 end

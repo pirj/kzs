@@ -33,8 +33,8 @@ Kzs::Application.routes.draw do
     resources :official_mails, path: 'mails' do
       member do
         get 'reply'
+        post 'reply', to: :create_reply
         get 'assign_state'
-        get 'copy'
       end
 
       # Приложенные документы
@@ -46,8 +46,8 @@ Kzs::Application.routes.draw do
     resources :orders, except: 'index' do
       member do
         get 'assign_state'
-        get 'copy'
         get 'reject'
+        post 'reject', to: :reject_create
       end
 
       # Приложенные документы
@@ -59,7 +59,6 @@ Kzs::Application.routes.draw do
     resources :reports, except: 'index' do
       member do
         get 'assign_state'
-        get 'copy'
       end
 
       # Приложенные документы

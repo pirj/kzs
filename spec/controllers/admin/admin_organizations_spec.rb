@@ -1,17 +1,16 @@
 require 'spec_helper'
 
-
 describe Admin::OrganizationsController do
   before { pending }
   render_views
   def valid_attributes
     { organization: {
-        title: 'title_new'
+      title: 'title_new'
     }
     }
   end
-  let!(:organization) { Organization.make!}
-  let!(:user) { User.make!(sys_user: true)}
+  let!(:organization) { Organization.make! }
+  let!(:user) { User.make!(sys_user: true) }
   before :each do
     sign_in(user)
   end
@@ -32,8 +31,8 @@ describe Admin::OrganizationsController do
 
   context 'POST create' do
     it 'new object Organization' do
-      expect { post :create, valid_attributes
-      }.to change(Organization, :count).by(1)
+      expect do post :create, valid_attributes
+      end.to change(Organization, :count).by(1)
     end
     it 'redirect' do
       post :create, valid_attributes
@@ -59,23 +58,22 @@ describe Admin::OrganizationsController do
 
   context 'PUT update' do
     it 'assigns the requested organization as @organization' do
-      put :update, id: organization.id, organization: {title: 'title_new'}
+      put :update, id: organization.id, organization: { title: 'title_new' }
       assigns(:organization).title.should eq('title_new')
     end
     it 'redirect' do
-      put :update, id: organization.id, organization: {title: 'title_new'}
+      put :update, id: organization.id, organization: { title: 'title_new' }
       response.should redirect_to(admin_organization_path(organization.id))
     end
   end
 
-
   context 'DELETE destroy' do
     it 'destroy organization' do
-      expect { delete :destroy, {id: organization.id}
-      }.to change(Organization, :count).by(-1)
+      expect do delete :destroy, id: organization.id
+      end.to change(Organization, :count).by(-1)
     end
     it 'redirect' do
-      delete :destroy, {id: organization.id}
+      delete :destroy, id: organization.id
       response.should redirect_to(admin_organizations_path)
     end
   end

@@ -1,6 +1,6 @@
 require 'acceptance/acceptance_helper'
 
-feature "Users view states for Report", %q{} do
+feature "Users view states for Report", %q() do
   let(:document) { FactoryGirl.create(:report) }
   let(:user) { FactoryGirl.create(:user) }
   let(:recipient_user) { document.recipient_organization.admin }

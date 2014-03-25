@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature "Users review order", %q{} do
+feature "Users review order", %q() do
 
   let!(:order) { FactoryGirl.create(:order) }
   let(:user) { FactoryGirl.create(:user) }

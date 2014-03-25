@@ -1,6 +1,5 @@
 FactoryGirl.define do
- factory :report, class: Documents::Report do
-
+  factory :report, class: Documents::Report do
     title 'title'
     body 'body'
 
@@ -16,9 +15,8 @@ FactoryGirl.define do
       instance.creator = user
     end
 
-    after(:create) do |instance,ev|
+    after(:create) do |instance, ev|
       instance.transition_to!('draft')
     end
-
   end
 end

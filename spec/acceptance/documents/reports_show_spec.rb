@@ -2,12 +2,11 @@
 
 require 'acceptance/acceptance_helper'
 
-feature "Users review reports", %q{} do
+feature "Users review reports", %q() do
 
   let(:user) { order.recipient_organization.admin }
   let!(:order) { FactoryGirl.create(:order) }
   let(:path) {  new_documents_report_path(report) }
-
 
   describe 'form fill add fields and save report', js: true do
     let(:path) { new_documents_report_path }
@@ -38,7 +37,7 @@ feature "Users review reports", %q{} do
       expect { click_button 'Подготовить' }.to_not change(Documents::Report, :count)
       expect(current_path).to_not eq(new_documents_report_path)
       expect(page).to have_content 'не может быть пустым'
-      #save_and_open_page
+      # save_and_open_page
     end
   end
 end

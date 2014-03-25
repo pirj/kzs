@@ -6,11 +6,11 @@ describe Admin::UsersController do
   render_views
   def valid_attributes
     { user: {
-        username: 'username_new'
+      username: 'username_new'
       }
     }
   end
-  let!(:user) { User.make!(sys_user: true)}
+  let!(:user) { User.make!(sys_user: true) }
   before :each do
     sign_in(user)
   end
@@ -31,8 +31,8 @@ describe Admin::UsersController do
 
   context 'POST create' do
     it 'new object User' do
-      expect { post :create, valid_attributes
-      }.to change(User, :count).by(1)
+      expect do post :create, valid_attributes
+      end.to change(User, :count).by(1)
     end
     it 'redirect' do
       post :create, valid_attributes
@@ -58,23 +58,22 @@ describe Admin::UsersController do
 
   context 'PUT update' do
     it 'assigns the requested group as @group' do
-      put :update, id: user.id, user: {first_name: 'Andrey'}
+      put :update, id: user.id, user: { first_name: 'Andrey' }
       assigns(:user).first_name.should eq('Andrey')
     end
     it 'redirect' do
-      put :update, id: user.id, user: {first_name: 'Andrey'}
+      put :update, id: user.id, user: { first_name: 'Andrey' }
       response.should redirect_to(admin_user_path(user.id))
     end
   end
 
-
   context 'DELETE destroy' do
     it 'destroy group' do
-      expect { delete :destroy, {id: user.id}
-      }.to change(User, :count).by(-1)
+      expect do delete :destroy, id: user.id
+      end.to change(User, :count).by(-1)
     end
     it 'redirect' do
-      delete :destroy, {id: user.id}
+      delete :destroy, id: user.id
       response.should redirect_to(admin_users_path)
     end
   end

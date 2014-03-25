@@ -1,6 +1,6 @@
 require 'acceptance/acceptance_helper'
 
-feature "Users view states for Official Mail", %q{} do
+feature "Users view states for Official Mail", %q() do
   let!(:document) { FactoryGirl.create(:mail_with_many_recipients) }
   let(:user) { FactoryGirl.create(:user) }
   let(:recipient_user) { document.recipient_organization.admin }
