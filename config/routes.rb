@@ -30,7 +30,7 @@ Kzs::Application.routes.draw do
       get 'history', on: :member
     end
 
-    resources :official_mails, path: 'mails' do
+    resources :official_mails, path: 'mails', except: 'index' do
       member do
         get 'reply'
         post 'reply', to: :create_reply
