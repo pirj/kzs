@@ -3,6 +3,7 @@ module Documents
   class BaseDecorator < Draper::Decorator
     delegate_all
     decorates :document
+    delegate :document
 
     LABEL_COL_WIDTH = 3
 

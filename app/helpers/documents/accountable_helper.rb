@@ -19,7 +19,7 @@ module Documents::AccountableHelper
 
   def change_state_link_to resource, state, options={}
     d_doc = Documents::StateDecorator.decorate resource
-    doc = resource.respond_to?(:document) ? resource.document : doc
+    doc = resource.respond_to?(:document) ? resource.document : resource
 
     link_to d_doc.to_humanize_state(state),
             batch_documents_documents_path(state: state, document_ids: [doc.id]),

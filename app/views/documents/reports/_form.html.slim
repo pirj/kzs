@@ -41,7 +41,7 @@
     = doc.input :title
     = doc.input :body, input_html: { rows: 7 }
 
-    = render 'documents/application/attached_file_form', f: f
+    = render 'documents/application/attached_files_and_documents', f: f, resource: resource
 
   .form-group
     .col-sm-offset-2.col-sm-10
