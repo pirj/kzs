@@ -13,8 +13,8 @@ module Documents
     accepts_nested_attributes_for :task_list, allow_destroy: true
 
     validates :deadline, timeliness: {
-        on_or_after: -> { DateTime.now + 3.days },
-        type: :date
+      on_or_after: -> { DateTime.now + 3.days },
+      type: :date
     }
 
     def state_machine

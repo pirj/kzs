@@ -10,7 +10,6 @@
 
   = render 'documents/application/error_label', resource: resource
 
-  = f.input :conversation_id, as: :hidden
   = f.simple_fields_for :document  do |doc|
     .form-group
       .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее документ в системе' ]

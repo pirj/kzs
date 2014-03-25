@@ -66,7 +66,7 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
-  before_destroy {|document| document.conformers.clear}
+  before_destroy { |document| document.conformers.clear }
 
   validates_presence_of :title,
                         :sender_organization_id,
@@ -74,31 +74,37 @@ class Document < ActiveRecord::Base
                         :executor_id,
                         :body
 
-  validates_presence_of :recipient_organization, unless: :can_have_many_recipients?
+  validates_presence_of :recipient_organization,
+                        unless: :can_have_many_recipients?
 
   # New Scopes
   scope :lookup, lambda { |query|
     joins(:sender_organization, :recipient_organization)
-    .where { title.matches("%#{query}%") | serial_number.matches("%#{query}%") | sender_organization.short_title.matches("%#{query}%") | recipient_organization.short_title.matches("%#{query}%") }
+    .where do
+      title.matches("%#{query}%") |
+      serial_number.matches("%#{query}%") |
+      sender_organization.short_title.matches("%#{query}%") |
+      recipient_organization.short_title.matches("%#{query}%")
+    end
   }
 
-
-  #Scope by state
+  # Scope by state
   scope :draft,    -> { where(state: 'draft') }
   scope :prepared,  -> { where(state: 'prepared') }
   scope :approved,  -> { where(state: 'approved') }
 
-  scope :not_draft, -> { where{ state.not_eq('draft') } }
+  scope :not_draft, -> { where { state.not_eq('draft') } }
 
-  #Scope by type
+  # Scope by type
   scope :orders, -> { where(accountable_type: 'Documents::Order') }
   scope :mails,  -> { where(accountable_type: 'Documents::OfficialMail') }
-  scope :reports,-> { where(accountable_type: 'Documents::Report') }
+  scope :reports, -> { where(accountable_type: 'Documents::Report') }
 
-  scope :visible_for,  ->(org_id){
+  scope :visible_for,  lambda { |org_id|
     where do
       sender_organization_id.eq(org_id) |
-      (recipient_organization_id.eq(org_id) & state.in(%w(sent accepted rejected)))
+      (recipient_organization_id.eq(org_id) &
+          state.in(%w(sent accepted rejected)))
     end
   }
 
@@ -106,12 +112,11 @@ class Document < ActiveRecord::Base
   scope :from, ->(org) { where(sender_organization_id: org) }
 
   # Means that document once passed through *sent* state
-  scope :passed_state, ->(state) {
+  scope :passed_state, lambda { |state|
     joins(:document_transitions)
     .where('document_transitions.to_state' => state)
   }
   scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
-
 
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
@@ -134,13 +139,13 @@ class Document < ActiveRecord::Base
 
   # title and unique-number together
   def unique_title
-    "#{Document.serial_number_for(self)} — #{self.title}"
+    "#{Document.serial_number_for(self)} — #{title}"
   end
 
   # TODO-justvitalius: please, get it ffrom here
   # actual methods for one instance of Model
   def single_applicable_actions
-    %w(edit) if %w(draft prepared).include?(self.accountable.current_state)
+    %w(edit) if %w(draft prepared).include?(accountable.current_state)
   end
 
   # only actual states which shows to user
@@ -193,7 +198,7 @@ class Document < ActiveRecord::Base
     pdf = Magick::Image.read("#{path}document_#{id}.pdf").first
     thumb = pdf.scale(400, 520)
 
-    Dir.mkdir(path) unless File.exists?(path)
+    Dir.mkdir(path) unless File.exist?(path)
     thumb.write "#{path}document_#{id}.png"
   end
 end

@@ -15,7 +15,6 @@
                   do |f|
 
   = render 'documents/application/error_label', resource: resource
-  = f.hidden_field :conversation_id
 
   = f.simple_fields_for :document  do |doc|
     .form-group
