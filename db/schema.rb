@@ -135,11 +135,6 @@ ActiveRecord::Schema.define(:version => 20140325135515) do
     t.datetime "updated_at",              :null => false
   end
 
-  create_table "document_conversations", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "document_relations", :force => true do |t|
     t.integer "document_id"
     t.integer "relational_document_id"
@@ -173,13 +168,20 @@ ActiveRecord::Schema.define(:version => 20140325135515) do
     t.datetime "approved_at"
     t.integer  "creator_id"
     t.datetime "read_at"
+    t.integer  "flow_id"
   end
 
   add_index "documents", ["accountable_id", "accountable_type"], :name => "index_documents_on_accountable_id_and_accountable_type", :unique => true
   add_index "documents", ["approver_id"], :name => "index_documents_on_approver_id"
   add_index "documents", ["executor_id"], :name => "index_documents_on_executor_id"
+  add_index "documents", ["flow_id"], :name => "index_documents_on_flow_id"
   add_index "documents", ["recipient_organization_id"], :name => "index_documents_on_recipient_organization_id"
   add_index "documents", ["sender_organization_id"], :name => "index_documents_on_sender_organization_id"
+
+  create_table "documents_flows", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "documents_users", :id => false, :force => true do |t|
     t.integer "document_id", :null => false
@@ -209,12 +211,9 @@ ActiveRecord::Schema.define(:version => 20140325135515) do
   end
 
   create_table "official_mails", :force => true do |t|
-    t.integer  "conversation_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
-
-  add_index "official_mails", ["conversation_id"], :name => "index_mails_on_conversation_id"
 
   create_table "official_mails_organizations", :id => false, :force => true do |t|
     t.integer "official_mail_id", :null => false
@@ -230,14 +229,6 @@ ActiveRecord::Schema.define(:version => 20140325135515) do
 
   create_table "orders", :force => true do |t|
     t.datetime "deadline"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "conversation_id"
-  end
-
-  add_index "orders", ["conversation_id"], :name => "index_orders_on_conversation_id"
-
-  create_table "orders_conversations", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
