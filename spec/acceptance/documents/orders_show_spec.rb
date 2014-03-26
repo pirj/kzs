@@ -99,18 +99,15 @@ feature "Users review order", %q() do
         sign_out_js
         sign_in_with recipient_user.email, 'password'
         visit path
+        all('.iCheck-helper').each do |i|
+          i.click
+        end
 
+        page.save_screenshot('/test_images/order.png', full: true)
         i = all('.spec-task-checkbox.disabled').count
 
         expect(all('.spec-task-checkbox').count).to_not eq(i)
 
-          ##n = 0
-        ##while i > 0
-        ##  #find('#task_list_tasks_attributes_'+n+'_completed').click
-        ##  n+=1
-        ##end
-        #
-        #save_and_open_page
 
       end
 
