@@ -1,3 +1,9 @@
+# Добавляет к Accountable приаттаченный документ mail_approved
+def add_attachment_to(accountable)
+  attachment = FactoryGirl.create(:mail_approved)
+  accountable.attached_documents << attachment.document
+end
+
 FactoryGirl.define do
   factory :mail, class: Documents::OfficialMail do
 
@@ -56,13 +62,16 @@ FactoryGirl.define do
       end
     end
 
-    # С приаттаченным mail_approved
+    # С приаттаченным 1 или более mail_approved
+    # Базовая factory - c одним
     factory :mail_with_attachment do
       recipient_organization
 
-      after(:create) do |instance,ev|
-        attachment = FactoryGirl.create(:mail_approved)
-        instance.attached_documents << attachment.document
+      after(:create) { |instance,ev| add_attachment_to instance }
+
+      # С двумя
+      factory :mail_with_two_attachments do
+        after(:create) { |instance,ev| add_attachment_to instance }        
       end
     end
   end
