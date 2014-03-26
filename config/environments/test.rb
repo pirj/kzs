@@ -33,5 +33,15 @@ Kzs::Application.configure do
   config.active_record.mass_assignment_sanitizer = :strict
 
   # Print deprecation notices to the stderr
-  config.active_support.deprecation = :stderr
+  config.active_support.deprecation = :stderr         #внесены изменения в тестовую среду! Раньше она не показывала js ошибки что порождало много неопределенностей в процессе тестирования!
+
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
+
+  # Sass options
+  config.sass.style = :expanded
+  config.sass.line = true
 end

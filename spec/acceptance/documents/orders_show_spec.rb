@@ -59,7 +59,7 @@ feature "Users review order", %q() do
         expect(current_path).to eq edit_documents_order_path(order)
       end
 
-      it 'should not edit with approved state' do
+      it 'should not edit with approved state, button new-report in hidden' do
         order.transition_to!(:draft)
         order.transition_to!(:prepared)
         order.transition_to!(:approved)
@@ -77,7 +77,7 @@ feature "Users review order", %q() do
     end
   end
 
-  describe 'correct user permissions' do
+  describe 'correct user permissions', :js => true  do
     context 'sender' do
       it 'must see tasks' do
         visit path
@@ -87,31 +87,47 @@ feature "Users review order", %q() do
 
       end
 
-      it 'not allows to manage tasks', :js => true  do
+      it 'not allows to manage tasks' do
         visit path
         i = all('.spec-task-checkbox.disabled').count
         expect(all('.spec-task-checkbox').count).to eq(i)
+        expect(all('.js-orders-new-report-btn.simple-hide').count).to eq(1)
       end
     end
 
     context 'recipient' do
-      it 'allows to manage tasks', :js => true  do
+
+      it 'allows to manage tasks, show button new-report ' do
+
+        order.transition_to!(:prepared)
+        order.transition_to!(:approved)
+        order.transition_to!(:sent)
+
         sign_out_js
+        #save_and_open_page
+        sleep 1
         sign_in_with recipient_user.email, 'password'
         visit path
         all('.iCheck-helper').each do |i|
           i.click
+          sleep 0.1
         end
 
-        page.save_screenshot('/test_images/order.png', full: true)
-        i = all('.spec-task-checkbox.disabled').count
 
-        expect(all('.spec-task-checkbox').count).to_not eq(i)
+        visit path
+        checked = all('.checked .spec-task-checkbox').count
+        disabled = all('.spec-task-checkbox.disabled').count
 
+        expect(all('.spec-task-checkbox').count).to eq(checked)
+        expect(all('.spec-task-checkbox').count).to eq(disabled)
+        expect(all('.js-orders-new-report-btn').count).to eq(1)
+        expect(all('.js-orders-new-report-btn.simple-hide').count).to eq(0)
 
       end
 
     end
+
+
 
   end
 

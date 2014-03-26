@@ -738,18 +738,18 @@ $component-offset-horizontal: 180px !default;
 
 // Container sizes
 // --------------------------------------------------
-
+$sidebar-width-closed:          90px !default;
 // Small screen / tablet
 $container-tablet:             ((720px + $grid-gutter-width)) !default;
-$container-sm:                 $container-tablet !default;
+$container-sm:                 $container-tablet - $sidebar-width-closed !default;
 
 // Medium screen / desktop
 $container-desktop:            ((940px + $grid-gutter-width)) !default;
-$container-md:                 $container-desktop !default;
+$container-md:                 $container-desktop - $sidebar-width-closed !default;
 
 // Large screen / wide desktop
 $container-large-desktop:      ((1100px + $grid-gutter-width)) !default;
-$container-lg:                 $container-large-desktop !default;
+$container-lg:                 $container-large-desktop - $sidebar-width-closed !default;
 
 
-$sidebar-width-closed:          70px !default;
+

@@ -6,9 +6,9 @@ Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
 
-  Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, js_errors: false)
-  end
+  #Capybara.register_driver :poltergeist do |app|
+  #  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  #end
 
   Capybara.ignore_hidden_elements = false
 
