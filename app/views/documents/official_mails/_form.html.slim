@@ -42,7 +42,7 @@
         = doc.label :confidential, class: 'control-label js-label-hint label-icon-hint', title: 'Этот документ прочтет только генеральные директор получателя или уполномоченные лица' do
           = doc.check_box :confidential
           span Конфиденциально
-    = doc.input :title
+    = doc.input :title, input_html: { maxlength: 255 }
     = doc.input :body, input_html: { rows: 6 }
 
 

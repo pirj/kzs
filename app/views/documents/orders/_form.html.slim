@@ -37,7 +37,7 @@
 
     = f.input :deadline, as: :datepicker, input_html: { class: 'js-deadline'}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой распоряжение должно быть исполнено'
 
-    = doc.input :title
+    = doc.input :title, input_html: { maxlength: 255 }
     = doc.input :body, input_html: { rows: 6 }
 
     = render 'documents/orders/task_list_form', f: f

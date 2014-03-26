@@ -38,7 +38,7 @@
     = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }, label_html: { title: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица' }, wrapper: :inline_hint
 
 
-    = doc.input :title
+    = doc.input :title, input_html: { maxlength: 255 }
     = doc.input :body, input_html: { rows: 7 }
 
     = render 'documents/application/attached_files_and_documents', f: f, resource: resource
