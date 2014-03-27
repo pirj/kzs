@@ -36,6 +36,12 @@
   &.label-sm{
     padding: .3em .75em;
   }
+
+  // text and icon relatives
+  span + .fa,
+  .fa + span{
+    padding-left: .3em;
+  }
 }
 
 // Colors

@@ -2,17 +2,29 @@
   .row
     - if defined? title
       h2.col-sm-12 = title
-    table.table.js-row-clickable.m-table-replacement
+    table.table.js-row-clickable.m-table-replacement.js-table-filter
       thead
-        tr
-          th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
-          th = t('documents.table.list_attrs.number_and_date')
-          th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
-          th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
-          th = resource_sortable 'title', t('documents.table.list_attrs.title')
-          th = t('documents.table.list_attrs.type')
-          th
-          th = t('documents.table.list_attrs.status')
+        = search_form_for @search,  url: documents_documents_path, \
+                                    html: { class: 'form-horizontal js-filter-form', data: {url: search_documents_documents_path } } \
+                                    do |f|
+          tr
+            th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
+            th = t('documents.table.list_attrs.number_and_date')
+            th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
+            th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
+            th = resource_sortable 'title', t('documents.table.list_attrs.title')
+            th = t('documents.table.list_attrs.type')
+            th
+            th
+              .label.label-sm.label-success.js-table-filter-label
+                span = t('documents.table.list_attrs.status')
+                span.fa.fa-filter
+          tr
+            th colspan=8
+              .js-table-filter-form
+                = f.select :state_cont_any, document_filter_states, {}, class: 'js-chosen', multiple: true
+                = f.submit
+
 
       tbody
         - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon]

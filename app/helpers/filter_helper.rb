@@ -26,4 +26,14 @@ module FilterHelper
         ['исключает', 'not_cont']
     ]
   end
+
+  def document_filter_states
+    # TODO: нельзя будет искать по прочитаным, потому что это не статус как таковой
+    [
+        ['черновик', 'draft'],
+        ['подготовлен', 'prepared'],
+        ['подписан', 'approved'],
+        ['отправлен', 'sent'],
+    ]
+  end
 end
