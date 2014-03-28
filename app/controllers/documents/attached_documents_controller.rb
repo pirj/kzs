@@ -54,7 +54,7 @@ class Documents::AttachedDocumentsController < ApplicationController
 
     attacher.confirm    
 
-    redirect_to polymorphic_path(document.accountable)
+    redirect_to polymorphic_path([:edit, document.accountable])
   end
 
 private
