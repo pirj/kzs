@@ -18,6 +18,7 @@ module Documents::AccountableController
 
         # Когда прикрепляем документы, то сохраняем данный документ в БД. Иначе как крепить файлы то???
         elsif params.has_key?(:attached_documents)
+          resource.transition_to!(:draft, default_metadata)
           redirect_to polymorphic_path([resource, :attached_documents])
         end
       end
