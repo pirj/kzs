@@ -1,0 +1,18 @@
+ru:
+  documents:
+    filter:
+      states:
+        draft: Черновик
+        prepared: Подготовлено
+        approved: Подписано
+        sent: Отправлено/Получено
+        trashed: Удалено
+        accepted: Исполнено
+        rejected: Отклонено
+
+      headers:
+        state: Фильтрация по статусу
+        recipient: Фильтрация по получателю
+        sender: Фильтрация по отправителю
+        title: Фильтрация по теме
+        document_type: Фильтрация по типу документа

@@ -5,25 +5,44 @@
     table.table.js-row-clickable.m-table-replacement.js-table-filter
       thead
         = search_form_for @search,  url: documents_documents_path, \
-                                    html: { class: 'form-horizontal js-filter-form', data: {url: search_documents_documents_path } } \
+                                    html: { class: 'form-horizontal', data: {url: search_documents_documents_path } } \
                                     do |f|
           tr
             th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
             th = t('documents.table.list_attrs.number_and_date')
             th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
             th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
-            th = resource_sortable 'title', t('documents.table.list_attrs.title')
+            th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
             th = t('documents.table.list_attrs.type')
             th
-            th
-              .label.label-sm.label-success.js-table-filter-label
+            th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
+              /- active_class = f.object.try(:state_cont_any).try(:blank?) ? '' : ' label-default'
+              /= f.object.try(:state_cont_any).blank?.inspect
+              /= active_class
+              /.label.label-sm.js-table-filter-activate-btn data-target='document-table-filter-state'
                 span = t('documents.table.list_attrs.status')
                 span.fa.fa-filter
+
+          / строки с самими элементами форм фильтра
           tr
-            th colspan=8
-              .js-table-filter-form
+            th.js-table-filter-form data-target='document-table-filter-state' colspan=8
+              h3 = t('documents.filter.headers.state')
+              .form-group
                 = f.select :state_cont_any, document_filter_states, {}, class: 'js-chosen', multiple: true
-                = f.submit
+              .btn-block
+                = f.submit 'Сохранить', class: 'btn btn-primary'
+                span или
+                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
+
+          tr
+            th.js-table-filter-form data-target='document-table-filter-title' colspan=8
+              h3 = t('documents.filter.headers.title')
+              .form-group
+                = f.text_field :title_cont, class: 'form-control'
+              .btn-block
+                = f.submit 'Сохранить', class: 'btn btn-primary'
+                span или
+                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
 
 
       tbody

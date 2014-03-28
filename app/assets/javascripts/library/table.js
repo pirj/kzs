@@ -18,7 +18,6 @@ $(document).ready(function(){
                 $('.js-info').show();
                 $(".js-more-info").hide();
 
-                console.log(elem)
                 elem.toggle();
              //   visible.show()
 
