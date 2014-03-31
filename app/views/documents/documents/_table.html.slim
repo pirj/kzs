@@ -10,8 +10,8 @@
           tr
             th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
             th = t('documents.table.list_attrs.number_and_date')
-            th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
-            th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
+            th = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
+            th = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
             th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
             th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
             th
@@ -43,6 +43,26 @@
               h3 = t('documents.filter.headers.title')
               .form-group
                 = f.select :accountable_type_cont_any, document_filter_document_types, {}, class: 'js-chosen', multiple: true
+              .btn-block
+                = f.submit 'Сохранить', class: 'btn btn-primary'
+                span или
+                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
+
+          tr
+            th.js-table-filter-form data-target='document-table-filter-sender-organization' colspan=8
+              h3 = t('documents.filter.headers.sender_organization')
+              .form-group
+                = f.select :sender_organization_id_in, document_filter_organizations, {}, class: 'js-chosen', multiple: true
+              .btn-block
+                = f.submit 'Сохранить', class: 'btn btn-primary'
+                span или
+                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
+
+          tr
+            th.js-table-filter-form data-target='document-table-filter-recipient-organization' colspan=8
+              h3 = t('documents.filter.headers.recipient_organization')
+              .form-group
+                = f.select :recipient_organization_id_in, document_filter_organizations, {}, class: 'js-chosen', multiple: true
               .btn-block
                 = f.submit 'Сохранить', class: 'btn btn-primary'
                 span или

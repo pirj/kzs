@@ -4,7 +4,9 @@ ru:
       list_attrs:
         number_and_date: '№/дата'
         sender_link: Отправитель
+        sender_organization: Отправитель
         recipient_link: Получатель
+        recipient_organization: Получатель
         title: Тема
         type: Тип
         attachment_icon: ''

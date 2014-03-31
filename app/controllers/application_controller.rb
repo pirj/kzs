@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_inbox
+  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_inbox, :organizations
 
   def access_denied(exception)
     redirect_to root_path, alert: t('access_denied')
@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
   def can_apply_state?(state, accountable)
     ability_name = ability_for(state)
     can?(ability_name, accountable)
+  end
+
+  def organizations
+    @all_organizations ||= Organization.order('short_title ASC')
   end
 
   # unless Rails.application.config.consider_all_requests_local
