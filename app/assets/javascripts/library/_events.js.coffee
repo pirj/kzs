@@ -103,6 +103,13 @@ $ ->
     popover.css('height': popover.height(), width: popover.width() )
   )
 
+  # popover-over
+
+  $('.js-popover-btn').on('click', ->
+    $('.js-popover').popover('destroy').filter(@).popover(html: true, animation: false).popover('show').trigger('document_state:show')
+  )
+
+
   # click on 'back' button
   $(document).on('click', '.js-document-state-back-link', ->
     $(@).closest('.popover').prev().popover('show').trigger('document_state:show')

@@ -864,7 +864,7 @@
 
 
 // arrow for dropdown menus
-@mixin arrow-top($color){
+@mixin arrow-top($color: white){
   border-bottom: $dropdown-arrow-width-base solid $color;
   border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
   border-right: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
