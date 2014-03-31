@@ -70,3 +70,11 @@
 .label-danger {
   @include label-variant($label-danger-bg);
 }
+
+.label-blue{
+  @include label-variant($color-sky-blue, #fff);
+}
+
+.label-gray{
+  @include label-variant($color-gray, #fff);
+}

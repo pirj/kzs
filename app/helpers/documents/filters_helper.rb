@@ -44,7 +44,7 @@ module Documents
 
     def document_filter_organizations
       organizations.map do |o|
-        [o.short_title, o.id]
+        [o.title, o.id]
       end
     end
 

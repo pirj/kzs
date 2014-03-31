@@ -12,7 +12,7 @@ module Documents
     # target
     def table_filter_caption(title, object, search_field, target)
       classes = 'label label-sm js-table-filter-activate-btn'
-      classes += ' label-default js-table-filter-filled-form' unless object.try(search_field.to_sym).blank?
+      classes += ' label-gray js-table-filter-filled-form' unless object.try(search_field.to_sym).blank?
       content_tag :div, class: classes, data: { target: target } do
         content_tag(:span, title) +
         content_tag(:span, nil, class: 'fa fa-filter')

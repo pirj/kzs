@@ -11,7 +11,7 @@
 }
 
 .link-danger{
-  @include btn-link-style($brand-danger, darken($brand-danger, 10%));
+  @include btn-link-style($color-red, $color-red-darker);
 }
 
 .link-dashed{

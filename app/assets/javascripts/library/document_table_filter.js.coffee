@@ -3,7 +3,8 @@ window.app.table_filter =
   table:
     btn: '.js-table-filter-activate-btn'
     filled_form: '.js-table-filter-filled-form'
-    filled_form_class: "js-table-filter-filled-form label-default"
+    filled_form_class: 'label-gray'
+    active_btn_class: 'label-blue'
 
   form:
     container: '.js-table-filter-form'
@@ -40,8 +41,9 @@ window.app.table_filter =
 
   # управляем стилями кнопок переключения поисковых форм
   toggle_activate_btns_style: (elem) ->
-    $(@.table.btn).not(elem).removeClass('label-success')
-    $(elem).toggleClass('label-success')
+    $(@.table.btn).not(elem).removeClass(@.table.active_btn_class)
+    $(elem).removeClass(@.table.filled_form_class)
+    $(elem).toggleClass(@.table.active_btn_class)
 
 
   toggle_status_bar: ->
@@ -61,10 +63,13 @@ window.app.table_filter =
       $inputs = $form.find('input, textarea, select').filter('[name*="q"]').not('input[type=submit]')
       # соеденим все заполненные значения вместе
       sum_vals = _.map($inputs, (input) -> $(input).val() ).join('')
+      $btn = @.find_activate_btn(form)
       # если хотя бы одно поле заполнено,то длина суммарного значения более 0
       if sum_vals.length > 0
-        $btn = @.find_activate_btn(form)
-        $btn.addClass(@.table.filled_form_class)
+        $btn.addClass("#{@.table.filled_form_class} #{@.table.filled_form}")
+      # если поля пустые, то убираем класс выбранных значений
+      else
+        $btn.removeClass("#{@.table.filled_form_class} #{@.table.filled_form}")
     )
 
   # очищаем инпуты внутри формы

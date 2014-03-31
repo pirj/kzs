@@ -48,9 +48,9 @@
   }
 }
 .text-danger {
-  color: $state-danger-text;
+  color: $color-red;
   &:hover {
-    color: darken($state-danger-text, 10%);
+    color: $color-red-darker;
   }
 }
 .text-success {
