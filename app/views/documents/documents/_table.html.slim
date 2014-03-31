@@ -1,42 +1,46 @@
-- unless collection.empty?
-  .row
-    - if defined? title
-      h2.col-sm-12 = title
-    table.table.js-row-clickable.m-table-replacement.js-table-filter
-      thead
-        = search_form_for @search,  url: documents_documents_path, \
-                                    html: { class: 'form-horizontal', data: {url: search_documents_documents_path } } \
-                                    do |f|
+.row
+  - if defined? title
+    h2.col-sm-12 = title
+  table.table.js-row-clickable.m-table-replacement.js-table-filter
+    thead
+      = search_form_for @search,  url: documents_documents_path, \
+                                  html: { class: 'form-horizontal', data: {url: search_documents_documents_path } } \
+                                  do |f|
+        tr
+          th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
+          th = t('documents.table.list_attrs.number_and_date')
+          th = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
+          th = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
+          th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
+          th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
+          th
+          th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
+
+        / строка со статусом фильтра показывается, только если применены настройки фильтра
+        - if @search.respond_to?(:conditions) && @search.try(:conditions).any?
           tr
-            th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
-            th = t('documents.table.list_attrs.number_and_date')
-            th = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
-            th = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
-            th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
-            th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
-            th
-            th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
+            th.js-table-filter-status-bar colspan=8
+              .btn-block.text-center
+                h3.text-heading-alt
+                  span.fa.fa-filter
+                  span Фильтр включен
+                = link_to 'изменить', '#', class: 'link link-muted js-table-filter-status-bar-change-btn'
+                = link_to 'сбросить', '#', class: 'link link-muted js-table-filter-status-bar-clear-btn'
 
-          / строка со статусом фильтра показывается, только если применены настройки фильтра
-          - if @search.respond_to?(:conditions) && @search.try(:conditions).any?
-            tr
-              th.js-table-filter-status-bar colspan=8
-                .btn-block.text-center
-                  h3.text-heading-alt
-                    span.fa.fa-filter
-                    span Фильтр включен
-                  = link_to 'изменить', '#', class: 'link link-muted js-table-filter-status-bar-change-btn'
-                  = link_to 'сбросить', '#', class: 'link link-muted js-table-filter-status-bar-clear-btn'
-
-          / строки с самими элементами форм фильтра
-          tr = table_filter_chosen f, 'sender_organization', :sender_organization_id_in, document_filter_organizations, 'document-table-filter-sender-organization'
-          tr = table_filter_chosen f, 'recipient_organization', :recipient_organization_id_in, document_filter_organizations, 'document-table-filter-recipient-organization'
-          tr = table_filter_text f, 'title', :title_cont, 'document-table-filter-title'
-          tr = table_filter_chosen f, 'document_type', :accountable_type_cont_any, document_filter_document_types, 'document-table-filter-document-type'
-          tr = table_filter_chosen f, 'state', :state_cont_any, document_filter_states, 'document-table-filter-state'
+        / строки с самими элементами форм фильтра
+        tr = table_filter_chosen f, 'sender_organization', :sender_organization_id_in, document_filter_organizations, 'document-table-filter-sender-organization'
+        tr = table_filter_chosen f, 'recipient_organization', :recipient_organization_id_in, document_filter_organizations, 'document-table-filter-recipient-organization'
+        tr = table_filter_text f, 'title', :title_cont, 'document-table-filter-title'
+        tr = table_filter_chosen f, 'document_type', :accountable_type_cont_any, document_filter_document_types, 'document-table-filter-document-type'
+        tr = table_filter_chosen f, 'state', :state_cont_any, document_filter_states, 'document-table-filter-state'
 
 
-      tbody
+    tbody
+      - if  collection.empty?
+        tr
+          td colspan=8
+            .text-center.text-important по заданным параметрам фильтрации документы не найдены
+      - else
         - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon]
         - collection.each do |resource|
           / simple row with short information
