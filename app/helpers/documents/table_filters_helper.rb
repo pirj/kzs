@@ -39,9 +39,13 @@ module Documents
 
     # обертка для ячейки таблицы. Внутрь помещаем элемент формы, параметры которого и отправляются на сервер
     def table_filter_wrapper(f, caption, target, &block)
-      content_tag :th, class: 'js-table-filter-form', data: { target: target }, colspan: 8 do
+      content_tag :th, class: 'js-table-filter-form form-horizontal', data: { target: target }, colspan: 8 do
         content_tag(:h3, t(caption, scope: 'documents.filter.headers')) +
-        yield +
+        content_tag(:div, class: 'form-group') do
+          content_tag(:div, class: 'col-sm-6') do
+            yield
+          end
+        end.html_safe +
         table_filter_buttons(f)
       end
     end
@@ -49,7 +53,7 @@ module Documents
 
     # кнопки в фильтровой форме
     def table_filter_buttons(f)
-      content_tag :div, class: 'btn-block' do
+      content_tag :div, class: 'btn-block b-offset-sm' do
         f.submit('Сохранить', class: 'btn btn-primary') +
         content_tag(:span, 'или') +
         link_to('сбросить', '#', class: 'link link-danger js-document-filter-clear-btn')
