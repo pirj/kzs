@@ -1,9 +1,6 @@
 class DocumentAttacher
   DOCUMENT_TYPES = [Documents::OfficialMail, Documents::Order, Documents::Report]
 
-  attr_reader :pending_attaches
-  attr_reader :pending_detaches
-
   def initialize object, session
     # Принимаем либо Document, либо любые Accountable
     unless is_accountable?(object) || object.kind_of?(Document)
@@ -39,6 +36,10 @@ class DocumentAttacher
       raise ArgumentError, "Document should be a number, or the one of the #{DOCUMENT_TYPES}, received #{object.class} instead"
     end
 
+    cleanup # Чистим pending_attaches и pending_detaches от элементов, которые больше не могут быть прикреплены/откреплены
+
+    raise RuntimeError, "Can't attach #{doc}" unless can_attach? id 
+
     # Если документ есть в списке на удаление - удаляем оттуда
     if @pending_detaches.include? id
       @pending_detaches.delete id
@@ -59,6 +60,10 @@ class DocumentAttacher
     else
       raise ArgumentError, "Document should be a number, or the one of the #{DOCUMENT_TYPES}, received #{object.class} instead"
     end
+
+    cleanup # Чистим pending_attaches и pending_detaches от элементов, которые больше не могут быть прикреплены/откреплены
+
+    raise RuntimeError, "Can't detach document with id ##{id}" unless can_detach? id
     
     attached_documents = @document.attached_documents
     attached_ids = attached_documents.map{|i| i.id.to_i}
@@ -77,6 +82,8 @@ class DocumentAttacher
   # Возвращает документы, доступные для аттача на текущем этапе (для пользователя)
   # TODO: @predetective Refactor to re-use attached_documents() method
   def attachable_documents
+    cleanup # Чистим pending_attaches и pending_detaches от элементов, которые больше не могут быть прикреплены/откреплены
+
     # Составляем список документов, которые будут показы пользователю как доступные для прикрепления, это:
     # - по-настоящему прикрепленные документы, если их нет в списке на удаление
     # - документы в списке на добавление
@@ -86,22 +93,28 @@ class DocumentAttacher
     excluded_ids.concat @pending_attaches
     excluded_ids << @document.id
     
-    # Кроме того, нужно исключить черновики и "подготовленные" документы
+    # Кроме того, нужно исключить черновики
     attachable_documents = Document
                               .where('id not in (?)', excluded_ids)
-                              .where('state not in (?)', ['draft','prepared'])
+                              .where('state <> \'draft\'')
   end
 
   # Возвращает список уже прикрепленных документов на текущем этапе (для пользователя)
   #  - по-настоящему прикрепленные (в БД) документы, если их нет в списке на удаление
   #  - документы в списке на добавление
   def attached_documents
+    cleanup # Чистим pending_attaches и pending_detaches от элементов, которые больше не могут быть прикреплены/откреплены
+    
     attached_documents = @real_attached_documents.to_a.map {|ad| ad unless @pending_detaches.include?(ad.id) }.compact
     attached_documents.concat Document.where('id in (?)', @pending_attaches )
   end
 
   # Актуализирует данные 
   def confirm
+    # Проверяем, есть ли в pending_attaches или pending_detaches элементы, с которыми нельзя сделать требуемую операцию
+    # Если есть - сразу очищаем
+    raise RuntimeError, "Some of the docs can't be attached ot detached" unless cleanup
+
     @document.attached_documents.delete(Document.where('id in (?)', @pending_detaches))
     @document.attached_documents.concat(Document.where('id in (?)', @pending_attaches))
   end
@@ -117,5 +130,46 @@ private
   def is_accountable? obj
     !!DOCUMENT_TYPES.map {|type| obj.kind_of? type}.index(true)
   end
+
+  # Приаттачить документ можно, если он существует и не черновик
+  def can_attach? id
+    return false unless Document.exists?(id)
+    doc = Document.find(id)
+    doc.state != 'draft'
+  end
+
+  # Отвязать можно любой существующий документ, если он приаттачен по-настоящему
+  def can_detach? id
+    return false unless Document.exists?(id)
+    doc = Document.find(id)
+
+    @document.attached_documents.include? doc
+  end
+
   
+  # Проходим по массивам @pending_attaches и @pending_detaches и убеждаемся,
+  # что каждый из элементов по прежнему пригоден для прикрепления/открепления
+  #
+  # Возвращает true, если после проверки чистка не потребовалась
+  # Возвращает false, если какие-то элементы пришлось почистить
+  def cleanup
+    cant_attach = []
+    cant_detach = []
+
+    @pending_attaches.each do |attach_id|
+      unless can_attach?(attach_id) 
+        @pending_attaches.delete(attach_id)
+        cant_attach << attach_id
+      end
+    end
+
+    @pending_detaches.each do |detach_id|
+      unless can_detach?(detach_id) 
+        @pending_detaches.delete(detach_id)
+        cant_detach << detach_id
+      end
+    end
+
+    cant_attach.empty? && cant_detach.empty? 
+  end
 end

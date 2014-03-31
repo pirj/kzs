@@ -1,7 +1,6 @@
 class Documents::AttachedDocumentsController < ApplicationController
   layout 'simple'
 
-
   def index
     document = get_document(params)
     @accountable = document.accountable
@@ -11,10 +10,6 @@ class Documents::AttachedDocumentsController < ApplicationController
     #   - удаляем все временные документы (которые пользователь мог добавить в прошлый раз, но не сохранить)
     #   - сбрасываем все метки на удаление (которые пользователь мог поставить в прошлый раз, но не сохранить)
     attacher.clear unless params[:continue]
-
-    # # УДАЛИТЬ
-    @to_attach = attacher.pending_attaches 
-    @to_detach = attacher.pending_detaches
 
     # Список текущих (предварительно прикрепленных) документов
     @attached_documents = attacher.attached_documents
@@ -36,6 +31,9 @@ class Documents::AttachedDocumentsController < ApplicationController
 
     # Редирект на index с меткой продолжения операции
     redirect_to polymorphic_path([document.accountable, :attached_documents], params: {continue: true})
+  rescue
+    flash[:error] = 'Не удалось прикрепить документ.'
+    redirect_to polymorphic_path([document.accountable, :attached_documents], params: {continue: true})
   end
 
   # На самом деле здесь ничего не удаляется, удаление будет происходить при подтверждении (action confirm)
@@ -46,6 +44,9 @@ class Documents::AttachedDocumentsController < ApplicationController
     attacher.detach params[:id].to_i
 
     redirect_to polymorphic_path([document.accountable, :attached_documents], params: {continue: true})
+  rescue
+    flash[:error] = 'Не удалось открепить документ.'
+    redirect_to polymorphic_path([document.accountable, :attached_documents], params: {continue: true})  
   end
 
   def confirm
@@ -55,6 +56,9 @@ class Documents::AttachedDocumentsController < ApplicationController
     attacher.confirm    
 
     redirect_to polymorphic_path([:edit, document.accountable])
+  rescue
+    flash[:error] = 'Некоторые документы не удалось прикрепить или открепить.'
+    redirect_to polymorphic_path([document.accountable, :attached_documents], params: {continue: true})  
   end
 
 private
