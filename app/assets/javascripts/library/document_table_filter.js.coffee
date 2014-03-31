@@ -27,14 +27,15 @@ window.app.table_filter =
 
 
   init_plugins: ->
-    $(@.container).find('.js-chosen').chosen(global.chosen)
-    $(@.container).find('.js-chosen-search').chosen(global.chosen_search)
+    $(@.container).find('.js-chosen').filter(':visible').chosen(global.chosen)
+    $(@.container).find('.js-chosen-search').filter(':visible').chosen(global.chosen_search)
 
 
 
 $ ->
   F = app.table_filter
 
+  # клик по кнопке «имя фильтра»
   $(document).on('click', F.table.btn, (e) =>
     e.preventDefault()
     $target = $(e.target).closest('.js-table-filter-activate-btn')
@@ -42,6 +43,7 @@ $ ->
     F.toggle_activate_btns_style($target)
   )
 
+  # клик по кнопке «очистить»
   $(document).on('click', F.form.clear_btn, (e) =>
     e.preventDefault()
     $target = $(e.target).closest('.js-table-filter-activate-btn')

@@ -40,7 +40,7 @@
 
           tr
             th.js-table-filter-form data-target='document-table-filter-document-type' colspan=8
-              h3 = t('documents.filter.headers.title')
+              h3 = t('documents.filter.headers.document_type')
               .form-group
                 = f.select :accountable_type_cont_any, document_filter_document_types, {}, class: 'js-chosen', multiple: true
               .btn-block
