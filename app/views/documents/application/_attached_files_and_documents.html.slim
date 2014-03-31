@@ -17,7 +17,9 @@ ul.nav.nav-pills
             span.fa.fa-plus-circle
             span Добавить документ
         - else
-          = link_to 'Добавить документ', polymorphic_path([resource, :attached_documents]), class: 'btn btn-big btn-mega-primary'
+          = link_to polymorphic_path([resource, :attached_documents]), class: 'btn btn-big btn-mega-primary' do
+            span.fa.fa-plus-circle
+            span Добавить документ
 
       .tab-pane#files
         = render 'documents/application/attached_file_form', f: f

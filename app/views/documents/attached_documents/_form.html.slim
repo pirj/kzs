@@ -1,6 +1,6 @@
 .spec-attached-documents
   /= f.object.attached_documents.inspect
-  = f.fields_for :document, wrapper: false do |doc_builder|
+  = f.simple_fields_for :document do |doc_builder|
     .fields-inline
       = doc_builder.simple_fields_for :attached_documents do |builder|
         ._document

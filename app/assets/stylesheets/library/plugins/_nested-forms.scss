@@ -1,10 +1,3 @@
-.fields {
-  @extend .b-offset-sm !optional;
-  &:empty{
-    margin-bottom: 0;
-  }
-}
-
 .fields-inline{
   .fields{
     display: inline;
