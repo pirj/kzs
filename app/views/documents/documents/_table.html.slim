@@ -1,6 +1,5 @@
+/ рисуем список документов с фильтрацией по столбцам
 .row
-  - if defined? title
-    h2.col-sm-12 = title
   table.table.js-row-clickable.m-table-replacement.js-table-filter
     thead
       = search_form_for @search,  url: documents_documents_path, \
@@ -39,7 +38,7 @@
       - if  collection.empty?
         tr
           td colspan=8
-            .text-center.text-important по заданным параметрам фильтрации документы не найдены
+            .text-center.text-important по заданным параметрам фильтрации документов нет
       - else
         - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon]
         - collection.each do |resource|
