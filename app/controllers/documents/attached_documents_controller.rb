@@ -1,3 +1,4 @@
+# coding: utf-8
 class Documents::AttachedDocumentsController < ApplicationController
   layout 'simple'
 
