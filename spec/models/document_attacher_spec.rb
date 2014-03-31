@@ -3,6 +3,7 @@ require 'spec_helper'
 describe DocumentAttacher do
   before :all do
     @session = {}
+    @user = FactoryGirl.create(:user)
   end
 
   it "shoud be able to clear the state" do
@@ -10,7 +11,7 @@ describe DocumentAttacher do
     existing_attachment = accountable.attached_documents.first
     attachment = FactoryGirl.create(:mail_approved)
 
-    attacher = DocumentAttacher.new(accountable, @session)
+    attacher = DocumentAttacher.new(accountable, @session, @user)
 
     attached_documents = attacher.attached_documents
     attachable_documents = attacher.attachable_documents
@@ -27,11 +28,11 @@ describe DocumentAttacher do
   context "on initialize" do
     it "should accept document/accountable and a session on initialize" do
       mail = FactoryGirl.create(:mail_with_direct_recipient)
-      expect {attacher = DocumentAttacher.new(mail, {})}.not_to raise_error
+      expect {attacher = DocumentAttacher.new(mail, {}, @user)}.not_to raise_error
     end
 
     it "should raise ArgumentError if document sent is not a document/accountable" do
-      expect {attacher = DocumentAttacher.new(1, {})}.to raise_error ArgumentError
+      expect {attacher = DocumentAttacher.new(1, {}, @user)}.to raise_error ArgumentError
     end
   end
 
@@ -39,16 +40,19 @@ describe DocumentAttacher do
     it "should be able to pre-attach approved document" do
       attachment = FactoryGirl.create(:mail_approved)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.attach attachment
 
       attacher.attached_documents.should include attachment.document
     end
 
+    xit "should not be able to attach the document, which is not visible to current user" do
+    end
+
     it "should not repeat attached document when attached single document several times" do
       attachment = FactoryGirl.create(:mail_approved).document
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
       3.times {attacher.attach attachment}
 
       attacher.attached_documents.should include attachment
@@ -63,7 +67,7 @@ describe DocumentAttacher do
       attachment_document_id = attachment.document.id
       Document.destroy(attachment_document_id)
 
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
 
       expect {attacher.attach attachment_document_id}.to raise_error
     end
@@ -72,7 +76,7 @@ describe DocumentAttacher do
       attachment = FactoryGirl.create(:mail_with_direct_recipient)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
 
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
 
       expect { attacher.attach attachment }.to raise_error
     end
@@ -83,7 +87,7 @@ describe DocumentAttacher do
       accountable = FactoryGirl.create(:mail_with_attachment)
       attachment = accountable.attached_documents.first
       
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.detach attachment
 
       attacher.attached_documents.should_not include attachment
@@ -95,7 +99,7 @@ describe DocumentAttacher do
       attachment = accountable.attached_documents.first
       attachment_id = attachment.id
       
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
 
       attachment.destroy
 
@@ -108,7 +112,7 @@ describe DocumentAttacher do
       attachment = FactoryGirl.create(:mail_approved)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
 
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.attach attachment
       attacher.confirm
 
@@ -119,7 +123,7 @@ describe DocumentAttacher do
       accountable = FactoryGirl.create(:mail_with_attachment)
       attachment = accountable.attached_documents.first
       
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.detach attachment
       attacher.confirm
 
@@ -131,7 +135,7 @@ describe DocumentAttacher do
       attachment2 = FactoryGirl.create(:mail_approved)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
       
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
 
       attacher.attach attachment
       attacher.attach attachment2
@@ -149,7 +153,7 @@ describe DocumentAttacher do
         accountable.attached_documents.last
       ]
       
-      attacher = DocumentAttacher.new(accountable, @session)
+      attacher = DocumentAttacher.new(accountable, @session, @user)
 
       attacher.detach existing_attachments[0]
       attacher.detach existing_attachments[1]
@@ -176,7 +180,7 @@ describe DocumentAttacher do
 
       draft = FactoryGirl.create(:mail_with_direct_recipient)
       
-      @attacher = DocumentAttacher.new(@accountable, @session)
+      @attacher = DocumentAttacher.new(@accountable, @session, @user)
       @attacher.detach existing_attachments[0]
       @attacher.attach new_attachments[0]
     end

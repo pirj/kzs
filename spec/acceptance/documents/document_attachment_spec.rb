@@ -12,7 +12,7 @@ feature "Users attach existed documents to creating document", %q{} do
 
   let!(:user) { document.sender_organization.admin }
 
-  let(:document) { FactoryGirl.create(:mail_with_attached_documents) }
+  let(:document) { FactoryGirl.create(:mail_with_two_attachments) }
   let(:document_attachments) { document.attached_documents }
   let(:attached_count) { document_attachments.count }
 

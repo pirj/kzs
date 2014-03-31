@@ -1,11 +1,14 @@
+# Wizard, прикрепляющий документы к документам
 class DocumentAttacher
   DOCUMENT_TYPES = [Documents::OfficialMail, Documents::Order, Documents::Report]
 
-  def initialize object, session
+  def initialize object, session, current_user
     # Принимаем либо Document, либо любые Accountable
     unless is_accountable?(object) || object.kind_of?(Document)
       raise ArgumentError, "Document should be one of #{DOCUMENT_TYPES}, received #{object.class} instead"
     end
+
+    @organization = current_user.organization
     
     # Внутри себя работаем с объектом класса Document, что бы не получили
     @document = is_accountable?(object) ? object.document : object
@@ -38,7 +41,7 @@ class DocumentAttacher
 
     cleanup # Чистим pending_attaches и pending_detaches от элементов, которые больше не могут быть прикреплены/откреплены
 
-    raise RuntimeError, "Can't attach #{doc}" unless can_attach? id 
+    raise RuntimeError, "Can't attach document with id ##{id}" unless can_attach? id 
 
     # Если документ есть в списке на удаление - удаляем оттуда
     if @pending_detaches.include? id
@@ -93,10 +96,10 @@ class DocumentAttacher
     excluded_ids.concat @pending_attaches
     excluded_ids << @document.id
     
-    # Кроме того, нужно исключить черновики
-    attachable_documents = Document
+    # Выбираем из видимых документов для организации, исключая ненужные id
+    attachable_documents = Document.visible_for(@organization)
+                              .not_draft
                               .where('id not in (?)', excluded_ids)
-                              .where('state <> \'draft\'')
   end
 
   # Возвращает список уже прикрепленных документов на текущем этапе (для пользователя)
@@ -134,6 +137,10 @@ private
   # Приаттачить документ можно, если он существует и не черновик
   def can_attach? id
     return false unless Document.exists?(id)
+    
+    # Также нужно ограничить прикрепление документов только видимыми из текущей организации,
+    # Пока отключено, т.к. тесты не заточены под это
+    # return false unless Document.visible_for(@organization).map {|d| d.id}.include? id
     doc = Document.find(id)
     doc.state != 'draft'
   end
