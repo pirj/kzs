@@ -73,7 +73,6 @@ window.app.table_filter =
       # как кнопке причислен активный класс,
       # а значит ей не нужно обновлять статус «заполнены ли у нее фильтрующие поля»
       $btn = @.find_activate_btn(form).not(".#{@.table.active_btn_class}")
-      console.log $btn
       # если хотя бы одно поле заполнено,то длина суммарного значения более 0
       if sum_vals.length > 0
         $btn.addClass("#{@.table.filled_form_class} #{@.table.filled_form.replace('.','')}")
@@ -135,7 +134,6 @@ $ ->
   # клик по кнопке «изменить» направленной на весь фильтр
   $(document).on('click', F.status_bar.change_btn, (e) =>
     e.preventDefault()
-    console.log  $(F.table.btn)
     $(F.table.btn).filter(F.table.filled_form).first().trigger('click')
     F.toggle_status_bar()
   )

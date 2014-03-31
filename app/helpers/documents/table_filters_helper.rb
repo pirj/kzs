@@ -18,5 +18,43 @@ module Documents
         content_tag(:span, nil, class: 'fa fa-filter')
       end.html_safe
     end
+
+
+    # ячейка таблицы с кусочком фильтровой формы и chosen
+    def table_filter_chosen(f, caption, search_field, collection, target)
+      table_filter_wrapper f, caption, target do
+        f.select search_field, collection, {}, class: 'js-chosen', multiple: true
+      end
+    end
+
+    # ячейка таблицы с кусочком фильтровой формы и текстового поля
+    def table_filter_text(f, caption, search_field, target)
+      table_filter_wrapper f, caption, target do
+        f.text_field search_field, class: 'form-control', autocomplete: :off
+      end
+    end
+
+
+    private
+
+    # обертка для ячейки таблицы. Внутрь помещаем элемент формы, параметры которого и отправляются на сервер
+    def table_filter_wrapper(f, caption, target, &block)
+      content_tag :th, class: 'js-table-filter-form', data: { target: target }, colspan: 8 do
+        content_tag(:h3, t(caption, scope: 'documents.filter.headers')) +
+        yield +
+        table_filter_buttons(f)
+      end
+    end
+
+
+    # кнопки в фильтровой форме
+    def table_filter_buttons(f)
+      content_tag :div, class: 'btn-block' do
+        f.submit('Сохранить', class: 'btn btn-primary') +
+        content_tag(:span, 'или') +
+        link_to('сбросить', '#', class: 'link link-danger js-document-filter-clear-btn')
+      end
+    end
+
   end
 end

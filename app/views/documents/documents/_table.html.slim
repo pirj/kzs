@@ -28,58 +28,12 @@
                   = link_to 'изменить', '#', class: 'link link-muted js-table-filter-status-bar-change-btn'
                   = link_to 'сбросить', '#', class: 'link link-muted js-table-filter-status-bar-clear-btn'
 
-
-
           / строки с самими элементами форм фильтра
-          tr
-            th.js-table-filter-form data-target='document-table-filter-state' colspan=8
-              h3 = t('documents.filter.headers.state')
-              .form-group
-                = f.select :state_cont_any, document_filter_states, {}, class: 'js-chosen', multiple: true
-              .btn-block
-                = f.submit 'Сохранить', class: 'btn btn-primary'
-                span или
-                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
-
-          tr
-            th.js-table-filter-form data-target='document-table-filter-title' colspan=8
-              h3 = t('documents.filter.headers.title')
-              .form-group
-                = f.text_field :title_cont, class: 'form-control', autocomplete: :off
-              .btn-block
-                = f.submit 'Сохранить', class: 'btn btn-primary'
-                span или
-                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
-
-          tr
-            th.js-table-filter-form data-target='document-table-filter-document-type' colspan=8
-              h3 = t('documents.filter.headers.document_type')
-              .form-group
-                = f.select :accountable_type_cont_any, document_filter_document_types, {}, class: 'js-chosen', multiple: true
-              .btn-block
-                = f.submit 'Сохранить', class: 'btn btn-primary'
-                span или
-                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
-
-          tr
-            th.js-table-filter-form data-target='document-table-filter-sender-organization' colspan=8
-              h3 = t('documents.filter.headers.sender_organization')
-              .form-group
-                = f.select :sender_organization_id_in, document_filter_organizations, {}, class: 'js-chosen', multiple: true
-              .btn-block
-                = f.submit 'Сохранить', class: 'btn btn-primary'
-                span или
-                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
-
-          tr
-            th.js-table-filter-form data-target='document-table-filter-recipient-organization' colspan=8
-              h3 = t('documents.filter.headers.recipient_organization')
-              .form-group
-                = f.select :recipient_organization_id_in, document_filter_organizations, {}, class: 'js-chosen', multiple: true
-              .btn-block
-                = f.submit 'Сохранить', class: 'btn btn-primary'
-                span или
-                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
+          tr = table_filter_chosen f, 'sender_organization', :sender_organization_id_in, document_filter_organizations, 'document-table-filter-sender-organization'
+          tr = table_filter_chosen f, 'recipient_organization', :recipient_organization_id_in, document_filter_organizations, 'document-table-filter-recipient-organization'
+          tr = table_filter_text f, 'title', :title_cont, 'document-table-filter-title'
+          tr = table_filter_chosen f, 'document_type', :accountable_type_cont_any, document_filter_document_types, 'document-table-filter-document-type'
+          tr = table_filter_chosen f, 'state', :state_cont_any, document_filter_states, 'document-table-filter-state'
 
 
       tbody
