@@ -17,6 +17,18 @@
             th
             th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
 
+          / строка со статусом фильтра
+          tr
+            th.js-table-filter-status-bar colspan=8
+              .btn-block.text-center
+                h3.text-heading-alt
+                  span.fa.fa-filter
+                  span Фильтр включен
+                = link_to 'изменить', '#', class: 'link link-muted js-table-filter-status-bar-change-btn'
+                = link_to 'сбросить', '#', class: 'link link-muted js-table-filter-status-bar-clear-btn'
+
+
+
           / строки с самими элементами форм фильтра
           tr
             th.js-table-filter-form data-target='document-table-filter-state' colspan=8

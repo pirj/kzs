@@ -7,6 +7,11 @@ window.app.table_filter =
     container: '.js-table-filter-form'
     clear_btn: '.js-document-filter-clear-btn'
 
+  status_bar:
+    container: '.js-table-filter-status-bar'
+    clear_btn: '.js-table-filter-status-bar-clear-btn'
+    change_btn: '.js-table-filter-status-bar-change-btn'
+
 
 
   # переключаем видимость у формы, с которой работаем
@@ -49,7 +54,7 @@ $ ->
   # клик по кнопке «имя фильтра»
   $(document).on('click', F.table.btn, (e) =>
     e.preventDefault()
-    $target = $(e.target).closest('.js-table-filter-activate-btn')
+    $target = $(e.target).closest(F.table.btn)
     F.toggle_form($target)
     F.toggle_activate_btns_style($target)
   )
@@ -59,11 +64,18 @@ $ ->
     e.preventDefault()
 
     $target = $(e.target).closest(F.form.clear_btn)
-    $form = $target.closest('.js-table-filter-form')
+    $form = $target.closest(F.form.container)
 
-    F.toggle_form($target)
     F.clear_inputs($form)
-    F.toggle_activate_btns_style($target)
-
     $form.find('input[type=submit]').trigger('click')
+  )
+
+  # клик по кнопке «сбросить» направленной на весь фильтр
+  $(document).on('click', F.status_bar.clear_btn, (e) =>
+    e.preventDefault()
+
+    $forms = $(F.form.container)
+
+    F.clear_inputs($forms)
+    $forms.first().find('input[type=submit]').trigger('click')
   )

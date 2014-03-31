@@ -177,9 +177,15 @@
   .btn + .link,
   .link + .btn,
   .link + span,
-  span + .link{
+  span + .link,
+  h3 + .link,
+  .link + h3,
+  .link + .link,
+  .btn + .btn{
     margin-left: $padding-base-horizontal;
   }
+
+  h1, h2, h3, h4, h5, h6{ display: inline-block; margin-top: 0; margin-bottom: 0; }
 }
 
 // Vertically space out multiple block buttons
