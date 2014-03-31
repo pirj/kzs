@@ -52,8 +52,6 @@ GEM
     bcrypt (3.1.7)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
-    bootstrap-sass-extras (0.0.5)
-      rails (>= 3.1.0)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -387,7 +385,6 @@ DEPENDENCIES
   amoeba
   awesome_nested_set
   bootstrap-sass
-  bootstrap-sass-extras
   bullet
   cancan
   capistrano

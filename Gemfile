@@ -45,7 +45,6 @@ gem 'kaminari'
 gem 'ckeditor'
 
 gem 'bootstrap-sass'
-gem 'bootstrap-sass-extras'
 
 gem 'icheck-rails'
 
