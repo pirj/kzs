@@ -171,6 +171,15 @@
   width: 100%;
   padding-left: 0;
   padding-right: 0;
+
+  .btn + span,
+  span + .btn,
+  .btn + .link,
+  .link + .btn,
+  .link + span,
+  span + .link{
+    margin-left: $padding-base-horizontal;
+  }
 }
 
 // Vertically space out multiple block buttons
