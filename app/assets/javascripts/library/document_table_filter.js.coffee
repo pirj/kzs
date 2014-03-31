@@ -2,6 +2,8 @@ window.app.table_filter =
   container: '.js-table-filter'
   table:
     btn: '.js-table-filter-activate-btn'
+    filled_form: '.js-table-filter-filled-form'
+    filled_form_class: "js-table-filter-filled-form label-default"
 
   form:
     container: '.js-table-filter-form'
@@ -29,11 +31,41 @@ window.app.table_filter =
     target = $(elem).data('target')
     $(@.container).find(@.form.container).filter("[data-target='#{target}']")
 
+  # находим кнопку, которая активирует форму с фильтром
+  find_activate_btn: (form) ->
+    target = $(form).data('target')
+    $(@.container).find(@.table.btn).filter("[data-target='#{target}']")
+
+
 
   # управляем стилями кнопок переключения поисковых форм
   toggle_activate_btns_style: (elem) ->
     $(@.table.btn).not(elem).removeClass('label-success')
     $(elem).toggleClass('label-success')
+
+
+  toggle_status_bar: ->
+    if $(@.form.container).filter(':visible').length > 0
+      $(@.status_bar.container).hide()
+    else
+      $(@.status_bar.container).show()
+
+  # проставляем всем формам и активирующим кнопкам статус «активно»
+  # если внутри форм хотя бы одно поле заполнено
+  toggle_filled_form_status: (elem) ->
+    $forms = $(@.form.container)
+    # пробежимся по каждому инпуту
+    _.each($forms, (form) =>
+      $form = $(form)
+      # все инпуты,работающие на поиск содержат в названии параметр 'q'
+      $inputs = $form.find('input, textarea, select').filter('[name*="q"]').not('input[type=submit]')
+      # соеденим все заполненные значения вместе
+      sum_vals = _.map($inputs, (input) -> $(input).val() ).join('')
+      # если хотя бы одно поле заполнено,то длина суммарного значения более 0
+      if sum_vals.length > 0
+        $btn = @.find_activate_btn(form)
+        $btn.addClass(@.table.filled_form_class)
+    )
 
   # очищаем инпуты внутри формы
   clear_inputs: (form) ->
@@ -57,6 +89,8 @@ $ ->
     $target = $(e.target).closest(F.table.btn)
     F.toggle_form($target)
     F.toggle_activate_btns_style($target)
+    F.toggle_filled_form_status($target)
+    F.toggle_status_bar()
   )
 
   # клик по кнопке «очистить»
@@ -78,4 +112,12 @@ $ ->
 
     F.clear_inputs($forms)
     $forms.first().find('input[type=submit]').trigger('click')
+  )
+
+  # клик по кнопке «изменить» направленной на весь фильтр
+  $(document).on('click', F.status_bar.change_btn, (e) =>
+    e.preventDefault()
+    console.log  $(F.table.btn)
+    $(F.table.btn).filter(F.table.filled_form).first().trigger('click')
+    F.toggle_status_bar()
   )
