@@ -1,6 +1,11 @@
 ru:
   documents:
     filter:
+      document_type:
+        documents/official_mail: письмо
+        documents/order: распоряжение
+        documents/report: акт
+
       states:
         draft: Черновик
         prepared: Подготовлено

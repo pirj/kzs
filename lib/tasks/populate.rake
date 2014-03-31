@@ -187,6 +187,7 @@ namespace :documents do
       d.conformers << sender_organization.users.last
       d.sender_organization    = Organization.find(rand(1..organizations_count))
       d.save!
+      d.transition_to!(:draft)
     end
     puts 'Mail created'
 
@@ -225,6 +226,7 @@ namespace :documents do
       d.deadline = DateTime.now + rand(1..6).months
 
       d.save!
+      d.transition_to!(:draft)
     end
     puts 'Orders created'
 
@@ -245,6 +247,7 @@ namespace :documents do
       d.order = Documents::Order.find(rand(1..Documents::Order.count))
 
       d.save!
+      d.transition_to!(:draft)
     end
     puts 'Reports created'
   end

@@ -1,6 +1,7 @@
 # coding:utf-8
 module Documents
   module FiltersHelper
+
     def link_to_add_fields(name, f, type)
       new_object = f.object.send "build_#{type}"
       id = "new_#{type}"
@@ -34,5 +35,12 @@ module Documents
         [t(state, scope: 'documents.filter.states'), state]
       end
     end
+
+    def document_filter_document_types
+      ['Documents::OfficialMail', 'Documents::Order', 'Documents::Report'].map do |type|
+        [t(type.underscore, scope: 'documents.filter.document_type'), type]
+      end
+    end
+
   end
 end

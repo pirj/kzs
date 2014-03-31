@@ -13,15 +13,9 @@
             th = resource_sortable 'organizations.short_title', t('documents.table.list_attrs.sender_link')
             th = resource_sortable 'recipient_organizations_documents.short_title', t('documents.table.list_attrs.recipient_link')
             th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
-            th = t('documents.table.list_attrs.type')
+            th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
             th
             th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
-              /- active_class = f.object.try(:state_cont_any).try(:blank?) ? '' : ' label-default'
-              /= f.object.try(:state_cont_any).blank?.inspect
-              /= active_class
-              /.label.label-sm.js-table-filter-activate-btn data-target='document-table-filter-state'
-                span = t('documents.table.list_attrs.status')
-                span.fa.fa-filter
 
           / строки с самими элементами форм фильтра
           tr
@@ -38,7 +32,17 @@
             th.js-table-filter-form data-target='document-table-filter-title' colspan=8
               h3 = t('documents.filter.headers.title')
               .form-group
-                = f.text_field :title_cont, class: 'form-control'
+                = f.text_field :title_cont, class: 'form-control', autocomplete: :off
+              .btn-block
+                = f.submit 'Сохранить', class: 'btn btn-primary'
+                span или
+                = link_to 'сбросить', '#', class: 'link link-danger js-document-filter-clear-btn'
+
+          tr
+            th.js-table-filter-form data-target='document-table-filter-document-type' colspan=8
+              h3 = t('documents.filter.headers.title')
+              .form-group
+                = f.select :accountable_type_cont_any, document_filter_document_types, {}, class: 'js-chosen', multiple: true
               .btn-block
                 = f.submit 'Сохранить', class: 'btn btn-primary'
                 span или
