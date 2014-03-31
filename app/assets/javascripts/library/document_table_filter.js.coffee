@@ -41,11 +41,17 @@ window.app.table_filter =
 
   # управляем стилями кнопок переключения поисковых форм
   toggle_activate_btns_style: (elem) ->
+    $elem = $(elem)
     $(@.table.btn).not(elem).removeClass(@.table.active_btn_class)
-    $(elem).removeClass(@.table.filled_form_class)
-    $(elem).toggleClass(@.table.active_btn_class)
+    $elem.toggleClass(@.table.active_btn_class)
+
+    if $elem.hasClass(@.table.filled_form_class)
+      # удаляем класс, чтобы при активации кнопки подсвечивать ее активным цветом
+      # и чтобы этот класс не перекрывал свойство активной кнопки
+      $elem.removeClass(@.table.filled_form_class)
 
 
+  # управляем видимостью информационного блока к фильтру
   toggle_status_bar: ->
     if $(@.form.container).filter(':visible').length > 0
       $(@.status_bar.container).hide()
@@ -63,13 +69,17 @@ window.app.table_filter =
       $inputs = $form.find('input, textarea, select').filter('[name*="q"]').not('input[type=submit]')
       # соеденим все заполненные значения вместе
       sum_vals = _.map($inputs, (input) -> $(input).val() ).join('')
-      $btn = @.find_activate_btn(form)
+      # не выбираем кнопку, у которой есть активный класс. Потому что данный алгоритм срабатывает после того,
+      # как кнопке причислен активный класс,
+      # а значит ей не нужно обновлять статус «заполнены ли у нее фильтрующие поля»
+      $btn = @.find_activate_btn(form).not(".#{@.table.active_btn_class}")
+      console.log $btn
       # если хотя бы одно поле заполнено,то длина суммарного значения более 0
       if sum_vals.length > 0
-        $btn.addClass("#{@.table.filled_form_class} #{@.table.filled_form}")
+        $btn.addClass("#{@.table.filled_form_class} #{@.table.filled_form.replace('.','')}")
       # если поля пустые, то убираем класс выбранных значений
       else
-        $btn.removeClass("#{@.table.filled_form_class} #{@.table.filled_form}")
+        $btn.removeClass("#{@.table.filled_form_class} #{@.table.filled_form.replace('.','')}")
     )
 
   # очищаем инпуты внутри формы
@@ -93,6 +103,9 @@ $ ->
     e.preventDefault()
     $target = $(e.target).closest(F.table.btn)
     F.toggle_form($target)
+
+    # вначале выставляем цвет активной кнопке
+    # а потом пробегаемся по неактивным кнопкам и проставляем им статус заполненности фильтра
     F.toggle_activate_btns_style($target)
     F.toggle_filled_form_status($target)
     F.toggle_status_bar()
