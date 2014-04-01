@@ -188,6 +188,7 @@ namespace :documents do
       d.sender_organization    = Organization.find(rand(1..organizations_count))
       d.save!
       d.transition_to!(:draft)
+      d.transition_to!(:prepared)
     end
     puts 'Mail created'
 
@@ -227,6 +228,7 @@ namespace :documents do
 
       d.save!
       d.transition_to!(:draft)
+      d.transition_to!(:prepared)
     end
     puts 'Orders created'
 
@@ -248,6 +250,7 @@ namespace :documents do
 
       d.save!
       d.transition_to!(:draft)
+      d.transition_to!(:prepared)
     end
     puts 'Reports created'
   end

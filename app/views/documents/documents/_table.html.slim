@@ -1,5 +1,9 @@
 / рисуем список документов с фильтрацией по столбцам
 .row
+  p = sort_column
+  p = resource_class
+  p = params[:sort].inspect
+  p = params.inspect
   table.table.js-row-clickable.m-table-replacement.js-table-filter
     thead
       = search_form_for @search,  url: documents_documents_path, \
@@ -8,9 +12,20 @@
         tr
           th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
           th = t('documents.table.list_attrs.number_and_date')
-          th = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
-          th = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
-          th = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
+          th
+            = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
+            = resource_sortable 'organizations.short_title'
+
+
+          th
+            .pull-right = resource_sortable 'recipient_organizations_documents.short_title'
+            = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
+
+
+          th
+            = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
+            = resource_sortable 'title'
+
           th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
           th
           th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'

@@ -127,7 +127,9 @@ class Documents::DocumentsController < ResourceController
 
   def sort_column
     column = sort_fields.include?(params[:sort]) ? params[:sort] : 'updated_at'
-    avoid_ambiguous(column)
+    # TODO-prikha: следующая строка закомментирована, потому что при сортировке по полю title,
+    # она начинает искать по documents.title
+    #avoid_ambiguous(column)
   end
 
   def sort_fields
@@ -138,6 +140,8 @@ class Documents::DocumentsController < ResourceController
     %w(organizations.short_title recipient_organizations_documents.short_title)
   end
 
+  # TODO-prikha пожалуйста опиши зачем этот метод,
+  # не понятно, почему етсь колонки, к которым
   def avoid_ambiguous(column_name)
     if column_name.match('\.')
       column_name

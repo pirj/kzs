@@ -56,6 +56,7 @@ th {
     > tr {
       > th,
       > td {
+        @include clearfix();
         padding: $table-cell-padding;
         line-height: $line-height-base;
         border-top: 1px solid $table-border-color;
@@ -71,6 +72,9 @@ th {
     @extend .text-help;
     vertical-align: bottom;
     border-bottom: 1px solid $table-border-color;
+    > div, > span, > a, > p{
+      display: table-cell;
+    }
   }
   // Remove top border from thead by default
   > caption + thead,
