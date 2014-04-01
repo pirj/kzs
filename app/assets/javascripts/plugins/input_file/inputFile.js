@@ -236,7 +236,7 @@
     };
 
     $.fn.filestyle.defaults = {
-        'buttonText': 'прикрепить файл',
+        'buttonText': 'выбрать файл',
         'input': true,
         'icon': true,
         'classButton': 'btn btn-default',
