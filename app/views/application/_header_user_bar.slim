@@ -1,8 +1,8 @@
 ul.nav.navbar-nav.navbar-right
   li
 
-    = link_to '', class: 'btn btn-primary btn-divide-by-word text-right js-popover', data: {target: 'user-bar'} do
-      = current_user.first_name_with_last_name
+    = link_to '', class: 'btn btn-login text-right js-popover btn-divide-by-word ', data: {target: 'user-bar'} do
+      = content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
       span.caret
 
     .js-popover-content._user-bar data-target='user-bar'
@@ -14,3 +14,6 @@ ul.nav.navbar-nav.navbar-right
           = link_to destroy_user_session_path, class: 'btn ', method: :delete do
             i.fa.fa-power-off
             | Выйти из системы
+
+
+

@@ -1,3 +1,20 @@
+.btn-login{
+  background-color: #ededed;
+  color: #999999;
+  border-radius: 15px;
+  padding-right: 25px;
+  &.active{
+    background-color: #1ba0e1;
+    color:#fff;
+    box-shadow: none;
+  }
+  .caret{
+    display: inline-block;
+    position: absolute;
+    top: 42%;
+    right: 11px;
+  }
+}
 
 $el: '._user-bar';
 

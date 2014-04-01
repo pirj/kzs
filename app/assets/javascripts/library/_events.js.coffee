@@ -110,6 +110,7 @@ $ ->
     target = this.dataset.target
 
     $('.js-popover-content[data-target=' + target + ']').toggle()
+    $(this).toggleClass('active')
   )
 
   # CLEAR PAGE
@@ -119,6 +120,7 @@ $ ->
     return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
 
     $('.js-popover-content').hide()
+    $('.js-popover').removeClass('active')
 
     event.stopPropagation()
     return
