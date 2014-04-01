@@ -1,7 +1,7 @@
 .b-offset-xs.js-task-container
   .js-task-form-fields
     = f.input :title, input_html: { rows: 1, data: { target: 'js-task-title' } }
-    = f.input :deadline, as: :datepicker, input_html: { data: { target: 'js-task-deadline' } }, input_wrapper_html: { class: 'col-sm-3' }
+    = f.input :deadline, as: :datepicker, input_html: { data: { target: 'js-task-deadline', days: '3' } }, input_wrapper_html: { class: 'col-sm-3' }
     = f.input :body, input_html: { rows: 3, data: { target: 'js-task-body' } }
 
   .js-task-form-inserted-values

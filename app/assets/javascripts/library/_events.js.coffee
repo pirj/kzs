@@ -45,7 +45,13 @@ $ ->
   $('.dropdown-toggle').dropdown()
 
   # datepicker
-  $( ".js-datepicker" ).filter(':visible').datepicker( global.datepicker )
+  date = $('.js-datepicker.js-deadline').datepicker( "getDate" )
+  data_days = $('.js-datepicker.js-deadline').data('days')
+  max_date = $('.js-datepicker.js-deadline').datepicker( "option", "maxDate" )
+  opts = _.extend(global.datepicker, minDate: date + data_days, max_date )
+  console.log opts
+  $( '.js-datepicker.js-deadline' ).datepicker(opts)
+
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->

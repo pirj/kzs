@@ -81,6 +81,8 @@ $ ->
   # создание новой таски в модальном окне
   # при открытии модального окна, клонируем в него заготовку под форму.
   # и в этой заготовке управляем видимостью элементов
+
+  #  set_task_deadline: -> Собирает даду дедлайна, передает в глобал для пикеров зависимых от дедлайна
   $(document).on('click', T.order_tasks_form.add_task_btn, (e) ->
     e.preventDefault()
     # replace '0' to 'now timestamp' in task-form
@@ -89,24 +91,23 @@ $ ->
 
     html_source = $(@).data('fields').replace(regexp, time)
 
+    # Обновляем дату, забираем data_days из data, устанавливаем maxDate/MinDate
+#    date = $('.js-datepicker.js-deadline').datepicker( "getDate" )
+    data_days = $('.js-datepicker.js-deadline').data('days')
+    opts = _.extend(global.datepicker, minDate: date + data_days, maxDate: date )
     # вставляем обработанную форму заготовку код в модальное окно
     T.create_modal.$form_container.html(html_source)
 
     # показываем форму, скрываем все остальное
     T.create_modal.$form_container.find(T.task.html_container).hide()
-    
-    #  set_task_deadline: -> Собирает даду дедлайна, передает в глобал для пикеров зависимых от дедлайна
-    date = $('.js-datepicker.js-deadline').datepicker('getDate')
-    console.log date
-    opts = _.extend(global.datepicker, maxDate: date)
-
 
     T.create_modal.$form_container.find('.js-datepicker').datepicker(opts)
-
-#    T.create_modal.$form_container.find(max_date_for_new_datepickers)
     T.create_modal.$form_container.find(T.task.inputs_container).show()
 
     T.create_modal.$elem.modal('show')
+
+#    T.create_modal.$form_container.find(max_date_for_new_datepickers)
+
   )
 
   # при клике на кнопку сабмита
