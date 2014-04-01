@@ -5,6 +5,8 @@ class TaskList < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
+  validates :tasks, length: {minimum: 1}
+
   def progress
     if tasks.present?
       total = tasks.count.to_f
