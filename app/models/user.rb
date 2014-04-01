@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     permissions.exists?(permission_id)
   end
 
+  def director?
+    organization && organization.director?(self)
+  end
+
 
   def save_with_empty_password
   end

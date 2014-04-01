@@ -40,7 +40,13 @@ class Organization < ActiveRecord::Base
 
   accepts_nested_attributes_for :licenses, allow_destroy: true
 
+  def director?(user)
+    director && director == user
+  end
+
   def users_statement
     self.users.statement_approvers
   end
+
+
 end
