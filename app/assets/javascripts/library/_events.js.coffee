@@ -110,8 +110,21 @@ $ ->
     target = this.dataset.target
 
     $('.js-popover-content[data-target=' + target + ']').toggle()
-
   )
+
+  # CLEAR PAGE
+
+  $(document).click (e) ->
+
+    return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
+
+    $('.js-popover-content').hide()
+
+    event.stopPropagation()
+    return
+
+
+
 
 
   # click on 'back' button
