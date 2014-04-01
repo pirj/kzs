@@ -1,20 +1,17 @@
 * {
-  color: red
+//  color: red
 }
 
 
 .js-popover-content{
   position: absolute;
   top: 100%;
-//  display: none;
-
+  display: none;
+  background: rgba(0,0,0,0.8); //default background-color
   width: auto;
-  background: rgba(0,0,0,0.8);
+  z-index: 999;
   &:before{
     @include arrow-top(rgba(0,0,0,0.8));
   }
 }
 
-.b-user-info{
-
-}

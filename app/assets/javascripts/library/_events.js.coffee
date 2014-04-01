@@ -105,8 +105,8 @@ $ ->
 
   # popover-over
 
-  $('.js-popover-btn').on('click', ->
-    $('.js-popover').popover('destroy').filter(@).popover(html: true, animation: false).popover('show').trigger('document_state:show')
+  $('.js-popover').on('click', ->
+   $('.js-popover-content').toggle();
   )
 
 

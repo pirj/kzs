@@ -1,0 +1,46 @@
+
+$el: '._user-bar';
+
+#{$el}{
+  &::before{
+    right: 21px;
+    left: auto;
+  }
+
+
+  .btn-group-vertical{
+    .btn{
+      border-top:
+         #666666 solid 1px;
+
+    }
+  }
+
+  background: rgba(0,0,0,0.8);
+  right: 0;
+  margin-top: 15px;
+  #{$el}-header{
+    width: 360px;
+    color: #f1ede4;
+    font-size: 18px;
+    text-decoration: underline;
+
+  }
+
+  #{$el}-image{
+    width: 100px;
+    height: 100px;
+    margin: 0 28px 28px 28px;
+  }
+
+  #{$el}-exit{
+    a{
+      color: #fff;
+      font-size: 14px;
+    }
+
+  }
+  border-radius: 15px;
+
+
+}

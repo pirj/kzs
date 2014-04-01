@@ -12,13 +12,16 @@ ul.nav.navbar-nav.navbar-right
       = current_user.first_name_with_last_name
       span.caret
 
-    .js-popover-content.b-user-info
-      | yo! wasdwasd!
-      | yo! wasdwasd!
-      | yo! wasdwasd!
-      | yo! wasdwasd!
-      | yo! wasdwasd!
-      | yo! wasdwasd!
+    .js-popover-content._user-bar
+      h3.text-center._user-bar-header = current_user.first_name_with_last_name
+      .row
+        .col-sm-4
+          img._user-bar-image src='/assets/user1.jpg'
+        .col-sm-8.btn-group.btn-group-vertical._user-bar-exit
+          = link_to destroy_user_session_path, class: 'btn ', method: :delete do
+            i
+            | Выйти из системы
+
 
 
     /ul.nav-pills
