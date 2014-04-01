@@ -105,8 +105,12 @@ $ ->
 
   # popover-over
 
-  $('.js-popover').on('click', ->
-   $('.js-popover-content').toggle();
+  $('.js-popover').on('click', (e) ->
+    e.preventDefault()
+    target = this.dataset.target
+
+    $('.js-popover-content[data-target=' + target + ']').toggle()
+
   )
 
 

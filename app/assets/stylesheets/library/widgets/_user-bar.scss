@@ -2,6 +2,9 @@
 $el: '._user-bar';
 
 #{$el}{
+
+  font-family: open_sans, arial, sans-serif;
+
   &::before{
     right: 21px;
     left: auto;
@@ -13,6 +16,11 @@ $el: '._user-bar';
       border-top:
          #666666 solid 1px;
 
+      text-align: left;
+      i{
+        font-size: 22px;
+        margin-right: 20px;
+      }
     }
   }
 
@@ -24,13 +32,14 @@ $el: '._user-bar';
     color: #f1ede4;
     font-size: 18px;
     text-decoration: underline;
-
+    text-align: left;
+    padding-left: 21px;
   }
 
   #{$el}-image{
     width: 100px;
     height: 100px;
-    margin: 0 28px 28px 28px;
+    margin: 0 21px 21px 21px;
   }
 
   #{$el}-exit{

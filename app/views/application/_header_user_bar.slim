@@ -1,54 +1,16 @@
 ul.nav.navbar-nav.navbar-right
-  /li
-  /  = link_to '#', class: 'btn btn-link-muted btn-divide-by-word text-right btn-no-hover extra-right-padding' do
-  /    = content_tag(:span, current_user.first_name)+\
-  /      content_tag(:span, current_user.last_name)
   li
-    /= link_to destroy_user_session_path, class: 'btn btn-default btn-icon', method: :delete do
-    /  = content_tag :span, nil, class: 'fa fa-sign-out'
 
-
-    = link_to '#', class: 'btn btn-primary btn-divide-by-word text-right js-popover', data: {target: 'wasd'} do
+    = link_to '', class: 'btn btn-primary btn-divide-by-word text-right js-popover', data: {target: 'user-bar'} do
       = current_user.first_name_with_last_name
       span.caret
 
-    .js-popover-content._user-bar
-      h3.text-center._user-bar-header = current_user.first_name_with_last_name
+    .js-popover-content._user-bar data-target='user-bar'
+      h3._user-bar-header = current_user.first_name_with_last_name
       .row
         .col-sm-4
           img._user-bar-image src='/assets/user1.jpg'
         .col-sm-8.btn-group.btn-group-vertical._user-bar-exit
           = link_to destroy_user_session_path, class: 'btn ', method: :delete do
-            i
+            i.fa.fa-power-off
             | Выйти из системы
-
-
-
-    /ul.nav-pills
-      li.dropdown
-        a.dropdown-toggle.btn.btn-primary data-target="dropdown" href="#"
-          = current_user.first_name_with_last_name
-          span.caret
-        span.dropdown-arr
-        ul.dropdown-menu role="menu"
-          li
-            = current_user.first_name_with_last_name
-
-
-      /li.dropdown
-      /  a.dropdown-toggle.btn.btn-default data-toggle="dropdown" href="#"
-      /    | Действия
-      /    span.caret
-      /  ul.dropdown-menu role="menu"
-      /    li
-      /      a#create_copy_link href="#"  Создать по образу и подобию
-      /    li
-      /      a#edit_link href="#"  Редактировать
-      /    li
-      /      a data-confirm=("Вы уверены?") href="#" name="prepare"  Подготовить
-      /    li
-      /      a#approve_link data-confirm=("Вы уверены?") href="#" name="approve"  Подписать
-      /    li
-      /      a#send_link data-confirm=("Вы уверены?") href="#" name="send"  Отправить
-      /    li
-      /      a#reply_link href="#"  Ответить
