@@ -3,8 +3,6 @@
   ul.nav.nav-pills
     li.active = link_to "Документы (#{resource.attached_documents.count})", '#documents', data: { toggle: 'tab' }
     li = link_to "Файлы (#{resource.document_attached_files.count})", '#files', data: { toggle: 'tab' }
-    li = link_to 'Сотрудники', '#users', data: { toggle: 'tab' }
-    li = link_to 'Лицензии', '#licenses', data: { toggle: 'tab' }
 
   .row
     .col-sm-12
