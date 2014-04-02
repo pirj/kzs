@@ -72,9 +72,6 @@ th {
     @extend .text-help;
     vertical-align: bottom;
     border-bottom: 1px solid $table-border-color;
-    > div, > span, > a, > p{
-      display: table-cell;
-    }
   }
   // Remove top border from thead by default
   > caption + thead,

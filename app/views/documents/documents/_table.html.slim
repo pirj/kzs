@@ -14,17 +14,17 @@
           th = t('documents.table.list_attrs.number_and_date')
           th
             = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
-            = resource_sortable 'organizations.short_title'
+            .pull-right = resource_sortable_icon 'organizations.short_title'
 
 
           th
-            .pull-right = resource_sortable 'recipient_organizations_documents.short_title'
+            .pull-right.label.label-sm.label-default = resource_sortable_icon 'recipient_organizations_documents.short_title'
             = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
 
 
           th
             = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
-            = resource_sortable 'title'
+            .pull-right = resource_sortable_icon 'title'
 
           th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
           th
