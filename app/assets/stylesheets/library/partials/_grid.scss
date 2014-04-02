@@ -145,3 +145,9 @@
   @include make-grid($grid-columns, lg, offset);
 }
 
+// Сетка управляемая количеством символов.
+// Вносится предположение, что длина одного символа равна 0.8em
+@for $i from 1 through 30{
+  .col-words-#{$i}{ min-width: .8em*$i; }
+}
+

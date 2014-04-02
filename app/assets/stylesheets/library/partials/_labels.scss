@@ -18,15 +18,16 @@
   vertical-align: baseline;
   cursor: pointer;
 
-  // Add hover effects, but only for links
-  &[href] {
-    &:hover,
-    &:focus {
-      color: $label-link-hover-color;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
+//  убрал, потому что мешало править стили для иконки, которая помещена в лэйбл
+//  // Add hover effects, but only for links
+//  &[href] {
+//    &:hover,
+//    &:focus {
+//      color: $label-link-hover-color;
+//      text-decoration: none;
+//      cursor: pointer;
+//    }
+//  }
 
   // Empty labels collapse automatically (not available in IE8)
   &:empty {
@@ -35,6 +36,12 @@
 
   &.label-sm{
     padding: .3em .75em;
+  }
+
+  &.label-icon{
+    padding-left: .1em;
+    padding-right: .1em;
+    min-width: 1em;
   }
 
   // text and icon relatives

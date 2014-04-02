@@ -1,9 +1,5 @@
 / рисуем список документов с фильтрацией по столбцам
 .row
-  p = sort_column
-  p = resource_class
-  p = params[:sort].inspect
-  p = params.inspect
   table.table.js-row-clickable.m-table-replacement.js-table-filter
     thead
       = search_form_for @search,  url: documents_documents_path, \
@@ -11,23 +7,23 @@
                                   do |f|
         tr
           th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
-          th = t('documents.table.list_attrs.number_and_date')
-          th
+          th.col-words-6 = t('documents.table.list_attrs.number_and_date')
+          th.col-words-15
             = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
-            .pull-right = resource_sortable_icon 'organizations.short_title'
+            .pull-right = resource_sortable_icon 'organizations.short_title', class: 'label label-sm label-icon'
 
 
-          th
-            .pull-right.label.label-sm.label-default = resource_sortable_icon 'recipient_organizations_documents.short_title'
+          th.col-words-17
             = table_filter_caption t('documents.table.list_attrs.recipient_organization'), f.object, :recipient_organization_id_in, 'document-table-filter-recipient-organization'
+            .pull-right = resource_sortable_icon 'recipient_organizations_documents.short_title', class: 'label label-sm label-icon'
 
 
           th
             = table_filter_caption t('documents.table.list_attrs.title'), f.object, :title_cont, 'document-table-filter-title'
-            .pull-right = resource_sortable_icon 'title'
+            .pull-right = resource_sortable_icon 'title', class: 'label label-sm label-icon'
 
-          th = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
-          th
+          th.col-words-5 = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
+          th.col-words-2
           th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
 
         / строка со статусом фильтра показывается, только если применены настройки фильтра
