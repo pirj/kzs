@@ -10,5 +10,7 @@ html
   body
     .wrapper.js-dashboard-page
       = render 'shared/page_title'
+      if welcome != nil
+      = render 'shared/welcome_screen'
       - unless controller?('devise/sessions')
         = yield
