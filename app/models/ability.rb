@@ -5,6 +5,14 @@ class Ability
     
     alias_action :read, :update, :to => :crud
 
+    can :read, Document, confidential: false
+    if user.director?
+      can :read, Document, confidential: true
+    end
+    can :read, Document, confidential: true, creator_id: user.id
+    can :read, Document, confidential: true, approver_id: user.id
+    can :read, Document, confidential: true, executor_id: user.id
+    can :read, Document, confidential: true, conformers: {id: user.id}
     #TODO: @babrovka
     # Make use of
     #https://github.com/ryanb/cancan/wiki/Fetching-Records
