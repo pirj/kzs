@@ -7,7 +7,10 @@
                                   do |f|
         tr
           th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
-          th.col-words-6 = t('documents.table.list_attrs.number_and_date')
+          th.col-words-9
+            span = t('documents.table.list_attrs.number_and_date')
+            .pull-right = resource_sortable_icon 'approved_at', class: 'label label-sm label-icon'
+
           th.col-words-15
             = table_filter_caption t('documents.table.list_attrs.sender_organization'), f.object, :sender_organization_id_in, 'document-table-filter-sender-organization'
             .pull-right = resource_sortable_icon 'organizations.short_title', class: 'label label-sm label-icon'
