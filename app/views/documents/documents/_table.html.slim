@@ -3,8 +3,12 @@
   table.table.js-row-clickable.m-table-replacement.js-table-filter
     thead
       = search_form_for @search,  url: documents_documents_path, \
-                                  html: { class: 'form-horizontal', data: {url: search_documents_documents_path } } \
+                                  html: { class: 'form-horizontal', data: { url: search_documents_documents_path } } \
                                   do |f|
+
+        = hidden_field_tag :with_state, params[:with_state]
+        = hidden_field_tag :with_type, params[:with_type]
+
         tr
           th = check_box_tag :selected, nil, false, class: 'js-select-all-in-table', data:{ target: 'document' }
           th.col-words-9
