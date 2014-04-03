@@ -2,9 +2,6 @@
 class Documents::OrdersController < ResourceController
   include Documents::AccountableController
 
-  layout 'base'
-  actions :all, except: [:index]
-
   helper_method :history
 
   # TODO: @justvitalius why do we get Report by id in Orders controller?

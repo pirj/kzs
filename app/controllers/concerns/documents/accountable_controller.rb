@@ -3,6 +3,14 @@ module Documents::AccountableController
 
   included do
     layout 'base'
+
+    # Проверяем права ползователя на чтение соответствующего документа
+    before_filter :authorize_document, only: :show
+
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to documents_path, :flash => { :error => exception.message }
+    end
+
     before_filter :assign_read_state_if_director, only: :show
     before_filter :mark_as_read, only: :show
     actions :all, except: [:index]
@@ -56,5 +64,9 @@ module Documents::AccountableController
 
   def mark_as_read
     resource.mark_as_read!(for: current_user)
+  end
+
+  def authorize_document
+    authorize! :read, resource.document, message: I18n.t('unauthorized.read.document')
   end
 end
