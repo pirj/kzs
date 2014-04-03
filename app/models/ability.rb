@@ -5,14 +5,25 @@ class Ability
     
     alias_action :read, :update, :to => :crud
 
-    can :read, Document, confidential: false
+    # Любой пользователь данной организации может читать неконфиденциальные исходящие документы
+    can :read, Document, confidential: false, sender_organization_id: user.organization_id
+
+    # Любой пользователь данной организации может читать неконфиденциальные входящие документы
+    can :read, Document, confidential: false, recipient_organization_id: user.organization_id, state: ['sent', 'accepted', 'rejected']
+
+    # Директор может читать входящие и исходящие конфиденциальные документы
     if user.director?
-      can :read, Document, confidential: true
+      can :read, Document, confidential: true, sender_organization_id: user.organization_id
+      can :read, Document, confidential: true, recipient_organization_id: user.organization_id, state: ['sent', 'accepted', 'rejected']
+    else
+
+      #Конфиденциальные исходящие документы может могут читать Составитель, Исполнитель, Контроллирующее Лицо и Согласующие Лица.
+      can :read, Document, confidential: true, sender_organization_id: user.organization_id, creator_id: user.id
+      can :read, Document, confidential: true, sender_organization_id: user.organization_id, approver_id: user.id
+      can :read, Document, confidential: true, sender_organization_id: user.organization_id, executor_id: user.id
+      can :read, Document, :confidential => true, :conformers.outer => { :id => user.id}
     end
-    can :read, Document, confidential: true, creator_id: user.id
-    can :read, Document, confidential: true, approver_id: user.id
-    can :read, Document, confidential: true, executor_id: user.id
-    can :read, Document, confidential: true, conformers: {id: user.id}
+
     #TODO: @babrovka
     # Make use of
     #https://github.com/ryanb/cancan/wiki/Fetching-Records

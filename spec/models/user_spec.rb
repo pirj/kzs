@@ -9,41 +9,53 @@ describe User do
       let(:user) { nil }
       subject { Ability.new(user)}
 
-      context 'not confidential document' do
-        let(:user) { FactoryGirl.create(:user) }
+      context 'non-confidential' do
         let(:document) do
           FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
         end
+        context 'Employee' do
+          let(:user) { FactoryGirl.create(:user) }
 
-        it { should be_able_to(:read, document)}
+          before do
+            document.sender_organization.users<<user
+          end
+
+          it { should be_able_to(:read, document)}
+        end
+
+        context 'Saboteur' do
+          let(:user) { FactoryGirl.create(:user) }
+
+          it { should_not be_able_to(:read, document)}
+        end
 
       end
 
       context 'confidential document' do
         let(:document) do
           document = FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
-          document.creator = FactoryGirl.create(:user)
-          document.executor = FactoryGirl.create(:user)
-          document.approver = FactoryGirl.create(:user)
+          document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+          document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+          document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
           document.save
           document
         end
-        context 'read by director' do
+        context 'Director' do
           let(:user){ organization.director }
           it { should be_able_to(:read, document)}
         end
 
-        context 'read by creator' do
+        context 'Creator' do
           let(:user){ document.creator }
           it { should be_able_to(:read, document)}
         end
 
-        context 'read by approver' do
+        context 'Approver' do
           let(:user){ document.approver }
           it { should be_able_to(:read, document)}
         end
 
-        context 'read by conformer' do
+        context 'Conformer' do
           let(:user){ FactoryGirl.create(:user) }
           before do
             document.conformers << user
@@ -51,15 +63,11 @@ describe User do
           it { should be_able_to(:read, document)}
         end
 
-        context 'read by side user' do
+        context 'Saboteur' do
           let(:user){ FactoryGirl.create(:user) }
           it { should_not be_able_to(:read, document)}
         end
-
-
       end
-
-
     end
   end
 
