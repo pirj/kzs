@@ -1,4 +1,5 @@
 module Documents::ResourceSortableHelper
+  # кнопка сортировка в виде текста с иконкой
   def resource_sortable(column, title = nil)
     icon_class = resource_sortable_icon_class(column)
     resource_sortable_wrapper column do
@@ -7,6 +8,7 @@ module Documents::ResourceSortableHelper
     end.html_safe
   end
 
+  # кнопка сортировка только в виде иконки
   def resource_sortable_icon(column, opts={})
     order_class = resource_sortable_icon_class(column) + ' js-tooltip'
     resource_sortable_wrapper column, opts do
@@ -37,6 +39,7 @@ module Documents::ResourceSortableHelper
     column == sort_column ? "fa fa-sort-#{sort_direction}" : 'fa fa-sort'
   end
 
+  # формируем подсказку для кнопки сортировки
   def resource_sortable_hint_title(column)
     txt = ['Сортировать']
     txt << if column == sort_column
