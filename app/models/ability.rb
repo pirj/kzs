@@ -1,69 +1,67 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)  
-    
-    alias_action :read, :update, :to => :crud
+  def initialize(user)
+    alias_action :read, :update, to: :crud
 
     # Любой пользователь данной организации может читать неконфиденциальные исходящие документы
     can :read, Document, confidential: false, sender_organization_id: user.organization_id
 
     # Любой пользователь данной организации может читать неконфиденциальные входящие документы
-    can :read, Document, confidential: false, recipient_organization_id: user.organization_id, state: ['sent', 'accepted', 'rejected']
+    can :read, Document, confidential: false, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
 
     # Директор может читать входящие и исходящие конфиденциальные документы
     if user.director?
       can :read, Document, confidential: true, sender_organization_id: user.organization_id
-      can :read, Document, confidential: true, recipient_organization_id: user.organization_id, state: ['sent', 'accepted', 'rejected']
+      can :read, Document, confidential: true, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
     else
 
-      #Конфиденциальные исходящие документы может могут читать Составитель, Исполнитель, Контроллирующее Лицо и Согласующие Лица.
+      # Конфиденциальные исходящие документы может могут читать Составитель, Исполнитель, Контроллирующее Лицо и Согласующие Лица.
       can :read, Document, confidential: true, sender_organization_id: user.organization_id, creator_id: user.id
       can :read, Document, confidential: true, sender_organization_id: user.organization_id, approver_id: user.id
       can :read, Document, confidential: true, sender_organization_id: user.organization_id, executor_id: user.id
-      can :read, Document, :confidential => true, :conformers.outer => { :id => user.id}
+      can :read, Document, :confidential => true, :conformers.outer => { id: user.id }
     end
 
-    #TODO: @babrovka
+    # TODO: @babrovka
     # Make use of
-    #https://github.com/ryanb/cancan/wiki/Fetching-Records
+    # https://github.com/ryanb/cancan/wiki/Fetching-Records
 
-
-    #TODO: @babrovka Can switch to this:
+    # TODO: @babrovka Can switch to this:
 
     # Documents::OfficialMail
     # Documents::OfficialMailStateMachine
 
-    can :apply_draft,    Documents::OfficialMail, document:{sender_organization_id: user.organization_id}
-    can :apply_prepared, Documents::OfficialMail, document:{sender_organization_id: user.organization_id}
-    can :apply_approved, Documents::OfficialMail, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::OfficialMail, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::OfficialMail, document:{sender_organization_id: user.organization_id, creator_id: user.id}
-    can :apply_trashed,  Documents::OfficialMail, document:{sender_organization_id: user.organization_id}
+    can :apply_draft,    Documents::OfficialMail, document: { sender_organization_id: user.organization_id }
+    can :apply_prepared, Documents::OfficialMail, document: { sender_organization_id: user.organization_id }
+    can :apply_approved, Documents::OfficialMail, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    can :apply_sent,     Documents::OfficialMail, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    can :apply_sent,     Documents::OfficialMail, document: { sender_organization_id: user.organization_id, creator_id: user.id }
+    can :apply_trashed,  Documents::OfficialMail, document: { sender_organization_id: user.organization_id }
 
     # Documents::Order
     # Documents::OrderStateMachine
 
-    can :apply_draft,    Documents::Order, document:{sender_organization_id: user.organization_id}
-    can :apply_prepared, Documents::Order, document:{sender_organization_id: user.organization_id}
-    can :apply_approved, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    #can :apply_accepted, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    #can :apply_rejected, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::Order, document:{sender_organization_id: user.organization_id, creator_id: user.id}
-    can :apply_trashed,  Documents::Order, document:{sender_organization_id: user.organization_id}
+    can :apply_draft,    Documents::Order, document: { sender_organization_id: user.organization_id }
+    can :apply_prepared, Documents::Order, document: { sender_organization_id: user.organization_id }
+    can :apply_approved, Documents::Order, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    # can :apply_accepted, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
+    # can :apply_rejected, Documents::Order, document:{sender_organization_id: user.organization_id, approver_id: user.id}
+    can :apply_sent,     Documents::Order, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    can :apply_sent,     Documents::Order, document: { sender_organization_id: user.organization_id, creator_id: user.id }
+    can :apply_trashed,  Documents::Order, document: { sender_organization_id: user.organization_id }
 
     # Documents::Report
     # Documents::ReportStateMachine
 
-    can :apply_draft,    Documents::Report, document:{sender_organization_id: user.organization_id}
-    can :apply_prepared, Documents::Report, document:{sender_organization_id: user.organization_id}
-    can :apply_approved, Documents::Report, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::Report, document:{sender_organization_id: user.organization_id, approver_id: user.id}
-    can :apply_sent,     Documents::Report, document:{sender_organization_id: user.organization_id, creator_id: user.id}
-    can :apply_trashed,  Documents::Report, document:{sender_organization_id: user.organization_id}
-    can :apply_accepted, Documents::Report, document:{recipient_organization_id: user.organization_id}, order: {document:{approver_id: user.id}}
-    can :apply_rejected, Documents::Report, document:{recipient_organization_id: user.organization_id}, order: {document:{approver_id: user.id}}
+    can :apply_draft,    Documents::Report, document: { sender_organization_id: user.organization_id }
+    can :apply_prepared, Documents::Report, document: { sender_organization_id: user.organization_id }
+    can :apply_approved, Documents::Report, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    can :apply_sent,     Documents::Report, document: { sender_organization_id: user.organization_id, approver_id: user.id }
+    can :apply_sent,     Documents::Report, document: { sender_organization_id: user.organization_id, creator_id: user.id }
+    can :apply_trashed,  Documents::Report, document: { sender_organization_id: user.organization_id }
+    can :apply_accepted, Documents::Report, document: { recipient_organization_id: user.organization_id }, order: { document: { approver_id: user.id } }
+    can :apply_rejected, Documents::Report, document: { recipient_organization_id: user.organization_id }, order: { document: { approver_id: user.id } }
 
     can :create, Permit if user.permissions.exists?('6')
 
@@ -78,8 +76,8 @@ class Ability
       if user.permissions.exists?('10')
         can :manage, Organization
       elsif user.organization_id
-        can :crud, Organization, :id => user.organization_id
-        can :manage, User, :organization_id => user.organization_id
+        can :crud, Organization, id: user.organization_id
+        can :manage, User, organization_id: user.organization_id
       else
         cannot :read, Organization
         cannot :read, User
