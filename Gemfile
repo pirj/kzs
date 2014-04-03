@@ -10,7 +10,6 @@ gem 'squeel'
 gem 'ransack'
 
 gem 'execjs'
-gem 'therubyracer'
 
 gem 'paperclip', '~> 3.0'
 gem 'devise'
@@ -79,19 +78,22 @@ gem 'hipchat'
 gem 'spreadsheet'
 
 
+
 group :production do
   gem 'thin'
 end
 
 group :assets do
+  #gem 'tilt', '~>1.3.3'
   gem 'sass-rails',   '~> 3.2.6'
-  gem 'tilt', '~>1.3.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'compass'
+  gem 'compass-rails'
+  gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
-  gem 'compass-rails'
   gem 'font-awesome-rails'
   gem 'turbo-sprockets-rails3'
+  gem 'therubyracer'
 end
 
 group :development, :test do

@@ -8,9 +8,9 @@ module Documents::ResourceHelper
   end
 
   def resource_sortable_icon(column, opts={})
-    order_class = resource_sortable_icon_class(column)
+    order_class = resource_sortable_icon_class(column) + ' js-tooltip'
     resource_sortable_wrapper column, opts do
-      content_tag(:span, nil, class: order_class)
+      content_tag(:span, nil, class: order_class, title: resource_sortable_hint_title(column))
     end.html_safe
   end
 
@@ -33,5 +33,17 @@ module Documents::ResourceHelper
   # иконка сортировки,стрелка вверх-вниз в зависимости от ASC DESC текущей сортировки
   def resource_sortable_icon_class(column)
     column == sort_column ? "fa fa-sort-#{sort_direction}" : 'fa fa-sort'
+  end
+
+  def resource_sortable_hint_title(column)
+    txt = ['Сортировать']
+    txt << if column == sort_column
+            if sort_direction == 'asc'
+              'Я → А'
+            elsif sort_direction == 'desc'
+              'А → Я'
+            end
+          end
+    txt.join(' ')
   end
 end
