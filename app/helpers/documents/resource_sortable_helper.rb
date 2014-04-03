@@ -1,4 +1,4 @@
-module Documents::ResourceHelper
+module Documents::ResourceSortableHelper
   def resource_sortable(column, title = nil)
     icon_class = resource_sortable_icon_class(column)
     resource_sortable_wrapper column do
@@ -22,6 +22,8 @@ module Documents::ResourceHelper
 
   private
 
+  # обертка под кнопку сортировки
+  # представляет из себя ссылку,внутрь которой помещается кода — текст и иконки для кнопки
   def resource_sortable_wrapper(column, opts = {}, &block)
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_class = "link link-success link-nounderline #{opts.delete(:class)}"
