@@ -115,7 +115,7 @@ class Documents::DocumentsController < ResourceController
 
   def end_of_association_chain
     super
-    .visible_for(current_organization.id)
+    .accessible_by(current_user)
     .includes(:sender_organization, :recipient_organization)
     .order(sort_column + ' ' + sort_direction)
   end
