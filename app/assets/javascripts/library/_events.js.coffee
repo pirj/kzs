@@ -103,6 +103,10 @@ $ ->
   )
 
   # popover-over
+  clearPopover = () ->
+    $('.js-popover-content').hide()
+    $('.js-popover').removeClass('active')
+    return
 
   $('.js-popover').on('click', (e) ->
     e.preventDefault()
@@ -111,15 +115,16 @@ $ ->
     $('.js-popover-content[data-target=' + target + ']').toggle()
     $(this).toggleClass('active')
   )
+  $('.js-popover-close').on('click', (e) ->
+    clearPopover()
+  )
 
   # CLEAR PAGE
 
   $(document).click (e) ->
 
     return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
-
-    $('.js-popover-content').hide()
-    $('.js-popover').removeClass('active')
+    clearPopover()
 
     event.stopPropagation()
     return

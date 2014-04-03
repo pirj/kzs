@@ -3,17 +3,27 @@
   color: #999999;
   border-radius: 15px;
   padding-right: 25px;
-  &.active{
-    background-color: #1ba0e1;
-    color:#fff;
-    box-shadow: none;
-  }
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.7s ease;
   .caret{
     display: inline-block;
     position: absolute;
     top: 42%;
     right: 11px;
+    transition: -webkit-transform 0.4s ease-in-out;
   }
+  &:hover{
+    box-shadow: rgba(0,0,0,0.4) 0px 1px 2px;
+  }
+  &.active{
+    background-color: #1ba0e1;
+    color:#fff;
+    box-shadow: none;
+    .caret{
+      -webkit-transform: rotate(180deg);
+    }
+  }
+
+
 }
 
 $el: '._user-bar';
