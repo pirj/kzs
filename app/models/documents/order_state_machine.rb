@@ -12,9 +12,9 @@ module Documents
     state :trashed
 
     transition from: :unsaved,  to: [:draft, :prepared]
-    transition from: :draft,    to: [:draft, :prepared, :trashed]
+    transition from: :draft,    to: [:draft, :prepared]
     transition from: :prepared, to: [:approved, :draft, :prepared, :trashed]
-    transition from: :approved, to: [:sent]
+    transition from: :approved, to: [:sent, :trashed]
     transition from: :sent,     to: [:accepted, :rejected]
 
     after_transition(to: :approved) do |accountable, transition|

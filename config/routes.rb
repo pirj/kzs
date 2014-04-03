@@ -20,7 +20,7 @@ Kzs::Application.routes.draw do
   # a convenient alias
   get '/documents' => 'documents/documents#index', as: :documents
   namespace :documents do
-    resources :documents, path:'', only: ['index', 'edit', 'show'] do
+    resources :documents, path:'', only: ['index', 'edit', 'show', 'destroy'] do
       # TODO BAD
       # match '/documents/batch' => 'documents#batch'
       # GOOD

@@ -66,6 +66,7 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
+  before_destroy :destroy_or_trash
   before_destroy { |document| document.conformers.clear }
 
   validates_presence_of :title,
@@ -181,9 +182,30 @@ class Document < ActiveRecord::Base
     User.first.id
   end
 
-  # TODO: add paranoia - this will handle the destruction
+  # Можно ли удалить этот документ?
+  # Возвращает true, если документ черновик или документу доступно переведение в статус trashed
+  def can_delete?
+    draft? || applicable_states.include?('trashed')
+  end
+
+  # Черновик?
+  def draft?
+    state == 'draft'
+  end
 
   private
+
+  # Используется как before_delete
+  # Если документ - черновик, разрешаем удаление
+  # Если документ - не черновик, просто переводим документ в статус "удален"
+  def destroy_or_trash
+    unless draft?
+      accountable.transition_to!('trashed')
+      return false
+    end
+
+    true
+  end
 
   def can_have_many_recipients?
     accountable_type == 'Documents::OfficialMail'
