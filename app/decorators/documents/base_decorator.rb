@@ -163,8 +163,6 @@ module Documents
 
     def related_order_link_with_label
       element_wrapper object.class == Documents::Report do
-
-
           h.content_tag( :div, I18n.t("documents.table.document_labels.related_order"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
               h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
                 h.content_tag( :span, Documents::Order.find(object.order_id).title, class: 'muted' )

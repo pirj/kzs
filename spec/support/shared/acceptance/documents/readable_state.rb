@@ -1,5 +1,7 @@
+# дополнительный перевод статусов,когда документо прочтен
+# TODO-justvitalius: этот тест проверяет не то,что нужно.
 shared_examples_for 'readable_state' do
-  describe 'special translates for sent states for recipient and sender' do
+  describe 'displayning "read" state when document has been opened by recipient director' do
     background do
       document.transition_to!(:draft)
       document.transition_to!(:prepared)
@@ -8,7 +10,7 @@ shared_examples_for 'readable_state' do
       visit path
     end
 
-    it 'should not equals recipient-user and sender-user' do
+    scenario 'should not equals recipient-user and sender-user' do
       expect(sender_user).to_not eq recipient_user
     end
 
@@ -19,7 +21,7 @@ shared_examples_for 'readable_state' do
         sign_in_with sender_user.email, 'password'
       end
 
-      it 'should render sender-state name' do
+      scenario 'render sender-state name' do
         within '.spec-doc-state-field' do
           expect(page).to have_content(/Отправлен/)
         end
@@ -33,7 +35,7 @@ shared_examples_for 'readable_state' do
         sign_in_with recipient_user.email, 'password'
       end
 
-      it 'should render recipient-state name' do
+      scenario 'should render recipient-state name' do
         within '.spec-doc-state-field' do
           expect(page).to have_content(/Получен/)
         end

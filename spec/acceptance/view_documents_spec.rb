@@ -1,15 +1,15 @@
 require 'acceptance/acceptance_helper'
 
-feature "List documents page correctly works", %q() do
+feature 'User cam manage documents from documents list', %q() do
 
   let(:root) { root_path }
   let(:doc_page_path) { documents_path }
   let!(:user) { FactoryGirl.create(:user) }
-  describe 'mail has a button to answer' do
+  describe 'documents list' do
 
-    it 'view documents page opened' do
-      sign_in_with user.email, "password"
+    scenario 'visit documents list page' do
       visit doc_page_path
+      sign_in_with user.email, 'password'
       expect(page).to have_content('Документы')
     end
 

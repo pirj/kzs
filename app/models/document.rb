@@ -176,7 +176,7 @@ class Document < ActiveRecord::Base
     document_transitions.exists?(to_state: 'prepared')
   end
 
-  # TODO: @prikha stub out user_id to replace it properly
+  # TODO-prikha: stub out user_id to replace it properly
   def user_id
     User.first.id
   end

@@ -1,3 +1,4 @@
+# ситуации,когда документ можно редактировать
 shared_examples_for 'document_editable' do
   describe 'allow edit document before sent' do
     subject { page }

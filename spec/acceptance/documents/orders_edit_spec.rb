@@ -11,7 +11,7 @@ feature "Users edit and create an order", %q() do
   describe 'executer custom placeholder', js: true do
     let(:path) { new_documents_order_path }
 
-    it 'should be render custom placeholder' do
+    pending 'should be render custom placeholder' do
       visit path
       sign_in_with user.email, 'password'
 
@@ -35,15 +35,15 @@ feature "Users edit and create an order", %q() do
 
       scenario 'should create new one order' do
         # TODO-levtolstoi нужно отрефакторить метод выбора chosen, не нормально, что мы передаем label = БЛА-БЛА-БЛА
-        select_from_chosen label = 'Контрольное лицо'
-        select_from_chosen label = 'Организация-получатель'
+        select_from_chosen 'Контрольное лицо'
+        select_from_chosen 'Организация-получатель'
 
         expect { click_button 'Подготовить' }.to change(Documents::Order, :count).by(1)
         expect(page).to_not have_content 'не может быть пустым'
         expect(current_path).to eq(documents_path)
       end
 
-      scenario 'should not create new order' do
+      pending 'should not create new order' do
         expect { click_button 'Подготовить' }.to_not change(Documents::Order, :count)
         expect(current_path).to_not eq(documents_path)
         expect(page).to have_content 'не может быть пустым'

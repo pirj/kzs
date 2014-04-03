@@ -1,3 +1,4 @@
+# варианты переовода статуса 'sent' в зависимости от того,какая сторона просматривает документ
 shared_examples_for 'sent_state_translatable' do
   describe 'special translates for sent states for recipient and sender' do
 
