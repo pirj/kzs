@@ -50,6 +50,34 @@ $ ->
   # hide all inputs by on after page loaded
   $(T.main_form_container).find('input, textarea, select').closest('.form-group').hide()
 
+
+  # datepicket minData assigned
+
+  if $('#new_documents_order').length
+
+    target = $('.js-datepicker.js-deadline')
+
+    d = new Date( JSON.parse(target[0].dataset.minDate) )
+
+    leadZero = (number) ->
+      length = 2
+      number = "0" + number  while number.toString().length < length
+      number
+
+    day = leadZero (d.getDate())
+    month = leadZero (d.getMonth()+1)
+    year = d.getFullYear()
+    opts = _.extend(global.datepicker, minDate: (day+'.'+month+'.'+year) )
+
+    target.datepicker( "destroy" );
+
+    target.datepicker opts
+
+
+#  $(document).on('click', '.js-datepicker.js-deadline', (e) ->
+#    console.log $(e.target)
+#    $(e.target).datepicker(opts)
+#  )
   # создание новой таски в модальном окне
   # при открытии модального окна, клонируем в него заготовку под форму.
   # и в этой заготовке управляем видимостью элементов
@@ -69,6 +97,7 @@ $ ->
     
     #  set_task_deadline: -> Собирает даду дедлайна, передает в глобал для пикеров зависимых от дедлайна
     date = $('.js-datepicker.js-deadline').datepicker('getDate')
+    console.log date
     opts = _.extend(global.datepicker, maxDate: date)
 
 
