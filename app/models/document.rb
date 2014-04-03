@@ -135,7 +135,7 @@ class Document < ActiveRecord::Base
   end
 
   def applicable_states
-    accountable.allowed_transitions
+    accountable.allowed_transitions - ["trashed"]
   end
 
   # title and unique-number together

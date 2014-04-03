@@ -50,6 +50,12 @@ module Documents
     end
 
 
+    # return Documents::Order class (or Report, or Mail)
+    def accountable
+      _doc = object.respond_to?(:object) ? object.object : object # if decorates object was decorated
+      @_state_decorator_accountable ||= _doc.respond_to?(:document) ? _doc : _doc.accountable
+    end
+
     protected
 
     # return translated for state from locale.yml
@@ -65,11 +71,6 @@ module Documents
       I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}")
     end
 
-    # return Documents::Order class (or Report, or Mail)
-    def accountable
-      _doc = object.respond_to?(:object) ? object.object : object # if decorates object was decorated
-      @_state_decorator_accountable ||= _doc.respond_to?(:document) ? _doc : _doc.accountable
-    end
 
     # some extra translates for sender and recipients user roles
     def state_postfix state

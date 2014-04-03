@@ -47,7 +47,7 @@ module Kzs
 
     config.i18n.locale = :ru
     config.i18n.default_locale = :ru
-    config.i18n.enforce_available_locales = true
+    #config.i18n.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

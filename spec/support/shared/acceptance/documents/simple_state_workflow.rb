@@ -41,7 +41,7 @@ shared_examples_for 'simple_state_workflow' do
 
         scenario 'should have action-states in popup' do
           within '.spec-doc-state-field' do
-            click_link 'Подготовлено'
+            click_link /Подготовлен/
             expect(page).to have_content 'Подготовить'
             expect(page).to have_content 'В черновики'
             expect(page).to have_content 'Подписать'

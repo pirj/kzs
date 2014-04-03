@@ -54,11 +54,13 @@ module DocumentStatesHelper
     end.html_safe
   end
 
+
   # дополнительные кнопки «отмена» и «история» для всплывающего окна работы со статусами
   def states_bar_buttons doc
     doc = doc.document if doc.respond_to?(:document)
     content_tag(:div, class: '_doc-state__actions') do
-      states_action_links(doc).html_safe +
+      states_action_links(doc) +
+      delete_action_link(doc) +
       link_to( history_documents_document_path(doc), remote: true ) do
         content_tag(:span, nil, class: 'fa fa-clock-o') +
         content_tag(:span, 'история статусов')
@@ -68,6 +70,15 @@ module DocumentStatesHelper
         content_tag(:span, 'отмена')
       end.html_safe
     end.html_safe
+  end
+
+  def delete_action_link(doc)
+    doc = doc.respond_to?(:document) ? doc.document : doc
+    if doc.can_delete?
+      link_to 'Удалить', documents_document_path(doc),
+              method: :delete,
+              confirm: 'Вы уверены?'
+    end
   end
 
 end

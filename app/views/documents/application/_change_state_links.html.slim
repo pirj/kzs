@@ -11,7 +11,7 @@ span.spec-doc-action-buttons
   - %w(draft).each do |state|
     = change_state_link_to(resource, state, class: 'btn btn-default') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
-  = link_to "Удалить", documents_document_path(resource.document), method: :delete, class: 'btn btn-default', confirm: 'Вы уверены?' if resource.document.can_delete?
+  = link_to 'Удалить', documents_document_path(resource.document), method: :delete, class: 'btn btn-danger', confirm: 'Вы уверены?' if resource.document.can_delete?
 
 
 / TODO-justvitalius: next code ignores order and importance of buttons.
