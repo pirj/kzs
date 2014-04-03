@@ -98,26 +98,19 @@ class Documents::DocumentsController < ResourceController
 
   private
 
-  # TODO: might be extracted out
   def batch_can?(state, accountables)
     cans = accountables.map do |accountable|
-      a = accountable.can_transition_to?(state)
-      b = can_apply_state?(state, accountable)
-      a && b
+      accountable.can_transition_to?(state) &&
+        can_apply_state?(state, accountable)
     end
     cans.all?
   end
-
-  # TODO: enable or delete pushing unapproved records up
-  # using such lines:
-  #   select('documents.*').
-  #   order('documents.approved_at nulls first').
 
   def end_of_association_chain
     super
     .accessible_by(current_ability)
     .includes(:sender_organization, :recipient_organization)
-    .order(sort_column + ' ' + sort_direction)
+    .order(avoid_ambiguous(sort_column) + ' ' + sort_direction)
   end
 
   def default_metadata
@@ -125,31 +118,27 @@ class Documents::DocumentsController < ResourceController
   end
 
   def sort_column
-    column = sort_fields.include?(params[:sort]) ? params[:sort] : 'updated_at'
-    # TODO-prikha: следующая строка закомментирована, потому что при сортировке по полю title,
-    # она начинает искать по documents.title
-    #avoid_ambiguous(column)
+    sort_fields.include?(params[:sort]) ? params[:sort] : 'updated_at'
   end
 
   def sort_fields
     resource_class.column_names + complex_sort_fields
   end
 
+  # В случае если происходит многократный join одной и той же таблицы ее имя изменяется автоматически
+  # в первом случае это имя самой таблицы, а затем имя ассоциации
   def complex_sort_fields
     %w(organizations.short_title recipient_organizations_documents.short_title)
   end
 
-  # TODO-prikha пожалуйста опиши зачем этот метод,
-  # не понятно, почему етсь колонки, к которым
+  # Если в рамках одного запроса появляется несколько таблиц с одинаковыми именами столбцов
+  # мы увидим PG::AmbiguousColumn: ERROR:  column reference "updated_at" is ambiguous
+  # вот чтобы этого избежать можно однозначно определить имена столбцов.
   def avoid_ambiguous(column_name)
     if column_name.match('\.')
       column_name
     else
-      [resource_table_name, column_name].join('.')
+      [resource_class.table_name, column_name].join('.')
     end
-  end
-
-  def resource_table_name
-    resource_class.table_name
   end
 end
