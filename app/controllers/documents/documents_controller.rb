@@ -79,12 +79,10 @@ class Documents::DocumentsController < ResourceController
       @accountables.each do |accountable|
         accountable.transition_to!(state, default_metadata)
       end
-      flash[:notice] = t('documents_updated')
+      redirect_to :back, flash: { notice: t('documents_updated') }
     else
-      flash[:error] = t('access_denied')
+      redirect_to :back, flash: { error: t('access_denied') }
     end
-
-    redirect_to :back, notice: flash[:notice], error: flash[:error]
   end
 
   def history
