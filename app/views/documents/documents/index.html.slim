@@ -1,8 +1,3 @@
-/= content_for :page_header do
-  = header_title do
-    h1 Документы
-
-
 = content_for :page_header do
   / TODO: @vit need refactor
   = header_title do
@@ -28,35 +23,16 @@
       ul.dropdown-menu role="menu"
         - if params[:scope]
           li
-            = link_to documents_path do
-              | Все документы
-        / TODO-tagir: слудющие строки можно записать в одну вот так:
-        / li = linkt_to 'черновики', documents_path()
-        li
-          = link_to documents_path(with_state:'draft') do
-            | Черновики
-        li
-          = link_to documents_path(with_state:'prepared') do
-            | Подготовленные
-        li
-          = link_to documents_path(with_state:'approved') do
-            | Утвержденные
-        li
-          = link_to documents_path(with_type:'mails') do
-            | Письма
-        li
-          = link_to documents_path(with_type:'orders') do
-            | Распоряжения
-        li
-          = link_to documents_path(with_type:'reports') do
-            | Акты
-
-
-
+            = link_to 'Все документы', documents_path
+        li = link_to 'Черновики', documents_path(with_state:'draft')
+        li = link_to 'Подготовленные', documents_path(with_state:'prepared')
+        li = link_to 'Утвержденные', documents_path(with_state:'approved')
+        li = link_to 'Письма', documents_path(with_type:'mails')
+        li = link_to 'Распоряжения', documents_path(with_type:'orders')
+        li = link_to 'Акты', documents_path(with_type:'reports')
 
 = content_for :page_header_search do
   = render 'quick_search_for'
-
 
 = render 'filter'
 
@@ -70,7 +46,6 @@ ul.nav.nav-inline.btn-block
       li= link_to 'письмо', new_polymorphic_path(Documents::OfficialMail)
       li= link_to 'распоряжение', new_polymorphic_path(Documents::Order)
       li= link_to 'акт', new_polymorphic_path(Documents::Report)
-
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-default', data:{ toggle: 'dropdown' } do
       span Действия
@@ -78,22 +53,13 @@ ul.nav.nav-inline.btn-block
     span.dropdown-arr
     ul.dropdown-menu.js-documents-actions-list
       li выберите документы
-
   li
     = link_to '#', class: 'btn btn-default', data: { toggle: 'modal', target: '.js-document-filter-modal' } do
       span.fa.fa-filter
       span Фильтр
-
   li
     = link_to request.url, class: 'btn btn-default' do
       span.fa.fa-refresh
-
   li = link_to 'сбросить фильтрацию', documents_path, class: 'btn btn-link-muted'
-
-
-
-
 = render 'table'
 = paginate collection
-
-

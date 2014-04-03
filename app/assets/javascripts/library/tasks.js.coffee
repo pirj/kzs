@@ -2,7 +2,7 @@ $ ->
   window.app.tasks =
     order_tasks_list:
       form: '.js-tasks-order-task-form'
-
+      task: '.js-task'
     order_tasks_form:
       container: '.js-tasks-main-form'
       add_task_btn: '.js-tasks-add-task'
@@ -158,31 +158,24 @@ $ ->
   # submit form on task checked over ajax
   $(document).on('ifChecked ifUnchecked', "#{T.order_tasks_list.form} input", (e) ->
     e.preventDefault()
-    e.stopImmediatePropagation()
-    # TODO-tagir: класс для javascript называется js- а не j-
-    # TODO-tagir: перенеси свои классы типа '.js-tasks-order-task-form' в начало файла в переменные в раздел 'order_tasks_list'
-    # TODO-tagir: после if не оствляем пустую строку
     if e.type is 'ifChecked'
-
-      $tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]')
-      $completed_tasks = $('.js-tasks-order-task-form' + ' input[type=checkbox]:checked') #throw RuntimeException("exit")#('Ошибка!')
-
+      $tasks = $(window.app.tasks.order_tasks_list.form + ' input[type=checkbox]')
+      $completed_tasks = $(window.app.tasks.order_tasks_list.form + ' input[type=checkbox]:checked') #throw RuntimeException("exit")#('Ошибка!')
       if $tasks.length-$completed_tasks.length==0
         if confirm("Вы уверены? Отменить невозможно!")
-          $(e.target).closest('.j-task').addClass('m-task-completed')
+          $(e.target).closest(window.app.tasks.order_tasks_list.task).addClass('m-task-completed')
           $form = $(e.target).closest(T.order_tasks_list.form)
           $form.submit()
         else
           location.reload()
       else
-        $(e.target).closest('.j-task').addClass('m-task-completed')
+        $(e.target).closest(window.app.tasks.order_tasks_list.task).addClass('m-task-completed')
         $form = $(e.target).closest(T.order_tasks_list.form)
         $form.submit()
     else
-      $(e.target).closest('.j-task').removeClass('m-task-completed')
+      $(e.target).closest(window.app.tasks.order_tasks_list.task).removeClass('m-task-completed')
       $form = $(e.target).closest(T.order_tasks_list.form)
       $form.submit()
-
   )
 
 
