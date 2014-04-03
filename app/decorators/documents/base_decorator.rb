@@ -169,7 +169,9 @@ module Documents
       element_wrapper object.class == Documents::Report do
           h.content_tag( :div, I18n.t("documents.table.document_labels.related_order"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
               h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
-                h.content_tag( :span, Documents::Order.find(object.order_id).title, class: 'muted' )
+                h.link_to h.documents_order_path(object.order_id), class: 'muted', target: '_blank' do
+                  h.content_tag( :span, Documents::Order.find(object.order_id).title, class: 'muted' )
+                end
               end
       end
     end
