@@ -1,4 +1,7 @@
 # coding: utf-8
+# TODO-justvitalius: технический долг перед декоратором
+# - действия-статусы для многих и одиночных эелементов вынести в декоратор и заюзать их вл вьюхе
+# - выделить несколько декораторов, которые рисуют организаций,пользователей,какие-то собственные атрибуты и все заинклудить
 module Documents
   class BaseDecorator < Draper::Decorator
     delegate_all
@@ -61,7 +64,8 @@ module Documents
     def actions
       collection = object.accountable.applicable_states || []
       single = object.accountable.single_applicable_actions || []
-      (collection + single).to_s
+      # удаляем действие удалить, потому что оно как статус не нужно во вьюхах
+      (collection + single).reject{ |a| a=='trashed' }.compact.to_s
     end
 
     def state popover_position = :left
