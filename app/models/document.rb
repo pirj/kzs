@@ -66,7 +66,6 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
-  before_destroy :destroy_or_trash
   before_destroy { |document| document.conformers.clear }
 
   validates_presence_of :title,
@@ -193,18 +192,26 @@ class Document < ActiveRecord::Base
     state == 'draft'
   end
 
+  # Удалить документ 
+  # Если документ - черновик, удаляем навсегда
+  # Если документ - не черновик, просто переводим документ в статус "удален", сохраняя юзера, который это сделал
+  def destroy_by user
+    if draft?
+      destroy
+    else
+      accountable.transition_to!('trashed', {user_id: user.id})
+    end
+  end
+
   private
 
-  # Используется как before_delete
-  # Если документ - черновик, разрешаем удаление
-  # Если документ - не черновик, просто переводим документ в статус "удален"
-  def destroy_or_trash
-    unless draft?
-      accountable.transition_to!('trashed')
-      return false
-    end
-
-    true
+  # Запрещаем удаление "извне"
+  # Вместо destroy используйте destroy_by
+  #
+  # Это сделано потому, что большинство документов не удаляется на самом деле,
+  # а при переводе в статус "удален", нужно также хранить метаданные (например, id пользователя, который удалил документ)
+  def destroy
+    super
   end
 
   def can_have_many_recipients?
