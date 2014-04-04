@@ -1,0 +1,24 @@
+- if session[:welcome] == true
+  - session[:welcome] = false
+  javascript:
+    $(document).ready(function () {
+      window.app.enable_welcome ()
+    })
+  .text-center.modal-simple.modal.js-welcome-screen data-backdrop="static"
+    .modal-dialog-center
+      .modal-content-simple
+        h2
+          | Добро пожаловать,
+          br #{current_user.first_name_with_last_name}
+        /= documents_inbox.inspect
+        - if documents_inbox.badge_label
+          .js-screen-user-actions
+            p У вас#{documents_inbox.badge} непрочитанных сообщений.
+            .btn-group
+              = link_to documents_path, class: 'btn btn-primary'
+                | Посмотреть
+              .btn.btn-default.js-screen-exit Пропустить
+        - else
+          p
+            | сейчас вы будете автоматически
+            br перенаправлены на страницу виджетов

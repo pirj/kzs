@@ -42,6 +42,21 @@
   z-index: ($zindex-modal-background + 10);
 }
 
+.modal-dialog-center {
+  @extend .modal-dialog;
+  margin-top:15%;
+}
+
+.modal-simple {
+  h2 {
+    color: $color-green-darker;
+  }
+  p {
+    color: $input-color;
+    line-height: 20px;
+  }
+}
+
 // Actual modal
 .modal-content {
   position: relative;
@@ -50,6 +65,14 @@
   border: 1px solid $modal-content-border-color;
   border-radius: $border-radius-large;
   @include box-shadow(0 3px 9px rgba(0,0,0,.5));
+  background-clip: padding-box;
+  // Remove focus outline from opened modal
+  outline: none;
+}
+
+.modal-content-simple {
+  position: relative;
+  border-radius: $border-radius-large;
   background-clip: padding-box;
   // Remove focus outline from opened modal
   outline: none;
@@ -67,6 +90,12 @@
   // Fade for backdrop
   &.fade { @include opacity(0); }
   &.in { @include opacity(.5); }
+}
+
+.modal-backdrop-white {
+  @extend .modal-backdrop;
+  background-color: $modal-backdrop-white-bg;
+  &.in { @include opacity(.9); }
 }
 
 // Modal header

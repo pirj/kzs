@@ -23,6 +23,16 @@ window.global =
     minDate: new Date()
 
 
+window.app.enable_welcome = ->
+  $('.js-welcome-screen').modal('show')
+  $('.modal-backdrop').removeClass().addClass('modal-backdrop-white in')
+  if $('.js-welcome-screen').find('.js-screen-user-actions').length > 0
+    $(document).one 'click', '.js-screen-exit', (e) ->
+      $('.modal, .modal-backdrop-white').fadeOut(1000, -> $(@).modal('hide'))
+  else
+    $('.modal, .modal-backdrop-white').delay(1500).fadeOut(1000, -> $(@).modal('hide'))
+
+
 $ ->
   # run code pretty:
   window.prettyPrint and prettyPrint()

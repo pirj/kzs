@@ -42,6 +42,12 @@ class ApplicationController < ActionController::Base
   def organizations
     @all_organizations ||= Organization.order('short_title ASC')
   end
+  
+  def after_sign_in_path_for(resource)
+    session[:welcome] = true
+    super
+  end
+  #current_user.domain_prefix
 
   # unless Rails.application.config.consider_all_requests_local
   #   rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }

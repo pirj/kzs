@@ -106,8 +106,8 @@ $font-size-small:         13px !default;
 
 
 $font-size-h1:            36px !default;
-$font-size-h2:            26px !default;
-$font-size-h3:            24px !default;
+$font-size-h2:            32px !default;
+$font-size-h3:            26px !default;
 
 $font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
 $font-size-h5:            $font-size-base !default;
@@ -549,9 +549,10 @@ $modal-content-bg:                             #fff !default;
 $modal-content-border-color:                   rgba(0,0,0,.2) !default;
 $modal-content-fallback-border-color:          #999 !default;
 
-$modal-backdrop-bg:           #000 !default;
-$modal-header-border-color:   #e5e5e5 !default;
-$modal-footer-border-color:   $modal-header-border-color !default;
+$modal-backdrop-bg:             #000 !default;
+$modal-backdrop-white-bg:       #fff !default;
+$modal-header-border-color:     #e5e5e5 !default;
+$modal-footer-border-color:     $modal-header-border-color !default;
 
 
 // Alerts
