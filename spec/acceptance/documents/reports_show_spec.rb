@@ -34,6 +34,7 @@ feature "Users review reports", %q() do
     end
 
     scenario 'should not create new report' do
+      skip_welcome
       expect { click_button 'Подготовить' }.to_not change(Documents::Report, :count)
       expect(current_path).to_not eq(new_documents_report_path)
       expect(page).to have_content 'не может быть пустым'

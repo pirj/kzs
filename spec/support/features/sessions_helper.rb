@@ -16,9 +16,16 @@ module Features
 
       end
 
+    def skip_welcome
+      execute_script(%Q!$('.js-welcome-screen, .modal-backdrop-white').remove()!)
+    end
+
     def sign_out_js
+      skip_welcome
       find('.spec-user-logout').click
     end
+
+
 
   end
 end

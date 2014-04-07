@@ -19,6 +19,7 @@ shared_examples_for 'simple_state_workflow' do
 
         scenario 'should have action-states in popup' do
           within '.spec-doc-state-field' do
+            skip_welcome
             click_link 'Черновик'
             expect(page).to have_content 'Подготовить'
             expect(page).to have_content 'В черновики'
@@ -41,7 +42,7 @@ shared_examples_for 'simple_state_workflow' do
 
         scenario 'should have action-states in popup' do
           within '.spec-doc-state-field' do
-            click_link /Подготовлен/
+            click_link 'Подготовлен'
             expect(page).to have_content 'Подготовить'
             expect(page).to have_content 'В черновики'
             expect(page).to have_content 'Подписать'

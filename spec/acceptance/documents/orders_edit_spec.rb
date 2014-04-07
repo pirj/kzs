@@ -37,7 +37,7 @@ feature "Users edit and create an order", %q() do
         # TODO-levtolstoi нужно отрефакторить метод выбора chosen, не нормально, что мы передаем label = БЛА-БЛА-БЛА
         select_from_chosen 'Контрольное лицо'
         select_from_chosen 'Организация-получатель'
-
+        skip_welcome
         expect { click_button 'Подготовить' }.to change(Documents::Order, :count).by(1)
         expect(page).to_not have_content 'не может быть пустым'
         expect(current_path).to eq(documents_path)

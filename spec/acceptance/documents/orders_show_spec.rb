@@ -108,6 +108,7 @@ feature "Users review order", %q() do
         sleep 1
         sign_in_with recipient_user.email, 'password'
         visit path
+        skip_welcome
         all('.iCheck-helper').each do |i|
           i.click
           sleep 0.1

@@ -2,6 +2,7 @@ module Features
   module ChosenHelper
     def select_from_chosen(label)
       field_id = find_field(label, visible: false)[:id]
+      skip_welcome
       find("##{field_id}_chosen").click
       sleep 1
       within "##{field_id}_chosen" do

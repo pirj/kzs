@@ -28,9 +28,9 @@ window.app.enable_welcome = ->
   $('.modal-backdrop').removeClass().addClass('modal-backdrop-white in')
   if $('.js-welcome-screen').find('.js-screen-user-actions').length > 0
     $(document).one 'click', '.js-screen-exit', (e) ->
-      $('.modal, .modal-backdrop-white').fadeOut(1000, -> $(@).modal('hide'))
+      $('.modal, .modal-backdrop-white').fadeOut(1000, -> $(@).modal('hide').remove())
   else
-    $('.modal, .modal-backdrop-white').delay(1500).fadeOut(1000, -> $(@).modal('hide'))
+    $('.modal, .modal-backdrop-white').delay(1500).fadeOut(1000, -> $(@).modal('hide').remove())
 
 
 $ ->
