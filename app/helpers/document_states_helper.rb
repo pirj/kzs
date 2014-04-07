@@ -45,7 +45,8 @@ module DocumentStatesHelper
     accountable = d_doc.accountable
 
     if doc.applicable_states
-      doc.applicable_states.map do |state|
+      # TODO-justvitalius: не дело вот так вырезать удаленный статус, пора уже отрефакторить декораторы.
+      doc.applicable_states.reject{ |s| s.to_sym==:trashed }.map do |state|
         #link_to d_doc.to_humanize_state(state) , batch_documents_documents_path( document_ids: [parent_instance.id], state: state)
         change_state_link_to(accountable, state) if accountable.allowed_transitions.include?(state) && can_apply_state?(state, accountable)
       end.join('').html_safe
@@ -55,7 +56,7 @@ module DocumentStatesHelper
   end
 
 
-  # дополнительные кнопки «отмена» и «история» для всплывающего окна работы со статусами
+  # дополнительные кнопки «удалить», «отмена» и «история» для всплывающего окна работы со статусами
   def states_bar_buttons doc
     doc = doc.document if doc.respond_to?(:document)
     content_tag(:div, class: '_doc-state__actions') do
