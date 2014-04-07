@@ -107,6 +107,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
   gem 'bullet'
+  gem 'yard' # Для документации
 end
 
 group :test do
