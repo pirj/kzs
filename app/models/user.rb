@@ -95,4 +95,35 @@ class User < ActiveRecord::Base
     organization && organization.director?(self)
   end
 
+  # Согласовать документ
+  # @param document [Document] документ
+  # @param options
+  #   - @param comment [String] комментарий (необязательный параметр)
+  # @example
+  #   user.conform document, comment: 'Отлично составлено!'
+  # @see Document
+  def conform(document, options = {})
+    options[:comment] ||= ''
+
+    raise RuntimeError, 'User is not in the confomers list for the document' unless document.conformers.include? self
+    raise RuntimeError, 'User has already made his decision for this document' if document.conformed_users.include? self
+
+    conformations.create(document: document, comment: options[:comment], conformed: true)
+  end
+
+  # Отказать в согласовании документа
+  # @param document [Document] документ
+  # @param comment [String] комментарий 
+  # @example
+  #   user.deny document, 'Я не буду это подписывать!'
+  # @see Document
+  def deny document, comment
+    comment.strip!
+
+    raise ArgumentError, 'Non-empty comment is required' if comment.nil? || comment.empty?
+    raise RuntimeError, 'User is not in the confomers list for the document' unless document.conformers.include? self
+
+    conformations.create(document: document, comment: comment, conformed: false)
+  end
+
 end

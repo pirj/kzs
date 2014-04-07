@@ -1,5 +1,5 @@
 class Conformation < ActiveRecord::Base
-  attr_accessible :document_id, :user_id, :comment
+  attr_accessible :document, :user, :comment, :conformed
 
   belongs_to :documents
   belongs_to :users
