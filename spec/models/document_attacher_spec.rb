@@ -9,7 +9,7 @@ describe DocumentAttacher do
   it "shoud be able to clear the state" do
     accountable = FactoryGirl.create(:mail_with_attachment)
     existing_attachment = accountable.attached_documents.first
-    attachment = FactoryGirl.create(:mail_approved)
+    attachment = FactoryGirl.create(:approved_mail)
 
     attacher = DocumentAttacher.new(accountable, @session, @user)
 
@@ -38,7 +38,7 @@ describe DocumentAttacher do
 
   context "When pre-attaching a document" do
     it "should be able to pre-attach approved document" do
-      attachment = FactoryGirl.create(:mail_approved)
+      attachment = FactoryGirl.create(:approved_mail)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
       attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.attach attachment
@@ -50,7 +50,7 @@ describe DocumentAttacher do
     end
 
     it "should not repeat attached document when attached single document several times" do
-      attachment = FactoryGirl.create(:mail_approved).document
+      attachment = FactoryGirl.create(:approved_mail).document
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
       attacher = DocumentAttacher.new(accountable, @session, @user)
       3.times {attacher.attach attachment}
@@ -61,11 +61,13 @@ describe DocumentAttacher do
     end
 
     it "should raise exception when document being attached by ID doesn't exists" do
-      attachment = FactoryGirl.create(:mail_approved)
+      attachment = FactoryGirl.create(:approved_mail)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
       
       attachment_document_id = attachment.document.id
-      Document.destroy(attachment_document_id)
+      
+      # Принудительно удаляем документ, иммитируя удаление напрямую из БД
+      attachment.document.send :destroy
 
       attacher = DocumentAttacher.new(accountable, @session, @user)
 
@@ -101,7 +103,8 @@ describe DocumentAttacher do
       
       attacher = DocumentAttacher.new(accountable, @session, @user)
 
-      attachment.destroy
+      # Принудительно удаляем документ, иммитируя удаление напрямую из БД
+      attachment.send :destroy
 
       expect {attacher.detach attachment_id}.to raise_error
     end
@@ -109,7 +112,7 @@ describe DocumentAttacher do
 
   context "When confirming the action" do
     it "should attach all documents which are supporsed to be added (in attach list)" do
-      attachment = FactoryGirl.create(:mail_approved)
+      attachment = FactoryGirl.create(:approved_mail)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
 
       attacher = DocumentAttacher.new(accountable, @session, @user)
@@ -131,8 +134,8 @@ describe DocumentAttacher do
     end
 
     it "should raise exception if any document can't be attached" do
-      attachment = FactoryGirl.create(:mail_approved)
-      attachment2 = FactoryGirl.create(:mail_approved)
+      attachment = FactoryGirl.create(:approved_mail)
+      attachment2 = FactoryGirl.create(:approved_mail)
       accountable = FactoryGirl.create(:mail_with_direct_recipient)
       
       attacher = DocumentAttacher.new(accountable, @session, @user)
@@ -140,7 +143,8 @@ describe DocumentAttacher do
       attacher.attach attachment
       attacher.attach attachment2
 
-      Document.destroy(attachment.document.id)
+      # Принудительно удаляем документ, иммитируя удаление напрямую из БД
+      attachment.document.send :destroy
 
       expect {attacher.confirm}.to raise_error
     end
@@ -158,7 +162,8 @@ describe DocumentAttacher do
       attacher.detach existing_attachments[0]
       attacher.detach existing_attachments[1]
 
-      Document.destroy(existing_attachments[0].id)
+      # Принудительно удаляем документ, иммитируя удаление напрямую из БД
+      existing_attachments[0].send :destroy
 
       expect {attacher.confirm}.to raise_error
     end
@@ -174,8 +179,8 @@ describe DocumentAttacher do
       ]
       
       new_attachments = [
-        FactoryGirl.create(:mail_approved).document,
-        FactoryGirl.create(:mail_approved).document
+        FactoryGirl.create(:approved_mail).document,
+        FactoryGirl.create(:approved_mail).document
       ]
 
       draft = FactoryGirl.create(:mail_with_direct_recipient)
