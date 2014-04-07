@@ -178,7 +178,6 @@ $ ->
 
 
 
-
   # click on 'back' button
   $(document).on('click', '.js-document-state-back-link', ->
     $(@).closest('.popover').prev().popover('show').trigger('document_state:show')
@@ -192,3 +191,6 @@ $ ->
 
   # initialize styling file attach button with file-title near attach button
   $('.js-filestyle-with-title').filestyle()
+
+  # БЛОК АКТИВАЦИИ КЛАССОВ
+  user_conform = new ConformingView()

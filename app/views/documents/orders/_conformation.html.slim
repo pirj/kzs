@@ -1,0 +1,36 @@
+h2 Согласование
+
+/ сверстать можно через Media Object
+/ http://getbootstrap.com/components/#media
+
+
+- resource.conformers.each do |conformer|
+  p = conformer.first_name_with_last_name
+
+.well.js-document-debug
+
+
+= link_to 'go-go-go', '#', class: 'btn btn-danger js-document-conform-btn'
+
+= form_tag '/hello', class: 'js-conformer-form' do
+  = text_field_tag :opinion
+  = submit_tag :sent
+
+
+
+/ форма под мнение
+#task-model.modal.fade.js-document-conform-modal aria-hidden="true" role="dialog" tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4.modal-title Создание задачи
+      .modal-body.js-document-conform-form
+      .modal-footer
+        .btn-block.text-left
+          = link_to '#', class: 'btn btn-primary js-tasks-modal-save-btn' do
+            span.fa.fa-plus-circle
+            span назначить
+          /= link_to '#', class: 'btn btn-primary-light js-tasks-modal-add-new-task-btn' do
+          /  span.fa.fa-plus-circle
+          /  span назначить и добавить еще одну
+          = link_to 'отмена', '#', class: 'btn link-muted js-tasks-modal-cancel-btn'
