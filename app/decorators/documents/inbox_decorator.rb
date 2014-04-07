@@ -10,7 +10,7 @@ module Documents
 
     def badge_label(type = nil)
       counter = count_by_type(type)
-      h.content_tag(:span, counter, class: 'label label-danger') unless counter < 1
+      h.content_tag(:span, counter, class: 'label label-sm label-icon label-danger') unless counter < 1
     end
 
     def row_class(document)

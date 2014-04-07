@@ -13,8 +13,8 @@
         /= documents_inbox.inspect
         - if documents_inbox.badge_label
           .js-screen-user-actions
-            p У вас#{documents_inbox.badge} непрочитанных сообщений.
-            .btn-group
+            p У вас #{documents_inbox.badge_label} непрочитанных сообщений.
+            .btn-block3
               = link_to documents_path, class: 'btn btn-primary'
                 | Посмотреть
               .btn.btn-default.js-screen-exit Пропустить
