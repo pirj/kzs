@@ -29,24 +29,25 @@ FactoryGirl.define do
     factory :mail_with_direct_recipient do
       recipient_organization
 
-      # Подготовленное  письмо
+      # Подготовленное письмо с одним адресатом
       factory :prepared_mail do
         after(:create) do |instance, ev|
           instance.transition_to! :prepared
         end
+
+        # Подготовленное письмо с одним адресатом и согласующими
+        factory :mail_with_direct_recipient_and_conformers do
+          after(:build) do |instance, ev|
+            instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
+            instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
+          end
+        end
         
-        # Подписанное письмо
+        # Подписанное письмо с одним адресатом
         factory :approved_mail do
           after(:create) do |instance, ev|
             instance.transition_to! :approved
           end
-        end
-      end
-
-      factory :mail_with_direct_recipient_and_conformers do
-        after(:build) do |instance, ev|
-          instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
-          instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
         end
       end
     end

@@ -14,8 +14,6 @@ shared_examples_for 'document_preparable' do
     let!(:another_user) { FactoryGirl.create(:user, organization: approver.organization) }
 
     background do
-      document.transition_to!(:draft)
-      document.transition_to!(:prepared)
       sign_out
       visit list_path
       sign_in_with user.email, 'password'
