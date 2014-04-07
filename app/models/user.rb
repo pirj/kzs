@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :vehicle_users
   has_many :vehicles, :through => :vehicle_users
 
+  # Согласования
+  has_many :conformations
+
   belongs_to :organization
 
   scope :superuser, -> { where(is_superuser: true) }
@@ -91,6 +94,5 @@ class User < ActiveRecord::Base
   def director?
     organization && organization.director?(self)
   end
-
 
 end

@@ -35,6 +35,9 @@ class Document < ActiveRecord::Base
 
   has_many :document_transitions
 
+  # Согласования
+  has_many :conformations
+
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
   belongs_to :approver, class_name: 'User'
