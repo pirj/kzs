@@ -1,5 +1,5 @@
 # coding: utf-8
-require 'acceptance/acceptance_helper111'
+require 'acceptance/acceptance_helper'
 
 feature "Users attach existed documents to creating document", %q{} do
   before { pending }

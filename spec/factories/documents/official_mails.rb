@@ -35,6 +35,13 @@ FactoryGirl.define do
           instance.transition_to! :approved
         end
       end
+
+      factory :mail_with_direct_recipient_and_conformers do
+        after(:build) do |instance, ev|
+          instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
+          instance.conformers << FactoryGirl.create(:user, organization: instance.sender_organization)
+        end
+      end
     end
 
     # С несколькими адресатами

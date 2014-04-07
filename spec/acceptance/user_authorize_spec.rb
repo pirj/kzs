@@ -1,4 +1,4 @@
-require 'acceptance/acceptance_helper111'
+require 'acceptance/acceptance_helper'
 
 feature "Users may authenitacting", %q() do
 

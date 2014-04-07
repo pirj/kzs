@@ -1,4 +1,4 @@
-require 'acceptance/acceptance_helper111'
+require 'acceptance/acceptance_helper'
 
 feature "Users view states for Report", %q() do
   let(:document) { FactoryGirl.create(:report) }

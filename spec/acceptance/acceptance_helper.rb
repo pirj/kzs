@@ -48,7 +48,7 @@ RSpec.configure do |config|
       meta = example.metadata
       filename = File.basename(meta[:file_path])
       line_number = meta[:line_number]
-      screenshot_name = "screenshot-#{filename}-#{line_number}.png"
+      screenshot_name = "#{filename}-#{line_number}.png"
       screenshot_path = "#{Rails.root.join("test_images")}/#{screenshot_name}"
 
       page.save_screenshot(screenshot_path, full: true)
