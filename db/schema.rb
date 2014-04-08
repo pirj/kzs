@@ -146,21 +146,6 @@ ActiveRecord::Schema.define(:version => 20140409081803) do
     t.datetime "updated_at",              :null => false
   end
 
-  create_table "document_attachments", :force => true do |t|
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
-    t.integer  "document_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-  end
-
-  create_table "document_conversations", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "document_relations", :force => true do |t|
     t.integer "document_id"
     t.integer "relational_document_id"
@@ -255,11 +240,6 @@ ActiveRecord::Schema.define(:version => 20140409081803) do
 
   create_table "orders", :force => true do |t|
     t.datetime "deadline"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "orders_conversations", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

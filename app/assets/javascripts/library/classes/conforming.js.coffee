@@ -11,79 +11,99 @@
 
 class window.ConformingView
   params:
-   conform_btn: '.js-document-conform-btn'
-   modal: '.js-document-conform-modal'
-   modal_form: '.js-document-conform-modal-form'
-
+   agree_btn: '.js-document-conform-agree-btn'
+   deny_btn: '.js-document-conform-deny-btn'
+   conformation_form: '.js-document-conform-modal-form'
    conform_type: '.js-document-conform-type'
    conform_txt: '.js-document-conform-txt'
-   can_send_conform: false # можно ли отослать форму на сервер
 
    debug: '.js-document-debug'
 
   constructor: ->
-    @.$conform_btn = $(@.params.conform_btn)
-    @.$modal = $(@.params.modal)
-    @.$modal_form = $(@.params.modal_form)
-
-    @.$conform_type = $(@.conform_type)
-    @.$conform_txt = $(@.conform_txt)
-
     @.$debug = $(@.params.debug)
+    @.send_without_validate = false # переменная для определения,можем ли мы без валидации отправить форму на сервер
 
-    @.$conform_btn.on('click', (e) =>
+    @.init(@.$agree_btn = $(@.params.agree_btn))
+    @.init(@.$deny_btn = $(@.params.deny_btn))
+    @.init(@.$conformation_form = $(@.params.conformation_form))
+    @.init(@.$conformation_form_submit = $(@.params.conformation_form).find('input[type=submit]'))
+    @.init(@.$conform_type = $(@.params.conform_type))
+    @.init(@.$conform_txt = $(@.params.conform_txt))
+
+
+    @.$agree_btn.on('click', (e) =>
       e.preventDefault()
-      @.conform()
+      @.agree()
       return false
     )
 
-    @.init_modal()
+    @.$deny_btn.on('click', (e) =>
+      e.preventDefault()
+      @.deny()
+      return false
+    )
+
+    # обрабатываем ввод букв в окне с комментарием
+    @.$conform_txt.on('keyup', (e) =>
+      clearTimeout(@.timer_id)
+      @.timer_id = setTimeout( =>
+        if @.can_send_form()
+          @.debug 'can send conform set to TRUE'
+          @.$conformation_form_submit.prop('disabled', '')
+        clearTimeout(@.timer_id)
+      , 300)
+    )
     @.init_ajax_create_conform()
     @.debug 'conforming view created'
+
+  # пишем в результат инициализаций
+  init: (obj) ->
+    if obj.length
+      str = "<p class='text-success'>#{obj.selector} init</p>"
+    else
+      str = "<p class='text-danger'>#{obj.selector} non init</p>"
+    @.$debug.html(@.$debug.html() + str)
 
   # пишем в дебаг
   debug: (str) ->
     @.$debug.html(@.$debug.html() + "<p>#{str}</p>")
 
 
-  # обработка клика по кнопке голосования
-  conform: () ->
-    @.toggle_modal()
-    @.enable_conform_validations()
+  # обработка клика по кнопке «согласен»
+  agree: () ->
+    @.debug 'agree clicked'
+    @.send_without_validate = true
+    @.$conform_type.val(true)
+    @.$conformation_form_submit.prop('disabled', '')
 
 
-  # управляем видимостью всплывающего окна с текстом под комментарий
-  toggle_modal: ->
-    @.debug 'toggle modal'
+  # обработка клика по кнопке «не очень согласен»
+  deny: () ->
+    @.debug 'deny clicked'
+    @.$conform_type.val(false)
+    # если комментарий пустой,то дизэйблим кнопку сабмита формы
+    unless @.can_send_form()
+      @.$conformation_form_submit.prop('disabled', 'disabled')
 
-  # скрываем модальное
-
-  # инициализируем модальное окно и события на него
-  init_modal: ->
-    # кнопка крестик
-    # кнопка отмена
 
   # вешаем событие и прерывание отправки формы на сервер с вариантом голосования
   init_ajax_create_conform: ->
-    @.$modal_form.on('ajax:beforeSend', =>
-      console.log 'hello'
-      @.debug 'ajax send form'
-      return false
-      # если стоит запрет на отправку,то выходим из колбэка
-      # TODO-justvitalius: лучше сделать вызов метода,который будет возвращать true или false
-#      if @.can_send_conform == false
-#        return true
-#      return false
+    @.debug 'ajax conform inited'
+    @.$conformation_form.on('ajax:before', =>
+      @.debug 'before ajax send form'
+      # если комментарий
+      if @.can_send_form() || @.send_without_validate
+        @.debug 'can send conform'
+        return true
+      else
+        @.debug 'can not send conform'
+        return false
     )
 
-  # выносим решение можно ли отправить форму на сервер
-  
 
-  # управляем валидациями на создание голоса
-  enable_conform_validations: ->
-    if @.$conform_txt.text().length
-      @.can_send_conform == true
-      @.debug 'can send conform'
-    else
-      @.debug 'can not senf conform'
+  # проверяет можно ли отправить форму.
+  # возвращаем false если комментарий пустой
+  # возвращаем true если есть хотя бы 1 символ в комментарии
+  can_send_form: ->
+    @.$conform_txt.val().length*true
 

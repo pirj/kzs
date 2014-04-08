@@ -4,9 +4,9 @@
 # - выделить несколько декораторов, которые рисуют организаций,пользователей,какие-то собственные атрибуты и все заинклудить
 module Documents
   class BaseDecorator < Draper::Decorator
-    delegate_all
-    decorates :document
+    decorate :document
     delegate :document, :attached_documents
+    delegate_all
 
     LABEL_COL_WIDTH = 3
 

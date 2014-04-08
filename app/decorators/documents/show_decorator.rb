@@ -4,6 +4,7 @@ module Documents
     decorate :document
     delegate :title, :accountable
     delegate :serial_number, :recipient_organization, :conformers
+    delegate_all
 
     def title
       h.content_tag :h1, object.title
