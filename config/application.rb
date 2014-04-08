@@ -34,6 +34,7 @@ module Kzs
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.before_configuration do
+      I18n.config.enforce_available_locales = false #@prdetective TODO: this will default to true in future rails versions
       I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
       I18n.locale = :ru
       I18n.default_locale = :ru
@@ -47,7 +48,6 @@ module Kzs
 
     config.i18n.locale = :ru
     config.i18n.default_locale = :ru
-    #config.i18n.enforce_available_locales = true
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
