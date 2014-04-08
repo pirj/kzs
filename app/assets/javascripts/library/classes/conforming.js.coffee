@@ -65,14 +65,19 @@ class window.ConformingView
 
   # вешаем событие и прерывание отправки формы на сервер с вариантом голосования
   init_ajax_create_conform: ->
-    @.$modal_form.on('ajax:before', =>
-      e.preventDefault()
+    @.$modal_form.on('ajax:beforeSend', =>
+      console.log 'hello'
       @.debug 'ajax send form'
+      return false
       # если стоит запрет на отправку,то выходим из колбэка
       # TODO-justvitalius: лучше сделать вызов метода,который будет возвращать true или false
-      if @.can_send_conform == false
-        return true
+#      if @.can_send_conform == false
+#        return true
+#      return false
     )
+
+  # выносим решение можно ли отправить форму на сервер
+  
 
   # управляем валидациями на создание голоса
   enable_conform_validations: ->

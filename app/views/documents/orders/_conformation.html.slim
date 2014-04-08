@@ -12,7 +12,7 @@ h2 Согласование
 
 = link_to 'go-go-go', '#', class: 'btn btn-danger js-document-conform-btn'
 
-= form_tag '/hello', class: 'js-conformer-form' do
+= form_tag '/hello', class: 'js-document-conform-modal-form', remote: true do
   = text_field_tag :opinion
   = submit_tag :sent
 
