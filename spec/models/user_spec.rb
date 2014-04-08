@@ -169,12 +169,28 @@ describe User do
               document.recipient_organization.users<<user
             end
 
-            context 'not sent' do
-              let(:document) do
-                FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+            context 'draft' do
+              it { should_not be_able_to(:read, document)}
+            end
+
+            context 'prepared' do
+              before do
+                document.accountable.transition_to!('prepared')
+                document.reload
               end
 
-              it { should_not be_able_to(:read, document)}
+              it { should_not be_able_to(:read, document) }
+
+            end
+
+            context 'approved' do
+              before do
+                document.accountable.transition_to!('prepared')
+                document.accountable.transition_to!('approved')
+                document.reload
+              end
+
+              it { should_not be_able_to(:read, document) }
             end
 
             context 'sent' do
