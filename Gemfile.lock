@@ -149,6 +149,9 @@ GEM
     guard-rubocop (1.0.2)
       guard (~> 2.0)
       rubocop (~> 0.10)
+    guard-zeus (2.0.0)
+      guard (~> 2.0)
+      zeus (~> 0)
     haml (4.0.5)
       tilt
     has_scope (0.5.1)
@@ -405,6 +408,7 @@ DEPENDENCIES
   guard
   guard-rspec
   guard-rubocop
+  guard-zeus
   haml
   has_scope
   hipchat

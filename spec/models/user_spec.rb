@@ -3,69 +3,228 @@ require 'cancan/matchers'
 
 describe User do
 
-  context 'abilities' do
-    context 'documents' do
-      let(:organization) { FactoryGirl.create(:organization)}
+  context 'Ability for' do
+    context 'documents:' do
       let(:user) { nil }
       subject { Ability.new(user)}
-
-      context 'non-confidential' do
-        let(:document) do
-          FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
-        end
-        context 'Employee' do
-          let(:user) { FactoryGirl.create(:user) }
-
-          before do
-            document.sender_organization.users<<user
+      context 'Outgoing' do
+        context 'non-confidential.' do
+          let(:document) do
+            FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
           end
 
-          it { should be_able_to(:read, document)}
+          context 'Saboteur' do
+            let(:user) { FactoryGirl.create(:user) }
+            it { should_not be_able_to(:read, document)}
+          end
+
+          context 'Employee' do
+            let(:user) { FactoryGirl.create(:user) }
+
+            before do
+              document.sender_organization.users<<user
+            end
+
+            context 'draft' do
+
+              context 'not author' do
+                it { should_not be_able_to(:read, document)}
+              end
+
+              context 'is author' do
+                before do
+                  document.creator = user
+                  document.save
+                end
+
+                it { should be_able_to(:read, document)}
+              end
+            end
+
+            context 'taking prepared document as' do
+              let(:document) do
+                document = FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+                document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+                document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+                document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+                document.save
+                document
+              end
+
+              before do
+                accountable = document.accountable
+                accountable.transition_to!(:prepared)
+                document.reload
+              end
+
+              context 'Creator' do
+                let(:user) { document.creator }
+
+                it { should be_able_to(:read, document)}
+              end
+
+              context 'Approver' do
+                let(:user) { document.approver }
+
+                it { should be_able_to(:read, document)}
+              end
+
+              context 'Executor' do
+                let(:user) { document.executor }
+
+                it { should be_able_to(:read, document)}
+              end
+
+              context 'Conformer' do
+                let(:user){ FactoryGirl.create(:user) }
+                before { document.conformers << user }
+
+                it { should be_able_to(:read, document)}
+              end
+
+              context 'Director' do
+                let(:user) { document.sender_organization.director }
+
+                it { should be_able_to(:read, document)}
+              end
+
+              context 'others' do
+                let(:user) { FactoryGirl.create(:user) }
+                before { document.sender_organization.users << user }
+
+                it { should_not be_able_to(:read, document)}
+              end
+
+            end
+
+            context 'read approved document' do
+              before do
+                accountable = document.accountable
+                accountable.transition_to!(:prepared)
+                accountable.transition_to!(:approved)
+                document.reload
+              end
+              it { should be_able_to(:read, document) }
+            end
+          end
         end
 
-        context 'Saboteur' do
-          let(:user) { FactoryGirl.create(:user) }
+        context 'confidential.' do
+          let(:document) do
+            document = FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
+            document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+            document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+            document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
+            document.save
+            document
+          end
 
-          it { should_not be_able_to(:read, document)}
+          context 'Director' do
+            let(:user){ document.sender_organization.director }
+
+            it { should be_able_to(:read, document)}
+          end
+
+          context 'Creator' do
+            let(:user){ document.creator }
+
+            it { should be_able_to(:read, document)}
+          end
+
+          context 'Approver' do
+            let(:user){ document.approver }
+
+            it { should be_able_to(:read, document)}
+          end
+
+          context 'Conformer' do
+            let(:user){ FactoryGirl.create(:user) }
+
+            before { document.conformers << user }
+
+            it { should be_able_to(:read, document)}
+          end
+
+          context 'Saboteur' do
+            let(:user){ FactoryGirl.create(:user) }
+
+            before { document.sender_organization.users << user }
+
+            it { should_not be_able_to(:read, document)}
+          end
         end
-
       end
-
-      context 'confidential document' do
-        let(:document) do
-          document = FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
-          document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
-          document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
-          document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
-          document.save
-          document
-        end
-        context 'Director' do
-          let(:user){ organization.director }
-          it { should be_able_to(:read, document)}
-        end
-
-        context 'Creator' do
-          let(:user){ document.creator }
-          it { should be_able_to(:read, document)}
-        end
-
-        context 'Approver' do
-          let(:user){ document.approver }
-          it { should be_able_to(:read, document)}
-        end
-
-        context 'Conformer' do
-          let(:user){ FactoryGirl.create(:user) }
-          before do
-            document.conformers << user
+      context 'Incoming' do
+        context 'non-confidential.' do
+          let(:document) do
+            FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
           end
-          it { should be_able_to(:read, document)}
+
+          context 'Saboteur' do
+            let(:user) { FactoryGirl.create(:user) }
+            it { should_not be_able_to(:read, document)}
+          end
+
+          context 'Employee' do
+            let(:user) { FactoryGirl.create(:user) }
+
+            before do
+              document.recipient_organization.users<<user
+            end
+
+            context 'not sent' do
+              let(:document) do
+                FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+              end
+
+              it { should_not be_able_to(:read, document)}
+            end
+
+            context 'sent' do
+              let(:document) do
+                FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+              end
+
+              before do
+                accountable = document.accountable
+                accountable.transition_to!(:prepared)
+                accountable.transition_to!(:approved)
+                accountable.transition_to!(:sent)
+                document.reload
+              end
+
+              it { should be_able_to(:read, document)}
+
+            end
+          end
         end
 
-        context 'Saboteur' do
-          let(:user){ FactoryGirl.create(:user) }
-          it { should_not be_able_to(:read, document)}
+        context 'confidential.' do
+          let(:document) do
+            FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
+          end
+
+          before do
+            accountable = document.accountable
+            accountable.transition_to!(:prepared)
+            accountable.transition_to!(:approved)
+            accountable.transition_to!(:sent)
+            document.reload
+          end
+
+          context 'Director' do
+            let(:user){ document.recipient_organization.director }
+
+            it { should be_able_to(:read, document)}
+          end
+
+          context 'Saboteur' do
+            let(:user){ FactoryGirl.create(:user) }
+
+            before { document.recipient_organization.users << user }
+
+            it { should_not be_able_to(:read, document)}
+          end
         end
       end
     end
@@ -91,6 +250,7 @@ describe User do
   end
 
   context 'conforming documents' do
+    before { pending }
     before :each do
       @mail_to_conform = FactoryGirl.create(:mail_with_direct_recipient_and_conformers)
       @conformer = mail_to_conform.conformers.first

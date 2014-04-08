@@ -4,23 +4,36 @@ class Ability
   def initialize(user)
     alias_action :read, :update, to: :crud
 
+    # Создатель может читать свои документы( в том числе и черновики и конфиденциальные)
+    can :read, Document, creator_id: user.id
+
     # Любой пользователь данной организации может читать неконфиденциальные исходящие документы
-    can :read, Document, confidential: false, sender_organization_id: user.organization_id
+    # в состоянии Подписан, Отправлен, Принят, Отклонен
+    can :read, Document, confidential: false, sender_organization_id: user.organization_id, state: %w(approved sent approved rejected)
 
     # Любой пользователь данной организации может читать неконфиденциальные входящие документы
     can :read, Document, confidential: false, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
 
-    # Директор может читать входящие и исходящие конфиденциальные документы
-    if user.director?
-      can :read, Document, confidential: true, sender_organization_id: user.organization_id
-      can :read, Document, confidential: true, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
-    else
+    # Не конфиденциальные исходящие документы в состоянии Подготовлен могут видеть
+    # Создатель
+    # Исполнитель
+    # Согласующие лица
+    # Контроллирующее лицо
+    can :read, Document, confidential: false, state: 'prepared', executor_id: user.id
+    can :read, Document, confidential: false, state: 'prepared', approver_id: user.id
+    can :read, Document, :confidential => false, :state => 'prepared', :conformers.outer => { id: user.id }
 
-      # Конфиденциальные исходящие документы может могут читать Составитель, Исполнитель, Контроллирующее Лицо и Согласующие Лица.
-      can :read, Document, confidential: true, sender_organization_id: user.organization_id, creator_id: user.id
-      can :read, Document, confidential: true, sender_organization_id: user.organization_id, approver_id: user.id
-      can :read, Document, confidential: true, sender_organization_id: user.organization_id, executor_id: user.id
-      can :read, Document, :confidential => true, :conformers.outer => { id: user.id }
+
+    # Конфиденциальные исходящие документы может могут читать Составитель, Исполнитель, Контроллирующее Лицо и Согласующие Лица.
+    #can :read, Document, confidential: true, sender_organization_id: user.organization_id, creator_id: user.id
+    can :read, Document, confidential: true, sender_organization_id: user.organization_id, approver_id: user.id
+    can :read, Document, confidential: true, sender_organization_id: user.organization_id, executor_id: user.id
+    can :read, Document, :confidential => true, :conformers.outer => { id: user.id }
+
+    # Директор может читать входящие и исходящие документы
+    if user.director?
+      can :read, Document, :sender_organization_id => user.organization_id
+      can :read, Document, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
     end
 
     # TODO: @babrovka

@@ -105,6 +105,7 @@ group :development, :test do
   gem 'rvm-capistrano'
   gem 'guard'
   gem 'guard-rspec', require: false
+  gem 'guard-zeus'
   gem 'guard-rubocop', require: false
   gem 'bullet'
   gem 'yard' # Для документации
