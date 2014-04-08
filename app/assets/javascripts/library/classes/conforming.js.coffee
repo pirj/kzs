@@ -28,6 +28,7 @@ class window.ConformingView
     @.init(@.$deny_btn = $(@.params.deny_btn))
     @.init(@.$conformation_form = $(@.params.conformation_form))
     @.init(@.$conformation_form_submit = $(@.params.conformation_form).find('input[type=submit]'))
+    @.init(@.$conformation_form_title = $(@.params.conformation_form).find('h4'))
     @.init(@.$conform_type = $(@.params.conform_type))
     @.init(@.$conform_txt = $(@.params.conform_txt))
     @.init(@.$conformations = $(@.params.conformations))
@@ -82,6 +83,7 @@ class window.ConformingView
     @.send_without_validate = true
     @.$conformation_form.show()
     @.$conformation_form_submit.prop('disabled', '')
+    @.$conformation_form_title.text('Добавьте комментарий (необязательно)')
 
 
   # обработка клика по кнопке «не очень согласен»
@@ -89,6 +91,7 @@ class window.ConformingView
     @.debug 'deny clicked'
     @.$conform_type.val(false)
     @.$conformation_form.show()
+    @.$conformation_form_title.text('Добавьте комментарий (обязательно)')
     # если комментарий пустой,то дизэйблим кнопку сабмита формы
     unless @.can_send_form()
       @.$conformation_form_submit.prop('disabled', 'disabled')

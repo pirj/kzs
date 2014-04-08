@@ -148,6 +148,6 @@
 // Сетка управляемая количеством символов.
 // Вносится предположение, что длина одного символа равна 0.8em
 @for $i from 1 through 30{
-  .col-words-#{$i}{ min-width: .8em*$i; }
+  .col-words-#{$i}{ min-width: .8em*$i; display: inline-block; }
 }
 

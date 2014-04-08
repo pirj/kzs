@@ -3,7 +3,7 @@ module Documents
   class ShowDecorator < Documents::BaseDecorator
     decorate :document
     delegate :title, :accountable
-    delegate :serial_number, :recipient_organization, :conformers
+    delegate :serial_number, :recipient_organization, :conformers, :conformations
     delegate_all
 
     def title

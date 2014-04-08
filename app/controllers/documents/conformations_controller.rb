@@ -9,7 +9,7 @@ class Documents::ConformationsController < ApplicationController
         current_user.deny doc, conformation[:comment]
       end
 
-      respond_to { |format| format.js }
+      respond_to { |format| format.js { render layout: false } }
     end
   rescue Exception => e
     render text: e.message

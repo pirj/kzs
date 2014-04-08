@@ -126,4 +126,16 @@ class User < ActiveRecord::Base
     conformations.create(document_id: document.id, comment: comment, conformed: false)
   end
 
+
+  # Голосовал ли пользователь за документ
+  # @param document [Document] документ
+  # @example
+  #   user.conformated? document
+  # @see Document
+  def conformated? document
+    raise RuntimeError, 'User is not in the confomers list for the document' unless document.conformers.include? self
+
+    conformations.where(document_id: document.id)
+  end
+
 end
