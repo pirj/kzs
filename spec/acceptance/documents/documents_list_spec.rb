@@ -11,16 +11,16 @@ feature "Users sees documents list", %q{} do
 
 
   context 'mails' do
-    #context 'prepared' do
-    #  let!(:document) { FactoryGirl.create(:mail_with_direct_recipient_and_conformers) }
-    #  let(:list_path) { documents_documents_path }
-    #
-    #  it_behaves_like 'document_preparable'
-    #
-    #end
+    context 'prepared' do
+      let!(:document) { FactoryGirl.create(:mail_with_direct_recipient_and_conformers) }
+      let(:list_path) { documents_documents_path }
+
+      it_behaves_like 'document_preparable'
+
+    end
 
     context 'draft' do
-      let!(:document) { FactoryGirl.create(:mail_with_direct_recipient) }
+      let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient) }
       let(:list_path) { documents_documents_path(with_state: 'draft') }
 
       it_behaves_like 'document_draftable'

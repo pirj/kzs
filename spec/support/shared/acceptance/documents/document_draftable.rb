@@ -1,6 +1,6 @@
 # область видимости подготовленного документа
 # list_path — ссылка на список документов
-# document — документ, с которым работаем
+# accountable — документ, с которым работаем
 shared_examples_for 'document_draftable' do
 
   describe 'list drafts' do
@@ -11,18 +11,18 @@ shared_examples_for 'document_draftable' do
       visit list_path
       sign_in_with user.email, 'password'
       puts "signed in with a user #{user.id}"
-      puts "document authored by #{document.creator_id}"
+      puts "document authored by #{accountable.creator_id}"
     end
 
 
     context 'to Author' do
-      let(:user){ document.creator }
-      it { should have_content document.title }
+      let(:user){ accountable.creator }
+      it { should have_content accountable.title }
     end
 
     context 'to Saboteur' do
-      let(:user){ FactoryGirl.create(:user, organization: document.sender_organization) }
-      it { should_not have_content document.title }
+      let(:user){ FactoryGirl.create(:user, organization: accountable.sender_organization) }
+      it { should_not have_content accountable.title }
     end
   end
 
@@ -30,17 +30,17 @@ shared_examples_for 'document_draftable' do
     subject { page }
     background do
       sign_out
-      visit "/documents/mails/#{document.id}"
+      visit "/documents/mails/#{accountable.id}"
       sign_in_with user.email, 'password'
     end
 
     context 'to Author' do
-      let(:user) { document.creator }
-      it { should have_selector('h1', text: document.title) }
+      let(:user) { accountable.creator }
+      it { should have_selector('h1', text: accountable.title) }
     end
 
     context 'to Saboteur' do
-      let!(:user) { FactoryGirl.create(:user, organization: document.sender_organization) }
+      let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
       its(:current_path) { should match '/documents' }
       it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
     end
