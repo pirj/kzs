@@ -4,11 +4,11 @@ require 'cancan/matchers'
 describe User do
 
   context 'Ability for' do
-    context 'documents:' do
+    context 'Document' do
       let(:user) { nil }
       subject { Ability.new(user)}
-      context 'Outgoing' do
-        context 'non-confidential.' do
+      context 'outgoing' do
+        context 'non-confidential' do
           let(:document) do
             FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
           end
@@ -41,7 +41,7 @@ describe User do
               end
             end
 
-            context 'taking prepared document as' do
+            context 'prepared' do
               let(:document) do
                 document = FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
                 document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
@@ -89,9 +89,6 @@ describe User do
               end
 
               context 'others' do
-                let(:user) { FactoryGirl.create(:user) }
-                before { document.sender_organization.users << user }
-
                 it { should_not be_able_to(:read, document)}
               end
 
@@ -109,7 +106,7 @@ describe User do
           end
         end
 
-        context 'confidential.' do
+        context 'confidential' do
           let(:document) do
             document = FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
             document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
@@ -155,7 +152,7 @@ describe User do
         end
       end
       context 'Incoming' do
-        context 'non-confidential.' do
+        context 'non-confidential' do
           let(:document) do
             FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
           end
@@ -199,7 +196,7 @@ describe User do
           end
         end
 
-        context 'confidential.' do
+        context 'confidential' do
           let(:document) do
             FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
           end
@@ -250,7 +247,6 @@ describe User do
   end
 
   context 'conforming documents' do
-    before { pending }
     before :each do
       @mail_to_conform = FactoryGirl.create(:mail_with_direct_recipient_and_conformers)
       @conformer = mail_to_conform.conformers.first
