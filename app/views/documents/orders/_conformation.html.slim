@@ -9,20 +9,20 @@
       span = conformer.first_name_with_last_name
 
   / TODO-justvitalius: доступно ли это в ability?
-  - if resource.conformers.include?(current_user) && current_user.conformated?(resource.document)
+  - if resource.conformers.include?(current_user) && !current_user.conformated?(resource.document)
     h2.text-danger.b-offset-sm = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
 
 
-  .row
-    .col-sm-12.b-offset-sm
-      = button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
-      = button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
+    .row
+      .col-sm-12.b-offset-sm
+        = button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
+        = button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
 
-      = form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide', remote: true } do |f|
-        h4 Добавьте комментарий
-        .form-group = f.text_field :conformed, class: 'js-document-conform-type'
-        .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
-        .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
+        = form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide', remote: true } do |f|
+          h4 Добавьте комментарий
+          .form-group = f.text_field :conformed, class: 'js-document-conform-type'
+          .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
+          .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
 
 
   .row
