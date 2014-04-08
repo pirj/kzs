@@ -1,3 +1,16 @@
+.voter {
+  margin-bottom: 12px;
+}
+
+.voter-name {
+  font-size: 16px;
+  line-height: 26px;
+  a {
+    cursor:pointer;
+    margin-right: 10px;
+  }
+}
+
 .b-confirmation {
   i{
     padding-right: 5px;
