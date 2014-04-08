@@ -1,0 +1,37 @@
+.b-confirmation {
+  i{
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+  }
+  .media {
+    margin-bottom: 15px;
+  }
+
+  .b-comment-title{
+
+    .b-comment-date{
+      display: inline-block;
+      color: $color-cloud-darker;
+      margin-left: 5px;
+    }
+  }
+
+  .b-comment-body{
+    color: $color-gray;
+  }
+
+  .m-positive{
+    .fa.fa-circle {
+      color: $color-green;
+    }
+  }
+
+  .m-negative{
+    .fa.fa-circle {
+      color: $color-red;
+    }
+  }
+
+
+}

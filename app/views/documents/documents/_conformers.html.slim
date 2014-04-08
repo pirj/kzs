@@ -1,0 +1,31 @@
+.row.b-offset-sm.b-confirmation
+  .col-sm-12
+    h1 Согласование
+    h2
+      | Внимание! #{ current_user.first_name}
+      |, мы ждём вашего решения:
+    /= resource.inspect
+    /=  content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
+    div голосованьо
+    div коментарьо поле
+    h4 Комментарии (4)
+    div
+      .media.m-negative
+
+        i.fa.fa-circle.pull-left
+        .media-body
+          div.media-heading.b-comment-title
+            = content_tag(:span, current_user.first_name)+' '+content_tag(:span, current_user.last_name)
+            .b-comment-date
+              |(12.10.2013 17:25)
+          .b-comment-body wasd wasd wasd wasd wasd
+      .media.m-positive
+
+        i.fa.fa-circle.pull-left
+        .media-body
+          div.media-heading.b-comment-title
+            = content_tag(:span, current_user.first_name)+' '+content_tag(:span, current_user.last_name)
+            .b-comment-date
+              | (12.10.2013 17:25)
+          .b-comment-body wasd wasd wasd wasd wasd
+    div
