@@ -47,11 +47,9 @@
     color: darken($state-warning-text, 10%);
   }
 }
+
 .text-danger {
   color: $color-red;
-  &:hover {
-    color: $color-red-darker;
-  }
 }
 .text-success {
   color: $state-success-text;
