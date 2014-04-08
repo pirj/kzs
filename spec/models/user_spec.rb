@@ -271,18 +271,16 @@ describe User do
     context "When in the conformers list" do
       it "should be able to conform document" do
         expect {@conformer.conform(@mail_to_conform)}.not_to raise_error
-        @mail_to_conform.conformed_users.should include @conformer
+        @mail_to_conform.reload.conformed_users.should include @conformer
       end  
 
       it "should be able to optionnaly add a comment when conforming" do
-        @conformer.conform @mail_to_conform, comment: "Comment!"
-
-        expect {@conformer.conform @mail_to_conform}.not_to raise_error
+        expect {@conformer.conform @mail_to_conform, comment: 'Comment!'}.not_to raise_error
       end
 
       it "should be able to deny document" do
         expect {@conformer.conform(@mail_to_conform)}.not_to raise_error
-        @mail_to_conform.conformed_users.should include @conformer
+        @mail_to_conform.reload.conformed_users.should include @conformer
       end
 
       it "shouldn't be able to deny the document without a comment or with a nil/empty/space-only-characters comment" do

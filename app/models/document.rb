@@ -209,9 +209,8 @@ class Document < ActiveRecord::Base
   # Возвращает список пользователей, согласовавших/не согласовавших документ
   # @example
   #   doc.conformed_users
-  # @return [Boolean] удалось ли сделать важные вещи
   def conformed_users
-    conformations(true).map(&:user)
+    conformations.map(&:user)
   end
 
   private
