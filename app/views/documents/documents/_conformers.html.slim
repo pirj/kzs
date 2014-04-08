@@ -1,4 +1,4 @@
-form.voting-block.row-fuild.b-confirmation
+form.voting-block.row-fuild._confirmation
   h2.text-danger.b-offset-md Согласование
   h3.text-danger.b-offset-md Внимание! #{ current_user.first_name}, мы ждем вашего решения:
   .votets-list.b-offset-md
@@ -54,21 +54,21 @@ form.voting-block.row-fuild.b-confirmation
   .row
     h4.col-sm-12 Комментарии:
     .col-sm-12
-      .media.m-negative
+      .media
 
-        i.fa.fa-circle.pull-left
+        i.fa.fa-circle.pull-left.text-danger
         .media-body
-          div.media-heading.b-comment-title
+          div.media-heading._comment-title
             = content_tag(:span, current_user.first_name)+' '+content_tag(:span, current_user.last_name)
-            .b-comment-date
+            ._comment-date
               |(12.10.2013 17:25)
-          .b-comment-body wasd wasd wasd wasd wasd
-      .media.m-positive
+          .text-help wasd wasd wasd wasd wasd
+      .media
 
-        i.fa.fa-circle.pull-left
+        i.fa.fa-circle.pull-left.text-success
         .media-body
-          div.media-heading.b-comment-title
+          div.media-heading._comment-title
             = content_tag(:span, current_user.first_name)+' '+content_tag(:span, current_user.last_name)
-            .b-comment-date
+            ._comment-date
               | (12.10.2013 17:25)
-        .b-comment-body wasd wasd wasd wasd wasd
+          .text-help wasd wasd wasd wasd wasd

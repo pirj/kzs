@@ -11,7 +11,7 @@
   }
 }
 
-.b-confirmation {
+._confirmation {
   i{
     padding-right: 5px;
     position: relative;
@@ -21,28 +21,12 @@
     margin-bottom: 15px;
   }
 
-  .b-comment-title{
+  ._comment-title{
 
-    .b-comment-date{
+    ._comment-date{
       display: inline-block;
       color: $color-cloud-darker;
       margin-left: 5px;
-    }
-  }
-
-  .b-comment-body{
-    color: $color-gray;
-  }
-
-  .m-positive{
-    .fa.fa-circle {
-      color: $color-green;
-    }
-  }
-
-  .m-negative{
-    .fa.fa-circle {
-      color: $color-red;
     }
   }
 
