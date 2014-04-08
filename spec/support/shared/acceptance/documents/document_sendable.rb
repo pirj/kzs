@@ -1,7 +1,7 @@
 # область видимости подготовленного документа
 # index_path — ссылка на список документов
 # accountable — документ, с которым работаем
-shared_examples_for 'document_approvable' do
+shared_examples_for 'document_sendable' do
 
   describe 'list drafts' do
     subject { page }
@@ -15,6 +15,11 @@ shared_examples_for 'document_approvable' do
 
     context 'sender oranization Employee' do
       let(:user){ FactoryGirl.create(:user, organization: accountable.sender_organization)}
+      it { should have_content accountable.title }
+    end
+
+    context 'recipient oranization Employee' do
+      let(:user){ FactoryGirl.create(:user, organization: accountable.recipient_organization)}
       it { should have_content accountable.title }
     end
 
@@ -34,6 +39,19 @@ shared_examples_for 'document_approvable' do
 
     context 'to sender organization Employee' do
       let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
+
+      # Место для теста на показ Согласующих Лиц
+      # должны быть
+
+      it { should have_selector('h1', text: accountable.title) }
+    end
+
+    context 'to recipient organization Employee' do
+      let!(:user) { FactoryGirl.create(:user, organization: accountable.recipient_organization) }
+
+      # Место для теста на показ Согласующих Лиц
+      # их быть не должно
+
       it { should have_selector('h1', text: accountable.title) }
     end
 
