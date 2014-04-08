@@ -9,10 +9,10 @@ h2 Согласование
 
 .well.js-document-debug
 
-= link_to 'agree', '#', class: 'btn btn-primary js-document-conform-agree-btn'
-= link_to 'deny', '#', class: 'btn btn-danger js-document-conform-deny-btn'
+= button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
+= button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
 
-= form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form', remote: true } do |f|
+= form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide', remote: true } do |f|
   h4 Добавьте комментарий
   .form-group
     = f.text_field :conformed, class: 'js-document-conform-type'

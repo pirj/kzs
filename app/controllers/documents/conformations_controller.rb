@@ -2,10 +2,31 @@ class Documents::ConformationsController < ApplicationController
 
   def create
     doc = get_document(params)
-    render json: params
+    if conformation
+      if conformed?
+        current_user.conform doc, comment: conformation[:comment]
+      else
+        current_user.deny doc, conformation[:comment]
+      end
+
+      respond_to { |format| format.js }
+    end
+  rescue Exception => e
+    render text: e.message
+
+  # данная строчка добавлена для тестирования работы фронтенда при многократном отсылании голосований
+  #respond_to { |format| format.js { render layout: false } }
   end
 
   private
+
+  def conformed?
+    (params[:conformation][:conformed] == 'true')? true : false
+  end
+
+  def conformation
+    params[:conformation] || nil
+  end
 
   def get_document(params)
     if (id = params[:official_mail_id])

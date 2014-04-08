@@ -16,6 +16,7 @@ class window.ConformingView
    conformation_form: '.js-document-conform-modal-form'
    conform_type: '.js-document-conform-type'
    conform_txt: '.js-document-conform-txt'
+   conformations: '.js-document-conform-list'
 
    debug: '.js-document-debug'
 
@@ -29,6 +30,7 @@ class window.ConformingView
     @.init(@.$conformation_form_submit = $(@.params.conformation_form).find('input[type=submit]'))
     @.init(@.$conform_type = $(@.params.conform_type))
     @.init(@.$conform_txt = $(@.params.conform_txt))
+    @.init(@.$conformations = $(@.params.conformations))
 
 
     @.$agree_btn.on('click', (e) =>
@@ -53,6 +55,10 @@ class window.ConformingView
         clearTimeout(@.timer_id)
       , 300)
     )
+
+    # глобальная переменная для данного голосования,чтобы обработать jquery-ujs ответы
+    window.conformation = @
+
     @.init_ajax_create_conform()
     @.debug 'conforming view created'
 
@@ -72,8 +78,9 @@ class window.ConformingView
   # обработка клика по кнопке «согласен»
   agree: () ->
     @.debug 'agree clicked'
-    @.send_without_validate = true
     @.$conform_type.val(true)
+    @.send_without_validate = true
+    @.$conformation_form.show()
     @.$conformation_form_submit.prop('disabled', '')
 
 
@@ -81,6 +88,7 @@ class window.ConformingView
   deny: () ->
     @.debug 'deny clicked'
     @.$conform_type.val(false)
+    @.$conformation_form.show()
     # если комментарий пустой,то дизэйблим кнопку сабмита формы
     unless @.can_send_form()
       @.$conformation_form_submit.prop('disabled', 'disabled')
@@ -101,9 +109,25 @@ class window.ConformingView
     )
 
 
+  # что делаем в случае успешного ответа от сервера
+  success_ajax_send: ->
+    @.$conformation_form.slideUp().find('input').val('');
+    @.$agree_btn.prop('disabled', 'disabled')
+    @.$deny_btn.prop('disabled', 'disabled')
+
+
+  # вставляем комментарий в общий список комментариев
+  append_conformation: (html) ->
+    @.$conformations.append(html)
+
   # проверяет можно ли отправить форму.
   # возвращаем false если комментарий пустой
   # возвращаем true если есть хотя бы 1 символ в комментарии
   can_send_form: ->
     @.$conform_txt.val().length*true
+
+
+
+
+
 
