@@ -1,7 +1,8 @@
 # область видимости подготовленного документа
-# list_path — ссылка на список документов
+# index_path — ссылка на список документов
+# show_path - ссылка на сам документ
 # accountable — документ, с которым работаем
-shared_examples_for 'document_draftable' do
+shared_examples_for 'document_approvable' do
 
   describe 'list drafts' do
     subject { page }
@@ -13,13 +14,13 @@ shared_examples_for 'document_draftable' do
     end
 
 
-    context 'to Author' do
-      let(:user){ accountable.creator }
+    context 'sender Employee' do
+      let(:user){ FactoryGirl.create(:user, organization: accountable.sender_organization)}
       it { should have_content accountable.title }
     end
 
-    context 'to Saboteur' do
-      let(:user){ FactoryGirl.create(:user, organization: accountable.sender_organization) }
+    context 'other user' do
+      let(:user){ FactoryGirl.create(:user) }
       it { should_not have_content accountable.title }
     end
   end
@@ -32,13 +33,13 @@ shared_examples_for 'document_draftable' do
       sign_in_with user.email, 'password'
     end
 
-    context 'to Author' do
-      let(:user) { accountable.creator }
+    context 'to sender organization Employee' do
+      let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
       it { should have_selector('h1', text: accountable.title) }
     end
 
-    context 'to Saboteur' do
-      let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
+    context 'to other user' do
+      let!(:user) { FactoryGirl.create(:user) }
       its(:current_path) { should match '/documents' }
       it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
     end

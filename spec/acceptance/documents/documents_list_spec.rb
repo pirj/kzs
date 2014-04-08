@@ -25,6 +25,18 @@ feature "Users sees documents list", %q{} do
 
       it_behaves_like 'document_draftable'
     end
+
+    context 'approved' do
+      let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient) }
+      let(:list_path) { documents_documents_path(with_state: 'approved') }
+
+      before do
+        accountable.transition_to!(:prepared)
+        accountable.transition_to!(:approved)
+      end
+
+      it_behaves_like 'document_approvable'
+    end
   end
 
 end
