@@ -3,8 +3,8 @@
   .media-body
     / TODO-tagir: можно ли удалить отсюда comment-title
     div.media-heading._comment-title
-      = content_tag(:span, current_user.first_name_with_last_name)
-      / TODO-tagir: отступ между словами можно делать через span.col-words-1
-      /._comment-date = DateFormatter.new(conform.created_at, :full)
+      span = current_user.first_name_with_last_name
+      span.col-words-1
+      span.text-help = "(#{DateFormatter.new(conform.created_at, :full)})"
 
     .text-help = conform.comment
