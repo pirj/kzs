@@ -1,4 +1,4 @@
-- if resource.conformers.include?(current_user) && !current_user.made_decision?(resource.document)
+- if can? :conform, resource.document
   .row.b-offset-sm
     .col-sm-3
       /= button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
