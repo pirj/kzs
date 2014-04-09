@@ -36,12 +36,13 @@ form.voting-block.row-fuild._confirmation
     .voter.row
       .col-sm-2
         .switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
-          input#conform-yes  name="view10"  type="radio"
-          label for="conform-yes" onclick=""
-          input#conform-undefined  name="view10" type="radio" checked=""
-          label for="conform-undefined" onclick=""
           input#conform-no name="view10" type="radio"
           label for="conform-no" onclick=""
+          input#conform-undefined  name="view10" type="radio" checked=""
+          label for="conform-undefined" onclick=""
+          input#conform-yes name="view10" type="radio"
+          label for="conform-yes" onclick=""
+          span.switch-bg
           a
       span.voter-name.col-sm-10
         a Святослав Велкопоповецкий
@@ -49,8 +50,10 @@ form.voting-block.row-fuild._confirmation
           | (ожидание решения: 6 дней)
   .vote-comment.col-sm-10.row
     h4 Добавьте комментарий (необязательно)
-    textarea.text.required.form-control  placeholder="Согласую! Молодцы ребята, всё сделали в срок" rows="6"
-  br
+    textarea.text.required.form-control.b-offset-sm  placeholder="Согласую! Молодцы ребята, всё сделали в срок" rows="6"
+    .btn-group.b-offset-sm
+      /= f.submit "Готово", :class => 'btn btn-primary' - незнает f
+      input.btn.btn-primary type="submit" value="Готово"
   .row
     h4.col-sm-12 Комментарии:
     .col-sm-12
