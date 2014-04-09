@@ -1,17 +1,20 @@
 - if can? :conform, resource.document
   .b
-    .col-sm-2
+    /.col-sm-2
       /= button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
       /= button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
 
+    .col-sm-2
       .switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
-        input#conform-yes.js-document-conform-agree-btn  name="view10"  type="radio"
-        label for="conform-yes" onclick=""  Да
-        input name="view10" type="radio" checked=""
-        label for="conform-undefined" onclick=""
         input#conform-no.js-document-conform-deny-btn name="view10" type="radio"
-        label for="conform-no" onclick=""  Нет
+        label for="conform-no" onclick=""
+        input#conform-undefined  name="view10" type="radio" checked=""
+        label for="conform-undefined" onclick="return false"
+        input#conform-yes.js-document-conform-agree-btn name="view10" type="radio"
+        label for="conform-yes" onclick=""
+        span.switch-bg
         a
+
     .col-sm-10
       span = current_user.first_name_with_last_name
 
