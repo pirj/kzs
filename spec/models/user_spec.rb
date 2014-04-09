@@ -61,18 +61,21 @@ describe User do
                 let(:user) { document.creator }
 
                 it { should be_able_to(:read, document)}
+                it { should be_able_to(:update, document)}
               end
 
               context 'Approver' do
                 let(:user) { document.approver }
 
                 it { should be_able_to(:read, document)}
+                it { should be_able_to(:update, document)}
               end
 
               context 'Executor' do
                 let(:user) { document.executor }
 
                 it { should be_able_to(:read, document)}
+                it { should be_able_to(:update, document)}
               end
 
               context 'Conformer' do
@@ -80,6 +83,7 @@ describe User do
                 before { document.conformers << user }
 
                 it { should be_able_to(:read, document)}
+                it { should_not be_able_to(:update, document)}
               end
 
               context 'Director' do
@@ -90,6 +94,7 @@ describe User do
 
               context 'others' do
                 it { should_not be_able_to(:read, document)}
+                it { should_not be_able_to(:update, document)}
               end
 
             end
@@ -126,12 +131,21 @@ describe User do
             let(:user){ document.creator }
 
             it { should be_able_to(:read, document)}
+            it { should be_able_to(:update, document)}
+          end
+
+          context 'Executor' do
+            let(:user){ document.executor }
+
+            it { should be_able_to(:read, document)}
+            it { should be_able_to(:update, document)}
           end
 
           context 'Approver' do
             let(:user){ document.approver }
 
             it { should be_able_to(:read, document)}
+            it { should be_able_to(:edit, document)}
           end
 
           context 'Conformer' do
@@ -140,6 +154,7 @@ describe User do
             before { document.conformers << user }
 
             it { should be_able_to(:read, document)}
+            it { should_not be_able_to(:update, document)}
           end
 
           context 'Saboteur' do
@@ -148,6 +163,7 @@ describe User do
             before { document.sender_organization.users << user }
 
             it { should_not be_able_to(:read, document)}
+            it { should_not be_able_to(:update, document)}
           end
         end
       end
