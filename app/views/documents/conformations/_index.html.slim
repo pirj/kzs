@@ -12,6 +12,7 @@
     .text-help.col-sm-8 Согласующий
 
 
+  / список согласующих с кнопками согласования
   .b.b-offset-sm
     - resource.conformers.order('last_name ASC').each do |conformer|
       .row
@@ -28,12 +29,15 @@
           span.col-sm-8 = conformer.first_name_with_last_name
 
 
+  / отрисовка согласований
   .row
+    - conformations_count = resource.conformations.select{|c| c.comment.present?}.count
     .col-sm-12.b-offset-sm.js-document-conform-list
-      h4 = "Комментарии (#{resource.conformations.select{|c| c.comment.present?}.count}):"
+      h4 = "Комментарии (#{conformations_count}):"
 
-      - resource.conformations.each do |conform|
-        = render 'documents/conformations/conformation', conform: conform
+      - if conformations_count > 0
+        - resource.conformations.each do |conform|
+          = render 'documents/conformations/conformation', conform: conform
 
 
 
