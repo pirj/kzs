@@ -67,15 +67,15 @@ task :mercury do
   
   namespace(:thin) do
     task :stop do
-      run %Q{cd #{latest_release} && bundle exec thin stop -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinStop}
      end
 
     task :start do
-      run %Q{cd #{latest_release} && bundle exec thin start -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinStart}
     end
 
     task :restart do
-      run %Q{cd #{latest_release} && bundle exec thin restart -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinRestart}
     end
   end
   
