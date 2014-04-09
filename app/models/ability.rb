@@ -84,6 +84,10 @@ class Ability
 
     can :create, Permit if user.permissions.exists?('6')
 
+    can :conform, Document do |doc|
+        doc.conformers.include?(user) && !user.made_decision?(doc)
+    end
+
     if user.sys_user
       can :manage, User
       can :manage, Group
