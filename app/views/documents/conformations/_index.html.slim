@@ -1,26 +1,29 @@
 .well.js-document-debug.hidden
 
 - if resource.conformers
-  h2 Согласование
+  h2.b-offset-sm Согласование
 
   - if can? :conform, resource.document
-    h2.text-danger.b-offset-sm.js-document-conform-alert = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
+    h3.text-danger.b-offset-sm.js-document-conform-alert = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
+
+  .row
+    .text-help.col-sm-2
+      span.label-icon-hint.js-label-hint[ title='' ] Решение
+    .text-help.col-sm-8 Согласующий
+
 
   - resource.conformers.each do |conformer|
-    p
+    .row
       - if conformer.made_decision? resource.document
         - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
         - css_class = is_conformed ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'
-        span class=css_class
-        span.col-words-1
-        span = conformer.first_name_with_last_name
+        .h4.col-sm-2.text-center class=css_class
+        span.col-sm-8 = conformer.first_name_with_last_name
       - elsif conformer == current_user
         = render 'documents/conformations/conform_form', resource: resource
-        /span = conformer == current_user
       - else
-        span ВКЛ/ВЫКЛ
-        span.col-words-1
-        span = conformer.first_name_with_last_name
+        span.col-sm-2.text-center ВКЛ/ВЫКЛ
+        span.col-sm-8 = conformer.first_name_with_last_name
 
 
   .row
