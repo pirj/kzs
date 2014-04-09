@@ -180,12 +180,12 @@ namespace :documents do
       d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
-      d.executor = User.find(rand(1..users_count))
-      d.approver = User.find(rand(1..users_count))
+      d.executor = sender_organization.users.shuffle.first
+      d.approver = sender_organization.users.shuffle.first
       d.recipients << Organization.where('id != ?', sender_organization.id).last
       d.recipient_organization = Organization.where('id != ?', sender_organization.id).last #to be deprecated
       d.conformers << sender_organization.users.last
-      d.sender_organization    = Organization.find(rand(1..organizations_count))
+      d.sender_organization = sender_organization
       d.save!
       d.transition_to!(:draft)
       d.transition_to!(:prepared)
@@ -200,14 +200,15 @@ namespace :documents do
     Task.reset_pk_sequence
 
     20.times do |i|
+      sender_organization = Organization.find(rand(1..organizations_count))
       d = Documents::Order.new
       d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
-      d.executor = User.find(rand(1..users_count))
-      d.approver = User.find(rand(1..users_count))
+      d.executor = sender_organization.users.shuffle.first
+      d.approver = sender_organization.users.shuffle.first
       d.recipient_organization = Organization.find(rand(1..organizations_count))
-      d.sender_organization    = Organization.find(rand(1..organizations_count))
+      d.sender_organization = sender_organization
       task_list = d.build_task_list
       4.times do |t|
         t = Task.new
@@ -237,14 +238,15 @@ namespace :documents do
     Documents::Report.reset_pk_sequence
 
     10.times do |d|
+      sender_organization = Organization.find(rand(1..organizations_count))
       d = Documents::Report.new
       d.title = Populator.words(4)
       d.body = Populator.sentences(30..50)
       d.confidential = false
-      d.executor = User.find(rand(1..users_count))
-      d.approver = User.find(rand(1..users_count))
+      d.executor = sender_organization.users.shuffle.first
+      d.approver = sender_organization.users.shuffle.first
       d.recipient_organization = Organization.find(rand(1..organizations_count))
-      d.sender_organization    = Organization.find(rand(1..organizations_count))
+      d.sender_organization = sender_organization
 
       d.order = Documents::Order.find(rand(1..Documents::Order.count))
 
