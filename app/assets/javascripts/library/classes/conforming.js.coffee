@@ -34,17 +34,9 @@ class window.ConformingView
     @.init(@.$conformations = $(@.params.conformations))
 
 
-    @.$agree_btn.on('click', (e) =>
-      e.preventDefault()
-      @.agree()
-      return false
-    )
+    @.$agree_btn.on('click', (e) => @.agree() )
 
-    @.$deny_btn.on('click', (e) =>
-      e.preventDefault()
-      @.deny()
-      return false
-    )
+    @.$deny_btn.on('click', (e) => @.deny() )
 
     # обрабатываем ввод букв в окне с комментарием
     @.$conform_txt.on('keyup', (e) =>

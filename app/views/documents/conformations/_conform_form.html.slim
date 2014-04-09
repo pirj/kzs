@@ -3,6 +3,15 @@
     .col-sm-3.b-offset-sm
       = button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
       = button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
+
+      .switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
+        input#conform-yes.js-document-conform-agree-btn  name="view10"  type="radio"
+        label for="conform-yes" onclick=""  Да
+        input name="view10" type="radio" checked=""
+        label for="conform-undefined" onclick=""
+        input#conform-no.js-document-conform-deny-btn name="view10" type="radio"
+        label for="conform-no" onclick=""  Нет
+        a
     .col-sm-8
       span = current_user.first_name_with_last_name
   .row
