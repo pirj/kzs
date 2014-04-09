@@ -65,6 +65,20 @@ task :mercury do
     end
   end
   
+  namespace(:thin) do
+    task :stop do
+      run %Q{cd #{latest_release} && bundle exec thin stop -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+     end
+
+    task :start do
+      run %Q{cd #{latest_release} && bundle exec thin start -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+    end
+
+    task :restart do
+      run %Q{cd #{latest_release} && bundle exec thin restart -C /srv/webdata/sakedev.kzsspb.ru/shared/sakedev.yml}
+    end
+  end
+  
   namespace(:populate) do
     task :data do
       run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=production}
