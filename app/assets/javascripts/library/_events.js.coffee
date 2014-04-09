@@ -106,6 +106,36 @@ $ ->
       radioClass: 'iradio_flat-green radio-inline'
     )
 
+  $('#conform-yes').on('click', ->
+    if !$('.js-icheck-off').hasClass('disable')
+
+      if confirm("Вы уверены? Отменить невозможно!")
+        console.log('вы проголосовали ЗА')
+        $('.js-icheck-off').addClass('disable');
+      else
+        $('#conform-undefined').click()
+    else
+      return false
+  )
+
+  $('#conform-undefined').on('click', ->
+    if $('.js-icheck-off').hasClass('disable')
+      return false
+
+  )
+
+
+  $('#conform-no').on('click', ->
+    if !$('.js-icheck-off').hasClass('disable')
+      if confirm("Вы уверены? Отменить невозможно!")
+        console.log('вы проголосовали ПРОТИВ')
+        $('.js-icheck-off').addClass('disable');
+      else
+        $('#conform-undefined').click()
+    else
+      return false
+  )
+
 
   # custom initialize popover
   $('.js-document-state-link').on('click', ->
