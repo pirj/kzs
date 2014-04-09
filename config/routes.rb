@@ -35,8 +35,8 @@ Kzs::Application.routes.draw do
         get 'reply'
         post 'reply', to: :create_reply
         get 'assign_state'
-        post 'conformation', to: 'conformations#create'
       end
+      resources :conformations, only: [:create]
 
       # Приложенные документы
       resources :attached_documents, only: [:index, :create, :destroy] do
@@ -62,6 +62,7 @@ Kzs::Application.routes.draw do
       member do
         get 'assign_state'
       end
+      resources :conformations, only: [:create]
 
       # Приложенные документы
       resources :attached_documents, only: [:index, :create, :destroy] do
