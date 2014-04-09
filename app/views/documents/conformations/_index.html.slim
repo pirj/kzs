@@ -1,0 +1,35 @@
+.well.js-document-debug
+
+- if resource.conformers
+  h2 Согласование
+
+  / TODO-justvitalius: доступно ли это в ability?
+  - if resource.conformers.include?(current_user) && !current_user.made_decision?(resource.document)
+    h2.text-danger.b-offset-sm = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
+
+  - resource.conformers.each do |conformer|
+    p
+      - if conformer.made_decision? resource.document
+        - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
+        - css_class = is_conformed ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'
+        span class=css_class
+        span.col-words-1
+        span = conformer.first_name_with_last_name
+      - elsif conformer == current_user
+        = render 'documents/conformations/conform_form', resource: resource
+        /span = conformer == current_user
+      - else
+        span ВКЛ/ВЫКЛ
+        span.col-words-1
+        span = conformer.first_name_with_last_name
+
+
+  .row
+    .col-sm-12.b-offset-sm.js-document-conform-list
+      h4 = "Комментарии (#{resource.conformations.select{|c| c.comment.present?}.count}):"
+
+      - resource.conformations.each do |conform|
+        = render 'documents/conformations/conformation', conform: conform
+
+
+

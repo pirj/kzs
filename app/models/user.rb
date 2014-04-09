@@ -132,10 +132,11 @@ class User < ActiveRecord::Base
   # @example
   #   user.conformated? document
   # @see Document
-  def conformated? document
+  # @return true | false
+  def made_decision? document
     raise RuntimeError, 'User is not in the confomers list for the document' unless document.conformers.include? self
 
-    conformations.where(document_id: document.id)
+    conformations.where(document_id: document.id).blank? ? false : true
   end
 
 end

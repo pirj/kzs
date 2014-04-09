@@ -81,7 +81,7 @@ class window.ConformingView
     @.debug 'agree clicked'
     @.$conform_type.val(true)
     @.send_without_validate = true
-    @.$conformation_form.show()
+    @.$conformation_form.slideDown(300)
     @.$conformation_form_submit.prop('disabled', '')
     @.$conformation_form_title.text('Добавьте комментарий (необязательно)')
 
@@ -90,7 +90,7 @@ class window.ConformingView
   deny: () ->
     @.debug 'deny clicked'
     @.$conform_type.val(false)
-    @.$conformation_form.show()
+    @.$conformation_form.slideDown(300)
     @.$conformation_form_title.text('Добавьте комментарий (обязательно)')
     # если комментарий пустой,то дизэйблим кнопку сабмита формы
     unless @.can_send_form()
@@ -114,7 +114,7 @@ class window.ConformingView
 
   # что делаем в случае успешного ответа от сервера
   success_ajax_send: ->
-    @.$conformation_form.slideUp().find('input').val('');
+    @.$conformation_form.slideUp(300).find('input').val('');
     @.$agree_btn.prop('disabled', 'disabled')
     @.$deny_btn.prop('disabled', 'disabled')
 

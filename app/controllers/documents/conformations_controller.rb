@@ -2,11 +2,11 @@ class Documents::ConformationsController < ApplicationController
 
   def create
     doc = get_document(params)
-    if conformation
+    if conformation_params
       if conformed?
-        current_user.conform doc, comment: conformation[:comment]
+        @conform = current_user.conform doc, comment: conformation_params[:comment]
       else
-        current_user.deny doc, conformation[:comment]
+        @conform = current_user.deny doc, conformation_params[:comment]
       end
 
       respond_to { |format| format.js { render layout: false } }
@@ -21,10 +21,10 @@ class Documents::ConformationsController < ApplicationController
   private
 
   def conformed?
-    (params[:conformation][:conformed] == 'true')? true : false
+    (conformation_params[:conformed] == 'true')? true : false
   end
 
-  def conformation
+  def conformation_params
     params[:conformation] || nil
   end
 
