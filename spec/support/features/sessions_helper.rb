@@ -1,7 +1,7 @@
 # coding: utf-8
 module Features
   module SessionsHelper
-    def sign_in_with(email, password)
+    def sign_in_with(email, password='password')
       within '.spec-login-form' do
         fill_in 'user[login]', with: email
         fill_in 'user[password]', with: password

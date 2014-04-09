@@ -6,9 +6,9 @@ feature "Users edit and create an order", %q() do
   let(:user) { FactoryGirl.create(:user) }
   let(:recipient_user) { order.recipient_organization.admin }
   let(:sender_user) { order.sender_organization.admin }
-  let(:path) {  documents_order_path(order) }
+  let(:path) { documents_order_path(order) }
 
-  describe 'executer custom placeholder', js: true do
+  pending 'executer custom placeholder', js: true do
     let(:path) { new_documents_order_path }
 
     pending 'should be render custom placeholder' do
@@ -21,7 +21,7 @@ feature "Users edit and create an order", %q() do
     end
   end
 
-  describe 'form fill add fields and save', js: true do
+  pending 'form fill add fields and save', js: true do
       let(:path) { new_documents_order_path }
       background do
         visit path
@@ -49,5 +49,56 @@ feature "Users edit and create an order", %q() do
         expect(page).to have_content 'не может быть пустым'
         # save_and_open_page
       end
+  end
+
+  describe 'document-saver should be saved like creator' do
+    let(:old_creator) { order.creator }
+    let(:new_creator) { order.sender_organization.director }
+
+    let(:show_path) { documents_order_path(order) }
+    let(:path) { edit_documents_order_path(order) }
+
+    background do
+      visit path
+      sign_in_with user.email
     end
+
+    context 'old creator sees document' do
+      let(:user) { old_creator }
+      let(:creator_name) { old_creator.first_name_with_last_name }
+      scenario 'sees self name' do
+        visit show_path
+        within('.spec-document-creator') do
+          expect(page).to have_content creator_name
+        end
+      end
+    end
+
+    context 'new editor save document' do
+      let(:user) { new_creator }
+      let(:creator_name) { new_creator.first_name_with_last_name }
+
+      background do
+        # сохраняем нового псевдоюзера под контрольным лицом в документе,чтобы у нас были права просмотра документа из под него
+        expect(new_creator).to_not eq old_creator
+        order.approver = new_creator
+        order.save!
+        visit path
+      end
+
+      scenario 'update old creator to new creator' do
+        within('.spec-document-creator') do
+          expect(page).to have_content creator_name
+        end
+
+        click_on 'Подготовить'
+        visit show_path
+
+        within('.spec-document-creator') do
+          expect(page).to have_content creator_name
+        end
+      end
+    end
+
+  end
 end
