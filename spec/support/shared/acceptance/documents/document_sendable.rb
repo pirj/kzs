@@ -1,5 +1,6 @@
 # область видимости подготовленного документа
 # index_path — ссылка на список документов
+# show_path - ссылка на документ
 # accountable — документ, с которым работаем
 shared_examples_for 'document_sendable' do
 
@@ -8,17 +9,17 @@ shared_examples_for 'document_sendable' do
 
     background do
       sign_out
-      visit list_path
+      visit index_path
       sign_in_with user.email, 'password'
     end
 
 
-    context 'sender oranization Employee' do
+    context 'sender organization Employee' do
       let(:user){ FactoryGirl.create(:user, organization: accountable.sender_organization)}
       it { should have_content accountable.title }
     end
 
-    context 'recipient oranization Employee' do
+    context 'recipient organization Employee' do
       let(:user){ FactoryGirl.create(:user, organization: accountable.recipient_organization)}
       it { should have_content accountable.title }
     end
@@ -33,7 +34,7 @@ shared_examples_for 'document_sendable' do
     subject { page }
     background do
       sign_out
-      visit "/documents/mails/#{accountable.id}"
+      visit show_path
       sign_in_with user.email, 'password'
     end
 

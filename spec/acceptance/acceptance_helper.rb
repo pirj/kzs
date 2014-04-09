@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'database_cleaner'
 require 'capybara/poltergeist'
 
+include Rails.application.routes.url_helpers
+
 Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|

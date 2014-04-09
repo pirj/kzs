@@ -1,5 +1,6 @@
 # область видимости подготовленного документа
-# list_path — ссылка на список документов
+# index_path — ссылка на список документов
+# show_path — ссылка на документ
 # document — документ, с которым работаем
 shared_examples_for 'document_preparable' do
 
@@ -7,53 +8,53 @@ shared_examples_for 'document_preparable' do
 
     subject { page }
 
-    let!(:approver) { document.approver }
-    let!(:creator) { document.creator }
-    let!(:executor) { document.executor }
-    let!(:conformer) { document.conformers.first }
+    let!(:approver) { accountable.approver }
+    let!(:creator) { accountable.creator }
+    let!(:executor) { accountable.executor }
+    let!(:conformer) { accountable.conformers.first }
     let!(:another_user) { FactoryGirl.create(:user, organization: approver.organization) }
 
     background do
       sign_out
-      visit list_path
+      visit index_path
       sign_in_with user.email, 'password'
 
-      expect(current_path).to eq list_path
+      expect(current_path).to eq index_path
     end
 
     context 'executor' do
-      let!(:user) { document.executor }
+      let!(:user) { accountable.executor }
 
-      it { should have_content document.title }
+      it { should have_content accountable.title }
     end
 
     context 'approver' do
-      let!(:user) { document.approver }
-      it { should have_content document.title }
+      let!(:user) { accountable.approver }
+      it { should have_content accountable.title }
     end
 
     context 'creator' do
-      let!(:user) { document.creator }
+      let!(:user) { accountable.creator }
 
-      it { should have_content document.title }
+      it { should have_content accountable.title }
     end
 
     context 'conformers' do
-      let!(:user) { document.conformers.first }
+      let!(:user) { accountable.conformers.first }
 
-      it { should have_content document.title }
+      it { should have_content accountable.title }
     end
 
     context 'another user' do
-      let!(:user) { FactoryGirl.create(:user, organization: document.sender_organization) }
+      let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
 
-      it { should_not have_content document.title }
+      it { should_not have_content accountable.title }
     end
 
     context 'recipient user' do
-      let!(:user) { document.recipient_organization.director }
+      let!(:user) { accountable.recipient_organization.director }
 
-      it { should_not have_content document.title }
+      it { should_not have_content accountable.title }
     end
 
   end

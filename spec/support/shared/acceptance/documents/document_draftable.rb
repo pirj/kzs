@@ -1,5 +1,6 @@
 # область видимости подготовленного документа
-# list_path — ссылка на список документов
+# index_path — ссылка на список документов
+# show_path — ссылка на документ
 # accountable — документ, с которым работаем
 shared_examples_for 'document_draftable' do
 
@@ -8,7 +9,7 @@ shared_examples_for 'document_draftable' do
 
     background do
       sign_out
-      visit list_path
+      visit index_path
       sign_in_with user.email, 'password'
     end
 
@@ -28,7 +29,7 @@ shared_examples_for 'document_draftable' do
     subject { page }
     background do
       sign_out
-      visit "/documents/mails/#{accountable.id}"
+      visit show_path
       sign_in_with user.email, 'password'
     end
 
