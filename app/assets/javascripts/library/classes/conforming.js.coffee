@@ -13,12 +13,14 @@ class window.ConformingView
   params:
    agree_btn: '.js-document-conform-agree-btn'
    deny_btn: '.js-document-conform-deny-btn'
+   conformation_alert: '.js-document-conform-alert'
    conformation_form: '.js-document-conform-modal-form'
    conform_type: '.js-document-conform-type'
    conform_txt: '.js-document-conform-txt'
    conformations: '.js-document-conform-list'
 
    debug: '.js-document-debug'
+   is_debug: false
 
   constructor: ->
     @.$debug = $(@.params.debug)
@@ -26,6 +28,7 @@ class window.ConformingView
 
     @.init(@.$agree_btn = $(@.params.agree_btn))
     @.init(@.$deny_btn = $(@.params.deny_btn))
+    @.init(@.$conformation_alert = $(@.params.conformation_alert))
     @.init(@.$conformation_form = $(@.params.conformation_form))
     @.init(@.$conformation_form_submit = $(@.params.conformation_form).find('input[type=submit]'))
     @.init(@.$conformation_form_title = $(@.params.conformation_form).find('h4'))
@@ -57,15 +60,16 @@ class window.ConformingView
 
   # пишем в результат инициализаций
   init: (obj) ->
-    if obj.length
-      str = "<p class='text-success'>#{obj.selector} init</p>"
-    else
-      str = "<p class='text-danger'>#{obj.selector} non init</p>"
-    @.$debug.html(@.$debug.html() + str)
+    if @.params.is_debug
+      if obj.length
+        str = "<p class='text-success'>#{obj.selector} init</p>"
+      else
+        str = "<p class='text-danger'>#{obj.selector} non init</p>"
+      @.$debug.html(@.$debug.html() + str)
 
   # пишем в дебаг
   debug: (str) ->
-    @.$debug.html(@.$debug.html() + "<p>#{str}</p>")
+    @.$debug.html(@.$debug.html() + "<p>#{str}</p>") if @.params.is_debug
 
 
   # обработка клика по кнопке «согласен»
@@ -94,7 +98,7 @@ class window.ConformingView
     @.debug 'ajax conform inited'
     @.$conformation_form.on('ajax:before', =>
       @.debug 'before ajax send form'
-      # если комментарий
+      # проверяем нужен ли комментарий
       if @.can_send_form() || @.send_without_validate
         @.debug 'can send conform'
         return true
@@ -105,15 +109,17 @@ class window.ConformingView
 
 
   # что делаем в случае успешного ответа от сервера
+  # данный метод вызывается из js-файла в ответе от сервера через ujs.
   success_ajax_send: ->
     @.$conformation_form.slideUp(300).find('input').val('');
+    @.$conformation_alert.hide()
     @.$agree_btn.prop('disabled', 'disabled')
     @.$deny_btn.prop('disabled', 'disabled')
 
 
   # вставляем комментарий в общий список комментариев
   append_conformation: (html) ->
-    @.$conformations.append(html)
+    @.$conformations.append(html).fadeIn(200)
 
   # проверяет можно ли отправить форму.
   # возвращаем false если комментарий пустой

@@ -1,11 +1,11 @@
-.well.js-document-debug
+.well.js-document-debug.hidden
 
 - if resource.conformers
   h2 Согласование
 
   / TODO-justvitalius: доступно ли это в ability?
   - if resource.conformers.include?(current_user) && !current_user.made_decision?(resource.document)
-    h2.text-danger.b-offset-sm = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
+    h2.text-danger.b-offset-sm.js-document-conform-alert = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
 
   - resource.conformers.each do |conformer|
     p
