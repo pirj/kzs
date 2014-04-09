@@ -72,7 +72,7 @@ module Documents::AccountableController
     authorize! :read, resource.document, message: I18n.t('unauthorized.read.document')
   end
 
-  def authorize_to_edit_document
+  def authorize_to_update_document
     authorize! :update, resource.document, message: I18n.t('unauthorized.read.document')
   end
 end
