@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :vehicles, :through => :vehicle_users
 
   # Согласования
-  has_many :conformations
+  has_many :conformations, dependent: :destroy
 
   belongs_to :organization
 

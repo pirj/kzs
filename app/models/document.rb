@@ -23,6 +23,8 @@ class Document < ActiveRecord::Base
 
   attr_accessible :document_attached_files_attributes, :attached_documents_attributes
 
+  after_update :clear_conformations
+
   has_many :document_attached_files
 
   # Приложенные документы
@@ -36,7 +38,7 @@ class Document < ActiveRecord::Base
   has_many :document_transitions
 
   # Согласования
-  has_many :conformations
+  has_many :conformations, dependent: :destroy
 
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
@@ -69,7 +71,6 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
-  before_destroy { |document| document.conformers.clear }
 
   validates_presence_of :title,
                         :sender_organization_id,
@@ -214,6 +215,12 @@ class Document < ActiveRecord::Base
   end
 
   private
+
+  # Используется как after_update
+  # При обновлении документа обнуляем все согласования
+  def clear_conformations
+    conformations.destroy_all
+  end
 
   # Запрещаем удаление "извне"
   # Вместо destroy используйте destroy_by
