@@ -11,11 +11,12 @@ feature "Users edit and create an order", %q() do
   let(:edit_path) { edit_documents_order_path(order) }
 
 
-  pending 'form fill fields and save', js: true do
+  describe 'form fill fields and save', js: true do
       background do
         visit new_path
         sign_in_with user.email
         skip_welcome
+        create_screenshot
 
           # fill auction fields
         fill_in 'дата исполнения', with: DateTime.now + 5.days

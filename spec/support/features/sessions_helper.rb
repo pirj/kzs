@@ -1,6 +1,7 @@
 # coding: utf-8
 module Features
   module SessionsHelper
+
     def sign_in_with(email, password='password')
       within '.spec-login-form' do
         fill_in 'user[login]', with: email
@@ -13,8 +14,7 @@ module Features
 
     def sign_out
       page.driver.submit :delete, destroy_user_session_path, {}
-
-      end
+    end
 
     def skip_welcome
       execute_script(%Q!$('.js-welcome-screen, .modal-backdrop-white').remove()!)
@@ -24,8 +24,6 @@ module Features
       skip_welcome
       find('.spec-user-logout').click
     end
-
-
 
   end
 end
