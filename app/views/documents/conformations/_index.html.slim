@@ -22,7 +22,8 @@
       - elsif conformer == current_user
         = render 'documents/conformations/conform_form', resource: resource
       - else
-        span.col-sm-2.text-center ВКЛ/ВЫКЛ
+        span.col-sm-2.text-center
+          .h4.fa.fa-question-circle
         span.col-sm-8 = conformer.first_name_with_last_name
 
 
