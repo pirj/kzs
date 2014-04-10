@@ -23,6 +23,12 @@ window.global =
     minDate: new Date()
 
 
+# Исполнение js-кода внутри кастомного контекста
+window.eval_js_in_context = (data, context) ->
+  (->
+    eval data
+  ).apply context
+
 window.app.enable_welcome = ->
   $('.js-welcome-screen').modal('show')
   $('.modal-backdrop').removeClass().addClass('modal-backdrop-white in')
@@ -59,7 +65,6 @@ $ ->
   data_days = $('.js-datepicker.js-deadline').data('days')
   max_date = $('.js-datepicker.js-deadline').datepicker( "option", "maxDate" )
   opts = _.extend(global.datepicker, minDate: date + data_days, max_date )
-  console.log opts
   $( '.js-datepicker.js-deadline' ).datepicker(opts)
 
 
@@ -148,7 +153,6 @@ $ ->
 
 
 
-
   # click on 'back' button
   $(document).on('click', '.js-document-state-back-link', ->
     $(@).closest('.popover').prev().popover('show').trigger('document_state:show')
@@ -156,9 +160,11 @@ $ ->
 
   # close this 'cancel button' popover
   $(document).on('click', '.js-document-state-close-popover', ->
-    console.log @
     $(@).closest('.popover').prev().popover('destroy')
   )
 
   # initialize styling file attach button with file-title near attach button
   $('.js-filestyle-with-title').filestyle()
+
+  # БЛОК АКТИВАЦИИ КЛАССОВ
+  user_conform = new ConformingView()

@@ -65,6 +65,20 @@ task :mercury do
     end
   end
   
+  namespace(:thin) do
+    task :stop do
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinStop}
+     end
+
+    task :start do
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinStart}
+    end
+
+    task :restart do
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinRestart}
+    end
+  end
+  
   namespace(:populate) do
     task :data do
       run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=production}

@@ -36,6 +36,7 @@ Kzs::Application.routes.draw do
         post 'reply', to: :create_reply
         get 'assign_state'
       end
+      resources :conformations, only: [:create]
 
       # Приложенные документы
       resources :attached_documents, only: [:index, :create, :destroy] do
@@ -49,6 +50,7 @@ Kzs::Application.routes.draw do
         get 'reject'
         post 'reject', to: :create_reject
       end
+      resources :conformations, only: [:create]
 
       # Приложенные документы
       resources :attached_documents, only: [:index, :create, :destroy] do
@@ -60,6 +62,7 @@ Kzs::Application.routes.draw do
       member do
         get 'assign_state'
       end
+      resources :conformations, only: [:create]
 
       # Приложенные документы
       resources :attached_documents, only: [:index, :create, :destroy] do

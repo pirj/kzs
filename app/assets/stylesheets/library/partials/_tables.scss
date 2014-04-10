@@ -16,6 +16,15 @@ th {
   text-align: left;
 }
 
+// делаем патч у классов длины в кол-ве символов, чтобы таблицы не слипались в некрасивое мессево.
+th, td{
+  &[class*='col-words']{ display: table-cell; }
+}
+
+tr{
+  &[class*='col-words']{ display: table-row; }
+}
+
 
 // Baseline styles
 

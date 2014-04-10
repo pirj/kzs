@@ -4,9 +4,9 @@
 # - выделить несколько декораторов, которые рисуют организаций,пользователей,какие-то собственные атрибуты и все заинклудить
 module Documents
   class BaseDecorator < Draper::Decorator
-    delegate_all
-    decorates :document
+    decorate :document
     delegate :document, :attached_documents
+    delegate_all
 
     LABEL_COL_WIDTH = 3
 
@@ -120,7 +120,7 @@ module Documents
     def creator_with_label
       element_wrapper object.creator do
         h.content_tag( :div, I18n.t("documents.table.document_labels.creator"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}  spec-document-creator" )
       end
     end
 

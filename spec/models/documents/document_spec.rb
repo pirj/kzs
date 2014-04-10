@@ -31,17 +31,6 @@ describe Document do
         mail2.reload.conformations.count.should be > 0
       end
     end
-
-    context 'and being destroyed' do
-      it 'should clear its conformations' do
-        id = @mail.document.id
-        
-        # Иммитируем удаление из БД (в обычной ситуации использование destroy невозможно)
-        @mail.document.send :destroy
-
-        Conformation.where('document_id = ?', id).count.should == 0
-      end
-    end
   end
 
 end

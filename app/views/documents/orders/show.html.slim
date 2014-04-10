@@ -30,7 +30,7 @@
 
 
 
-= render 'documents/documents/conformers', resource: resource
+/= render 'documents/documents/conformers', resource: resource
 
 
 
@@ -55,7 +55,10 @@
           ._task-comment = task_builder.object.body
         .col-sm-2.col-sm-offset-2 = DateFormatter.new(task_builder.object.deadline) if task_builder.object.deadline
 
-/= render 'shared/voting.slim'
+
+.row.b-offset-sm
+  .col-sm-12
+    = render 'documents/conformations/index', resource: resource
 
 .row.b-offset-sm
   .col-sm-12
@@ -75,8 +78,10 @@
 .b-offset-sm
   = render 'documents/application/change_state_links', resource: resource
 
-  - css_class = 'simple-hide' unless resource.tasks.count == resource.tasks.completed.count
 
+  / управляем видимостью кнопки «создать акт»
+  / TODO-justvitalius: перенести это в ability надо
+  - css_class = 'simple-hide' unless resource.tasks.count == resource.tasks.completed.count
   - unless resource.task_input_disable_status(current_organization.id)
     = link_to 'Создать Акт', new_documents_report_path(order_id: resource.id), class: "btn btn-primary js-orders-new-report-btn #{css_class}"
 

@@ -14,7 +14,7 @@
     .form-group
       .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее документ в системе' ]
         | Составитель
-      .text-help.col-sm-8= "#{current_user.first_name_with_last_name} (это Вы)"
+      .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
     .spec-order-field-show
       = doc.association :executor, as: :select_with_checkbox, \
                         collection: current_organization_users, \

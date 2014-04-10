@@ -28,6 +28,9 @@
       = image_tag("/system/documents/document_#{resource.document.id}.png", class: 'table-img-md')
     = resource.link_to_pdf class: 'img-bordered'
 
+.row.b-offset-sm
+  .col-sm-12
+    = render 'documents/conformations/index', resource: resource
 
 .row.b-offset-sm
   .col-sm-12

@@ -33,6 +33,10 @@
 
 .row.b-offset-sm
   .col-sm-12
+    = render 'documents/conformations/index', resource: resource
+
+.row.b-offset-sm
+  .col-sm-12
     h3 Прикрепленные документы
     - resource.attached_documents.each do |attach_doc|
       ._document

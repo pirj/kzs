@@ -6,6 +6,7 @@ class Ability
 
     # Создатель может читать свои документы( в том числе и черновики и конфиденциальные)
     can :read, Document, creator_id: user.id
+    cannot :update, Document
 
     # Любой пользователь данной организации может читать неконфиденциальные исходящие документы
     # в состоянии Подписан, Отправлен, Принят, Отклонен
@@ -32,9 +33,14 @@ class Ability
 
     # Директор может читать входящие и исходящие документы
     if user.director?
-      can :read, Document, :sender_organization_id => user.organization_id
+      can :read, Document, sender_organization_id: user.organization_id
       can :read, Document, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
     end
+
+    # Только Составитель, Исполнитель, Контроллирующее лицо могут редактировать документ
+    can :update, Document, creator_id: user.id
+    can :update, Document, executor_id: user.id
+    can :update, Document, approver_id: user.id
 
     # TODO: @babrovka
     # Make use of
@@ -77,6 +83,10 @@ class Ability
     can :apply_rejected, Documents::Report, document: { recipient_organization_id: user.organization_id }, order: { document: { approver_id: user.id } }
 
     can :create, Permit if user.permissions.exists?('6')
+
+    can :conform, Document do |doc|
+        doc.conformers.include?(user) && !user.made_decision?(doc)
+    end
 
     if user.sys_user
       can :manage, User
