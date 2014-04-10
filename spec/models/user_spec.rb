@@ -99,14 +99,24 @@ describe User do
 
             end
 
-            context 'read approved document' do
+            context 'approved' do
               before do
                 accountable = document.accountable
                 accountable.transition_to!(:prepared)
                 accountable.transition_to!(:approved)
                 document.reload
               end
+
               it { should be_able_to(:read, document) }
+
+              it { should_not be_able_to(:apply_sent, document.accountable) }
+
+              context 'Approver' do
+                let(:user) { document.approver }
+
+                it { should be_able_to(:apply_sent, document.accountable)}
+              end
+
             end
           end
         end
