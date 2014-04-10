@@ -9,6 +9,13 @@ describe Documents::OfficialMail do
     it("#sender_organziation should respond") { expect { subject.sender_organization }.to_not raise_error }
   end
 
+  context 'approvable' do
+    let(:accountable){ create(:mail_with_direct_recipient) }
+
+    it_should_behave_like 'Approvable Document'
+
+  end
+
   context 'without recipients' do
     subject { build(:mail) }
     it { should_not be_valid }

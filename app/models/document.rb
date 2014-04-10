@@ -214,6 +214,10 @@ class Document < ActiveRecord::Base
     conformations.map(&:user)
   end
 
+  def approvable?
+    (conformers.count == conformations.count) && conformations.pluck(:conformed).all?
+  end
+
   private
 
   # Используется как after_update

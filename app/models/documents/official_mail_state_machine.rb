@@ -18,6 +18,10 @@ module Documents
       !mail.new_record?
     end
 
+    guard_transition to: :approved do |accountable|
+      accountable.approvable?
+    end
+
     after_transition(to: :approved) do |accountable, transition|
       Documents::Accounter.sign(accountable)
     end

@@ -53,4 +53,11 @@ describe Documents::Order do
     end
   end
 
+  context 'approvable' do
+    let(:accountable){ create(:order) }
+
+    it_should_behave_like 'Approvable Document'
+
+  end
+
 end

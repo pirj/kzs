@@ -17,6 +17,10 @@ module Documents
     transition from: :approved, to: [:sent, :trashed]
     transition from: :sent,     to: [:accepted, :rejected]
 
+    guard_transition to: :approved do |accountable|
+      accountable.approvable?
+    end
+
     after_transition(to: :approved) do |accountable, transition|
       Documents::Accounter.sign(accountable)
     end
