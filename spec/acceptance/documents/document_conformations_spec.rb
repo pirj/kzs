@@ -48,15 +48,19 @@ feature "Users can conform or deny document", %q{} do
           it { should have_content "Комментарии (#{conformers.count})" }
 
           scenario 'displaying conformers name' do
-            conformers.each do |_conformer|
-              expect(page).to have_content _conformer.first_name_with_last_name
+            within '.spec-document-conformations' do
+              conformers.each do |_conformer|
+                expect(page).to have_content _conformer.first_name_with_last_name
+              end
             end
           end
 
           scenario 'displaying conformers comments' do
             expect(document.conformations).to_not be_empty
-            document.conformations.each do |_conform|
-              expect(page).to have_content _conform.comment
+            within '.spec-document-conformations' do
+              document.conformations.each do |_conform|
+                expect(page).to have_content _conform.comment
+              end
             end
           end
         end
@@ -71,15 +75,19 @@ feature "Users can conform or deny document", %q{} do
 
         scenario 'hidding conformation comments' do
           expect(document.conformations).to_not be_empty
-          document.conformations.each do |_conform|
-            expect(page).to_not have_content _conform.comment
+          within '.spec-document-conformations' do
+            document.conformations.each do |_conform|
+              expect(page).to_not have_content _conform.comment
+            end
           end
         end
 
         scenario 'hidding conformers name' do
           expect(conformers).to_not be_empty
-          conformers.each do |_conformer|
-            expect(page).to_not have_content _conformer.first_name_with_last_name
+          within '.spec-document-conformations' do
+            conformers.each do |_conformer|
+              expect(page).to_not have_content _conformer.first_name_with_last_name
+            end
           end
         end
       end
