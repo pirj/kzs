@@ -15,8 +15,14 @@ FactoryGirl.define do
       instance.save!
     end
 
-    factory :sender_organization, class: Organization
-    factory :recipient_organization, class: Organization
+    factory :sender_organization, class: Organization do
+      title "OOO Sender Organization"
+      short_title "Sender Organization"
+    end
+    factory :recipient_organization, class: Organization do
+      title "OOO Recipient Organization"
+      short_title "Recipient Organization"
+    end
   end
 
   

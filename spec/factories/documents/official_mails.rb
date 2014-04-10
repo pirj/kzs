@@ -10,7 +10,7 @@ FactoryGirl.define do
     # Общее
     title 'title'
     body 'body'
-    sender_organization
+    sender_organization { FactoryGirl.create(:sender_organization) }
 
     after(:build) do |instance, ev|
       user = instance.sender_organization.admin
@@ -27,7 +27,7 @@ FactoryGirl.define do
 
     # С адресатом
     factory :mail_with_direct_recipient do
-      recipient_organization
+      recipient_organization { FactoryGirl.create(:recipient_organization) }
 
       # Подготовленное письмо с одним адресатом
       factory :prepared_mail do
