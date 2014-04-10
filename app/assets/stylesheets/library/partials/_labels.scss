@@ -54,14 +54,13 @@
   &:after{
     font-family: FontAwesome;
     content: "\f059";
-    display: block;
+    display: inline-block;
+    vertical-align: bottom;
     color: inherit;
     font-size: inherit;
     margin-right: -20px;
     margin-top: -30px;
     margin-bottom: 10px;
-    right: 0;
-    position: absolute;
   }
 }
 
