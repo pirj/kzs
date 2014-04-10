@@ -12,6 +12,7 @@ module Features
       # find('form').click('войти')
     end
 
+    # TODO-justvitalius: сюда запилить проверку на js тест и автоматически переключать выход
     def sign_out
       page.driver.submit :delete, destroy_user_session_path, {}
     end

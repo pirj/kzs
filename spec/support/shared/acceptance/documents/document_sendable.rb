@@ -4,13 +4,13 @@
 # accountable — документ, с которым работаем
 shared_examples_for 'document_sendable' do
 
-  describe 'list drafts' do
+  describe 'displaying sent document in general list' do
     subject { page }
 
     background do
       sign_out
       visit index_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
 
@@ -30,12 +30,12 @@ shared_examples_for 'document_sendable' do
     end
   end
 
-  describe 'show' do
+  describe 'allow open sent document-page' do
     subject { page }
     background do
       sign_out
       visit show_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
     context 'to sender organization Employee' do
@@ -44,7 +44,7 @@ shared_examples_for 'document_sendable' do
       # Место для теста на показ Согласующих Лиц
       # должны быть
 
-      it { should have_selector('h1', text: accountable.title) }
+      it { should have_content accountable.title }
     end
 
     context 'to recipient organization Employee' do
@@ -53,7 +53,7 @@ shared_examples_for 'document_sendable' do
       # Место для теста на показ Согласующих Лиц
       # их быть не должно
 
-      it { should have_selector('h1', text: accountable.title) }
+      it { should have_content accountable.title }
     end
 
     context 'to other user' do

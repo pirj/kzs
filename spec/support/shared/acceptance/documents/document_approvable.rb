@@ -4,13 +4,13 @@
 # accountable — документ, с которым работаем
 shared_examples_for 'document_approvable' do
 
-  describe 'list drafts' do
+  describe 'displaying approved documents in general list' do
     subject { page }
 
     background do
       sign_out
       visit index_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
 
@@ -25,12 +25,12 @@ shared_examples_for 'document_approvable' do
     end
   end
 
-  describe 'show' do
+  describe 'allow to open document-page' do
     subject { page }
     background do
       sign_out
       visit show_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
     context 'to sender organization Employee' do

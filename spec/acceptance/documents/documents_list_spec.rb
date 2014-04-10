@@ -11,14 +11,6 @@ feature "Users sees documents list", %q{} do
 
 
   context 'mails' do
-    context 'prepared' do
-      let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient_and_conformers) }
-      let(:index_path) { documents_documents_path }
-      let(:show_path) { polymorphic_path(accountable) }
-
-      it_behaves_like 'document_preparable'
-
-    end
 
     context 'draft' do
       let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient) }
@@ -28,12 +20,21 @@ feature "Users sees documents list", %q{} do
       it_behaves_like 'document_draftable'
     end
 
+    context 'prepared' do
+      let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient_and_conformers) }
+      let(:index_path) { documents_documents_path }
+      let(:show_path) { polymorphic_path(accountable) }
+
+      it_behaves_like 'document_preparable'
+
+    end
+
     context 'approved' do
       let!(:accountable) { FactoryGirl.create(:mail_with_direct_recipient) }
       let(:index_path) { documents_documents_path(with_state: 'approved') }
       let(:show_path) { polymorphic_path(accountable) }
 
-      before do
+      background do
         accountable.transition_to!(:prepared)
         accountable.transition_to!(:approved)
       end
@@ -46,7 +47,7 @@ feature "Users sees documents list", %q{} do
       let(:index_path) { documents_documents_path(with_state: 'sent') }
       let(:show_path) { polymorphic_path(accountable) }
 
-      before do
+      background do
         accountable.transition_to!(:prepared)
         accountable.transition_to!(:approved)
         accountable.transition_to!(:sent)

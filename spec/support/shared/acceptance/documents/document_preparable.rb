@@ -4,7 +4,7 @@
 # document — документ, с которым работаем
 shared_examples_for 'document_preparable' do
 
-  describe 'allow view prepared document in documents list' do
+  describe 'displaying prepared documents in general list' do
 
     subject { page }
 
@@ -57,5 +57,34 @@ shared_examples_for 'document_preparable' do
       it { should_not have_content accountable.title }
     end
 
+
+    describe 'allow to open document-page' do
+      subject { page }
+      background do
+        sign_out
+        visit show_path
+        sign_in_with user.email
+      end
+
+      [:approver, :creator, :executor].each do |user|
+        context user.to_s do
+          let!(:user) { accountable.send(user) }
+          it { should have_selector('h1', text: accountable.title) }
+        end
+      end
+
+      context 'conformer' do
+        let!(:user) { accountable.conformers.first }
+        it { should have_selector('h1', text: accountable.title) }
+      end
+
+      context 'saboteur' do
+        let!(:user) { FactoryGirl.create(:user, organization: approver.organization) }
+        it { should_not have_selector('h1', text: accountable.title) }
+        it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
+        its(:current_path) { should match '/documents' }
+      end
+
+    end
   end
 end

@@ -4,13 +4,13 @@
 # accountable — документ, с которым работаем
 shared_examples_for 'document_draftable' do
 
-  describe 'list drafts' do
+  describe 'displaying drafted documents in general list' do
     subject { page }
 
     background do
       sign_out
       visit index_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
 
@@ -25,17 +25,17 @@ shared_examples_for 'document_draftable' do
     end
   end
 
-  describe 'show' do
+  describe 'allow to open document-page' do
     subject { page }
     background do
       sign_out
       visit show_path
-      sign_in_with user.email, 'password'
+      sign_in_with user.email
     end
 
     context 'to Author' do
       let(:user) { accountable.creator }
-      it { should have_selector('h1', text: accountable.title) }
+      it { should have_content accountable.title }
     end
 
     context 'to Saboteur' do
