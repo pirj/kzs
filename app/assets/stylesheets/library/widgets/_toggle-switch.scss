@@ -137,8 +137,6 @@
 
   input + label {
     position: relative;
-    z-index: 2;
-
     float: left;
     width: 50%;
     height: 100%;
@@ -226,22 +224,41 @@
     font-weight: bold;
     text-align: center;
     position: relative;
-    overflow: hidden;
     .switch-bg {
       content: '';
-      display: block;
-      width: 100%;
-      max-width: $switch-max-width;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
       padding: 0;
       background-color: lighten($color-gray-darker, 40%);
       border-radius: 30px;
       -webkit-transition: all 0.5s ease-out;
       -moz-transition: all 0.5s ease-out;
       transition: all 0.5s ease-out;
+      z-index: -1;
+    }
+    .switch-text, .switch-text:before, .switch-text:after, .switch-bg {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      max-width: $switch-max-width;
+    }
+    .switch-text:before, .switch-text:after {
+      width: 100%;
+      font-weight: bold;
+      font-size: 12px;
+      color:$color-gray-darker;
+    }
+    .switch-text:before,
+    .switch-text:after
+    {
+      display: none;
+    }
+    .switch-text:before {
+      content: 'НЕТ';
+    }
+    .switch-text:after {
+      content: 'ДА';
+      text-align: right;
     }
     label {
       color: #fff;
@@ -479,7 +496,7 @@
  * https://github.com/ghinda/css-toggle-switch
  *
  */
-/* Toggle Switches
+/* Toggle Switches>
  */
 /* Shared
  */
@@ -533,20 +550,25 @@
     transition: all 0.3s ease-out; }
   .switch-light label, .switch-light > span {
     line-height: 26px;
-    vertical-align: middle; }
+    vertical-align: middle;
+  }
   .switch-light input:focus ~ a, .switch-light input:focus + label {
-    outline: none; }
+    outline: none;
+  }
   .switch-light label {
     position: relative;
     z-index: 3;
     display: block;
-    width: 100%; }
+    width: 100%;
+  }
   .switch-light input {
     position: absolute;
     opacity: 0;
-    z-index: 5; }
+    z-index: 3;
+  }
   .switch-light input:checked ~ a {
-    right: 0%; }
+    right: 0%;
+  }
   .switch-light > span {
     position: absolute;
     left: -100px;
@@ -595,14 +617,11 @@
   .switch-toggle label, .switch-toggle > span {
     line-height: 26px;
     vertical-align: middle; }
-  .switch-toggle input:focus ~ a, .switch-toggle input:focus + label {
-    outline: 1px dotted #888888; }
   .switch-toggle input {
     position: absolute;
     opacity: 0; }
   .switch-toggle input + label {
     position: relative;
-    z-index: 2;
     float: left;
     width: 50%;
     height: 100%;
@@ -650,12 +669,26 @@
   }
   .switch-candy label {
     color: white;
+    position: relative;
+    z-index: 10;
     -webkit-transition: color 0.2s ease-out;
     -moz-transition: color 0.2s ease-out;
-    transition: color 0.2s ease-out; }
+    transition: color 0.2s ease-out;
+  }
+  .switch-candy label:first-of-type,
+  .switch-candy.switch-light #conform-undefined:checked ~ .switch-text:before
+  {
+    padding-left: 6px;
+  }
+  .switch-candy label:last-of-type,
+  .switch-candy.switch-light #conform-undefined:checked ~ .switch-text:after{
+    padding-right: 8px;
+  }
   .switch-candy input:checked + label {
     color: #333333;
   }
+
+// switch change color & icons tumbler
   .switch-candy.switch-light #conform-yes:checked ~ a {
     @include fa-icon("\f00c", 12px);
     color:lighten($color-green-darker, 30%);
@@ -664,6 +697,44 @@
     @include fa-icon("\f00d", 12px);
     color:lighten($color-red-darker, 30%);
   }
+  .switch-candy.switch-light #conform-undefined:checked ~ a {
+    display: none;
+  }
+
+//  switch-text
+//  .switch-candy.switch-light input:checked:not('#conform-undefined') ~ .switch-text:after,
+//  .switch-candy.switch-light input:checked:not('#conform-undefined') ~ .switch-text:before{
+//    z-index: 4;
+//    color: #fff;
+//    text-align: center;
+//  }
+  .switch-candy.switch-light #conform-yes:checked ~ .switch-text:after {
+    padding-right: 20px;
+    display: block;
+    z-index: 4;
+    color: #fff;
+    text-align: center;
+
+  }
+  .switch-candy.switch-light #conform-no:checked ~ .switch-text:before {
+    padding-left: 20px;
+    display: block;
+    z-index: 4;
+    color: #fff;
+    text-align: center;
+  }
+  .switch-candy.switch-light #conform-undefined:checked ~ .switch-text:before,
+  .switch-candy.switch-light #conform-undefined:checked ~ .switch-text:after
+  {
+    display: block;
+    z-index: 1;
+  }
+
+  .switch-candy.switch-light #conform-undefined + label {
+    z-index: 1;
+  }
+
+//  switch-bg change color
   .switch-candy.switch-light #conform-yes:checked ~ .switch-bg  {
     background: lighten($color-green-darker, 30%);
   }
