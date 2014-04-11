@@ -32,36 +32,4 @@ describe Document do
     end
   end
 
-  context "read/unread states"
-
-    xit "should be able to be marked as read by reader, if unread"
-
-    context "when created in state > draft and < sent" do
-
-      xit "should be marked as read to sender"
-
-      xit "should be unread by approver (if approver is not sender)"
-      
-      xit "should be unread by executor (if approver is not sender)"
-
-      xit "should be unread by all conformers (if conformer is not sender)"
-      
-      xit "should be marked as read to sender if sender == approver"
-
-      xit "should be marked as read to sender if sender == conformer"
-
-      xit "should be marked as read to sender if sender == executor"
-
-    end
-
-    context "when in state >= sent" do
-      xit "should be marked as unread to everybody in receiving organization"
-
-      xit "it should be able to be readed"
-
-    end
-  end
-
-
-
 end
