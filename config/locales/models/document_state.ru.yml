@@ -26,9 +26,9 @@ ru:
           draft: Черновик
           prepared: Подготовлено
           approved: Подписано
-          sent_recipient: Получено
-          sent_sender: Отправлено
-          sent: Отправлено
+          sent_recipient: Получено ▼
+          sent_sender: Отправлено ▲
+          sent: Отправлено ▲
           read: Прочитано
           accepted: Исполнено
           rejected: Отклонено
@@ -52,9 +52,9 @@ ru:
           draft: Черновик
           prepared: Подготовлен
           approved: Согласован
-          sent_recipient: Получен
-          sent_sender: Отправлен
-          sent: Отправлен
+          sent_recipient: Получен ▼
+          sent_sender: Отправлен ▲
+          sent: Отправлен ▲
           read: Прочтен
           accepted: Подписан
           rejected: Отклонен

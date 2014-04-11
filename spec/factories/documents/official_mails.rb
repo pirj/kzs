@@ -13,10 +13,9 @@ FactoryGirl.define do
     sender_organization { FactoryGirl.create(:sender_organization) }
 
     after(:build) do |instance, ev|
-      user = instance.sender_organization.admin
-      instance.approver = user
-      instance.executor = user
-      instance.creator = user
+      instance.approver = FactoryGirl.create(:user, organization: instance.sender_organization)
+      instance.executor = FactoryGirl.create(:user, organization: instance.sender_organization)
+      instance.creator = FactoryGirl.create(:user, organization: instance.sender_organization)
     end
 
     after(:create) do |instance,ev|
