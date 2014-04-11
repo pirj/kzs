@@ -1,5 +1,5 @@
 ul.nav.navbar-nav.navbar-right
-  li
+  li.spec-user-bar
 
     = link_to '', class: 'btn btn-login text-right js-popover btn-divide-by-word ', data: {target: 'user-bar'} do
       = content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
