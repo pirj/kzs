@@ -91,7 +91,7 @@ feature "Users review order", %q() do
         visit path
         i = all('.spec-task-checkbox.disabled').count
         expect(all('.spec-task-checkbox').count).to eq(i)
-        expect(all('.js-orders-new-report-btn.simple-hide').count).to eq(1)
+        expect(all('.js-orders-new-report-btn').count).to eq(0)
       end
     end
 
