@@ -71,6 +71,7 @@ class Document < ActiveRecord::Base
   alias_attribute :organization_id, :sender_organization_id
 
   after_save :create_png
+  after_create :create_history
 
   validates_presence_of :title,
                         :sender_organization_id,
@@ -120,7 +121,7 @@ class Document < ActiveRecord::Base
     joins(:document_transitions)
     .where('document_transitions.to_state' => state)
   }
-  scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
+  # scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
 
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
@@ -233,6 +234,12 @@ class Document < ActiveRecord::Base
   # а при переводе в статус "удален", нужно также хранить метаданные (например, id пользователя, который удалил документ)
   def destroy
     super
+  end
+
+  # Создаем историю изменений
+  def create_history
+    history = Documents::History.new(accountable)
+    history.ensure_has_flow
   end
 
   def can_have_many_recipients?

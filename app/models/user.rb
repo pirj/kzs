@@ -95,6 +95,17 @@ class User < ActiveRecord::Base
     organization && organization.director?(self)
   end
 
+  # Возвращает "важные" документы для этого пользователя
+  # Документ считает важным, если: ты участник документа: исполнитель, контрольное лицо, согласующий
+  #
+  # (нужно для нотификаций: они выводятся только для важных документов)
+  #
+  # @returns [ActiveRecord::Relation]
+  # @see Document
+  def important_documents
+    Document.includes(:conformers).where("approver_id = ? OR executor_id = ? OR documents_users.user_id = ?", id, id, id)
+  end
+
   # Согласовать документ
   # @param document [Document] документ
   # @param options

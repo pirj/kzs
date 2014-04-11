@@ -2,7 +2,7 @@ module Documents
   class History
     def initialize(accountable)
       @base = accountable.document
-      ensure_has_flow
+      # ensure_has_flow
     end
 
     def flow
@@ -21,7 +21,6 @@ module Documents
       .order { approved_at.desc }
     end
 
-    private
 
     def ensure_has_flow
       unless @base.flow
@@ -29,5 +28,6 @@ module Documents
         @base.save!
       end
     end
+
   end
 end

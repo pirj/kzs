@@ -12,7 +12,7 @@ aside.l-page__column.left
           i
           .text Документооборот
           b
-          = documents_inbox.badge
+          = documents_important.badge
       .child-dir
         = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
           i
@@ -22,7 +22,7 @@ aside.l-page__column.left
           -%w(mails orders reports).each do |doctype|
             = link_to documents_path(with_type: doctype), class: 'menu-link' do
               = humanize_documents_menu_item_name(doctype)
-              = documents_inbox.badge(doctype)
+              = documents_important.badge(doctype)
     = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
       i
       .text Пропуска

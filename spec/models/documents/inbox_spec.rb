@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Documents::Inbox do
+describe Documents::Important do
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { user.organization }
 
@@ -24,7 +24,7 @@ describe Documents::Inbox do
     order.transition_to!(:sent)
   end
 
-  subject { Documents::Inbox.new(user, organization) }
+  subject { Documents::Important.new(user, organization) }
 
   before do
     inbox_mail

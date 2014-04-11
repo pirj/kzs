@@ -10,10 +10,10 @@
         h2
           | Добро пожаловать,
           br #{current_user.first_name_with_last_name}
-        /= documents_inbox.inspect
-        - if documents_inbox.badge_label
+        /= documents_important.inspect
+        - if documents_important.badge_label
           .js-screen-user-actions
-            p У вас #{documents_inbox.badge_label} непрочитанных сообщений.
+            p У вас #{documents_important.badge_label} уведомлений.
             .btn-block3
               = link_to documents_path, class: 'btn btn-primary'
                 | Посмотреть

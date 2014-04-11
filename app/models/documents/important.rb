@@ -1,5 +1,5 @@
 module Documents
-  class Inbox
+  class Important
     def initialize(current_user, organization, scope = nil)
       @organization = organization
       @user = current_user
@@ -24,22 +24,22 @@ module Documents
     end
 
     def mail_count
-      @mail_count ||=
+      @mail_count =
           incoming.mails.count
     end
 
     def order_count
-      @order_count ||=
+      @order_count =
           incoming.orders.count
     end
 
     def report_count
-      @report_count ||=
+      @report_count =
           incoming.reports.count
     end
 
     def incoming
-      @scope.inbox(@organization).unread_by(@user)
+      @user.important_documents.unread_by(@user)
     end
   end
 end

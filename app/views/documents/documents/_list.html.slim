@@ -20,7 +20,7 @@
         - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon]
         - collection.each do |resource|
           / simple row with short information
-          tr[class=documents_inbox.row_class(resource)  data-id=resource.id data-server-actions=resource.actions ]
+          tr[class=documents_important.row_class(resource)  data-id=resource.id data-server-actions=resource.actions ]
             td.js-visible = check_box_tag "select-document-#{resource.id}", resource.id, false, data:{ target: 'document' }, class: 'js-row-select'
             - attrs.each do |attr|
               td.js-info = resource.send(attr.to_sym)

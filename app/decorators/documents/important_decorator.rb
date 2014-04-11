@@ -1,5 +1,5 @@
 module Documents
-  class InboxDecorator < Documents::BaseDecorator
+  class ImportantDecorator < Documents::BaseDecorator
     decorate :inbox
     delegate_all
 

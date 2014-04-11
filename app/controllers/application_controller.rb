@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_inbox, :organizations
+  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_important, :organizations
 
   def access_denied(exception)
     redirect_to root_path, alert: t('access_denied')
@@ -16,12 +16,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
-  def documents_inbox
-    @documents_inbox ||= Documents::InboxDecorator.new(pure_inbox)
+  def documents_important
+    @documents_important = Documents::ImportantDecorator.new(pure_important)
   end
 
-  def pure_inbox
-    Documents::Inbox.new(current_user, current_organization)
+  def pure_important
+    Documents::Important.new(current_user, current_organization)
   end
 
   def current_organization
