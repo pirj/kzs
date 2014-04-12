@@ -6,27 +6,35 @@
     - if can? :conform, resource.document
       h3.text-danger.b-offset-sm.js-document-conform-alert = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
 
-    .row.b-offset-xs
-      .text-help.col-sm-1
-        span.label-icon-hint.js-label-hint[ title='' ] Решение
-      .text-help.col-sm-8 Согласующий
+    .row.b-offset-sm
+      span.label-icon-hint.text-help.col-sm-2.text-center.js-label-hint[ title='' ] Решение
+      span.text-help.col-sm-8 Согласующий
 
 
     / список согласующих с кнопками согласования
-    .b.b-offset-sm
+    ul.b-offset-md.conformers-list.list-unstyled
       - resource.conformers.order('last_name ASC').each do |conformer|
-        .row
+        li.row
           - if conformer.made_decision? resource.document
             - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
             - css_class = is_conformed ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'
-            .h4.col-sm-1.text-center class=css_class
+            .col-sm-2.text-center class=css_class
             span.col-sm-8 = conformer.first_name_with_last_name
           - elsif conformer == current_user
             = render 'documents/conformations/conform_form', resource: resource
           - else
-            span.col-sm-1.text-center
-              .h4.fa.fa-question-circle
-            span.col-sm-8 = conformer.first_name_with_last_name
+            span.col-sm-2.text-center
+              span.fa.fa-question-circle
+            span.col-sm-8
+              a.conformer-name = conformer.first_name_with_last_name
+
+    .b
+      .col-sm-8
+        = form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide', remote: true } do |f|
+          h4 Добавьте комментарий
+          .form-group = f.hidden_field :conformed, class: 'js-document-conform-type'
+          .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
+          .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
 
 
     / отрисовка согласований

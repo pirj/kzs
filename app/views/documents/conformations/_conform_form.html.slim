@@ -1,38 +1,15 @@
 - if can? :conform, resource.document
-  .b
-    /.col-sm-2
-      /= button_tag 'agree', class: 'btn btn-primary js-document-conform-agree-btn'
-      /= button_tag 'deny', class: 'btn btn-danger js-document-conform-deny-btn'
-
-    .col-sm-2
-      /.switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
-      /  input#conform-no.js-document-conform-deny-btn name="view10" type="radio"
-      /  label for="conform-no" onclick=""
-      /  input#conform-undefined  name="view10" type="radio" checked=""
-      /  label for="conform-undefined" onclick="return false"
-      /  input#conform-yes.js-document-conform-agree-btn name="view10" type="radio"
-      /  label for="conform-yes" onclick=""
-      /  span.switch-bg
-      /  a
-      .switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
-        input#conform-no.js-document-conform-deny-btn name="view10" type="radio"
-        label for="conform-no" onclick=""
-        input#conform-undefined name="view10" type="radio" checked=""
-        label for="conform-undefined" onclick=""
-        input#conform-yes.js-document-conform-agree-btn name="view10" type="radio"
-        label for="conform-yes" onclick=""
-        /without before
-        span.switch-text
-        span.switch-bg
-        a
-    .col-sm-10
-      span = current_user.first_name_with_last_name
-
-      
-  .b
-    .col-sm-8
-      = form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide b-offset-sm', remote: true } do |f|
-        h4 Добавьте комментарий
-        .form-group = f.hidden_field :conformed, class: 'js-document-conform-type'
-        .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
-        .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
+  .col-sm-2
+    .switch-toggle.switch-3.switch-candy.switch-light.js-icheck-off
+      input#conform-no.js-document-conform-deny-btn name="view10" type="radio"
+      label for="conform-no" onclick=""
+      input#conform-undefined name="view10" type="radio" checked=""
+      label for="conform-undefined" onclick=""
+      input#conform-yes.js-document-conform-agree-btn name="view10" type="radio"
+      label for="conform-yes" onclick=""
+      /without before
+      span.switch-text
+      span.switch-bg
+      a
+  .col-sm-8
+    a.conformer-name = current_user.first_name_with_last_name

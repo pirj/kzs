@@ -1,16 +1,3 @@
-.voter {
-  margin-bottom: 12px;
-}
-
-.voter-name {
-  font-size: 16px;
-  line-height: 26px;
-  a {
-    cursor:pointer;
-    margin-right: 10px;
-  }
-}
-
 ._confirmation {
   i{
     padding-right: 5px;
@@ -30,5 +17,22 @@
     }
   }
 
+}
 
+.conformers-list {
+  li {
+    margin-bottom: 18px;
+    line-height: 26px;
+  }
+  .fa {
+    color: $brand-rich-info;
+    font-size: 26px;
+  }
+}
+
+.conformer-name {
+  color: $brand-rich-info;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
 }

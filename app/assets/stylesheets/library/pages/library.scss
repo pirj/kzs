@@ -31,7 +31,8 @@ p{
   ul {
     @extend .list-unstyled;
     margin-bottom: 15px;
-
+    padding: 0;
+    list-style-type: none;
     > li > a{
       padding: $offset;
       display: block;
