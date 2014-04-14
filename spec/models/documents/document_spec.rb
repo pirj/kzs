@@ -7,28 +7,26 @@ describe Document do
     let(:conformer) {mail.conformers.first}
 
     before :each do
-      mail.conformers.first.conform mail
+      conformer.conform mail.document
     end
 
     it "should clear its conformations" do
-      mail.reload.conformations.count.should be > 0
+      expect(mail.conformations.count).to eq 1
 
       mail.title = '123'
-      mail.save
-
-      mail.reload.conformations.count.should == 0
+      expect {mail.save}.to change {mail.reload.conformations.count}.from(1).to(0)
     end
 
     it "should not clear other conformations" do
       mail2 = FactoryGirl.create(:mail_with_direct_recipient_and_conformers)
-      mail2.conformers.first.conform mail2
+      mail2.conformers.first.conform mail2.document
 
-      mail2.reload.conformations.count.should be > 0
+      expect(mail2.conformations.count).to be > 0
 
       mail.title = '123'
       mail.save
-
-      mail2.reload.conformations.count.should be > 0
+      
+      expect(mail2.conformations.count).to be > 0
     end
   end
 
