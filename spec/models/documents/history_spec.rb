@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Documents::History do
-  let(:accountable){ FactoryGirl.create(:mail_with_direct_recipient) }
-  let(:other_accountable) { FactoryGirl.create(:mail_with_direct_recipient) }
+  let(:accountable){ FactoryGirl.create(:mail) }
+  let(:other_accountable) { FactoryGirl.create(:mail) }
   subject { Documents::History.new(accountable) }
 
   it('#flow') { subject.flow.should be_a Documents::Flow }
@@ -15,7 +15,7 @@ describe Documents::History do
     let(:sender)      { FactoryGirl.create :simple_organization              }
     let(:recipient)   { FactoryGirl.create :simple_organization              }
     let(:accountable) do
-      mail = FactoryGirl.create :mail_with_direct_recipient
+      mail = FactoryGirl.create :mail
       mail.sender_organization = sender
       mail.recipient_organization = recipient
       mail.save!
@@ -24,7 +24,7 @@ describe Documents::History do
     let(:history)     { Documents::History.new(accountable) }
     before do
 
-      @not_matching = FactoryGirl.create :mail_with_direct_recipient
+      @not_matching = FactoryGirl.create :mail
       @not_matching.tap do |mail|
         mail.sender_organization = sender
         mail.recipient_organization = recipient
@@ -34,7 +34,7 @@ describe Documents::History do
         mail.transition_to!(:sent)
       end
 
-      @matching = FactoryGirl.create :mail_with_direct_recipient
+      @matching = FactoryGirl.create :mail
       @matching.tap do |mail|
         mail.sender_organization = sender
         mail.recipient_organization = recipient
@@ -44,7 +44,7 @@ describe Documents::History do
         mail.transition_to!(:sent)
       end
 
-      @not_approved = FactoryGirl.create :mail_with_direct_recipient
+      @not_approved = FactoryGirl.create :mail
       @not_approved.tap do |mail|
         mail.sender_organization = recipient
         mail.recipient_organization = sender
@@ -52,7 +52,7 @@ describe Documents::History do
         mail.transition_to!(:prepared)
       end
 
-      @not_sent = FactoryGirl.create :mail_with_direct_recipient
+      @not_sent = FactoryGirl.create :mail
       @not_sent.tap do |mail|
         mail.sender_organization = recipient
         mail.recipient_organization = sender

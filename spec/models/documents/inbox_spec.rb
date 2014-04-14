@@ -4,7 +4,7 @@ describe Documents::Important do
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { user.organization }
 
-  let(:mail) { FactoryGirl.create(:mail_with_direct_recipient) }
+  let(:mail) { FactoryGirl.create(:mail) }
 
   let(:inbox_mail) do
     mail = FactoryGirl.build(:mail)

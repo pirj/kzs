@@ -16,7 +16,7 @@ describe Documents::OfficialMailsController do
   end
   describe 'open unread mail' do
     let(:mail)do
-      FactoryGirl.create(:mail_with_direct_recipient)
+      FactoryGirl.create(:mail)
     end
     let(:inbox_mail)do
       inbox_mail = FactoryGirl.build(:mail)

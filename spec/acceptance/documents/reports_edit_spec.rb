@@ -2,7 +2,7 @@
 
 require 'acceptance/acceptance_helper'
 
-feature "Users review reports", %q() do
+feature "Users create reports", %q() do
 
   let(:user) { order.recipient_organization.admin }
   let!(:order) { FactoryGirl.create(:order) }
@@ -10,6 +10,7 @@ feature "Users review reports", %q() do
 
   describe 'form fill add fields and save report', js: true do
     let(:path) { new_documents_report_path }
+
     background do
       visit path
 
@@ -23,6 +24,8 @@ feature "Users review reports", %q() do
       fill_in 'Тема', with: 'тест'
       fill_in 'Текст', with: 'тестовый текст'
     end
+
+
     scenario 'should create new one report' do
 
       select_from_chosen label = 'Распоряжение'
@@ -33,12 +36,12 @@ feature "Users review reports", %q() do
       expect(current_path).to_not eq(new_documents_report_path)
     end
 
+
     scenario 'should not create new report' do
       skip_welcome
       expect { click_button 'Подготовить' }.to_not change(Documents::Report, :count)
       expect(current_path).to_not eq(new_documents_report_path)
       expect(page).to have_content 'не может быть пустым'
-      # save_and_open_page
     end
   end
 end

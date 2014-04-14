@@ -10,19 +10,19 @@ describe Documents::OfficialMail do
   end
 
   context 'approvable' do
-    let(:accountable){ create(:mail_with_direct_recipient) }
+    let(:accountable){ create(:mail) }
 
     it_should_behave_like 'Approvable Document'
 
   end
 
   context 'without recipients' do
-    subject { build(:mail) }
+    subject { build(:mail_without_recipient) }
     it { should_not be_valid }
   end
 
   context 'with one direct recipient' do
-    subject { build(:mail_with_direct_recipient) }
+    subject { build(:mail) }
     it { should be_valid }
   end
 

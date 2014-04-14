@@ -8,8 +8,7 @@ shared_examples_for 'document_draftable' do
     subject { page }
 
     background do
-      sign_out
-      visit index_path
+      visit documents_path(with_state:'draft')
       sign_in_with user.email
     end
 

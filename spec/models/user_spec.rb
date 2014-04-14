@@ -10,7 +10,7 @@ describe User do
       context 'outgoing' do
         context 'non-confidential' do
           let(:document) do
-            FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+            FactoryGirl.create(:mail, confidential: false).document
           end
 
           context 'Saboteur' do
@@ -43,7 +43,7 @@ describe User do
 
             context 'prepared' do
               let(:document) do
-                document = FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+                document = FactoryGirl.create(:mail, confidential: false).document
                 document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
                 document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
                 document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
@@ -123,7 +123,7 @@ describe User do
 
         context 'confidential' do
           let(:document) do
-            document = FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
+            document = FactoryGirl.create(:mail, confidential: true).document
             document.creator = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
             document.executor = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
             document.approver = FactoryGirl.create(:user, organization_id: document.sender_organization_id)
@@ -180,7 +180,7 @@ describe User do
       context 'Incoming' do
         context 'non-confidential' do
           let(:document) do
-            FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+            FactoryGirl.create(:mail, confidential: false).document
           end
 
           context 'Saboteur' do
@@ -221,7 +221,7 @@ describe User do
 
             context 'sent' do
               let(:document) do
-                FactoryGirl.create(:mail_with_direct_recipient, confidential: false).document
+                FactoryGirl.create(:mail, confidential: false).document
               end
 
               before do
@@ -240,7 +240,7 @@ describe User do
 
         context 'confidential' do
           let(:document) do
-            FactoryGirl.create(:mail_with_direct_recipient, confidential: true).document
+            FactoryGirl.create(:mail, confidential: true).document
           end
 
           before do

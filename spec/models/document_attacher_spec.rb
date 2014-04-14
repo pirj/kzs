@@ -27,7 +27,7 @@ describe DocumentAttacher do
 
   context "on initialize" do
     it "should accept document/accountable and a session on initialize" do
-      mail = FactoryGirl.create(:mail_with_direct_recipient)
+      mail = FactoryGirl.create(:mail)
       expect {attacher = DocumentAttacher.new(mail, {}, @user)}.not_to raise_error
     end
 
@@ -39,7 +39,7 @@ describe DocumentAttacher do
   context "When pre-attaching a document" do
     it "should be able to pre-attach approved document" do
       attachment = FactoryGirl.create(:approved_mail)
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      accountable = FactoryGirl.create(:mail)
       attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.attach attachment
 
@@ -51,7 +51,7 @@ describe DocumentAttacher do
 
     it "should not repeat attached document when attached single document several times" do
       attachment = FactoryGirl.create(:approved_mail).document
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      accountable = FactoryGirl.create(:mail)
       attacher = DocumentAttacher.new(accountable, @session, @user)
       3.times {attacher.attach attachment}
 
@@ -62,7 +62,7 @@ describe DocumentAttacher do
 
     it "should raise exception when document being attached by ID doesn't exists" do
       attachment = FactoryGirl.create(:approved_mail)
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      accountable = FactoryGirl.create(:mail)
       
       attachment_document_id = attachment.document.id
       
@@ -75,8 +75,8 @@ describe DocumentAttacher do
     end
 
     it "should raise exception if trying to attach draft" do
-      attachment = FactoryGirl.create(:mail_with_direct_recipient)
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      attachment = FactoryGirl.create(:mail)
+      accountable = FactoryGirl.create(:mail)
 
       attacher = DocumentAttacher.new(accountable, @session, @user)
 
@@ -113,7 +113,7 @@ describe DocumentAttacher do
   context "When confirming the action" do
     it "should attach all documents which are supporsed to be added (in attach list)" do
       attachment = FactoryGirl.create(:approved_mail)
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      accountable = FactoryGirl.create(:mail)
 
       attacher = DocumentAttacher.new(accountable, @session, @user)
       attacher.attach attachment
@@ -136,7 +136,7 @@ describe DocumentAttacher do
     it "should raise exception if any document can't be attached" do
       attachment = FactoryGirl.create(:approved_mail)
       attachment2 = FactoryGirl.create(:approved_mail)
-      accountable = FactoryGirl.create(:mail_with_direct_recipient)
+      accountable = FactoryGirl.create(:mail)
       
       attacher = DocumentAttacher.new(accountable, @session, @user)
 
@@ -183,7 +183,7 @@ describe DocumentAttacher do
         FactoryGirl.create(:approved_mail).document
       ]
 
-      draft = FactoryGirl.create(:mail_with_direct_recipient)
+      draft = FactoryGirl.create(:mail)
       
       @attacher = DocumentAttacher.new(@accountable, @session, @user)
       @attacher.detach existing_attachments[0]

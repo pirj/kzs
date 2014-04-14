@@ -4,7 +4,7 @@ require 'acceptance/acceptance_helper'
 
 feature "User review mail", %q() do
 
-  let!(:mail) { FactoryGirl.create(:mail_with_direct_recipient) }
+  let!(:mail) { FactoryGirl.create(:mail) }
   let(:sender_user) { mail.sender_organization.admin }
   let(:recipient_user) { mail.recipient_organization.director }
   let(:path) {  documents_official_mail_path(mail) }
