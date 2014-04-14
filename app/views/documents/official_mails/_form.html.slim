@@ -31,7 +31,7 @@
         = doc.select :conformer_ids, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'new-mail-conformer' }, multiple: true } if current_organization_users if current_organization_users
 
     /= doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }, label_html: { title: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица' }, wrapper: :inline_hint
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, default: current_organization.director.first_name_with_last_name, input_html: { class: 'js-chosen' }
 
     /= f.association :recipients, label_html: { title: 'Организации-получатели документа' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' } }
     = f.association :recipients, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' } }
