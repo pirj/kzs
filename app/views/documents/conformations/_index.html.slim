@@ -14,7 +14,7 @@
     / список согласующих с кнопками согласования
     ul.b-offset-md.conformers-list.list-unstyled
       - resource.conformers.order('last_name ASC').each do |conformer|
-        li.row
+        li.row.spec-conform
           - if conformer.made_decision? resource.document
             - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
             - css_class = is_conformed ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'
