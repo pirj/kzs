@@ -121,7 +121,7 @@ class Document < ActiveRecord::Base
     joins(:document_transitions)
     .where('document_transitions.to_state' => state)
   }
-  # scope :inbox, ->(o_id) { to(o_id).passed_state('sent') }
+  scope :inbox, ->(org) { to(org).passed_state('sent') }
 
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.

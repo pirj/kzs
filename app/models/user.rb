@@ -103,7 +103,8 @@ class User < ActiveRecord::Base
   # @returns [ActiveRecord::Relation]
   # @see Document
   def important_documents
-    Document.includes(:conformers).where("approver_id = ? OR executor_id = ? OR documents_users.user_id = ?", id, id, id)
+    inbox_ids = Document.to(organization).map(&:id)
+    Document.includes(:conformers).where("approver_id = ? OR executor_id = ? OR documents_users.user_id = ? OR documents.id IN (?)", id, id, id, inbox_ids)
   end
 
   # Согласовать документ
