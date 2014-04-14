@@ -2,7 +2,7 @@ module Documents
   class History
     def initialize(accountable)
       @base = accountable.document
-      # ensure_has_flow
+      ensure_has_flow
     end
 
     def flow
