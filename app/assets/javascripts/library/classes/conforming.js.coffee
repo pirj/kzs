@@ -111,15 +111,15 @@ class window.ConformingView
   # что делаем в случае успешного ответа от сервера
   # данный метод вызывается из js-файла в ответе от сервера через ujs.
   success_ajax_send: ->
-    @.$conformation_form.slideUp(300).find('input').val('');
+    @.$conformation_form.slideUp(100).find('input').val('');
     @.$conformation_alert.hide()
     @.$agree_btn.prop('disabled', 'disabled')
     @.$deny_btn.prop('disabled', 'disabled')
 
 
   # вставляем комментарий в общий список комментариев
-  append_conformation: (html) ->
-    @.$conformations.append(html).fadeIn(200)
+  append_conformations: (html) ->
+    @.$conformations.html(html)
 
   # проверяет можно ли отправить форму.
   # возвращаем false если комментарий пустой

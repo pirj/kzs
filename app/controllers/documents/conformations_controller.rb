@@ -8,11 +8,13 @@ class Documents::ConformationsController < ApplicationController
       else
         @conform = current_user.deny doc, conformation_params[:comment]
       end
+      # TODO-vladimir: как-то не красиво выглядит эта связь, надо уже и в контроллерах писать «релоад» согласований
+      @conformations = doc.conformations.reload
 
       respond_to { |format| format.js { render layout: false } }
     end
   rescue Exception => e
-    render text: e.message
+    render json: e.message
 
   # данная строчка добавлена для тестирования работы фронтенда при многократном отсылании голосований
   #respond_to { |format| format.js { render layout: false } }

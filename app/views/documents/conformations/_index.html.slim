@@ -8,8 +8,6 @@
 
 
 
-
-
     / список согласующих с кнопками согласования
     ul.b-offset-md.conformers-list.list-unstyled
       li.row.list-title.text-help
@@ -38,16 +36,10 @@
           .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
           .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
 
+    .js-document-conform-list = render 'documents/conformations/conformers_comments', conformations: resource.conformations
 
-    / отрисовка согласований
-    .row
-      - conformations_count = resource.conformations.select{|c| c.comment.present?}.count
-      .col-sm-12.b-offset-sm.js-document-conform-list
-        ul.media-list.list-unstyled
-          li.list-title.h4 = "Комментарии (#{conformations_count}):"
-          - if conformations_count > 0
-            - resource.conformations.each do |conform|
-              = render 'documents/conformations/conformer_comment', conform: conform
+
+
 
 
 
