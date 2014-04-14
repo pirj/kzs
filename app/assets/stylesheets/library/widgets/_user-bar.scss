@@ -42,6 +42,17 @@ $el: '._user-bar';
   }
 
 
+  #{$el}-status {
+    color: #00e335;
+    font-size: 13px;
+    padding-left: 21px;
+
+    margin-bottom: 6px;
+    i {
+      margin-right: 5px;
+    }
+  }
+
   .btn-group-vertical{
     .btn{
       border-top:
@@ -78,6 +89,7 @@ $el: '._user-bar';
     text-align: left;
     padding-left: 21px;
     text-decoration: none;
+    margin-bottom: 6px;
   }
 
   #{$el}-image{

@@ -6,7 +6,11 @@ ul.nav.navbar-nav.navbar-right
       span.caret
 
     .js-popover-content._user-bar data-target='user-bar'
+
       h3._user-bar-header = current_user.first_name_with_last_name
+      ._user-bar-status
+        i.fa.fa-circle
+        | на работе
       .row
         .col-sm-4
           img._user-bar-image src='/assets/user1.jpg'
