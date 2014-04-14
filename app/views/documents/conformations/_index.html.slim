@@ -34,7 +34,7 @@
           h4 Добавьте комментарий
           .form-group = f.hidden_field :conformed, class: 'js-document-conform-type'
           .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
-          .form-group = f.submit 'готово', class: 'btn btn-primary', disabled: :disabled
+          .form-group = f.submit 'готово', class: 'btn btn-primary spec-submit-comment', disabled: :disabled
 
     .js-document-conform-list = render 'documents/conformations/conformers_comments', conformations: resource.conformations
 
