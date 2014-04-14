@@ -20,13 +20,18 @@
 }
 
 .conformers-list {
+  .list-title {
+    margin-bottom: 28px;
+  }
   li {
-    margin-bottom: 18px;
+    margin-bottom: 28px;
     line-height: 26px;
   }
-  .fa {
-    color: $brand-rich-info;
+  span.fa {
     font-size: 26px;
+  }
+  .fa {
+    line-height: 26px;
   }
 }
 
@@ -35,4 +40,8 @@
   font-size: 16px;
   line-height: 26px;
   cursor: pointer;
+}
+
+.media-list {
+  @extend .conformers-list;
 }
