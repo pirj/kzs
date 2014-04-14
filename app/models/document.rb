@@ -219,6 +219,10 @@ class Document < ActiveRecord::Base
     (conformers.count == conformations.count) && conformations.pluck(:conformed).all?
   end
 
+  def to_s
+    "#{id}"
+  end
+
   private
 
   # Используется как after_update
@@ -238,8 +242,10 @@ class Document < ActiveRecord::Base
 
   # Создаем историю изменений
   def create_history
-    history = Documents::History.new(accountable)
-    history.ensure_has_flow
+    unless flow
+      create_flow
+      save!
+    end
   end
 
   def can_have_many_recipients?
