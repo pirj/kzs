@@ -67,11 +67,11 @@ feature "Users view agreement-conformer buttons", %q() do
         first('.spec-submit-comment').click
         sleep(1)
 
-        within('.conformers-list') do
-
-          page.execute_script("$('.js-document-conform-agree-btn')[0].click()")
-
-        end
+        #within('.conformers-list') do
+        #
+        #  page.execute_script("$('.js-document-conform-agree-btn')[0].click()")
+        #
+        #end
 
         #expect(all('.js-document-conform-txt:visible').count).to eq(0)
         expect(page).to have_selector('.js-document-conform-txt', visible: false)
@@ -79,17 +79,33 @@ feature "Users view agreement-conformer buttons", %q() do
     end
   end
 
-  #describe 'user must create comment if agreement negative' do  #2
-  #  it 'negative vote without comment should not be created' do
-  #    #пытаеся сделать подтверждение с пустым окном комментария
-  #
-  #  end
-  #
-  #  it 'negative vote with comment should be created' do
-  #    #должно пройти
-  #  end
-  #
-  #end
+  describe 'user must create comment for negative voting', js:true do
+    background do
+      visit path
+      sign_in_with accountable.conformers.first.email, 'password'
+    end
+
+    it 'vote without comment should not be validate' do
+      skip_welcome
+      within('.conformers-list') do
+
+        page.execute_script("$('.js-document-conform-deny-btn')[0].click()")       #сдвинули ползунок
+
+      end
+      sleep(1)
+      fill_in 'conformation_comment', :with => 'exampletext'
+      sleep(1)
+      fill_in 'conformation_comment', :with => ''
+      sleep(1)
+      first('.spec-submit-comment').click                               #жмем кнопку отправить комментарий
+
+
+      create_screenshot
+      expect(page).to have_selector('.js-document-conform-txt', visible: true)
+
+    end
+
+  end
 
 
 end
