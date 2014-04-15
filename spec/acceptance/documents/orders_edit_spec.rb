@@ -2,13 +2,14 @@ require 'acceptance/acceptance_helper'
 
 feature "Users edit and create an order", %q() do
 
-  let!(:order) { FactoryGirl.create(:order) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:recipient_user) { order.recipient_organization.admin }
-  let(:sender_user) { order.sender_organization.admin }
-  let(:show_path) { documents_order_path(order) }
+  let!(:accountable) { FactoryGirl.create(:order) }
+  let!(:document) { accountable.document }
+  let(:user) { document.creator }
+  let(:recipient_user) { document.recipient_organization.admin }
+  let(:sender_user) { document.sender_organization.admin }
+  let(:show_path) { documents_order_path(accountable) }
   let(:new_path) { new_documents_order_path }
-  let(:edit_path) { edit_documents_order_path(order) }
+  let(:edit_path) { edit_documents_order_path(accountable) }
 
 
   describe 'form fill fields and save', js: true do
@@ -16,7 +17,6 @@ feature "Users edit and create an order", %q() do
         visit new_path
         sign_in_with user.email
         skip_welcome
-        create_screenshot
 
           # fill auction fields
         fill_in 'дата исполнения', with: DateTime.now + 5.days
@@ -31,11 +31,18 @@ feature "Users edit and create an order", %q() do
           within('.spec-document-creator') do
             expect(page).to have_content user.first_name_with_last_name
           end
-          expect { click_button 'Подготовить' }.to change(Documents::Order, :count).by(1)
-          expect(page).to_not have_content 'не может быть пустым'
+
         end
 
-        scenario 'redirect to documents list' do
+        scenario 'click on "to prepare state"' do
+          expect { click_button 'Подготовить' }.to change(Documents::Order, :count).by(1)
+          expect(page).to_not have_content 'не может быть пустым'
+          expect(current_path).to eq(documents_path)
+        end
+
+        scenario 'click on "to draft state"' do
+          expect { click_button 'В черновики' }.to change(Documents::Order, :count).by(1)
+          expect(page).to_not have_content 'не может быть пустым'
           expect(current_path).to eq(documents_path)
         end
 
@@ -50,7 +57,7 @@ feature "Users edit and create an order", %q() do
         end
       end
 
-      pending 'should not create new order' do
+      scenario 'should not create new order' do
         expect { click_button 'Подготовить' }.to_not change(Documents::Order, :count)
         expect(current_path).to_not eq(documents_path)
         expect(page).to have_content 'не может быть пустым'
@@ -60,8 +67,8 @@ feature "Users edit and create an order", %q() do
   end
 
   describe 'document-saver should be saved like creator for existed document' do
-    let(:old_creator) { order.creator }
-    let(:new_creator) { order.sender_organization.director }
+    let(:old_creator) { document.creator }
+    let(:new_creator) { document.sender_organization.director }
 
     background do
       visit edit_path
@@ -86,8 +93,8 @@ feature "Users edit and create an order", %q() do
       background do
         # сохраняем нового псевдоюзера под контрольным лицом в документе,чтобы у нас были права просмотра документа из под него
         expect(user).to_not eq old_creator
-        order.approver = new_creator
-        order.save!
+        document.approver = new_creator
+        accountable.save!
         visit edit_path
       end
 

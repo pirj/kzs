@@ -12,7 +12,6 @@ shared_examples_for 'document_draftable' do
       sign_in_with user.email
     end
 
-
     context 'to Author' do
       let(:user){ accountable.creator }
       it { should have_content accountable.title }
@@ -32,15 +31,23 @@ shared_examples_for 'document_draftable' do
       sign_in_with user.email
     end
 
-    context 'to Author' do
+    context 'creator' do
       let(:user) { accountable.creator }
       it { should have_content accountable.title }
     end
 
-    context 'to Saboteur' do
+    context 'saboteur' do
       let!(:user) { FactoryGirl.create(:user, organization: accountable.sender_organization) }
       its(:current_path) { should match '/documents' }
       it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
     end
+
+    context 'next state action' do
+      let(:user) { accountable.creator }
+      it { should have_selector('a', text: 'В черновики') }
+      it { should have_selector('a', text: 'Подготовить') }
+      it { should_not have_selector('a', text: 'Подписать') }
+    end
+
   end
 end

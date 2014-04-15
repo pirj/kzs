@@ -39,8 +39,5 @@ feature "Users review mails", %q() do
       expect(page).to have_content 'Выберите хотябы одного адресата'
     end
 
-    pending 'should not create new mail' do
-    end
-
   end
 end

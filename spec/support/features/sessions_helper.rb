@@ -6,7 +6,6 @@ module Features
       within '.spec-login-form' do
         fill_in 'user[login]', with: email
         fill_in 'user[password]', with: password
-        # click_on "войти"
         click_on 'Вход'
       end
       # find('form').click('войти')

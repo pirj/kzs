@@ -8,6 +8,7 @@ shared_examples_for 'document_preparable' do
     let(:creator) { accountable.creator }
     let(:approver) { accountable.approver }
     let(:executor) { accountable.executor }
+    let(:conformer) { accountable.conformers.try(:first) }
 
     background do
       accountable.transition_to!(:draft)
@@ -29,16 +30,11 @@ shared_examples_for 'document_preparable' do
         expect(current_path).to eq index_path
       end
 
-      [:executor, :approver, :creator].each do |_user|
+      [:executor, :approver, :creator, :conformer].each do |_user|
         context _user do
           let(:user) { send(_user.to_sym) }
           it { should have_content accountable.title }
         end
-      end
-
-      context 'conformers' do
-        let!(:user) { accountable.conformers.first }
-        it { should have_content accountable.title }
       end
 
       context 'another user' do
@@ -50,9 +46,6 @@ shared_examples_for 'document_preparable' do
         let!(:user) { accountable.recipient_organization.director }
         it { should_not have_content accountable.title }
       end
-
-
-
     end
 
     describe 'allow to open document-page' do
@@ -62,16 +55,11 @@ shared_examples_for 'document_preparable' do
         sign_in_with user.email
       end
 
-      [:approver, :creator, :executor].each do |user|
+      [:approver, :creator, :executor, :conformer].each do |user|
         context user.to_s do
-          let!(:user) { accountable.send(user) }
+          let!(:user) { send(user) }
           it { should have_selector('h1', text: accountable.title) }
         end
-      end
-
-      context 'conformer' do
-        let!(:user) { accountable.conformers.first }
-        it { should have_selector('h1', text: accountable.title) }
       end
 
       context 'saboteur' do
@@ -79,6 +67,15 @@ shared_examples_for 'document_preparable' do
         it { should_not have_selector('h1', text: accountable.title) }
         it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
         its(:current_path) { should match '/documents' }
+      end
+
+      context 'next state action' do
+        [:approver, :creator, :executor, :conformer].each do |user|
+          context user.to_s do
+            let!(:user) { send(user) }
+            it { should_not have_selector('a', text: 'Подготовить') }
+          end
+        end
       end
 
     end

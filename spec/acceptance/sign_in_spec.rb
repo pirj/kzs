@@ -3,7 +3,7 @@ require 'acceptance/acceptance_helper'
 feature "User login/unlogin", %q() do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:path) { new_user_session_path }
+  let(:path) { root_path }
 
   describe 'User sign in', js: true do
     scenario 'success' do
@@ -22,15 +22,6 @@ feature "User login/unlogin", %q() do
       sign_in_with user.email, 'passw2ord'
       expect(page).to have_content 'Неверное имя пользователя или пароль.'
       expect(current_path).to_not eq root_path
-    end
-
-    pending 'success with new message' do
-      visit path
-      sign_in_with user.email, 'password'
-      visit root_path
-      expect(page).to have_content 'Добро пожаловать'
-      #expect(page).to have_content 'Главный рабочий стол'
-      expect(page).to_not have_content 'Неверное имя пользователя или пароль.'
     end
 
   end
