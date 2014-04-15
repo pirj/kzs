@@ -32,7 +32,7 @@ shared_examples_for 'sent_state_translatable' do
 
     context 'recipient user' do
       let(:user) { recipient_user }
-      it { should have_content(/Получен/) }
+      it { should have_content(/Отправлен/) }
     end
 
   end

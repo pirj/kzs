@@ -4,7 +4,7 @@ require 'acceptance/acceptance_helper'
 
 feature "Users review mails", %q() do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { mail.creator }
   let(:organization) { user.organization }
   let!(:users) { 5.times.map { create(:user, organization: organization) } }
   let(:recipient_user) { mail.recipient_organization.admin }
