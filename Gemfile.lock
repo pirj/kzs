@@ -49,6 +49,7 @@ GEM
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     bcrypt (3.1.7)
+    bootbox-rails (0.3.0)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     bourbon (3.1.8)
@@ -386,6 +387,7 @@ DEPENDENCIES
   activeadmin
   amoeba
   awesome_nested_set
+  bootbox-rails (~> 0.3)
   bootstrap-sass
   bullet
   cancan

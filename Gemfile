@@ -75,6 +75,7 @@ gem 'wkhtmltopdf-binary', '0.9.9.1'
 gem 'hipchat'
 
 gem 'spreadsheet'
+gem 'bootbox-rails', '~>0.3'
 
 
 
