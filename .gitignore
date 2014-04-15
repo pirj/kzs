@@ -17,5 +17,10 @@
 /config/database.yml
 config/database.yml
 
+# Ignore mail server & credentials configuration
+/config/mail.yml
+config/mail.yml
+
+# Ignore documentation
 doc/*
 .yardoc/*

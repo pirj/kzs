@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.17'
 gem 'pg'
 
-
 # ActiveRecord Query DSL
 gem 'squeel'
 # Search object processor

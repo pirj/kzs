@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'yaml'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -86,5 +87,21 @@ module Kzs
       g.fixture_replacement :machinist
       g.test_framework :rspec
     end
+
+
+
+    config.action_mailer.default_url_options = { host: "sakedev.kzsspb.ru" }
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.smtp_settings = YAML::load_file('config/mail.yml').symbolize_keys
+    # {
+    #   address:        "aristotle.krivenko.ru",
+    #   port:           25, 
+    #   domain:         'krivenko.ru',
+    #   authentication: :plain,
+    #   user_name:      "test@cyclonelabs.com",
+    #   password:       "jNYVIFXrztK7H9Bk",
+    #   enable_starttls_auto: true
+    # }
   end
 end
