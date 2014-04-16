@@ -10,7 +10,7 @@ class window.ModalWindowView
     cancel_btn: '.js-modal-window-cancel-btn'
 
     css:
-      active: 'md-show'
+      active: 'm-show'
     is_debug: false
 
   constructor: (params) ->
@@ -27,7 +27,7 @@ class window.ModalWindowView
     @.$container.addClass(@.defaults.css.active)
 
   cancel_confirm: ->
-    @.$container.removeClass('md-show')
+    @.$container.removeClass(@.defaults.css.active)
     @.destroy
 
   confirm: (message, callback) ->

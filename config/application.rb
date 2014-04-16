@@ -74,8 +74,11 @@ module Kzs
     
     # Enable the asset pipeline
     config.assets.enabled = true
-    
-    config.assets.initialize_on_precompile = false
+
+    # чтобы assets правильно слипались выставить в true
+    # чтобы вместо .class __subclass{}
+    # было .class__subclass{}
+    config.assets.initialize_on_precompile = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
