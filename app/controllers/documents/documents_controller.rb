@@ -4,12 +4,12 @@ class Documents::DocumentsController < ResourceController
   layout 'base'
   actions :index
   has_scope :per, default: 10, only: [:index]
-
   has_scope :with_type, except: [:batch] do |controller, scope, value|
     case value
     when 'orders' then scope.orders
     when 'mails' then scope.mails
     when 'reports' then scope.reports
+    when 'unread' then scope.unread_by(controller.current_user)
     else
       scope
     end
