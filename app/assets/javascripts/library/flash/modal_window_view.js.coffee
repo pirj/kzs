@@ -1,27 +1,34 @@
+# Модальное окно
+# варианты отрисовки/работы
+# confirm - окно с двумя кнопками «согласен» и «отмена»
 
-
-class window.ModalWindow
+class window.ModalWindowView
   defaults:
     container: '.js-modal-window'
     txt_container: '.js-modal-window-txt'
     confirm_btn: '.js-modal-window-confirm-btn'
     cancel_btn: '.js-modal-window-cancel-btn'
 
-    is_debug: true
+    css:
+      active: 'md-show'
+    is_debug: false
 
   constructor: (params) ->
     @.d = new ConsoleDebug @.defaults.is_debug
     @.d.init(@.$container = $(@.defaults.container))
     @.d.init(@.$txt_container = $(@.defaults.txt_container))
 
-#    if params.hasOwnProperty('confirm')
-#      @.init_confirm()
-#    console.log params
+    @.$container.on('click', @defaults.cancel_btn, => @.cancel_confirm())
 
+    @.keypress_listener = new window.keypress.Listener()
+    @.keypress_listener.simple_combo("esc", => @.cancel_confirm())
 
   show_modal: ->
-    @.$container.addClass('md-show')
+    @.$container.addClass(@.defaults.css.active)
 
+  cancel_confirm: ->
+    @.$container.removeClass('md-show')
+    @.destroy
 
   confirm: (message, callback) ->
     if message
@@ -34,4 +41,6 @@ class window.ModalWindow
   destroy: ->
     @.$container.off('click', @.defaults.confirm_btn)
     @.$container.off('click', @.defaults.cancel_btn)
+    @.keypress_listener.stop_listening()
+    @.keypress_listener.unregister_combo('esc')
     delete @
