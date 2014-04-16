@@ -59,10 +59,11 @@
 @import "partials/responsive-utilities";
 
 // Plugins classes
-@import 'plugins/chosen';
-@import 'plugins/jcrop';
-@import 'plugins/datepicker';
-@import 'plugins/nested-forms';
+//@import 'plugins/chosen';
+//@import 'plugins/jcrop';
+//@import 'plugins/datepicker';
+//@import 'plugins/nested-forms';
+@import 'plugins/*';
 
 // Library page styles
 @import "pages/library";
