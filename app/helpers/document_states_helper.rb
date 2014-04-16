@@ -69,8 +69,18 @@ module DocumentStatesHelper
       link_to( '#', class: 'js-document-state-close-popover' ) do
         content_tag(:span, nil, class: 'fa fa-ban') +
         content_tag(:span, 'отмена')
-      end.html_safe
+      end.html_safe +
+      reply_action_link(doc)
     end.html_safe
+  end
+
+  def reply_action_link(doc)
+    if doc.accountable_type == 'Documents::OfficialMail'
+      link_to reply_documents_official_mail_path(doc.accountable) do
+        content_tag(:span, nil, class: 'fa fa-mail-reply') +
+            content_tag(:span, 'Ответить')
+      end.html_safe
+    end
   end
 
   def delete_action_link(doc)

@@ -33,7 +33,7 @@ module Documents
         if object.send(attr)
           h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link")
         else
-          h.link_to( object.accountable.recipients.first.try(:title), '#', class: "link") if object.accountable_type == 'Documents::OfficialMail'
+          h.link_to( object.accountable.recipients.first.try(:title), h.organization_path(object.accountable.recipients.first), class: "link") if object.accountable_type == 'Documents::OfficialMail'
         end
       end
     end
