@@ -223,13 +223,17 @@ class Document < ActiveRecord::Base
     "#{id}"
   end
 
-  private
 
-  # Используется как after_update
-  # При обновлении документа обнуляем все согласования
+
+  #  обнуляем все согласования
   def clear_conformations
     conformations.destroy_all
   end
+
+
+  private
+
+
 
   # Запрещаем удаление "извне"
   # Вместо destroy используйте destroy_by

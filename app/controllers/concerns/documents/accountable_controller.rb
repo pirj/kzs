@@ -36,6 +36,11 @@ module Documents::AccountableController
     end
   end
 
+  def edit
+    resource.document.update_attribute(:creator, current_user)
+    resource.document.clear_conformations
+  end
+
   def update
     update! do |success, failure|
       success.html do
