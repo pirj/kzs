@@ -21,7 +21,7 @@
           | Документы
         span.caret
       ul.dropdown-menu role="menu"
-        - if params[:scope]
+        - if params[:with_state] || params[:with_type]
           li
             = link_to 'Все документы', documents_path
         li = link_to 'Черновики', documents_path(with_state:'draft')
@@ -32,6 +32,9 @@
         li = link_to 'Акты', documents_path(with_type:'reports')
         li = link_to 'Непрочитанные', documents_path(with_type:'unread')
 
+
+
+= params[:with_state]
 = content_for :page_header_search do
   = render 'quick_search_for'
 

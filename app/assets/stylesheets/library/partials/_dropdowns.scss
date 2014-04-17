@@ -203,6 +203,14 @@
 
 // Header dropdown
 // Styles header of dropdown and options list in same color
+
+
+.open{
+  .dropdown-toggle{
+    position: relative;
+    z-index: $zindex-dropdown;
+  }
+}
 .header{
   $_padding: $padding-base-horizontal*2;
   margin-left: -$_padding; // it step to alignment h1 and dropdown header-with-left-padding
