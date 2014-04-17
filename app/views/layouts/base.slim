@@ -9,8 +9,7 @@ html
     = yield(:head)
   body
     - unless controller?('devise/sessions') || controller?('dashboard')
-      #sidebar.sidebar
-        = render 'shared/left'
+      = render 'shared/left'
     .page
       /- if notice
       /  .alert.alert-success= notice

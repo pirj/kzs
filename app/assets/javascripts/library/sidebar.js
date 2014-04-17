@@ -4,13 +4,13 @@ $(document).ready(function () {
 
     $('#main-b').on('click', function (e) {         //логика главной кнопки
         e.preventDefault();
-
-        if (panel.hasClass('m-open')) {
-            document.location.href = '/';
-        }
-        else {
-            panel.addClass('m-open');
-        }
+        panel.closest('.js-sidebar').toggleClass('m-open');
+//        if (panel.closest('.js-sidebar').hasClass('m-open')) {
+//            document.location.href = '/';
+//        }
+//        else {
+//            panel.closest('.js-sidebar').addClass('m-open');
+//        }
 
     });
 
@@ -19,12 +19,12 @@ $(document).ready(function () {
 
     function closeSidebar() {
 
-        removeId = setTimeout(function() {
-            $('.l-page__column').removeClass('m-open');
-            $('.menu-dir').removeClass('open');
-            $('.child-dir').css({'height': '0px'});
-
-        }, 800)
+//        removeId = setTimeout(function() {
+//            $('.l-page__column').closest('.js-sidebar').removeClass('m-open');
+//            $('.menu-dir').closest('.js-sidebar').removeClass('open');
+//            $('.child-dir').css({'height': '0px'});
+//
+//        }, 800)
     }
 
 
@@ -41,7 +41,7 @@ $(document).ready(function () {
         var childDir = $(this).parent().next();
 
 
-        if (panel.hasClass('m-open')) {
+        if (panel.closest('.js-sidebar').hasClass('m-open')) {
             if (childDir.parent().hasClass('open')) {
                 console.log(1);
                 childDir.parent().toggleClass('open');

@@ -1,31 +1,32 @@
-aside.l-page__column.left
-  nav.b-sidebar
-    a#main-b.main href="/"
-      .icon
-        span
-        span
-        span
-      .text Виджеты
-    .menu-dir
-      div class=(controller_name == 'documents' ? "menu-link documents active" : "menu-link documents")
-        = link_to documents_path, :class => (controller_name == 'documents' ? 'active sidebar-header ' : 'sidebar-header ') do
-          i
-          .text Документооборот
-          b
-          = documents_important.badge
-      .child-dir
-        = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
-          i
-          .text= humanize_documents_menu_item_name(:all)
-          -%w(draft prepared approved).each do |state|
-            = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
-          -%w(mails orders reports unread).each do |doctype|
-            = link_to documents_path(with_type: doctype), class: 'menu-link' do
-              = humanize_documents_menu_item_name(doctype)
-              = documents_important.badge(doctype)
-    = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
-      i
-      .text Пропуска
-    = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
-      i
-      .text Организации
+#sidebar.sidebar.js-sidebar
+  aside.l-page__column.left
+    nav.b-sidebar
+      a#main-b.main href="/"
+        .icon
+          span
+          span
+          span
+        .text Виджеты
+      .menu-dir
+        div class=(controller_name == 'documents' ? "menu-link documents active" : "menu-link documents")
+          = link_to documents_path, :class => (controller_name == 'documents' ? 'active sidebar-header ' : 'sidebar-header ') do
+            i
+            .text Документооборот
+            b
+            = documents_important.badge
+        .child-dir
+          = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
+            i
+            .text= humanize_documents_menu_item_name(:all)
+            -%w(draft prepared approved).each do |state|
+              = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
+            -%w(mails orders reports unread).each do |doctype|
+              = link_to documents_path(with_type: doctype), class: 'menu-link' do
+                = humanize_documents_menu_item_name(doctype)
+                = documents_important.badge(doctype)
+      = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
+        i
+        .text Пропуска
+      = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
+        i
+        .text Организации

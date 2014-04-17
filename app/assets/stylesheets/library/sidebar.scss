@@ -237,7 +237,7 @@ $icon-documents-active: -152px -230px;
     }
 
   }
-  .l-page__column.left.m-open {
+  &.m-open .l-page__column.left {
     width: 240px;
     position: fixed;
     box-shadow: 1px 0 5px gray;
@@ -429,7 +429,7 @@ $icon-documents-active: -152px -230px;
     }
 
   }
-  aside.m-open {
+  &.m-open aside{
     //открытый сайдбар
     .menu-link {
       &:hover{

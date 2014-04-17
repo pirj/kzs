@@ -7,14 +7,19 @@
 .page{
   padding-left: $sidebar-width-closed;
   min-width: $screen-default-width;
+  @include transition(.2s ease-in-out);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
 }
 
-.sidebar.open ~ .page{
+.sidebar.m-open ~ .page{
   @include transition(.2s ease-in-out);
-  -webkit-transform: translateX($sidebar-width-opened);
-  -moz-transform: translateX($sidebar-width-opened);
-  -o-transform: translateX($sidebar-width-opened);
-  transform: translateX($sidebar-width-opened);
+  -webkit-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  -moz-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  -o-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  transform: translateX($sidebar-width-opened - $sidebar-width-closed);
 }
 
 
