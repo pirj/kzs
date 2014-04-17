@@ -22,6 +22,7 @@ class Documents::DocumentsController < ResourceController
     when 'draft' then scope.draft
     when 'prepared' then scope.prepared
     when 'approved' then scope.approved
+    when 'trashed' then scope.trashed
     else
       scope.not_draft
     end

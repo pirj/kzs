@@ -97,6 +97,7 @@ class Document < ActiveRecord::Base
   scope :draft,    -> { where(state: 'draft') }
   scope :prepared,  -> { where(state: 'prepared') }
   scope :approved,  -> { where(state: 'approved') }
+  scope :trashed,  -> { where(state: 'trashed') }
 
   scope :not_draft, -> { where { state.not_eq('draft') } }
 
@@ -175,6 +176,10 @@ class Document < ActiveRecord::Base
 
   def approved
     document_transitions.exists?(to_state: 'approved')
+  end
+
+  def trashed
+    document_transitions.exists?(to_state: 'trashed')
   end
 
   def prepared
