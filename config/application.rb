@@ -91,20 +91,13 @@ module Kzs
       g.test_framework :rspec
     end
 
+    mail_conf_path = 'config/mail.yml'
+    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path).symbolize_keys : {}
 
-
+    # TODO: move to mail.yml
     config.action_mailer.default_url_options = { host: "sakedev.kzsspb.ru" }
     config.action_mailer.delivery_method = :smtp
 
-    config.action_mailer.smtp_settings = YAML::load_file('config/mail.yml').symbolize_keys
-    # {
-    #   address:        "aristotle.krivenko.ru",
-    #   port:           25, 
-    #   domain:         'krivenko.ru',
-    #   authentication: :plain,
-    #   user_name:      "test@cyclonelabs.com",
-    #   password:       "jNYVIFXrztK7H9Bk",
-    #   enable_starttls_auto: true
-    # }
+    config.action_mailer.smtp_settings = mail_config
   end
 end
