@@ -54,8 +54,3 @@
 .padding-block
 = render 'documents/documents/list', collection: history, title: 'История распоряжений и актов:'
 
-/.row
-  .col-sm-6.col-sm-offset-3
-    - history.each do |letter|
-      = letter.inspect
-      hr

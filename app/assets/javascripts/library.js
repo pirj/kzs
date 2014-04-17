@@ -22,5 +22,4 @@
 //= require ckeditor/init
 //= require library/permit
 //= require ckeditor/ckeditor
-//= require bootbox
 //= require_tree ./library
