@@ -591,8 +591,10 @@
 
 // Centered container element
 @mixin container-fixed() {
-  margin-right: auto;
-  margin-left: auto;
+  // в стандартном bootstrap было равнение контейнера по центру.
+  // т.к.у нас есть левое меню приклееное к границе браузера,то выключаем равнение по центру.
+  // margin-right: auto;
+  // margin-left: auto;
   padding-left:  ($grid-gutter-width / 2);
   padding-right: ($grid-gutter-width / 2);
   @include clearfix();

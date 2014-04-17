@@ -9,7 +9,7 @@ html
     = yield(:head)
   body
     - unless controller?('devise/sessions') || controller?('dashboard')
-      #sidebar
+      #sidebar.sidebar
         = render 'shared/left'
     .page
       /- if notice

@@ -2,10 +2,28 @@
 // Grid system
 // --------------------------------------------------
 
+// Set global container for grid
+// Because of html have sidebar with animations
+.page{
+  padding-left: $sidebar-width-closed;
+  min-width: $screen-default-width;
+}
+
+.sidebar.open ~ .page{
+  @include transition(.2s ease-in-out);
+  -webkit-transform: translateX($sidebar-width-opened);
+  -moz-transform: translateX($sidebar-width-opened);
+  -o-transform: translateX($sidebar-width-opened);
+  transform: translateX($sidebar-width-opened);
+}
+
+
+
 // Set the container width, and override it for fixed navbars in media queries
 .container {
   height: 100%;
   @include container-fixed();
+  @include transition(width .3s ease-in-out);
 }
 .content-container {
   @include container-fixed();
@@ -92,10 +110,16 @@
 //
 // Note that `.col-sm-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
-@media (min-width: $screen-sm-min) {
+//
+//
+// по умолчанию media был установлен в $screen-sm-min
+// в целях стилизации всех элементов сетки к единому варианту
+// делаем все сетки одинакового размера
+@media (min-width: $grid-float-breakpoint) {
   .container {
-    width: $container-sm;
+    // выключаем размер контейнера по умолчанию для маленьких экранов
+    // width: $container-sm;
+    width: $container-md;
   }
 
   @include make-grid-columns-float(sm);
@@ -112,8 +136,12 @@
 //
 // Note that `.col-md-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
-@media (min-width: $screen-md-min) {
+//
+//
+// по умолчанию media был установлен в $screen-md-min
+// в целях стилизации всех элементов сетки к единому варианту
+// делаем все сетки одинакового размера
+@media (min-width: $grid-float-breakpoint) {
   .container {
     width: $container-md;
   }
@@ -132,7 +160,6 @@
 //
 // Note that `.col-lg-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
 @media (min-width: $screen-lg-min) {
   .container {
     width: $container-lg;
