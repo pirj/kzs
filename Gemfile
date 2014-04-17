@@ -63,7 +63,6 @@ gem 'unread', '~> 0.3.1'
 #gem 'date_validator'
 gem 'validates_timeliness'
 
-
 gem 'jquery-rails', '~> 2.3.0'
 
 # PDF thing
@@ -75,6 +74,9 @@ gem 'wkhtmltopdf-binary', '0.9.9.1'
 gem 'hipchat'
 
 gem 'spreadsheet'
+
+#time_ago
+gem 'rails-timeago', '~> 2.0'
 
 
 

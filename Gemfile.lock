@@ -255,6 +255,9 @@ GEM
       activesupport (= 3.2.17)
       bundler (~> 1.0)
       railties (= 3.2.17)
+    rails-timeago (2.10.1)
+      actionpack (>= 3.1)
+      activesupport (>= 3.1)
     railties (3.2.17)
       actionpack (= 3.2.17)
       activesupport (= 3.2.17)
@@ -424,6 +427,7 @@ DEPENDENCIES
   prawn
   quiet_assets
   rails (= 3.2.17)
+  rails-timeago (~> 2.0)
   ransack
   responders
   rmagick

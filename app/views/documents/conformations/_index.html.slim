@@ -20,19 +20,24 @@
             - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
             - css_class = is_conformed ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger'
             span.col-sm-2.text-center class=css_class
-            span.col-sm-8.text-info = conformer.first_name_with_last_name
+            span.col-sm-8
+              span.text-info #{conformer.first_name_with_last_name}&nbsp
+              = is_conformed ? timeago_tag(Time.zone.now, :format => :day_hour) : timeago_tag(Time.zone.now, :format => :wating_time, class: 'text-danger')
           - elsif conformer == current_user
             = render 'documents/conformations/conform_form', resource: resource
           - else
             span.col-sm-2.text-center
               span.fa.fa-question-circle.text-info
-            span.col-sm-8.text-info = conformer.first_name_with_last_name
+            span.col-sm-8
+              span.text-info #{conformer.first_name_with_last_name}&nbsp
+              = timeago_tag Time.zone.now, :format => :wating_time, :nojs => false, class: 'text-danger'
+
 
     .b
       .col-sm-8
         = form_for Conformation.new, url: polymorphic_path([resource.object, :conformations]), html: { class: 'js-document-conform-modal-form simple-hide', remote: true } do |f|
           h4 Добавьте комментарий
-          .form-group = f.hidden_field :conformed, class: 'js-document-conform-type'
+          .form-group = f.hidden_field(:conformed, class: 'js-document-conform-type')
           .form-group = f.text_area :comment, class: 'form-control js-document-conform-txt', rows: '6'
           .form-group = f.submit 'готово', class: 'btn btn-primary spec-submit-comment', disabled: :disabled
 

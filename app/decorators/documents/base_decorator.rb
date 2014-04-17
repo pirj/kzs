@@ -91,7 +91,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:first_name_with_last_name), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
         end
       end
     end
