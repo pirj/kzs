@@ -17,6 +17,8 @@
           | Распоряжения
           - when 'reports'
           | Акты
+          - when 'trashed'
+          | Удаленные
           - else
           | Документы
         span.caret
@@ -27,6 +29,7 @@
         li = link_to 'Черновики', documents_path(with_state:'draft')
         li = link_to 'Подготовленные', documents_path(with_state:'prepared')
         li = link_to 'Утвержденные', documents_path(with_state:'approved')
+        li = link_to 'Удаленные', documents_path(with_state:'trashed')
         li = link_to 'Письма', documents_path(with_type:'mails')
         li = link_to 'Распоряжения', documents_path(with_type:'orders')
         li = link_to 'Акты', documents_path(with_type:'reports')

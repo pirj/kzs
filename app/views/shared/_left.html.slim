@@ -18,7 +18,7 @@
           = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
             i
             .text= humanize_documents_menu_item_name(:all)
-            -%w(draft prepared approved).each do |state|
+            -%w(draft prepared approved trashed).each do |state|
               = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
             -%w(mails orders reports unread).each do |doctype|
               = link_to documents_path(with_type: doctype), class: 'menu-link' do
