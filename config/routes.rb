@@ -163,6 +163,10 @@ Kzs::Application.routes.draw do
   #match '/dashboard' => 'dashboard#index'
   # TODO GOOD
   get '/dashboard' => 'dashboard#index'
+  
+  namespace :tasks do
+    resources :tasks
+  end
 
   ActiveAdmin.routes(self)
 
