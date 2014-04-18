@@ -8,7 +8,7 @@ describe TaskList do
   describe '#completed' do
 
     before do
-      tasks = 5.times.map { FactoryGirl.create(:task, task_list: task_list) }
+      tasks = 5.times.map { FactoryGirl.create(:document_task, task_list: task_list) }
       task_list.tasks << tasks
       task_list.tasks.each do |t|
         t.completed = true
