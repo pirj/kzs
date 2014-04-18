@@ -261,19 +261,16 @@ end
 namespace :initial_data do
   task :crete_admin => :environment do
     
+    organization = Organization.find_or_create_by_title('Администрация САКЭ')
+    
     if User.exists?(:username => 'admin')
       puts "Admin user already exists"
     else
-      User.create!(:first_name => 'Администратор', :last_name => 'Администратор', :organization_id => '1', :middle_name => 'Администратор', :password => 'admin', :password_confirmation => 'admin', :sys_user => true, :username => 'admin', :position => 'Администратор')
+      User.create!(:first_name => 'Администратор', :last_name => 'Администратор', :organization_id => organization.id, :middle_name => 'Администратор', :password => 'admin', :password_confirmation => 'admin', :sys_user => true, :username => 'admin', :position => 'Администратор')
       puts "Admin user created"
     end
       
-    if Organization.exists?(:id => 1)
-      puts "Organization already exists"
-    else
-      Organizization.create!(:title => 'Администрация САКЭ')
-      puts "Organization created"
-    end
+
     
   end
 end
