@@ -1,0 +1,25 @@
+.row
+  table.table
+    thead
+      tr
+        td Номер
+        td Дата
+        td Заголовок
+
+    tbody
+      - if @tasks.empty?
+        tr
+          td colspan=8
+            .text-center.text-important задачи отсутствуют
+      - else
+        - @tasks.each do |task|
+          tr
+            td
+              = link_to task.id, "/tasks/tasks/#{task.id}"
+            td
+              = task.created_at
+            td
+              = task.title
+
+
+
