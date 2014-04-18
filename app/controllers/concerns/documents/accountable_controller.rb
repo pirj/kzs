@@ -24,11 +24,13 @@ module Documents::AccountableController
       success.html do
         if params.has_key?(:transition_to)
           resource.transition_to!(params[:transition_to], default_metadata)
+          resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
           redirect_to documents_documents_path
 
         # Когда прикрепляем документы, то сохраняем данный документ в БД. Иначе как крепить файлы то???
         elsif params.has_key?(:attached_documents)
           resource.transition_to!(:draft, default_metadata)
+          resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
           redirect_to polymorphic_path([resource, :attached_documents])
         end
       end
@@ -45,6 +47,7 @@ module Documents::AccountableController
     update! do |success, failure|
       success.html do
         resource.transition_to!(params[:transition_to], default_metadata)
+        resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
         redirect_to documents_path
       end
       failure.html { render action: 'edit' }
