@@ -18,7 +18,7 @@ describe Documents::StateDecorator do
 
     context 'with other state' do
       subject{decorator.to_humanize_state(:approved)}
-      it{ should_not match "Подписать"}
+      it{ should match "Подписать"}
     end
   end
 end
