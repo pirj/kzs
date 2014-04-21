@@ -25,17 +25,14 @@
 
 
 // Set the container width, and override it for fixed navbars in media queries
-.container {
+.container, .container-lefted{
   height: 100%;
-  @include container-fixed();
   @include transition(width .3s ease-in-out);
 }
 
-.container-lefted {
-  height: 100%;
-  @include container-lefted();
-  @include transition(width .3s ease-in-out);
-}
+.container { @include container-fixed(); }
+.container-lefted { @include container-lefted(); }
+
 .content-container {
   @include container-fixed();
 }
@@ -127,7 +124,7 @@
 // в целях стилизации всех элементов сетки к единому варианту
 // делаем все сетки одинакового размера
 @media (min-width: $grid-float-breakpoint) {
-  .container {
+  .container, .container-lefted  {
     // выключаем размер контейнера по умолчанию для маленьких экранов
     // width: $container-sm;
     width: $container-md;
@@ -153,7 +150,7 @@
 // в целях стилизации всех элементов сетки к единому варианту
 // делаем все сетки одинакового размера
 @media (min-width: $grid-float-breakpoint) {
-  .container {
+  .container, .container-lefted  {
     width: $container-md;
   }
 
@@ -172,7 +169,7 @@
 // Note that `.col-lg-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
 @media (min-width: $screen-lg-min) {
-  .container {
+  .container, .container-lefted {
     width: $container-lg;
   }
 
