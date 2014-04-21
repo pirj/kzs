@@ -258,44 +258,21 @@ namespace :documents do
   end
 end
 
-# namespace :users do
-#   task :create => :environment do
-#     User.destroy_all
-#     User.populate 15 do |user|
-#       user.username = Faker::Internet.user_name
-#       user.first_name = Faker::Name.first_name
-#       user.last_name = Faker::Name.last_name
-#       user.middle_name = Faker::Name.last_name
-#       user.phone = '88123361' + rand(100..999).to_s
-#       user.position = Faker::Lorem.words(1)
-#       user.division = Faker::Lorem.words(1)
-#       user.info = Populator.sentences(1..3)
-#       user.dob = rand(20.years).ago
-#       user.permit = rand(768..999)
-#       user.work_status = ['at_work', 'ooo'].sample
-#       user.organization_id = Organization.all.sample
-#       user.email = Faker::Internet.free_email
-#       user.encrypted_password = User.new(:password => "password").encrypted_password
-#     end
-#     User.all.each { |user| user.avatar = File.open(Dir.glob(File.join(Rails.root, 'avatars', '*')).sample); user.save! }
-#     puts "Users create!"
-#   end
-# end
+namespace :initial_data do
+  task :crete_admin => :environment do
+    
+    organization = Organization.find_or_create_by_title('Администрация САКЭ')
+    
+    if User.exists?(:username => 'admin')
+      puts "Admin user already exists"
+    else
+      User.create!(:first_name => 'Администратор', :last_name => 'Администратор', :organization_id => organization.id, :middle_name => 'Администратор', :password => 'admin', :password_confirmation => 'admin', :sys_user => true, :username => 'admin', :position => 'Администратор')
+      puts "Admin user created"
+    end
+      
 
+    
+  end
+end
 
-# namespace :users do
-#   task :create_admin => :environment do
-#     if User.exists?(:username => 'admin')
-#       puts "Admin user already exists"
-#     else
-#       User.create!(:username => 'admin', :first_name => 'admin', :last_name => 'admin', :middle_name => 'admin', :password => 'admin', :password_confirmation => 'admin')
-#       user = User.find_by_username('admin')
-#       user.sys_user = true
-#       permissions = Permission.all
-#       user.permissions << permissions
-#       user.save!
-#       puts "Admin user created"
-#     end
-#   end
-# end
 
