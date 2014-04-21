@@ -18,7 +18,11 @@ feature "Users create and edit tasks", %q() do
     end
     context 'valid' do
       scenario 'create new one task' do
-        expect { click_on 'Сохранить' }.to change(Task, :count).by(1)
+        fill_in 'Заголовок', with: 'Тестовая задача'
+        fill_in 'Описание', with: 'Тестовая задача'
+        select_from_multiple_chosen 'Исполнители'
+        select_from_multiple_chosen 'Контрольные лица'
+        expect { click_on 'Создать' }.to change(Task, :count).by(1)
       end
     end
   end

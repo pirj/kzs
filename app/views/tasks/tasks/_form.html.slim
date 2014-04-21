@@ -24,6 +24,8 @@
                               input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
                               label_hint: 'Лицо, указанное в задаче, как исполнитель'
 
+  = f.input :started_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата начала исполнения задачи'
+  = f.input :finished_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой задача должна быть исполнена'
 
   = f.input :title
   = f.input :text, input_html: { rows: 4 }
