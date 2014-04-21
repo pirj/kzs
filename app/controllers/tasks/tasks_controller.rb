@@ -2,7 +2,7 @@ class Tasks::TasksController < InheritedResources::Base
   layout 'base'
 
   def index
-    @tasks = Tasks::Task.for_org(current_organization)
+    @tasks = Tasks::Task.for_org(current_organization).page(params[:page]).per(10)
   end
 
   def create

@@ -11,4 +11,4 @@ ul.nav.nav-inline.btn-block
   li = link_to 'Создать новую задачу', '/tasks/tasks/new', class: 'btn btn-default'
 
 = render 'table'
-/= paginate collection
+= paginate @tasks
