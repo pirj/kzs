@@ -14,14 +14,16 @@
     .col-md-7
       - resource.executors.each do |executor|
         = link_to executor.first_name_with_last_name, '#'
-  .form-group.row
-    .col-md-2.text-help.text-right Дата начала:
-    .col-md-7
-      = resource.started_at
-  .form-group.row
-    .col-md-2.text-help.text-right Дата окончания:
-    .col-md-7
-      = resource.finished_at
+  - unless resource.started_at == nil
+    .form-group.row
+      .col-md-2.text-help.text-right Дата начала:
+      .col-md-7
+        = DateFormatter.new resource.started_at
+  - unless resource.finished_at == nil
+    .form-group.row
+      .col-md-2.text-help.text-right Дата окончания:
+      .col-md-7
+        = DateFormatter.new resource.finished_at
   .form-group.row
     .col-md-2.text-help.text-right Описание:
     .col-md-7
