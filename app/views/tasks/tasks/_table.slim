@@ -2,9 +2,10 @@
   table.table
     thead
       tr
-        td Номер
-        td Дата
-        td Заголовок
+        th Номер
+        th.col-words-8 Дата
+        th.col-words-15 Заголовок
+        th.col-words-8 Действия
 
     tbody
       - if @tasks.empty?
@@ -20,6 +21,7 @@
               = task.created_at
             td
               = task.title
-
+            td
+              = link_to 'Редактировать', "/tasks/tasks/#{task.id}/edit"
 
 
