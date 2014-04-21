@@ -30,6 +30,6 @@
       = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
         i
         .text Организации
-      = link_to tasks_tasks_path, :class => 'menu-link' do
+      = link_to tasks_tasks_path, :class => (controller_name == 'tasks' ? 'menu-link tasks active' : 'menu-link tasks') do
         i
         .text Задачи
