@@ -1,0 +1,29 @@
+= content_for :page_header do
+  = header_back_btn tasks_tasks_path
+  = header_title do
+    h1 = resource.title
+
+.row-fuild
+  .form-group.row
+    .col-md-2.text-help.text-right Контрольные лица:
+    .col-md-7
+      - resource.approvers.each do |approver|
+        = link_to approver.first_name_with_last_name, '#'
+  .form-group.row
+    .col-md-2.text-help.text-right Исполнители:
+    .col-md-7
+      - resource.executors.each do |executor|
+        = link_to executor.first_name_with_last_name, '#'
+  .form-group.row
+    .col-md-2.text-help.text-right Дата начала:
+    .col-md-7
+      = resource.started_at
+  .form-group.row
+    .col-md-2.text-help.text-right Дата окончания:
+    .col-md-7
+      = resource.finished_at
+  .form-group.row
+    .col-md-2.text-help.text-right Описание:
+    .col-md-7
+      = resource.text
+  
