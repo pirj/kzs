@@ -49,21 +49,18 @@ class ApplicationController < ActionController::Base
   end
   #current_user.domain_prefix
 
-  # unless Rails.application.config.consider_all_requests_local
-  #   rescue_from *renderable_exceptions, with: lambda { |exception| render_error 404, exception }
-  # end
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from *[ActionController::RoutingError,
+                   ActionController::UnknownController,
+                   ::AbstractController::ActionNotFound,
+                   ActiveRecord::RecordNotFound], with: lambda { |exception| render_error 404, exception }
+  end
 
-  # def render_error(status, exception)
-  #   respond_to do |format|
-  #     format.html { render template: "errors/error_#{status}", layout: 'application', status: status }
-  #     format.all { render nothing: true, status: status }
-  #   end
-  # end
+  def render_error(status, exception)
+    respond_to do |format|
+      format.html { render template: "errors/error_#{status}", layout: 'application', status: status }
+      format.all { render nothing: true, status: status }
+    end
+  end
 
-  # def renderable_exceptions
-  #   [ActionController::RoutingError,
-  #    ActionController::UnknownController,
-  #    ::AbstractController::ActionNotFound,
-  #    ActiveRecord::RecordNotFound]
-  # end
 end
