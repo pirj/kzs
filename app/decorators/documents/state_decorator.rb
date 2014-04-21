@@ -17,7 +17,11 @@ module Documents
 
     # translating state name in 'next state' style
     def to_humanize_state(state)
-      translates_to_state 'to_state', state
+      if current? state
+        translates_save_and_preserve_state
+      else
+        translates_to_state 'to_state', state
+      end
     end
 
     # not-translated current state
@@ -58,6 +62,10 @@ module Documents
 
     protected
 
+    def current?(state)
+      object.state == state.to_s
+    end
+
     # return translated for state from locale.yml
     def translates_state(scope, state)
       prefix = accountable.class.to_s.underscore
@@ -69,6 +77,11 @@ module Documents
     def translates_to_state(scope, state)
       prefix = accountable.class.to_s.underscore
       I18n.t("activerecord.document.#{prefix}.#{scope}.#{state}")
+    end
+
+    # returns translation to save with same state
+    def translates_save_and_preserve_state
+      I18n.t('documents.form.save_with_same_state')
     end
 
 
