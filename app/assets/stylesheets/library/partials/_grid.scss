@@ -30,6 +30,12 @@
   @include container-fixed();
   @include transition(width .3s ease-in-out);
 }
+
+.container-lefted {
+  height: 100%;
+  @include container-lefted();
+  @include transition(width .3s ease-in-out);
+}
 .content-container {
   @include container-fixed();
 }
