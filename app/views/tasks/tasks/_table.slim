@@ -22,6 +22,7 @@
             td
               = task.title
             td
-              = link_to 'Редактировать', "/tasks/tasks/#{task.id}/edit"
+              / TODO-tagir: так роутинг не пишут. Го читать про routes в рельсах
+              = link_to 'Редактировать', edit_task_path(task)
 
 
