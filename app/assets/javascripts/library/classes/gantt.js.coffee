@@ -28,7 +28,7 @@ class Gantt
         console.log (status)
         return
     that = this
-    gantt.attachEvent "onAfterTaskDrag", (id) ->
+    gantt.attachEvent "  ", (id) ->
       console.log @
       data = @.getTask(id)
 
