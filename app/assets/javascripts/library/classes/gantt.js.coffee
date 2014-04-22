@@ -17,8 +17,7 @@ class Gantt
 #    gantt.config.step = 1
 #    gantt.config.date_scale = "%Y"
     gantt.init(dom)
-    this.getJSON()
-
+    @.getJSON()
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->
       request = $.ajax(
         url: '/api/tasks/' + id
@@ -28,29 +27,33 @@ class Gantt
       request.done (status) =>
         console.log (status)
         return
-
+    that = this
     gantt.attachEvent "onAfterTaskDrag", (id) ->
-      newData = this.getTask(id)
-      console.log newData
-      taskData =
-        tasks_task:
-          finished_at: newData.end_date
-          id: newData.id
-          organization_id: 3
-          started_at: newData.start_date
-          text: "Paste\r\n"
-          title: "Мазафака"
+      console.log @
+      data = @.getTask(id)
 
-      request = $.ajax(
-        url: '/api/tasks/' + id
-        type: 'PUT'
-        dataType: "json"
-        data: taskData
-      )
+      that.editTask(data, id)
 
-      request.done (status) =>
-        console.log (status)
-      return
+  editTask: (data, id) ->
+    console.log data
+    taskData =
+      tasks_task:
+        finished_at: data.end_date
+        id: data.id
+        started_at: data.start_date
+        text: "Paste\r\n"
+        title: "Вася Рогов"
+
+    request = $.ajax(
+      url: '/api/tasks/' + id
+      type: 'PUT'
+      dataType: "json"
+      data: taskData
+    )
+
+    request.done (status) =>
+      console.log (status)
+    return
 
   addTasks: (data) ->
     gantt.parse(data)
