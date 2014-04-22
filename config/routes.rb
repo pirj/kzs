@@ -128,16 +128,6 @@ Kzs::Application.routes.draw do
     end
   end
 
-  # TODO GOOD
-  # define only routes you do need
-  resources :tasks, only: [:index, :update] do
-    #TODO EQUIVALENT
-    # get 'execute', on: :member
-    member do
-      get 'execute'
-    end
-  end
-
   resources :users, :controller => "users"
   resources :rights
   resources :groups
@@ -154,7 +144,9 @@ Kzs::Application.routes.draw do
 
   resources :projects
   resources :document_attached_files
-  resources :task_lists
+
+  #TODO-prikha: move task-related code inside Documents module
+  resources :task_lists, only: [:update]
 
   #match '/save_desktop_configuration' => 'dashboard#save_desktop_configuration', :via => :post
   post '/save_desktop_configuration' => 'dashboard#save_desktop_configuration'
@@ -163,8 +155,8 @@ Kzs::Application.routes.draw do
   #match '/dashboard' => 'dashboard#index'
   # TODO GOOD
   get '/dashboard' => 'dashboard#index'
-  
-  namespace :tasks do
+
+  scope module: 'tasks' do
     resources :tasks
   end
 

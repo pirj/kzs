@@ -15,7 +15,7 @@
         - @tasks.each do |task|
           tr
             td
-              = link_to task.id, "/tasks/tasks/#{task.id}"
+              = link_to task.id, task_path(task)
             td
               = task.created_at
             td
