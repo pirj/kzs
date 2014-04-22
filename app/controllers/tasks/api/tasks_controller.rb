@@ -1,8 +1,9 @@
-class Tasks::TasksController < ResourceController
-  layout 'base'
+class Tasks::Api::TasksController < ResourceController
+  layout nil
 
-  has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
+
+  respond_to :json
 
   def create
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
