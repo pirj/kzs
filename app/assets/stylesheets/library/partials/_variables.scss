@@ -38,8 +38,8 @@ $color-sea-green-darker: #16a085;
 $color-green: #2ecc71;
 $color-green-darker: #27ae60;
 
-$color-sky-blue: #3490db;
-$color-sky-blue-darker: #2980b9;
+$color-blue: #3490db;
+$color-blue-d: #2980b9;
 
 $color-magenta: #9b59b6;
 $color-magenta-darker: #8e44ad;
@@ -73,7 +73,7 @@ $text-color:            $gray-dark !default;
 
 $link-font-size:              $global-link-font-size;
 
-$link-color:                  $brand-rich-info !default;
+$link-color:                  $color-blue !default;
 $link-hover-color:            darken($brand-rich-info, 10%) !default;
 
 $link-muted-color:            $gray !default;
@@ -100,6 +100,13 @@ $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:   Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $font-family-base:        $font-family-sans-serif !default;
 
+$font-family-h1:            $font-family-sans-serif-light;
+$font-family-h2:            $font-family-sans-serif-light;
+$font-family-h3:            $font-family-sans-serif-light;
+$font-family-h4:            $font-family-sans-serif;
+$font-family-h5:            $font-family-sans-serif;
+$font-family-h6:            $font-family-sans-serif;
+
 $font-size-base:          $global-base-font-size;
 $font-size-large:         18px !default;
 $font-size-small:         13px !default;
@@ -109,7 +116,7 @@ $font-size-h1:            36px !default;
 $font-size-h2:            32px !default;
 $font-size-h3:            26px !default;
 
-$font-size-h4:            ceil($font-size-base * 1.25) !default; // ~18px
+$font-size-h4:            18px !default;
 $font-size-h5:            $font-size-base !default;
 $font-size-h6:            ceil($font-size-base * 0.85) !default; // ~12px
 
@@ -469,8 +476,8 @@ $nav-pills-link-padding:                    $btn-vertical-padding $btn-horizonta
 $nav-pills-border-radius:                   $border-radius-base !default;
 $nav-pills-font-size:                       $global-btn-font-size !default;
 
-$nav-pills-active-link-bg:                  $color-sky-blue !default;
-$nav-pills-active-link-hover-bg:            $color-sky-blue-darker !default;
+$nav-pills-active-link-bg: $color-blue !default;
+$nav-pills-active-link-hover-bg: $color-blue-d !default;
 $nav-pills-active-link-color:               white !default;
 $nav-pills-active-link-hover-color:         white !default;
 
@@ -772,4 +779,32 @@ $component-offset-horizontal: 180px !default;
 
 
 
+// Confirm-window
+// --------------------------
+$confirm-window-danger-overlay-bg: rgba($color-stern-blue, 0.8);
+$confirm-window-danger-content-bg: lighten($color-red, 35%);
+$confirm-window-danger-header-bg: $color-red;
+$confirm-window-danger-content-txt-color: $color-red;
+$confirm-window-danger-header-txt-color: #fff;
+$confirm-window-danger-controls-agree-color: #fff;
+$confirm-window-danger-controls-agree-bg: $color-red;
+$confirm-window-danger-controls-deny-color: $color-stern-blue;
+
+$confirm-window-warning-overlay-bg: rgba($color-stern-blue, 0.8);
+$confirm-window-warning-content-bg: lighten($color-yellow-darker, 35%);
+$confirm-window-warning-header-bg: $color-yellow-darker;
+$confirm-window-warning-content-txt-color: $color-red-darker;
+$confirm-window-warning-header-txt-color: #fff;
+$confirm-window-warning-controls-agree-color: #fff;
+$confirm-window-warning-controls-agree-bg: $color-yellow-darker;
+$confirm-window-warning-controls-deny-color: $color-stern-blue;
+
+$confirm-window-info-overlay-bg: rgba($color-stern-blue, 0.8);
+$confirm-window-info-content-bg: lighten($color-blue, 35%);
+$confirm-window-info-header-bg: $color-blue;
+$confirm-window-info-content-txt-color: $color-blue;
+$confirm-window-info-header-txt-color: #fff;
+$confirm-window-info-controls-agree-color: #fff;
+$confirm-window-info-controls-agree-bg: $color-blue;
+$confirm-window-info-controls-deny-color: $color-stern-blue;
 

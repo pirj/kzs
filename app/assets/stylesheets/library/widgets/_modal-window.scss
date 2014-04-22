@@ -1,15 +1,16 @@
 // Виджет всплывающего модального окна
 // В системе замещает встроенный confirm окно
 // вдохновлено этими стилями
-//  file:///Users/justvitalius/Downloads/ModalWindowEffects-master/index.html
+//  ModalWindowEffects
 //
 //
-// Оригинальные цвета
-//$widget-modal-window-bg: #e74c3c;
 $widget-modal-window-overlay-bg: rgba(143,27,15,0.8);
-//
-// Цвета библиотеки
 $widget-modal-window-bg: $color-red;
+
+$widget-modal-window-text-color: #fff;
+$widget-modal-cancel-btn-color: $color-stern-blue;
+$widget-modal-agree-btn-bg: $color-red-darker;
+
 
 
 ._modal-window {
@@ -85,6 +86,7 @@ $widget-modal-window-bg: $color-red;
       opacity: 0.8;
       background: rgba(0, 0, 0, 0.1);
       border-radius: 3px 3px 0 0;
+      color: #fff;
     }
 
     > div {
@@ -92,6 +94,7 @@ $widget-modal-window-bg: $color-red;
       margin: 0;
       font-weight: 300;
       font-size: 1.15em;
+      color: $widget-modal-window-text-color;
 
       p {
         margin: 0;
@@ -125,16 +128,20 @@ $widget-modal-window-bg: $color-red;
     }
   }
 
-  & __confirm-btn, & __cancel-btn{
+  & __confirm-btn{
     @extend .btn !optional;
     color: #fff;
-    background-color: $color-red-darker;
+    background-color: $widget-modal-agree-btn-bg;
 
     @include  links-active-states{
       color: #fff;
-      background-color: darken($color-red-darker, 10%);
+      background-color: darken($widget-modal-agree-btn-bg, 10%);
     }
+  }
 
+  & __cancel-btn {
+    @extend .link;
+    color: $widget-modal-cancel-btn-color;
   }
 
 }

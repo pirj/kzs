@@ -39,10 +39,9 @@ cite    { font-style: normal; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-weight: normal;
-  font-family: $font-size-base;
   line-height: $headings-line-height;
   color: $headings-color;
+  font-weight: normal;
 
   small,
   .small {
@@ -59,14 +58,8 @@ h1, .h1{
   margin-bottom: $padding-base-vertical;
 }
 
-h1, h2,
-.h1, .h2{
-  font-family: $headings-font-family;
-}
-
 h2, .h2
 h3, .h3 {
-//  margin-top: $line-height-computed;
   margin-top: 0;
   margin-bottom: ($line-height-computed / 2);
 
@@ -87,12 +80,12 @@ h6 {
   }
 }
 
-h1, .h1 { font-size: $font-size-h1; }
-h2, .h2 { font-size: $font-size-h2; }
-h3, .h3 { font-size: $font-size-h3; }
-h4, .h4 { font-size: $font-size-h4; }
-h5, .h5 { font-size: $font-size-h5; }
-h6, .h6 { font-size: $font-size-h6; }
+h1, .h1 { font-size: $font-size-h1; font-family: $font-family-h1; }
+h2, .h2 { font-size: $font-size-h2; font-family: $font-family-h2; }
+h3, .h3 { font-size: $font-size-h3; font-family: $font-family-h3; }
+h4, .h4 { font-size: $font-size-h4; font-family: $font-family-h4; }
+h5, .h5 { font-size: $font-size-h5; font-family: $font-family-h5; }
+h6, .h6 { font-size: $font-size-h6; font-family: $font-family-h6; }
 
 
 // Page header
