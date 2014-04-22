@@ -6,6 +6,10 @@ $icon-contragent-stan: -13px -430px;
 $icon-contragent-hover: -83px -430px;
 $icon-contragent-active: -153px -430px;
 
+$icon-tasks-stan: -13px -300px;
+$icon-tasks-hover: -83px -300px;
+$icon-tasks-active: -153px -300px;
+
 $icon-documents-stan: -13px -230px;
 $icon-documents-hover: -83px -230px;
 $icon-documents-active: -152px -230px;
@@ -425,6 +429,17 @@ $icon-documents-active: -152px -230px;
           background-position: $icon-contragent-active;
         }
 
+      }
+      &.tasks {
+        i {
+          background-position: $icon-tasks-stan;
+        }
+        &:hover i {
+          background-position: $icon-tasks-hover;
+        }
+        &.active i {
+          background-position: $icon-tasks-active;
+        }
       }
     }
 

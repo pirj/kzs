@@ -93,7 +93,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'font-awesome-rails'
-  gem 'turbo-sprockets-rails3'
+  # gem 'turbo-sprockets-rails3'
   gem 'therubyracer'
 end
 

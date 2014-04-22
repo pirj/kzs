@@ -1,7 +1,8 @@
 # coding: utf-8
 module Organizations
   class BaseDecorator < Draper::Decorator
-    delegate_all
+    # delegate_all
+    delegate :id, :licences
 
     # render title by format:
     # '<span>NAME,</span><span>OOO</span>

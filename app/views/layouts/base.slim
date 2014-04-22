@@ -11,11 +11,7 @@ html
     - unless controller?('devise/sessions') || controller?('dashboard')
       = render 'shared/left'
     .page
-      /- if notice
-      /  .alert.alert-success= notice
-      /- if alert
-      /  .alert.alert-danger= alert
-      .container
+      .container-lefted
         = render 'shared/welcome_screen'
         / ===============================================================
         .navbar

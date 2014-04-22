@@ -61,6 +61,7 @@ $ ->
   $('.dropdown-toggle').dropdown()
 
   # datepicker
+  $('.js-datepicker').not('.js-deadline').datepicker(global.datepicker)
   date = $('.js-datepicker.js-deadline').datepicker( "getDate" )
   data_days = $('.js-datepicker.js-deadline').data('days')
   max_date = $('.js-datepicker.js-deadline').datepicker( "option", "maxDate" )
