@@ -10,6 +10,10 @@ class Gantt
     gantt.init(dom)
 #    this.addTasks(tasks)
     this.getJSON()
+    gantt.attachEvent "onAfterTaskDelete", (id, item) ->
+      console.log id
+      console.log item
+
   addTasks: (data) ->
     gantt.parse(data)
 
@@ -39,3 +43,4 @@ $ ->
   if $('#gantt_here').length >0
 
     gantt = new Gantt("gantt_here")
+
