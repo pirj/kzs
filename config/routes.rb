@@ -157,6 +157,9 @@ Kzs::Application.routes.draw do
   get '/dashboard' => 'dashboard#index'
 
   scope module: 'tasks' do
+    namespace :api, defaults: { format: 'json' } do
+      resources :tasks
+    end
     resources :tasks
   end
 
