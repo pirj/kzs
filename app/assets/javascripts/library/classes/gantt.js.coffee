@@ -54,38 +54,7 @@ tasks =
       parent: 3
     }
   ]
-  links: [
-    {
-      id: 1
-      source: 1
-      target: 2
-      type: "1"
-    }
-    {
-      id: 2
-      source: 1
-      target: 3
-      type: "1"
-    }
-    {
-      id: 3
-      source: 3
-      target: 4
-      type: "1"
-    }
-    {
-      id: 4
-      source: 4
-      target: 5
-      type: "0"
-    }
-    {
-      id: 5
-      source: 5
-      target: 6
-      type: "0"
-    }
-  ]
+
 
 
 #classes
@@ -99,9 +68,29 @@ class Gantt
 #    gantt.config.date_scale = "%Y"
     gantt.init(dom)
     this.addTasks(tasks)
-
+    this.getJSON()
   addTasks: (data) ->
     gantt.parse(data)
+
+  getJSON: () ->
+    $.ajaxSetup beforeSend: (xhr) ->
+      xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
+      return
+
+    request = $.ajax(
+      url: '/api/tasks/'
+      type: 'GET'
+      dataType: "json"
+#      data: (if type=='POST' then {'data': data} else '')
+    )
+
+    request.done (data) ->
+      console.log data
+      return
+
+    request.fail (status) ->
+      console.log('request failed ' + status)
+      return
 
 # start flow
 $ ->
