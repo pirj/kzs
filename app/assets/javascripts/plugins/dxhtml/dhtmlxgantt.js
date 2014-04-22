@@ -1,240 +1,8382 @@
 /*
-dhtmlxGantt v.2.1.1 StandardThis software is covered by GPL license. You also can obtain Commercial or Enterprise license to use it in non-GPL project - please contact sales@dhtmlx.com. Usage without proper license is prohibited.(c) Dinamenta, UAB.
-*/
-function dtmlXMLLoaderObject(t,e,n,i){return this.xmlDoc="",this.async="undefined"!=typeof n?n:!0,this.onloadAction=t||null,this.mainObject=e||null,this.waitCall=null,this.rSeed=i||!1,this}function callerFunction(t,e){return this.handler=function(n){return n||(n=window.event),t(n,e),!0},this.handler}function getAbsoluteLeft(t){return getOffset(t).left}function getAbsoluteTop(t){return getOffset(t).top}function getOffsetSum(t){for(var e=0,n=0;t;)e+=parseInt(t.offsetTop),n+=parseInt(t.offsetLeft),t=t.offsetParent;
-return{top:e,left:n}}function getOffsetRect(t){var e=t.getBoundingClientRect(),n=document.body,i=document.documentElement,a=window.pageYOffset||i.scrollTop||n.scrollTop,s=window.pageXOffset||i.scrollLeft||n.scrollLeft,r=i.clientTop||n.clientTop||0,o=i.clientLeft||n.clientLeft||0,d=e.top+a-r,l=e.left+s-o;return{top:Math.round(d),left:Math.round(l)}}function getOffset(t){return t.getBoundingClientRect?getOffsetRect(t):getOffsetSum(t)}function convertStringToBoolean(t){switch("string"==typeof t&&(t=t.toLowerCase()),t){case"1":case"true":case"yes":case"y":case 1:case!0:return!0;
-default:return!1}}function getUrlSymbol(t){return-1!=t.indexOf("?")?"&":"?"}function dhtmlDragAndDropObject(){return window.dhtmlDragAndDrop?window.dhtmlDragAndDrop:(this.lastLanding=0,this.dragNode=0,this.dragStartNode=0,this.dragStartObject=0,this.tempDOMU=null,this.tempDOMM=null,this.waitDrag=0,window.dhtmlDragAndDrop=this,this)}function _dhtmlxError(){return this.catches||(this.catches=[]),this}function dhtmlXHeir(t,e){for(var n in e)"function"==typeof e[n]&&(t[n]=e[n]);return t}function dhtmlxEvent(t,e,n){t.addEventListener?t.addEventListener(e,n,!1):t.attachEvent&&t.attachEvent("on"+e,n)
-}function dhtmlxDetachEvent(t,e,n){t.removeEventListener?t.removeEventListener(e,n,!1):t.detachEvent&&t.detachEvent("on"+e,n)}function dhtmlxDnD(t,e){e&&(this._settings=e),dhtmlxEventable(this),dhtmlxEvent(t,"mousedown",dhtmlx.bind(function(e){this.dragStart(t,e)},this))}function dataProcessor(t){return this.serverProcessor=t,this.action_param="!nativeeditor_status",this.object=null,this.updatedRows=[],this.autoUpdate=!0,this.updateMode="cell",this._tMode="GET",this.post_delim="_",this._waitMode=0,this._in_progress={},this._invalid={},this.mandatoryFields=[],this.messages=[],this.styles={updated:"font-weight:bold;",inserted:"font-weight:bold;",deleted:"text-decoration : line-through;",invalid:"background-color:FFE0E0;",invalid_cell:"border-bottom:2px solid red;",error:"color:red;",clear:"font-weight:normal;text-decoration:none;"},this.enableUTFencoding(!0),dhtmlxEventable(this),this
-}window.dhtmlx||(dhtmlx=function(t){for(var e in t)dhtmlx[e]=t[e];return dhtmlx}),dhtmlx.extend_api=function(t,e,n){var i=window[t];i&&(window[t]=function(t){var n;if(t&&"object"==typeof t&&!t.tagName){n=i.apply(this,e._init?e._init(t):arguments);for(var a in dhtmlx)e[a]&&this[e[a]](dhtmlx[a]);for(var a in t)e[a]?this[e[a]](t[a]):0===a.indexOf("on")&&this.attachEvent(a,t[a])}else n=i.apply(this,arguments);return e._patch&&e._patch(this),n||this},window[t].prototype=i.prototype,n&&dhtmlXHeir(window[t].prototype,n))
-},dhtmlxAjax={get:function(t,e){var n=new dtmlXMLLoaderObject(!0);return n.async=arguments.length<3,n.waitCall=e,n.loadXML(t),n},post:function(t,e,n){var i=new dtmlXMLLoaderObject(!0);return i.async=arguments.length<4,i.waitCall=n,i.loadXML(t,!0,e),i},getSync:function(t){return this.get(t,null,!0)},postSync:function(t,e){return this.post(t,e,null,!0)}},dtmlXMLLoaderObject.count=0,dtmlXMLLoaderObject.prototype.waitLoadFunction=function(t){var e=!0;return this.check=function(){if(t&&t.onloadAction&&(!t.xmlDoc.readyState||4==t.xmlDoc.readyState)){if(!e)return;
-e=!1,dtmlXMLLoaderObject.count++,"function"==typeof t.onloadAction&&t.onloadAction(t.mainObject,null,null,null,t),t.waitCall&&(t.waitCall.call(this,t),t.waitCall=null)}},this.check},dtmlXMLLoaderObject.prototype.getXMLTopNode=function(t,e){var n;if(this.xmlDoc.responseXML){var i=this.xmlDoc.responseXML.getElementsByTagName(t);if(0===i.length&&-1!=t.indexOf(":"))var i=this.xmlDoc.responseXML.getElementsByTagName(t.split(":")[1]);n=i[0]}else n=this.xmlDoc.documentElement;if(n)return this._retry=!1,n;
-if(!this._retry&&_isIE){this._retry=!0;var e=this.xmlDoc;return this.loadXMLString(this.xmlDoc.responseText.replace(/^[\s]+/,""),!0),this.getXMLTopNode(t,e)}return dhtmlxError.throwError("LoadXML","Incorrect XML",[e||this.xmlDoc,this.mainObject]),document.createElement("DIV")},dtmlXMLLoaderObject.prototype.loadXMLString=function(t,e){if(_isIE)this.xmlDoc=new ActiveXObject("Microsoft.XMLDOM"),this.xmlDoc.async=this.async,this.xmlDoc.onreadystatechange=function(){},this.xmlDoc.loadXML(t);else{var n=new DOMParser;
-this.xmlDoc=n.parseFromString(t,"text/xml")}e||(this.onloadAction&&this.onloadAction(this.mainObject,null,null,null,this),this.waitCall&&(this.waitCall(),this.waitCall=null))},dtmlXMLLoaderObject.prototype.loadXML=function(t,e,n,i){this.rSeed&&(t+=(-1!=t.indexOf("?")?"&":"?")+"a_dhx_rSeed="+(new Date).valueOf()),this.filePath=t,this.xmlDoc=!_isIE&&window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP"),this.async&&(this.xmlDoc.onreadystatechange=new this.waitLoadFunction(this)),this.xmlDoc.open(e?"POST":"GET",t,this.async),i?(this.xmlDoc.setRequestHeader("User-Agent","dhtmlxRPC v0.1 ("+navigator.userAgent+")"),this.xmlDoc.setRequestHeader("Content-type","text/xml")):e&&this.xmlDoc.setRequestHeader("Content-type","application/x-www-form-urlencoded"),this.xmlDoc.setRequestHeader("X-Requested-With","XMLHttpRequest"),this.xmlDoc.send(null||n),this.async||new this.waitLoadFunction(this)()
-},dtmlXMLLoaderObject.prototype.destructor=function(){return this._filterXPath=null,this._getAllNamedChilds=null,this._retry=null,this.async=null,this.rSeed=null,this.filePath=null,this.onloadAction=null,this.mainObject=null,this.xmlDoc=null,this.doXPath=null,this.doXPathOpera=null,this.doXSLTransToObject=null,this.doXSLTransToString=null,this.loadXML=null,this.loadXMLString=null,this.doSerialization=null,this.xmlNodeToJSON=null,this.getXMLTopNode=null,this.setXSLParamValue=null,null},dtmlXMLLoaderObject.prototype.xmlNodeToJSON=function(t){for(var e={},n=0;n<t.attributes.length;n++)e[t.attributes[n].name]=t.attributes[n].value;
-e._tagvalue=t.firstChild?t.firstChild.nodeValue:"";for(var n=0;n<t.childNodes.length;n++){var i=t.childNodes[n].tagName;i&&(e[i]||(e[i]=[]),e[i].push(this.xmlNodeToJSON(t.childNodes[n])))}return e},dhtmlDragAndDropObject.prototype.removeDraggableItem=function(t){t.onmousedown=null,t.dragStarter=null,t.dragLanding=null},dhtmlDragAndDropObject.prototype.addDraggableItem=function(t,e){t.onmousedown=this.preCreateDragCopy,t.dragStarter=e,this.addDragLanding(t,e)},dhtmlDragAndDropObject.prototype.addDragLanding=function(t,e){t.dragLanding=e
-},dhtmlDragAndDropObject.prototype.preCreateDragCopy=function(t){return!t&&!window.event||2!=(t||event).button?window.dhtmlDragAndDrop.waitDrag?(window.dhtmlDragAndDrop.waitDrag=0,document.body.onmouseup=window.dhtmlDragAndDrop.tempDOMU,document.body.onmousemove=window.dhtmlDragAndDrop.tempDOMM,!1):(window.dhtmlDragAndDrop.dragNode&&window.dhtmlDragAndDrop.stopDrag(t),window.dhtmlDragAndDrop.waitDrag=1,window.dhtmlDragAndDrop.tempDOMU=document.body.onmouseup,window.dhtmlDragAndDrop.tempDOMM=document.body.onmousemove,window.dhtmlDragAndDrop.dragStartNode=this,window.dhtmlDragAndDrop.dragStartObject=this.dragStarter,document.body.onmouseup=window.dhtmlDragAndDrop.preCreateDragCopy,document.body.onmousemove=window.dhtmlDragAndDrop.callDrag,window.dhtmlDragAndDrop.downtime=(new Date).valueOf(),t&&t.preventDefault?(t.preventDefault(),!1):!1):void 0
-},dhtmlDragAndDropObject.prototype.callDrag=function(t){t||(t=window.event);var e=window.dhtmlDragAndDrop;if(!((new Date).valueOf()-e.downtime<100)){if(!e.dragNode){if(!e.waitDrag)return e.stopDrag(t,!0);if(e.dragNode=e.dragStartObject._createDragNode(e.dragStartNode,t),!e.dragNode)return e.stopDrag();e.dragNode.onselectstart=function(){return!1},e.gldragNode=e.dragNode,document.body.appendChild(e.dragNode),document.body.onmouseup=e.stopDrag,e.waitDrag=0,e.dragNode.pWindow=window,e.initFrameRoute()
-}if(e.dragNode.parentNode!=window.document.body&&e.gldragNode){var n=e.gldragNode;e.gldragNode.old&&(n=e.gldragNode.old),n.parentNode.removeChild(n);var i=e.dragNode.pWindow;if(n.pWindow&&n.pWindow.dhtmlDragAndDrop.lastLanding&&n.pWindow.dhtmlDragAndDrop.lastLanding.dragLanding._dragOut(n.pWindow.dhtmlDragAndDrop.lastLanding),_isIE){var a=document.createElement("Div");a.innerHTML=e.dragNode.outerHTML,e.dragNode=a.childNodes[0]}else e.dragNode=e.dragNode.cloneNode(!0);e.dragNode.pWindow=window,e.gldragNode.old=e.dragNode,document.body.appendChild(e.dragNode),i.dhtmlDragAndDrop.dragNode=e.dragNode
-}e.dragNode.style.left=t.clientX+15+(e.fx?-1*e.fx:0)+(document.body.scrollLeft||document.documentElement.scrollLeft)+"px",e.dragNode.style.top=t.clientY+3+(e.fy?-1*e.fy:0)+(document.body.scrollTop||document.documentElement.scrollTop)+"px";var s;s=t.srcElement?t.srcElement:t.target,e.checkLanding(s,t)}},dhtmlDragAndDropObject.prototype.calculateFramePosition=function(t){if(window.name){for(var e=parent.frames[window.name].frameElement.offsetParent,n=0,i=0;e;)n+=e.offsetLeft,i+=e.offsetTop,e=e.offsetParent;
-if(parent.dhtmlDragAndDrop){var a=parent.dhtmlDragAndDrop.calculateFramePosition(1);n+=1*a.split("_")[0],i+=1*a.split("_")[1]}if(t)return n+"_"+i;this.fx=n,this.fy=i}return"0_0"},dhtmlDragAndDropObject.prototype.checkLanding=function(t,e){t&&t.dragLanding?(this.lastLanding&&this.lastLanding.dragLanding._dragOut(this.lastLanding),this.lastLanding=t,this.lastLanding=this.lastLanding.dragLanding._dragIn(this.lastLanding,this.dragStartNode,e.clientX,e.clientY,e),this.lastLanding_scr=_isIE?e.srcElement:e.target):t&&"BODY"!=t.tagName?this.checkLanding(t.parentNode,e):(this.lastLanding&&this.lastLanding.dragLanding._dragOut(this.lastLanding,e.clientX,e.clientY,e),this.lastLanding=0,this._onNotFound&&this._onNotFound())
-},dhtmlDragAndDropObject.prototype.stopDrag=function(t,e){var n=window.dhtmlDragAndDrop;if(!e){n.stopFrameRoute();var i=n.lastLanding;n.lastLanding=null,i&&i.dragLanding._drag(n.dragStartNode,n.dragStartObject,i,_isIE?event.srcElement:t.target)}n.lastLanding=null,n.dragNode&&n.dragNode.parentNode==document.body&&n.dragNode.parentNode.removeChild(n.dragNode),n.dragNode=0,n.gldragNode=0,n.fx=0,n.fy=0,n.dragStartNode=0,n.dragStartObject=0,document.body.onmouseup=n.tempDOMU,document.body.onmousemove=n.tempDOMM,n.tempDOMU=null,n.tempDOMM=null,n.waitDrag=0
-},dhtmlDragAndDropObject.prototype.stopFrameRoute=function(t){t&&window.dhtmlDragAndDrop.stopDrag(1,1);for(var e=0;e<window.frames.length;e++)try{window.frames[e]!=t&&window.frames[e].dhtmlDragAndDrop&&window.frames[e].dhtmlDragAndDrop.stopFrameRoute(window)}catch(n){}try{parent.dhtmlDragAndDrop&&parent!=window&&parent!=t&&parent.dhtmlDragAndDrop.stopFrameRoute(window)}catch(n){}},dhtmlDragAndDropObject.prototype.initFrameRoute=function(t,e){t&&(window.dhtmlDragAndDrop.preCreateDragCopy(),window.dhtmlDragAndDrop.dragStartNode=t.dhtmlDragAndDrop.dragStartNode,window.dhtmlDragAndDrop.dragStartObject=t.dhtmlDragAndDrop.dragStartObject,window.dhtmlDragAndDrop.dragNode=t.dhtmlDragAndDrop.dragNode,window.dhtmlDragAndDrop.gldragNode=t.dhtmlDragAndDrop.dragNode,window.document.body.onmouseup=window.dhtmlDragAndDrop.stopDrag,window.waitDrag=0,!_isIE&&e&&(!_isFF||1.8>_FFrv)&&window.dhtmlDragAndDrop.calculateFramePosition());
-try{parent.dhtmlDragAndDrop&&parent!=window&&parent!=t&&parent.dhtmlDragAndDrop.initFrameRoute(window)}catch(n){}for(var i=0;i<window.frames.length;i++)try{window.frames[i]!=t&&window.frames[i].dhtmlDragAndDrop&&window.frames[i].dhtmlDragAndDrop.initFrameRoute(window,!t||e?1:0)}catch(n){}},_isFF=!1,_isIE=!1,_isOpera=!1,_isKHTML=!1,_isMacOS=!1,_isChrome=!1,_FFrv=!1,_KHTMLrv=!1,_OperaRv=!1,-1!=navigator.userAgent.indexOf("Macintosh")&&(_isMacOS=!0),navigator.userAgent.toLowerCase().indexOf("chrome")>-1&&(_isChrome=!0),-1!=navigator.userAgent.indexOf("Safari")||-1!=navigator.userAgent.indexOf("Konqueror")?(_KHTMLrv=parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf("Safari")+7,5)),_KHTMLrv>525?(_isFF=!0,_FFrv=1.9):_isKHTML=!0):-1!=navigator.userAgent.indexOf("Opera")?(_isOpera=!0,_OperaRv=parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf("Opera")+6,3))):-1!=navigator.appName.indexOf("Microsoft")?(_isIE=!0,-1==navigator.appVersion.indexOf("MSIE 8.0")&&-1==navigator.appVersion.indexOf("MSIE 9.0")&&-1==navigator.appVersion.indexOf("MSIE 10.0")||"BackCompat"==document.compatMode||(_isIE=8)):"Netscape"==navigator.appName&&-1!=navigator.userAgent.indexOf("Trident")?_isIE=8:(_isFF=!0,_FFrv=parseFloat(navigator.userAgent.split("rv:")[1])),dtmlXMLLoaderObject.prototype.doXPath=function(t,e,n,i){if(_isKHTML||!_isIE&&!window.XPathResult)return this.doXPathOpera(t,e);
-if(_isIE)return e||(e=this.xmlDoc.nodeName?this.xmlDoc:this.xmlDoc.responseXML),e||dhtmlxError.throwError("LoadXML","Incorrect XML",[e||this.xmlDoc,this.mainObject]),n&&e.setProperty("SelectionNamespaces","xmlns:xsl='"+n+"'"),"single"==i?e.selectSingleNode(t):e.selectNodes(t)||new Array(0);var a=e;e||(e=this.xmlDoc.nodeName?this.xmlDoc:this.xmlDoc.responseXML),e||dhtmlxError.throwError("LoadXML","Incorrect XML",[e||this.xmlDoc,this.mainObject]),-1!=e.nodeName.indexOf("document")?a=e:(a=e,e=e.ownerDocument);
-var s=XPathResult.ANY_TYPE;"single"==i&&(s=XPathResult.FIRST_ORDERED_NODE_TYPE);var r=[],o=e.evaluate(t,a,function(){return n},s,null);if(s==XPathResult.FIRST_ORDERED_NODE_TYPE)return o.singleNodeValue;for(var d=o.iterateNext();d;)r[r.length]=d,d=o.iterateNext();return r},_dhtmlxError.prototype.catchError=function(t,e){this.catches[t]=e},_dhtmlxError.prototype.throwError=function(t,e,n){return this.catches[t]?this.catches[t](t,e,n):this.catches.ALL?this.catches.ALL(t,e,n):(window.alert("Error type: "+arguments[0]+"\nDescription: "+arguments[1]),null)
-},window.dhtmlxError=new _dhtmlxError,dtmlXMLLoaderObject.prototype.doXPathOpera=function(t,e){var n=t.replace(/[\/]+/gi,"/").split("/"),i=null,a=1;if(!n.length)return[];if("."==n[0])i=[e];else{if(""!==n[0])return[];i=(this.xmlDoc.responseXML||this.xmlDoc).getElementsByTagName(n[a].replace(/\[[^\]]*\]/g,"")),a++}for(a;a<n.length;a++)i=this._getAllNamedChilds(i,n[a]);return-1!=n[a-1].indexOf("[")&&(i=this._filterXPath(i,n[a-1])),i},dtmlXMLLoaderObject.prototype._filterXPath=function(t,e){for(var n=[],e=e.replace(/[^\[]*\[\@/g,"").replace(/[\[\]\@]*/g,""),i=0;i<t.length;i++)t[i].getAttribute(e)&&(n[n.length]=t[i]);
-return n},dtmlXMLLoaderObject.prototype._getAllNamedChilds=function(t,e){var n=[];_isKHTML&&(e=e.toUpperCase());for(var i=0;i<t.length;i++)for(var a=0;a<t[i].childNodes.length;a++)_isKHTML?t[i].childNodes[a].tagName&&t[i].childNodes[a].tagName.toUpperCase()==e&&(n[n.length]=t[i].childNodes[a]):t[i].childNodes[a].tagName==e&&(n[n.length]=t[i].childNodes[a]);return n},dtmlXMLLoaderObject.prototype.xslDoc=null,dtmlXMLLoaderObject.prototype.setXSLParamValue=function(t,e,n){n||(n=this.xslDoc),n.responseXML&&(n=n.responseXML);
-var i=this.doXPath("/xsl:stylesheet/xsl:variable[@name='"+t+"']",n,"http://www.w3.org/1999/XSL/Transform","single");i&&(i.firstChild.nodeValue=e)},dtmlXMLLoaderObject.prototype.doXSLTransToObject=function(t,e){t||(t=this.xslDoc),t.responseXML&&(t=t.responseXML),e||(e=this.xmlDoc),e.responseXML&&(e=e.responseXML);var n;if(_isIE){n=new ActiveXObject("Msxml2.DOMDocument.3.0");try{e.transformNodeToObject(t,n)}catch(i){n=e.transformNode(t)}}else this.XSLProcessor||(this.XSLProcessor=new XSLTProcessor,this.XSLProcessor.importStylesheet(t)),n=this.XSLProcessor.transformToDocument(e);
-return n},dtmlXMLLoaderObject.prototype.doXSLTransToString=function(t,e){var n=this.doXSLTransToObject(t,e);return"string"==typeof n?n:this.doSerialization(n)},dtmlXMLLoaderObject.prototype.doSerialization=function(t){if(t||(t=this.xmlDoc),t.responseXML&&(t=t.responseXML),_isIE)return t.xml;var e=new XMLSerializer;return e.serializeToString(t)},dhtmlxEventable=function(obj){obj.attachEvent=function(t,e,n){return t="ev_"+t.toLowerCase(),this[t]||(this[t]=new this.eventCatcher(n||this)),t+":"+this[t].addEvent(e)
-},obj.callEvent=function(t,e){return t="ev_"+t.toLowerCase(),this[t]?this[t].apply(this,e):!0},obj.checkEvent=function(t){return!!this["ev_"+t.toLowerCase()]},obj.eventCatcher=function(obj){var dhx_catch=[],z=function(){for(var t=!0,e=0;e<dhx_catch.length;e++)if(dhx_catch[e]){var n=dhx_catch[e].apply(obj,arguments);t=t&&n}return t};return z.addEvent=function(ev){return"function"!=typeof ev&&(ev=eval(ev)),ev?dhx_catch.push(ev)-1:!1},z.removeEvent=function(t){dhx_catch[t]=null},z},obj.detachEvent=function(t){if(t){var e=t.split(":");
-this[e[0]].removeEvent(e[1])}},obj.detachAllEvents=function(){for(var t in this)0===t.indexOf("ev_")&&(this.detachEvent(t),this[t]=null)},obj=null},window.dhtmlx||(window.dhtmlx={}),function(){function t(t,e){var i=t.callback;n(!1),t.box.parentNode.removeChild(t.box),c=t.box=null,i&&i(e)}function e(e){if(c){e=e||event;var n=e.which||event.keyCode;return dhtmlx.message.keyboard&&((13==n||32==n)&&t(c,!0),27==n&&t(c,!1)),e.preventDefault&&e.preventDefault(),!(e.cancelBubble=!0)}}function n(t){n.cover||(n.cover=document.createElement("DIV"),n.cover.onkeydown=e,n.cover.className="dhx_modal_cover",document.body.appendChild(n.cover));
-document.body.scrollHeight;n.cover.style.display=t?"inline-block":"none"}function i(t,e){var n="dhtmlx_"+t.toLowerCase().replace(/ /g,"_")+"_button";return"<div class='dhtmlx_popup_button "+n+"' result='"+e+"' ><div>"+t+"</div></div>"}function a(t){g.area||(g.area=document.createElement("DIV"),g.area.className="dhtmlx_message_area",g.area.style[g.position]="5px",document.body.appendChild(g.area)),g.hide(t.id);var e=document.createElement("DIV");return e.innerHTML="<div>"+t.text+"</div>",e.className="dhtmlx-info dhtmlx-"+t.type,e.onclick=function(){g.hide(t.id),t=null
-},"bottom"==g.position&&g.area.firstChild?g.area.insertBefore(e,g.area.firstChild):g.area.appendChild(e),t.expire>0&&(g.timers[t.id]=window.setTimeout(function(){g.hide(t.id)},t.expire)),g.pull[t.id]=e,e=null,t.id}function s(e,n,a){var s=document.createElement("DIV");s.className=" dhtmlx_modal_box dhtmlx-"+e.type,s.setAttribute("dhxbox",1);var r="";if(e.width&&(s.style.width=e.width),e.height&&(s.style.height=e.height),e.title&&(r+='<div class="dhtmlx_popup_title">'+e.title+"</div>"),r+='<div class="dhtmlx_popup_text"><span>'+(e.content?"":e.text)+'</span></div><div  class="dhtmlx_popup_controls">',n&&(r+=i(e.ok||"OK",!0)),a&&(r+=i(e.cancel||"Cancel",!1)),e.buttons)for(var o=0;o<e.buttons.length;o++)r+=i(e.buttons[o],o);
-if(r+="</div>",s.innerHTML=r,e.content){var d=e.content;"string"==typeof d&&(d=document.getElementById(d)),"none"==d.style.display&&(d.style.display=""),s.childNodes[e.title?1:0].appendChild(d)}return s.onclick=function(n){n=n||event;var i=n.target||n.srcElement;if(i.className||(i=i.parentNode),"dhtmlx_popup_button"==i.className.split(" ")[0]){var a=i.getAttribute("result");a="true"==a||("false"==a?!1:a),t(e,a)}},e.box=s,(n||a)&&(c=e),s}function r(t,i,a){var r=t.tagName?t:s(t,i,a);t.hidden||n(!0),document.body.appendChild(r);
-var o=Math.abs(Math.floor(((window.innerWidth||document.documentElement.offsetWidth)-r.offsetWidth)/2)),d=Math.abs(Math.floor(((window.innerHeight||document.documentElement.offsetHeight)-r.offsetHeight)/2));return r.style.top="top"==t.position?"-3px":d+"px",r.style.left=o+"px",r.onkeydown=e,r.focus(),t.hidden&&dhtmlx.modalbox.hide(r),r}function o(t){return r(t,!0,!1)}function d(t){return r(t,!0,!0)}function l(t){return r(t)}function _(t,e,n){return"object"!=typeof t&&("function"==typeof e&&(n=e,e=""),t={text:t,type:e,callback:n}),t
-}function h(t,e,n,i){return"object"!=typeof t&&(t={text:t,type:e,expire:n,id:i}),t.id=t.id||g.uid(),t.expire=t.expire||g.expire,t}var c=null;document.attachEvent?document.attachEvent("onkeydown",e):document.addEventListener("keydown",e,!0),dhtmlx.alert=function(){var t=_.apply(this,arguments);return t.type=t.type||"confirm",o(t)},dhtmlx.confirm=function(){var t=_.apply(this,arguments);return t.type=t.type||"alert",d(t)},dhtmlx.modalbox=function(){var t=_.apply(this,arguments);return t.type=t.type||"alert",l(t)
-},dhtmlx.modalbox.hide=function(t){for(;t&&t.getAttribute&&!t.getAttribute("dhxbox");)t=t.parentNode;t&&(t.parentNode.removeChild(t),n(!1))};var g=dhtmlx.message=function(t){t=h.apply(this,arguments),t.type=t.type||"info";var e=t.type.split("-")[0];switch(e){case"alert":return o(t);case"confirm":return d(t);case"modalbox":return l(t);default:return a(t)}};g.seed=(new Date).valueOf(),g.uid=function(){return g.seed++},g.expire=4e3,g.keyboard=!0,g.position="top",g.pull={},g.timers={},g.hideAll=function(){for(var t in g.pull)g.hide(t)
-},g.hide=function(t){var e=g.pull[t];e&&e.parentNode&&(window.setTimeout(function(){e.parentNode.removeChild(e),e=null},2e3),e.className+=" hidden",g.timers[t]&&window.clearTimeout(g.timers[t]),delete g.pull[t])}}(),gantt={version:"2.1.1"},dhtmlxEventable=function(obj){obj._silent_mode=!1,obj._silentStart=function(){this._silent_mode=!0},obj._silentEnd=function(){this._silent_mode=!1},obj.attachEvent=function(t,e,n){return t="ev_"+t.toLowerCase(),this[t]||(this[t]=new this._eventCatcher(n||this)),t+":"+this[t].addEvent(e)
-},obj.callEvent=function(t,e){return this._silent_mode?!0:(t="ev_"+t.toLowerCase(),this[t]?this[t].apply(this,e):!0)},obj.checkEvent=function(t){return!!this["ev_"+t.toLowerCase()]},obj._eventCatcher=function(obj){var dhx_catch=[],z=function(){for(var t=!0,e=0;e<dhx_catch.length;e++)if(dhx_catch[e]){var n=dhx_catch[e].apply(obj,arguments);t=t&&n}return t};return z.addEvent=function(ev){return"function"!=typeof ev&&(ev=eval(ev)),ev?dhx_catch.push(ev)-1:!1},z.removeEvent=function(t){dhx_catch[t]=null
-},z},obj.detachEvent=function(t){if(t){var e=t.split(":");this[e[0]].removeEvent(e[1])}},obj.detachAllEvents=function(){for(var t in this)0===t.indexOf("ev_")&&delete this[t]},obj=null},dhtmlx.copy=function(t){var e,n,i;if(t&&"object"==typeof t){for(i={},n=[Array,Date,Number,String,Boolean],e=0;e<n.length;e++)t instanceof n[e]&&(i=e?new n[e](t):new n[e]);for(e in t)Object.prototype.hasOwnProperty.apply(t,[e])&&(i[e]=dhtmlx.copy(t[e]))}return i||t},dhtmlx.mixin=function(t,e,n){for(var i in e)(!t[i]||n)&&(t[i]=e[i]);
-return t},dhtmlx.defined=function(t){return"undefined"!=typeof t},dhtmlx.uid=function(){return this._seed||(this._seed=(new Date).valueOf()),this._seed++,this._seed},dhtmlx.bind=function(t,e){return function(){return t.apply(e,arguments)}},gantt._get_position=function(t){var e=0,n=0;if(t.getBoundingClientRect){var i=t.getBoundingClientRect(),a=document.body,s=document.documentElement,r=window.pageYOffset||s.scrollTop||a.scrollTop,o=window.pageXOffset||s.scrollLeft||a.scrollLeft,d=s.clientTop||a.clientTop||0,l=s.clientLeft||a.clientLeft||0;
-return e=i.top+r-d,n=i.left+o-l,{y:Math.round(e),x:Math.round(n),width:t.offsetWidth,height:t.offsetHeight}}for(;t;)e+=parseInt(t.offsetTop,10),n+=parseInt(t.offsetLeft,10),t=t.offsetParent;return{y:e,x:n,width:t.offsetWidth,height:t.offsetHeight}},gantt._detectScrollSize=function(){var t=document.createElement("div");t.style.cssText="visibility:hidden;position:absolute;left:-1000px;width:100px;padding:0px;margin:0px;height:110px;min-height:100px;overflow-y:scroll;",document.body.appendChild(t);var e=t.offsetWidth-t.clientWidth;
-return document.body.removeChild(t),e},dhtmlxEventable(gantt),gantt._click={},gantt._dbl_click={},gantt._context_menu={},gantt._on_click=function(t){t=t||window.event;var e=t.target||t.srcElement,n=gantt.locate(t);if(null!==n){var i=!gantt.checkEvent("onTaskClick")||gantt.callEvent("onTaskClick",[n,t]);i&&gantt.config.select_task&&gantt.selectTask(n)}else gantt.callEvent("onEmptyClick",[t]);gantt._find_ev_handler(t,e,gantt._click,n)},gantt._on_contextmenu=function(t){t=t||window.event;var e=t.target||t.srcElement,n=gantt.locate(e),i=gantt.locate(e,gantt.config.link_attribute),a=!gantt.checkEvent("onContextMenu")||gantt.callEvent("onContextMenu",[n,i,t]);
-return a||t.preventDefault(),a},gantt._find_ev_handler=function(t,e,n,i){for(var a=!0;e&&e.parentNode;){var s=e.className;if(s){s=s.split(" ");for(var r=0;r<s.length;r++)s[r]&&n[s[r]]&&(a=n[s[r]].call(gantt,t,i,e),a=!("undefined"!=typeof a&&a!==!0))}e=e.parentNode}return a},gantt._on_dblclick=function(t){t=t||window.event;var e=t.target||t.srcElement,n=gantt.locate(t),i=gantt._find_ev_handler(t,e,gantt._dbl_click,n);if(i&&null!==n){var a=!gantt.checkEvent("onTaskDblClick")||gantt.callEvent("onTaskDblClick",[n,t]);
-a&&gantt.config.details_on_dblclick&&gantt.showLightbox(n)}},gantt._on_mousemove=function(t){if(gantt.checkEvent("onMouseMove")){var e=gantt.locate(t);gantt._last_move_event=t,gantt.callEvent("onMouseMove",[e,t])}},dhtmlxDnD.prototype={dragStart:function(t,e){this.config={obj:t,marker:null,started:!1,pos:this.getPosition(e),sensitivity:4},this._settings&&dhtmlx.mixin(this.config,this._settings,!0);var n=dhtmlx.bind(function(e){return this.dragMove(t,e)},this),i=(dhtmlx.bind(function(e){return this.dragScroll(t,e)
-},this),dhtmlx.bind(function(t){return dhtmlx.defined(this.config.updates_per_second)&&!gantt._checkTimeout(this,this.config.updates_per_second)?!0:n(t)},this)),a=dhtmlx.bind(function(){return dhtmlxDetachEvent(document.body,"mousemove",i),dhtmlxDetachEvent(document.body,"mouseup",a),this.dragEnd(t)},this);dhtmlxEvent(document.body,"mousemove",i),dhtmlxEvent(document.body,"mouseup",a),document.body.className+=" gantt_noselect"},dragMove:function(t,e){if(!this.config.marker&&!this.config.started){var n=this.getPosition(e),i=n.x-this.config.pos.x,a=n.y-this.config.pos.y,s=Math.sqrt(Math.pow(Math.abs(i),2)+Math.pow(Math.abs(a),2));
-if(s>this.config.sensitivity){if(this.config.started=!0,this.config.ignore=!1,this.callEvent("onBeforeDragStart",[t,e])===!1)return this.config.ignore=!0,!0;var r=this.config.marker=document.createElement("div");r.className="gantt_drag_marker",r.innerHTML="Dragging object",document.body.appendChild(r),this.callEvent("onAfterDragStart",[t,e])}else this.config.ignore=!0}this.config.ignore||(e.pos=this.getPosition(e),this.config.marker.style.left=e.pos.x+"px",this.config.marker.style.top=e.pos.y+"px",this.callEvent("onDragMove",[t,e]))
-},dragEnd:function(){this.config.marker&&(this.config.marker.parentNode.removeChild(this.config.marker),this.config.marker=null,this.callEvent("onDragEnd",[])),document.body.className=document.body.className.replace(" gantt_noselect","")},getPosition:function(t){var e=0,n=0;return t=t||window.event,t.pageX||t.pageY?(e=t.pageX,n=t.pageY):(t.clientX||t.clientY)&&(e=t.clientX+document.body.scrollLeft+document.documentElement.scrollLeft,n=t.clientY+document.body.scrollTop+document.documentElement.scrollTop),{x:e,y:n}
-}},gantt._init_grid=function(){this._click.gantt_close=dhtmlx.bind(function(t,e){this.close(e)},this),this._click.gantt_open=dhtmlx.bind(function(t,e){this.open(e)},this),this._click.gantt_row=dhtmlx.bind(function(t,e,n){if(null!==e){var i=this.getTaskNode(e),a=Math.max(i.offsetLeft-this.config.task_scroll_offset,0);this.scrollTo(a),this.callEvent("onTaskRowClick",[e,n])}},this),this._click.gantt_grid_head_cell=dhtmlx.bind(function(t,e,n){var i=n.getAttribute("column_id");if(this.callEvent("onGridHeaderClick",[i,t]))if("add"==i)this._click.gantt_add(t,this.config.root_id);
-else if(this.config.sort){var a=this._sort&&this._sort.direction&&this._sort.name==i?this._sort.direction:"desc";a="desc"==a?"asc":"desc",this._sort={name:i,direction:a},this._render_grid_header(),this.sort(i,"desc"==a)}},this),!this.config.sort&&this.config.order_branch&&this._init_dnd(),this._click.gantt_add=dhtmlx.bind(function(t,e){if(!this.config.readonly){var n=e?this.getTask(e):!1,i="";if(n)i=n.start_date;else{var a=this._order[0];i=a?this.getTask(a).start_date:this.getState().min_date}n&&(n.$open=!0);
-var s={text:gantt.locale.labels.new_task,start_date:this.templates.xml_format(i),duration:1,progress:0,parent:e};s.id=dhtmlx.uid(),this.callEvent("onTaskCreated",[s]),this.config.details_on_create?(s.$new=!0,this._pull[s.id]=this._init_task(s),this._add_branch(s),s.$level=this._item_level(s),this.selectTask(s.id),this.refreshData(),this.showLightbox(s.id)):(this.addTask(s),this.showTask(s.id),this.selectTask(s.id))}},this)},gantt._render_grid=function(){this._is_grid_visible()&&(this._calc_grid_width(),this._render_grid_header())
-},gantt._calc_grid_width=function(){if(this.config.autofit){for(var t=this.config.columns,e=0,n=[],i=[],a=0;a<t.length;a++){var s=parseInt(t[a].width,10);window.isNaN(s)&&(s=50,n.push(a)),i[a]=s,e+=s}{var r=this._get_grid_width()-e;r/(n.length>0?n.length:i.length>0?i.length:1)}if(n.length>0)for(var o=r/(n.length?n.length:1),a=0;a<n.length;a++){var d=n[a];i[d]+=o}else for(var o=r/(i.length?i.length:1),a=0;a<i.length;a++)i[a]+=o;for(var a=0;a<i.length;a++)t[a].width=i[a]}},gantt._render_grid_header=function(){for(var t=this.config.columns,e=[],n=0,i=this.locale.labels,a=this.config.scale_height-2,s=0;s<t.length;s++){var r=s==t.length-1,o=t[s];
-r&&this._get_grid_width()>n+o.width&&(o.width=this._get_grid_width()-n),n+=o.width;var d=this._sort&&o.name==this._sort.name?"<div class='gantt_sort gantt_"+this._sort.direction+"'></div>":"",l=["gantt_grid_head_cell","gantt_grid_head_"+o.name,r?"gantt_last_cell":"",this.templates.grid_header_class(o.name,o)].join(" "),_="width:"+(o.width-(r?1:0))+"px;",h=o.label||i["column_"+o.name];h=h||"";var c="<div class='"+l+"' style='"+_+"' column_id='"+o.name+"'>"+h+d+"</div>";e.push(c)}this.$grid_scale.style.height=this.config.scale_height-1+"px",this.$grid_scale.style.lineHeight=a+"px",this.$grid_scale.style.width=n-1+"px",this.$grid_scale.innerHTML=e.join("")
-},gantt._render_grid_item=function(t){if(!gantt._is_grid_visible())return null;for(var e=this.config.columns,n=[],i=0;i<e.length;i++){var a,s,r=i==e.length-1,o=e[i];"add"==o.name&&i==e.length-1?s="<div class='gantt_add'></div>":(s=o.template?o.template(t):t[o.name],s instanceof Date&&(s=this.templates.date_grid(s)),s="<div class='gantt_tree_content'>"+s+"</div>");var d="gantt_cell"+(r?" gantt_last_cell":""),l="";if(o.tree){for(var _=0;_<t.$level;_++)l+=this.templates.grid_indent(t);var h=this._branches[t.id]&&this._branches[t.id].length>0;
-h?(l+=this.templates.grid_open(t),l+=this.templates.grid_folder(t)):(l+=this.templates.grid_blank(t),l+=this.templates.grid_file(t))}var c="width:"+(o.width-(r?1:0))+"px;";dhtmlx.defined(o.align)&&(c+="text-align:"+o.align+";"),a="<div class='"+d+"' style='"+c+"'>"+l+s+"</div>",n.push(a)}var d=t.$index%2===0?"":" odd";if(d+=t.$transparent?" gantt_transparent":"",this.templates.grid_row_class){var g=this.templates.grid_row_class.call(this,t.start_date,t.end_date,t);g&&(d+=" "+g)}this.getState().selected_task==t.id&&(d+=" gantt_selected");
-var u=document.createElement("div");return u.className="gantt_row"+d,u.style.height=this.config.row_height+"px",u.style.lineHeight=gantt.config.row_height+"px",u.setAttribute(this.config.task_attribute,t.id),u.innerHTML=n.join(""),u},gantt.open=function(t){gantt._set_item_state(t,!0),this.callEvent("onTaskOpened",[t])},gantt.close=function(t){gantt._set_item_state(t,!1),this.callEvent("onTaskClosed",[t])},gantt._set_item_state=function(t,e){t&&this._pull[t]&&(this._pull[t].$open=e,this.refreshData())
-},gantt._is_grid_visible=function(){return this.config.grid_width&&this.config.show_grid},gantt._get_grid_width=function(){return this._is_grid_visible()?this._is_chart_visible()?this.config.grid_width:this._x:0},gantt.getTaskIndex=function(t){for(var e=this._branches[this.getTask(t).parent],n=0;n<e.length;n++)if(e[n]==t)return n;return-1},gantt.getGlobalTaskIndex=function(t){for(var e=this._order,n=0;n<e.length;n++)if(e[n]==t)return n;return-1},gantt.moveTask=function(t,e,n){var i=arguments[3];if(i){if(i===t)return;
-n=this.getTask(i).parent,e=this.getTaskIndex(i)}n=n||this.config.root_id;var a=this.getTask(t),s=(this._branches[a.parent],this._branches[n]);if(-1==e&&(e=s.length+1),a.parent==n){var r=this.getTaskIndex(t);if(r==e)return;e>r&&e--}this._replace_branch_child(a.parent,t),s=this._branches[n];var o=s[e];o?s=s.slice(0,e).concat([t]).concat(s.slice(e)):s.push(t),a.parent=n,this._branches[n]=s,this.refreshData()},gantt._init_dnd=function(){var t=new dhtmlxDnD(this.$grid_data,{updates_per_second:60});dhtmlx.defined(this.config.dnd_sensitivity)&&(t.config.sensitivity=this.config.dnd_sensitivity),t.attachEvent("onBeforeDragStart",dhtmlx.bind(function(t,e){var n=this._locateHTML(e);
-if(!n)return!1;this.hideQuickInfo&&this._hideQuickInfo();var i=this.locate(e);return this.callEvent("onRowDragStart",[i,e.target||e.srcElement,e])?void 0:!1},this)),t.attachEvent("onAfterDragStart",dhtmlx.bind(function(e,n){var i=this._locateHTML(n);t.config.marker.innerHTML=i.outerHTML,t.config.id=this.locate(n);var a=this.getTask(t.config.id);a.$open=!1,a.$transparent=!0,this.refreshData()},this)),t.lastTaskOfLevel=function(t){for(var e=gantt._order,n=gantt._pull,i=null,a=0,s=e.length;s>a;a++)n[e[a]].$level==t&&(i=n[e[a]]);
-return i?i.id:null},t.attachEvent("onDragMove",dhtmlx.bind(function(e,n){var i=t.config,a=this._get_position(this.$grid_data),s=a.x+10,r=n.pos.y-10;r<a.y&&(r=a.y),r>a.y+this.$grid_data.offsetHeight-this.config.row_height&&(r=a.y+this.$grid_data.offsetHeight-this.config.row_height),i.marker.style.left=s+"px",i.marker.style.top=r+"px";var o=document.elementFromPoint(a.x-document.body.scrollLeft+1,r-document.body.scrollTop),d=this.locate(o),l=this.getTask(t.config.id);if(this.isTaskExists(d)||(d=t.lastTaskOfLevel(l.$level),d==t.config.id&&(d=null)),this.isTaskExists(d)){var _=gantt._get_position(o),h=this.getTask(d);
-if(_.y+o.offsetHeight/2<r){var c=this.getGlobalTaskIndex(h.id),g=this._pull[this._order[c+1+(h.id==l.id?1:0)]];if(g){if(g.id==l.id)return;h=g}else if(g=this._pull[this._order[c]],g.$level==l.$level)return this.moveTask(l.id,-1,g.parent),void(i.target="next:"+g.id)}if(h.$level==l.$level&&l.id!=h.id)this.moveTask(l.id,0,0,h.id),i.target=h.id;else{if(l.id==h.id)return;var c=this.getGlobalTaskIndex(h.id),u=this._pull[this._order[c-1]];u&&u.$level==l.$level&&l.id!=u.id&&(this.moveTask(l.id,-1,u.parent),i.target="next:"+u.id)
-}}return!0},this)),t.attachEvent("onDragEnd",dhtmlx.bind(function(){this.getTask(t.config.id).$transparent=!1,this.refreshData(),this.callEvent("onRowDragEnd",[t.config.id,t.config.target])},this))},gantt._scale_helpers={getSum:function(t,e,n){void 0===n&&(n=t.length-1),void 0===e&&(e=0);for(var i=0,a=e;n>=a;a++)i+=t[a];return i},setSumWidth:function(t,e,n,i){var a=e.width;void 0===i&&(i=a.length-1),void 0===n&&(n=0);var s=i-n+1;if(!(n>a.length-1||0>=s||i>a.length-1)){var r=this.getSum(a,n,i),o=t-r;
-this.adjustSize(o,a,n,i),this.adjustSize(-o,a,i+1),e.full_width=this.getSum(a)}},splitSize:function(t,e){for(var n=[],i=0;e>i;i++)n[i]=0;return this.adjustSize(t,n),n},adjustSize:function(t,e,n,i){n||(n=0),void 0===i&&(i=e.length-1);for(var a=i-n+1,s=this.getSum(e,n,i),r=0,o=n;i>=o;o++){var d=Math.floor(t*(s?e[o]/s:1/a));s-=e[o],t-=d,a--,e[o]+=d,r+=d}e[e.length-1]+=t},sortScales:function(t){function e(t,e){var n=new Date(1970,0,1);return gantt.date.add(n,e,t)-n}t.sort(function(t,n){return e(t.unit,t.step)<e(n.unit,n.step)?1:-1
-})},primaryScale:function(){return gantt._init_template("date_scale"),{unit:gantt.config.scale_unit,step:gantt.config.step,template:gantt.templates.date_scale,date:gantt.config.date_scale,css:gantt.templates.scale_cell_class}},prepareConfigs:function(t,e,n,i){for(var a=this.splitSize(i,t.length),s=n,r=[],o=t.length-1;o>=0;o--){var d=o==t.length-1,l=this.initScaleConfig(t[o]);d&&this.processIgnores(l),this.initColSizes(l,e,s,a[o]),this.limitVisibleRange(l),d&&(s=l.full_width),r.unshift(l)}for(var o=0;o<r.length-1;o++)this.alineScaleColumns(r[r.length-1],r[o]);
-return r},_ignore_time_config:function(t){return this.config.skip_off_time?!this.isWorkTime(t):!1},processIgnores:function(t){var e=t.count;if(t.ignore_x={},gantt.ignore_time||gantt.config.skip_off_time){var n=gantt.ignore_time||function(){return!1};e=0;for(var i=0;i<t.trace_x.length;i++)n.call(gantt,t.trace_x[i])||this._ignore_time_config.call(gantt,t.trace_x[i])?(t.ignore_x[t.trace_x[i].valueOf()]=!0,t.ignored_colls=!0):e++}t.display_count=e},initColSizes:function(t,e,n,i){var a=n;t.height=i;var s=void 0===t.display_count?t.count:t.display_count;
-s||(s=1),t.col_width=Math.floor(a/s),e&&t.col_width<e&&(t.col_width=e,a=t.col_width*s),t.width=[];for(var r=t.ignore_x||{},o=0;o<t.trace_x.length;o++)t.width[o]=r[t.trace_x[o].valueOf()]||t.display_count==t.count?0:1;this.adjustSize(a-this.getSum(t.width),t.width),t.full_width=this.getSum(t.width)},initScaleConfig:function(t){var e=dhtmlx.mixin({count:0,col_width:0,full_width:0,height:0,width:[],trace_x:[]},t);return this.eachColumn(t.unit,t.step,function(t){e.count++,e.trace_x.push(new Date(t))}),e
-},iterateScales:function(t,e,n,i,a){for(var s=e.trace_x,r=t.trace_x,o=n||0,d=i||r.length-1,l=0,_=1;_<s.length;_++)for(var h=o;d>=h;h++)+r[h]!=+s[_]||(a&&a.apply(this,[l,_,o,h]),o=h,l=_)},alineScaleColumns:function(t,e,n,i){this.iterateScales(t,e,n,i,function(n,i,a,s){var r=this.getSum(t.width,a,s-1),o=this.getSum(e.width,n,i-1);o!=r&&this.setSumWidth(r,e,n,i-1)})},eachColumn:function(t,e,n){var i=new Date(gantt._min_date),a=new Date(gantt._max_date);gantt.date[t+"_start"]&&(i=gantt.date[t+"_start"](i));
-for(var s=new Date(i);+a>+s;)n.call(this,new Date(s)),s=gantt.date.add(s,e,t)},limitVisibleRange:function(t){var e=t.trace_x,n=0,i=t.width.length-1,a=0;if(+e[0]<+gantt._min_date&&n!=i){var s=Math.floor(t.width[0]*((e[1]-gantt._min_date)/(e[1]-e[0])));a+=t.width[0]-s,t.width[0]=s,e[0]=new Date(gantt._min_date)}var r=e.length-1,o=e[r],d=gantt.date.add(o,t.step,t.unit);if(+d>+gantt._max_date&&r>0){var s=t.width[r]-Math.floor(t.width[r]*((d-gantt._max_date)/(d-o)));a+=t.width[r]-s,t.width[r]=s}if(a){for(var l=this.getSum(t.width),_=0,h=0;h<t.width.length;h++){var c=Math.floor(a*(t.width[h]/l));
-t.width[h]+=c,_+=c}this.adjustSize(a-_,t.width)}}},gantt._tasks_dnd={drag:null,_events:{before_start:{},before_finish:{},after_finish:{}},_handlers:{},init:function(){this.clear_drag_state();var t=gantt.config.drag_mode;this.set_actions();var e={before_start:"onBeforeTaskDrag",before_finish:"onBeforeTaskChanged",after_finish:"onAfterTaskDrag"};for(var n in this._events)for(var i in t)this._events[n][i]=e[n];this._handlers[t.move]=this._move,this._handlers[t.resize]=this._resize,this._handlers[t.progress]=this._resize_progress
-},set_actions:function(){var t=gantt.$task_data;dhtmlxEvent(t,"mousemove",dhtmlx.bind(function(t){this.on_mouse_move(t||event)},this)),dhtmlxEvent(t,"mousedown",dhtmlx.bind(function(t){this.on_mouse_down(t||event)},this)),dhtmlxEvent(t,"mouseup",dhtmlx.bind(function(t){this.on_mouse_up(t||event)},this))},clear_drag_state:function(){this.drag={id:null,mode:null,pos:null,start_x:null,start_y:null,obj:null,left:null}},_resize:function(t,e,n){var i=gantt.config,a=this._drag_task_coords(t,n);n.left?(t.start_date=gantt._date_from_pos(a.start+e),t.start_date||(t.start_date=new Date(gantt.getState().min_date))):(t.end_date=gantt._date_from_pos(a.end+e),t.end_date||(t.end_date=new Date(gantt.getState().max_date))),t.end_date-t.start_date<i.min_duration&&(n.left?t.start_date=gantt.calculateEndDate(t.end_date,-1):t.end_date=gantt.calculateEndDate(t.start_date,1)),gantt._init_task_timing(t)
-},_resize_progress:function(t,e,n){var i=this._drag_task_coords(t,n),a=Math.max(0,n.pos.x-i.start);t.progress=Math.min(1,a/(i.end-i.start))},_move:function(t,e,n){var i=this._drag_task_coords(t,n),a=gantt._date_from_pos(i.start+e),s=gantt._date_from_pos(i.end+e);a?s?(t.start_date=a,t.end_date=s):(t.end_date=new Date(gantt.getState().max_date),t.start_date=gantt._date_from_pos(gantt.posFromDate(t.end_date)-(i.end-i.start))):(t.start_date=new Date(gantt.getState().min_date),t.end_date=gantt._date_from_pos(gantt.posFromDate(t.start_date)+(i.end-i.start)))
-},_drag_task_coords:function(t,e){var n=e.obj_s_x=e.obj_s_x||gantt.posFromDate(t.start_date),i=e.obj_e_x=e.obj_e_x||gantt.posFromDate(t.end_date);return{start:n,end:i}},on_mouse_move:function(t){this.drag.start_drag&&this._start_dnd(t);var e=this.drag;if(e.mode){if(!gantt._checkTimeout(this,40))return;this._update_on_move(t)}},_update_on_move:function(t){var e=this.drag;if(e.mode){var n=gantt._get_mouse_pos(t);if(e.pos&&e.pos.x==n.x)return;e.pos=n;var i=gantt._date_from_pos(n.x);if(!i||isNaN(i.getTime()))return;
-var a=n.x-e.start_x,s=gantt.getTask(e.id);if(this._handlers[e.mode]){var r=dhtmlx.mixin({},s),o=dhtmlx.mixin({},s);this._handlers[e.mode].apply(this,[o,a,e]),dhtmlx.mixin(s,o,!0),gantt._update_parents(e.id,!0),gantt.callEvent("onTaskDrag",[s.id,e.mode,o,r,t]),dhtmlx.mixin(s,o,!0),gantt._update_parents(e.id),gantt.refreshTask(e.id)}}},on_mouse_down:function(t,e){if(2!=t.button&&!gantt.config.readonly&&!this.drag.mode){this.clear_drag_state(),e=e||t.target||t.srcElement;var n=gantt._trim(e.className||"");
-if(!n||!this._get_drag_mode(n))return e.parentNode?this.on_mouse_down(t,e.parentNode):void 0;var i=this._get_drag_mode(n);if(i)if(i.mode&&i.mode!=gantt.config.drag_mode.ignore&&gantt.config["drag_"+i.mode]){var a=gantt.locate(e),s=dhtmlx.copy(gantt.getTask(a)||{});if(gantt._is_flex_task(s)&&i.mode!=gantt.config.drag_mode.progress)return void this.clear_drag_state();i.id=a;var r=gantt._get_mouse_pos(t);i.start_x=r.x,i.start_y=r.y,i.obj=s,this.drag.start_drag=i}else this.clear_drag_state();else if(gantt.checkEvent("onMouseDown")&&gantt.callEvent("onMouseDown",[n.split(" ")[0]])&&e.parentNode)return this.on_mouse_down(t,e.parentNode)
-}},_fix_dnd_scale_time:function(t,e){var n=gantt._tasks.unit,i=gantt._tasks.step;gantt.config.round_dnd_dates||(n="minute",i=gantt.config.time_step),e.mode==gantt.config.drag_mode.resize?e.left?t.start_date=gantt._get_closest_date({date:t.start_date,unit:n,step:i}):t.end_date=gantt._get_closest_date({date:t.end_date,unit:n,step:i}):e.mode==gantt.config.drag_mode.move&&(t.start_date=gantt._get_closest_date({date:t.start_date,unit:n,step:i}),t.end_date=gantt.calculateEndDate(t.start_date,t.duration,gantt.config.duration_unit))
-},_fix_working_times:function(t,e){gantt.config.work_time&&gantt.config.correct_work_time&&(e.mode==gantt.config.drag_mode.resize?e.left?t.start_date=gantt.getClosestWorkTime({date:t.start_date,dir:"future"}):t.end_date=gantt.getClosestWorkTime({date:t.end_date,dir:"past"}):e.mode==gantt.config.drag_mode.move&&(gantt.isWorkTime(t.start_date)?gantt.isWorkTime(new Date(+t.end_date-1))||(t.end_date=gantt.getClosestWorkTime({date:t.end_date,dir:"past"}),t.start_date=gantt.calculateEndDate(t.end_date,-1*t.duration)):(t.start_date=gantt.getClosestWorkTime({date:t.start_date,dir:"future"}),t.end_date=gantt.calculateEndDate(t.start_date,t.duration))))
-},on_mouse_up:function(t){var e=this.drag;if(e.mode&&e.id){var n=gantt.getTask(e.id);if(gantt.config.work_time&&gantt.config.correct_work_time&&this._fix_working_times(n,e),this._fix_dnd_scale_time(n,e),gantt._init_task_timing(n),this._fireEvent("before_finish",e.mode,[e.id,e.mode,dhtmlx.copy(e.obj),t])){var i=e.id;gantt._init_task_timing(n),gantt.updateTask(n.id),this._fireEvent("after_finish",e.mode,[i,e.mode,t]),this.clear_drag_state()}else e.obj._dhx_changed=!1,dhtmlx.mixin(n,e.obj,!0),gantt.updateTask(n.id)
-}this.clear_drag_state()},_get_drag_mode:function(t){var e=gantt.config.drag_mode,n=(t||"").split(" "),i=n[0],a={mode:null,left:null};switch(i){case"gantt_task_line":case"gantt_task_content":a.mode=e.move;break;case"gantt_task_drag":a.mode=e.resize,a.left=n[1]&&-1!==n[1].indexOf("left",n[1].length-"left".length)?!0:!1;break;case"gantt_task_progress_drag":a.mode=e.progress;break;case"gantt_link_control":case"gantt_link_point":a.mode=e.ignore;break;default:a=null}return a},_start_dnd:function(t){var e=this.drag=this.drag.start_drag;
-delete e.start_drag;var n=gantt.config,i=e.id;n["drag_"+e.mode]&&gantt.callEvent("onBeforeDrag",[i,e.mode,t])&&this._fireEvent("before_start",e.mode,[i,e.mode,t])?delete e.start_drag:this.clear_drag_state()},_fireEvent:function(t,e,n){dhtmlx.assert(this._events[t],"Invalid stage:{"+t+"}");var i=this._events[t][e];return dhtmlx.assert(i,"Unknown after drop mode:{"+e+"}"),dhtmlx.assert(n,"Invalid event arguments"),gantt.checkEvent(i)?gantt.callEvent(i,n):!0}},gantt._render_link=function(t){var e=this.getLink(t);
-gantt._linkRenderer.render_item(e,this.$task_links)},gantt._get_link_type=function(t,e){var n=null;return t&&e?n=gantt.config.links.start_to_start:!t&&e?n=gantt.config.links.finish_to_start:t||e?t&&!e&&(n=gantt.config.links.start_to_finish):n=gantt.config.links.finish_to_finish,n},gantt.isLinkAllowed=function(t,e,n,i){var a=null;if(a="object"==typeof t?t:{source:t,target:e,type:this._get_link_type(n,i)},!a)return!1;if(!(a.source&&a.target&&a.type))return!1;if(a.source==a.target)return!1;var s=!0;
-return this.checkEvent("onLinkValidation")&&(s=this.callEvent("onLinkValidation",[a])),s},gantt._render_link_element=function(t){var e=this._path_builder.get_points(t),n=gantt._drawer,i=n.get_lines(e),a=document.createElement("div"),s="gantt_task_link",r=this.templates.link_class?this.templates.link_class(t):"";r&&(s+=" "+r),a.className=s,a.setAttribute(gantt.config.link_attribute,t.id);for(var o=0;o<i.length;o++)o==i.length-1&&(i[o].size-=gantt.config.link_arrow_size),a.appendChild(n.render_line(i[o],i[o+1]));
-var d=i[i.length-1].direction,l=gantt._render_link_arrow(e[e.length-1],d);return a.appendChild(l),a},gantt._render_link_arrow=function(t,e){var n=document.createElement("div"),i=gantt._drawer,a=t.y,s=t.x,r=gantt.config.link_arrow_size,o=gantt.config.row_height,d="gantt_link_arrow gantt_link_arrow_"+e;switch(e){case i.dirs.right:a-=(r-o)/2,s-=r;break;case i.dirs.left:a-=(r-o)/2;break;case i.dirs.up:s-=(r-o)/2;break;case i.dirs.down:a-=r,s-=(r-o)/2}return n.style.cssText=["top:"+a+"px","left:"+s+"px"].join(";"),n.className=d,n
-},gantt._drawer={current_pos:null,dirs:{left:"left",right:"right",up:"up",down:"down"},path:[],clear:function(){this.current_pos=null,this.path=[]},point:function(t){this.current_pos=dhtmlx.copy(t)},get_lines:function(t){this.clear(),this.point(t[0]);for(var e=1;e<t.length;e++)this.line_to(t[e]);return this.get_path()},line_to:function(t){var e=dhtmlx.copy(t),n=this.current_pos,i=this._get_line(n,e);this.path.push(i),this.current_pos=e},get_path:function(){return this.path},get_wrapper_sizes:function(t){var e,n=gantt.config.link_wrapper_width,i=(gantt.config.link_line_width,t.y+(gantt.config.row_height-n)/2);
-switch(t.direction){case this.dirs.left:e={top:i,height:n,lineHeight:n,left:t.x-t.size-n/2,width:t.size+n};break;case this.dirs.right:e={top:i,lineHeight:n,height:n,left:t.x-n/2,width:t.size+n};break;case this.dirs.up:e={top:i-t.size,lineHeight:t.size+n,height:t.size+n,left:t.x-n/2,width:n};break;case this.dirs.down:e={top:i,lineHeight:t.size+n,height:t.size+n,left:t.x-n/2,width:n}}return e},get_line_sizes:function(t){var e,n=gantt.config.link_line_width,i=gantt.config.link_wrapper_width,a=t.size+n;
-switch(t.direction){case this.dirs.left:case this.dirs.right:e={height:n,width:a,marginTop:(i-n)/2,marginLeft:(i-n)/2};break;case this.dirs.up:case this.dirs.down:e={height:a,width:n,marginTop:(i-n)/2,marginLeft:(i-n)/2}}return e},render_line:function(t){var e=this.get_wrapper_sizes(t),n=document.createElement("div");n.style.cssText=["top:"+e.top+"px","left:"+e.left+"px","height:"+e.height+"px","width:"+e.width+"px"].join(";"),n.className="gantt_line_wrapper";var i=this.get_line_sizes(t),a=document.createElement("div");
-return a.style.cssText=["height:"+i.height+"px","width:"+i.width+"px","margin-top:"+i.marginTop+"px","margin-left:"+i.marginLeft+"px"].join(";"),a.className="gantt_link_line_"+t.direction,n.appendChild(a),n},_get_line:function(t,e){var n=this.get_direction(t,e),i={x:t.x,y:t.y,direction:this.get_direction(t,e)};return i.size=Math.abs(n==this.dirs.left||n==this.dirs.right?t.x-e.x:t.y-e.y),i},get_direction:function(t,e){var n=0;return n=e.x<t.x?this.dirs.left:e.x>t.x?this.dirs.right:e.y>t.y?this.dirs.down:this.dirs.up
-}},gantt._y_from_ind=function(t){return t*gantt.config.row_height},gantt._path_builder={path:[],clear:function(){this.path=[]},current:function(){return this.path[this.path.length-1]},point:function(t){return t?(this.path.push(dhtmlx.copy(t)),t):this.current()},point_to:function(t,e,n){n=n?{x:n.x,y:n.y}:dhtmlx.copy(this.point());var i=gantt._drawer.dirs;switch(t){case i.left:n.x-=e;break;case i.right:n.x+=e;break;case i.up:n.y-=e;break;case i.down:n.y+=e}return this.point(n)},get_points:function(t){var e=this.get_endpoint(t),n=gantt.config,i=e.e_y-e.y,a=e.e_x-e.x,s=gantt._drawer.dirs;
-this.clear(),this.point({x:e.x,y:e.y});var r=2*n.link_arrow_size,o=e.e_x>e.x;if(t.type==gantt.config.links.start_to_start)this.point_to(s.left,r),o?(this.point_to(s.down,i),this.point_to(s.right,a)):(this.point_to(s.right,a),this.point_to(s.down,i)),this.point_to(s.right,r);else if(t.type==gantt.config.links.finish_to_start)if(o=e.e_x>e.x+2*r,this.point_to(s.right,r),o)a-=r,this.point_to(s.down,i),this.point_to(s.right,a);else{a-=2*r;var d=i>0?1:-1;this.point_to(s.down,d*(n.row_height/2)),this.point_to(s.right,a),this.point_to(s.down,d*(Math.abs(i)-n.row_height/2)),this.point_to(s.right,r)
-}else if(t.type==gantt.config.links.finish_to_finish)this.point_to(s.right,r),o?(this.point_to(s.right,a),this.point_to(s.down,i)):(this.point_to(s.down,i),this.point_to(s.right,a)),this.point_to(s.left,r);else if(t.type==gantt.config.links.start_to_finish)if(o=e.e_x>e.x-2*r,this.point_to(s.left,r),o){a+=2*r;var d=i>0?1:-1;this.point_to(s.down,d*(n.row_height/2)),this.point_to(s.right,a),this.point_to(s.down,d*(Math.abs(i)-n.row_height/2)),this.point_to(s.left,r)}else a+=r,this.point_to(s.down,i),this.point_to(s.right,a);
-return this.path},get_endpoint:function(t){var e=gantt.config.links,n=!1,i=!1;t.type==e.start_to_start?n=i=!0:t.type==e.finish_to_finish?n=i=!1:t.type==e.finish_to_start?(n=!1,i=!0):t.type==e.start_to_finish?(n=!0,i=!1):dhtmlx.assert(!1,"Invalid link type");var a=gantt._get_task_visible_pos(gantt._pull[t.source],n),s=gantt._get_task_visible_pos(gantt._pull[t.target],i);return{x:a.x,e_x:s.x,y:a.y,e_y:s.y}}},gantt._init_links_dnd=function(){function t(t,e,n){var i=gantt._get_task_pos(t,!!e);return i.y+=gantt._get_task_height()/2,n=n||0,i.x+=(e?-1:1)*n,i
-}function e(t){var e=i(),n=["gantt_link_tooltip"];e.from&&e.to&&n.push(gantt.isLinkAllowed(e.from,e.to,e.from_start,e.to_start)?"gantt_allowed_link":"gantt_invalid_link");var a=gantt.templates.drag_link_class(e.from,e.from_start,e.to,e.to_start);a&&n.push(a);var s="<div class='"+a+"'>"+gantt.templates.drag_link(e.from,e.from_start,e.to,e.to_start)+"</div>";t.innerHTML=s}function n(t,e){t.style.left=e.x+5+"px",t.style.top=e.y+5+"px"}function i(){return{from:gantt._link_source_task,to:gantt._link_target_task,from_start:gantt._link_source_task_start,to_start:gantt._link_target_task_start}
-}function a(){gantt._link_source_task=gantt._link_source_task_start=gantt._link_target_task=null,gantt._link_target_task_start=!0}function s(t,e,n,a){var s=d(),l=i(),_=["gantt_link_direction"];gantt.templates.link_direction_class&&_.push(gantt.templates.link_direction_class(l.from,l.from_start,l.to,l.to_start));var h=Math.sqrt(Math.pow(n-t,2)+Math.pow(a-e,2));if(h=Math.max(0,h-3)){s.className=_.join(" ");var c=(a-e)/(n-t),g=Math.atan(c);2==o(t,n,e,a)?g+=Math.PI:3==o(t,n,e,a)&&(g-=Math.PI);var u=Math.sin(g),f=Math.cos(g),p=Math.round(e),m=Math.round(t),v=["-webkit-transform: rotate("+g+"rad)","-moz-transform: rotate("+g+"rad)","-ms-transform: rotate("+g+"rad)","-o-transform: rotate("+g+"rad)","transform: rotate("+g+"rad)","width:"+Math.round(h)+"px"];
-if(-1!=window.navigator.userAgent.indexOf("MSIE 8.0")){v.push('-ms-filter: "'+r(u,f)+'"');var k=Math.abs(Math.round(t-n)),x=Math.abs(Math.round(a-e));switch(o(t,n,e,a)){case 1:p-=x;break;case 2:m-=k,p-=x;break;case 3:m-=k}}v.push("top:"+p+"px"),v.push("left:"+m+"px"),s.style.cssText=v.join(";")}}function r(t,e){return"progid:DXImageTransform.Microsoft.Matrix(M11 = "+e+",M12 = -"+t+",M21 = "+t+",M22 = "+e+",SizingMethod = 'auto expand')"}function o(t,e,n,i){return e>=t?n>=i?1:4:n>=i?2:3}function d(){return _._direction||(_._direction=document.createElement("div"),gantt.$task_links.appendChild(_._direction)),_._direction
-}function l(){_._direction&&(_._direction.parentNode&&_._direction.parentNode.removeChild(_._direction),_._direction=null)}var _=new dhtmlxDnD(this.$task_bars,{sensitivity:0,updates_per_second:60}),h="task_left",c="task_right",g="gantt_link_point",u="gantt_link_control";_.attachEvent("onBeforeDragStart",dhtmlx.bind(function(e,n){if(gantt.config.readonly)return!1;var i=n.target||n.srcElement;if(a(),gantt.getState().drag_id)return!1;if(gantt._locate_css(i,g)){gantt._locate_css(i,h)&&(gantt._link_source_task_start=!0);
-var s=gantt._link_source_task=this.locate(n),r=gantt.getTask(s),o=0;return r.type==gantt.config.types.milestone&&(o=(gantt._get_visible_milestone_width()-gantt._get_milestone_width())/2),this._dir_start=t(r,!!gantt._link_source_task_start,o),!0}return!1},this)),_.attachEvent("onAfterDragStart",dhtmlx.bind(function(){e(_.config.marker)},this)),_.attachEvent("onDragMove",dhtmlx.bind(function(i,a){var r=_.config,o=_.getPosition(a);n(r.marker,o);var d=gantt._is_link_drop_area(a),l=gantt._link_target_task,h=gantt._link_landing,g=gantt._link_target_task_start,f=gantt.locate(a),p=!0;
-if(d&&(p=!gantt._locate_css(a,c),d=!!f),gantt._link_target_task=f,gantt._link_landing=d,gantt._link_target_task_start=p,d){var m=gantt.getTask(f),v=gantt._locate_css(a,u),k=0;v&&(k=Math.floor(v.offsetWidth/2)),this._dir_end=t(m,!!gantt._link_target_task_start,k)}else this._dir_end=gantt._get_mouse_pos(a);var x=!(h==d&&l==f&&g==p);return x&&(l&&gantt.refreshTask(l,!1),f&&gantt.refreshTask(f,!1)),x&&e(r.marker),s(this._dir_start.x,this._dir_start.y,this._dir_end.x,this._dir_end.y),!0},this)),_.attachEvent("onDragEnd",dhtmlx.bind(function(){var t=i();
-if(t.from&&t.to&&t.from!=t.to){var e=gantt._get_link_type(t.from_start,t.to_start);e&&gantt.addLink({source:t.from,target:t.to,type:e})}a(),t.from&&gantt.refreshTask(t.from,!1),t.to&&gantt.refreshTask(t.to,!1),l()},this)),gantt._is_link_drop_area=function(t){return!!gantt._locate_css(t,u)}},gantt._get_link_state=function(){return{link_landing_area:this._link_landing,link_target_id:this._link_target_task,link_target_start:this._link_target_task_start,link_source_id:this._link_source_task,link_source_start:this._link_source_task_start}
-},gantt._init_tasks=function(){function t(t,e,n,i){for(var a=0;a<t.length;a++)t[a].change_id(e,n),t[a].render_item(i)}this._tasks={col_width:this.config.columnWidth,width:[],full_width:0,trace_x:[],rendered:{}},this._click.gantt_task_link=dhtmlx.bind(function(t){var e=this.locate(t,gantt.config.link_attribute);e&&this.callEvent("onLinkClick",[e,t])},this),this._dbl_click.gantt_task_link=dhtmlx.bind(function(t,e){var e=this.locate(t,gantt.config.link_attribute);this._delete_link_handler(e,t)},this),this._dbl_click.gantt_link_point=dhtmlx.bind(function(t,e,n){var e=this.locate(t),i=this.getTask(e),a=null;
-return n.parentNode&&n.parentNode.className&&(a=n.parentNode.className.indexOf("_left")>-1?i.$target[0]:i.$source[0]),a&&this._delete_link_handler(a,t),!1},this),this._tasks_dnd.init(),this._init_links_dnd();var e=this._create_filter("_filter_task","_is_grid_visible"),n=this._create_filter("_filter_task","_is_chart_visible"),i=this._create_filter("_filter_link","_is_chart_visible");this._taskRenderer=gantt._task_renderer("line",this._render_task_element,this.$task_bars,n),this._linkRenderer=gantt._task_renderer("links",this._render_link_element,this.$task_links,i),this._gridRenderer=gantt._task_renderer("grid_items",this._render_grid_item,this.$grid_data,e),this._bgRenderer=gantt._task_renderer("bg_lines",this._render_bg_line,this.$task_bg,n),this.attachEvent("onTaskIdChange",function(e,n){var i=this._get_task_renderers();
-t(i,e,n,this.getTask(n))}),this.attachEvent("onLinkIdChange",function(e,n){var i=this._get_link_renderers();t(i,e,n,this.getLink(n))})},gantt._create_filter=function(t){return t instanceof Array||(t=Array.prototype.slice.call(arguments,0)),function(e){for(var n=!0,i=0,a=t.length;a>i;i++){var s=t[i];gantt[s]&&(n=n&&gantt[s].apply(gantt,[e.id,e])!==!1)}return n}},gantt._is_chart_visible=function(){return!!this.config.show_chart},gantt._filter_task=function(t,e){var n=null,i=null;return this.config.start_date&&this.config.end_date&&(n=this.config.start_date.valueOf(),i=this.config.end_date.valueOf(),+e.start_date>i||+e.end_date<+n)?!1:!0
-},gantt._filter_link=function(t,e){return this.config.show_links&&gantt.isTaskVisible(e.source)&&gantt.isTaskVisible(e.target)?this.callEvent("onBeforeLinkDisplay",[t,e]):!1},gantt._get_task_renderers=function(){return[this._taskRenderer,this._gridRenderer,this._bgRenderer]},gantt._get_link_renderers=function(){return[this._linkRenderer]},gantt._delete_link_handler=function(t,e){if(t&&this.callEvent("onLinkDblClick",[t,e])){if(this.config.readonly)return;var n="",i=gantt.locale.labels.link+" "+this.templates.link_description(this.getLink(t))+" "+gantt.locale.labels.confirm_link_deleting;
-window.setTimeout(function(){gantt._dhtmlx_confirm(i,n,function(){gantt.deleteLink(t)})},gantt.config.touch?300:1)}},gantt.getTaskNode=function(t){return this._taskRenderer.rendered[t]},gantt.getLinkNode=function(t){return this._linkRenderer.rendered[t]},gantt._get_tasks_data=function(){for(var t=[],e=0;e<this._order.length;e++){var n=this._pull[this._order[e]];n.$index=e,this._update_parents(n.id,!0),t.push(n)}return t},gantt._get_links_data=function(){var t=[];for(var e in this._lpull)t.push(this._lpull[e]);
-return t},gantt._render_data=function(){this._update_layout_sizes();for(var t=this._get_tasks_data(),e=this._get_task_renderers(),n=0;n<e.length;n++)e[n].render_items(t);var i=gantt._get_links_data();e=this._get_link_renderers();for(var n=0;n<e.length;n++)e[n].render_items(i)},gantt._update_layout_sizes=function(){var t=this._tasks;if(t.bar_height=this._get_task_height(),this.$task_data.style.height=Math.max(this.$task.offsetHeight-this.config.scale_height,0)+"px",this.$task_bg.style.width=t.full_width+"px",this._is_grid_visible()){for(var e=this.config.columns,n=0,i=0;i<e.length;i++)n+=e[i].width;
-this.$grid_data.style.width=Math.max(n-1,0)+"px"}},gantt._init_tasks_range=function(){var t=this.config.scale_unit;if(this.config.start_date&&this.config.end_date)return this._min_date=this.date[t+"_start"](new Date(this.config.start_date)),void(this._max_date=this.date[t+"_start"](new Date(this.config.end_date)));var e=this._get_tasks_data(),n=this._init_task({id:this.config.root_id});e.push(n);var i=-1/0,a=1/0;this.eachTask(function(t){t.end_date&&+t.end_date>+i&&(i=new Date(t.end_date))},this.config.root_id),this.eachTask(function(t){t.start_date&&+t.start_date<+a&&(a=new Date(t.start_date))
-},this.config.root_id),this._min_date=a,this._max_date=i,i&&i!=-1/0||(this._min_date=new Date,this._max_date=new Date(this._min_date)),this._min_date=this.date[t+"_start"](this._min_date),+this._min_date==+a&&(this._min_date=this.date.add(this.date[t+"_start"](this._min_date),-1,t)),this._max_date=this.date[t+"_start"](this._max_date),this._max_date=this.date.add(this._max_date,1,t)},gantt._prepare_scale_html=function(t){var e=[],n=null,i=null,a=null;(t.template||t.date)&&(i=t.template||this.date.date_to_str(t.date)),a=t.css||gantt.templates.scale_cell_class;
-for(var s=0;s<t.count;s++){n=new Date(t.trace_x[s]);var r=i.call(this,n),o=t.width[s],d="",l="",_="";if(o){d="width:"+o+"px;",_="gantt_scale_cell"+(s==t.count-1?" gantt_last_cell":""),l=a.call(this,n),l&&(_+=" "+l);var h="<div class='"+_+"' style='"+d+"'>"+r+"</div>";e.push(h)}}return e.join("")},gantt._render_tasks_scales=function(){this._init_tasks_range(),this._scroll_resize(),this._set_sizes();var t="",e=0,n=0,i=0;if(this._is_chart_visible()){var a=this._scale_helpers,s=[a.primaryScale()].concat(this.config.subscales);
-i=this.config.scale_height-1,a.sortScales(s);for(var r=this._get_resize_options(),o=r.x?0:this.$task.offsetWidth,d=a.prepareConfigs(s,this.config.min_column_width,o,i),l=this._tasks=d[d.length-1],_=[],h=this.templates.scale_row_class,c=0;c<d.length;c++){var g="gantt_scale_line",u=h(d[c]);u&&(g+=" "+u),_.push('<div class="'+g+'" style="height:'+d[c].height+"px;line-height:"+d[c].height+'px">'+this._prepare_scale_html(d[c])+"</div>")}t=_.join(""),e=l.full_width+this.$scroll_ver.offsetWidth+"px",n=l.full_width+"px",i+="px"
-}this.$task.style.display=this._is_chart_visible()?"":"none",this.$task_scale.style.height=i,this.$task_data.style.width=this.$task_scale.style.width=e,this.$task_links.style.width=this.$task_bars.style.width=n,this.$task_scale.innerHTML=t},gantt._render_bg_line=function(t){var e=gantt._tasks,n=e.count,i=[];if(gantt.config.show_task_cells)for(var a=0;n>a;a++){var s=e.width[a],r="",o="";if(s>0){r="width:"+s+"px;",o="gantt_task_cell"+(a==n-1?" gantt_last_cell":""),_=this.templates.task_cell_class(t,e.trace_x[a]),_&&(o+=" "+_);
-var d="<div class='"+o+"' style='"+r+"'></div>";i.push(d)}}var l=t.$index%2!==0,_=gantt.templates.task_row_class(t.start_date,t.end_date,t),h="gantt_task_row"+(l?" odd":"")+(_?" "+_:"");this.getState().selected_task==t.id&&(h+=" gantt_selected");var c=document.createElement("div");return c.className=h,c.style.height=gantt.config.row_height+"px",c.setAttribute(this.config.task_attribute,t.id),c.innerHTML=i.join(""),c},gantt._adjust_scales=function(){if(this.config.fit_tasks){var t=+this._min_date,e=+this._max_date;
-if(this._init_tasks_range(),+this._min_date!=t||+this._max_date!=e)return this.render(),this.callEvent("onScaleAdjusted",[]),!0}return!1},gantt.refreshTask=function(t,e){var n=this._get_task_renderers(),i=this.getTask(t);if(i&&this.isTaskVisible(t))for(var a=0;a<n.length;a++)n[a].render_item(i);else for(var a=0;a<n.length;a++)n[a].remove_item(t);if(void 0===e||e){for(var i=this.getTask(t),a=0;a<i.$source.length;a++)gantt.refreshLink(i.$source[a]);for(var a=0;a<i.$target.length;a++)gantt.refreshLink(i.$target[a])
-}},gantt.refreshLink=function(t){this.isLinkExists(t)?gantt._render_link(t):gantt._linkRenderer.remove_item(t)},gantt._combine_item_class=function(t,e,n){var i=[t];e&&i.push(e);var a=gantt.getState(),s=this.getTask(n);this._get_safe_type(s.type)==this.config.types.milestone&&i.push("gantt_milestone"),this._get_safe_type(s.type)==this.config.types.project&&i.push("gantt_project"),this._is_flex_task(s)&&i.push("gantt_dependent_task"),this.config.select_task&&n==a.selected_task&&i.push("gantt_selected"),n==a.drag_id&&i.push("gantt_drag_"+a.drag_mode);
-var r=gantt._get_link_state();if(r.link_source_id==n&&i.push("gantt_link_source"),r.link_target_id==n&&i.push("gantt_link_target"),r.link_landing_area&&r.link_target_id&&r.link_source_id&&r.link_target_id!=r.link_source_id){var o=r.link_source_id,d=r.link_source_start,l=r.link_target_start,_=gantt.isLinkAllowed(o,n,d,l),h="";h=_?l?"link_start_allow":"link_finish_allow":l?"link_start_deny":"link_finish_deny",i.push(h)}return i.join(" ")},gantt._render_pair=function(t,e,n,i){var a=gantt.getState();
-+n.end_date<=+a.max_date&&t.appendChild(i(e+" task_right")),+n.start_date>=+a.min_date&&t.appendChild(i(e+" task_left"))},gantt._get_task_height=function(){var t=this.config.task_height;return"full"==t&&(t=this.config.row_height-5),t=Math.min(t,this.config.row_height),Math.max(t,0)},gantt._get_milestone_width=function(){return this._get_task_height()},gantt._get_visible_milestone_width=function(){var t=gantt._get_task_height();return Math.sqrt(2*t*t)},gantt._get_task_width=function(t){return Math.round(this._get_task_pos(t,!1).x-this._get_task_pos(t,!0).x)
-},gantt._render_task_element=function(t){var e=this._get_task_pos(t),n=this.config,i=this._get_task_height(),a=Math.floor((this.config.row_height-i)/2);t.type==n.types.milestone&&n.link_line_width>1&&(a+=1);var s=document.createElement("div"),r=gantt._get_task_width(t),o=this._get_safe_type(t.type);s.setAttribute(this.config.task_attribute,t.id),s.appendChild(gantt._render_task_content(t,r)),s.className=this._combine_item_class("gantt_task_line",this.templates.task_class(t.start_date,t.end_date,t),t.id),s.style.cssText=["left:"+e.x+"px","top:"+(a+e.y)+"px","height:"+i+"px","line-height:"+i+"px","width:"+r+"px"].join(";");
-var d=this._render_leftside_content(t);return d&&s.appendChild(d),d=this._render_rightside_content(t),d&&s.appendChild(d),n.show_progress&&o!=this.config.types.milestone&&this._render_task_progress(t,s,r),this.config.readonly||(n.drag_resize&&!this._is_flex_task(t)&&o!=this.config.types.milestone&&gantt._render_pair(s,"gantt_task_drag",t,function(t){var e=document.createElement("div");return e.className=t,e}),n.drag_links&&gantt._render_pair(s,"gantt_link_control",t,function(t){var e=document.createElement("div");
-e.className=t,e.style.cssText=["height:"+i+"px","line-height:"+i+"px"].join(";");var n=document.createElement("div");return n.className="gantt_link_point",e.appendChild(n),e})),s},gantt._render_side_content=function(t,e,n){if(!e)return null;var i=e(t.start_date,t.end_date,t);if(!i)return null;var a=document.createElement("div");return a.className="gantt_side_content "+n,a.innerHTML=i,a},gantt._render_leftside_content=function(t){var e="gantt_left "+gantt._get_link_crossing_css(!0,t);return gantt._render_side_content(t,this.templates.leftside_text,e)
-},gantt._render_rightside_content=function(t){var e="gantt_right "+gantt._get_link_crossing_css(!1,t);return gantt._render_side_content(t,this.templates.rightside_text,e)},gantt._get_conditions=function(t){return t?{$source:[gantt.config.links.start_to_start],$target:[gantt.config.links.start_to_start,gantt.config.links.finish_to_start]}:{$source:[gantt.config.links.finish_to_start,gantt.config.links.finish_to_finish],$target:[gantt.config.links.finish_to_finish]}},gantt._get_link_crossing_css=function(t,e){var n=gantt._get_conditions(t);
-for(var i in n)for(var a=e[i],s=0;s<a.length;s++)for(var r=gantt.getLink(a[s]),o=0;o<n[i].length;o++)if(r.type==n[i][o])return"gantt_link_crossing";return""},gantt._render_task_content=function(t){var e=document.createElement("div");return this._get_safe_type(t.type)!=this.config.types.milestone&&(e.innerHTML=this.templates.task_text(t.start_date,t.end_date,t)),e.className="gantt_task_content",e},gantt._render_task_progress=function(t,e,n){var i=1*t.progress||0;n=Math.max(n-2,0);var a=document.createElement("div"),s=Math.round(n*i);
-if(s=Math.min(n,s),a.style.width=s+"px",a.className="gantt_task_progress",a.innerHTML=this.templates.progress_text(t.start_date,t.end_date,t),e.appendChild(a),this.config.drag_progress&&!gantt.config.readonly){var r=document.createElement("div");r.style.left=s+"px",r.className="gantt_task_progress_drag",a.appendChild(r),e.appendChild(r)}},gantt._get_line=function(t){var e={second:1,minute:60,hour:3600,day:86400,week:604800,month:2592e3,year:31536e3};return e[t]||0},gantt._date_from_pos=function(t){var e=this._tasks;
-if(0>t||t>e.full_width)return null;for(var n=0,i=0;i+e.width[n]<t;)i+=e.width[n],n++;var a=(t-i)/e.width[n],s=gantt._get_coll_duration(e,e.trace_x[n]),r=new Date(e.trace_x[n].valueOf()+Math.round(a*s));return r},gantt.posFromDate=function(t){var e=gantt._day_index_by_date(t);dhtmlx.assert(e>=0,"Invalid day index");for(var n=Math.floor(e),i=e%1,a=0,s=1;n>=s;s++)a+=gantt._tasks.width[s-1];return i&&(a+=n<gantt._tasks.width.length?gantt._tasks.width[n]*(i%1):1),a},gantt._day_index_by_date=function(t){var e=new Date(t),n=gantt._tasks.trace_x,i=gantt._tasks.ignore_x;
-if(+e<=this._min_date)return 0;if(+e>=this._max_date)return n.length;for(var a=0;a<n.length-1&&(!(+e<n[a+1])||i[+n[a+1]]);a++);return a+(t-n[a])/gantt._get_coll_duration(gantt._tasks,n[a])},gantt._get_coll_duration=function(t,e){return gantt.date.add(e,t.step,t.unit)-e},gantt._get_x_pos=function(t,e){e=e!==!1;gantt.posFromDate(e?t.start_date:t.end_date)},gantt._get_task_coord=function(t,e,n){e=e!==!1,n=n||0;var i=t.type==this.config.types.milestone,a=this.posFromDate(e||i?t.start_date:t.end_date),s=this._y_from_ind(this._get_visible_order(t.id));
-return i&&(e?a-=n:a+=n),{x:a,y:s}},gantt._get_task_pos=function(t,e){e=e!==!1;var n=gantt._get_milestone_width()/2;return this._get_task_coord(t,e,n)},gantt._get_task_visible_pos=function(t,e){e=e!==!1;var n=gantt._get_visible_milestone_width()/2;return this._get_task_coord(t,e,n)},gantt._correct_shift=function(t,e){return t-=6e4*(new Date(gantt._min_date).getTimezoneOffset()-new Date(t).getTimezoneOffset())*(e?-1:1)},gantt._get_mouse_pos=function(t){if(t.pageX||t.pageY)var e={x:t.pageX,y:t.pageY};
-var n=_isIE?document.documentElement:document.body,e={x:t.clientX+n.scrollLeft-n.clientLeft,y:t.clientY+n.scrollTop-n.clientTop},i=gantt._get_position(gantt.$task_data);return e.x=e.x-i.x+gantt.$task_data.scrollLeft,e.y=e.y-i.y+gantt.$task_data.scrollTop,e},gantt._task_renderer=function(t,e,n,i){return this._task_area_pulls||(this._task_area_pulls={}),this._task_area_renderers||(this._task_area_renderers={}),this._task_area_renderers[t]?this._task_area_renderers[t]:(e||dhtmlx.assert(!1,"Invalid renderer call"),this._task_area_renderers[t]={render_item:function(a,s){var r=gantt._task_area_pulls[t];
-if(s=s||n,i&&!i(a))return void this.remove_item(a.id);var o=e.call(gantt,a);o&&(r[a.id]?this.replace_item(a.id,o):(r[a.id]=o,s.appendChild(o)))},render_items:function(e,i){this.rendered=gantt._task_area_pulls[t]={},i=i||n,i.innerHTML="";for(var a=document.createDocumentFragment(),s=0,r=e.length;r>s;s++)this.render_item(e[s],a);i.appendChild(a)},replace_item:function(t,e){var n=this.rendered[t];n&&n.parentNode&&n.parentNode.replaceChild(e,n),this.rendered[t]=e},remove_item:function(t){var e=this.rendered[t];
-e&&e.parentNode&&e.parentNode.removeChild(e),delete this.rendered[t]},change_id:function(t,e){this.rendered[e]=this.rendered[t],delete this.rendered[t]},rendered:this._task_area_pulls[t],node:n},this._task_area_renderers[t])},gantt._pull={},gantt._branches={},gantt._order=[],gantt._lpull={},gantt.load=function(t,e,n){dhtmlx.assert(arguments.length,"Invalid load arguments"),this.callEvent("onLoadStart",[]);var i="json",a=null;arguments.length>=3?(i=e,a=n):"string"==typeof arguments[1]?i=arguments[1]:"function"==typeof arguments[1]&&(a=arguments[1]),dhtmlxAjax.get(t,dhtmlx.bind(function(t){this.on_load(t,i),"function"==typeof a&&a.call(this)
-},this))},gantt.parse=function(t,e){this.on_load({xmlDoc:{responseText:t}},e)},gantt.serialize=function(t){return t=t||"json",this[t].serialize()},gantt.on_load=function(t,e){e||(e="json"),dhtmlx.assert(this[e],"Invalid data type:'"+e+"'");var n=t.xmlDoc.responseText,i=this[e].parse(n,t);this._process_loading(i),this.callEvent("onLoadEnd",[])},gantt._process_loading=function(t){t.collections&&this._load_collections(t.collections);for(var e=t.data,n=0;n<e.length;n++){var i=e[n];this._init_task(i),this.callEvent("onTaskLoading",[i])&&(this._pull[i.id]=i,this._add_branch(i))
-}this._sync_order();for(var n in this._pull)this._pull[n].$level=this._item_level(this._pull[n]);this._init_links(t.links||(t.collections?t.collections.links:[]))},gantt._init_links=function(t){if(t)for(var e=0;e<t.length;e++)if(t[e]){var n=this._init_link(t[e]);this._lpull[n.id]=n}this._sync_links()},gantt._load_collections=function(t){var e=!1;for(var n in t)if(t.hasOwnProperty(n)){e=!0;var i=t[n],a=this.serverList[n];if(!a)continue;a.splice(0,a.length);for(var s=0;s<i.length;s++){var r=i[s],o=dhtmlx.copy(r);
-o.key=o.value;for(var d in r)if(r.hasOwnProperty(d)){if("value"==d||"label"==d)continue;o[d]=r[d]}a.push(o)}}e&&this.callEvent("onOptionsLoad",[])},gantt._sync_order=function(){this._order=[],this._sync_order_item({parent:this.config.root_id,$open:!0,$ignore:!0,id:this.config.root_id}),this._scroll_resize(),this._set_sizes()},gantt.attachEvent("onBeforeTaskDisplay",function(t,e){return!e.$ignore}),gantt._sync_order_item=function(t){if(t.id&&this._filter_task(t.id,t)&&this.callEvent("onBeforeTaskDisplay",[t.id,t])&&this._order.push(t.id),t.$open){var e=this._branches[t.id];
-if(e)for(var n=0;n<e.length;n++)this._sync_order_item(this._pull[e[n]])}},gantt._get_visible_order=function(t){dhtmlx.assert(t,"Invalid argument");for(var e=this._order,n=0,i=e.length;i>n;n++)if(e[n]==t)return n;return-1},gantt.eachTask=function(t,e,n){e=e||this.config.root_id,n=n||this;var i=this._branches[e];if(i)for(var a=0;a<i.length;a++){var s=this._pull[i[a]];t.call(n,s),this._branches[s.id]&&this.eachTask(t,s.id,n)}},gantt.json={parse:function(data){return dhtmlx.assert(data,"Invalid data"),"string"==typeof data&&(window.JSON?data=JSON.parse(data):(gantt._temp=eval("("+data+")"),data=gantt._temp||{},gantt._temp=null)),data.dhx_security&&(dhtmlx.security_key=data.dhx_security),data
-},_copyLink:function(t){var e={};for(var n in t)e[n]=t[n];return e},_copyObject:function(t){var e={};for(var n in t)"$"!=n.charAt(0)&&(e[n]=t[n]);return e.start_date=gantt.templates.xml_format(e.start_date),e.end_date&&(e.end_date=gantt.templates.xml_format(e.end_date)),e},serialize:function(){var t=[],e=[];gantt.eachTask(function(e){t.push(this._copyObject(e))},gantt.config.root_id,this);for(var n in gantt._lpull)e.push(this._copyLink(gantt._lpull[n]));return{data:t,links:e}}},gantt.xml={_xmlNodeToJSON:function(t,e){for(var n={},i=0;i<t.attributes.length;i++)n[t.attributes[i].name]=t.attributes[i].value;
-if(!e){for(var i=0;i<t.childNodes.length;i++){var a=t.childNodes[i];1==a.nodeType&&(n[a.tagName]=a.firstChild?a.firstChild.nodeValue:"")}n.text||(n.text=t.firstChild?t.firstChild.nodeValue:"")}return n},_getCollections:function(t){for(var e={},n=t.doXPath("//coll_options"),i=0;i<n.length;i++)for(var a=n[i].getAttribute("for"),s=e[a]=[],r=t.doXPath(".//item",n[i]),o=0;o<r.length;o++){for(var d=r[o],l=d.attributes,_={key:r[o].getAttribute("value"),label:r[o].getAttribute("label")},h=0;h<l.length;h++){var c=l[h];
-"value"!=c.nodeName&&"label"!=c.nodeName&&(_[c.nodeName]=c.nodeValue)}s.push(_)}return e},_getXML:function(t,e,n){n=n||"data",e.getXMLTopNode||(e=new dtmlXMLLoaderObject(function(){}),e.loadXMLString(t));var i=e.getXMLTopNode(n);if(i.tagName!=n)throw"Invalid XML data";var a=i.getAttribute("dhx_security");return a&&(dhtmlx.security_key=a),e},parse:function(t,e){e=this._getXML(t,e);for(var n={},i=n.data=[],a=e.doXPath("//task"),s=0;s<a.length;s++)i[s]=this._xmlNodeToJSON(a[s]);return n.collections=this._getCollections(e),n
-},_copyLink:function(t){return"<item id='"+t.id+"' source='"+t.source+"' target='"+t.target+"' type='"+t.type+"' />"},_copyObject:function(t){var e=gantt.templates.xml_format(t.start_date),n=gantt.templates.xml_format(t.end_date);return"<task id='"+t.id+"' parent='"+(t.parent||"")+"' start_date='"+e+"' duration='"+t.duration+"' open='"+!!t.open+"' progress='"+t.progress+"' end_date='"+n+"'><![CDATA["+t.text+"]]></task>"},serialize:function(){var t=[],e=[];gantt.eachTask(function(e){t.push(this._copyObject(e))
-},this.config.root_id,this);for(var n in gantt._lpull)e.push(this._copyLink(gantt._lpull[n]));return"<data>"+t.join("")+"<coll_options for='links'>"+e.join("")+"</coll_options></data>"}},gantt.oldxml={parse:function(t,e){e=gantt.xml._getXML(t,e,"projects");for(var n={collections:{links:[]}},i=n.data=[],a=e.doXPath("//task"),s=0;s<a.length;s++){i[s]=gantt.xml._xmlNodeToJSON(a[s]);var r=a[s].parentNode;i[s].parent="project"==r.tagName?"project-"+r.getAttribute("id"):r.parentNode.getAttribute("id")}a=e.doXPath("//project");
-for(var s=0;s<a.length;s++){var o=gantt.xml._xmlNodeToJSON(a[s],!0);o.id="project-"+o.id,i.push(o)}for(var s=0;s<i.length;s++){var o=i[s];o.start_date=o.startdate||o.est,o.end_date=o.enddate,o.text=o.name,o.duration=o.duration/8,o.open=1,o.duration||o.end_date||(o.duration=1),o.predecessortasks&&n.collections.links.push({target:o.id,source:o.predecessortasks,type:gantt.config.links.finish_to_start})}return n},serialize:function(){dhtmlx.message("Serialization to 'old XML' is not implemented")}},gantt.serverList=function(t,e){return e?this.serverList[t]=e.slice(0):this.serverList[t]||(this.serverList[t]=[]),this.serverList[t]
-},gantt._working_time_helper={units:["year","month","week","day","hour","minute"],hours:[8,17],dates:{0:!1,6:!1},_get_unit_order:function(t){for(var e=0,n=this.units.length;n>e;e++)if(this.units[e]==t)return e;dhtmlx.assert(!1,"Incorrect duration unit")},_timestamp:function(t){var e=null;return t.day||0===t.day?e=t.day:t.date&&(e=gantt.date.date_part(new Date(t.date)).valueOf()),e},set_time:function(t){var e=void 0!==t.hours?t.hours:!0,n=this._timestamp(t);null!==n?this.dates[n]=e:this.hours=e},unset_time:function(t){if(t){var e=this._timestamp(t);
-null!==e&&delete this.dates[e]}else this.hours=[]},is_working_unit:function(t,e,n){return gantt.config.work_time?(void 0===n&&(n=this._get_unit_order(e)),void 0===n?!1:n&&!this.is_working_unit(t,this.units[n-1],n-1)?!1:this["is_work_"+e]?this["is_work_"+e](t):!0):!0},is_work_day:function(t){var e=this.get_working_hours(t);return e instanceof Array?e.length>0:!1},is_work_hour:function(t){for(var e=this.get_working_hours(t),n=t.getHours(),i=0;i<e.length;i+=2){if(void 0===e[i+1])return e[i]==n;if(n>=e[i]&&n<e[i+1])return!0
-}return!1},get_working_hours:function(t){var e=this._timestamp({date:t}),n=!0;return void 0!==this.dates[e]?n=this.dates[e]:void 0!==this.dates[t.getDay()]&&(n=this.dates[t.getDay()]),n===!0?this.hours:n?n:[]},get_work_units_between:function(t,e,n,i){if(!n)return!1;for(var a=new Date(t),s=new Date(e),i=i||1,r=0;a.valueOf()<s.valueOf();)this.is_working_unit(a,n)&&r++,a=gantt.date.add(a,i,n);return r},add_worktime:function(t,e,n,i){if(!n)return!1;for(var a=new Date(t),s=0,i=i||1,e=1*e;e>s;){var r=gantt.date.add(a,i,n);
-this.is_working_unit(i>0?a:r,n)&&s++,a=r}return a},get_closest_worktime:function(t){if(this.is_working_unit(t.date,t.unit))return t.date;var e=t.unit,n=gantt.date[e+"_start"](t.date),i=new Date(n),a=new Date(n),s=!0,r=3e3,o=0,d="any"==t.dir||!t.dir,l=1;for("past"==t.dir&&(l=-1);!this.is_working_unit(n,e);)if(d&&(n=s?i:a,l=-1*l),n=gantt.date.add(n,l,e),d&&(s?i=n:a=n),s=!s,o++,o>r)return dhtmlx.assert(!1,"Invalid working time check"),!1;return(n==a||"past"==t.dir)&&(n=gantt.date.add(n,1,e)),n}},gantt.getTask=function(t){return dhtmlx.assert(this._pull[t]),this._pull[t]
-},gantt.getTaskByTime=function(t,e){var n=this._pull,i=[];if(t||e){t=+t||-1/0,e=+e||1/0;for(var a in n){var s=n[a];+s.start_date<e&&+s.end_date>t&&i.push(s)}}else for(var a in n)i.push(n[a]);return i},gantt.isTaskExists=function(t){return dhtmlx.defined(this._pull[t])},gantt.isTaskVisible=function(t){if(!this._pull[t])return!1;if(!(+this._pull[t].start_date<+this._max_date&&+this._pull[t].end_date>+this._min_date))return!1;for(var e=0,n=this._order.length;n>e;e++)if(this._order[e]==t)return!0;return!1
-},gantt.updateTask=function(t,e){return dhtmlx.defined(e)||(e=this.getTask(t)),this.callEvent("onBeforeTaskUpdate",[t,e])===!1?!1:(this._pull[e.id]=e,this._is_parent_sync(e)||this._resync_parent(e),this._update_parents(e.id),this.refreshTask(e.id),this.callEvent("onAfterTaskUpdate",[t,e]),this._sync_order(),void this._adjust_scales())},gantt._add_branch=function(t){this._branches[t.parent]||(this._branches[t.parent]=[]);for(var e=this._branches[t.parent],n=!1,i=0,a=e.length;a>i;i++)if(e[i]==t.id){n=!0;
-break}n||e.push(t.id),this._sync_parent(t),this._sync_order()},gantt._move_branch=function(t,e,n){t.parent=n,this._sync_parent(t),this._replace_branch_child(e,t.id),n?this._add_branch(t):delete this._branches[t.id],t.$level=this._item_level(t),this._sync_order()},gantt._resync_parent=function(t){this._move_branch(t,t.$rendered_parent,t.parent)},gantt._sync_parent=function(t){t.$rendered_parent=t.parent},gantt._is_parent_sync=function(t){return t.$rendered_parent==t.parent},gantt._replace_branch_child=function(t,e,n){var i=this._branches[t];
-if(i){for(var a=[],s=0;s<i.length;s++)i[s]!=e?a.push(i[s]):n&&a.push(n);this._branches[t]=a}this._sync_order()},gantt.addTask=function(t,e){return dhtmlx.defined(e)||(e=t.parent||0),dhtmlx.defined(this._pull[e])||(e=0),t.parent=e,t=this._init_task(t),this.callEvent("onBeforeTaskAdd",[t.id,t])===!1?!1:(this._pull[t.id]=t,this._add_branch(t),this.refreshData(),this.callEvent("onAfterTaskAdd",[t.id,t]),this._adjust_scales(),t.id)},gantt.deleteTask=function(t){return this._deleteTask(t)},gantt._deleteTask=function(t,e){var n=this.getTask(t);
-if(!e&&this.callEvent("onBeforeTaskDelete",[t,n])===!1)return!1;!e&&this._dp&&this._dp.setUpdateMode("off");var i=this._branches[n.id]||[];this._update_flags(t,!1);for(var a=0;a<i.length;a++)this._silentStart(),this._deleteTask(i[a],!0),this._dp&&(this._dp._ganttMode="tasks",this._dp.setUpdated(i[a],!0,"deleted")),this._silentEnd();for(!e&&this._dp&&this._dp.setUpdateMode("cell");n.$source.length>0;)this.deleteLink(n.$source[0]);for(;n.$target.length>0;)this.deleteLink(n.$target[0]);return delete this._pull[t],this._move_branch(n,n.parent,null),e||(this.callEvent("onAfterTaskDelete",[t,n]),this.refreshData()),!0
-},gantt.clearAll=function(){this._pull={},this._branches={},this._order=[],this._order_full=[],this._lpull={},this.refreshData(),this.callEvent("onClear",[])},gantt._update_flags=function(t,e){this._lightbox_id==t&&(this._lightbox_id=e),this._selected_task==t&&(this._selected_task=e),this._tasks_dnd.drag&&this._tasks_dnd.drag.id==t&&(this._tasks_dnd.drag.id=e)},gantt.changeTaskId=function(t,e){var n=this._pull[e]=this._pull[t];this._pull[e].id=e,delete this._pull[t];for(var i in this._pull)this._pull[i].parent==t&&(this._pull[i].parent=e);
-this._update_flags(t,e),this._replace_branch_child(n.parent,t,e),this.callEvent("onTaskIdChange",[t,e])},gantt._get_duration_unit=function(){return 1e3*gantt._get_line(this.config.duration_unit)||this.config.duration_unit},gantt._get_safe_type=function(t){for(var e in this.config.types)if(this.config.types[e]==t)return t;return gantt.config.types.task},gantt._get_type_name=function(t){for(var e in this.config.types)if(this.config.types[e]==t)return e;return"task"},gantt.getWorkHours=function(t){return this._working_time_helper.get_working_hours(t)
-},gantt.setWorkTime=function(t){this._working_time_helper.set_time(t)},gantt.isWorkTime=function(t,e){var n=this._working_time_helper;return n.is_working_unit(t,e||this.config.duration_unit)},gantt.getClosestWorkTime=function(t){var e=this._working_time_helper;return t instanceof Date&&(t={date:t}),t.dir=t.dir||"any",t.unit=t.unit||this.config.duration_unit,e.get_closest_worktime(t)},gantt.calculateDuration=function(t,e){var n=this._working_time_helper;return n.get_work_units_between(t,e,this.config.duration_unit,this.config.duration_step)
-},gantt.calculateEndDate=function(t,e){var n=this._working_time_helper,i=e>=0?1:-1;return n.add_worktime(t,Math.abs(e),this.config.duration_unit,i*this.config.duration_step)},gantt._init_task=function(t){return dhtmlx.defined(t.id)||(t.id=dhtmlx.uid()),t.start_date&&(t.start_date=gantt.date.parseDate(t.start_date,"xml_date")),t.end_date&&(t.end_date=gantt.date.parseDate(t.end_date,"xml_date")),t.start_date&&!t.end_date&&t.duration&&(t.end_date=this.calculateEndDate(t.start_date,t.duration)),gantt.config.work_time&&gantt.config.correct_work_time&&(t.start_date&&(t.start_date=gantt.getClosestWorkTime(t.start_date)),t.end_date&&(t.end_date=gantt.getClosestWorkTime(t.end_date))),gantt._init_task_timing(t),t.$source=[],t.$target=[],t.parent=t.parent||this.config.root_id,t.$open=dhtmlx.defined(t.open)?t.open:!1,t.$level=this._item_level(t),t
-},gantt._init_task_timing=function(t){void 0===t.$rendered_type?t.$rendered_type=t.type:t.$rendered_type!=t.type&&(delete t.$no_end,delete t.$no_start,t.$rendered_type=t.type),void 0!==t.$no_end&&void 0!==t.$no_start||t.type==this.config.types.milestone||(t.type==this.config.types.project?t.$no_end=t.$no_start=!0:(t.$no_end=!(t.end_date||t.duration),t.$no_start=!t.start_date)),t.type==this.config.types.milestone&&(t.end_date=t.start_date),t.start_date&&t.end_date&&(t.duration=this.calculateDuration(t.start_date,t.end_date)),t.duration=t.duration||0
-},gantt._is_flex_task=function(t){return!(!t.$no_end&&!t.$no_start)},gantt._update_parents=function(t,e){if(t){for(var n=this.getTask(t);!n.$no_end&&!n.$no_start&&n.parent&&this.isTaskExists(n.parent);)n=this.getTask(n.parent);if(n.$no_end){var i=0;this.eachTask(function(t){t.end_date&&+t.end_date>+i&&(i=new Date(t.end_date))},n.id),i&&(n.end_date=i)}if(n.$no_start){var a=1/0;this.eachTask(function(t){t.start_date&&+t.start_date<+a&&(a=new Date(t.start_date))},n.id),1/0!=a&&(n.start_date=a)}(n.$no_end||n.$no_start)&&(this._init_task_timing(n),e||this.refreshTask(n.id,!0)),n.parent&&this.isTaskExists(n.parent)&&this._update_parents(n.parent,e)
-}},gantt.isChildOf=function(t,e){if(!this.isTaskExists(t))return!1;if(e===this.config.root_id)return this.isTaskExists(t);for(var n=this.getTask(t);n&&this.isTaskExists(n.parent);)if(n=this.getTask(n.parent),n&&n.id==e)return!0;return!1},gantt._get_closest_date=function(t){for(var e=t.date,n=t.step,i=t.unit,a=gantt.date[i+"_start"](new Date(this._min_date));+e>+a;)a=gantt.date.add(a,n,i);var s=gantt.date.add(a,-1*n,i);return t.dir&&"future"==t.dir?a:t.dir&&"past"==t.dir?s:Math.abs(e-s)<Math.abs(a-e)?s:a
-},gantt.attachEvent("onBeforeTaskUpdate",function(t,e){return gantt._init_task_timing(e),!0}),gantt.attachEvent("onBeforeTaskAdd",function(t,e){return gantt._init_task_timing(e),!0}),gantt._item_level=function(t){for(var e=0;t.parent&&dhtmlx.defined(this._pull[t.parent]);)t=this._pull[t.parent],e++;return e},gantt.sort=function(t,e,n){var i=!arguments[3];dhtmlx.defined(n)||(n=this.config.root_id),dhtmlx.defined(t)||(t="order");var a="string"==typeof t?function(n,i){var a=n[t]>i[t];return e&&(a=!a),a?1:-1
-}:t,s=this._branches[n];if(s){for(var r=[],o=s.length-1;o>=0;o--)r[o]=this._pull[s[o]];r.sort(a);for(var o=0;o<r.length;o++)s[o]=r[o].id,this.sort(t,e,s[o],!0)}i&&this.refreshData()},gantt.getNext=function(t){for(var e=0;e<this._order.length-1;e++)if(this._order[e]==t)return this._order[e+1];return null},gantt.getPrev=function(t){for(var e=1;e<this._order.length;e++)if(this._order[e]==t)return this._order[e-1];return null},gantt._dp_init=function(t){t.setTransactionMode("POST",!0),t.serverProcessor+=(-1!=t.serverProcessor.indexOf("?")?"&":"?")+"editing=true",t._serverProcessor=t.serverProcessor,t.styles={updated:"gantt_updated",inserted:"gantt_inserted",deleted:"gantt_deleted",invalid:"gantt_invalid",error:"gantt_error",clear:""},t._methods=["_row_style","setCellTextStyle","_change_id","_delete_task"],this.attachEvent("onAfterTaskAdd",function(e){t._ganttMode="tasks",t.setUpdated(e,!0,"inserted")
-}),this.attachEvent("onAfterTaskUpdate",function(e){t._ganttMode="tasks",t.setUpdated(e,!0)}),this.attachEvent("onAfterTaskDelete",function(e){t._ganttMode="tasks",t.setUpdated(e,!0,"deleted")}),this.attachEvent("onAfterLinkUpdate",function(e){t._ganttMode="links",t.setUpdated(e,!0)}),this.attachEvent("onAfterLinkAdd",function(e){t._ganttMode="links",t.setUpdated(e,!0,"inserted")}),this.attachEvent("onAfterLinkDelete",function(e){t._ganttMode="links",t.setUpdated(e,!0,"deleted")}),this.attachEvent("onRowDragEnd",function(e,n){t._ganttMode="tasks",this.getTask(e).target=n,t.setUpdated(e,!0,"order")
-}),t.attachEvent("onBeforeDataSending",function(){return this.serverProcessor=this._serverProcessor+getUrlSymbol(this._serverProcessor)+"gantt_mode="+this._ganttMode,!0}),t._getRowData=dhtmlx.bind(function(e){var n;n="tasks"==t._ganttMode?this.isTaskExists(e)?this.getTask(e):{id:e}:this.isLinkExists(e)?this.getLink(e):{id:e};var i={};for(var a in n)if("$"!=a.substr(0,1)){var s=n[a];i[a]=s instanceof Date?this.templates.xml_format(s):s}return n.$no_start&&(n.start_date="",n.duration=""),n.$no_end&&(n.end_date="",n.duration=""),i[t.action_param]=this.getUserData(e,t.action_param),i
-},this),this._change_id=dhtmlx.bind(function(e,n){"tasks"!=t._ganttMode?this.changeLinkId(e,n):this.changeTaskId(e,n)},this),this._row_style=function(e,n){if("tasks"==t._ganttMode){var i=gantt.getTaskRowNode(e);if(i)if(n)i.className+=" "+n;else{var a=/ (gantt_updated|gantt_inserted|gantt_deleted|gantt_invalid|gantt_error)/g;i.className=i.className.replace(a,"")}}},this._delete_task=function(){},this._dp=t},gantt.getUserData=function(t,e){return this.userdata||(this.userdata={}),this.userdata[t]&&this.userdata[t][e]?this.userdata[t][e]:""
-},gantt.setUserData=function(t,e,n){this.userdata||(this.userdata={}),this.userdata[t]||(this.userdata[t]={}),this.userdata[t][e]=n},gantt._init_link=function(t){return dhtmlx.defined(t.id)||(t.id=dhtmlx.uid()),t},gantt._sync_links=function(){for(var t in this._pull)this._pull[t].$source=[],this._pull[t].$target=[];for(var t in this._lpull){var e=this._lpull[t];this._pull[e.source]&&this._pull[e.source].$source.push(t),this._pull[e.target]&&this._pull[e.target].$target.push(t)}},gantt.getLink=function(t){return dhtmlx.assert(this._lpull[t],"Link doesn't exist"),this._lpull[t]
-},gantt.isLinkExists=function(t){return dhtmlx.defined(this._lpull[t])},gantt.addLink=function(t){return t=this._init_link(t),this.callEvent("onBeforeLinkAdd",[t.id,t])===!1?!1:(this._lpull[t.id]=t,this._sync_links(),this._render_link(t.id),this.callEvent("onAfterLinkAdd",[t.id,t]),t.id)},gantt.updateLink=function(t,e){return dhtmlx.defined(e)||(e=this.getLink(t)),this.callEvent("onBeforeLinkUpdate",[t,e])===!1?!1:(this._lpull[t]=e,this._sync_links(),this._render_link(t),this.callEvent("onAfterLinkUpdate",[t,e]),!0)
-},gantt.deleteLink=function(t){return this._deleteLink(t)},gantt._deleteLink=function(t,e){var n=this.getLink(t);return e||this.callEvent("onBeforeLinkDelete",[t,n])!==!1?(delete this._lpull[t],this._sync_links(),this.refreshLink(t),e||this.callEvent("onAfterLinkDelete",[t,n]),!0):!1},gantt.changeLinkId=function(t,e){this._lpull[e]=this._lpull[t],this._lpull[e].id=e,delete this._lpull[t],this._sync_links(),this.callEvent("onLinkIdChange",[t,e])},gantt.getChildren=function(t){return dhtmlx.defined(this._branches[t])?this._branches[t]:[]
-},gantt.hasChild=function(t){return dhtmlx.defined(this._branches[t])},gantt.refreshData=function(){this._sync_order(),this._render_data()},gantt._configure=function(t,e){for(var n in e)"undefined"==typeof t[n]&&(t[n]=e[n])},gantt._init_skin=function(){if(!gantt.skin)for(var t=document.getElementsByTagName("link"),e=0;e<t.length;e++){var n=t[e].href.match("dhtmlxgantt_([a-z]+).css");if(n){gantt.skin=n[1];break}}gantt.skin||(gantt.skin="terrace");var i=gantt.skins[gantt.skin];this._configure(gantt.config,i.config);
-var a=gantt.config.columns;a[1]&&"undefined"==typeof a[1].width&&(a[1].width=i._second_column_width),a[2]&&"undefined"==typeof a[2].width&&(a[2].width=i._third_column_width),i._lightbox_template&&(gantt._lightbox_template=i._lightbox_template),gantt._init_skin=function(){}},gantt.skins={},gantt._lightbox_methods={},gantt._lightbox_template="<div class='dhx_cal_ltitle'><span class='dhx_mark'>&nbsp;</span><span class='dhx_time'></span><span class='dhx_title'></span></div><div class='dhx_cal_larea'></div>",gantt.showLightbox=function(t){if(t&&!this.config.readonly&&this.callEvent("onBeforeLightbox",[t])){var e=this.getTask(t),n=this.getLightbox(this._get_safe_type(e.type));
-this._center_lightbox(n),this.showCover(),this._fill_lightbox(t,n),this.callEvent("onLightbox",[t])}},gantt._get_timepicker_step=function(){if(this.config.round_dnd_dates){var t=gantt._tasks,e=this._get_line(t.unit)*t.step/60;return e>=1440&&(e=this.config.time_step),e}return this.config.time_step},gantt.getLabel=function(t,e){for(var n=this._get_typed_lightbox_config(),i=0;i<n.length;i++)if(n[i].map_to==t)for(var a=n[i].options,s=0;s<a.length;s++)if(a[s].key==e)return a[s].label;return""},gantt.updateCollection=function(t,e){var e=e.slice(0),n=gantt.serverList(t);
-return n?(n.splice(0,n.length),n.push.apply(n,e||[]),void gantt.resetLightbox()):!1},gantt.getLightboxType=function(){return this._get_safe_type(this._lightbox_type)},gantt.getLightbox=function(t){if(void 0===t&&(t=this.getLightboxType()),!this._lightbox||this.getLightboxType()!=this._get_safe_type(t)){this._lightbox_type=this._get_safe_type(t);var e=document.createElement("DIV");e.className="dhx_cal_light";var n=this._is_lightbox_timepicker();(gantt.config.wide_form||n)&&(e.className+=" dhx_cal_light_wide"),n&&(gantt.config.wide_form=!0,e.className+=" dhx_cal_light_full"),e.style.visibility="hidden";
-var i=this._lightbox_template,a=this.config.buttons_left;for(var s in a)i+="<div class='dhx_btn_set dhx_left_btn_set "+a[s]+"_set'><div dhx_button='1' class='"+a[s]+"'></div><div>"+this.locale.labels[a[s]]+"</div></div>";a=this.config.buttons_right;for(var s in a)i+="<div class='dhx_btn_set dhx_right_btn_set "+a[s]+"_set' style='float:right;'><div dhx_button='1' class='"+a[s]+"'></div><div>"+this.locale.labels[a[s]]+"</div></div>";i+="</div>",e.innerHTML=i,gantt.config.drag_lightbox&&(e.firstChild.onmousedown=gantt._ready_to_dnd,e.firstChild.onselectstart=function(){return!1
-},e.firstChild.style.cursor="pointer",gantt._init_dnd_events()),document.body.insertBefore(e,document.body.firstChild),this._lightbox=e;var r=this._get_typed_lightbox_config(t);i=this._render_sections(r);for(var o=e.getElementsByTagName("div"),s=0;s<o.length;s++){var d=o[s];if("dhx_cal_larea"==d.className){d.innerHTML=i;break}}this.resizeLightbox(),this._init_lightbox_events(this),e.style.display="none",e.style.visibility="visible"}return this._lightbox},gantt._render_sections=function(t){for(var e="",n=0;n<t.length;n++){var i=this.form_blocks[t[n].type];
-if(i){t[n].id="area_"+dhtmlx.uid();var a=t[n].hidden?" style='display:none'":"",s="";t[n].button&&(s="<div class='dhx_custom_button' index='"+n+"'><div class='dhx_custom_button_"+t[n].button+"'></div><div>"+this.locale.labels["button_"+t[n].button]+"</div></div>"),this.config.wide_form&&(e+="<div class='dhx_wrap_section' "+a+">"),e+="<div id='"+t[n].id+"' class='dhx_cal_lsection'>"+s+this.locale.labels["section_"+t[n].name]+"</div>"+i.render.call(this,t[n]),e+="</div>"}}return e},gantt.resizeLightbox=function(){var t=this._lightbox;
-if(t){var e=t.childNodes[1];e.style.height="0px",e.style.height=e.scrollHeight+"px",t.style.height=e.scrollHeight+this.config.lightbox_additional_height+"px",e.style.height=e.scrollHeight+"px"}},gantt._center_lightbox=function(t){if(t){t.style.display="block";var e=window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop,n=window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft,i=window.innerHeight||document.documentElement.clientHeight;t.style.top=e?Math.round(e+Math.max((i-t.offsetHeight)/2,0))+"px":Math.round(Math.max((i-t.offsetHeight)/2,0)+9)+"px",t.style.left=document.documentElement.scrollWidth>document.body.offsetWidth?Math.round(n+(document.body.offsetWidth-t.offsetWidth)/2)+"px":Math.round((document.body.offsetWidth-t.offsetWidth)/2)+"px"
-}},gantt.showCover=function(){if(!this._cover){this._cover=document.createElement("DIV"),this._cover.className="dhx_cal_cover";var t=void 0!==document.height?document.height:document.body.offsetHeight,e=document.documentElement?document.documentElement.scrollHeight:0;this._cover.style.height=Math.max(t,e)+"px",document.body.appendChild(this._cover)}},gantt._init_lightbox_events=function(){gantt.lightbox_events={},gantt.lightbox_events.dhx_save_btn=function(){gantt._save_lightbox()},gantt.lightbox_events.dhx_delete_btn=function(){gantt.callEvent("onLightboxDelete",[gantt._lightbox_id])&&gantt.$click.buttons["delete"](gantt._lightbox_id)
-},gantt.lightbox_events.dhx_cancel_btn=function(){gantt._cancel_lightbox()},gantt.lightbox_events["default"]=function(t,e){if(e.getAttribute("dhx_button"))gantt.callEvent("onLightboxButton",[e.className,e,t]);else{var n,i,a;-1!=e.className.indexOf("dhx_custom_button")&&(-1!=e.className.indexOf("dhx_custom_button_")?(n=e.parentNode.getAttribute("index"),a=e.parentNode.parentNode):(n=e.getAttribute("index"),a=e.parentNode,e=e.firstChild));var s=gantt._get_typed_lightbox_config();n&&(i=gantt.form_blocks[s[n].type],i.button_click(n,e,a,a.nextSibling))
-}},dhtmlxEvent(gantt.getLightbox(),"click",function(t){t=t||window.event;var e=t.target?t.target:t.srcElement;if(e.className||(e=e.previousSibling),e&&e.className&&0===e.className.indexOf("dhx_btn_set")&&(e=e.firstChild),e&&e.className){var n=dhtmlx.defined(gantt.lightbox_events[e.className])?gantt.lightbox_events[e.className]:gantt.lightbox_events["default"];return n(t,e)}return!1}),gantt.getLightbox().onkeydown=function(t){switch((t||event).keyCode){case gantt.keys.edit_save:if((t||event).shiftKey)return;
-gantt._save_lightbox();break;case gantt.keys.edit_cancel:gantt._cancel_lightbox()}}},gantt._cancel_lightbox=function(){var t=this.getLightboxValues();this.callEvent("onLightboxCancel",[this._lightbox_id,t.$new]),t.$new&&(this._deleteTask(t.id,!0),this.refreshData()),this.hideLightbox()},gantt._save_lightbox=function(){var t=this.getLightboxValues();this.callEvent("onLightboxSave",[this._lightbox_id,t,!!t.$new])&&(t.$new?(delete t.$new,this.addTask(t)):(dhtmlx.mixin(this.getTask(t.id),t,!0),this.updateTask(t.id)),this.refreshData(),this.hideLightbox())
-},gantt.getLightboxValues=function(){for(var t=dhtmlx.mixin({},this.getTask(this._lightbox_id)),e=this._get_typed_lightbox_config(),n=0;n<e.length;n++){var i=document.getElementById(e[n].id);i=i?i.nextSibling:i;var a=this.form_blocks[e[n].type],s=a.get_value.call(this,i,t,e[n]);"auto"!=e[n].map_to&&(t[e[n].map_to]=s)}return t},gantt.hideLightbox=function(){var t=this.getLightbox();t&&(t.style.display="none"),this._lightbox_id=null,this.hideCover(),this.callEvent("onAfterLightbox",[])},gantt.hideCover=function(){this._cover&&this._cover.parentNode.removeChild(this._cover),this._cover=null
-},gantt.resetLightbox=function(){gantt._lightbox&&!gantt._custom_lightbox&&gantt._lightbox.parentNode.removeChild(gantt._lightbox),gantt._lightbox=null},gantt._set_lightbox_values=function(t,e){var n=t,i=e.getElementsByTagName("span");gantt.templates.lightbox_header?(i[1].innerHTML="",i[2].innerHTML=gantt.templates.lightbox_header(n.start_date,n.end_date,n)):(i[1].innerHTML=this.templates.task_time(n.start_date,n.end_date,n),i[2].innerHTML=(this.templates.task_text(n.start_date,n.end_date,n)||"").substr(0,70));
-for(var a=this._get_typed_lightbox_config(this.getLightboxType()),s=0;s<a.length;s++){var r=a[s];if(this.form_blocks[r.type]){var o=document.getElementById(r.id).nextSibling,d=this.form_blocks[r.type],l=dhtmlx.defined(n[r.map_to])?n[r.map_to]:r.default_value;d.set_value.call(this,o,l,n,r),r.focus&&d.focus.call(this,o)}}t.id&&(gantt._lightbox_id=t.id)},gantt._fill_lightbox=function(t,e){var n=this.getTask(t);this._set_lightbox_values(n,e)},gantt.getLightboxSection=function(t){var e=this._get_typed_lightbox_config(),n=0;
-for(n;n<e.length&&e[n].name!=t;n++);var i=e[n];this._lightbox||this.getLightbox();var a=document.getElementById(i.id),s=a.nextSibling,r={section:i,header:a,node:s,getValue:function(t){return this.form_blocks[i.type].get_value(s,t||{},i)},setValue:function(t,e){return this.form_blocks[i.type].set_value(s,t,e||{},i)}},o=this._lightbox_methods["get_"+i.type+"_control"];return o?o(r):r},gantt._lightbox_methods.get_template_control=function(t){return t.control=t.node,t},gantt._lightbox_methods.get_select_control=function(t){return t.control=t.node.getElementsByTagName("select")[0],t
-},gantt._lightbox_methods.get_textarea_control=function(t){return t.control=t.node.getElementsByTagName("textarea")[0],t},gantt._lightbox_methods.get_time_control=function(t){return t.control=t.node.getElementsByTagName("select"),t},gantt._init_dnd_events=function(){dhtmlxEvent(document.body,"mousemove",gantt._move_while_dnd),dhtmlxEvent(document.body,"mouseup",gantt._finish_dnd),gantt._init_dnd_events=function(){}},gantt._move_while_dnd=function(t){if(gantt._dnd_start_lb){document.dhx_unselectable||(document.body.className+=" dhx_unselectable",document.dhx_unselectable=!0);
-var e=gantt.getLightbox(),n=t&&t.target?[t.pageX,t.pageY]:[event.clientX,event.clientY];e.style.top=gantt._lb_start[1]+n[1]-gantt._dnd_start_lb[1]+"px",e.style.left=gantt._lb_start[0]+n[0]-gantt._dnd_start_lb[0]+"px"}},gantt._ready_to_dnd=function(t){var e=gantt.getLightbox();gantt._lb_start=[parseInt(e.style.left,10),parseInt(e.style.top,10)],gantt._dnd_start_lb=t&&t.target?[t.pageX,t.pageY]:[event.clientX,event.clientY]},gantt._finish_dnd=function(){gantt._lb_start&&(gantt._lb_start=gantt._dnd_start_lb=!1,document.body.className=document.body.className.replace(" dhx_unselectable",""),document.dhx_unselectable=!1)
-},gantt._focus=function(t,e){t&&t.focus&&(gantt.config.touch||(e&&t.select&&t.select(),t.focus()))},gantt.form_blocks={getTimePicker:function(t,e){var n=t.time_format;if(!n){var n=["%d","%m","%Y"];gantt._get_line(gantt._tasks.unit)<gantt._get_line("day")&&n.push("%H:%i")}t._time_format_order={size:0};var i=this.config,a=this.date.date_part(new Date(gantt._min_date.valueOf())),s=1440,r=0;gantt.config.limit_time_select&&(s=60*i.last_hour+1,r=60*i.first_hour,a.setHours(i.first_hour));for(var o="",d=0;d<n.length;d++){var l=n[d];
-d>0&&(o+=" ");var _="";switch(l){case"%Y":t._time_format_order[2]=d,t._time_format_order.size++;for(var h=a.getFullYear()-5,c=0;10>c;c++)_+="<option value='"+(h+c)+"'>"+(h+c)+"</option>";break;case"%m":t._time_format_order[1]=d,t._time_format_order.size++;for(var c=0;12>c;c++)_+="<option value='"+c+"'>"+this.locale.date.month_full[c]+"</option>";break;case"%d":t._time_format_order[0]=d,t._time_format_order.size++;for(var c=1;32>c;c++)_+="<option value='"+c+"'>"+c+"</option>";break;case"%H:%i":var s=1440,r=0;
-t._time_format_order[3]=d,t._time_format_order.size++;var c=r,g=a.getDate();for(t._time_values=[];s>c;){var u=this.templates.time_picker(a);_+="<option value='"+c+"'>"+u+"</option>",t._time_values.push(c),a.setTime(a.valueOf()+60*this._get_timepicker_step()*1e3);var f=a.getDate()!=g?1:0;c=24*f*60+60*a.getHours()+a.getMinutes()}}if(_){var p=t.readonly?"disabled='disabled'":"",m=e?" style='display:none'":"";o+="<select "+p+m+">"+_+"</select>"}}return o},_fill_lightbox_select:function(t,e,n,i){if(t[e+i[0]].value=n.getDate(),t[e+i[1]].value=n.getMonth(),t[e+i[2]].value=n.getFullYear(),dhtmlx.defined(i[3])){var a=60*n.getHours()+n.getMinutes();
-a=Math.round(a/gantt._get_timepicker_step())*gantt._get_timepicker_step(),t[e+i[3]].value=a}},template:{render:function(t){var e=(t.height||"30")+"px";return"<div class='dhx_cal_ltext dhx_cal_template' style='height:"+e+";'></div>"},set_value:function(t,e){t.innerHTML=e||""},get_value:function(t){return t.innerHTML||""},focus:function(){}},textarea:{render:function(t){var e=(t.height||"130")+"px";return"<div class='dhx_cal_ltext' style='height:"+e+";'><textarea></textarea></div>"},set_value:function(t,e){t.firstChild.value=e||""
-},get_value:function(t){return t.firstChild.value},focus:function(t){var e=t.firstChild;gantt._focus(e,!0)}},select:{render:function(t){for(var e=(t.height||"23")+"px",n="<div class='dhx_cal_ltext' style='height:"+e+";'><select style='width:100%;'>",i=0;i<t.options.length;i++)n+="<option value='"+t.options[i].key+"'>"+t.options[i].label+"</option>";return n+="</select></div>"},set_value:function(t,e,n,i){var a=t.firstChild;!a._dhx_onchange&&i.onchange&&(a.onchange=i.onchange,a._dhx_onchange=!0),"undefined"==typeof e&&(e=(a.options[0]||{}).value),a.value=e||""
-},get_value:function(t){return t.firstChild.value},focus:function(t){var e=t.firstChild;gantt._focus(e,!0)}},time:{render:function(t){var e=this.form_blocks.getTimePicker.call(this,t),n=["<div style='height:30px;padding-top:0px;font-size:inherit;text-align:center;' class='dhx_section_time'>"];return n.push(e),t.single_date?(e=this.form_blocks.getTimePicker.call(this,t,!0),n.push("<span></span>")):n.push("<span style='font-weight:normal; font-size:10pt;'> &nbsp;&ndash;&nbsp; </span>"),n.push(e),n.push("</div>"),n.join("")
-},set_value:function(t,e,n,i){{var a=this.config,s=t.getElementsByTagName("select"),r=i._time_format_order;i._time_format_size}if(a.auto_end_date)for(var o=function(){var t=new Date(s[r[2]].value,s[r[1]].value,s[r[0]].value,0,0),e=gantt.calculateEndDate(t,1);this.form_blocks._fill_lightbox_select(s,r.size,e,r,a)},d=0;4>d;d++)s[d].onchange=o;this.form_blocks._fill_lightbox_select(s,0,n.start_date,r,a),this.form_blocks._fill_lightbox_select(s,r.size,n.end_date,r,a)},get_value:function(t,e,n){var i=t.getElementsByTagName("select"),a=n._time_format_order,s=0,r=0;
-if(dhtmlx.defined(a[3])){var o=parseInt(i[a[3]].value,10);s=Math.floor(o/60),r=o%60}if(e.start_date=new Date(i[a[2]].value,i[a[1]].value,i[a[0]].value,s,r),s=r=0,dhtmlx.defined(a[3])){var o=parseInt(i[a.size+a[3]].value,10);s=Math.floor(o/60),r=o%60}return e.end_date=new Date(i[a[2]+a.size].value,i[a[1]+a.size].value,i[a[0]+a.size].value,s,r),e.end_date<=e.start_date&&(e.end_date=gantt.date.add(e.start_date,gantt._get_timepicker_step(),"minute")),{start_date:new Date(e.start_date),end_date:new Date(e.end_date)}
-},focus:function(t){gantt._focus(t.getElementsByTagName("select")[0])}},duration:{render:function(t){var e=this.form_blocks.getTimePicker.call(this,t);e="<div class='dhx_time_selects'>"+e+"</div>";var n=this.locale.labels[this.config.duration_unit+"s"],i=t.single_date?' style="display:none"':"",a=t.readonly?" disabled='disabled'":"",s="<div class='dhx_gantt_duration' "+i+"><input type='button' class='dhx_gantt_duration_dec' value='-'"+a+"><input type='text' value='5' class='dhx_gantt_duration_value'"+a+"><input type='button' class='dhx_gantt_duration_inc' value='+'"+a+"> "+n+" <span></span></div>",r="<div style='height:30px;padding-top:0px;font-size:inherit;' class='dhx_section_time'>"+e+" "+s+"</div>";
-return r},set_value:function(t,e,n,i){function a(){var e=gantt.form_blocks.duration._get_start_date.call(gantt,t,i),n=gantt.form_blocks.duration._get_duration.call(gantt,t,i),a=gantt.calculateEndDate(e,n);h.innerHTML=gantt.templates.task_date(a)}function s(t){var e=l.value;e=parseInt(e,10),window.isNaN(e)&&(e=0),e+=t,1>e&&(e=1),l.value=e,a()}var r=this.config,o=t.getElementsByTagName("select"),d=t.getElementsByTagName("input"),l=d[1],_=[d[0],d[2]],h=t.getElementsByTagName("span")[0],c=i._time_format_order;
-_[0].onclick=dhtmlx.bind(function(){s(-1*this.config.duration_step)},this),_[1].onclick=dhtmlx.bind(function(){s(1*this.config.duration_step)},this),o[0].onchange=a,o[1].onchange=a,o[2].onchange=a,o[3]&&(o[3].onchange=a),l.onkeydown=dhtmlx.bind(function(t){t=t||window.event;var e=t.charCode||t.keyCode||t.which;return 40==e?(s(-1*this.config.duration_step),!1):38==e?(s(1*this.config.duration_step),!1):void window.setTimeout(function(){a()},1)},this),l.onchange=dhtmlx.bind(function(){a()},this),this.form_blocks._fill_lightbox_select(o,0,n.start_date,c,r);
-var g;g=n.end_date?gantt.calculateDuration(n.start_date,n.end_date):n.duration,g=Math.round(g),l.value=g,a()},_get_start_date:function(t,e){var n=t.getElementsByTagName("select"),i=e._time_format_order,a=0,s=0;if(dhtmlx.defined(i[3])){var r=parseInt(n[i[3]].value,10);a=Math.floor(r/60),s=r%60}return new Date(n[i[2]].value,n[i[1]].value,n[i[0]].value,a,s)},_get_duration:function(t){var e=t.getElementsByTagName("input")[1];return e=parseInt(e.value,10),window.isNaN(e)&&(e=1),0>e&&(e*=-1),e},get_value:function(t,e,n){e.start_date=this.form_blocks.duration._get_start_date(t,n);
-var i=this.form_blocks.duration._get_duration(t,n);return e.end_date=this.calculateEndDate(e.start_date,i),e.duration=i,{start_date:new Date(e.start_date),end_date:new Date(e.end_date)}},focus:function(t){gantt._focus(t.getElementsByTagName("select")[0])}},typeselect:{render:function(t){var e=gantt.config.types,n=gantt.locale.labels,i=[];for(var a in e)i.push({key:e[a],label:n["type_"+a]});t.options=i;var s=t.onchange;return t.onchange=function(){gantt.getState().lightbox;gantt.changeLightboxType(this.value),"function"==typeof s&&s.apply(this,arguments)
-},gantt.form_blocks.select.render.apply(this,arguments)},set_value:function(){return gantt.form_blocks.select.set_value.apply(this,arguments)},get_value:function(){return gantt.form_blocks.select.get_value.apply(this,arguments)},focus:function(){return gantt.form_blocks.select.focus.apply(this,arguments)}},parent:{_filter:function(t,e,n){var i=e.filter||function(){return!0};t=t.slice(0);for(var a=0;a<t.length;a++){var s=t[a];(s.id==n||gantt.isChildOf(s.id,n)||i(s.id,s)===!1)&&(t.splice(a,1),a--)}return t
-},_display:function(t,e){var n=[],i=[];e&&(n=gantt.getTaskByTime(),t.allow_root&&n.unshift({id:gantt.config.root_id,text:t.root_label||""}),n=this._filter(n,t,e),t.sort&&n.sort(t.sort));for(var a=t.template||gantt.templates.task_text,s=0;s<n.length;s++){var r=a.apply(gantt,[n[s].start_date,n[s].end_date,n[s]]);void 0===r&&(r=""),i.push({key:n[s].id,label:r})}return t.options=i,t.map_to=t.map_to||"parent",gantt.form_blocks.select.render.apply(this,arguments)},render:function(t){return gantt.form_blocks.parent._display(t,!1)
-},set_value:function(t,e,n,i){var a=document.createElement("div");a.innerHTML=gantt.form_blocks.parent._display(i,n.id);var s=a.removeChild(a.firstChild);return t.onselect=null,t.parentNode.replaceChild(s,t),gantt.form_blocks.select.set_value.apply(this,[s,e,n,i])},get_value:function(){return gantt.form_blocks.select.get_value.apply(this,arguments)},focus:function(){return gantt.form_blocks.select.focus.apply(this,arguments)}}},gantt._is_lightbox_timepicker=function(){for(var t=this._get_typed_lightbox_config(),e=0;e<t.length;e++)if("time"==t[e].name&&"time"==t[e].type)return!0;
-return!1},gantt._dhtmlx_confirm=function(t,e,n,i){if(!t)return n();var a={text:t};e&&(a.title=e),i&&(a.ok=i),n&&(a.callback=function(t){t&&n()}),dhtmlx.confirm(a)},gantt._get_typed_lightbox_config=function(t){void 0===t&&(t=this.getLightboxType());var e=this._get_type_name(t);return gantt.config.lightbox[e+"_sections"]?gantt.config.lightbox[e+"_sections"]:gantt.config.lightbox.sections},gantt._silent_redraw_lightbox=function(t){var e=this.getLightboxType();if(this.getState().lightbox){var n=this.getState().lightbox,i=this.getLightboxValues(),a=dhtmlx.copy(this.getTask(n));
-this.resetLightbox();var s=dhtmlx.mixin(a,i,!0),r=this.getLightbox(t?t:void 0);this._set_lightbox_values(s,r),this._center_lightbox(this.getLightbox()),this.callEvent("onLightboxChange",[e,this.getLightboxType()])}else this.resetLightbox(),this.getLightbox(t?t:void 0);this.callEvent("onLightboxChange",[e,this.getLightboxType()])},dataProcessor.prototype={setTransactionMode:function(t,e){this._tMode=t,this._tSend=e},escape:function(t){return this._utf?encodeURIComponent(t):escape(t)},enableUTFencoding:function(t){this._utf=convertStringToBoolean(t)
-},setDataColumns:function(t){this._columns="string"==typeof t?t.split(","):t},getSyncState:function(){return!this.updatedRows.length},enableDataNames:function(t){this._endnm=convertStringToBoolean(t)},enablePartialDataSend:function(t){this._changed=convertStringToBoolean(t)},setUpdateMode:function(t,e){this.autoUpdate="cell"==t,this.updateMode=t,this.dnd=e},ignore:function(t,e){this._silent_mode=!0,t.call(e||window),this._silent_mode=!1},setUpdated:function(t,e,n){if(!this._silent_mode){var i=this.findRow(t);
-n=n||"updated";var a=this.obj.getUserData(t,this.action_param);a&&"updated"==n&&(n=a),e?(this.set_invalid(t,!1),this.updatedRows[i]=t,this.obj.setUserData(t,this.action_param,n),this._in_progress[t]&&(this._in_progress[t]="wait")):this.is_invalid(t)||(this.updatedRows.splice(i,1),this.obj.setUserData(t,this.action_param,"")),e||this._clearUpdateFlag(t),this.markRow(t,e,n),e&&this.autoUpdate&&this.sendData(t)}},_clearUpdateFlag:function(){},markRow:function(t,e,n){var i="",a=this.is_invalid(t);if(a&&(i=this.styles[a],e=!0),this.callEvent("onRowMark",[t,e,n,a])&&(i=this.styles[e?n:"clear"]+i,this.obj[this._methods[0]](t,i),a&&a.details)){i+=this.styles[a+"_cell"];
-for(var s=0;s<a.details.length;s++)a.details[s]&&this.obj[this._methods[1]](t,s,i)}},getState:function(t){return this.obj.getUserData(t,this.action_param)},is_invalid:function(t){return this._invalid[t]},set_invalid:function(t,e,n){n&&(e={value:e,details:n,toString:function(){return this.value.toString()}}),this._invalid[t]=e},checkBeforeUpdate:function(){return!0},sendData:function(t){return!this._waitMode||"tree"!=this.obj.mytype&&!this.obj._h2?(this.obj.editStop&&this.obj.editStop(),"undefined"==typeof t||this._tSend?this.sendAllData():this._in_progress[t]?!1:(this.messages=[],!this.checkBeforeUpdate(t)&&this.callEvent("onValidationError",[t,this.messages])?!1:void this._beforeSendData(this._getRowData(t),t))):void 0
-},_beforeSendData:function(t,e){return this.callEvent("onBeforeUpdate",[e,this.getState(e),t])?void this._sendData(t,e):!1},serialize:function(t,e){if("string"==typeof t)return t;if("undefined"!=typeof e)return this.serialize_one(t,"");var n=[],i=[];for(var a in t)t.hasOwnProperty(a)&&(n.push(this.serialize_one(t[a],a+this.post_delim)),i.push(a));return n.push("ids="+this.escape(i.join(","))),dhtmlx.security_key&&n.push("dhx_security="+dhtmlx.security_key),n.join("&")},serialize_one:function(t,e){if("string"==typeof t)return t;
-var n=[];for(var i in t)t.hasOwnProperty(i)&&n.push(this.escape((e||"")+i)+"="+this.escape(t[i]));return n.join("&")},_sendData:function(t,e){if(t){if(!this.callEvent("onBeforeDataSending",e?[e,this.getState(e),t]:[null,null,t]))return!1;e&&(this._in_progress[e]=(new Date).valueOf());var n=new dtmlXMLLoaderObject(this.afterUpdate,this,!0),i=this.serverProcessor+(this._user?getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+this.obj.getUserData(0,"version")].join("&"):"");"POST"!=this._tMode?n.loadXML(i+(-1!=i.indexOf("?")?"&":"?")+this.serialize(t,e)):n.loadXML(i,!0,this.serialize(t,e)),this._waitMode++
-}},sendAllData:function(){if(this.updatedRows.length){this.messages=[];for(var t=!0,e=0;e<this.updatedRows.length;e++)t&=this.checkBeforeUpdate(this.updatedRows[e]);if(!t&&!this.callEvent("onValidationError",["",this.messages]))return!1;if(this._tSend)this._sendData(this._getAllData());else for(var e=0;e<this.updatedRows.length;e++)if(!this._in_progress[this.updatedRows[e]]){if(this.is_invalid(this.updatedRows[e]))continue;if(this._beforeSendData(this._getRowData(this.updatedRows[e]),this.updatedRows[e]),this._waitMode&&("tree"==this.obj.mytype||this.obj._h2))return
-}}},_getAllData:function(){for(var t={},e=!1,n=0;n<this.updatedRows.length;n++){var i=this.updatedRows[n];this._in_progress[i]||this.is_invalid(i)||this.callEvent("onBeforeUpdate",[i,this.getState(i)])&&(t[i]=this._getRowData(i,i+this.post_delim),e=!0,this._in_progress[i]=(new Date).valueOf())}return e?t:null},setVerificator:function(t,e){this.mandatoryFields[t]=e||function(t){return""!==t}},clearVerificator:function(t){this.mandatoryFields[t]=!1},findRow:function(t){var e=0;for(e=0;e<this.updatedRows.length&&t!=this.updatedRows[e];e++);return e
-},defineAction:function(t,e){this._uActions||(this._uActions=[]),this._uActions[t]=e},afterUpdateCallback:function(t,e,n,i){var a=t,s="error"!=n&&"invalid"!=n;if(s||this.set_invalid(t,n),this._uActions&&this._uActions[n]&&!this._uActions[n](i))return delete this._in_progress[a];"wait"!=this._in_progress[a]&&this.setUpdated(t,!1);var r=t;switch(n){case"inserted":case"insert":e!=t&&(this.obj[this._methods[2]](t,e),t=e);break;case"delete":case"deleted":return this.obj.setUserData(t,this.action_param,"true_deleted"),this.obj[this._methods[3]](t),delete this._in_progress[a],this.callEvent("onAfterUpdate",[t,n,e,i])
-}"wait"!=this._in_progress[a]?(s&&this.obj.setUserData(t,this.action_param,""),delete this._in_progress[a]):(delete this._in_progress[a],this.setUpdated(e,!0,this.obj.getUserData(t,this.action_param))),this.callEvent("onAfterUpdate",[r,n,e,i])},afterUpdate:function(t,e,n,i,a){if(a.getXMLTopNode("data"),a.xmlDoc.responseXML){for(var s=a.doXPath("//data/action"),r=0;r<s.length;r++){var o=s[r],d=o.getAttribute("type"),l=o.getAttribute("sid"),_=o.getAttribute("tid");t.afterUpdateCallback(l,_,d,o)}t.finalizeUpdate()
-}},finalizeUpdate:function(){this._waitMode&&this._waitMode--,("tree"==this.obj.mytype||this.obj._h2)&&this.updatedRows.length&&this.sendData(),this.callEvent("onAfterUpdateFinish",[]),this.updatedRows.length||this.callEvent("onFullSync",[])},init:function(t){this.obj=t,this.obj._dp_init&&this.obj._dp_init(this)},setOnAfterUpdate:function(t){this.attachEvent("onAfterUpdate",t)},enableDebug:function(){},setOnBeforeUpdateHandler:function(t){this.attachEvent("onBeforeDataSending",t)},setAutoUpdate:function(t,e){t=t||2e3,this._user=e||(new Date).valueOf(),this._need_update=!1,this._loader=null,this._update_busy=!1,this.attachEvent("onAfterUpdate",function(t,e,n,i){this.afterAutoUpdate(t,e,n,i)
-}),this.attachEvent("onFullSync",function(){this.fullSync()});var n=this;window.setInterval(function(){n.loadUpdate()},t)},afterAutoUpdate:function(t,e){return"collision"==e?(this._need_update=!0,!1):!0},fullSync:function(){return this._need_update===!0&&(this._need_update=!1,this.loadUpdate()),!0},getUpdates:function(t,e){return this._update_busy?!1:(this._update_busy=!0,this._loader=this._loader||new dtmlXMLLoaderObject(!0),this._loader.async=!0,this._loader.waitCall=e,void this._loader.loadXML(t))
-},_v:function(t){return t.firstChild?t.firstChild.nodeValue:""},_a:function(t){for(var e=[],n=0;n<t.length;n++)e[n]=this._v(t[n]);return e},loadUpdate:function(){var t=this,e=this.obj.getUserData(0,"version"),n=this.serverProcessor+getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+e].join("&");n=n.replace("editing=true&",""),this.getUpdates(n,function(){var e=t._loader.doXPath("//userdata");t.obj.setUserData(0,"version",t._v(e[0]));var n=t._loader.doXPath("//update");if(n.length){t._silent_mode=!0;
-for(var i=0;i<n.length;i++){var a=n[i].getAttribute("status"),s=n[i].getAttribute("id"),r=n[i].getAttribute("parent");switch(a){case"inserted":t.callEvent("insertCallback",[n[i],s,r]);break;case"updated":t.callEvent("updateCallback",[n[i],s,r]);break;case"deleted":t.callEvent("deleteCallback",[n[i],s,r])}}t._silent_mode=!1}t._update_busy=!1,t=null})}},dhtmlx.assert=function(t,e){t||dhtmlx.message({type:"error",text:e,expire:-1})},gantt.init=function(t,e,n){e&&n&&(this.config.start_date=this._min_date=new Date(e),this.config.end_date=this._max_date=new Date(n)),this._init_skin(),this.config.scroll_size||(this.config.scroll_size=this._detectScrollSize()),this._reinit(t),this.attachEvent("onLoadEnd",this.render),dhtmlxEvent(window,"resize",this._on_resize),this.init=function(t){this.$container&&(this.$container.innerHTML=""),this._reinit(t)
-},this.callEvent("onGanttReady",[])},gantt._reinit=function(t){this._init_html_area(t),this._set_sizes(),this._task_area_pulls={},this._task_area_renderers={},this._init_touch_events(),this._init_templates(),this._init_grid(),this._init_tasks(),this.render(),this._set_scroll_events(),dhtmlxEvent(this.$container,"click",this._on_click),dhtmlxEvent(this.$container,"dblclick",this._on_dblclick),dhtmlxEvent(this.$container,"mousemove",this._on_mousemove),dhtmlxEvent(this.$container,"contextmenu",this._on_contextmenu)
-},gantt._init_html_area=function(t){this._obj="string"==typeof t?document.getElementById(t):t,dhtmlx.assert(this._obj,"Invalid html container: "+t);var e="<div class='gantt_container'><div class='gantt_grid'></div><div class='gantt_task'></div>";e+="<div class='gantt_ver_scroll'><div></div></div><div class='gantt_hor_scroll'><div></div></div></div>",this._obj.innerHTML=e,this.$container=this._obj.firstChild;var n=this.$container.childNodes;this.$grid=n[0],this.$task=n[1],this.$scroll_ver=n[2],this.$scroll_hor=n[3],this.$grid.innerHTML="<div class='gantt_grid_scale'></div><div class='gantt_grid_data'></div>",this.$grid_scale=this.$grid.childNodes[0],this.$grid_data=this.$grid.childNodes[1],this.$task.innerHTML="<div class='gantt_task_scale'></div><div class='gantt_data_area'><div class='gantt_task_bg'></div><div class='gantt_links_area'></div><div class='gantt_bars_area'></div></div>",this.$task_scale=this.$task.childNodes[0],this.$task_data=this.$task.childNodes[1],this.$task_bg=this.$task_data.childNodes[0],this.$task_links=this.$task_data.childNodes[1],this.$task_bars=this.$task_data.childNodes[2]
-},gantt.$click={buttons:{edit:function(t){gantt.showLightbox(t)},"delete":function(t){var e=gantt.locale.labels.confirm_deleting,n=gantt.locale.labels.confirm_deleting_title;gantt._dhtmlx_confirm(e,n,function(){var e=gantt.getTask(t);e.$new?(gantt._deleteTask(t,!0),gantt.refreshData()):gantt.deleteTask(t),gantt.hideLightbox()})}}},gantt._calculate_content_height=function(){var t=this.config.scale_height,e=this._order.length*this.config.row_height,n=this._scroll_hor?this.config.scroll_size+1:0;return this._is_grid_visible()||this._is_chart_visible()?t+e+2+n:0
-},gantt._calculate_content_width=function(){{var t=this._get_grid_width(),e=this._tasks?this._tasks.full_width:0;this._scroll_ver?this.config.scroll_size+1:0}return this._is_chart_visible()||(e=0),this._is_grid_visible()||(t=0),t+e+1},gantt._get_resize_options=function(){var t={x:!1,y:!1};return"xy"==this.config.autosize?t.x=t.y=!0:"y"==this.config.autosize||this.config.autosize===!0?t.y=!0:"x"==this.config.autosize&&(t.x=!0),t},gantt._set_sizes=function(){var t=this._get_resize_options();if(t.y&&(this._obj.style.height=this._calculate_content_height()+"px"),t.x&&(this._obj.style.width=this._calculate_content_width()+"px"),this._y=this._obj.clientHeight,!(this._y<20)){this.$grid.style.height=this.$task.style.height=Math.max(this._y-this.$scroll_hor.offsetHeight-2,0)+"px";
-var e=Math.max(this._y-(this.config.scale_height||0)-this.$scroll_hor.offsetHeight-2,0);this.$grid_data.style.height=this.$task_data.style.height=e+"px";var n=Math.max(this._get_grid_width()-1,0);this.$grid.style.width=n+"px",this.$grid.style.display=0===n?"none":"",this._x=this._obj.clientWidth,this._x<20||(this.$grid_data.style.width=Math.max(this._get_grid_width()-1,0)+"px",this.$task.style.width=Math.max(this._x-this._get_grid_width()-2,0)+"px")}},gantt.getScrollState=function(){return{x:this.$task.scrollLeft,y:this.$task_data.scrollTop}
-},gantt.scrollTo=function(t,e){1*t==t&&(this.$task.scrollLeft=t),1*e==e&&(this.$task_data.scrollTop=e,this.$grid_data.scrollTop=e)},gantt.showDate=function(t){var e=this.posFromDate(t),n=Math.max(e-this.config.task_scroll_offset,0);this.scrollTo(n)},gantt.showTask=function(t){var e=this.getTaskNode(t);if(e){var n=Math.max(e.offsetLeft-this.config.task_scroll_offset,0),i=e.offsetTop-(this.$task_data.offsetHeight-this.config.row_height)/2;this.scrollTo(n,i)}},gantt._on_resize=gantt.setSizes=function(){gantt._set_sizes(),gantt._scroll_resize()
-},gantt.render=function(){if(this._render_grid(),this._render_tasks_scales(),this._scroll_resize(),this._on_resize(),this._render_data(),this.config.initial_scroll){var t=this._order[0]||this.config.root_id;t&&this.showTask(t)}this.callEvent("onGanttRender",[])},gantt._set_scroll_events=function(){dhtmlxEvent(this.$scroll_hor,"scroll",function(){if(!gantt._touch_scroll_active){var t=gantt.$scroll_hor.scrollLeft;gantt.scrollTo(t)}}),dhtmlxEvent(this.$scroll_ver,"scroll",function(){if(!gantt._touch_scroll_active){var t=gantt.$scroll_ver.scrollTop;
-gantt.$grid_data.scrollTop=t,gantt.scrollTo(null,t)}}),dhtmlxEvent(this.$task,"scroll",function(){var t=gantt.$task.scrollLeft,e=gantt.$scroll_hor.scrollLeft;e!=t&&(gantt.$scroll_hor.scrollLeft=t)}),dhtmlxEvent(this.$task_data,"scroll",function(){var t=gantt.$task_data.scrollTop,e=gantt.$scroll_ver.scrollTop;e!=t&&(gantt.$scroll_ver.scrollTop=t)}),dhtmlxEvent(gantt.$container,"mousewheel",function(t){var e=gantt._get_resize_options();if(t.wheelDeltaX){if(e.x)return!0;var n=t.wheelDeltaX/-40,i=gantt.$task.scrollLeft+30*n;
-gantt.scrollTo(i,null),gantt.$scroll_hor.scrollTop=a}else{if(e.y)return!0;var n=t.wheelDelta/-40;"undefined"==typeof t.wheelDelta&&(n=t.detail);var a=gantt.$grid_data.scrollTop+30*n;gantt.scrollTo(null,a),gantt.$scroll_ver.scrollTop=a}return t.preventDefault&&t.preventDefault(),t.cancelBubble=!0,!1})},gantt._scroll_resize=function(){if(!(this._x<20||this._y<20)){var t=this._get_grid_width(),e=this._x-t,n=this._y-this.config.scale_height,i=this.config.scroll_size+1,a=this.$task_data.offsetWidth-i,s=this.config.row_height*this._order.length,r=this._get_resize_options(),o=this._scroll_hor=r.x?!1:a>e,d=this._scroll_ver=r.y?!1:s>n;
-this.$scroll_hor.style.display=o?"block":"none",this.$scroll_hor.style.height=(o?i:0)+"px",this.$scroll_hor.style.width=this._x-(d?i:2)+"px",this.$scroll_hor.firstChild.style.width=a+t+i+2+"px",this.$scroll_ver.style.display=d?"block":"none",this.$scroll_ver.style.width=(d?i:0)+"px",this.$scroll_ver.style.height=this._y-(o?i:0)-this.config.scale_height+"px",this.$scroll_ver.style.top=this.config.scale_height+"px",this.$scroll_ver.firstChild.style.height=this.config.scale_height+s+"px"}},gantt.locate=function(t){var e=gantt._get_target_node(t);
-if("gantt_task_cell"==e.className)return null;for(var n=arguments[1]||this.config.task_attribute;e;){if(e.getAttribute){var i=e.getAttribute(n);if(i)return i}e=e.parentNode}return null},gantt._get_target_node=function(t){var e;return t.tagName?e=t:(t=t||window.event,e=t.target||t.srcElement),e},gantt._trim=function(t){var e=String.prototype.trim||function(){return this.replace(/^\s+|\s+$/g,"")};return e.apply(t)},gantt._locate_css=function(t,e,n){void 0===n&&(n=!0);for(var i=gantt._get_target_node(t),a="";i;){if(a=i.className){var s=a.indexOf(e);
-if(s>=0){if(!n)return i;var r=0===s||!gantt._trim(a.charAt(s-1)),o=s+e.length>=a.length||!gantt._trim(a.charAt(s+e.length));if(r&&o)return i}}i=i.parentNode}return null},gantt._locateHTML=function(t,e){var n=gantt._get_target_node(t);for(e=e||this.config.task_attribute;n;){if(n.getAttribute){var i=n.getAttribute(e);if(i)return n}n=n.parentNode}return null},gantt.getTaskRowNode=function(t){for(var e=this.$grid_data.childNodes,n=this.config.task_attribute,i=0;i<e.length;i++)if(e[i].getAttribute){var a=e[i].getAttribute(n);
-if(a==t)return e[i]}return null},gantt.getState=function(){return{drag_id:this._tasks_dnd.drag.id,drag_mode:this._tasks_dnd.drag.mode,drag_from_start:this._tasks_dnd.drag.left,selected_task:this._selected_task,min_date:new Date(this._min_date),max_date:new Date(this._max_date),lightbox:this._lightbox_id}},gantt._checkTimeout=function(t,e){if(!e)return!0;var n=1e3/e;return 1>n?!0:t._on_timeout?!1:(setTimeout(function(){delete t._on_timeout},n),t._on_timeout=!0,!0)},gantt.selectTask=function(t){if(!this.config.select_task)return!1;
-if(t){if(this._selected_task==t)return this._selected_task;if(!this.callEvent("onBeforeTaskSelected",[t]))return!1;this.unselectTask(),this._selected_task=t,this.refreshTask(t),this.callEvent("onTaskSelected",[t])}return this._selected_task},gantt.unselectTask=function(){var t=this._selected_task;t&&(this._selected_task=null,this.refreshTask(t),this.callEvent("onTaskUnselected",[t]))},gantt.getSelectedId=function(){return dhtmlx.defined(this._selected_task)?this._selected_task:null},gantt.changeLightboxType=function(t){return this.getLightboxType()==t?!0:void gantt._silent_redraw_lightbox(t)
-},gantt.date={init:function(){for(var t=gantt.locale.date.month_short,e=gantt.locale.date.month_short_hash={},n=0;n<t.length;n++)e[t[n]]=n;for(var t=gantt.locale.date.month_full,e=gantt.locale.date.month_full_hash={},n=0;n<t.length;n++)e[t[n]]=n},date_part:function(t){return t.setHours(0),t.setMinutes(0),t.setSeconds(0),t.setMilliseconds(0),t.getHours()&&t.setTime(t.getTime()+36e5*(24-t.getHours())),t},time_part:function(t){return(t.valueOf()/1e3-60*t.getTimezoneOffset())%86400},week_start:function(t){var e=t.getDay();
-return gantt.config.start_on_monday&&(0===e?e=6:e--),this.date_part(this.add(t,-1*e,"day"))},month_start:function(t){return t.setDate(1),this.date_part(t)},year_start:function(t){return t.setMonth(0),this.month_start(t)},day_start:function(t){return this.date_part(t)},hour_start:function(t){var e=t.getHours();return this.day_start(t),t.setHours(e),t},minute_start:function(t){var e=t.getMinutes();return this.hour_start(t),t.setMinutes(e),t},_add_days:function(t,e){var n=new Date(t.valueOf());return n.setDate(n.getDate()+e),!t.getHours()&&n.getHours()&&n.setTime(n.getTime()+36e5*(24-n.getHours())),n
-},add:function(t,e,n){var i=new Date(t.valueOf());switch(n){case"day":i=gantt.date._add_days(i,e);break;case"week":i=gantt.date._add_days(i,7*e);break;case"month":i.setMonth(i.getMonth()+e);break;case"year":i.setYear(i.getFullYear()+e);break;case"hour":i.setTime(i.getTime()+60*e*60*1e3);break;case"minute":i.setTime(i.getTime()+60*e*1e3);break;default:return gantt.date["add_"+n](t,e,n)}return i},to_fixed:function(t){return 10>t?"0"+t:t},copy:function(t){return new Date(t.valueOf())},date_to_str:function(t,e){return t=t.replace(/%[a-zA-Z]/g,function(t){switch(t){case"%d":return'"+gantt.date.to_fixed(date.getDate())+"';
-case"%m":return'"+gantt.date.to_fixed((date.getMonth()+1))+"';case"%j":return'"+date.getDate()+"';case"%n":return'"+(date.getMonth()+1)+"';case"%y":return'"+gantt.date.to_fixed(date.getFullYear()%100)+"';case"%Y":return'"+date.getFullYear()+"';case"%D":return'"+gantt.locale.date.day_short[date.getDay()]+"';case"%l":return'"+gantt.locale.date.day_full[date.getDay()]+"';case"%M":return'"+gantt.locale.date.month_short[date.getMonth()]+"';case"%F":return'"+gantt.locale.date.month_full[date.getMonth()]+"';
-case"%h":return'"+gantt.date.to_fixed((date.getHours()+11)%12+1)+"';case"%g":return'"+((date.getHours()+11)%12+1)+"';case"%G":return'"+date.getHours()+"';case"%H":return'"+gantt.date.to_fixed(date.getHours())+"';case"%i":return'"+gantt.date.to_fixed(date.getMinutes())+"';case"%a":return'"+(date.getHours()>11?"pm":"am")+"';case"%A":return'"+(date.getHours()>11?"PM":"AM")+"';case"%s":return'"+gantt.date.to_fixed(date.getSeconds())+"';case"%W":return'"+gantt.date.to_fixed(gantt.date.getISOWeek(date))+"';
-default:return t}}),e&&(t=t.replace(/date\.get/g,"date.getUTC")),new Function("date",'return "'+t+'";')},str_to_date:function(t,e){for(var n="var temp=date.match(/[a-zA-Z]+|[0-9]+/g);",i=t.match(/%[a-zA-Z]/g),a=0;a<i.length;a++)switch(i[a]){case"%j":case"%d":n+="set[2]=temp["+a+"]||1;";break;case"%n":case"%m":n+="set[1]=(temp["+a+"]||1)-1;";break;case"%y":n+="set[0]=temp["+a+"]*1+(temp["+a+"]>50?1900:2000);";break;case"%g":case"%G":case"%h":case"%H":n+="set[3]=temp["+a+"]||0;";break;case"%i":n+="set[4]=temp["+a+"]||0;";
-break;case"%Y":n+="set[0]=temp["+a+"]||0;";break;case"%a":case"%A":n+="set[3]=set[3]%12+((temp["+a+"]||'').toLowerCase()=='am'?0:12);";break;case"%s":n+="set[5]=temp["+a+"]||0;";break;case"%M":n+="set[1]=gantt.locale.date.month_short_hash[temp["+a+"]]||0;";break;case"%F":n+="set[1]=gantt.locale.date.month_full_hash[temp["+a+"]]||0;"}var s="set[0],set[1],set[2],set[3],set[4],set[5]";return e&&(s=" Date.UTC("+s+")"),new Function("date","var set=[0,0,1,0,0,0]; "+n+" return new Date("+s+");")},getISOWeek:function(t){if(!t)return!1;
-var e=t.getDay();0===e&&(e=7);var n=new Date(t.valueOf());n.setDate(t.getDate()+(4-e));var i=n.getFullYear(),a=Math.round((n.getTime()-new Date(i,0,1).getTime())/864e5),s=1+Math.floor(a/7);return s},getUTCISOWeek:function(t){return this.getISOWeek(t)},convert_to_utc:function(t){return new Date(t.getUTCFullYear(),t.getUTCMonth(),t.getUTCDate(),t.getUTCHours(),t.getUTCMinutes(),t.getUTCSeconds())},parseDate:function(t,e){return"string"==typeof t&&(dhtmlx.defined(e)&&(e="string"==typeof e?dhtmlx.defined(gantt.templates[e])?gantt.templates[e]:gantt.date.str_to_date(e):gantt.templates.xml_date),t=e(t)),t
-}},gantt.config||(gantt.config={}),gantt.config||(gantt.config={}),gantt.templates||(gantt.templates={}),function(){dhtmlx.mixin(gantt.config,{links:{finish_to_start:"0",start_to_start:"1",finish_to_finish:"2",start_to_finish:"3"},types:{task:"task",project:"project",milestone:"milestone"},duration_unit:"day",work_time:!1,correct_work_time:!1,skip_off_time:!1,autosize:!1,show_links:!0,show_task_cells:!0,show_chart:!0,show_grid:!0,min_duration:36e5,xml_date:"%d-%m-%Y %H:%i",api_date:"%d-%m-%Y %H:%i",start_on_monday:!0,server_utc:!1,show_progress:!0,fit_tasks:!1,select_task:!0,readonly:!1,date_grid:"%Y-%m-%d",drag_links:!0,drag_progress:!0,drag_resize:!0,drag_move:!0,drag_mode:{resize:"resize",progress:"progress",move:"move",ignore:"ignore"},round_dnd_dates:!0,link_wrapper_width:20,root_id:0,autofit:!0,columns:[{name:"text",tree:!0,width:"*"},{name:"start_date",align:"center"},{name:"duration",align:"center"},{name:"add",width:"44"}],step:1,scale_unit:"day",subscales:[],time_step:60,duration_step:1,date_scale:"%d %M",task_date:"%d %F %Y",time_picker:"%H:%i",task_attribute:"task_id",link_attribute:"link_id",buttons_left:["dhx_save_btn","dhx_cancel_btn"],buttons_right:["dhx_delete_btn"],lightbox:{sections:[{name:"description",height:70,map_to:"text",type:"textarea",focus:!0},{name:"time",height:72,type:"duration",map_to:"auto"}],project_sections:[{name:"description",height:70,map_to:"text",type:"textarea",focus:!0},{name:"type",type:"typeselect",map_to:"type"},{name:"time",height:72,type:"duration",readonly:!0,map_to:"auto"}],milestone_sections:[{name:"description",height:70,map_to:"text",type:"textarea",focus:!0},{name:"type",type:"typeselect",map_to:"type"},{name:"time",height:72,type:"duration",single_date:!0,map_to:"auto"}]},drag_lightbox:!0,sort:!1,details_on_create:!0,details_on_dblclick:!0,initial_scroll:!0,task_scroll_offset:100,task_height:"full",min_column_width:70}),gantt.keys={edit_save:13,edit_cancel:27},gantt._init_template=function(t,e){var n=this._reg_templates||{};
-this.config[t]&&n[t]!=this.config[t]&&(e&&this.templates[t]||(this.templates[t]=this.date.date_to_str(this.config[t]),n[t]=this.config[t])),this._reg_templates=n},gantt._init_templates=function(){var t=gantt.locale.labels;t.dhx_save_btn=t.icon_save,t.dhx_cancel_btn=t.icon_cancel,t.dhx_delete_btn=t.icon_delete;var e=this.date.date_to_str,n=this.config;gantt._init_template("date_scale",!0),gantt._init_template("date_grid",!0),gantt._init_template("task_date",!0),dhtmlx.mixin(this.templates,{xml_date:this.date.str_to_date(n.xml_date,n.server_utc),xml_format:e(n.xml_date,n.server_utc),api_date:this.date.str_to_date(n.api_date),progress_text:function(){return""
-},grid_header_class:function(){return""},task_text:function(t,e,n){return n.text},task_class:function(){return""},grid_row_class:function(){return""},task_row_class:function(){return""},task_cell_class:function(){return""},scale_cell_class:function(){return""},scale_row_class:function(){return""},grid_indent:function(){return"<div class='gantt_tree_indent'></div>"},grid_folder:function(t){return"<div class='gantt_tree_icon gantt_folder_"+(t.$open?"open":"closed")+"'></div>"},grid_file:function(){return"<div class='gantt_tree_icon gantt_file'></div>"
-},grid_open:function(t){return"<div class='gantt_tree_icon gantt_"+(t.$open?"close":"open")+"'></div>"},grid_blank:function(){return"<div class='gantt_tree_icon gantt_blank'></div>"},task_time:function(t,e){return gantt.templates.task_date(t)+" - "+gantt.templates.task_date(e)},time_picker:e(n.time_picker),link_class:function(){return""},link_description:function(t){var e=gantt.getTask(t.source),n=gantt.getTask(t.target);return"<b>"+e.text+"</b> &ndash;  <b>"+n.text+"</b>"},drag_link:function(t,e,n,i){t=gantt.getTask(t);
-var a=gantt.locale.labels,s="<b>"+t.text+"</b> "+(e?a.link_start:a.link_end)+"<br/>";return n&&(n=gantt.getTask(n),s+="<b> "+n.text+"</b> "+(i?a.link_start:a.link_end)+"<br/>"),s},drag_link_class:function(t,e,n,i){var a="";if(t&&n){var s=gantt.isLinkAllowed(t,n,e,i);a=" "+(s?"gantt_link_allow":"gantt_link_deny")}return"gantt_link_tooltip"+a}}),this.callEvent("onTemplatesReady",[])}}(),window.jQuery&&!function(t){var e=[];t.fn.dhx_gantt=function(n){if(n=n||{},"string"!=typeof n){var i=[];return this.each(function(){if(this&&this.getAttribute&&!this.getAttribute("dhxgantt")){for(var t in n)"data"!=t&&(gantt.config[t]=n[t]);
-gantt.init(this),n.data&&gantt.parse(n.data),i.push(gantt)}}),1===i.length?i[0]:i}return e[n]?e[n].apply(this,[]):void t.error("Method "+n+" does not exist on jQuery.dhx_gantt")}}(jQuery),window.dhtmlx&&(dhtmlx.attaches||(dhtmlx.attaches={}),dhtmlx.attaches.attachGantt=function(t,e){var n=document.createElement("DIV");n.id="gantt_"+dhtmlx.uid(),n.style.width="100%",n.style.height="100%",n.cmp="grid",document.body.appendChild(n),this.attachObject(n.id);var i=this.vs[this.av];i.grid=gantt,gantt.init(n.id,t,e),n.firstChild.style.border="none",i.gridId=n.id,i.gridObj=n;
-var a="_viewRestore";return this.vs[this[a]()].grid}),gantt.locale={date:{month_full:["January","February","March","April","May","June","July","August","September","October","November","December"],month_short:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],day_full:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],day_short:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]},labels:{new_task:"New task",icon_save:"Save",icon_cancel:"Cancel",icon_details:"Details",icon_edit:"Edit",icon_delete:"Delete",confirm_closing:"",confirm_deleting:"Task will be deleted permanently, are you sure?",section_description:"Description",section_time:"Time period",section_type:"Type",column_text:"Task name",column_start_date:"Start time",column_duration:"Duration",column_add:"",link:"Link",confirm_link_deleting:"will be deleted",link_start:" (start)",link_end:" (end)",type_task:"Task",type_project:"Project",type_milestone:"Milestone",minutes:"Minutes",hours:"Hours",days:"Days",weeks:"Week",months:"Months",years:"Years"}},gantt.skins.skyblue={config:{grid_width:350,row_height:27,scale_height:27,task_height:24,link_line_width:1,link_arrow_size:8,lightbox_additional_height:75},_second_column_width:95,_third_column_width:80},gantt.skins.meadow={config:{grid_width:350,row_height:27,scale_height:30,task_height:24,link_line_width:2,link_arrow_size:6,lightbox_additional_height:72},_second_column_width:95,_third_column_width:80},gantt.skins.terrace={config:{grid_width:360,row_height:35,scale_height:35,task_height:24,link_line_width:2,link_arrow_size:6,lightbox_additional_height:75},_second_column_width:90,_third_column_width:70},gantt.skins.broadway={config:{grid_width:360,row_height:35,scale_height:35,task_height:24,link_line_width:1,link_arrow_size:7,lightbox_additional_height:86},_second_column_width:90,_third_column_width:80,_lightbox_template:"<div class='dhx_cal_ltitle'><span class='dhx_mark'>&nbsp;</span><span class='dhx_time'></span><span class='dhx_title'></span><div class='dhx_cancel_btn'></div></div><div class='dhx_cal_larea'></div>",_config_buttons_left:{},_config_buttons_right:{dhx_delete_btn:"icon_delete",dhx_save_btn:"icon_save"}},gantt.config.touch_drag=50,gantt.config.touch=!0,gantt._init_touch_events=function(){"force"!=this.config.touch&&(this.config.touch=this.config.touch&&(-1!=navigator.userAgent.indexOf("Mobile")||-1!=navigator.userAgent.indexOf("iPad")||-1!=navigator.userAgent.indexOf("Android")||-1!=navigator.userAgent.indexOf("Touch"))),this.config.touch&&(window.navigator.msPointerEnabled?this._touch_events(["MSPointerMove","MSPointerDown","MSPointerUp"],function(t){return t.pointerType==t.MSPOINTER_TYPE_MOUSE?null:t
-},function(t){return!t||t.pointerType==t.MSPOINTER_TYPE_MOUSE}):this._touch_events(["touchmove","touchstart","touchend"],function(t){return t.touches&&t.touches.length>1?null:t.touches[0]?{target:t.target,pageX:t.touches[0].pageX,pageY:t.touches[0].pageY}:t},function(){return!1}))},gantt._touch_events=function(t,e,n){function i(t){return t&&t.preventDefault&&t.preventDefault(),(t||event).cancelBubble=!0,!1}var a,s=0,r=!1,o=!1,d=null;this._gantt_touch_event_ready||(this._gantt_touch_event_ready=1,dhtmlxEvent(document.body,t[0],function(t){if(!n(t)&&r){var l=e(t);
-if(l&&d){var _=d.pageX-l.pageX,h=d.pageY-l.pageY;!o&&(Math.abs(_)>5||Math.abs(h)>5)&&(gantt._touch_scroll_active=o=!0,s=0,a=gantt.getScrollState()),o&&gantt.scrollTo(a.x+_,a.y+h)}return i(t)}})),dhtmlxEvent(this.$container,"contextmenu",function(t){return r?i(t):void 0}),dhtmlxEvent(this.$container,t[1],function(t){if(!n(t)){if(t.touches&&t.touches.length>1)return void(r=!1);if(r=!0,d=e(t),d&&s){var a=new Date;500>a-s?(gantt._on_dblclick(d),i(t)):s=a}else s=new Date}}),dhtmlxEvent(this.$container,t[2],function(t){n(t)||(gantt._touch_scroll_active=r=o=!1)
-})};
-//# sourceMappingURL=sources/dhtmlxgantt.js.map
+ dhtmlxGantt v.2.1.1 Standard
+
+ This software is covered by GPL license. You also can obtain Commercial or Enterprise license to use it in non-GPL project - please contact sales@dhtmlx.com. Usage without proper license is prohibited.
+
+ (c) Dinamenta, UAB.
+ */
+if (!window.dhtmlx) {
+    dhtmlx = function(obj){
+        for (var a in obj) dhtmlx[a]=obj[a];
+        return dhtmlx; //simple singleton
+    };
+}
+dhtmlx.extend_api=function(name,map,ext){
+    var t = window[name];
+    if (!t) return; //component not defined
+    window[name]=function(obj){
+        var that;
+
+        if (obj && typeof obj == "object" && !obj.tagName){
+            that = t.apply(this,(map._init?map._init(obj):arguments));
+            //global settings
+            for (var a in dhtmlx)
+                if (map[a]) this[map[a]](dhtmlx[a]);
+            //local settings
+            for (var a in obj){
+                if (map[a]) this[map[a]](obj[a]);
+                else if (a.indexOf("on")===0){
+                    this.attachEvent(a,obj[a]);
+                }
+            }
+        } else
+            that = t.apply(this,arguments);
+        if (map._patch) map._patch(this);
+        return that||this;
+    };
+    window[name].prototype=t.prototype;
+    if (ext)
+        dhtmlXHeir(window[name].prototype,ext);
+};
+
+dhtmlxAjax={
+    get:function(url,callback){
+        var t=new dtmlXMLLoaderObject(true);
+        t.async=(arguments.length<3);
+        t.waitCall=callback;
+        t.loadXML(url);
+        return t;
+    },
+    post:function(url,post,callback){
+        var t=new dtmlXMLLoaderObject(true);
+        t.async=(arguments.length<4);
+        t.waitCall=callback;
+        t.loadXML(url,true,post);
+        return t;
+    },
+    getSync:function(url){
+        return this.get(url,null,true);
+    },
+    postSync:function(url,post){
+        return this.post(url,post,null,true);
+    }
+};
+
+/**
+ *     @desc: xmlLoader object
+ *     @type: private
+ *     @param: funcObject - xml parser function
+ *     @param: object - jsControl object
+ *     @param: async - sync/async mode (async by default)
+ *     @param: rSeed - enable/disable random seed ( prevent IE caching)
+ *     @topic: 0
+ */
+function dtmlXMLLoaderObject(funcObject, dhtmlObject, async, rSeed){
+    this.xmlDoc="";
+
+    if (typeof (async) != "undefined")
+        this.async=async;
+    else
+        this.async=true;
+
+    this.onloadAction=funcObject||null;
+    this.mainObject=dhtmlObject||null;
+    this.waitCall=null;
+    this.rSeed=rSeed||false;
+    return this;
+}
+
+dtmlXMLLoaderObject.count = 0;
+
+/**
+ *     @desc: xml loading handler
+ *     @type: private
+ *     @param: dtmlObject - xmlLoader object
+ *     @topic: 0
+ */
+dtmlXMLLoaderObject.prototype.waitLoadFunction=function(dhtmlObject){
+    var once = true;
+    this.check=function (){
+        if ((dhtmlObject)&&(dhtmlObject.onloadAction)){
+            if ((!dhtmlObject.xmlDoc.readyState)||(dhtmlObject.xmlDoc.readyState == 4)){
+                if (!once)
+                    return;
+
+                once=false; //IE 5 fix
+                dtmlXMLLoaderObject.count++;
+                if (typeof dhtmlObject.onloadAction == "function")
+                    dhtmlObject.onloadAction(dhtmlObject.mainObject, null, null, null, dhtmlObject);
+
+                if (dhtmlObject.waitCall){
+                    dhtmlObject.waitCall.call(this,dhtmlObject);
+                    dhtmlObject.waitCall=null;
+                }
+            }
+        }
+    };
+    return this.check;
+};
+
+/**
+ *     @desc: return XML top node
+ *     @param: tagName - top XML node tag name (not used in IE, required for Safari and Mozilla)
+ *     @type: private
+ *     @returns: top XML node
+ *     @topic: 0
+ */
+dtmlXMLLoaderObject.prototype.getXMLTopNode=function(tagName, oldObj){
+    var z;
+
+    if (this.xmlDoc.responseXML){
+        var temp = this.xmlDoc.responseXML.getElementsByTagName(tagName);
+        if(temp.length === 0 && tagName.indexOf(":")!=-1)
+            var temp = this.xmlDoc.responseXML.getElementsByTagName((tagName.split(":"))[1]);
+        z = temp[0];
+    } else
+        z = this.xmlDoc.documentElement;
+
+    if (z){
+        this._retry=false;
+        return z;
+    }
+
+    if (!this._retry&&_isIE){
+        this._retry=true;
+        var oldObj = this.xmlDoc;
+        this.loadXMLString(this.xmlDoc.responseText.replace(/^[\s]+/,""), true);
+        return this.getXMLTopNode(tagName, oldObj);
+    }
+
+    dhtmlxError.throwError("LoadXML", "Incorrect XML", [
+        (oldObj||this.xmlDoc),
+        this.mainObject
+    ]);
+
+    return document.createElement("DIV");
+};
+
+/**
+ *     @desc: load XML from string
+ *     @type: private
+ *     @param: xmlString - xml string
+ *     @topic: 0
+ */
+dtmlXMLLoaderObject.prototype.loadXMLString=function(xmlString, silent){
+
+    if (!_isIE){
+        var parser = new DOMParser();
+        this.xmlDoc=parser.parseFromString(xmlString, "text/xml");
+    } else {
+        this.xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+        this.xmlDoc.async=this.async;
+        this.xmlDoc.onreadystatechange = function(){};
+        this.xmlDoc["loadXM"+"L"](xmlString);
+    }
+
+    if (silent)
+        return;
+
+    if (this.onloadAction)
+        this.onloadAction(this.mainObject, null, null, null, this);
+
+    if (this.waitCall){
+        this.waitCall();
+        this.waitCall=null;
+    }
+};
+/**
+ *     @desc: load XML
+ *     @type: private
+ *     @param: filePath - xml file path
+ *     @param: postMode - send POST request
+ *     @param: postVars - list of vars for post request
+ *     @topic: 0
+ */
+dtmlXMLLoaderObject.prototype.loadXML=function(filePath, postMode, postVars, rpc){
+    if (this.rSeed)
+        filePath+=((filePath.indexOf("?") != -1) ? "&" : "?")+"a_dhx_rSeed="+(new Date()).valueOf();
+    this.filePath=filePath;
+
+    if ((!_isIE)&&(window.XMLHttpRequest))
+        this.xmlDoc=new XMLHttpRequest();
+    else {
+        this.xmlDoc=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    if (this.async)
+        this.xmlDoc.onreadystatechange=new this.waitLoadFunction(this);
+    this.xmlDoc.open(postMode ? "POST" : "GET", filePath, this.async);
+
+    if (rpc){
+        this.xmlDoc.setRequestHeader("User-Agent", "dhtmlxRPC v0.1 ("+navigator.userAgent+")");
+        this.xmlDoc.setRequestHeader("Content-type", "text/xml");
+    }
+
+    else if (postMode)
+        this.xmlDoc.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    this.xmlDoc.setRequestHeader("X-Requested-With","XMLHttpRequest");
+    this.xmlDoc.send(null||postVars);
+
+    if (!this.async)
+        (new this.waitLoadFunction(this))();
+};
+/**
+ *     @desc: destructor, cleans used memory
+ *     @type: private
+ *     @topic: 0
+ */
+dtmlXMLLoaderObject.prototype.destructor=function(){
+    this._filterXPath = null;
+    this._getAllNamedChilds = null;
+    this._retry = null;
+    this.async = null;
+    this.rSeed = null;
+    this.filePath = null;
+    this.onloadAction = null;
+    this.mainObject = null;
+    this.xmlDoc = null;
+    this.doXPath = null;
+    this.doXPathOpera = null;
+    this.doXSLTransToObject = null;
+    this.doXSLTransToString = null;
+    this.loadXML = null;
+    this.loadXMLString = null;
+    // this.waitLoadFunction = null;
+    this.doSerialization = null;
+    this.xmlNodeToJSON = null;
+    this.getXMLTopNode = null;
+    this.setXSLParamValue = null;
+    return null;
+};
+
+dtmlXMLLoaderObject.prototype.xmlNodeToJSON = function(node){
+    var t={};
+    for (var i=0; i<node.attributes.length; i++)
+        t[node.attributes[i].name]=node.attributes[i].value;
+    t["_tagvalue"]=node.firstChild?node.firstChild.nodeValue:"";
+    for (var i=0; i<node.childNodes.length; i++){
+        var name=node.childNodes[i].tagName;
+        if (name){
+            if (!t[name]) t[name]=[];
+            t[name].push(this.xmlNodeToJSON(node.childNodes[i]));
+        }
+    }
+    return t;
+};
+
+/**
+ *     @desc: Call wrapper
+ *     @type: private
+ *     @param: funcObject - action handler
+ *     @param: dhtmlObject - user data
+ *     @returns: function handler
+ *     @topic: 0
+ */
+function callerFunction(funcObject, dhtmlObject){
+    this.handler=function(e){
+        if (!e)
+            e=window.event;
+        funcObject(e, dhtmlObject);
+        return true;
+    };
+    return this.handler;
+}
+
+/**
+ *     @desc: Calculate absolute position of html object
+ *     @type: private
+ *     @param: htmlObject - html object
+ *     @topic: 0
+ */
+function getAbsoluteLeft(htmlObject){
+    return getOffset(htmlObject).left;
+}
+/**
+ *     @desc: Calculate absolute position of html object
+ *     @type: private
+ *     @param: htmlObject - html object
+ *     @topic: 0
+ */
+function getAbsoluteTop(htmlObject){
+    return getOffset(htmlObject).top;
+}
+
+function getOffsetSum(elem) {
+    var top=0, left=0;
+    while(elem) {
+        top = top + parseInt(elem.offsetTop);
+        left = left + parseInt(elem.offsetLeft);
+        elem = elem.offsetParent;
+    }
+    return {top: top, left: left};
+}
+function getOffsetRect(elem) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docElem = document.documentElement;
+    var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+    var clientTop = docElem.clientTop || body.clientTop || 0;
+    var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+    var top  = box.top +  scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return { top: Math.round(top), left: Math.round(left) };
+}
+function getOffset(elem) {
+    if (elem.getBoundingClientRect) {
+        return getOffsetRect(elem);
+    } else {
+        return getOffsetSum(elem);
+    }
+}
+
+/**
+ *     @desc: Convert string to it boolean representation
+ *     @type: private
+ *     @param: inputString - string for covertion
+ *     @topic: 0
+ */
+function convertStringToBoolean(inputString){
+    if (typeof (inputString) == "string")
+        inputString=inputString.toLowerCase();
+
+    switch (inputString){
+        case "1":
+        case "true":
+        case "yes":
+        case "y":
+        case 1:
+        case true:
+            return true;
+        default:
+            return false;
+    }
+}
+
+/**
+ *     @desc: find out what symbol to use as url param delimiters in further params
+ *     @type: private
+ *     @param: str - current url string
+ *     @topic: 0
+ */
+function getUrlSymbol(str){
+    if (str.indexOf("?") != -1)
+        return "&";
+    else
+        return "?";
+}
+
+function dhtmlDragAndDropObject(){
+    if (window.dhtmlDragAndDrop)
+        return window.dhtmlDragAndDrop;
+
+    this.lastLanding=0;
+    this.dragNode=0;
+    this.dragStartNode=0;
+    this.dragStartObject=0;
+    this.tempDOMU=null;
+    this.tempDOMM=null;
+    this.waitDrag=0;
+    window.dhtmlDragAndDrop=this;
+
+    return this;
+}
+
+dhtmlDragAndDropObject.prototype.removeDraggableItem=function(htmlNode){
+    htmlNode.onmousedown=null;
+    htmlNode.dragStarter=null;
+    htmlNode.dragLanding=null;
+};
+
+dhtmlDragAndDropObject.prototype.addDraggableItem=function(htmlNode, dhtmlObject){
+    htmlNode.onmousedown=this.preCreateDragCopy;
+    htmlNode.dragStarter=dhtmlObject;
+    this.addDragLanding(htmlNode, dhtmlObject);
+};
+
+dhtmlDragAndDropObject.prototype.addDragLanding=function(htmlNode, dhtmlObject){
+    htmlNode.dragLanding=dhtmlObject;
+};
+
+dhtmlDragAndDropObject.prototype.preCreateDragCopy=function(e){
+    if ((e||window.event) && (e||event).button == 2)
+        return;
+
+    if (window.dhtmlDragAndDrop.waitDrag){
+        window.dhtmlDragAndDrop.waitDrag=0;
+        document.body.onmouseup=window.dhtmlDragAndDrop.tempDOMU;
+        document.body.onmousemove=window.dhtmlDragAndDrop.tempDOMM;
+        return false;
+    }
+
+    if (window.dhtmlDragAndDrop.dragNode)
+        window.dhtmlDragAndDrop.stopDrag(e);
+
+    window.dhtmlDragAndDrop.waitDrag=1;
+    window.dhtmlDragAndDrop.tempDOMU=document.body.onmouseup;
+    window.dhtmlDragAndDrop.tempDOMM=document.body.onmousemove;
+    window.dhtmlDragAndDrop.dragStartNode=this;
+    window.dhtmlDragAndDrop.dragStartObject=this.dragStarter;
+    document.body.onmouseup=window.dhtmlDragAndDrop.preCreateDragCopy;
+    document.body.onmousemove=window.dhtmlDragAndDrop.callDrag;
+    window.dhtmlDragAndDrop.downtime = new Date().valueOf();
+
+
+    if ((e)&&(e.preventDefault)){
+        e.preventDefault();
+        return false;
+    }
+    return false;
+};
+
+dhtmlDragAndDropObject.prototype.callDrag=function(e){
+    if (!e)
+        e=window.event;
+    var dragger=window.dhtmlDragAndDrop;
+    if ((new Date()).valueOf()-dragger.downtime<100) return;
+
+    //if ((e.button == 0)&&(_isIE))
+    //	return dragger.stopDrag();
+
+    if (!dragger.dragNode){
+        if (dragger.waitDrag){
+            dragger.dragNode=dragger.dragStartObject._createDragNode(dragger.dragStartNode, e);
+
+            if (!dragger.dragNode)
+                return dragger.stopDrag();
+
+            dragger.dragNode.onselectstart=function(){return false;};
+            dragger.gldragNode=dragger.dragNode;
+            document.body.appendChild(dragger.dragNode);
+            document.body.onmouseup=dragger.stopDrag;
+            dragger.waitDrag=0;
+            dragger.dragNode.pWindow=window;
+            dragger.initFrameRoute();
+        }
+        else return dragger.stopDrag(e, true);
+    }
+
+    if (dragger.dragNode.parentNode != window.document.body && dragger.gldragNode){
+        var grd = dragger.gldragNode;
+
+        if (dragger.gldragNode.old)
+            grd=dragger.gldragNode.old;
+
+        //if (!document.all) dragger.calculateFramePosition();
+        grd.parentNode.removeChild(grd);
+        var oldBody = dragger.dragNode.pWindow;
+
+        if (grd.pWindow &&	grd.pWindow.dhtmlDragAndDrop.lastLanding)
+            grd.pWindow.dhtmlDragAndDrop.lastLanding.dragLanding._dragOut(grd.pWindow.dhtmlDragAndDrop.lastLanding);
+
+        //		var oldp=dragger.dragNode.parentObject;
+        if (_isIE){
+            var div = document.createElement("Div");
+            div.innerHTML=dragger.dragNode.outerHTML;
+            dragger.dragNode=div.childNodes[0];
+        } else
+            dragger.dragNode=dragger.dragNode.cloneNode(true);
+
+        dragger.dragNode.pWindow=window;
+        //		dragger.dragNode.parentObject=oldp;
+
+        dragger.gldragNode.old=dragger.dragNode;
+        document.body.appendChild(dragger.dragNode);
+        oldBody.dhtmlDragAndDrop.dragNode=dragger.dragNode;
+    }
+
+    dragger.dragNode.style.left=e.clientX+15 +
+        (dragger.fx ? dragger.fx*(-1) : 0) +
+        (document.body.scrollLeft||document.documentElement.scrollLeft)+"px";
+    dragger.dragNode.style.top=e.clientY+3+
+        (dragger.fy ? dragger.fy*(-1) : 0) +
+        (document.body.scrollTop||document.documentElement.scrollTop)+"px";
+
+    var z;
+    if (!e.srcElement)
+        z = e.target;
+    else
+        z=e.srcElement;
+    dragger.checkLanding(z, e);
+};
+
+dhtmlDragAndDropObject.prototype.calculateFramePosition=function(n){
+    //this.fx = 0, this.fy = 0;
+    if (window.name){
+        var el = parent.frames[window.name].frameElement.offsetParent;
+        var fx = 0;
+        var fy = 0;
+
+        while (el){
+            fx+=el.offsetLeft;
+            fy+=el.offsetTop;
+            el=el.offsetParent;
+        }
+
+        if ((parent.dhtmlDragAndDrop)){
+            var ls = parent.dhtmlDragAndDrop.calculateFramePosition(1);
+            fx+=ls.split('_')[0]*1;
+            fy+=ls.split('_')[1]*1;
+        }
+
+        if (n)
+            return fx+"_"+fy;
+        else
+            this.fx=fx;
+        this.fy=fy;
+    }
+    return "0_0";
+};
+
+dhtmlDragAndDropObject.prototype.checkLanding=function(htmlObject, e){
+    if ((htmlObject)&&(htmlObject.dragLanding)){
+        if (this.lastLanding)
+            this.lastLanding.dragLanding._dragOut(this.lastLanding);
+        this.lastLanding=htmlObject;
+        this.lastLanding=this.lastLanding.dragLanding._dragIn(this.lastLanding, this.dragStartNode, e.clientX,
+            e.clientY, e);
+        this.lastLanding_scr=(_isIE ? e.srcElement : e.target);
+    } else {
+        if ((htmlObject)&&(htmlObject.tagName != "BODY"))
+            this.checkLanding(htmlObject.parentNode, e);
+        else {
+            if (this.lastLanding)
+                this.lastLanding.dragLanding._dragOut(this.lastLanding, e.clientX, e.clientY, e);
+            this.lastLanding=0;
+
+            if (this._onNotFound)
+                this._onNotFound();
+        }
+    }
+};
+
+dhtmlDragAndDropObject.prototype.stopDrag=function(e, mode){
+    var dragger=window.dhtmlDragAndDrop;
+
+    if (!mode){
+        dragger.stopFrameRoute();
+        var temp = dragger.lastLanding;
+        dragger.lastLanding=null;
+
+        if (temp)
+            temp.dragLanding._drag(dragger.dragStartNode, dragger.dragStartObject, temp,
+                (_isIE ? event.srcElement : e.target));
+    }
+    dragger.lastLanding=null;
+
+    if ((dragger.dragNode)&&(dragger.dragNode.parentNode == document.body))
+        dragger.dragNode.parentNode.removeChild(dragger.dragNode);
+    dragger.dragNode=0;
+    dragger.gldragNode=0;
+    dragger.fx=0;
+    dragger.fy=0;
+    dragger.dragStartNode=0;
+    dragger.dragStartObject=0;
+    document.body.onmouseup=dragger.tempDOMU;
+    document.body.onmousemove=dragger.tempDOMM;
+    dragger.tempDOMU=null;
+    dragger.tempDOMM=null;
+    dragger.waitDrag=0;
+};
+
+dhtmlDragAndDropObject.prototype.stopFrameRoute=function(win){
+    if (win)
+        window.dhtmlDragAndDrop.stopDrag(1, 1);
+
+    for (var i = 0; i < window.frames.length; i++){
+        try{
+            if ((window.frames[i] != win)&&(window.frames[i].dhtmlDragAndDrop))
+                window.frames[i].dhtmlDragAndDrop.stopFrameRoute(window);
+        } catch(e){}
+    }
+
+    try{
+        if ((parent.dhtmlDragAndDrop)&&(parent != window)&&(parent != win))
+            parent.dhtmlDragAndDrop.stopFrameRoute(window);
+    } catch(e){}
+};
+
+dhtmlDragAndDropObject.prototype.initFrameRoute=function(win, mode){
+    if (win){
+        window.dhtmlDragAndDrop.preCreateDragCopy();
+        window.dhtmlDragAndDrop.dragStartNode=win.dhtmlDragAndDrop.dragStartNode;
+        window.dhtmlDragAndDrop.dragStartObject=win.dhtmlDragAndDrop.dragStartObject;
+        window.dhtmlDragAndDrop.dragNode=win.dhtmlDragAndDrop.dragNode;
+        window.dhtmlDragAndDrop.gldragNode=win.dhtmlDragAndDrop.dragNode;
+        window.document.body.onmouseup=window.dhtmlDragAndDrop.stopDrag;
+        window.waitDrag=0;
+
+        if (((!_isIE)&&(mode))&&((!_isFF)||(_FFrv < 1.8)))
+            window.dhtmlDragAndDrop.calculateFramePosition();
+    }
+    try{
+        if ((parent.dhtmlDragAndDrop)&&(parent != window)&&(parent != win))
+            parent.dhtmlDragAndDrop.initFrameRoute(window);
+    }catch(e){}
+
+    for (var i = 0; i < window.frames.length; i++){
+        try{
+            if ((window.frames[i] != win)&&(window.frames[i].dhtmlDragAndDrop))
+                window.frames[i].dhtmlDragAndDrop.initFrameRoute(window, ((!win||mode) ? 1 : 0));
+        } catch(e){}
+    }
+};
+
+_isFF = false;
+_isIE = false;
+_isOpera = false;
+_isKHTML = false;
+_isMacOS = false;
+_isChrome = false;
+_FFrv = false;
+_KHTMLrv = false;
+_OperaRv = false;
+
+if (navigator.userAgent.indexOf('Macintosh') != -1)
+    _isMacOS=true;
+
+
+if (navigator.userAgent.toLowerCase().indexOf('chrome')>-1)
+    _isChrome=true;
+
+if ((navigator.userAgent.indexOf('Safari') != -1)||(navigator.userAgent.indexOf('Konqueror') != -1)){
+    _KHTMLrv = parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf('Safari')+7, 5));
+
+    if (_KHTMLrv > 525){ //mimic FF behavior for Safari 3.1+
+        _isFF=true;
+        _FFrv = 1.9;
+    } else
+        _isKHTML=true;
+} else if (navigator.userAgent.indexOf('Opera') != -1){
+    _isOpera=true;
+    _OperaRv=parseFloat(navigator.userAgent.substr(navigator.userAgent.indexOf('Opera')+6, 3));
+}
+
+
+else if (navigator.appName.indexOf("Microsoft") != -1){
+    _isIE=true;
+    if ((navigator.appVersion.indexOf("MSIE 8.0")!= -1 || navigator.appVersion.indexOf("MSIE 9.0")!= -1 || navigator.appVersion.indexOf("MSIE 10.0")!= -1 ) && document.compatMode != "BackCompat"){
+        _isIE=8;
+    }
+} else if (navigator.appName  == 'Netscape' && navigator.userAgent.indexOf("Trident") != -1){
+    //ie11
+    _isIE=8;
+} else {
+    _isFF=true;
+    _FFrv = parseFloat(navigator.userAgent.split("rv:")[1]);
+}
+
+
+//multibrowser Xpath processor
+dtmlXMLLoaderObject.prototype.doXPath=function(xpathExp, docObj, namespace, result_type){
+    if (_isKHTML || (!_isIE && !window.XPathResult))
+        return this.doXPathOpera(xpathExp, docObj);
+
+    if (_isIE){ //IE
+        if (!docObj)
+            if (!this.xmlDoc.nodeName)
+                docObj=this.xmlDoc.responseXML;
+            else
+                docObj=this.xmlDoc;
+
+        if (!docObj)
+            dhtmlxError.throwError("LoadXML", "Incorrect XML", [
+                (docObj||this.xmlDoc),
+                this.mainObject
+            ]);
+
+        if (namespace)
+            docObj.setProperty("SelectionNamespaces", "xmlns:xsl='"+namespace+"'"); //
+
+        if (result_type == 'single'){
+            return docObj.selectSingleNode(xpathExp);
+        }
+        else {
+            return docObj.selectNodes(xpathExp)||new Array(0);
+        }
+    } else { //Mozilla
+        var nodeObj = docObj;
+
+        if (!docObj){
+            if (!this.xmlDoc.nodeName){
+                docObj=this.xmlDoc.responseXML;
+            }
+            else {
+                docObj=this.xmlDoc;
+            }
+        }
+
+        if (!docObj)
+            dhtmlxError.throwError("LoadXML", "Incorrect XML", [
+                (docObj||this.xmlDoc),
+                this.mainObject
+            ]);
+
+        if (docObj.nodeName.indexOf("document") != -1){
+            nodeObj=docObj;
+        }
+        else {
+            nodeObj=docObj;
+            docObj=docObj.ownerDocument;
+        }
+        var retType = XPathResult.ANY_TYPE;
+
+        if (result_type == 'single')
+            retType=XPathResult.FIRST_ORDERED_NODE_TYPE;
+        var rowsCol = [];
+        var col = docObj.evaluate(xpathExp, nodeObj, function(pref){
+            return namespace;
+        }, retType, null);
+
+        if (retType == XPathResult.FIRST_ORDERED_NODE_TYPE){
+            return col.singleNodeValue;
+        }
+        var thisColMemb = col.iterateNext();
+
+        while (thisColMemb){
+            rowsCol[rowsCol.length]=thisColMemb;
+            thisColMemb=col.iterateNext();
+        }
+        return rowsCol;
+    }
+};
+
+function _dhtmlxError(type, name, params){
+    if (!this.catches)
+        this.catches=[];
+
+    return this;
+}
+
+_dhtmlxError.prototype.catchError=function(type, func_name){
+    this.catches[type]=func_name;
+};
+
+_dhtmlxError.prototype.throwError=function(type, name, params){
+    if (this.catches[type])
+        return this.catches[type](type, name, params);
+
+    if (this.catches["ALL"])
+        return this.catches["ALL"](type, name, params);
+
+    window.alert("Error type: "+arguments[0]+"\nDescription: "+arguments[1]);
+    return null;
+};
+
+window.dhtmlxError=new _dhtmlxError();
+
+
+//opera fake, while 9.0 not released
+//multibrowser Xpath processor
+dtmlXMLLoaderObject.prototype.doXPathOpera=function(xpathExp, docObj){
+    //this is fake for Opera
+    var z = xpathExp.replace(/[\/]+/gi, "/").split('/');
+    var obj = null;
+    var i = 1;
+
+    if (!z.length)
+        return [];
+
+    if (z[0] == ".")
+        obj=[docObj]; else if (z[0] === ""){
+        obj=(this.xmlDoc.responseXML||this.xmlDoc).getElementsByTagName(z[i].replace(/\[[^\]]*\]/g, ""));
+        i++;
+    } else
+        return [];
+
+    for (i; i < z.length; i++)obj=this._getAllNamedChilds(obj, z[i]);
+
+    if (z[i-1].indexOf("[") != -1)
+        obj=this._filterXPath(obj, z[i-1]);
+    return obj;
+};
+
+dtmlXMLLoaderObject.prototype._filterXPath=function(a, b){
+    var c = [];
+    var b = b.replace(/[^\[]*\[\@/g, "").replace(/[\[\]\@]*/g, "");
+
+    for (var i = 0; i < a.length; i++)
+        if (a[i].getAttribute(b))
+            c[c.length]=a[i];
+
+    return c;
+};
+
+dtmlXMLLoaderObject.prototype._getAllNamedChilds=function(a, b){
+    var c = [];
+
+    if (_isKHTML)
+        b=b.toUpperCase();
+
+    for (var i = 0; i < a.length; i++)for (var j = 0; j < a[i].childNodes.length; j++){
+        if (_isKHTML){
+            if (a[i].childNodes[j].tagName&&a[i].childNodes[j].tagName.toUpperCase() == b)
+                c[c.length]=a[i].childNodes[j];
+        }
+
+        else if (a[i].childNodes[j].tagName == b)
+            c[c.length]=a[i].childNodes[j];
+    }
+
+    return c;
+};
+
+function dhtmlXHeir(a, b){
+    for (var c in b)
+        if (typeof (b[c]) == "function")
+            a[c]=b[c];
+    return a;
+}
+
+function dhtmlxEvent(el, event, handler){
+    if (el.addEventListener)
+        el.addEventListener(event, handler, false);
+
+    else if (el.attachEvent)
+        el.attachEvent("on"+event, handler);
+}
+
+//============= XSL Extension ===================================
+
+dtmlXMLLoaderObject.prototype.xslDoc=null;
+dtmlXMLLoaderObject.prototype.setXSLParamValue=function(paramName, paramValue, xslDoc){
+    if (!xslDoc)
+        xslDoc=this.xslDoc;
+
+    if (xslDoc.responseXML)
+        xslDoc=xslDoc.responseXML;
+    var item =
+        this.doXPath("/xsl:stylesheet/xsl:variable[@name='"+paramName+"']", xslDoc,
+            "http:/\/www.w3.org/1999/XSL/Transform", "single");
+
+    if (item)
+        item.firstChild.nodeValue=paramValue;
+};
+
+dtmlXMLLoaderObject.prototype.doXSLTransToObject=function(xslDoc, xmlDoc){
+    if (!xslDoc)
+        xslDoc=this.xslDoc;
+
+    if (xslDoc.responseXML)
+        xslDoc=xslDoc.responseXML;
+
+    if (!xmlDoc)
+        xmlDoc=this.xmlDoc;
+
+    if (xmlDoc.responseXML)
+        xmlDoc=xmlDoc.responseXML;
+
+
+    var result;
+    //Mozilla
+    if (!_isIE){
+        if (!this.XSLProcessor){
+            this.XSLProcessor=new XSLTProcessor();
+            this.XSLProcessor.importStylesheet(xslDoc);
+        }
+        result = this.XSLProcessor.transformToDocument(xmlDoc);
+    } else {
+        result = new ActiveXObject("Msxml2.DOMDocument.3.0");
+        try{
+            xmlDoc.transformNodeToObject(xslDoc, result);
+        }catch(e){
+            result = xmlDoc.transformNode(xslDoc);
+        }
+    }
+    return result;
+};
+
+dtmlXMLLoaderObject.prototype.doXSLTransToString=function(xslDoc, xmlDoc){
+    var res = this.doXSLTransToObject(xslDoc, xmlDoc);
+    if(typeof(res)=="string")
+        return res;
+    return this.doSerialization(res);
+};
+
+dtmlXMLLoaderObject.prototype.doSerialization=function(xmlDoc){
+    if (!xmlDoc)
+        xmlDoc=this.xmlDoc;
+    if (xmlDoc.responseXML)
+        xmlDoc=xmlDoc.responseXML;
+    if (!_isIE){
+        var xmlSerializer = new XMLSerializer();
+        return xmlSerializer.serializeToString(xmlDoc);
+    } else
+        return xmlDoc.xml;
+};
+
+/**
+ *   @desc:
+ *   @type: private
+ */
+dhtmlxEventable=function(obj){
+    obj.attachEvent=function(name, catcher, callObj){
+        name='ev_'+name.toLowerCase();
+        if (!this[name])
+            this[name]=new this.eventCatcher(callObj||this);
+
+        return(name+':'+this[name].addEvent(catcher)); //return ID (event name & event ID)
+    };
+    obj.callEvent=function(name, arg0){
+        name='ev_'+name.toLowerCase();
+        if (this[name])
+            return this[name].apply(this, arg0);
+        return true;
+    };
+    obj.checkEvent=function(name){
+        return (!!this['ev_'+name.toLowerCase()]);
+    };
+    obj.eventCatcher=function(obj){
+        var dhx_catch = [];
+        var z = function(){
+            var res = true;
+            for (var i = 0; i < dhx_catch.length; i++){
+                if (dhx_catch[i]){
+                    var zr = dhx_catch[i].apply(obj, arguments);
+                    res=res&&zr;
+                }
+            }
+            return res;
+        };
+        z.addEvent=function(ev){
+            if (typeof (ev) != "function")
+                ev=eval(ev);
+            if (ev)
+                return dhx_catch.push(ev)-1;
+            return false;
+        };
+        z.removeEvent=function(id){
+            dhx_catch[id]=null;
+        };
+        return z;
+    };
+    obj.detachEvent=function(id){
+        if (id){
+            var list = id.split(':');           //get EventName and ID
+            this[list[0]].removeEvent(list[1]); //remove event
+        }
+    };
+    obj.detachAllEvents = function(){
+        for (var name in this){
+            if (name.indexOf("ev_")===0){
+                this.detachEvent(name);
+                this[name] = null;
+            }
+        }
+    };
+    obj = null;
+};
+if(!window.dhtmlx)
+    window.dhtmlx = {};
+
+(function(){
+    var _dhx_msg_cfg = null;
+    function callback(config, result){
+        var usercall = config.callback;
+        modality(false);
+        config.box.parentNode.removeChild(config.box);
+        _dhx_msg_cfg = config.box = null;
+        if (usercall)
+            usercall(result);
+    }
+    function modal_key(e){
+        if (_dhx_msg_cfg){
+            e = e||event;
+            var code = e.which||event.keyCode;
+            if (dhtmlx.message.keyboard){
+                if (code == 13 || code == 32)
+                    callback(_dhx_msg_cfg, true);
+                if (code == 27)
+                    callback(_dhx_msg_cfg, false);
+            }
+            if (e.preventDefault)
+                e.preventDefault();
+            return !(e.cancelBubble = true);
+        }
+    }
+    if (document.attachEvent)
+        document.attachEvent("onkeydown", modal_key);
+    else
+        document.addEventListener("keydown", modal_key, true);
+
+    function modality(mode){
+        if(!modality.cover){
+            modality.cover = document.createElement("DIV");
+            //necessary for IE only
+            modality.cover.onkeydown = modal_key;
+            modality.cover.className = "dhx_modal_cover";
+            document.body.appendChild(modality.cover);
+        }
+        var height =  document.body.scrollHeight;
+        modality.cover.style.display = mode?"inline-block":"none";
+    }
+
+    function button(text, result){
+        var button_css = "dhtmlx_"+text.toLowerCase().replace(/ /g, "_")+"_button"; // dhtmlx_ok_button, dhtmlx_click_me_button
+        return "<div class='dhtmlx_popup_button "+button_css+"' result='"+result+"' ><div>"+text+"</div></div>";
+    }
+
+    function info(text){
+        if (!t.area){
+            t.area = document.createElement("DIV");
+            t.area.className = "dhtmlx_message_area";
+            t.area.style[t.position]="5px";
+            document.body.appendChild(t.area);
+        }
+
+        t.hide(text.id);
+        var message = document.createElement("DIV");
+        message.innerHTML = "<div>"+text.text+"</div>";
+        message.className = "dhtmlx-info dhtmlx-" + text.type;
+        message.onclick = function(){
+            t.hide(text.id);
+            text = null;
+        };
+
+        if (t.position == "bottom" && t.area.firstChild)
+            t.area.insertBefore(message,t.area.firstChild);
+        else
+            t.area.appendChild(message);
+
+        if (text.expire > 0)
+            t.timers[text.id]=window.setTimeout(function(){
+                t.hide(text.id);
+            }, text.expire);
+
+        t.pull[text.id] = message;
+        message = null;
+
+        return text.id;
+    }
+    function _boxStructure(config, ok, cancel){
+        var box = document.createElement("DIV");
+        box.className = " dhtmlx_modal_box dhtmlx-"+config.type;
+        box.setAttribute("dhxbox", 1);
+
+        var inner = '';
+
+        if (config.width)
+            box.style.width = config.width;
+        if (config.height)
+            box.style.height = config.height;
+        if (config.title)
+            inner+='<div class="dhtmlx_popup_title">'+config.title+'</div>';
+        inner+='<div class="dhtmlx_popup_text"><span>'+(config.content?'':config.text)+'</span></div><div  class="dhtmlx_popup_controls">';
+        if (ok)
+            inner += button(config.ok || "OK", true);
+        if (cancel)
+            inner += button(config.cancel || "Cancel", false);
+        if (config.buttons){
+            for (var i=0; i<config.buttons.length; i++)
+                inner += button(config.buttons[i],i);
+        }
+        inner += '</div>';
+        box.innerHTML = inner;
+
+        if (config.content){
+            var node = config.content;
+            if (typeof node == "string")
+                node = document.getElementById(node);
+            if (node.style.display == 'none')
+                node.style.display = "";
+            box.childNodes[config.title?1:0].appendChild(node);
+        }
+
+        box.onclick = function(e){
+            e = e ||event;
+            var source = e.target || e.srcElement;
+            if (!source.className) source = source.parentNode;
+            if (source.className.split(" ")[0] == "dhtmlx_popup_button"){
+                var result = source.getAttribute("result");
+                result = (result == "true")||(result == "false"?false:result);
+                callback(config, result);
+            }
+        };
+        config.box = box;
+        if (ok||cancel)
+            _dhx_msg_cfg = config;
+
+        return box;
+    }
+    function _createBox(config, ok, cancel){
+        var box = config.tagName ? config : _boxStructure(config, ok, cancel);
+
+        if (!config.hidden)
+            modality(true);
+        document.body.appendChild(box);
+        var x = Math.abs(Math.floor(((window.innerWidth||document.documentElement.offsetWidth) - box.offsetWidth)/2));
+        var y = Math.abs(Math.floor(((window.innerHeight||document.documentElement.offsetHeight) - box.offsetHeight)/2));
+        if (config.position == "top")
+            box.style.top = "-3px";
+        else
+            box.style.top = y+'px';
+        box.style.left = x+'px';
+        //necessary for IE only
+        box.onkeydown = modal_key;
+
+        box.focus();
+        if (config.hidden)
+            dhtmlx.modalbox.hide(box);
+
+        return box;
+    }
+
+    function alertPopup(config){
+        return _createBox(config, true, false);
+    }
+    function confirmPopup(config){
+        return _createBox(config, true, true);
+    }
+    function boxPopup(config){
+        return _createBox(config);
+    }
+    function box_params(text, type, callback){
+        if (typeof text != "object"){
+            if (typeof type == "function"){
+                callback = type;
+                type = "";
+            }
+            text = {text:text, type:type, callback:callback };
+        }
+        return text;
+    }
+    function params(text, type, expire, id){
+        if (typeof text != "object")
+            text = {text:text, type:type, expire:expire, id:id};
+        text.id = text.id||t.uid();
+        text.expire = text.expire||t.expire;
+        return text;
+    }
+    dhtmlx.alert = function(){
+        var text = box_params.apply(this, arguments);
+        text.type = text.type || "confirm";
+        return alertPopup(text);
+    };
+    dhtmlx.confirm = function(){
+        var text = box_params.apply(this, arguments);
+        text.type = text.type || "alert";
+        return confirmPopup(text);
+    };
+    dhtmlx.modalbox = function(){
+        var text = box_params.apply(this, arguments);
+        text.type = text.type || "alert";
+        return boxPopup(text);
+    };
+    dhtmlx.modalbox.hide = function(node){
+        while (node && node.getAttribute && !node.getAttribute("dhxbox"))
+            node = node.parentNode;
+        if (node){
+            node.parentNode.removeChild(node);
+            modality(false);
+        }
+    };
+    var t = dhtmlx.message = function(text, type, expire, id){
+        text = params.apply(this, arguments);
+        text.type = text.type||"info";
+
+        var subtype = text.type.split("-")[0];
+        switch (subtype){
+            case "alert":
+                return alertPopup(text);
+            case "confirm":
+                return confirmPopup(text);
+            case "modalbox":
+                return boxPopup(text);
+            default:
+                return info(text);
+        }
+    };
+
+    t.seed = (new Date()).valueOf();
+    t.uid = function(){return t.seed++;};
+    t.expire = 4000;
+    t.keyboard = true;
+    t.position = "top";
+    t.pull = {};
+    t.timers = {};
+
+    t.hideAll = function(){
+        for (var key in t.pull)
+            t.hide(key);
+    };
+    t.hide = function(id){
+        var obj = t.pull[id];
+        if (obj && obj.parentNode){
+            window.setTimeout(function(){
+                obj.parentNode.removeChild(obj);
+                obj = null;
+            },2000);
+            obj.className+=" hidden";
+
+            if(t.timers[id])
+                window.clearTimeout(t.timers[id]);
+            delete t.pull[id];
+        }
+    };
+})();
+gantt = {
+    version:"2.1.1"
+};
+
+/*jsl:ignore*/
+//import from dhtmlxcommon.js
+
+function dhtmlxDetachEvent(el, event, handler){
+    if (el.removeEventListener)
+        el.removeEventListener(event, handler, false);
+
+    else if (el.detachEvent)
+        el.detachEvent("on"+event, handler);
+}
+
+
+/** Overrides event functionality.
+ *  Includes all default methods from dhtmlx.common but adds _silentStart, _silendEnd
+ *   @desc:
+ *   @type: private
+ */
+dhtmlxEventable=function(obj){
+    obj._silent_mode = false;
+    obj._silentStart = function() {
+        this._silent_mode = true;
+    };
+    obj._silentEnd = function() {
+        this._silent_mode = false;
+    };
+    obj.attachEvent=function(name, catcher, callObj){
+        name='ev_'+name.toLowerCase();
+        if (!this[name])
+            this[name]=new this._eventCatcher(callObj||this);
+
+        return(name+':'+this[name].addEvent(catcher)); //return ID (event name & event ID)
+    };
+    obj.callEvent=function(name, arg0){
+        if (this._silent_mode) return true;
+        name='ev_'+name.toLowerCase();
+        if (this[name])
+            return this[name].apply(this, arg0);
+        return true;
+    };
+    obj.checkEvent=function(name){
+        return (!!this['ev_'+name.toLowerCase()]);
+    };
+    obj._eventCatcher=function(obj){
+        var dhx_catch = [];
+        var z = function(){
+            var res = true;
+            for (var i = 0; i < dhx_catch.length; i++){
+                if (dhx_catch[i]){
+                    var zr = dhx_catch[i].apply(obj, arguments);
+                    res=res&&zr;
+                }
+            }
+            return res;
+        };
+        z.addEvent=function(ev){
+            if (typeof (ev) != "function")
+                ev=eval(ev);
+            if (ev)
+                return dhx_catch.push(ev)-1;
+            return false;
+        };
+        z.removeEvent=function(id){
+            dhx_catch[id]=null;
+        };
+        return z;
+    };
+    obj.detachEvent=function(id){
+        if (id){
+            var list = id.split(':');           //get EventName and ID
+            this[list[0]].removeEvent(list[1]); //remove event
+        }
+    };
+    obj.detachAllEvents = function(){
+        for (var name in this){
+            if (name.indexOf("ev_") === 0)
+                delete this[name];
+        }
+    };
+    obj = null;
+};
+
+
+/*jsl:end*/
+
+
+dhtmlx.copy = function(object) {
+    var i, t, result; // iterator, types array, result
+
+    if (object && typeof object == "object") {
+        result = {};
+        t = [Array,Date,Number,String,Boolean];
+        for (i=0; i<t.length; i++) {
+            if (object instanceof t[i])
+                result = i ? new t[i](object) : new t[i](); // first one is array
+        }
+
+        for (i in object) {
+            if (Object.prototype.hasOwnProperty.apply(object, [i]))
+                result[i] = dhtmlx.copy(object[i]);
+        }
+    }
+    return result || object;
+};
+
+dhtmlx.mixin = function(target, source, force){
+    for (var f in source)
+        if ((!target[f] || force)) target[f]=source[f];
+    return target;
+};
+
+
+dhtmlx.defined = function(obj) {
+    return typeof(obj) != "undefined";
+};
+
+dhtmlx.uid = function() {
+    if (!this._seed)
+        this._seed = (new Date()).valueOf();
+
+    this._seed++;
+    return this._seed;
+};
+
+
+//creates function with specified "this" pointer
+dhtmlx.bind=function(functor, object){
+    return function(){ return functor.apply(object,arguments); };
+};
+
+
+//returns position of html element on the page
+gantt._get_position = function(elem) {
+    var top=0, left=0;
+    if (elem.getBoundingClientRect) { //HTML5 method
+        var box = elem.getBoundingClientRect();
+        var body = document.body;
+        var docElem = document.documentElement;
+        var scrollTop = window.pageYOffset || docElem.scrollTop || body.scrollTop;
+        var scrollLeft = window.pageXOffset || docElem.scrollLeft || body.scrollLeft;
+        var clientTop = docElem.clientTop || body.clientTop || 0;
+        var clientLeft = docElem.clientLeft || body.clientLeft || 0;
+        top  = box.top +  scrollTop - clientTop;
+        left = box.left + scrollLeft - clientLeft;
+        return { y: Math.round(top), x: Math.round(left), width:elem.offsetWidth, height:elem.offsetHeight };
+    } else { //fallback to naive approach
+        while(elem) {
+            top = top + parseInt(elem.offsetTop,10);
+            left = left + parseInt(elem.offsetLeft,10);
+            elem = elem.offsetParent;
+        }
+        return { y: top, x: left, width:elem.offsetWidth, height: elem.offsetHeight};
+    }
+};
+
+
+gantt._detectScrollSize = function(){
+    var div = document.createElement("div");
+    div.style.cssText="visibility:hidden;position:absolute;left:-1000px;width:100px;padding:0px;margin:0px;height:110px;min-height:100px;overflow-y:scroll;";
+
+    document.body.appendChild(div);
+    var width = div.offsetWidth-div.clientWidth;
+    document.body.removeChild(div);
+
+    return width;
+};
+
+dhtmlxEventable(gantt);
+
+gantt._click = {};
+gantt._dbl_click = {};
+gantt._context_menu = {};
+gantt._on_click = function(e) {
+    e = e || window.event;
+    var trg = e.target || e.srcElement;
+    var id = gantt.locate(e);
+
+    if (id !== null){
+        var res = !gantt.checkEvent("onTaskClick") || gantt.callEvent("onTaskClick", [id, e]);
+        if(res && gantt.config.select_task){
+            gantt.selectTask(id);
+        }
+    }else{
+        gantt.callEvent("onEmptyClick", [e]);
+    }
+
+    gantt._find_ev_handler(e, trg, gantt._click, id);
+};
+gantt._on_contextmenu = function(e){
+    e = e || window.event;
+    var src = e.target||e.srcElement,
+        taskId = gantt.locate(src),
+        linkId = gantt.locate(src, gantt.config.link_attribute);
+
+    var res = !gantt.checkEvent("onContextMenu") || gantt.callEvent("onContextMenu", [taskId, linkId, e]);
+    if(!res)
+        e.preventDefault();
+    return res;
+};
+gantt._find_ev_handler = function(e, trg, hash, id){
+    var res = true;
+    while (trg && trg.parentNode){
+        var css = trg.className;
+        if (css) {
+            css = css.split(" ");
+            for (var i = 0; i < css.length; i++) {
+                if (!css[i]) continue;
+                if (hash[css[i]]){
+                    res =  hash[css[i]].call(gantt, e, id, trg);
+                    res = !(typeof res!="undefined"&&res!==true);
+                }
+            }
+        }
+        trg=trg.parentNode;
+    }
+    return res;
+};
+gantt._on_dblclick = function(e) {
+    e = e || window.event;
+    var trg = e.target || e.srcElement;
+    var id = gantt.locate(e);
+
+    var default_action = gantt._find_ev_handler(e, trg, gantt._dbl_click, id);
+    if(!default_action)
+        return;
+
+    if (id !== null){
+        var res = !gantt.checkEvent("onTaskDblClick") || gantt.callEvent("onTaskDblClick", [id, e]);
+        if(res && gantt.config.details_on_dblclick){
+            gantt.showLightbox(id);
+        }
+    }
+};
+
+gantt._on_mousemove = function(e){
+    if (gantt.checkEvent("onMouseMove")){
+        var id = gantt.locate(e);
+        gantt._last_move_event = e;
+        gantt.callEvent("onMouseMove", [id,e]);
+    }
+};
+function dhtmlxDnD(obj, config) {
+    if(config){
+        this._settings = config;
+    }
+    dhtmlxEventable(this);
+    dhtmlxEvent(obj, "mousedown", dhtmlx.bind(function(e) {
+        this.dragStart(obj, e);
+    }, this));
+
+}
+dhtmlxDnD.prototype = {
+    dragStart: function(obj, e) {
+        this.config = {
+            obj: obj,
+            marker: null,
+            started: false,
+            pos: this.getPosition(e),
+            sensitivity: 4
+        };
+        if(this._settings)
+            dhtmlx.mixin(this.config, this._settings, true);
+
+        var mousemove = dhtmlx.bind(function(e) { return this.dragMove(obj, e); }, this);
+        var scroll = dhtmlx.bind(function(e) { return this.dragScroll(obj, e); }, this);
+
+        var limited_mousemove = dhtmlx.bind(function(e) {
+            if(dhtmlx.defined(this.config.updates_per_second)){
+                if(!gantt._checkTimeout(this, this.config.updates_per_second))
+                    return true;
+            }
+
+            return mousemove(e);
+        }, this);
+
+        var mouseup = dhtmlx.bind(function(e) {
+            dhtmlxDetachEvent(document.body, "mousemove", limited_mousemove);
+            dhtmlxDetachEvent(document.body, "mouseup", mouseup);
+            return this.dragEnd(obj);
+        }, this);
+
+
+        dhtmlxEvent(document.body, "mousemove", limited_mousemove);
+        dhtmlxEvent(document.body, "mouseup", mouseup);
+        document.body.className += " gantt_noselect";
+    },
+    dragMove: function(obj, e) {
+        if (!this.config.marker && !this.config.started) {
+            var pos = this.getPosition(e);
+            var diff_x = pos.x - this.config.pos.x;
+            var diff_y = pos.y - this.config.pos.y;
+            var distance = Math.sqrt(Math.pow(Math.abs(diff_x), 2) + Math.pow(Math.abs(diff_y), 2));
+
+            if (distance > this.config.sensitivity) {
+                // real drag starts here,
+                // when user moves mouse at first time after onmousedown
+                this.config.started = true;
+                this.config.ignore = false;
+                if (this.callEvent("onBeforeDragStart", [obj,e]) === false) {
+                    this.config.ignore = true;
+                    return true;
+                }
+
+                // initialize dnd marker
+                var marker = this.config.marker = document.createElement("div");
+                marker.className = "gantt_drag_marker";
+                marker.innerHTML = "Dragging object";
+                document.body.appendChild(marker);
+
+                this.callEvent("onAfterDragStart", [obj,e]);
+            } else
+                this.config.ignore = true;
+        }
+        if (!this.config.ignore) {
+            e.pos = this.getPosition(e);
+            this.config.marker.style.left = e.pos.x + "px";
+            this.config.marker.style.top = e.pos.y + "px";
+            this.callEvent("onDragMove", [obj,e]);
+        }
+    },
+
+    dragEnd: function(obj) {
+        if (this.config.marker) {
+            this.config.marker.parentNode.removeChild(this.config.marker);
+            this.config.marker = null;
+            this.callEvent("onDragEnd", []);
+        }
+        document.body.className = document.body.className.replace(" gantt_noselect", "");
+    },
+
+    getPosition: function(e) {
+        var x = 0, y = 0;
+        e = e || window.event;
+        if (e.pageX || e.pageY) {
+            x = e.pageX;
+            y = e.pageY;
+        } else if (e.clientX || e.clientY) 	{
+            x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+            y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+        }
+        return { x:x, y:y };
+    }
+};
+gantt._init_grid = function() {
+    this._click.gantt_close = dhtmlx.bind(function(e, id, trg) {
+        this.close(id);
+    }, this);
+    this._click.gantt_open = dhtmlx.bind(function(e, id, trg) {
+        this.open(id);
+    }, this);
+
+
+    this._click.gantt_row = dhtmlx.bind(function(e, id, trg) {
+        if (id!==null) {
+            var el = this.getTaskNode(id);
+            var left = Math.max(el.offsetLeft - this.config.task_scroll_offset, 0);
+            this.scrollTo(left);
+            this.callEvent("onTaskRowClick", [id, trg]);
+        }
+    }, this);
+
+    this._click.gantt_grid_head_cell = dhtmlx.bind(function(e, id, trg) {
+        var column = trg.getAttribute("column_id");
+
+        if(!this.callEvent("onGridHeaderClick", [column, e]))
+            return;
+
+        if (column == "add") {
+            this._click.gantt_add(e, this.config.root_id);
+        } else if (this.config.sort){
+            var sort = (this._sort && this._sort.direction && this._sort.name == column) ? this._sort.direction : "desc";
+            // invert sort direction
+            sort = (sort == "desc") ? "asc" : "desc";
+            this._sort = {
+                name: column,
+                direction: sort
+            };
+            this._render_grid_header();
+
+            this.sort(column, sort == "desc");
+        }
+    }, this);
+
+    if(!this.config.sort && this.config.order_branch) {
+        this._init_dnd();
+    }
+
+    this._click.gantt_add = dhtmlx.bind(function(e, id, trg) {
+        if(this.config.readonly) return;
+
+        var parent = id ? this.getTask(id) : false,
+            startDate = '';
+        if(parent){
+            startDate = parent.start_date;
+        }else{
+            var first = this._order[0];
+            startDate = first ? this.getTask(first).start_date : this.getState().min_date;
+        }
+
+
+        if(parent)
+            parent.$open = true;
+
+        var item = { text:gantt.locale.labels.new_task, start_date:this.templates.xml_format(startDate), duration: 1, progress: 0, parent: id };
+        item.id = dhtmlx.uid();
+        this.callEvent("onTaskCreated", [item]);
+
+        if (this.config.details_on_create){
+            item.$new = true;
+            this._pull[item.id] = this._init_task(item);
+
+            this._add_branch(item);
+            item.$level = this._item_level(item);
+            this.selectTask(item.id);
+            this.refreshData();
+            this.showLightbox(item.id);
+        }else{
+            this.addTask(item);
+
+            this.showTask(item.id);
+            this.selectTask(item.id);
+        }
+
+
+    }, this);
+
+
+};
+
+gantt._render_grid = function(){
+    if(this._is_grid_visible()){
+        this._calc_grid_width();
+        this._render_grid_header();
+    }
+};
+
+gantt._calc_grid_width = function() {
+    if (this.config.autofit) {
+        var columns = this.config.columns;
+        var cols_width = 0;
+        var unknown = [];
+        var width = [];
+        for (var i = 0; i < columns.length; i++) {
+            var v = parseInt(columns[i].width, 10);
+            if (window.isNaN(v)) {
+                v = 50;
+                unknown.push(i);
+            }
+            width[i] = v;
+            cols_width += v;
+        }
+        var diff = this._get_grid_width() - cols_width;
+        // TODO: logic may be improved for proportional changing of width
+        var step = diff/(unknown.length > 0 ? unknown.length : (width.length > 0 ? width.length : 1));
+        if (unknown.length > 0) {
+            // there are several columns with undefined width
+            var delta = diff/(unknown.length ? unknown.length : 1);
+            for (var i = 0; i < unknown.length; i++) {
+                var index = unknown[i];
+                width[index] += delta;
+            }
+        } else {
+            // delta must be added for all columns
+            var delta = diff/(width.length ? width.length : 1);
+            for (var i = 0; i < width.length; i++)
+                width[i] += delta;
+        }
+
+        for (var i = 0; i < width.length; i++) {
+            columns[i].width = width[i];
+        }
+    }
+};
+
+gantt._render_grid_header = function() {
+    var columns = this.config.columns;
+    var cells = [];
+    var width = 0,
+        labels = this.locale.labels;
+
+    var lineHeigth = this.config.scale_height-2;
+
+    for (var i = 0; i < columns.length; i++) {
+        var last = i == columns.length-1;
+        var col = columns[i];
+        if (last && this._get_grid_width() > width+col.width)
+            col.width = this._get_grid_width() - width;
+        width += col.width;
+        var sort = (this._sort && col.name == this._sort.name) ? ("<div class='gantt_sort gantt_" + this._sort.direction + "'></div>") : "";
+        var cssClass = ["gantt_grid_head_cell",
+            ("gantt_grid_head_" + col.name),
+            (last ? "gantt_last_cell" : ""),
+            this.templates.grid_header_class(col.name, col)].join(" ");
+
+        var style = "width:" + (col.width-(last?1:0)) + "px;";
+        var label = (col.label || labels["column_" + col.name]);
+        label = label || "";
+        var cell = "<div class='" + cssClass + "' style='" + style + "' column_id='" + col.name + "'>" + label + sort +  "</div>";
+        cells.push(cell);
+    }
+    this.$grid_scale.style.height = (this.config.scale_height-1) + "px";
+    this.$grid_scale.style.lineHeight = lineHeigth + "px";
+    this.$grid_scale.style.width = (width-1) + "px";
+    this.$grid_scale.innerHTML = cells.join("");
+};
+
+
+
+gantt._render_grid_item = function(item) {
+    if(!gantt._is_grid_visible())
+        return null;
+
+    var columns = this.config.columns;
+    var cells = [];
+    var width = 0;
+    for (var i = 0; i < columns.length; i++) {
+        var last = i == columns.length-1;
+        var col = columns[i];
+        var cell;
+
+        var value;
+        if (col.name == "add" && i == columns.length-1) {
+            value = "<div class='gantt_add'></div>";
+        } else {
+            if (col.template)
+                value = col.template(item);
+            else
+                value = item[col.name];
+
+            if (value instanceof Date)
+                value = this.templates.date_grid(value);
+            value = "<div class='gantt_tree_content'>" + value + "</div>";
+        }
+        var css = "gantt_cell" + (last ? " gantt_last_cell" : "");
+
+        var tree = "";
+        if (col.tree) {
+            for (var j = 0; j < item.$level; j++)
+                tree += this.templates.grid_indent(item);
+
+            var has_child = (this._branches[item.id] && this._branches[item.id].length > 0);
+            if (has_child) {
+                tree += this.templates.grid_open(item);
+                tree += this.templates.grid_folder(item);
+            } else {
+                tree += this.templates.grid_blank(item);
+                tree += this.templates.grid_file(item);
+            }
+        }
+        var style = "width:" + (col.width-(last ? 1 : 0)) + "px;";
+        if (dhtmlx.defined(col.align))
+            style += "text-align:" + col.align + ";";
+        cell = "<div class='" + css + "' style='" + style + "'>" + tree + value + "</div>";
+        cells.push(cell);
+    }
+    var css = item.$index%2 === 0 ? "" : " odd";
+    css += (item.$transparent) ? " gantt_transparent" : "";
+    if (this.templates.grid_row_class) {
+        var css_template = this.templates.grid_row_class.call(this, item.start_date, item.end_date, item);
+        if (css_template)
+            css += " " + css_template;
+    }
+
+    if(this.getState().selected_task == item.id){
+        css += " gantt_selected";
+    }
+    var el = document.createElement("div");
+    el.className = "gantt_row" + css;
+    el.style.height = this.config.row_height + "px";
+    el.style.lineHeight = (gantt.config.row_height)+"px";
+    el.setAttribute(this.config.task_attribute, item.id);
+    el.innerHTML = cells.join("");
+    return el;
+};
+
+
+gantt.open = function(id){
+    gantt._set_item_state(id, true);
+    this.callEvent("onTaskOpened", [id]);
+};
+gantt.close = function(id){
+    gantt._set_item_state(id, false);
+    this.callEvent("onTaskClosed", [id]);
+};
+gantt._set_item_state = function(id, state) {
+    if (id && this._pull[id]) {
+        this._pull[id].$open = state;
+        this.refreshData();
+    }
+};
+
+gantt._is_grid_visible = function(){
+    return (this.config.grid_width && this.config.show_grid);
+};
+gantt._get_grid_width = function(){
+    if(this._is_grid_visible()){
+        if(this._is_chart_visible()){
+            return this.config.grid_width;
+        }else{
+            return this._x;
+        }
+    }else{
+        return 0;
+    }
+};
+gantt.getTaskIndex = function(id){
+    var branch = this._branches[this.getTask(id).parent];
+    for (var i = 0; i < branch.length; i++)
+        if (branch[i] == id)
+            return i;
+
+    return -1;
+};
+gantt.getGlobalTaskIndex = function(id){
+    var branch = this._order;
+    for (var i = 0; i < branch.length; i++)
+        if (branch[i] == id)
+            return i;
+
+    return -1;
+};
+gantt.moveTask = function(sid, tindex, parent){
+    //target id as 4th parameter
+    var id = arguments[3];
+    if (id){
+        if (id === sid) return;
+
+        parent = this.getTask(id).parent;
+        tindex = this.getTaskIndex(id);
+    }
+
+    parent = parent || this.config.root_id;
+    var source = this.getTask(sid);
+    var sbranch = this._branches[source.parent];
+
+    var tbranch = this._branches[parent];
+    if (tindex == -1)
+        tindex = tbranch.length + 1;
+    if (source.parent == parent){
+        var sindex = this.getTaskIndex(sid);
+        if (sindex == tindex) return;
+        if (sindex < tindex)
+            tindex--;
+    }
+
+    this._replace_branch_child(source.parent, sid);
+    tbranch = this._branches[parent];
+
+    var tid = tbranch[tindex];
+    if (!tid) //adding as last element
+        tbranch.push(sid);
+    else
+        tbranch = tbranch.slice(0, tindex).concat([ sid ]).concat(tbranch.slice(tindex));
+
+    source.parent = parent;
+    this._branches[parent] = tbranch;
+    this.refreshData();
+};
+
+gantt._init_dnd = function() {
+    var dnd = new dhtmlxDnD(this.$grid_data, {updates_per_second : 60});
+    if (dhtmlx.defined(this.config.dnd_sensitivity))
+        dnd.config.sensitivity = this.config.dnd_sensitivity;
+
+    dnd.attachEvent("onBeforeDragStart", dhtmlx.bind(function(obj,e) {
+        var el = this._locateHTML(e);
+        if (!el) return false;
+        if (this.hideQuickInfo) this._hideQuickInfo();
+
+        var id =  this.locate(e);
+        if(!this.callEvent("onRowDragStart", [id, e.target || e.srcElement, e])){
+            return false;
+        }
+
+    }, this));
+
+    dnd.attachEvent("onAfterDragStart", dhtmlx.bind(function(obj,e) {
+        var el = this._locateHTML(e);
+        dnd.config.marker.innerHTML = el.outerHTML;
+
+        dnd.config.id = this.locate(e);
+        var task = this.getTask(dnd.config.id);
+        task.$open = false;
+        task.$transparent = true;
+        this.refreshData();
+    }, this));
+
+
+
+    dnd.lastTaskOfLevel = function(level){
+        var ids = gantt._order,
+            pull = gantt._pull,
+            last_item = null;
+        for(var i= 0, len = ids.length; i < len; i++){
+            if(pull[ids[i]].$level == level){
+                last_item = pull[ids[i]];
+            }
+        }
+        return last_item ? last_item.id : null;
+    };
+    dnd.attachEvent("onDragMove", dhtmlx.bind(function(obj,e) {
+        var dd = dnd.config;
+        var pos = this._get_position(this.$grid_data);
+
+        // row offset
+        var x = pos.x + 10;
+        var y = e.pos.y - 10;
+
+        // prevent moving row out of grid_data container
+        if (y < pos.y) y = pos.y;
+        if (y > pos.y + this.$grid_data.offsetHeight - this.config.row_height) y = pos.y + this.$grid_data.offsetHeight - this.config.row_height;
+
+        // setting position of row
+        dd.marker.style.left = x + "px";
+        dd.marker.style.top = y + "px";
+
+
+        // highlight row when mouseover
+        var target = document.elementFromPoint(pos.x-document.body.scrollLeft+1, y-document.body.scrollTop);
+        var el = this.locate(target);
+
+        var item = this.getTask(dnd.config.id);
+        if(!this.isTaskExists(el)){
+            el = dnd.lastTaskOfLevel(item.$level);
+            if(el == dnd.config.id){
+                el = null;
+            }
+        }
+
+        if (this.isTaskExists(el)) {
+            var box = gantt._get_position(target);
+            var over = this.getTask(el);
+
+
+            if (box.y + target.offsetHeight/2 < y){
+                //hovering over bottom part of item, check can be drop to bottom
+                var index = this.getGlobalTaskIndex(over.id);
+                var next = this._pull[this._order[index+1+(over.id == item.id ? 1 : 0)]]; //adds +1 when hovering over placeholder
+                if (next){
+                    if (next.id != item.id)
+                        over = next; //there is a valid target
+                    else
+                        return;
+                } else {
+                    //we at end of the list, check and drop at the end of list
+                    next = this._pull[this._order[index]];
+                    if (next.$level == item.$level){
+                        this.moveTask(item.id, -1, next.parent);
+                        dd.target = "next:"+next.id;
+                        return;
+                    }
+                }
+            }
+
+            //replacing item under cursor
+            if (over.$level == item.$level && item.id != over.id){
+                this.moveTask(item.id, 0, 0, over.id);
+                dd.target = over.id;
+            } else {
+                //if item is on different level, check the one before it
+                if (item.id == over.id) return;
+
+                var index = this.getGlobalTaskIndex(over.id);
+                var prev = this._pull[this._order[index-1]];
+                if (prev && prev.$level == item.$level && item.id != prev.id){
+                    this.moveTask(item.id, -1, prev.parent);
+                    dd.target = "next:"+prev.id;
+                }
+            }
+        }
+        return true;
+    }, this));
+
+
+    dnd.attachEvent("onDragEnd", dhtmlx.bind(function(){
+        this.getTask(dnd.config.id).$transparent = false;
+        this.refreshData();
+        this.callEvent("onRowDragEnd", [dnd.config.id, dnd.config.target]);
+    }, this));
+};
+gantt._scale_helpers = {
+    getSum : function(sizes, from, to){
+        if(to === undefined)
+            to = sizes.length - 1;
+        if(from === undefined)
+            from = 0;
+
+        var summ = 0;
+        for(var i=from; i <= to; i++)
+            summ += sizes[i];
+
+        return summ;
+    },
+    setSumWidth : function(sum_width, scale, from, to){
+        var parts = scale.width;
+
+        if(to === undefined)
+            to = parts.length - 1;
+        if(from === undefined)
+            from = 0;
+        var length = to - from + 1;
+
+        if(from > parts.length - 1 || length <= 0 || to > parts.length - 1)
+            return;
+
+        var oldWidth = this.getSum(parts, from, to);
+
+        var diff = sum_width - oldWidth;
+
+        this.adjustSize(diff, parts, from, to);
+        this.adjustSize(- diff, parts, to + 1);
+
+        scale.full_width = this.getSum(parts);
+    },
+    splitSize : function(width, count){
+        var arr = [];
+        for(var i=0; i < count; i++) arr[i] = 0;
+
+        this.adjustSize(width, arr);
+        return arr;
+
+    },
+    adjustSize : function(width, parts, from, to){
+        if(!from)
+            from = 0;
+        if(to === undefined)
+            to = parts.length - 1;
+
+        var length = to - from + 1;
+
+        var full = this.getSum(parts, from, to);
+
+        var shared = 0;
+
+        for(var i = from; i <= to; i++){
+            var share = Math.floor(width*(full ? (parts[i]/full) : (1/length)));
+
+            full -= parts[i];
+            width -= share;
+            length--;
+
+            parts[i] += share;
+            shared += share;
+        }
+        parts[parts.length - 1] += width;
+        //parts[parts.length - 1] += width - shared;
+    },
+    sortScales : function(scales){
+        function cellSize(unit, step){
+            var d = new Date(1970, 0, 1);
+            return gantt.date.add(d, step, unit) - d;
+        }
+
+        scales.sort(function(a, b){
+            return cellSize(a.unit, a.step) < cellSize(b.unit, b.step) ? 1 : -1;
+        });
+    },
+    primaryScale : function(){
+
+        gantt._init_template("date_scale");
+
+        return {
+            unit: gantt.config.scale_unit,
+            step: gantt.config.step,
+            template : gantt.templates.date_scale,
+            date : gantt.config.date_scale,
+            css: gantt.templates.scale_cell_class
+        };
+    },
+
+    prepareConfigs : function(scales, min_coll_width, container_width, scale_height){
+        var heights = this.splitSize(scale_height, scales.length);
+        var full_width = container_width;
+
+        var configs = [];
+        for(var i=scales.length-1; i >= 0; i--){
+            var main_scale = (i == scales.length - 1);
+            var cfg = this.initScaleConfig(scales[i]);
+            if(main_scale){
+                this.processIgnores(cfg);
+            }
+
+            this.initColSizes(cfg, min_coll_width, full_width, heights[i]);
+            this.limitVisibleRange(cfg);
+
+            if(main_scale){
+                full_width = cfg.full_width;
+            }
+
+            configs.unshift(cfg);
+        }
+
+
+        for( var i =0; i < configs.length-1; i++){
+            this.alineScaleColumns(configs[configs.length-1], configs[i]);
+        }
+
+        return configs;
+
+    },
+
+    _ignore_time_config : function(date){
+        if(this.config.skip_off_time){
+            return !this.isWorkTime(date);
+        }
+        return false;
+    },
+    processIgnores : function(config){
+        var display_count = config.count;
+        config.ignore_x = {};
+        if(gantt.ignore_time || gantt.config.skip_off_time){
+            var ignore = gantt.ignore_time || function(){return false;};
+            display_count = 0;
+            for(var i=0; i < config.trace_x.length; i++){
+
+                if(ignore.call(gantt, config.trace_x[i]) || this._ignore_time_config.call(gantt,config.trace_x[i])){
+                    config.ignore_x[config.trace_x[i].valueOf()] = true;
+                    config.ignored_colls = true;
+                }else{
+                    display_count++;
+                }
+            }
+
+        }
+        config.display_count = display_count;
+    },
+    initColSizes : function(config, min_col_width, full_width, line_height){
+        var cont_width = full_width;
+
+        config.height = line_height;
+
+        var column_count = config.display_count === undefined ? config.count : config.display_count;
+
+        if(!column_count)
+            column_count = 1;
+
+        config.col_width = Math.floor(cont_width/column_count);
+
+        if(min_col_width){
+            if (config.col_width < min_col_width){
+                config.col_width = min_col_width;
+                cont_width = config.col_width * column_count;
+            }
+        }
+        config.width = [];
+        var ignores = config.ignore_x || {};
+        for(var i =0; i < config.trace_x.length; i++){
+            if(ignores[config.trace_x[i].valueOf()] || (config.display_count == config.count)){
+                config.width[i] = 0;
+            }else{
+                config.width[i] = 1;
+            }
+        }
+
+        this.adjustSize(cont_width - this.getSum(config.width)/* 1 width per column from the code above */, config.width);
+        config.full_width = this.getSum(config.width);
+    },
+    initScaleConfig : function(config){
+        var cfg = dhtmlx.mixin({
+            count:0,
+            col_width:0,
+            full_width:0,
+            height:0,
+            width:[],
+            trace_x:[]
+        }, config);
+
+        this.eachColumn(config.unit, config.step, function(date){
+            cfg.count++;
+            cfg.trace_x.push(new Date(date));
+        });
+
+        return cfg;
+    },
+    iterateScales : function(lower_scale, upper_scale, from, to, callback){
+        var upper_dates = upper_scale.trace_x;
+        var lower_dates = lower_scale.trace_x;
+
+        var prev = from || 0;
+        var end = to || (lower_dates.length - 1);
+        var prevUpper = 0;
+        for(var up=1; up < upper_dates.length; up++){
+            for(var next=prev; next <= end; next++){
+                if(+lower_dates[next] == +upper_dates[up]){
+                    if(callback){
+                        callback.apply(this, [prevUpper, up, prev, next]);
+                    }
+                    prev = next;
+                    prevUpper = up;
+                    continue;
+                }
+            }
+        }
+    },
+    alineScaleColumns : function(lower_scale, upper_scale, from, to){
+        this.iterateScales(lower_scale, upper_scale, from, to, function(upper_start, upper_end, lower_start, lower_end){
+            var targetWidth = this.getSum(lower_scale.width, lower_start, lower_end - 1);
+            var actualWidth = this.getSum(upper_scale.width, upper_start, upper_end - 1);
+            if(actualWidth != targetWidth){
+                this.setSumWidth(targetWidth, upper_scale, upper_start, upper_end - 1);
+            }
+
+        });
+    },
+
+    eachColumn : function(unit, step, callback){
+        var start = new Date(gantt._min_date),
+            end = new Date(gantt._max_date);
+        if(gantt.date[unit + "_start"]){
+            start = gantt.date[unit + "_start"](start);
+        }
+
+        var curr = new Date(start);
+        while(+curr < +end){
+            callback.call(this, new Date(curr));
+            curr = gantt.date.add(curr, step, unit);
+        }
+    },
+    limitVisibleRange : function(cfg){
+        var dates = cfg.trace_x;
+
+        var left = 0, right = cfg.width.length-1;
+        var diff = 0;
+        if(+dates[0] < +gantt._min_date && left != right){
+            var width = Math.floor(cfg.width[0] * ((dates[1] - gantt._min_date)/ (dates[1] - dates[0])));
+            diff += cfg.width[0] - width;
+            cfg.width[0] = width;
+
+            dates[0] = new Date(gantt._min_date);
+        }
+
+        var last = dates.length - 1;
+        var lastDate = dates[last];
+        var outDate = gantt.date.add(lastDate, cfg.step, cfg.unit);
+        if(+outDate > +gantt._max_date && last > 0){
+            var width = cfg.width[last] - Math.floor(cfg.width[last] * ((outDate - gantt._max_date)/(outDate - lastDate)));
+            diff += cfg.width[last] - width;
+            cfg.width[last] = width;
+        }
+
+        if(diff){
+            var full = this.getSum(cfg.width);
+            var shared = 0;
+            for(var i =0; i < cfg.width.length; i++){
+                var share = Math.floor(diff*(cfg.width[i]/full));
+                cfg.width[i] += share;
+                shared += share;
+            }
+            this.adjustSize(diff - shared, cfg.width);
+        }
+
+    }
+};
+gantt._tasks_dnd = {
+    drag : null,
+    _events:{
+        before_start:{},
+        before_finish:{},
+        after_finish:{}
+    },
+    _handlers:{},
+    init:function(){
+        this.clear_drag_state();
+        var drag = gantt.config.drag_mode;
+        this.set_actions();
+
+        var evs = {
+            "before_start":"onBeforeTaskDrag",
+            "before_finish":"onBeforeTaskChanged",
+            "after_finish":"onAfterTaskDrag"
+        };
+        //for now, all drag operations will trigger the same events
+        for(var stage in this._events){
+            for(var mode in drag){
+                this._events[stage][mode] = evs[stage];
+            }
+        }
+
+        this._handlers[drag.move] = this._move;
+        this._handlers[drag.resize] = this._resize;
+        this._handlers[drag.progress] = this._resize_progress;
+
+    },
+    set_actions:function(){
+        var data = gantt.$task_data;
+        dhtmlxEvent(data, "mousemove", dhtmlx.bind(function(e){
+            this.on_mouse_move(e||event);
+        }, this));
+        dhtmlxEvent(data, "mousedown", dhtmlx.bind(function(e){
+            this.on_mouse_down(e||event);
+        }, this));
+        dhtmlxEvent(data, "mouseup", dhtmlx.bind(function(e){
+            this.on_mouse_up(e||event);
+        }, this));
+    },
+
+    clear_drag_state : function(){
+        this.drag = {
+            id:null,
+            mode:null,
+            pos:null,
+            start_x:null,
+            start_y:null,
+            obj:null,
+            left:null
+        };
+    },
+    _resize : function(ev, shift, drag){
+        var cfg = gantt.config;
+        var coords_x = this._drag_task_coords(ev, drag);
+        if(drag.left){
+            ev.start_date = gantt._date_from_pos(coords_x.start + shift);
+            if(!ev.start_date){
+                ev.start_date = new Date(gantt.getState().min_date);
+            }
+        }else{
+            ev.end_date =gantt._date_from_pos(coords_x.end + shift);
+            if(!ev.end_date){
+                ev.end_date = new Date(gantt.getState().max_date);
+            }
+        }
+
+        if (ev.end_date - ev.start_date < cfg.min_duration){
+            if(drag.left)
+                ev.start_date = gantt.calculateEndDate(ev.end_date, -1);
+            else
+                ev.end_date = gantt.calculateEndDate(ev.start_date, 1);
+        }
+        gantt._init_task_timing(ev);
+    },
+    _resize_progress:function(ev, shift, drag){
+        var coords_x = this._drag_task_coords(ev, drag);
+
+        var diff = Math.max(0, drag.pos.x - coords_x.start);
+        ev.progress = Math.min(1, diff / (coords_x.end-coords_x.start));
+    },
+    _move : function(ev, shift, drag){
+        var coords_x = this._drag_task_coords(ev, drag);
+        var new_start = gantt._date_from_pos(coords_x.start + shift),
+            new_end = gantt._date_from_pos(coords_x.end + shift);
+        if(!new_start){
+            ev.start_date = new Date(gantt.getState().min_date);
+            ev.end_date = gantt._date_from_pos(gantt.posFromDate(ev.start_date) + (coords_x.end - coords_x.start));
+        }else if(!new_end){
+            ev.end_date = new Date(gantt.getState().max_date);
+            ev.start_date = gantt._date_from_pos(gantt.posFromDate(ev.end_date) - (coords_x.end - coords_x.start));
+        }else{
+            ev.start_date = new_start;
+            ev.end_date = new_end;
+        }
+    },
+    _drag_task_coords : function(t, drag){
+        var start = drag.obj_s_x = drag.obj_s_x || gantt.posFromDate(t.start_date);
+        var end = drag.obj_e_x = drag.obj_e_x || gantt.posFromDate(t.end_date);
+        return {
+            start : start,
+            end : end
+        };
+    },
+    on_mouse_move : function(e){
+        if(this.drag.start_drag)
+            this._start_dnd(e);
+
+        var drag = this.drag;
+
+        if (drag.mode){
+            if(!gantt._checkTimeout(this, 40))//limit update frequency
+                return;
+
+            this._update_on_move(e);
+
+        }
+    },
+    _update_on_move : function(e){
+        var drag = this.drag;
+
+        if (drag.mode){
+            var pos = gantt._get_mouse_pos(e);
+            if(drag.pos && drag.pos.x == pos.x)
+                return;
+
+            drag.pos=pos;
+
+            var curr_date = gantt._date_from_pos(pos.x);
+            if(!curr_date || isNaN( curr_date.getTime() ))
+                return;
+
+
+            var shift = pos.x - drag.start_x;
+            var ev = gantt.getTask(drag.id);
+
+
+            if(this._handlers[drag.mode]){
+                var original = dhtmlx.mixin({}, ev);
+                var copy =  dhtmlx.mixin({}, ev);
+                this._handlers[drag.mode].apply(this, [copy, shift, drag]);
+                dhtmlx.mixin(ev, copy, true);
+                gantt._update_parents(drag.id, true);
+                gantt.callEvent("onTaskDrag", [ev.id, drag.mode, copy, original, e]);
+
+
+                dhtmlx.mixin(ev, copy, true);
+                gantt._update_parents(drag.id);
+                gantt.refreshTask(drag.id);
+            }
+
+        }
+    },
+
+    on_mouse_down : function(e, src){
+        // on Mac we do not get onmouseup event when clicking right mouse button leaving us in dnd state
+        // let's ignore right mouse button then
+        if (e.button == 2)
+            return;
+
+        if (gantt.config.readonly || this.drag.mode) return;
+
+        this.clear_drag_state();
+
+        src = src||(e.target||e.srcElement);
+
+        var className = gantt._trim(src.className || "");
+        if(!className || !this._get_drag_mode(className)){
+            if(src.parentNode)
+                return this.on_mouse_down(e, src.parentNode);
+            else
+                return;
+        }
+
+        var drag = this._get_drag_mode(className);
+
+        if(!drag){
+            if (gantt.checkEvent("onMouseDown") && gantt.callEvent("onMouseDown", [className.split(" ")[0]])) {
+                if (src.parentNode)
+                    return this.on_mouse_down(e,src.parentNode);
+
+            }
+        }else{
+            if (drag.mode && drag.mode != gantt.config.drag_mode.ignore && gantt.config["drag_" + drag.mode]){
+                var id =  gantt.locate(src),
+                    task = dhtmlx.copy(gantt.getTask(id) || {});
+
+                if(gantt._is_flex_task(task) && drag.mode != gantt.config.drag_mode.progress){//only progress drag is allowed for tasks with flexible duration
+                    this.clear_drag_state();
+                    return;
+                }
+
+                drag.id = id;
+                var pos = gantt._get_mouse_pos(e);
+
+                drag.start_x = pos.x;
+                drag.start_y = pos.y;
+                drag.obj = task;
+                this.drag.start_drag = drag;
+
+            }else
+                this.clear_drag_state();
+        }
+    },
+    _fix_dnd_scale_time:function(task, drag){
+        var unit = gantt._tasks.unit,
+            step = gantt._tasks.step;
+        if(!gantt.config.round_dnd_dates){
+            unit = 'minute';
+            step = gantt.config.time_step;
+        }
+
+        if(drag.mode == gantt.config.drag_mode.resize){
+            if(drag.left){
+                task.start_date = gantt._get_closest_date({date:task.start_date, unit:unit, step:step});
+            }else{
+                task.end_date = gantt._get_closest_date({date:task.end_date, unit:unit, step:step});
+            }
+        }else if(drag.mode == gantt.config.drag_mode.move){
+            task.start_date = gantt._get_closest_date({date:task.start_date, unit:unit, step:step});
+            task.end_date = gantt.calculateEndDate(task.start_date, task.duration, gantt.config.duration_unit);
+        }
+    },
+    _fix_working_times:function(task, drag){
+        if(gantt.config.work_time && gantt.config.correct_work_time){
+            if(drag.mode == gantt.config.drag_mode.resize){
+                if(drag.left){
+                    task.start_date = gantt.getClosestWorkTime({date:task.start_date, dir:'future'});
+                }else{
+                    task.end_date = gantt.getClosestWorkTime({date:task.end_date, dir:'past'});
+                }
+            }else if(drag.mode == gantt.config.drag_mode.move){
+                if(!gantt.isWorkTime(task.start_date)){
+                    task.start_date = gantt.getClosestWorkTime({date:task.start_date, dir:'future'});
+                    task.end_date = gantt.calculateEndDate(task.start_date, task.duration);
+                }else if(!gantt.isWorkTime(new Date(+task.end_date - 1))){
+                    task.end_date = gantt.getClosestWorkTime({date:task.end_date, dir:'past'});
+                    task.start_date = gantt.calculateEndDate(task.end_date, task.duration*-1);
+                }
+
+            }
+        }
+    },
+    on_mouse_up : function(e){
+        var drag = this.drag;
+        if (drag.mode && drag.id){
+            //drop
+            var ev=gantt.getTask(drag.id);
+
+            if(gantt.config.work_time && gantt.config.correct_work_time){
+                this._fix_working_times(ev, drag);
+            }
+
+            this._fix_dnd_scale_time(ev, drag);
+
+            gantt._init_task_timing(ev);
+
+            if(!this._fireEvent("before_finish", drag.mode, [drag.id, drag.mode, dhtmlx.copy(drag.obj), e])){
+                drag.obj._dhx_changed = false;
+                dhtmlx.mixin(ev, drag.obj, true);
+
+
+
+
+                gantt.updateTask(ev.id);
+            } else {
+                var drag_id = drag.id;
+
+
+
+
+
+                gantt._init_task_timing(ev);
+                gantt.updateTask(ev.id);
+                this._fireEvent("after_finish", drag.mode, [drag_id, drag.mode, e]);
+                this.clear_drag_state();
+            }
+
+        }
+        this.clear_drag_state();
+    },
+    _get_drag_mode : function(className){
+        var modes = gantt.config.drag_mode;
+        var classes = (className || "").split(" ");
+        var classname = classes[0];
+        var drag = {mode:null, left:null};
+        switch (classname) {
+            case "gantt_task_line":
+            case "gantt_task_content":
+                drag.mode = modes.move;
+                break;
+            case "gantt_task_drag":
+                drag.mode = modes.resize;
+                if(classes[1] && classes[1].indexOf("left", classes[1].length - "left".length) !== -1){
+                    drag.left = true;
+                }else{
+                    drag.left = false;
+                }
+                break;
+            case "gantt_task_progress_drag":
+                drag.mode = modes.progress;
+                break;
+            case "gantt_link_control":
+            case "gantt_link_point":
+                drag.mode = modes.ignore;
+                break;
+            default:
+                drag = null;
+                break;
+        }
+        return drag;
+
+    },
+
+    _start_dnd : function(e){
+        var drag = this.drag = this.drag.start_drag;
+        delete drag.start_drag;
+
+        var cfg = gantt.config;
+        var id = drag.id;
+        if (!cfg["drag_"+drag.mode] || !gantt.callEvent("onBeforeDrag",[id, drag.mode, e]) || !this._fireEvent("before_start", drag.mode, [id, drag.mode, e])){
+            this.clear_drag_state();
+        }else {
+            delete drag.start_drag;
+        }
+
+    },
+    _fireEvent:function(stage, mode, params){
+        dhtmlx.assert(this._events[stage], "Invalid stage:{" + stage + "}");
+
+        var trigger = this._events[stage][mode];
+
+        dhtmlx.assert(trigger, "Unknown after drop mode:{" + mode + "}");
+        dhtmlx.assert(params, "Invalid event arguments");
+
+
+        if(!gantt.checkEvent(trigger))
+            return true;
+
+        return gantt.callEvent(trigger, params);
+    }
+};
+
+
+
+
+
+
+
+gantt._render_link = function(id){
+    var link = this.getLink(id);
+    gantt._linkRenderer.render_item(link, this.$task_links);
+};
+gantt._get_link_type = function(from_start, to_start){
+    var type = null;
+    if(from_start && to_start){
+        type = gantt.config.links.start_to_start;
+    }else if(!from_start && to_start){
+        type = gantt.config.links.finish_to_start;
+    }else if(!from_start && !to_start){
+        type = gantt.config.links.finish_to_finish;
+    }else if(from_start && !to_start){
+        type = gantt.config.links.start_to_finish;
+    }
+    return type;
+};
+
+gantt.isLinkAllowed = function(from, to, from_start, to_start){
+    var link = null;
+    if(typeof(from) == "object"){
+        link = from;
+    }else{
+        link = {source:from, target:to, type: this._get_link_type(from_start, to_start)};
+    }
+
+    if(!link) return false;
+    if(!(link.source && link.target && link.type)) return false;
+    if(link.source == link.target) return false;
+
+    var res = true;
+    //any custom rules
+    if(this.checkEvent("onLinkValidation"))
+        res = this.callEvent("onLinkValidation", [link]);
+
+    return res;
+};
+
+gantt._render_link_element = function(link){
+    var dots = this._path_builder.get_points(link);
+    var drawer = gantt._drawer;
+    var lines = drawer.get_lines(dots);
+
+    var div = document.createElement("div");
+
+
+    var css = "gantt_task_link";
+    var cssTemplate = this.templates.link_class ? this.templates.link_class(link) : "";
+    if(cssTemplate){
+        css += " " + cssTemplate;
+    }
+
+
+    div.className = css;
+    div.setAttribute(gantt.config.link_attribute, link.id);
+    for(var i=0; i < lines.length; i++){
+        if(i == lines.length - 1){
+            lines[i].size -= gantt.config.link_arrow_size;
+        }
+        div.appendChild(drawer.render_line(lines[i], lines[i+1]));
+    }
+
+    var direction = lines[lines.length - 1].direction;
+    var endpoint = gantt._render_link_arrow(dots[dots.length - 1], direction);
+    div.appendChild(endpoint);
+
+    return div;
+};
+
+gantt._render_link_arrow = function(point, direction){
+    var div = document.createElement("div");
+    var drawer = gantt._drawer;
+    var top = point.y;
+    var left = point.x;
+
+    var size = gantt.config.link_arrow_size;
+    var line_width = gantt.config.row_height;
+    var className = "gantt_link_arrow gantt_link_arrow_" + direction;
+    switch (direction){
+        case drawer.dirs.right:
+            top -= (size - line_width)/2;
+            left -= size;
+            break;
+        case drawer.dirs.left:
+            top -= (size - line_width)/2;
+            break;
+        case drawer.dirs.up:
+            left -= (size - line_width)/2;
+            break;
+        case drawer.dirs.down:
+            top -= size;
+            left -= (size - line_width)/2;
+            break;
+        default:
+            break;
+    }
+    div.style.cssText = [
+        "top:"+top + "px",
+        "left:"+left+'px'].join(';');
+    div.className = className;
+
+    return div;
+};
+
+
+gantt._drawer = {
+    current_pos:null,
+    dirs:{"left":'left',"right":'right',"up":'up', "down":'down'},
+    path:[],
+    clear:function(){
+        this.current_pos = null;
+        this.path = [];
+    },
+    point:function(pos){
+        this.current_pos = dhtmlx.copy(pos);
+    },
+    get_lines:function(dots){
+        this.clear();
+        this.point(dots[0]);
+        for(var i=1; i<dots.length ; i++){
+            this.line_to(dots[i]);
+        }
+        return this.get_path();
+    },
+    line_to:function(pos){
+        var next = dhtmlx.copy(pos);
+        var prev = this.current_pos;
+
+        var line = this._get_line(prev, next);
+        this.path.push(line);
+        this.current_pos = next;
+    },
+    get_path:function(){
+        return this.path;
+    },
+    get_wrapper_sizes :function(v){
+        var res,
+            wrapper_size = gantt.config.link_wrapper_width,
+            line_size = gantt.config.link_line_width,
+            y = v.y + (gantt.config.row_height - wrapper_size)/2;
+        switch (v.direction){
+            case this.dirs.left:
+                res = {	top : y,
+                    height : wrapper_size,
+                    lineHeight : wrapper_size,
+                    left : v.x - v.size - wrapper_size/2 ,
+                    width : v.size +wrapper_size};
+                break;
+            case this.dirs.right:
+                res = {	top : y,
+                    lineHeight : wrapper_size,
+                    height : wrapper_size,
+                    left : v.x - wrapper_size/2,
+                    width : v.size + wrapper_size};
+                break;
+            case this.dirs.up:
+                res = {	top : y - v.size,
+                    lineHeight: v.size + wrapper_size,
+                    height : v.size + wrapper_size,
+                    left : v.x - wrapper_size/2,
+                    width : wrapper_size};
+                break;
+            case this.dirs.down:
+                res = {	top : y,
+                    lineHeight: v.size + wrapper_size,
+                    height : v.size + wrapper_size,
+                    left : v.x - wrapper_size/2,
+                    width : wrapper_size};
+                break;
+            default:
+                break;
+        }
+
+        return res;
+    },
+    get_line_sizes : function(v){
+        var res,
+            line_size = gantt.config.link_line_width,
+            wrapper_size = gantt.config.link_wrapper_width,
+            size =  v.size + line_size;
+        switch (v.direction){
+            case this.dirs.left:
+            case this.dirs.right:
+                res = {
+                    height : line_size,
+                    width : size,
+                    marginTop: (wrapper_size - line_size)/2,
+                    marginLeft: (wrapper_size - line_size)/2
+                };
+                break;
+            case this.dirs.up:
+            case this.dirs.down:
+                res = {
+                    height : size,
+                    width : line_size,
+                    marginTop: (wrapper_size - line_size)/2,
+                    marginLeft: (wrapper_size - line_size)/2
+                };
+                break;
+            default:
+                break;
+        }
+
+
+
+        return res;
+    },
+    render_line : function(v){
+        var pos = this.get_wrapper_sizes(v);
+        var wrapper = document.createElement("div");
+        wrapper.style.cssText = [
+            "top:" + pos.top + "px",
+            "left:" + pos.left + "px",
+            "height:" + pos.height + "px",
+            "width:" + pos.width + "px"
+        ].join(';');
+        wrapper.className = "gantt_line_wrapper";
+
+        var innerPos = this.get_line_sizes(v);
+        var inner = document.createElement("div");
+        inner.style.cssText = [
+            "height:" + innerPos.height + "px",
+            "width:" + innerPos.width + "px",
+            "margin-top:" + innerPos.marginTop + "px",
+            "margin-left:" + innerPos.marginLeft + "px"
+        ].join(";");
+
+        inner.className = "gantt_link_line_" + v.direction;
+        wrapper.appendChild(inner);
+
+        return wrapper;
+    },
+    _get_line:function(from, to){
+        var direction = this.get_direction(from, to);
+        var vect = {
+            x : from.x,
+            y : from.y,
+            direction : this.get_direction(from, to)
+        };
+        if(direction == this.dirs.left || direction == this.dirs.right){
+            vect.size =  Math.abs(from.x - to.x);
+        }else{
+            vect.size =  Math.abs(from.y - to.y);
+        }
+        return vect;
+    },
+    get_direction:function(from, to){
+        var direction = 0;
+        if(to.x < from.x){
+            direction = this.dirs.left;
+        }else if (to.x > from.x){
+            direction = this.dirs.right;
+        }else if (to.y > from.y){
+            direction = this.dirs.down;
+        }else {
+            direction = this.dirs.up;
+        }
+        return direction;
+    }
+
+};
+gantt._y_from_ind = function(index){
+    return (index)*gantt.config.row_height;
+};
+gantt._path_builder = {
+
+    path:[],
+    clear:function(){
+        this.path = [];
+    },
+    current:function(){
+        return this.path[this.path.length - 1];
+    },
+    point:function(next){
+        if(!next)
+            return this.current();
+
+        this.path.push(dhtmlx.copy(next));
+        return next;
+    },
+    point_to:function(direction, diff, point){
+        if(!point)
+            point = dhtmlx.copy(this.point());
+        else
+            point = {x:point.x, y:point.y};
+        var dir = gantt._drawer.dirs;
+        switch (direction){
+            case (dir.left):
+                point.x -= diff;
+                break;
+            case (dir.right):
+                point.x += diff;
+                break;
+            case (dir.up):
+                point.y -= diff;
+                break;
+            case (dir.down):
+                point.y += diff;
+                break;
+            default:
+                break;
+        }
+        return this.point(point);
+    },
+    get_points:function(link){
+        var pt = this.get_endpoint(link);
+        var xy = gantt.config;
+
+
+        var dy = pt.e_y - pt.y;
+        var dx = pt.e_x - pt.x;
+
+        var dir = gantt._drawer.dirs;
+
+        this.clear();
+        this.point({x: pt.x, y : pt.y});
+
+        var shiftX = 2*xy.link_arrow_size;//just random size for first line
+
+
+        var forward = (pt.e_x > pt.x);
+        if(link.type == gantt.config.links.start_to_start){
+            this.point_to(dir.left, shiftX);
+            if(forward){
+                this.point_to(dir.down, dy);
+                this.point_to(dir.right,  dx);
+            }else{
+                this.point_to(dir.right, dx);
+                this.point_to(dir.down, dy);
+            }
+            this.point_to(dir.right, shiftX);
+
+        }else if(link.type == gantt.config.links.finish_to_start){
+            forward = (pt.e_x > (pt.x + 2*shiftX));
+            this.point_to(dir.right, shiftX);
+            if(forward){
+                dx -= shiftX;
+                this.point_to(dir.down, dy);
+                this.point_to(dir.right, dx);
+            }else{
+                dx -= 2*shiftX;
+                var sign = dy > 0 ? 1 : -1;
+
+                this.point_to(dir.down, sign * (xy.row_height/2));
+                this.point_to(dir.right, dx);
+                this.point_to(dir.down, sign * ( Math.abs(dy) - (xy.row_height/2)));
+                this.point_to(dir.right, shiftX);
+            }
+
+        }else if(link.type == gantt.config.links.finish_to_finish){
+            this.point_to(dir.right, shiftX);
+            if(forward){
+                this.point_to(dir.right, dx);
+                this.point_to(dir.down, dy);
+            }else{
+                this.point_to(dir.down, dy);
+                this.point_to(dir.right, dx);
+            }
+            this.point_to(dir.left, shiftX);
+        }else if(link.type == gantt.config.links.start_to_finish){
+
+            forward = (pt.e_x > (pt.x - 2*shiftX));
+            this.point_to(dir.left, shiftX);
+
+            if(!forward){
+                dx += shiftX;
+                this.point_to(dir.down, dy);
+                this.point_to(dir.right,  dx);
+            }else{
+                dx += 2*shiftX;
+                var sign = dy > 0 ? 1 : -1;
+                this.point_to(dir.down, sign * (xy.row_height/2));
+                this.point_to(dir.right, dx);
+                this.point_to(dir.down, sign * ( Math.abs(dy) - (xy.row_height/2)));
+                this.point_to(dir.left, shiftX);
+            }
+
+        }
+
+        return this.path;
+    },
+    get_endpoint : function(link){
+        var types = gantt.config.links;
+        var from_start = false, to_start = false;
+
+        if(link.type == types.start_to_start){
+            from_start = to_start = true;
+        }else if(link.type == types.finish_to_finish){
+            from_start = to_start = false;
+        }else if(link.type == types.finish_to_start){
+            from_start = false;
+            to_start = true;
+        }else if(link.type == types.start_to_finish){
+            from_start = true;
+            to_start = false;
+        }else{
+            dhtmlx.assert(false, "Invalid link type");
+        }
+
+        var from = gantt._get_task_visible_pos(gantt._pull[link.source], from_start);
+        var to = gantt._get_task_visible_pos(gantt._pull[link.target], to_start);
+
+        return {
+            x :  from.x,
+            e_x : to.x,
+            y : from.y ,
+            e_y : to.y
+        };
+    }
+};
+
+gantt._init_links_dnd = function() {
+    var dnd = new dhtmlxDnD(this.$task_bars, { sensitivity : 0, updates_per_second : 60 }),
+        start_marker = "task_left",
+        end_marker = "task_right",
+        link_edge_marker = "gantt_link_point",
+        link_landing_hover_area = "gantt_link_control";
+
+    dnd.attachEvent("onBeforeDragStart", dhtmlx.bind(function(obj,e) {
+        if(gantt.config.readonly)
+            return false;
+
+        var target = (e.target||e.srcElement);
+        resetDndState();
+        if(gantt.getState().drag_id)
+            return false;
+
+
+        if(gantt._locate_css(target, link_edge_marker)){
+            if(gantt._locate_css(target, start_marker))
+                gantt._link_source_task_start = true;
+
+            var sid = gantt._link_source_task = this.locate(e);
+            var t = gantt.getTask(sid);
+
+            var shift = 0;
+            if(t.type == gantt.config.types.milestone){
+                shift = (gantt._get_visible_milestone_width() - gantt._get_milestone_width())/2;
+            }
+
+            this._dir_start = getLinePos(t, !!gantt._link_source_task_start, shift);
+            return true;
+        }else{
+            return false;
+        }
+
+    }, this));
+
+    dnd.attachEvent("onAfterDragStart", dhtmlx.bind(function(obj,e) {
+        updateMarkedHtml(dnd.config.marker);
+    }, this));
+
+    function getLinePos(task, to_start, shift){
+        var pos = gantt._get_task_pos(task, !!to_start);
+        pos.y += gantt._get_task_height()/2;
+
+        shift = shift || 0;
+        pos.x += (to_start ? -1 : 1)*shift;
+        return pos;
+    }
+
+    dnd.attachEvent("onDragMove", dhtmlx.bind(function(obj,e) {
+        var dd = dnd.config;
+        var pos = dnd.getPosition(e);
+        advanceMarker(dd.marker, pos);
+        var landing = gantt._is_link_drop_area(e);
+
+        var prevTarget = gantt._link_target_task;
+        var prevLanding = gantt._link_landing;
+        var prevToStart = gantt._link_target_task_start;
+
+        var targ = gantt.locate(e),
+            to_start = true;
+        if(landing){
+            //refreshTask
+            to_start = !gantt._locate_css(e, end_marker);
+            landing = !!targ;
+        }
+
+        gantt._link_target_task = targ;
+        gantt._link_landing = landing;
+        gantt._link_target_task_start = to_start;
+
+        if(landing){
+            var t = gantt.getTask(targ);
+
+            var node = gantt._locate_css(e, link_landing_hover_area);
+            var shift = 0;
+            if(node){
+                shift = Math.floor(node.offsetWidth  / 2);
+            }
+
+            this._dir_end = getLinePos(t, !!gantt._link_target_task_start,shift);
+        }else{
+            this._dir_end = gantt._get_mouse_pos(e);
+        }
+
+        var targetChanged = !(prevLanding == landing && prevTarget == targ && prevToStart == to_start);
+        if(targetChanged){
+            if(prevTarget)
+                gantt.refreshTask(prevTarget, false);
+            if(targ)
+                gantt.refreshTask(targ, false);
+        }
+
+        if(targetChanged){
+            updateMarkedHtml(dd.marker);
+        }
+
+
+
+        showDirectingLine(this._dir_start.x, this._dir_start.y, this._dir_end.x, this._dir_end.y);
+
+        return true;
+    }, this));
+
+
+    dnd.attachEvent("onDragEnd", dhtmlx.bind(function() {
+        var link = getDndState();
+
+        if(link.from && link.to && link.from != link.to){
+            var type = gantt._get_link_type(link.from_start, link.to_start);
+
+            if(type)
+                gantt.addLink({source : link.from, target: link.to, type:type});
+        }
+
+        resetDndState();
+
+        if(link.from)
+            gantt.refreshTask(link.from, false);
+        if(link.to)
+            gantt.refreshTask(link.to, false);
+        removeDirectionLine();
+    }, this));
+
+    function updateMarkedHtml(marker){
+        var link = getDndState();
+
+        var css = ["gantt_link_tooltip"];
+        if(link.from && link.to){
+            if(gantt.isLinkAllowed(link.from, link.to, link.from_start, link.to_start)){
+                css.push("gantt_allowed_link");
+            }else{
+                css.push("gantt_invalid_link");
+            }
+        }
+
+        var className = gantt.templates.drag_link_class(link.from, link.from_start, link.to, link.to_start);
+        if(className)
+            css.push(className);
+
+        var html = "<div class='"+className+ "'>" +
+            gantt.templates.drag_link(link.from, link.from_start, link.to, link.to_start) +
+            "</div>";
+        marker.innerHTML = html;
+    }
+
+    function advanceMarker(marker, pos){
+        marker.style.left = pos.x + 5 + "px";
+        marker.style.top = pos.y + 5 + "px";
+    }
+    function getDndState(){
+        return { from : gantt._link_source_task,
+            to : gantt._link_target_task,
+            from_start : gantt._link_source_task_start,
+            to_start : gantt._link_target_task_start};
+    }
+    function resetDndState(){
+        gantt._link_source_task =
+            gantt._link_source_task_start =
+                gantt._link_target_task = null;
+        gantt._link_target_task_start = true;
+    }
+    function showDirectingLine(s_x, s_y, e_x, e_y){
+        var div = getDirectionLine();
+
+        var link = getDndState();
+
+        var css = ["gantt_link_direction"];
+        if(gantt.templates.link_direction_class){
+            css.push(gantt.templates.link_direction_class(link.from, link.from_start, link.to, link.to_start));
+        }
+
+        var dist =Math.sqrt( (Math.pow(e_x - s_x, 2)) + (Math.pow(e_y - s_y, 2)) );
+        dist = Math.max(0, dist - 3);
+        if(!dist)
+            return;
+
+        div.className = css.join(" ");
+        var tan = (e_y - s_y)/(e_x - s_x),
+            angle = Math.atan(tan);
+
+        if(coordinateCircleQuarter(s_x, e_x, s_y, e_y) == 2){
+            angle += Math.PI;
+        }else if(coordinateCircleQuarter(s_x, e_x, s_y, e_y) == 3){
+            angle -= Math.PI;
+        }
+
+
+
+        var sin = Math.sin(angle),
+            cos = Math.cos(angle),
+            top = Math.round(s_y),
+            left = Math.round(s_x);
+
+
+        var style = [
+            "-webkit-transform: rotate("+angle+"rad)",
+            "-moz-transform: rotate("+angle+"rad)",
+            "-ms-transform: rotate("+angle+"rad)",
+            "-o-transform: rotate("+angle+"rad)",
+            "transform: rotate("+angle+"rad)",
+            "width:" + Math.round(dist) + "px"
+        ];
+
+        if(window.navigator.userAgent.indexOf("MSIE 8.0") != -1){
+            //ms-filter breaks styles in ie9, so add it only for 8th
+            style.push("-ms-filter: \"" + ieTransform(sin, cos) + "\"");
+
+            var shiftLeft = Math.abs(Math.round(s_x - e_x)),
+                shiftTop = Math.abs(Math.round(e_y - s_y));
+            //fix rotation axis
+            switch(coordinateCircleQuarter(s_x, e_x, s_y, e_y)){
+                case 1:
+                    top -= shiftTop;
+                    break;
+                case 2:
+                    left -= shiftLeft;
+                    top -= shiftTop;
+                    break;
+                case 3:
+                    left -= shiftLeft;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        style.push("top:" +  top + "px");
+        style.push("left:" +  left + "px");
+
+        div.style.cssText = style.join(";");
+    }
+
+    function ieTransform(sin, cos){
+        return "progid:DXImageTransform.Microsoft.Matrix("+
+            "M11 = "+cos+","+
+            "M12 = -"+sin+","+
+            "M21 = "+sin+","+
+            "M22 = "+cos+","+
+            "SizingMethod = 'auto expand'"+
+            ")";
+    }
+    function coordinateCircleQuarter(sX, eX, sY, eY){
+        if(eX >= sX){
+            if(eY <= sY){
+                return 1;
+            }else{
+                return 4;
+            }
+        }else{
+            if(eY <= sY){
+                return 2;
+            }else{
+                return 3;
+            }
+        }
+
+    }
+    function getDirectionLine(){
+        if(!dnd._direction){
+            dnd._direction = document.createElement("div");
+            gantt.$task_links.appendChild(dnd._direction);
+        }
+        return dnd._direction;
+    }
+    function removeDirectionLine(){
+        if(dnd._direction){
+            if (dnd._direction.parentNode)	//the event line can be detached because of data refresh
+                dnd._direction.parentNode.removeChild(dnd._direction);
+
+            dnd._direction = null;
+        }
+    }
+
+    gantt._is_link_drop_area = function(e){
+        return !!gantt._locate_css(e, link_landing_hover_area);
+    };
+};
+gantt._get_link_state = function(){
+    return {
+        link_landing_area : this._link_landing,
+        link_target_id : this._link_target_task,
+        link_target_start : this._link_target_task_start,
+        link_source_id : this._link_source_task,
+        link_source_start : this._link_source_task_start
+    };
+};
+
+gantt._init_tasks = function(){
+    //store temporary configs
+    this._tasks = {
+        col_width:this.config.columnWidth,
+        width: [], // width of each column
+        full_width: 0, // width of all columns
+        trace_x:[],
+        rendered:{}
+    };
+
+
+    this._click.gantt_task_link = dhtmlx.bind(function(e, trg){
+        var id = this.locate(e, gantt.config.link_attribute);
+        if(id){
+            this.callEvent("onLinkClick", [id, e]);
+        }
+    }, this);
+
+    this._dbl_click.gantt_task_link = dhtmlx.bind(function(e, id, trg){
+        var id = this.locate(e, gantt.config.link_attribute);
+        this._delete_link_handler(id, e);
+    }, this);
+
+    this._dbl_click.gantt_link_point = dhtmlx.bind(function(e, id, trg){
+        var id = this.locate(e),
+            task = this.getTask(id);
+
+
+        var link = null;
+        if(trg.parentNode && trg.parentNode.className){
+            if(trg.parentNode.className.indexOf("_left") > -1){
+                link = task.$target[0];
+            }else{
+                link = task.$source[0];
+            }
+        }
+        if(link)
+            this._delete_link_handler(link, e);
+        return false;
+    }, this);
+
+    this._tasks_dnd.init();
+    this._init_links_dnd();
+
+
+    var filter_grid_task = this._create_filter('_filter_task', '_is_grid_visible');
+    var filter_chart_task =  this._create_filter('_filter_task', '_is_chart_visible');
+    var filter_link =  this._create_filter('_filter_link', '_is_chart_visible');
+
+
+    this._taskRenderer = gantt._task_renderer("line", this._render_task_element, this.$task_bars, filter_chart_task);
+    this._linkRenderer = gantt._task_renderer("links", this._render_link_element, this.$task_links, filter_link);
+    this._gridRenderer = gantt._task_renderer("grid_items", this._render_grid_item, this.$grid_data, filter_grid_task);
+    this._bgRenderer = gantt._task_renderer("bg_lines", this._render_bg_line, this.$task_bg, filter_chart_task);
+
+
+    function refreshId(renders, oldId, newId, item){
+        for(var i =0; i < renders.length; i++){
+            renders[i].change_id(oldId, newId);
+            renders[i].render_item(item);
+        }
+    }
+    this.attachEvent("onTaskIdChange", function(oldId, newId){
+        var render = this._get_task_renderers();
+        refreshId(render, oldId, newId, this.getTask(newId));
+    });
+
+    this.attachEvent("onLinkIdChange", function(oldId, newId){
+        var render = this._get_link_renderers();
+        refreshId(render, oldId, newId, this.getLink(newId));
+    });
+
+};
+
+gantt._create_filter = function(filter_methods){
+    if(!(filter_methods instanceof Array)){
+        filter_methods = Array.prototype.slice.call(arguments, 0);
+    }
+
+    return function(obj){
+        var res = true;
+        for(var i = 0, len = filter_methods.length; i < len; i++){
+            var filter_method = filter_methods[i];
+            if(gantt[filter_method]){
+                res = res && (gantt[filter_method].apply(gantt, [obj.id, obj]) !== false);
+            }
+        }
+
+        return res;
+    };
+};
+
+gantt._is_chart_visible = function(){
+    return !!this.config.show_chart;
+};
+
+gantt._filter_task = function(id, task){
+    var min = null, max = null;
+    if(this.config.start_date && this.config.end_date){
+        min = this.config.start_date.valueOf();
+        max = this.config.end_date.valueOf();
+
+        if(+task.start_date > max || +task.end_date < +min)
+            return false;
+    }
+    return true;
+};
+gantt._filter_link = function(id, link){
+    if(!this.config.show_links){
+        return false;
+    }
+
+    if(!(gantt.isTaskVisible(link.source) && gantt.isTaskVisible(link.target)))
+        return false;
+
+    return this.callEvent("onBeforeLinkDisplay", [id, link]);
+};
+
+gantt._get_task_renderers = function(){
+    return [
+        this._taskRenderer,
+        this._gridRenderer,
+        this._bgRenderer
+    ];
+};
+gantt._get_link_renderers = function(){
+    return [
+        this._linkRenderer
+    ];
+};
+gantt._delete_link_handler = function(id, e){
+    if(id && this.callEvent("onLinkDblClick", [id, e])){
+        if(this.config.readonly) return;
+
+        var title = "";
+        var question = gantt.locale.labels.link + " " +this.templates.link_description(this.getLink(id)) + " " + gantt.locale.labels.confirm_link_deleting;
+
+        window.setTimeout(function(){
+            gantt._dhtmlx_confirm(question, title, function(){
+                gantt.deleteLink(id);
+            });
+        },(gantt.config.touch ? 300 : 1));
+    }
+};
+gantt.getTaskNode = function(id){
+    return this._taskRenderer.rendered[id];
+};
+gantt.getLinkNode = function(id){
+    return this._linkRenderer.rendered[id];
+};
+
+
+
+
+
+gantt._get_tasks_data = function(){
+    var rows = [];
+    for(var i=0; i < this._order.length; i++){
+        var item = this._pull[this._order[i]];
+        item.$index = i;
+        this._update_parents(item.id, true);
+        rows.push(item);
+    }
+    return rows;
+};
+gantt._get_links_data = function(){
+    var links = [];
+    for(var i in this._lpull)
+        links.push(this._lpull[i]);
+
+    return links;
+};
+gantt._render_data = function(){
+    this._update_layout_sizes();
+
+    var data = this._get_tasks_data();
+
+    var renderers = this._get_task_renderers();
+    for(var i=0; i < renderers.length; i++){
+        renderers[i].render_items(data);
+    }
+
+    var links = gantt._get_links_data();
+    renderers = this._get_link_renderers();
+    for(var i=0; i < renderers.length; i++)
+        renderers[i].render_items(links);
+};
+
+gantt._update_layout_sizes = function(){
+    var cfg = this._tasks;
+
+    cfg.bar_height = this._get_task_height();
+
+    //task bars layer
+    this.$task_data.style.height = Math.max(this.$task.offsetHeight - this.config.scale_height, 0) + 'px';
+
+    //background layer
+    this.$task_bg.style.width = cfg.full_width + "px";
+
+    //grid area
+    if(this._is_grid_visible()){
+        var columns = this.config.columns;
+        var width = 0;
+        for (var i = 0; i < columns.length; i++)
+            width += columns[i].width;
+        this.$grid_data.style.width = Math.max(width-1, 0) + "px";
+    }
+};
+
+
+gantt._init_tasks_range = function(){
+    var unit = this.config.scale_unit;
+    if(this.config.start_date && this.config.end_date){
+        this._min_date = this.date[unit + "_start"]( new Date(this.config.start_date));
+        this._max_date = this.date[unit + "_start"]( new Date(this.config.end_date));
+        return;
+    }
+
+    var data = this._get_tasks_data();
+    var root = this._init_task({id:this.config.root_id});
+    data.push(root);
+
+
+    var max = -Infinity,
+        min = Infinity;
+
+    this.eachTask(function(child){
+        if(child.end_date && +child.end_date > +max){
+            max = new Date(child.end_date);
+        }
+    }, this.config.root_id);
+
+    this.eachTask(function(child){
+        if(child.start_date && +child.start_date < +min){
+            min = new Date(child.start_date);
+        }
+    }, this.config.root_id);
+
+    this._min_date = min;
+    this._max_date = max;
+
+    if(!max || max == -Infinity){
+        this._min_date = new Date();
+        this._max_date = new Date(this._min_date);
+    }
+
+    this._min_date = this.date[unit + "_start"](this._min_date);
+    if(+this._min_date == +min)
+        this._min_date = this.date.add(this.date[unit + "_start"](this._min_date), -1, unit);
+
+    this._max_date = this.date[unit + "_start"](this._max_date);
+    this._max_date = this.date.add(this._max_date, 1, unit);
+};
+
+
+
+gantt._prepare_scale_html = function(config){
+    var cells = [];
+    var date = null, content = null, css = null;
+
+    if(config.template || config.date){
+        content = config.template || this.date.date_to_str(config.date);
+    }
+
+
+    css = config.css || gantt.templates.scale_cell_class;
+
+
+    for (var i = 0; i < config.count; i++) {
+        date = new Date(config.trace_x[i]);
+        var value = content.call(this, date),
+            width = config.width[i],
+            style = "",
+            template = "",
+            cssclass = "";
+
+        if(width){
+            style = "width:"+(width)+"px;";
+            cssclass = "gantt_scale_cell" + (i == config.count-1 ? " gantt_last_cell" : "");
+
+            template = css.call(this, date);
+            if(template) cssclass += " " + template;
+            var cell = "<div class='" + cssclass + "' style='" + style + "'>" + value + "</div>";
+            cells.push(cell);
+        }else{
+            //do not render ignored cells
+        }
+
+    }
+    return cells.join("");
+};
+
+gantt._render_tasks_scales = function() {
+    this._init_tasks_range();
+    this._scroll_resize();
+    this._set_sizes();
+
+    var scales_html = "",
+        outer_width = 0,
+        data_width = 0,
+        scale_height = 0;
+
+    if(this._is_chart_visible()){
+        var helpers = this._scale_helpers;
+        var scales = [helpers.primaryScale()].concat(this.config.subscales);
+        scale_height = (this.config.scale_height-1);
+
+        helpers.sortScales(scales);
+
+        var resize = this._get_resize_options();
+        var avail_width = resize.x ? 0 : this.$task.offsetWidth;
+        var cfgs = helpers.prepareConfigs(scales,this.config.min_column_width, avail_width, scale_height);
+        var cfg = this._tasks = cfgs[cfgs.length - 1];
+
+        var html = [];
+
+        var css = this.templates.scale_row_class;
+        for(var i=0; i < cfgs.length; i++){
+            var cssClass = "gantt_scale_line";
+            var tplClass = css(cfgs[i]);
+            if(tplClass){
+                cssClass += " " + tplClass;
+            }
+
+            html.push("<div class=\""+cssClass+"\" style=\"height:"+(cfgs[i].height)+"px;line-height:"+(cfgs[i].height)+"px\">" + this._prepare_scale_html(cfgs[i]) + "</div>");
+        }
+
+        scales_html = html.join("");
+        outer_width = cfg.full_width + this.$scroll_ver.offsetWidth + "px";
+        data_width = cfg.full_width + "px";
+        scale_height += "px";
+    }
+
+    if(this._is_chart_visible()){
+        this.$task.style.display = "";
+    }else{
+        this.$task.style.display = "none";
+    }
+
+    this.$task_scale.style.height = scale_height;
+
+    this.$task_data.style.width =
+        this.$task_scale.style.width = outer_width;
+    this.$task_links.style.width =
+        this.$task_bars.style.width = data_width;
+
+    this.$task_scale.innerHTML = scales_html;
+
+};
+
+
+
+gantt._render_bg_line = function(item){
+    var cfg = gantt._tasks;
+    var count = cfg.count;
+    var cells = [];
+
+    if(gantt.config.show_task_cells){
+        for (var j = 0; j < count; j++) {
+            var width = cfg.width[j],
+                style = "",
+                cssclass = "";
+
+            if(width > 0){//do not render skipped columns
+
+                style = "width:"+(width)+"px;";
+                cssclass = "gantt_task_cell" + (j == count-1 ? " gantt_last_cell" : "");
+
+                cssTemplate = this.templates.task_cell_class(item, cfg.trace_x[j]);
+                if(cssTemplate)
+                    cssclass += " " + cssTemplate;
+                var cell = "<div class='" + cssclass + "' style='" + style + "'></div>";
+                cells.push(cell);
+            }
+
+        }
+    }
+    var odd = item.$index%2 !== 0;
+    var cssTemplate = gantt.templates.task_row_class(item.start_date, item.end_date, item);
+    var css = "gantt_task_row" + (odd ? " odd" : "") + (cssTemplate ? ' '+cssTemplate : '');
+
+    if(this.getState().selected_task == item.id){
+        css += " gantt_selected";
+    }
+
+    //var row = "<div class='" + css + "' " + this.config.task_attribute + "='" + item.id + "'>" + cells.join("") + "</div>";
+    var row = document.createElement("div");
+    row.className = css;
+    row.style.height = (gantt.config.row_height)+"px";
+    row.setAttribute(this.config.task_attribute, item.id);
+    row.innerHTML = cells.join("");
+    return row;
+};
+
+
+gantt._adjust_scales = function(){
+    if(this.config.fit_tasks){
+        var old_min = +this._min_date,
+            old_max = +this._max_date;
+        this._init_tasks_range();
+        if(+this._min_date != old_min || +this._max_date != old_max){
+            this.render();
+
+            this.callEvent("onScaleAdjusted", []);
+            return true;
+        }
+    }
+    return false;
+};
+
+//refresh task and related links
+gantt.refreshTask = function(taskId, refresh_links){
+    var renders = this._get_task_renderers();
+
+    var task = this.getTask(taskId);
+    if(task && this.isTaskVisible(taskId)){
+        for(var i =0; i < renders.length; i++)
+            renders[i].render_item(task);
+    }else{
+        for(var i =0; i < renders.length; i++)
+            renders[i].remove_item(taskId);
+    }
+
+
+    if(refresh_links !== undefined && !refresh_links)
+        return;
+
+    var task = this.getTask(taskId);
+    for(var i=0; i < task.$source.length; i++){
+        gantt.refreshLink(task.$source[i]);
+    }
+    for(var i=0; i < task.$target.length; i++){
+        gantt.refreshLink(task.$target[i]);
+    }
+};
+gantt.refreshLink = function(linkId){
+    if(this.isLinkExists(linkId))
+        gantt._render_link(linkId);
+    else
+        gantt._linkRenderer.remove_item(linkId);
+};
+
+
+
+gantt._combine_item_class = function(basic, template, itemId){
+    var css = [basic];
+    if(template)
+        css.push(template);
+
+    var state = gantt.getState();
+
+    var task = this.getTask(itemId);
+
+    if(this._get_safe_type(task.type) == this.config.types.milestone){
+        css.push("gantt_milestone");
+    }
+
+    if(this._get_safe_type(task.type) == this.config.types.project){
+        css.push("gantt_project");
+    }
+
+    if(this._is_flex_task(task))
+        css.push("gantt_dependent_task");
+
+    if(this.config.select_task && itemId == state.selected_task)
+        css.push("gantt_selected");
+
+    if(itemId == state.drag_id)
+        css.push("gantt_drag_" + state.drag_mode);
+
+    var links = gantt._get_link_state();
+    if(links.link_source_id == itemId)
+        css.push("gantt_link_source");
+
+    if(links.link_target_id == itemId)
+        css.push("gantt_link_target");
+
+    if(links.link_landing_area &&
+        (links.link_target_id && links.link_source_id) &&
+        (links.link_target_id != links.link_source_id)){
+
+        var from_id = links.link_source_id;
+        var from_start = links.link_source_start;
+        var to_start = links.link_target_start;
+
+        var allowDrag = gantt.isLinkAllowed(from_id, itemId, from_start, to_start);
+
+        var dragClass = "";
+        if(allowDrag){
+            if(to_start)
+                dragClass = "link_start_allow";
+            else
+                dragClass = "link_finish_allow";
+        }else{
+            if(to_start)
+                dragClass = "link_start_deny";
+            else
+                dragClass = "link_finish_deny";
+        }
+        css.push(dragClass);
+    }
+    return css.join(" ");
+};
+
+gantt._render_pair = function(parent, css, task, content){
+    var state = gantt.getState();
+
+    if(+task.end_date <= +state.max_date)
+        parent.appendChild(content(css+" task_right"));
+
+    if(+task.start_date >= +state.min_date)
+        parent.appendChild(content(css+" task_left"));
+};
+
+gantt._get_task_height = function(){
+    // height of the bar item
+    var height = this.config.task_height;
+    if(height == "full")
+        height = this.config.row_height - 5;
+    //item height cannot be bigger than row height
+    height = Math.min(height, this.config.row_height);
+    return Math.max(height, 0);
+};
+
+gantt._get_milestone_width = function(){
+    return this._get_task_height();
+};
+gantt._get_visible_milestone_width = function(){
+    var origWidth = gantt._get_task_height();//m-s have square shape
+    return Math.sqrt(2*origWidth*origWidth);
+};
+
+gantt._get_task_width = function(task, start, end ){
+    return Math.round(this._get_task_pos(task, false).x - this._get_task_pos(task, true).x);
+};
+
+gantt._render_task_element = function(task){
+    var pos = this._get_task_pos(task);
+
+    var cfg = this.config;
+    var height = this._get_task_height();
+
+    var padd = Math.floor((this.config.row_height - height)/2);
+    if(task.type == cfg.types.milestone && cfg.link_line_width > 1){
+        //little adjust milestone position, so horisontal corners would match link arrow when thickness of link line is more than 1px
+        padd += 1;
+    }
+
+    var div = document.createElement("div");
+    var width = gantt._get_task_width(task);
+
+    var type = this._get_safe_type(task.type);
+
+    div.setAttribute(this.config.task_attribute, task.id);
+    //use separate div to display content above progress bar
+    div.appendChild(gantt._render_task_content(task, width));
+
+    div.className = this._combine_item_class("gantt_task_line",
+        this.templates.task_class(task.start_date, task.end_date, task),
+        task.id);
+
+
+    div.style.cssText = [
+        "left:" + pos.x + "px",
+        "top:" + (padd + pos.y) + 'px',
+        "height:" + height + 'px',
+        "line-height:" + height + 'px',
+        "width:" + width + 'px'
+    ].join(";");
+
+    var side = this._render_leftside_content(task);
+    if(side) div.appendChild(side);
+
+    side = this._render_rightside_content(task);
+    if(side) div.appendChild(side);
+
+    if(cfg.show_progress && type != this.config.types.milestone){
+        this._render_task_progress(task,div, width);
+    }
+
+
+    if(!this.config.readonly){
+        if(cfg.drag_resize && !this._is_flex_task(task) && type != this.config.types.milestone){
+            gantt._render_pair(div, "gantt_task_drag", task, function(css){
+                var el = document.createElement("div");
+                el.className = css;
+                return el;
+            });
+        }
+        if(cfg.drag_links){
+            gantt._render_pair(div, "gantt_link_control", task, function(css){
+                var outer = document.createElement("div");
+                outer.className = css;
+                outer.style.cssText = [
+                    "height:" + height + 'px',
+                    "line-height:" + height + 'px'
+                ].join(";");
+                var inner = document.createElement("div");
+                inner.className = "gantt_link_point";
+                outer.appendChild(inner);
+                return outer;
+            });
+        }
+    }
+    return div;
+};
+
+gantt._render_side_content = function(task, template, cssClass){
+    if(!template) return null;
+
+    var text = template(task.start_date, task.end_date, task);
+    if(!text) return null;
+    var content = document.createElement("div");
+    content.className = "gantt_side_content " + cssClass;
+    content.innerHTML = text;
+    return content;
+};
+
+
+
+gantt._render_leftside_content = function(task){
+    var css = "gantt_left " + gantt._get_link_crossing_css(true, task);
+    return gantt._render_side_content(task, this.templates.leftside_text, css);
+};
+gantt._render_rightside_content = function(task){
+    var css = "gantt_right " + gantt._get_link_crossing_css(false, task);
+    return gantt._render_side_content(task, this.templates.rightside_text, css);
+};
+
+gantt._get_conditions = function(leftside){
+    if(leftside){
+        return {
+            $source : [
+                gantt.config.links.start_to_start
+            ],
+            $target : [
+                gantt.config.links.start_to_start,
+                gantt.config.links.finish_to_start
+            ]
+        };
+    }else{
+        return {
+            $source : [
+                gantt.config.links.finish_to_start,
+                gantt.config.links.finish_to_finish
+            ],
+            $target : [
+                gantt.config.links.finish_to_finish
+            ]
+        };
+    }
+};
+
+gantt._get_link_crossing_css = function(left, task){
+    var cond = gantt._get_conditions(left);
+
+    for(var i in cond){
+        var links = task[i];
+        for(var ln =0; ln < links.length; ln++){
+            var link = gantt.getLink(links[ln]);
+
+            for(var tp =0; tp < cond[i].length; tp++){
+                if(link.type == cond[i][tp]){
+                    return "gantt_link_crossing";
+                }
+            }
+        }
+    }
+    return "";
+};
+
+
+
+gantt._render_task_content = function(task, width){
+    var content = document.createElement("div");
+    if(this._get_safe_type(task.type) != this.config.types.milestone)
+        content.innerHTML = this.templates.task_text(task.start_date, task.end_date, task);
+    content.className = "gantt_task_content";
+    //content.style.width = width + 'px';
+    return content;
+};
+gantt._render_task_progress = function(task, element, maxWidth){
+    var done = task.progress*1 || 0;
+
+    maxWidth = Math.max(maxWidth - 2, 0);//2px for borders
+    var pr = document.createElement("div");
+    var width = Math.round(maxWidth*done);
+
+    width = Math.min(maxWidth, width);
+
+    pr.style.width = width + 'px';
+    pr.className = "gantt_task_progress";
+    pr.innerHTML = this.templates.progress_text(task.start_date, task.end_date, task);
+    element.appendChild(pr);
+    if(this.config.drag_progress && !gantt.config.readonly){
+        var drag = document.createElement("div");
+        drag.style.left = width + 'px';
+        drag.className = "gantt_task_progress_drag";
+        pr.appendChild(drag);
+        element.appendChild(drag);
+    }
+};
+gantt._get_line = function(step) {
+    var steps = {
+        "second": 1,
+        "minute": 60,
+        "hour": 60*60,
+        "day": 60*60*24,
+        "week": 60*60*24*7,
+        "month": 60*60*24*30,
+        "year": 60*60*24*365
+    };
+    return steps[step] || 0;
+};
+
+
+gantt._date_from_pos = function(x){
+    var scale = this._tasks;
+    if(x < 0 || x > scale.full_width){
+        return null;
+    }
+    var ind = 0;
+    var summ = 0;
+    while(summ + scale.width[ind] < x){
+        summ += scale.width[ind];
+        ind++;
+    }
+    var part = (x - summ)/scale.width[ind];
+
+    var unit =  gantt._get_coll_duration(scale, scale.trace_x[ind]);
+
+
+    var date = new Date(scale.trace_x[ind].valueOf() + Math.round(part*unit));
+    return date;
+};
+
+gantt.posFromDate = function(date){
+    var ind = gantt._day_index_by_date(date);
+    dhtmlx.assert(ind >= 0, "Invalid day index");
+
+    var wholeCells = Math.floor(ind);
+    var partCell = ind % 1;
+
+    var pos = 0;
+    for(var i=1; i <= wholeCells; i++)
+        pos += gantt._tasks.width[i-1];
+
+    if(partCell){
+        if(wholeCells < gantt._tasks.width.length){
+            pos += gantt._tasks.width[wholeCells]*(partCell % 1);
+        }else{
+            pos += 1;
+        }
+
+    }
+    return pos;
+};
+
+gantt._day_index_by_date = function(date){
+    var pos = new Date(date);
+    var days = gantt._tasks.trace_x,
+        ignores = gantt._tasks.ignore_x;
+
+    if(+pos <= this._min_date)
+        return 0;
+
+    if(+pos >= this._max_date)
+        return days.length;
+
+    for (var xind = 0; xind < days.length-1; xind++) {
+        // | 8:00, 8:30 | 8:15 should be checked against 8:30
+        // clicking at the most left part of the cell, say 8:30 should create event in that cell, not previous one
+        if (+pos < days[xind+1] && !ignores[+days[xind+1]])
+            break;
+    }
+    return xind + ((date - days[xind]) / gantt._get_coll_duration(gantt._tasks, days[xind]));
+};
+gantt._get_coll_duration = function(scale, date){
+    return gantt.date.add(date, scale.step, scale.unit) -  date;
+};
+
+gantt._get_x_pos = function(task, to_start){
+    to_start = to_start !== false;
+    var x = gantt.posFromDate(to_start ? task.start_date : task.end_date);
+
+
+
+};
+
+gantt._get_task_coord = function(task, to_start, x_correction){
+    to_start = to_start !== false;
+    x_correction = x_correction || 0;
+
+    var isMilestone = (task.type == this.config.types.milestone);
+    var x = this.posFromDate((to_start || isMilestone) ? task.start_date : task.end_date),
+        y = this._y_from_ind(this._get_visible_order(task.id));
+
+    if(isMilestone){
+        if(to_start){
+            x -= x_correction;
+        }else{
+            x += x_correction;
+        }
+    }
+    return {x:x, y:y};
+};
+gantt._get_task_pos = function(task, to_start){
+    to_start = to_start !== false;
+    var mstoneCorrection = gantt._get_milestone_width()/2;
+    return this._get_task_coord(task, to_start, mstoneCorrection);
+};
+
+gantt._get_task_visible_pos = function(task, to_start){
+    to_start = to_start !== false;
+    var mstoneCorrection = gantt._get_visible_milestone_width()/2;
+    return this._get_task_coord(task, to_start, mstoneCorrection);
+};
+
+
+gantt._correct_shift=function(start, back){
+    return start-=((new Date(gantt._min_date)).getTimezoneOffset()-(new Date(start)).getTimezoneOffset())*60000*(back?-1:1);
+};
+
+
+
+gantt._get_mouse_pos = function(ev){
+    if (ev.pageX || ev.pageY)
+        var pos = {x:ev.pageX, y:ev.pageY};
+
+    var d = _isIE ? document.documentElement : document.body;
+    var pos = {
+        x:ev.clientX + d.scrollLeft - d.clientLeft,
+        y:ev.clientY + d.scrollTop - d.clientTop
+    };
+
+    var box = gantt._get_position(gantt.$task_data);
+    pos.x = pos.x - box.x + gantt.$task_data.scrollLeft;
+    pos.y = pos.y - box.y + gantt.$task_data.scrollTop;
+    return pos;
+};
+
+//helper for rendering bars and links
+gantt._task_renderer = function(id, render_one, node, filter){
+    //hash of dom elements is needed to redraw single bar/link
+    if(!this._task_area_pulls)
+        this._task_area_pulls = {};
+
+    if(!this._task_area_renderers)
+        this._task_area_renderers = {};
+
+    if(this._task_area_renderers[id])
+        return this._task_area_renderers[id];
+
+    if(!render_one)
+        dhtmlx.assert(false, "Invalid renderer call");
+
+    this._task_area_renderers[id] = {
+        render_item : function(item, container){
+            var pull = gantt._task_area_pulls[id];
+            container = container || node;
+
+
+            if(filter){
+                if(!filter(item)){
+                    this.remove_item(item.id);
+                    return;
+                }
+            }
+
+            var dom = render_one.call(gantt, item);
+            if(!dom) return;
+            if(pull[item.id]){
+                this.replace_item(item.id, dom);
+            }else{
+                pull[item.id] = dom;
+                container.appendChild(dom);
+            }
+        },
+        render_items : function(items, container){
+            this.rendered = gantt._task_area_pulls[id] = {};
+            container = container || node;
+            container.innerHTML = "";
+            var buffer = document.createDocumentFragment();
+            for(var i= 0, vis = items.length; i < vis; i++){
+                this.render_item(items[i], buffer);
+            }
+            container.appendChild(buffer);
+        },
+        replace_item: function(item_id, newNode){
+            var item = this.rendered[item_id];
+            if(item && item.parentNode){
+                item.parentNode.replaceChild(newNode, item);
+            }
+            this.rendered[item_id] = newNode;
+        },
+        remove_item:function(item_id){
+            var item = this.rendered[item_id];
+            if(item && item.parentNode){
+                item.parentNode.removeChild(item);
+            }
+            delete this.rendered[item_id];
+        },
+        change_id: function(oldid, newid) {
+            this.rendered[newid] = this.rendered[oldid];
+            delete this.rendered[oldid];
+        },
+        rendered : this._task_area_pulls[id],
+        node: node
+    };
+
+    return this._task_area_renderers[id];
+};
+
+
+
+gantt._pull = {};
+gantt._branches = {};
+gantt._order = [];
+gantt._lpull = {};
+
+gantt.load = function(url, type, callback){
+    dhtmlx.assert(arguments.length, "Invalid load arguments");
+    this.callEvent("onLoadStart", []);
+    var tp = 'json', cl = null;
+    if(arguments.length >= 3){
+        tp = type;
+        cl = callback;
+    }else{
+        if(typeof arguments[1] == "string")
+            tp = arguments[1];
+        else if(typeof arguments[1] == "function")
+            cl = arguments[1];
+    }
+
+    dhtmlxAjax.get(url, dhtmlx.bind(function(l) {
+        this.on_load(l, tp);
+        if(typeof cl == "function")
+            cl.call(this);
+    }, this));
+};
+gantt.parse = function(data, type) {
+    this.on_load({xmlDoc: {responseText: data}}, type);
+};
+
+gantt.serialize = function(type){
+    type = type || "json";
+    return this[type].serialize();
+};
+
+/*
+ tasks and relations
+ {
+ data:[
+ {
+ "id":"string",
+ "text":"...",
+ "start_date":"Date or string",
+ "end_date":"Date or string",
+ "duration":"number",
+ "progress":"0..1",
+ "parent_id":"string",
+ "order":"number"
+ },...],
+ links:[
+ {
+ id:"string",
+ source:"string",
+ target:"string",
+ type:"string"
+ },...],
+ collections:{
+ collectionName:[
+ {key:, label:, optional:...},...
+ ],...
+ }
+ }
+
+ gantt._pull - id to object hash
+ gantt._branch - array of per branch arrays of objects|ids
+ gantt._order - array of visible elements
+ gantt._order_full - array of all elements
+
+ gantt._links
+ * */
+
+gantt.on_load = function(resp, type){
+    if(!type)
+        type = "json";
+    dhtmlx.assert(this[type], "Invalid data type:'" + type + "'");
+
+    var raw = resp.xmlDoc.responseText;
+
+    var data = this[type].parse(raw, resp);
+    this._process_loading(data);
+    this.callEvent("onLoadEnd", []);
+};
+
+
+
+gantt._process_loading = function(data){
+    if(data.collections)
+        this._load_collections(data.collections);
+
+    var tasks = data.data;
+
+    for (var i = 0; i < tasks.length; i++) {
+        var task = tasks[i];
+        this._init_task(task);
+        if (!this.callEvent("onTaskLoading", [task])) continue;
+
+        this._pull[task.id] = task;
+        this._add_branch(task);
+    }
+
+
+    this._sync_order();
+
+    // calculating $level for each item
+    for (var i in this._pull)
+        this._pull[i].$level = this._item_level(this._pull[i]);
+
+    this._init_links(data.links || (data.collections ? data.collections.links : []));
+
+};
+
+
+gantt._init_links = function(links){
+    if (links)
+        for(var i=0; i < links.length; i++){
+            if(links[i]){
+                var link = this._init_link(links[i]);
+                this._lpull[link.id] = link;
+            }
+        }
+    this._sync_links();
+};
+
+
+gantt._load_collections = function(collections){
+    var collections_loaded = false;
+    for (var key in collections) {
+        if (collections.hasOwnProperty(key)) {
+            collections_loaded = true;
+            var collection = collections[key];
+            var arr = this.serverList[key];
+            if (!arr) continue;
+            arr.splice(0, arr.length); //clear old options
+            for (var j = 0; j < collection.length; j++) {
+                var option = collection[j];
+                var obj =  dhtmlx.copy(option);
+                obj.key = obj.value;// resulting option object
+
+                for (var option_key in option) {
+                    if (option.hasOwnProperty(option_key)) {
+                        if (option_key == "value" || option_key == "label")
+                            continue;
+                        obj[option_key] = option[option_key]; // obj['value'] = option['value']
+                    }
+                }
+                arr.push(obj);
+            }
+        }
+    }
+    if (collections_loaded)
+        this.callEvent("onOptionsLoad", []);
+};
+
+gantt._sync_order = function() {
+    this._order = [];
+    this._sync_order_item({parent:this.config.root_id, $open:true, $ignore:true, id:this.config.root_id});
+
+    this._scroll_resize();
+    this._set_sizes();
+};
+gantt.attachEvent("onBeforeTaskDisplay", function(id, task){
+    return !task.$ignore;
+});
+gantt._sync_order_item = function(item) {
+
+    if(item.id && //do not trigger event for virtual root
+        this._filter_task(item.id, item) &&
+        this.callEvent("onBeforeTaskDisplay", [item.id, item])){
+        this._order.push(item.id);
+    }
+
+
+    if (item.$open) {
+        var children = this._branches[item.id];
+        if (children)
+            for (var i = 0; i < children.length; i++)
+                this._sync_order_item(this._pull[children[i]]);
+    }
+};
+
+gantt._get_visible_order = function(id){
+    dhtmlx.assert(id, "Invalid argument");
+    var ord = this._order;
+    for(var i= 0, count = ord.length; i < count; i++)
+        if(ord[i] == id) return i;
+
+    return -1;
+};
+
+
+
+gantt.eachTask = function(code, parent, master){
+    parent = parent || this.config.root_id;
+    master = master || this;
+
+    var branch = this._branches[parent];
+    if (branch)
+        for (var i=0; i<branch.length; i++){
+            var item = this._pull[branch[i]];
+            code.call(master, item);
+            if (this._branches[item.id])
+                this.eachTask(code, item.id, master);
+        }
+};
+
+gantt.json = {
+    parse : function(data){
+        dhtmlx.assert(data, "Invalid data");
+
+        if (typeof data == "string") {
+            if(window.JSON)
+                data = JSON.parse(data);
+            else{
+                gantt._temp = eval("(" + data + ")");
+                data = gantt._temp || {};
+                gantt._temp = null;
+            }
+        }
+
+        if (data.dhx_security)
+            dhtmlx.security_key = data.dhx_security;
+        return data;
+    },
+    _copyLink:function(obj){
+        var copy = {};
+        for (var key in obj)
+            copy[key] = obj[key];
+        return copy;
+    },
+    _copyObject:function(obj){
+        var copy = {};
+        for (var key in obj){
+            if (key.charAt(0) == "$")
+                continue;
+            copy[key] = obj[key];
+        }
+        copy.start_date = gantt.templates.xml_format(copy.start_date);
+        if (copy.end_date)
+            copy.end_date = gantt.templates.xml_format(copy.end_date);
+        return copy;
+    },
+    serialize:function(){
+        var tasks = [];
+        var links = [];
+
+        gantt.eachTask(function(obj){
+            tasks.push(this._copyObject(obj));
+        }, gantt.config.root_id, this);
+        for (var key in gantt._lpull)
+            links.push(this._copyLink(gantt._lpull[key]));
+
+        return {
+            data : tasks,
+            links: links
+        };
+    }
+};
+
+/*
+ <data>
+ <task id:"some" parent_id="0" progress="0.5">
+ <text>My task 1</text>
+ <start_date>16.08.2013</start_date>
+ <end_date>22.08.2013</end_date>
+ </task>
+ <coll_options>
+ <links>
+ <link source='a1' target='b2' type='c3' />
+ </links>
+ </coll_options>
+ </data>
+ */
+
+gantt.xml = {
+    _xmlNodeToJSON:function(node, attrs_only){
+        var t = {};
+        for (var i = 0; i < node.attributes.length; i++)
+            t[node.attributes[i].name] = node.attributes[i].value;
+
+        if (!attrs_only){
+            for (var i = 0; i < node.childNodes.length; i++) {
+                var child = node.childNodes[i];
+                if (child.nodeType == 1)
+                    t[child.tagName] = child.firstChild ? child.firstChild.nodeValue : "";
+            }
+
+            if (!t.text) t.text = node.firstChild ? node.firstChild.nodeValue : "";
+        }
+
+        return t;
+    },
+    _getCollections:function(loader){
+        var collection = {};
+        var opts = loader.doXPath("//coll_options");
+        for (var i = 0; i < opts.length; i++) {
+            var bind = opts[i].getAttribute("for");
+            var arr = collection[bind] = [];
+            var itms = loader.doXPath(".//item", opts[i]);
+            for (var j = 0; j < itms.length; j++) {
+                var itm = itms[j];
+                var attrs = itm.attributes;
+                var obj = { key: itms[j].getAttribute("value"), label: itms[j].getAttribute("label")};
+                for (var k = 0; k < attrs.length; k++) {
+                    var attr = attrs[k];
+                    if (attr.nodeName == "value" || attr.nodeName == "label")
+                        continue;
+                    obj[attr.nodeName] = attr.nodeValue;
+                }
+                arr.push(obj);
+            }
+        }
+        return collection;
+    },
+    _getXML:function(text, loader, toptag){
+        toptag = toptag || "data";
+        if (!loader.getXMLTopNode){
+            loader = new dtmlXMLLoaderObject(function() {});
+            loader.loadXMLString(text);
+        }
+
+        var xml = loader.getXMLTopNode(toptag);
+        if (xml.tagName != toptag) throw "Invalid XML data";
+
+        var skey = xml.getAttribute("dhx_security");
+        if (skey)
+            dhtmlx.security_key = skey;
+
+        return loader;
+    },
+    parse:function(text, loader){
+        loader = this._getXML(text, loader);
+        var data = { };
+
+        var evs = data.data = [];
+        var xml = loader.doXPath("//task");
+
+        for (var i = 0; i < xml.length; i++)
+            evs[i] = this._xmlNodeToJSON(xml[i]);
+
+        data.collections = this._getCollections(loader);
+        return data;
+    },
+    _copyLink:function(obj){
+        return "<item id='"+obj.id+"' source='"+obj.source+"' target='"+obj.target+"' type='"+obj.type+"' />";
+    },
+    _copyObject:function(obj){
+        var start_date = gantt.templates.xml_format(obj.start_date);
+        var end_date   = gantt.templates.xml_format(obj.end_date);
+
+        return "<task id='"+obj.id+"' parent='"+(obj.parent||"")+"' start_date='"+start_date+"' duration='"+obj.duration+"' open='"+(!!obj.open)+"' progress='"+obj.progress+"' end_date='"+end_date+"'><![CDATA["+obj.text+"]]></task>";
+    },
+    serialize:function(){
+        var tasks = [];
+        var links = [];
+
+        gantt.eachTask(function(obj){
+            tasks.push(this._copyObject(obj));
+        },this.config.root_id, this);
+        for (var key in gantt._lpull)
+            links.push(this._copyLink(gantt._lpull[key]));
+
+        return "<data>"+tasks.join("")+"<coll_options for='links'>"+links.join("")+"</coll_options></data>";
+    }
+};
+
+
+gantt.oldxml = {
+    parse:function(text, loader){
+        loader = gantt.xml._getXML(text, loader, "projects");
+        var data = { collections:{ links:[] } };
+
+        var evs = data.data = [];
+        var xml = loader.doXPath("//task");
+        for (var i = 0; i < xml.length; i++){
+            evs[i] = gantt.xml._xmlNodeToJSON(xml[i]);
+            var parent = xml[i].parentNode;
+
+            if (parent.tagName == "project")
+                evs[i].parent = "project-"+parent.getAttribute("id");
+            else
+                evs[i].parent = parent.parentNode.getAttribute("id");
+        }
+
+        xml = loader.doXPath("//project");
+        for (var i = 0; i < xml.length; i++){
+            var ev = gantt.xml._xmlNodeToJSON(xml[i], true);
+            ev.id ="project-"+ev.id;
+            evs.push(ev);
+        }
+
+        for (var i=0; i<evs.length; i++){
+            var ev = evs[i];
+            ev.start_date = ev.startdate || ev.est;
+            ev.end_date = ev.enddate;
+            ev.text = ev.name;
+            ev.duration = ev.duration / 8;
+            ev.open = 1;
+            if (!ev.duration && !ev.end_date) ev.duration = 1;
+            if (ev.predecessortasks)
+                data.collections.links.push({ target:ev.id, source:ev.predecessortasks, type:gantt.config.links.finish_to_start });
+        }
+
+        return data;
+    },
+    serialize:function(){
+        dhtmlx.message("Serialization to 'old XML' is not implemented");
+    }
+};
+
+gantt.serverList = function(name, array) {
+    if (array) {
+        this.serverList[name] = array.slice(0);
+    }else if(!this.serverList[name]){
+        this.serverList[name] = [];
+    }
+    return this.serverList[name];
+};
+gantt._working_time_helper = {
+    units : [
+        "year",
+        "month",
+        "week",
+        "day",
+        "hour",
+        "minute"
+    ],
+
+    hours:[8, 17],
+    dates:{
+        0:false,
+        6:false
+    },
+
+    _get_unit_order : function(unit){
+        for(var i= 0, len =  this.units.length; i < len; i++){
+            if(this.units[i] == unit)
+                return i;
+        }
+        dhtmlx.assert(false, "Incorrect duration unit");
+    },
+
+    _timestamp:function(settings){
+
+        var timestamp = null;
+        if((settings.day || settings.day === 0)){
+            timestamp = settings.day;
+        }else if(settings.date){
+            timestamp = gantt.date.date_part(new Date(settings.date)).valueOf();
+        }
+        return timestamp;
+    },
+    set_time:function(settings){
+        var hours = settings.hours !== undefined ? settings.hours : true;
+
+        var timestamp = this._timestamp(settings);
+
+        if(timestamp !== null){
+            this.dates[timestamp] = hours;
+        }else{
+            this.hours = hours;
+        }
+    },
+    unset_time:function(settings){
+
+
+        if(!settings){
+            this.hours = [];
+        }else{
+
+            var timestamp = this._timestamp(settings);
+
+            if(timestamp !== null){
+                delete this.dates[timestamp];
+            }
+        }
+    },
+
+    is_working_unit : function(date, unit, order){
+        if(!gantt.config.work_time) return true;
+
+        if(order === undefined){
+            order = this._get_unit_order(unit);
+        }
+        if(order === undefined){
+            return false;
+        }
+        if(order){
+            //check if bigger time unit is a work time (hour < day < month...)
+            //i.e. don't check particular hour if the whole day is marked as not working
+            if(!this.is_working_unit(date, this.units[order-1], order-1))
+                return false;
+        }
+        if(!this["is_work_" + unit])
+            return true;
+        return this["is_work_" + unit](date);
+    },
+
+    //checkings for particular time units
+    //methods for month-year-week can be defined, otherwise always return 'true'
+    is_work_day:function(date){
+        var val = this.get_working_hours(date);
+
+        if(val instanceof Array){
+            return val.length > 0;
+        }
+        return false;
+    },
+    is_work_hour:function(date){
+        var hours = this.get_working_hours(date);
+        var hour = date.getHours();
+        for(var i=0; i < hours.length; i += 2){
+            if(hours[i+1] === undefined){
+                return hours[i] == hour;
+            }else{
+                if(hour >= hours[i] && hour < hours[i+1])
+                    return true;
+            }
+        }
+        return false;
+    },
+
+    get_working_hours:function(date){
+        var t = this._timestamp({date:date});
+        var hours = true;
+        if(this.dates[t] !== undefined){
+            hours = this.dates[t];//custom day
+        }else if(this.dates[date.getDay()] !== undefined){
+            hours = this.dates[date.getDay()];//week day
+        }
+        if(hours === true){
+            return this.hours;
+        }else if(hours){
+            return hours;
+        }
+        return [];
+
+
+    },
+
+    get_work_units_between:function(from, to, unit, step){
+        if(!unit){
+            return false;
+        }
+        var start = new Date(from),
+            end = new Date(to),
+            step = step || 1;
+        var units = 0;
+        while(start.valueOf() < end.valueOf()){
+            if(this.is_working_unit(start, unit))
+                units++;
+            start = gantt.date.add(start, step, unit);
+        }
+        return units;
+    },
+
+    add_worktime : function(from, duration, unit, step){
+        if(!unit)
+            return false;
+
+        var start = new Date(from),
+            added = 0,
+            step = step || 1,
+            duration = duration*1;
+
+        while(added < duration){
+            var next = gantt.date.add(start, step, unit);
+            if(this.is_working_unit(step > 0 ? start : next, unit))
+                added++;
+            start = next;
+        }
+        return start;
+    },
+
+    /* settings:
+     {
+     date:date,
+     unit:'day'/'hour'...,
+     dir:'future'/'past'/'any'/''
+     }
+     */
+    get_closest_worktime : function(settings){
+        if(this.is_working_unit(settings.date, settings.unit))
+            return settings.date;
+
+        var unit = settings.unit;
+
+        var curr = gantt.date[unit + '_start'](settings.date);
+
+        var future_target = new Date(curr),
+            prev_target = new Date(curr),
+            tick = true,
+            maximum_loop = 3000,//be extra sure we won't fall into infinite loop, 3k seems big enough
+            count = 0,
+            both_directins = (settings.dir == 'any' || !settings.dir);
+
+        var inc = 1;
+        if(settings.dir == 'past')
+            inc = -1;
+
+        //will seek closest working hour in future or in past, one step in one direction per iteration
+        while(!this.is_working_unit(curr, unit)){
+
+            if(both_directins){
+                curr = tick ? future_target : prev_target;
+                inc = inc*(-1);
+            }
+
+            curr = gantt.date.add(curr, inc, unit);
+
+            if(both_directins){
+                if(tick){
+                    future_target = curr;
+                }else{
+                    prev_target = curr;
+                }
+            }
+            tick = !tick;
+            count++;
+            if(count > maximum_loop){
+                dhtmlx.assert(false, "Invalid working time check");
+                return false;
+            }
+        }
+
+        if(curr == prev_target || settings.dir == 'past'){
+            curr = gantt.date.add(curr, 1, unit);
+        }
+
+        return curr;
+    }
+
+
+};
+
+gantt.getTask = function(id) {
+    dhtmlx.assert(this._pull[id]);
+    return this._pull[id];
+};
+gantt.getTaskByTime = function(from, to){
+    var p = this._pull,
+        res = [],
+        pos = 0,
+        taken = 0;
+
+    if(!(from || to)){
+        for (var t in p) res.push(p[t]);
+    }else{
+        from = +from || -Infinity;
+        to = +to || Infinity;
+        for (var t in p){
+            var task = p[t];
+            if (+task.start_date < to && +task.end_date > from)
+                res.push(task);
+        }
+    }
+
+    return res;
+};
+
+gantt.isTaskExists = function(id) {
+    return dhtmlx.defined(this._pull[id]);
+};
+
+gantt.isTaskVisible = function(id){
+    if(!this._pull[id])
+        return false;
+
+    if(!(+this._pull[id].start_date < +this._max_date && +this._pull[id].end_date > +this._min_date))
+        return false;
+
+    for(var i= 0, count = this._order.length; i < count; i++)
+        if(this._order[i] == id) return true;
+    return false;
+};
+
+
+gantt.updateTask = function(id, item) {
+    if (!dhtmlx.defined(item)) item = this.getTask(id);
+    if (this.callEvent("onBeforeTaskUpdate", [id, item])===false) return false;
+
+    this._pull[item.id] = item;
+    if(!this._is_parent_sync(item)){
+        this._resync_parent(item);
+    }
+    this._update_parents(item.id);
+    this.refreshTask(item.id);
+
+    this.callEvent("onAfterTaskUpdate", [id, item]);
+
+    this._sync_order();
+
+    this._adjust_scales();
+};
+
+gantt._add_branch = function(task){
+    if (!this._branches[task.parent])
+        this._branches[task.parent] = [];
+    var branch = this._branches[task.parent];
+    var added_already = false;
+    for(var i = 0, length = branch.length; i < length; i++){
+        if(branch[i] == task.id){
+            added_already = true;
+            break;
+        }
+    }
+    if(!added_already)
+        branch.push(task.id);
+
+    this._sync_parent(task);
+    this._sync_order();
+};
+
+gantt._move_branch = function(task, old_parent, new_parent){
+    task.parent = new_parent;
+    this._sync_parent(task);
+    this._replace_branch_child(old_parent, task.id);
+    if(new_parent){
+
+        this._add_branch(task);
+    }else{
+        delete this._branches[task.id];
+    }
+    task.$level =  this._item_level(task);
+    this._sync_order();
+};
+gantt._resync_parent = function(task){
+    this._move_branch(task, task.$rendered_parent, task.parent);
+};
+gantt._sync_parent = function(task){
+    task.$rendered_parent = task.parent;
+};
+gantt._is_parent_sync = function(task){
+    return (task.$rendered_parent == task.parent);
+};
+
+
+gantt._replace_branch_child = function(node, old_id, new_id){
+    var branch = this._branches[node];
+    if (branch){
+        var newbranch = [];
+        for (var i=0; i<branch.length; i++){
+            if (branch[i] != old_id)
+                newbranch.push(branch[i]);
+            else if (new_id)
+                newbranch.push(new_id);
+        }
+        this._branches[node] = newbranch;
+    }
+    this._sync_order();
+};
+
+gantt.addTask = function(item, parent) {
+    if (!dhtmlx.defined(parent)) parent = item.parent || 0;
+    if (!dhtmlx.defined(this._pull[parent])) parent = 0;
+    item.parent = parent;
+    item = this._init_task(item);
+
+    if (this.callEvent("onBeforeTaskAdd", [item.id, item])===false) return false;
+
+    this._pull[item.id] = item;
+
+    this._add_branch(item);
+
+    this.refreshData();
+
+    this.callEvent("onAfterTaskAdd", [item.id, item]);
+    this._adjust_scales();
+    return item.id;
+};
+
+gantt.deleteTask = function(id) {
+    return this._deleteTask(id);
+};
+
+gantt._deleteTask = function(id, silent) {
+    var item = this.getTask(id);
+    if (!silent && this.callEvent("onBeforeTaskDelete", [id, item])===false) return false;
+
+    if (!silent && this._dp)
+        this._dp.setUpdateMode("off");
+    var branches = this._branches[item.id] || [];
+
+    this._update_flags(id, false);
+
+    for (var i = 0; i < branches.length; i++) {
+        this._silentStart();
+        this._deleteTask(branches[i], true);
+        // add deleted subrow into dataprocessor update list manually
+        // because silent mode is on
+        if (this._dp) {
+            this._dp._ganttMode = "tasks";
+            this._dp.setUpdated(branches[i],true,"deleted");
+        }
+        this._silentEnd();
+    }
+    if (!silent && this._dp)
+        this._dp.setUpdateMode("cell");
+
+    while (item.$source.length > 0)
+        this.deleteLink(item.$source[0]);
+    while (item.$target.length > 0)
+        this.deleteLink(item.$target[0]);
+
+    delete this._pull[id];
+    this._move_branch(item, item.parent, null);
+
+
+    if (!silent) {
+        this.callEvent("onAfterTaskDelete", [id, item]);
+        this.refreshData();
+    }
+    return true;
+};
+
+gantt.clearAll = function() {
+    this._pull = {};
+    this._branches = {};
+    this._order = [];
+    this._order_full = [];
+    this._lpull = {};
+
+    this.refreshData();
+
+    this.callEvent("onClear", []);
+};
+
+gantt._update_flags = function(oldid, newid){
+    // TODO: need a proper way to update all possible flags
+    if (this._lightbox_id == oldid)
+        this._lightbox_id = newid;
+    if (this._selected_task == oldid){
+        this._selected_task = newid;
+    }
+    if (this._tasks_dnd.drag && this._tasks_dnd.drag.id == oldid){
+        this._tasks_dnd.drag.id = newid;
+    }
+};
+gantt.changeTaskId = function(oldid, newid) {
+    var item = this._pull[newid] = this._pull[oldid];
+    this._pull[newid].id = newid;
+    delete this._pull[oldid];
+    for (var id in this._pull) {
+        if (this._pull[id].parent == oldid)
+            this._pull[id].parent = newid;
+    }
+    this._update_flags(oldid, newid);
+    this._replace_branch_child(item.parent, oldid, newid);
+
+    this.callEvent("onTaskIdChange", [oldid, newid]);
+};
+
+gantt._get_duration_unit = function(){
+    return (gantt._get_line(this.config.duration_unit)*1000) || this.config.duration_unit;
+};
+
+gantt._get_safe_type = function(type){
+    for(var i in this.config.types){
+        if(this.config.types[i] == type){
+            return type;
+        }
+    }
+    return gantt.config.types.task;
+};
+gantt._get_type_name = function(type_value){
+    for(var i in this.config.types){
+        if(this.config.types[i] == type_value){
+            return i;
+        }
+    }
+    return "task";
+};
+gantt.getWorkHours = function(date){
+    return this._working_time_helper.get_working_hours(date);
+};
+
+gantt.setWorkTime = function(config){
+    this._working_time_helper.set_time(config);
+};
+
+gantt.isWorkTime = function(date, unit){
+    var helper = this._working_time_helper;
+    return helper.is_working_unit(date, unit || this.config.duration_unit);
+};
+
+gantt.getClosestWorkTime = function(config){
+    var helper = this._working_time_helper;
+    if(config instanceof Date){
+        config = {
+            date:config
+        };
+    }
+    config.dir = config.dir || 'any';
+    config.unit = config.unit || this.config.duration_unit;
+    return helper.get_closest_worktime(config);
+};
+
+gantt.calculateDuration = function(start_date, end_date){
+    var helper = this._working_time_helper;
+    return helper.get_work_units_between(start_date, end_date, this.config.duration_unit, this.config.duration_step);
+};
+gantt.calculateEndDate = function(start, duration, unit){
+    var helper = this._working_time_helper;
+    var mult = duration >= 0 ? 1 : -1;
+    return helper.add_worktime(start, Math.abs(duration), this.config.duration_unit, mult*this.config.duration_step);
+};
+
+gantt._init_task = function(task){
+    if (!dhtmlx.defined(task.id))
+        task.id = dhtmlx.uid();
+
+    if(task.start_date)
+        task.start_date = gantt.date.parseDate(task.start_date, "xml_date");
+    if(task.end_date)
+        task.end_date = gantt.date.parseDate(task.end_date, "xml_date");
+
+
+
+    if(task.start_date){
+        if(!task.end_date && task.duration){
+            task.end_date = this.calculateEndDate(task.start_date, task.duration);
+        }
+    }
+
+    if(gantt.config.work_time && gantt.config.correct_work_time){
+        if(task.start_date)
+            task.start_date = gantt.getClosestWorkTime(task.start_date);
+        if(task.end_date)
+            task.end_date = gantt.getClosestWorkTime(task.end_date);
+    }
+    gantt._init_task_timing(task);
+
+    task.$source = [];
+    task.$target = [];
+    task.parent = task.parent || this.config.root_id;
+    task.$open = dhtmlx.defined(task.open) ? task.open : false;
+    task.$level = this._item_level(task);
+    return task;
+};
+
+gantt._init_task_timing = function(task){
+    if(task.$rendered_type === undefined){
+        task.$rendered_type = task.type;
+    }else if(task.$rendered_type != task.type){
+        delete task.$no_end;
+        delete task.$no_start;
+        task.$rendered_type = task.type;
+    }
+
+    if((task.$no_end === undefined || task.$no_start === undefined) && task.type != this.config.types.milestone){
+        if(task.type == this.config.types.project){
+            //project duration is always defined by children duration
+            task.$no_end = task.$no_start = true;
+        }else{
+            //tasks can have fixed duration, children duration(as projects), or one date fixed, and other defined by nested items
+            task.$no_end = !(task.end_date || task.duration);
+            task.$no_start = !task.start_date;
+        }
+    }
+
+    if(task.type == this.config.types.milestone){
+        task.end_date = task.start_date;
+    }
+    if (task.start_date && task.end_date){
+        task.duration = this.calculateDuration(task.start_date, task.end_date);
+    }
+    task.duration = task.duration || 0;
+};
+gantt._is_flex_task = function(task){
+    return !!(task.$no_end || task.$no_start);
+};
+
+gantt._update_parents = function(taskId, silent){
+    if(!taskId) return;
+
+    var task = this.getTask(taskId);
+
+    while(!(task.$no_end || task.$no_start) && task.parent && this.isTaskExists(task.parent)){
+        task = this.getTask(task.parent);
+    }
+
+    if(task.$no_end){
+        var max = 0;
+        this.eachTask(function(child){
+            if(child.end_date && +child.end_date > +max){
+                max = new Date(child.end_date);
+            }
+        }, task.id);
+
+        if(max){
+            task.end_date = max;
+        }
+    }
+    if(task.$no_start){
+        var min = Infinity;
+        this.eachTask(function(child){
+            if(child.start_date && +child.start_date < +min){
+                min = new Date(child.start_date);
+            }
+        }, task.id);
+
+        if(min != Infinity){
+            task.start_date = min;
+        }
+    }
+
+    if((task.$no_end || task.$no_start)){
+        this._init_task_timing(task);
+        if(!silent)
+            this.refreshTask(task.id, true);
+    }
+    if(task.parent && this.isTaskExists(task.parent)){
+        this._update_parents(task.parent, silent);
+    }
+};
+gantt.isChildOf = function(child_id, parent_id){
+    if(!this.isTaskExists(child_id))
+        return false;
+    if(parent_id === this.config.root_id)
+        return this.isTaskExists(child_id);
+
+    var task = this.getTask(child_id);
+
+    while(task && this.isTaskExists(task.parent)){
+        task = this.getTask(task.parent);
+        if(task && task.id == parent_id)
+            return true;
+    }
+    return false;
+};
+
+gantt._get_closest_date = function(config){
+    var date = config.date,
+        steps = config.step,
+        unit = config.unit;
+
+    var upper = gantt.date[unit + "_start"](new Date(this._min_date));
+    while(+upper < +date){
+        upper = gantt.date.add(upper, steps, unit);
+    }
+
+    var lower = gantt.date.add(upper, -1*steps, unit);
+    if(config.dir && config.dir == 'future')
+        return upper;
+    if(config.dir && config.dir == 'past')
+        return lower;
+
+    if(Math.abs(date - lower) < Math.abs(upper - date)){
+        return lower;
+    }else{
+        return upper;
+    }
+
+};
+
+
+gantt.attachEvent("onBeforeTaskUpdate", function(id, task){
+    gantt._init_task_timing(task);
+    return true;
+});
+gantt.attachEvent("onBeforeTaskAdd", function(id, task){
+    gantt._init_task_timing(task);
+    return true;
+});
+
+gantt._item_level = function(item) {
+    var level = 0;
+    while (item.parent) {
+        if (!dhtmlx.defined(this._pull[item.parent])) break;
+        item = this._pull[item.parent];
+        level++;
+    }
+    return level;
+};
+
+
+gantt.sort = function(field, desc, parent) {
+    var render = !arguments[3];//4th argument to cancel redraw after sorting
+
+    if (!dhtmlx.defined(parent)) {
+        parent = this.config.root_id;
+    }
+
+    if (!dhtmlx.defined(field)) field = "order";
+    var criteria = (typeof(field) == "string") ? (function(a, b) {
+        var result = a[field] > b[field];
+        if (desc) result = !result;
+        return result ? 1 : -1;
+    }) : field;
+
+
+    var els = this._branches[parent];
+    if (els){
+        var temp = [];
+        for (var i = els.length - 1; i >= 0; i--)
+            temp[i] = this._pull[els[i]];
+
+        temp.sort(criteria);
+
+        for (var i = 0; i < temp.length; i++) {
+            els[i] = temp[i].id;
+            this.sort(field, desc, els[i], true);
+        }
+    }
+
+    if (render) {
+        this.refreshData();
+    }
+};
+
+gantt.getNext = function(id) {
+    for (var i = 0; i < this._order.length-1; i++) {
+        if (this._order[i] == id)
+            return this._order[i+1];
+    }
+    return null;
+};
+gantt.getPrev = function(id) {
+    for (var i = 1; i < this._order.length; i++) {
+        if (this._order[i] == id)
+            return this._order[i-1];
+    }
+    return null;
+};
+
+gantt._dp_init = function(dp) {
+    dp.setTransactionMode("POST", true);
+    dp.serverProcessor += (dp.serverProcessor.indexOf("?") != -1 ? "&" : "?") + "editing=true";
+    dp._serverProcessor = dp.serverProcessor;
+
+    dp.styles = {
+        updated:"gantt_updated",
+        inserted:"gantt_inserted",
+        deleted:"gantt_deleted",
+        invalid:"gantt_invalid",
+        error:"gantt_error",
+        clear:""
+    };
+
+    dp._methods=["_row_style","setCellTextStyle","_change_id","_delete_task"];
+    this.attachEvent("onAfterTaskAdd", function(id, item) {
+        dp._ganttMode = "tasks";
+        dp.setUpdated(id,true,"inserted");
+    });
+    this.attachEvent("onAfterTaskUpdate", function(id, item) {
+        dp._ganttMode = "tasks";
+        dp.setUpdated(id,true);
+    });
+    this.attachEvent("onAfterTaskDelete", function(id, item) {
+        dp._ganttMode = "tasks";
+        dp.setUpdated(id,true,"deleted");
+    });
+
+    this.attachEvent("onAfterLinkUpdate", function(id, item) {
+        dp._ganttMode = "links";
+        dp.setUpdated(id, true);
+    });
+    this.attachEvent("onAfterLinkAdd", function(id, item) {
+        dp._ganttMode = "links";
+        dp.setUpdated(id, true,"inserted");
+    });
+    this.attachEvent("onAfterLinkDelete", function(id, item) {
+        dp._ganttMode = "links";
+        dp.setUpdated(id, true,"deleted");
+    });
+    this.attachEvent("onRowDragEnd", function(id, target) {
+        dp._ganttMode = "tasks";
+        this.getTask(id).target = target;
+        dp.setUpdated(id, true,"order");
+    });
+
+    dp.attachEvent("onBeforeDataSending", function() {
+        this.serverProcessor = this._serverProcessor + getUrlSymbol(this._serverProcessor) + "gantt_mode=" + this._ganttMode;
+        return true;
+    });
+
+    dp._getRowData=dhtmlx.bind(function(id, pref) {
+        var task;
+        if (dp._ganttMode == "tasks")
+            task = this.isTaskExists(id) ? this.getTask(id) : { id: id };
+        else
+            task = this.isLinkExists(id) ? this.getLink(id) : { id: id };
+
+        var data = {};
+        for (var key in task) {
+            if (key.substr(0, 1) == "$") continue;
+            var value = task[key];
+            if (value instanceof Date)
+                data[key] = this.templates.xml_format(value);
+            else
+                data[key] = value;
+        }
+        if(task.$no_start){
+            task.start_date = "";
+            task.duration = "";
+        }
+        if(task.$no_end){
+            task.end_date = "";
+            task.duration = "";
+        }
+        data[dp.action_param] = this.getUserData(id, dp.action_param);
+        return data;
+    }, this);
+
+    this._change_id = dhtmlx.bind(function(oldid, newid) {
+        if (dp._ganttMode != "tasks")
+            this.changeLinkId(oldid, newid);
+        else
+            this.changeTaskId(oldid, newid);
+    }, this);
+
+    this._row_style = function(row_id, classname){
+        if (dp._ganttMode != "tasks") return;
+        var el = gantt.getTaskRowNode(row_id);
+        if (!el) return;
+        if (!classname) {
+            var regexp = / (gantt_updated|gantt_inserted|gantt_deleted|gantt_invalid|gantt_error)/g;
+            el.className = el.className.replace(regexp, "");
+        } else
+            el.className += " " + classname;
+    };
+
+    // fake method for dataprocessor
+    this._delete_task = function(row_id, node){};
+
+    this._dp = dp;
+};
+
+gantt.getUserData = function(id, name) {
+    if (!this.userdata) this.userdata = {};
+    if (this.userdata[id] && this.userdata[id][name]) return this.userdata[id][name];
+    return "";
+};
+gantt.setUserData = function(id, name, value) {
+    if (!this.userdata) this.userdata = {};
+    if (!this.userdata[id]) this.userdata[id] = {};
+    this.userdata[id][name] = value;
+};
+
+
+gantt._init_link = function(link) {
+    if (!dhtmlx.defined(link.id))
+        link.id = dhtmlx.uid();
+    return link;
+};
+
+gantt._sync_links = function() {
+    for (var id in this._pull) {
+        this._pull[id].$source = [];
+        this._pull[id].$target = [];
+    }
+    for (var id in this._lpull) {
+        var link = this._lpull[id];
+        if(this._pull[link.source])
+            this._pull[link.source].$source.push(id);
+        if(this._pull[link.target])
+            this._pull[link.target].$target.push(id);
+    }
+};
+
+gantt.getLink = function(id) {
+    dhtmlx.assert(this._lpull[id], "Link doesn't exist");
+    return this._lpull[id];
+};
+
+gantt.isLinkExists = function(id) {
+    return dhtmlx.defined(this._lpull[id]);
+};
+
+gantt.addLink = function(link) {
+    link = this._init_link(link);
+
+    if (this.callEvent("onBeforeLinkAdd", [link.id, link])===false) return false;
+
+    this._lpull[link.id] = link;
+    this._sync_links();
+    this._render_link(link.id);
+    this.callEvent("onAfterLinkAdd", [link.id, link]);
+    return link.id;
+};
+
+gantt.updateLink = function(id, data) {
+    if (!dhtmlx.defined(data))
+        data = this.getLink(id);
+
+    if (this.callEvent("onBeforeLinkUpdate", [id, data]) === false) return false;
+
+    this._lpull[id] = data;
+    this._sync_links();
+    this._render_link(id);
+    this.callEvent("onAfterLinkUpdate", [id, data]);
+    return true;
+};
+
+gantt.deleteLink = function(id) {
+    return this._deleteLink(id);
+};
+
+gantt._deleteLink = function(id, silent) {
+    var link = this.getLink(id);
+    if (!silent && this.callEvent("onBeforeLinkDelete", [id, link])===false) return false;
+
+    delete this._lpull[id];
+    this._sync_links();
+    this.refreshLink(id);
+    if (!silent) this.callEvent("onAfterLinkDelete", [id, link]);
+    return true;
+};
+
+gantt.changeLinkId = function(oldid, newid) {
+    this._lpull[newid] = this._lpull[oldid];
+    this._lpull[newid].id = newid;
+    delete this._lpull[oldid];
+
+    this._sync_links();
+    this.callEvent("onLinkIdChange", [oldid, newid]);
+};
+
+
+gantt.getChildren = function(id) {
+    return dhtmlx.defined(this._branches[id]) ? this._branches[id] : [];
+};
+gantt.hasChild = function(id) {
+    return dhtmlx.defined(this._branches[id]);
+};
+
+
+gantt.refreshData = function(){
+    this._sync_order();
+    this._render_data();
+};
+
+
+gantt._configure = function(col, data){
+    for (var key in data)
+        if (typeof col[key] == "undefined")
+            col[key] = data[key];
+};
+gantt._init_skin = function(){
+    if (!gantt.skin){
+        var links = document.getElementsByTagName("link");
+        for (var i = 0; i < links.length; i++) {
+            var res = links[i].href.match("dhtmlxgantt_([a-z]+).css");
+            if (res){
+                gantt.skin = res[1];
+                break;
+            }
+        }
+    }
+
+    if (!gantt.skin) gantt.skin = "terrace";
+    var skinset = gantt.skins[gantt.skin];
+
+    //apply skin related settings
+    this._configure(gantt.config, skinset.config);
+
+    var config = gantt.config.columns;
+    if (config[1] && typeof config[1].width == "undefined")
+        config[1].width = skinset._second_column_width;
+    if (config[2] && typeof config[2].width == "undefined")
+        config[2].width = skinset._third_column_width;
+
+    if (skinset._lightbox_template)
+        gantt._lightbox_template = skinset._lightbox_template;
+
+    gantt._init_skin = function(){};
+};
+gantt.skins = {};
+
+
+gantt._lightbox_methods = {};
+gantt._lightbox_template="<div class='dhx_cal_ltitle'><span class='dhx_mark'>&nbsp;</span><span class='dhx_time'></span><span class='dhx_title'></span></div><div class='dhx_cal_larea'></div>";
+
+gantt.showLightbox=function(id){
+    if (!id || this.config.readonly) return;
+    if (!this.callEvent("onBeforeLightbox",[id])) return;
+
+    var task = this.getTask(id);
+
+    var box = this.getLightbox(this._get_safe_type(task.type));
+    this._center_lightbox(box);
+    this.showCover();
+    this._fill_lightbox(id,box);
+    this.callEvent("onLightbox",[id]);
+};
+gantt._get_timepicker_step = function(){
+    if(this.config.round_dnd_dates){
+        var scale = gantt._tasks,
+            step = (this._get_line(scale.unit) * scale.step)/60;//timepicker step is measured in minutes
+        if(step >= 60*24){
+            step = this.config.time_step;
+        }
+        return step;
+    }
+    return this.config.time_step;
+};
+gantt.getLabel = function(property, key) {
+    var sections = this._get_typed_lightbox_config();
+    for (var i=0; i<sections.length; i++) {
+        if(sections[i].map_to == property) {
+            var options = sections[i].options;
+            for (var j=0; j<options.length; j++) {
+                if(options[j].key == key) {
+                    return options[j].label;
+                }
+            }
+        }
+    }
+    return "";
+};
+
+gantt.updateCollection = function(list_name, collection) {
+    var collection = collection.slice(0);
+    var list = gantt.serverList(list_name);
+    if (!list) return false;
+    list.splice(0, list.length);
+    list.push.apply(list, collection || []);
+    gantt.resetLightbox();
+};
+gantt.getLightboxType = function(){
+    return this._get_safe_type(this._lightbox_type);
+};
+gantt.getLightbox = function(type){
+    if(type === undefined)
+        type = this.getLightboxType();
+
+    if (!this._lightbox || this.getLightboxType() != this._get_safe_type(type)){
+        this._lightbox_type = this._get_safe_type(type);
+        var d=document.createElement("DIV");
+        d.className="dhx_cal_light";
+
+        var full_width = this._is_lightbox_timepicker();
+        if (gantt.config.wide_form || full_width)
+            d.className+=" dhx_cal_light_wide";
+
+        if (full_width) {
+            gantt.config.wide_form = true;
+            d.className+=" dhx_cal_light_full";
+        }
+
+
+        d.style.visibility="hidden";
+        var html = this._lightbox_template;
+
+        var buttons = this.config.buttons_left;
+        for (var i in buttons)
+            html+="<div class='dhx_btn_set dhx_left_btn_set "+buttons[i]+"_set'><div dhx_button='1' class='"+buttons[i]+"'></div><div>"+this.locale.labels[buttons[i]]+"</div></div>";
+
+        buttons = this.config.buttons_right;
+        for (var i in buttons)
+            html+="<div class='dhx_btn_set dhx_right_btn_set "+buttons[i]+"_set' style='float:right;'><div dhx_button='1' class='"+buttons[i]+"'></div><div>"+this.locale.labels[buttons[i]]+"</div></div>";
+
+        html+="</div>";
+        d.innerHTML=html;
+
+        if (gantt.config.drag_lightbox){
+            d.firstChild.onmousedown = gantt._ready_to_dnd;
+            d.firstChild.onselectstart = function(){ return false; };
+            d.firstChild.style.cursor = "pointer";
+            gantt._init_dnd_events();
+
+        }
+
+        document.body.insertBefore(d,document.body.firstChild);
+        this._lightbox=d;
+
+        var sns = this._get_typed_lightbox_config(type);
+        html = this._render_sections(sns);
+
+        var ds=d.getElementsByTagName("div");
+        for (var i=0; i<ds.length; i++) {
+            var t_ds = ds[i];
+            if (t_ds.className == "dhx_cal_larea") {
+                t_ds.innerHTML = html;
+                break;
+            }
+        }
+
+        //sizes
+        this.resizeLightbox();
+
+        this._init_lightbox_events(this);
+        d.style.display="none";
+        d.style.visibility="visible";
+    }
+    return this._lightbox;
+};
+
+gantt._render_sections = function(sns) {
+    var html="";
+    for (var i=0; i < sns.length; i++) {
+        var block=this.form_blocks[sns[i].type];
+        if (!block) continue; //ignore incorrect blocks
+        sns[i].id="area_"+dhtmlx.uid();
+
+        var display = sns[i].hidden ? " style='display:none'" : "";
+        var button = "";
+        if (sns[i].button){
+            button = "<div class='dhx_custom_button' index='"+i+"'><div class='dhx_custom_button_"+sns[i].button+"'></div><div>"+this.locale.labels["button_"+sns[i].button]+"</div></div>";
+        }
+        if (this.config.wide_form){
+            html+="<div class='dhx_wrap_section' " + display+">";
+        }
+        html+="<div id='"+sns[i].id+"' class='dhx_cal_lsection'>"+button+this.locale.labels["section_"+sns[i].name]+"</div>"+block.render.call(this,sns[i]);
+        html+="</div>";
+    }
+    return html;
+};
+
+
+gantt.resizeLightbox=function(){
+    var d = this._lightbox;
+    if (!d) return;
+
+    var con = d.childNodes[1];
+    con.style.height="0px";
+    con.style.height=con.scrollHeight+"px";
+    d.style.height=con.scrollHeight+this.config.lightbox_additional_height+"px";
+    con.style.height=con.scrollHeight+"px"; //it is incredible , how ugly IE can be
+
+
+};
+
+gantt._center_lightbox = function(box) {
+    if (box){
+        box.style.display="block";
+
+        var scroll_top = window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop;
+        var scroll_left = window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft;
+
+        var view_height = window.innerHeight||document.documentElement.clientHeight;
+
+        if(scroll_top) // if vertical scroll on window
+            box.style.top=Math.round(scroll_top+Math.max((view_height-box.offsetHeight)/2, 0))+"px";
+        else // vertical scroll on body
+            box.style.top=Math.round(Math.max(((view_height-box.offsetHeight)/2), 0) + 9)+"px"; // +9 for compatibility with auto tests
+
+        // not quite accurate but used for compatibility reasons
+        if(document.documentElement.scrollWidth > document.body.offsetWidth) // if horizontal scroll on the window
+            box.style.left=Math.round(scroll_left+(document.body.offsetWidth-box.offsetWidth)/2)+"px";
+        else // horizontal scroll on the body
+            box.style.left=Math.round((document.body.offsetWidth-box.offsetWidth)/2)+"px";
+    }
+};
+gantt.showCover = function(){
+    if(this._cover) return;
+
+    this._cover=document.createElement("DIV");
+    this._cover.className="dhx_cal_cover";
+    var _document_height = ((document.height !== undefined) ? document.height : document.body.offsetHeight);
+    var _scroll_height = ((document.documentElement) ? document.documentElement.scrollHeight : 0);
+    this._cover.style.height = Math.max(_document_height, _scroll_height) + 'px';
+    document.body.appendChild(this._cover);
+};
+
+
+gantt._init_lightbox_events = function(){
+    gantt.lightbox_events = {};
+
+
+    gantt.lightbox_events["dhx_save_btn"] = function(e) {
+        gantt._save_lightbox();
+    };
+
+
+    gantt.lightbox_events["dhx_delete_btn"] = function(e) {
+        if(!gantt.callEvent("onLightboxDelete", [gantt._lightbox_id]))
+            return;
+
+        gantt.$click.buttons["delete"](gantt._lightbox_id);
+    };
+
+
+    gantt.lightbox_events["dhx_cancel_btn"] = function(e) {
+        gantt._cancel_lightbox();
+    };
+
+
+    gantt.lightbox_events["default"] = function(e, src) {
+        if (src.getAttribute("dhx_button")) {
+            gantt.callEvent("onLightboxButton", [src.className, src, e]);
+        } else {
+            var index, block, sec;
+            if (src.className.indexOf("dhx_custom_button") != -1) {
+                if (src.className.indexOf("dhx_custom_button_") != -1) {
+                    index = src.parentNode.getAttribute("index");
+                    sec = src.parentNode.parentNode;
+                } else {
+                    index = src.getAttribute("index");
+                    sec = src.parentNode;
+                    src = src.firstChild;
+                }
+            }
+
+            var sections = gantt._get_typed_lightbox_config();
+
+            if (index) {
+                block = gantt.form_blocks[sections[index].type];
+                block.button_click(index, src, sec, sec.nextSibling);
+            }
+        }
+    };
+    dhtmlxEvent(gantt.getLightbox(), "click", function(e) {
+        e = e || window.event;
+        var src = e.target ? e.target : e.srcElement;
+
+        if (!src.className)
+            src = src.previousSibling;
+        if (src && src.className && src.className.indexOf("dhx_btn_set") === 0)
+            src = src.firstChild;
+        if (src && src.className) {
+            var func = dhtmlx.defined(gantt.lightbox_events[src.className]) ? gantt.lightbox_events[src.className] : gantt.lightbox_events["default"];
+            return func(e, src);
+        }
+        return false;
+    });
+
+    gantt.getLightbox().onkeydown=function(e){
+        switch((e||event).keyCode){
+            case gantt.keys.edit_save:
+                if ((e||event).shiftKey) return;
+                gantt._save_lightbox();
+                break;
+            case gantt.keys.edit_cancel:
+                gantt._cancel_lightbox();
+                break;
+            default:
+                break;
+        }
+    };
+};
+
+
+gantt._cancel_lightbox=function(){
+    var task = this.getLightboxValues();
+    this.callEvent("onLightboxCancel",[this._lightbox_id, task.$new]);
+    if(task.$new){
+        this._deleteTask(task.id, true);
+        this.refreshData();
+    }
+    this.hideLightbox();
+};
+
+gantt._save_lightbox=function(){
+    var task = this.getLightboxValues();
+    if(!this.callEvent("onLightboxSave", [this._lightbox_id, task, !!task.$new]))
+        return;
+
+    if (task.$new){
+        delete task.$new;
+        this.addTask(task);
+    }else{
+        dhtmlx.mixin(this.getTask(task.id), task, true);
+        this.updateTask(task.id);
+    }
+    this.refreshData();
+
+    // TODO: do we need any blockable events here to prevent closing lightbox?
+    this.hideLightbox();
+};
+
+gantt.getLightboxValues=function(){
+    var task = dhtmlx.mixin({}, this.getTask(this._lightbox_id));
+
+    var sns = this._get_typed_lightbox_config();
+    for (var i=0; i < sns.length; i++) {
+        var node = document.getElementById(sns[i].id);
+        node=(node?node.nextSibling:node);
+        var block=this.form_blocks[sns[i].type];
+        var res=block.get_value.call(this,node,task, sns[i]);
+        if (sns[i].map_to!="auto")
+            task[sns[i].map_to]=res;
+    }
+    return task;
+};
+
+
+gantt.hideLightbox=function(id){
+    var box = this.getLightbox();
+    if (box) box.style.display="none";
+    this._lightbox_id=null;
+
+    this.hideCover();
+    this.callEvent("onAfterLightbox",[]);
+};
+gantt.hideCover=function(){
+    if (this._cover)
+        this._cover.parentNode.removeChild(this._cover);
+    this._cover=null;
+};
+
+gantt.resetLightbox = function(){
+    if (gantt._lightbox && !gantt._custom_lightbox)
+        gantt._lightbox.parentNode.removeChild(gantt._lightbox);
+    gantt._lightbox = null;
+};
+gantt._set_lightbox_values = function(data, box){
+    var task = data;
+    var s = box.getElementsByTagName("span");
+    if (gantt.templates.lightbox_header) {
+        s[1].innerHTML = "";
+        s[2].innerHTML = gantt.templates.lightbox_header(task.start_date, task.end_date, task);
+    } else {
+        s[1].innerHTML = this.templates.task_time(task.start_date, task.end_date, task);
+        s[2].innerHTML = (this.templates.task_text(task.start_date, task.end_date, task) || "").substr(0, 70); //IE6 fix
+    }
+
+
+    var sns = this._get_typed_lightbox_config(this.getLightboxType());
+    for (var i = 0; i < sns.length; i++) {
+        var section = sns[i];
+
+        if(!this.form_blocks[section.type]){
+            continue;//skip incorrect sections, same check is done during rendering
+        }
+
+
+        var node = document.getElementById(section.id).nextSibling;
+        var block = this.form_blocks[section.type];
+        var value = dhtmlx.defined(task[section.map_to]) ? task[section.map_to] : section.default_value;
+        block.set_value.call(this, node, value, task, section);
+        if (section.focus)
+            block.focus.call(this, node);
+    }
+    if(data.id)
+        gantt._lightbox_id = data.id;
+};
+gantt._fill_lightbox = function(id, box) {
+    var task = this.getTask(id);
+    this._set_lightbox_values(task, box);
+};
+
+
+gantt.getLightboxSection = function(name){
+    var config = this._get_typed_lightbox_config();
+    var i =0;
+    for (i; i < config.length; i++)
+        if (config[i].name == name)
+            break;
+    var section = config[i];
+    if (!this._lightbox)
+        this.getLightbox();
+    var header = document.getElementById(section.id);
+    var node = header.nextSibling;
+
+    var result = {
+        section: section,
+        header: header,
+        node: node,
+        getValue:function(ev){
+            return this.form_blocks[section.type].get_value(node, (ev||{}), section);
+        },
+        setValue:function(value, ev){
+            return this.form_blocks[section.type].set_value(node, value, (ev||{}), section);
+        }
+    };
+
+    var handler = this._lightbox_methods["get_"+section.type+"_control"];
+    return handler?handler(result):result;
+};
+
+gantt._lightbox_methods.get_template_control = function(result) {
+    result.control = result.node;
+    return result;
+};
+gantt._lightbox_methods.get_select_control = function(result) {
+    result.control = result.node.getElementsByTagName('select')[0];
+    return result;
+};
+gantt._lightbox_methods.get_textarea_control = function(result) {
+    result.control = result.node.getElementsByTagName('textarea')[0];
+    return result;
+};
+gantt._lightbox_methods.get_time_control = function(result) {
+    result.control = result.node.getElementsByTagName('select'); // array
+    return result;
+};
+
+
+
+
+
+gantt._init_dnd_events = function(){
+    dhtmlxEvent(document.body, "mousemove", gantt._move_while_dnd);
+    dhtmlxEvent(document.body, "mouseup", gantt._finish_dnd);
+    gantt._init_dnd_events = function(){};
+};
+gantt._move_while_dnd = function(e){
+    if (gantt._dnd_start_lb){
+        if (!document.dhx_unselectable){
+            document.body.className += " dhx_unselectable";
+            document.dhx_unselectable = true;
+        }
+        var lb = gantt.getLightbox();
+        var now = (e&&e.target)?[e.pageX, e.pageY]:[event.clientX, event.clientY];
+        lb.style.top = gantt._lb_start[1]+now[1]-gantt._dnd_start_lb[1]+"px";
+        lb.style.left = gantt._lb_start[0]+now[0]-gantt._dnd_start_lb[0]+"px";
+    }
+};
+gantt._ready_to_dnd = function(e){
+    var lb = gantt.getLightbox();
+    gantt._lb_start = [parseInt(lb.style.left,10), parseInt(lb.style.top,10)];
+    gantt._dnd_start_lb = (e&&e.target)?[e.pageX, e.pageY]:[event.clientX, event.clientY];
+};
+gantt._finish_dnd = function(){
+    if (gantt._lb_start){
+        gantt._lb_start = gantt._dnd_start_lb = false;
+        document.body.className = document.body.className.replace(" dhx_unselectable","");
+        document.dhx_unselectable = false;
+    }
+};
+
+
+
+
+gantt._focus = function(node, select){
+    if (node && node.focus){
+        if (gantt.config.touch){
+            //do not focus editor, to prevent auto-zoom
+        } else {
+            if (select && node.select) node.select();
+            node.focus();
+        }
+    }
+};
+
+
+gantt.form_blocks={
+    getTimePicker: function(sns, hidden) {
+        var time_format = sns.time_format;
+        if (!time_format) {
+            // default order
+            var time_format = ["%d", "%m", "%Y"];
+            if(gantt._get_line(gantt._tasks.unit) < gantt._get_line("day")){
+                time_format.push("%H:%i");
+            }
+        }
+        // map: default order => real one
+        sns._time_format_order = { size:0 };
+
+
+        var cfg = this.config;
+        var dt = this.date.date_part(new Date(gantt._min_date.valueOf()));
+        var last = 24*60, first = 0;
+        if(gantt.config.limit_time_select){
+            last = 60*cfg.last_hour+1;
+            first = 60*cfg.first_hour;
+            dt.setHours(cfg.first_hour);
+        }
+        var html = "";
+
+        for (var p = 0; p < time_format.length; p++) {
+            var time_option = time_format[p];
+
+            // adding spaces between selects
+            if (p > 0) {
+                html += " ";
+            }
+
+            var options = '';
+            switch (time_option) {
+                case "%Y":
+                    sns._time_format_order[2] = p;
+                    sns._time_format_order.size++;
+                    //year
+                    var year = dt.getFullYear()-5; //maybe take from config?
+                    for (var i=0; i < 10; i++)
+                        options+="<option value='"+(year+i)+"'>"+(year+i)+"</option>";
+                    break;
+                case "%m":
+                    sns._time_format_order[1] = p;
+                    sns._time_format_order.size++;
+                    //month
+                    for (var i=0; i < 12; i++)
+                        options+="<option value='"+i+"'>"+this.locale.date.month_full[i]+"</option>";
+                    break;
+                case "%d":
+                    sns._time_format_order[0] = p;
+                    sns._time_format_order.size++;
+                    //days
+                    for (var i=1; i < 32; i++)
+                        options+="<option value='"+i+"'>"+i+"</option>";
+                    break;
+                case "%H:%i":
+                    var last = 24*60, first = 0;
+                    sns._time_format_order[3] = p;
+                    sns._time_format_order.size++;
+                    //hours
+                    var i = first;
+                    var tdate = dt.getDate();
+                    sns._time_values = [];
+
+                    while(i<last){
+                        var time=this.templates.time_picker(dt);
+                        options+="<option value='"+i+"'>"+time+"</option>";
+                        sns._time_values.push(i);
+                        dt.setTime(dt.valueOf()+this._get_timepicker_step()*60*1000);
+                        var diff = (dt.getDate()!=tdate)?1:0; // moved or not to the next day
+                        i=diff*24*60+dt.getHours()*60+dt.getMinutes();
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            if(options){
+                var readonly = sns.readonly ? "disabled='disabled'" : "";
+                var display = hidden ? " style='display:none'" : "";
+                html += "<select "+readonly+display +">"+options+"</select>";
+            }
+        }
+        return html;
+    },
+    _fill_lightbox_select: function (s,i,d,map,cfg) {
+        s[i+map[0]].value=d.getDate();
+        s[i+map[1]].value=d.getMonth();
+        s[i+map[2]].value=d.getFullYear();
+        if (dhtmlx.defined(map[3])) {
+            var v = d.getHours()*60+ d.getMinutes();
+            v = Math.round(v/gantt._get_timepicker_step())*gantt._get_timepicker_step();
+            s[i+map[3]].value= v;
+        }
+    },
+    template:{
+        render: function(sns){
+            var height=(sns.height||"30")+"px";
+            return "<div class='dhx_cal_ltext dhx_cal_template' style='height:"+height+";'></div>";
+        },
+        set_value:function(node,value,ev,config){
+            node.innerHTML = value||"";
+        },
+        get_value:function(node,ev,config){
+            return node.innerHTML||"";
+        },
+        focus: function(node){
+        }
+    },
+    textarea:{
+        render:function(sns){
+            var height=(sns.height||"130")+"px";
+            return "<div class='dhx_cal_ltext' style='height:"+height+";'><textarea></textarea></div>";
+        },
+        set_value:function(node,value,ev){
+            node.firstChild.value=value||"";
+        },
+        get_value:function(node,ev){
+            return node.firstChild.value;
+        },
+        focus:function(node){
+            var a=node.firstChild; gantt._focus(a, true);
+        }
+    },
+    select:{
+        render:function(sns){
+            var height=(sns.height||"23")+"px";
+            var html="<div class='dhx_cal_ltext' style='height:"+height+";'><select style='width:100%;'>";
+            for (var i=0; i < sns.options.length; i++)
+                html+="<option value='"+sns.options[i].key+"'>"+sns.options[i].label+"</option>";
+            html+="</select></div>";
+            return html;
+        },
+        set_value:function(node,value,ev,sns){
+            var select = node.firstChild;
+            if (!select._dhx_onchange && sns.onchange) {
+                select.onchange = sns.onchange;
+                select._dhx_onchange = true;
+            }
+            if (typeof value == "undefined")
+                value = (select.options[0]||{}).value;
+            select.value=value||"";
+        },
+        get_value:function(node,ev){
+            return node.firstChild.value;
+        },
+        focus:function(node){
+            var a=node.firstChild; gantt._focus(a, true);
+        }
+    },
+    time:{
+        render:function(sns) {
+            var time = this.form_blocks.getTimePicker.call(this, sns);
+            var parts = ["<div style='height:30px;padding-top:0px;font-size:inherit;text-align:center;' class='dhx_section_time'>"];
+            parts.push(time);
+
+            if(sns.single_date){
+                time = this.form_blocks.getTimePicker.call(this, sns, true);
+                parts.push("<span></span>");
+            }else{
+                parts.push("<span style='font-weight:normal; font-size:10pt;'> &nbsp;&ndash;&nbsp; </span>");
+            }
+
+            parts.push(time);
+            parts.push("</div>");
+            return parts.join('');
+        },
+        set_value:function(node,value,ev,config){
+            var cfg = this.config;
+            var s=node.getElementsByTagName("select");
+
+            var map = config._time_format_order;
+            var map_size = config._time_format_size;
+
+            if(cfg.auto_end_date) {
+                var _update_lightbox_select = function() {
+                    var start_date = new Date(s[map[2]].value,s[map[1]].value,s[map[0]].value,0,0);
+                    var end_date =  gantt.calculateEndDate(start_date, 1);
+                    this.form_blocks._fill_lightbox_select(s,map.size, end_date,map,cfg);
+                };
+                for(var i=0; i<4; i++) {
+                    s[i].onchange = _update_lightbox_select;
+                }
+            }
+
+            this.form_blocks._fill_lightbox_select(s,0,ev.start_date,map,cfg);
+            this.form_blocks._fill_lightbox_select(s,map.size,ev.end_date,map,cfg);
+        },
+
+        get_value:function(node, ev, config) {
+            var s=node.getElementsByTagName("select");
+            var map = config._time_format_order;
+
+            var hours = 0, minutes = 0;
+            if (dhtmlx.defined(map[3])) {
+                var time = parseInt(s[map[3]].value, 10);
+                hours = Math.floor(time/60);
+                minutes = time%60;
+            }
+            ev.start_date=new Date(s[map[2]].value,s[map[1]].value,s[map[0]].value,hours,minutes);
+
+            hours = minutes = 0;
+            if (dhtmlx.defined(map[3])) {
+                var time = parseInt(s[map.size+map[3]].value, 10);
+                hours = Math.floor(time/60);
+                minutes = time%60;
+            }
+            ev.end_date=new Date(s[map[2]+map.size].value,s[map[1]+map.size].value,s[map[0]+map.size].value,hours,minutes);
+
+            if (ev.end_date<=ev.start_date)
+                ev.end_date=gantt.date.add(ev.start_date, gantt._get_timepicker_step(),"minute");
+            return {
+                start_date: new Date(ev.start_date),
+                end_date: new Date(ev.end_date)
+            };
+        },
+        focus:function(node){
+            gantt._focus(node.getElementsByTagName("select")[0]);
+        }
+    },
+    duration:{
+        render:function(sns) {
+            var time = this.form_blocks.getTimePicker.call(this, sns);
+            time = "<div class='dhx_time_selects'>"+time+"</div>";
+            var label = this.locale.labels[this.config.duration_unit + "s"];
+
+            var singleDate = sns.single_date ? ' style="display:none"' : "";
+            var readonly = sns.readonly ? " disabled='disabled'" : "";
+
+            var duration = "<div class='dhx_gantt_duration' "+singleDate+">" +
+                "<input type='button' class='dhx_gantt_duration_dec' value='-'"+readonly+">" +
+                "<input type='text' value='5' class='dhx_gantt_duration_value'"+readonly+">" +
+                "<input type='button' class='dhx_gantt_duration_inc' value='+'"+readonly+"> " + label + " <span></span>" +
+                "</div>";
+            var html = "<div style='height:30px;padding-top:0px;font-size:inherit;' class='dhx_section_time'>"+time+" "+duration+"</div>";
+            return html;
+        },
+        set_value:function(node,value,ev,config){
+            var cfg = this.config;
+            var s=node.getElementsByTagName("select");
+            var inps = node.getElementsByTagName("input");
+
+            var duration = inps[1];
+            var btns=[inps[0],inps[2]];
+            var endspan = node.getElementsByTagName("span")[0];
+
+            var map = config._time_format_order;
+
+            function _calc_date() {
+                var start_date = gantt.form_blocks.duration._get_start_date.call(gantt, node ,config);
+                var duration = gantt.form_blocks.duration._get_duration.call(gantt, node ,config);
+                var end_date = gantt.calculateEndDate(start_date, duration);
+
+                endspan.innerHTML = gantt.templates.task_date(end_date);
+            }
+
+            function _change_duration(step) {
+                var value = duration.value;
+                value = parseInt(value, 10);
+                if (window.isNaN(value))
+                    value = 0;
+                value+=step;
+                if (value < 1) value = 1;
+                duration.value = value;
+                _calc_date();
+            }
+
+            btns[0].onclick = dhtmlx.bind(function() { _change_duration(-1*this.config.duration_step); }, this);
+            btns[1].onclick = dhtmlx.bind(function() { _change_duration(1*this.config.duration_step); }, this);
+            s[0].onchange = _calc_date;
+            s[1].onchange = _calc_date;
+            s[2].onchange = _calc_date;
+            if (s[3]) s[3].onchange = _calc_date;
+            duration.onkeydown = dhtmlx.bind(function(e) {
+                e = e || window.event;
+                // up
+                var code = (e.charCode || e.keyCode || e.which);
+
+                if (code == 40) {
+                    _change_duration(-1*this.config.duration_step);
+                    return false;
+                }
+                // down
+                if (code == 38) {
+                    _change_duration(1*this.config.duration_step);
+                    return false;
+                }
+                window.setTimeout(function(e) {
+                    _calc_date();
+                }, 1);
+            }, this);
+
+            duration.onchange = dhtmlx.bind(function(e) { _calc_date(); }, this);
+
+            this.form_blocks._fill_lightbox_select(s,0,ev.start_date,map,cfg);
+
+            var final_value;
+
+            if (!ev.end_date)
+                final_value = ev.duration;
+            else
+                final_value = gantt.calculateDuration(ev.start_date, ev.end_date);
+            final_value = Math.round(final_value);
+            duration.value = final_value;
+            _calc_date();
+        },
+
+        _get_start_date: function(node, config) {
+            var s=node.getElementsByTagName("select");
+            var map = config._time_format_order;
+            var hours = 0;
+            var minutes = 0;
+            if (dhtmlx.defined(map[3])) {
+                var time = parseInt(s[map[3]].value, 10);
+                hours = Math.floor(time/60);
+                minutes = time%60;
+            }
+            return new Date(s[map[2]].value,s[map[1]].value,s[map[0]].value,hours,minutes);
+        },
+        _get_duration: function(node, config) {
+            var duration = node.getElementsByTagName("input")[1];
+            duration = parseInt(duration.value, 10);
+            if (window.isNaN(duration)) duration = 1;
+            if (duration < 0) duration *= -1;
+            return duration;
+        },
+
+        get_value:function(node, ev, config) {
+            ev.start_date = this.form_blocks.duration._get_start_date(node, config);
+            var duration = this.form_blocks.duration._get_duration(node, config);
+
+            ev.end_date = this.calculateEndDate(ev.start_date, duration);
+            ev.duration = duration;
+
+            return {
+                start_date: new Date(ev.start_date),
+                end_date: new Date(ev.end_date)
+            };
+        },
+        focus:function(node){
+            gantt._focus(node.getElementsByTagName("select")[0]);
+        }
+    },
+    typeselect : {
+        render : function(sns){
+            var types = gantt.config.types,
+                locale = gantt.locale.labels,
+                options = [];
+            for(var i in types){
+                options.push({key: types[i], label:locale["type_" + i]});
+            }
+            sns.options = options;
+
+            var oldOnChange = sns.onchange;
+            sns.onchange = function(){
+                var tId = gantt.getState().lightbox;
+
+                gantt.changeLightboxType(this.value);
+                if(typeof oldOnChange == 'function'){
+                    oldOnChange.apply(this, arguments);
+                }
+            };
+
+            return gantt.form_blocks.select.render.apply(this, arguments);
+        },
+        set_value:function(){
+            return gantt.form_blocks.select.set_value.apply(this, arguments);
+        },
+        get_value:function(){
+            return gantt.form_blocks.select.get_value.apply(this, arguments);
+        },
+        focus:function(){
+            return gantt.form_blocks.select.focus.apply(this, arguments);
+        }
+    },
+    parent: {
+        _filter : function(options, config, item_id){
+            var filter = config.filter || function(){ return true;};
+
+            options = options.slice(0);
+
+            for(var i=0; i < options.length; i++){
+                var task = options[i];
+                if(task.id == item_id || gantt.isChildOf(task.id, item_id) || filter(task.id, task) === false){
+                    options.splice(i, 1);
+                    i--;
+                }
+            }
+            return options;
+        },
+
+        _display : function(config, item_id){
+            var tasks = [],
+                options = [];
+            if(item_id){
+                tasks = gantt.getTaskByTime();
+                if(config.allow_root){
+                    tasks.unshift({id:gantt.config.root_id, text:config.root_label || ""});
+                }
+                tasks = this._filter(tasks, config, item_id);
+                if(config.sort){
+                    tasks.sort(config.sort);
+                }
+            }
+            var text = config.template || gantt.templates.task_text;
+            for(var i = 0; i < tasks.length; i++){
+                var label = text.apply(gantt, [tasks[i].start_date, tasks[i].end_date, tasks[i]]);
+                if(label === undefined){
+                    label = "";
+                }
+                options.push({
+                    key: tasks[i].id,
+                    label: label
+                });
+            }
+            config.options = options;
+            config.map_to = config.map_to || "parent";
+            return gantt.form_blocks.select.render.apply(this, arguments);
+        },
+        render : function(sns){
+            return gantt.form_blocks.parent._display(sns, false);
+        },
+        set_value:function(node,value,ev,config){
+            var tmpDom = document.createElement("div");
+            tmpDom.innerHTML = gantt.form_blocks.parent._display(config, ev.id);
+            var newOptions = tmpDom.removeChild(tmpDom.firstChild);
+            node.onselect = null;
+            node.parentNode.replaceChild(newOptions, node);
+
+            return gantt.form_blocks.select.set_value.apply(this, [newOptions,value,ev,config]);
+        },
+        get_value:function(){
+            return gantt.form_blocks.select.get_value.apply(this, arguments);
+        },
+        focus:function(){
+            return gantt.form_blocks.select.focus.apply(this, arguments);
+        }
+    }
+};
+
+gantt._is_lightbox_timepicker = function() {
+    var s = this._get_typed_lightbox_config();
+    for (var i = 0; i < s.length; i++)
+        if (s[i].name == "time" && s[i].type == "time")
+            return true;
+    return false;
+};
+
+gantt._dhtmlx_confirm = function(message, title, callback, ok) {
+    if (!message)
+        return callback();
+    var opts = { text: message };
+    if (title)
+        opts.title = title;
+    if(ok){
+        opts.ok = ok;
+    }
+    if (callback) {
+        opts.callback = function(result) {
+            if (result)
+                callback();
+        };
+    }
+    dhtmlx.confirm(opts);
+};
+
+gantt._get_typed_lightbox_config = function(type){
+    if(type === undefined){
+        type = this.getLightboxType();
+    }
+
+    var field = this._get_type_name(type);
+
+    if(gantt.config.lightbox[field+"_sections"]){
+        return gantt.config.lightbox[field+"_sections"];
+    }else{
+        return gantt.config.lightbox.sections;
+    }
+};
+
+gantt._silent_redraw_lightbox = function(type){
+    var oldType = this.getLightboxType();
+
+    if(this.getState().lightbox){
+        var taskId = this.getState().lightbox;
+        var formData = this.getLightboxValues(),
+            task = dhtmlx.copy(this.getTask(taskId));
+
+        this.resetLightbox();
+
+        var updTask = dhtmlx.mixin(task, formData, true);
+        var box = this.getLightbox(type ? type : undefined);
+
+        this._set_lightbox_values(updTask, box);
+        this._center_lightbox(this.getLightbox());
+        this.callEvent("onLightboxChange", [oldType, this.getLightboxType()]);
+    }else{
+        this.resetLightbox();
+        this.getLightbox(type ? type : undefined);
+    }
+    this.callEvent("onLightboxChange", [oldType, this.getLightboxType()]);
+};
+/**
+ * 	@desc: constructor, data processor object
+ *	@param: serverProcessorURL - url used for update
+ *	@type: public
+ */
+function dataProcessor(serverProcessorURL){
+    this.serverProcessor = serverProcessorURL;
+    this.action_param="!nativeeditor_status";
+
+    this.object = null;
+    this.updatedRows = []; //ids of updated rows
+
+    this.autoUpdate = true;
+    this.updateMode = "cell";
+    this._tMode="GET";
+    this.post_delim = "_";
+
+    this._waitMode=0;
+    this._in_progress={};//?
+    this._invalid={};
+    this.mandatoryFields=[];
+    this.messages=[];
+
+    this.styles={
+        updated:"font-weight:bold;",
+        inserted:"font-weight:bold;",
+        deleted:"text-decoration : line-through;",
+        invalid:"background-color:FFE0E0;",
+        invalid_cell:"border-bottom:2px solid red;",
+        error:"color:red;",
+        clear:"font-weight:normal;text-decoration:none;"
+    };
+
+    this.enableUTFencoding(true);
+    dhtmlxEventable(this);
+
+    return this;
+}
+
+dataProcessor.prototype={
+    /**
+     * 	@desc: select GET or POST transaction model
+     *	@param: mode - GET/POST
+     *	@param: total - true/false - send records row by row or all at once (for grid only)
+     *	@type: public
+     */
+    setTransactionMode:function(mode,total){
+        this._tMode=mode;
+        this._tSend=total;
+    },
+    escape:function(data){
+        if (this._utf)
+            return encodeURIComponent(data);
+        else
+            return escape(data);
+    },
+    /**
+     * 	@desc: allows to set escaping mode
+     *	@param: true - utf based escaping, simple - use current page encoding
+     *	@type: public
+     */
+    enableUTFencoding:function(mode){
+        this._utf=convertStringToBoolean(mode);
+    },
+    /**
+     * 	@desc: allows to define, which column may trigger update
+     *	@param: val - array or list of true/false values
+     *	@type: public
+     */
+    setDataColumns:function(val){
+        this._columns=(typeof val == "string")?val.split(","):val;
+    },
+    /**
+     * 	@desc: get state of updating
+     *	@returns:   true - all in sync with server, false - some items not updated yet.
+     *	@type: public
+     */
+    getSyncState:function(){
+        return !this.updatedRows.length;
+    },
+    /**
+     * 	@desc: enable/disable named field for data syncing, will use column ids for grid
+     *	@param:   mode - true/false
+     *	@type: public
+     */
+    enableDataNames:function(mode){
+        this._endnm=convertStringToBoolean(mode);
+    },
+    /**
+     * 	@desc: enable/disable mode , when only changed fields and row id send to the server side, instead of all fields in default mode
+     *	@param:   mode - true/false
+     *	@type: public
+     */
+    enablePartialDataSend:function(mode){
+        this._changed=convertStringToBoolean(mode);
+    },
+    /**
+     * 	@desc: set if rows should be send to server automaticaly
+     *	@param: mode - "row" - based on row selection changed, "cell" - based on cell editing finished, "off" - manual data sending
+     *	@type: public
+     */
+    setUpdateMode:function(mode,dnd){
+        this.autoUpdate = (mode=="cell");
+        this.updateMode = mode;
+        this.dnd=dnd;
+    },
+    ignore:function(code,master){
+        this._silent_mode=true;
+        code.call(master||window);
+        this._silent_mode=false;
+    },
+    /**
+     * 	@desc: mark row as updated/normal. check mandatory fields,initiate autoupdate (if turned on)
+     *	@param: rowId - id of row to set update-status for
+     *	@param: state - true for "updated", false for "not updated"
+     *	@param: mode - update mode name
+     *	@type: public
+     */
+    setUpdated:function(rowId,state,mode){
+        if (this._silent_mode) return;
+        var ind=this.findRow(rowId);
+
+        mode=mode||"updated";
+        var existing = this.obj.getUserData(rowId,this.action_param);
+        if (existing && mode == "updated") mode=existing;
+        if (state){
+            this.set_invalid(rowId,false); //clear previous error flag
+            this.updatedRows[ind]=rowId;
+            this.obj.setUserData(rowId,this.action_param,mode);
+            if (this._in_progress[rowId])
+                this._in_progress[rowId]="wait";
+        } else{
+            if (!this.is_invalid(rowId)){
+                this.updatedRows.splice(ind,1);
+                this.obj.setUserData(rowId,this.action_param,"");
+            }
+        }
+
+        //clear changed flag
+        if (!state)
+            this._clearUpdateFlag(rowId);
+
+        this.markRow(rowId,state,mode);
+        if (state && this.autoUpdate) this.sendData(rowId);
+    },
+    _clearUpdateFlag:function(id){},
+    markRow:function(id,state,mode){
+        var str="";
+        var invalid=this.is_invalid(id);
+        if (invalid){
+            str=this.styles[invalid];
+            state=true;
+        }
+        if (this.callEvent("onRowMark",[id,state,mode,invalid])){
+            //default logic
+            str=this.styles[state?mode:"clear"]+str;
+
+            this.obj[this._methods[0]](id,str);
+
+            if (invalid && invalid.details){
+                str+=this.styles[invalid+"_cell"];
+                for (var i=0; i < invalid.details.length; i++)
+                    if (invalid.details[i])
+                        this.obj[this._methods[1]](id,i,str);
+            }
+        }
+    },
+    getState:function(id){
+        return this.obj.getUserData(id,this.action_param);
+    },
+    is_invalid:function(id){
+        return this._invalid[id];
+    },
+    set_invalid:function(id,mode,details){
+        if (details) mode={value:mode, details:details, toString:function(){ return this.value.toString(); }};
+        this._invalid[id]=mode;
+    },
+    /**
+     * 	@desc: check mandatory fields and varify values of cells, initiate update (if specified)
+     *	@param: rowId - id of row to set update-status for
+     *	@type: public
+     */
+    checkBeforeUpdate:function(rowId){
+        return true;
+    },
+    /**
+     * 	@desc: send row(s) values to server
+     *	@param: rowId - id of row which data to send. If not specified, then all "updated" rows will be send
+     *	@type: public
+     */
+    sendData:function(rowId){
+        if (this._waitMode && (this.obj.mytype=="tree" || this.obj._h2)) return;
+        if (this.obj.editStop) this.obj.editStop();
+
+
+        if(typeof rowId == "undefined" || this._tSend) return this.sendAllData();
+        if (this._in_progress[rowId]) return false;
+
+        this.messages=[];
+        if (!this.checkBeforeUpdate(rowId) && this.callEvent("onValidationError",[rowId,this.messages])) return false;
+        this._beforeSendData(this._getRowData(rowId),rowId);
+    },
+    _beforeSendData:function(data,rowId){
+        if (!this.callEvent("onBeforeUpdate",[rowId,this.getState(rowId),data])) return false;
+        this._sendData(data,rowId);
+    },
+    serialize:function(data, id){
+        if (typeof data == "string")
+            return data;
+        if (typeof id != "undefined")
+            return this.serialize_one(data,"");
+        else{
+            var stack = [];
+            var keys = [];
+            for (var key in data)
+                if (data.hasOwnProperty(key)){
+                    stack.push(this.serialize_one(data[key],key+this.post_delim));
+                    keys.push(key);
+                }
+            stack.push("ids="+this.escape(keys.join(",")));
+            if (dhtmlx.security_key)
+                stack.push("dhx_security="+dhtmlx.security_key);
+            return stack.join("&");
+        }
+    },
+    serialize_one:function(data, pref){
+        if (typeof data == "string")
+            return data;
+        var stack = [];
+        for (var key in data)
+            if (data.hasOwnProperty(key))
+                stack.push(this.escape((pref||"")+key)+"="+this.escape(data[key]));
+        return stack.join("&");
+    },
+    _sendData:function(a1,rowId){
+        if (!a1) return; //nothing to send
+        if (!this.callEvent("onBeforeDataSending",rowId?[rowId,this.getState(rowId),a1]:[null, null, a1])) return false;
+
+        if (rowId)
+            this._in_progress[rowId]=(new Date()).valueOf();
+        var a2=new dtmlXMLLoaderObject(this.afterUpdate,this,true);
+
+        var a3 = this.serverProcessor+(this._user?(getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+this.obj.getUserData(0,"version")].join("&")):"");
+
+        if (this._tMode!="POST")
+            a2.loadXML(a3+((a3.indexOf("?")!=-1)?"&":"?")+this.serialize(a1,rowId));
+        else
+            a2.loadXML(a3,true,this.serialize(a1,rowId));
+
+        this._waitMode++;
+    },
+    sendAllData:function(){
+        if (!this.updatedRows.length) return;
+
+        this.messages=[]; var valid=true;
+        for (var i=0; i<this.updatedRows.length; i++)
+            valid&=this.checkBeforeUpdate(this.updatedRows[i]);
+        if (!valid && !this.callEvent("onValidationError",["",this.messages])) return false;
+
+        if (this._tSend)
+            this._sendData(this._getAllData());
+        else
+            for (var i=0; i<this.updatedRows.length; i++)
+                if (!this._in_progress[this.updatedRows[i]]){
+                    if (this.is_invalid(this.updatedRows[i])) continue;
+                    this._beforeSendData(this._getRowData(this.updatedRows[i]),this.updatedRows[i]);
+                    if (this._waitMode && (this.obj.mytype=="tree" || this.obj._h2)) return; //block send all for tree
+                }
+    },
+
+
+
+
+
+
+
+
+    _getAllData:function(rowId){
+        var out={};
+        var has_one = false;
+        for(var i=0;i<this.updatedRows.length;i++){
+            var id=this.updatedRows[i];
+            if (this._in_progress[id] || this.is_invalid(id)) continue;
+            if (!this.callEvent("onBeforeUpdate",[id,this.getState(id)])) continue;
+            out[id]=this._getRowData(id,id+this.post_delim);
+            has_one = true;
+            this._in_progress[id]=(new Date()).valueOf();
+        }
+        return has_one?out:null;
+    },
+
+
+    /**
+     * 	@desc: specify column which value should be varified before sending to server
+     *	@param: ind - column index (0 based)
+     *	@param: verifFunction - function (object) which should verify cell value (if not specified, then value will be compared to empty string). Two arguments will be passed into it: value and column name
+     *	@type: public
+     */
+    setVerificator:function(ind,verifFunction){
+        this.mandatoryFields[ind] = verifFunction||(function(value){return (value !== "");});
+    },
+    /**
+     * 	@desc: remove column from list of those which should be verified
+     *	@param: ind - column Index (0 based)
+     *	@type: public
+     */
+    clearVerificator:function(ind){
+        this.mandatoryFields[ind] = false;
+    },
+
+
+
+
+
+    findRow:function(pattern){
+        var i=0;
+        for(i=0;i<this.updatedRows.length;i++)
+            if(pattern==this.updatedRows[i]) break;
+        return i;
+    },
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 	@desc: define custom actions
+     *	@param: name - name of action, same as value of action attribute
+     *	@param: handler - custom function, which receives a XMl response content for action
+     *	@type: private
+     */
+    defineAction:function(name,handler){
+        if (!this._uActions) this._uActions=[];
+        this._uActions[name]=handler;
+    },
+
+
+
+
+    /**
+     *     @desc: used in combination with setOnBeforeUpdateHandler to create custom client-server transport system
+     *     @param: sid - id of item before update
+     *     @param: tid - id of item after up0ate
+     *     @param: action - action name
+     *     @type: public
+     *     @topic: 0
+     */
+    afterUpdateCallback:function(sid, tid, action, btag) {
+        var marker = sid;
+        var correct=(action!="error" && action!="invalid");
+        if (!correct) this.set_invalid(sid,action);
+        if ((this._uActions)&&(this._uActions[action])&&(!this._uActions[action](btag)))
+            return (delete this._in_progress[marker]);
+
+        if (this._in_progress[marker]!="wait")
+            this.setUpdated(sid, false);
+
+        var soid = sid;
+
+        switch (action) {
+            case "inserted":
+            case "insert":
+                if (tid != sid) {
+                    this.obj[this._methods[2]](sid, tid);
+                    sid = tid;
+                }
+                break;
+            case "delete":
+            case "deleted":
+                this.obj.setUserData(sid, this.action_param, "true_deleted");
+                this.obj[this._methods[3]](sid);
+                delete this._in_progress[marker];
+                return this.callEvent("onAfterUpdate", [sid, action, tid, btag]);
+        }
+
+        if (this._in_progress[marker]!="wait"){
+            if (correct) this.obj.setUserData(sid, this.action_param,'');
+            delete this._in_progress[marker];
+        } else {
+            delete this._in_progress[marker];
+            this.setUpdated(tid,true,this.obj.getUserData(sid,this.action_param));
+        }
+
+        this.callEvent("onAfterUpdate", [soid, action, tid, btag]);
+    },
+
+    /**
+     * 	@desc: response from server
+     *	@param: xml - XMLLoader object with response XML
+     *	@type: private
+     */
+    afterUpdate:function(that,b,c,d,xml){
+        xml.getXMLTopNode("data"); //fix incorrect content type in IE
+        if (!xml.xmlDoc.responseXML) return;
+        var atag=xml.doXPath("//data/action");
+        for (var i=0; i<atag.length; i++){
+            var btag=atag[i];
+            var action = btag.getAttribute("type");
+            var sid = btag.getAttribute("sid");
+            var tid = btag.getAttribute("tid");
+
+            that.afterUpdateCallback(sid,tid,action,btag);
+        }
+        that.finalizeUpdate();
+    },
+    finalizeUpdate:function(){
+        if (this._waitMode) this._waitMode--;
+
+        if ((this.obj.mytype=="tree" || this.obj._h2) && this.updatedRows.length)
+            this.sendData();
+        this.callEvent("onAfterUpdateFinish",[]);
+        if (!this.updatedRows.length)
+            this.callEvent("onFullSync",[]);
+    },
+
+
+
+
+
+    /**
+     * 	@desc: initializes data-processor
+     *	@param: anObj - dhtmlxGrid object to attach this data-processor to
+     *	@type: public
+     */
+    init:function(anObj){
+        this.obj = anObj;
+        if (this.obj._dp_init)
+            this.obj._dp_init(this);
+    },
+
+
+    setOnAfterUpdate:function(ev){
+        this.attachEvent("onAfterUpdate",ev);
+    },
+    enableDebug:function(mode){
+    },
+    setOnBeforeUpdateHandler:function(func){
+        this.attachEvent("onBeforeDataSending",func);
+    },
+
+
+
+    /*! starts autoupdate mode
+     @param interval
+     time interval for sending update requests
+     */
+    setAutoUpdate: function(interval, user) {
+        interval = interval || 2000;
+
+        this._user = user || (new Date()).valueOf();
+        this._need_update = false;
+        this._loader = null;
+        this._update_busy = false;
+
+        this.attachEvent("onAfterUpdate",function(sid,action,tid,xml_node){
+            this.afterAutoUpdate(sid, action, tid, xml_node);
+        });
+        this.attachEvent("onFullSync",function(){
+            this.fullSync();
+        });
+
+        var self = this;
+        window.setInterval(function(){
+            self.loadUpdate();
+        }, interval);
+    },
+
+
+    /*! process updating request answer
+     if status == collision version is depricated
+     set flag for autoupdating immidiatly
+     */
+    afterAutoUpdate: function(sid, action, tid, xml_node) {
+        if (action == 'collision') {
+            this._need_update = true;
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+
+    /*! callback function for onFillSync event
+     call update function if it's need
+     */
+    fullSync: function() {
+        if (this._need_update === true) {
+            this._need_update = false;
+            this.loadUpdate();
+        }
+        return true;
+    },
+
+
+    /*! sends query to the server and call callback function
+     */
+    getUpdates: function(url,callback){
+        if (this._update_busy)
+            return false;
+        else
+            this._update_busy = true;
+
+        this._loader = this._loader || new dtmlXMLLoaderObject(true);
+
+        this._loader.async=true;
+        this._loader.waitCall=callback;
+        this._loader.loadXML(url);
+    },
+
+
+    /*! returns xml node value
+     @param node
+     xml node
+     */
+    _v: function(node) {
+        if (node.firstChild) return node.firstChild.nodeValue;
+        return "";
+    },
+
+
+    /*! returns values array of xml nodes array
+     @param arr
+     array of xml nodes
+     */
+    _a: function(arr) {
+        var res = [];
+        for (var i=0; i < arr.length; i++) {
+            res[i]=this._v(arr[i]);
+        }
+        return res;
+    },
+
+
+    /*! loads updates and processes them
+     */
+    loadUpdate: function(){
+        var self = this;
+        var version = this.obj.getUserData(0,"version");
+        var url = this.serverProcessor+getUrlSymbol(this.serverProcessor)+["dhx_user="+this._user,"dhx_version="+version].join("&");
+        url = url.replace("editing=true&","");
+        this.getUpdates(url, function(){
+            var vers = self._loader.doXPath("//userdata");
+            self.obj.setUserData(0,"version",self._v(vers[0]));
+
+            var upds = self._loader.doXPath("//update");
+            if (upds.length){
+                self._silent_mode = true;
+
+                for (var i=0; i<upds.length; i++) {
+                    var status = upds[i].getAttribute('status');
+                    var id = upds[i].getAttribute('id');
+                    var parent = upds[i].getAttribute('parent');
+                    switch (status) {
+                        case 'inserted':
+                            self.callEvent("insertCallback",[upds[i], id, parent]);
+                            break;
+                        case 'updated':
+                            self.callEvent("updateCallback",[upds[i], id, parent]);
+                            break;
+                        case 'deleted':
+                            self.callEvent("deleteCallback",[upds[i], id, parent]);
+                            break;
+                    }
+                }
+
+                self._silent_mode = false;
+            }
+
+            self._update_busy = false;
+            self = null;
+        });
+    }
+
+};
+
+
+
+/*
+ asserts will be removed in final code, so you can place them anythere
+ without caring about performance impacts
+ */
+dhtmlx.assert = function(check, message){
+    //jshint -W087
+    if (!check){
+        dhtmlx.message({ type:"error", text:message, expire:-1 });
+        debugger;
+    }
+};
+
+//initial initialization
+gantt.init = function(node, from, to){
+    if(from && to){
+        this.config.start_date = this._min_date = new Date(from);
+        this.config.end_date = this._max_date = new Date(to);
+    }
+    this._init_skin();
+
+    if (!this.config.scroll_size)
+        this.config.scroll_size = this._detectScrollSize();
+
+
+    this._reinit(node);
+
+    this.attachEvent("onLoadEnd", this.render);
+    dhtmlxEvent(window, "resize", this._on_resize);
+
+
+    //can be called only once
+    this.init = function(node){
+        if (this.$container)
+            this.$container.innerHTML = "";
+        this._reinit(node);
+    };
+    this.callEvent("onGanttReady", []);
+
+};
+
+gantt._reinit = function(node){
+    this._init_html_area(node);
+    this._set_sizes();
+
+    this._task_area_pulls = {};
+    this._task_area_renderers = {};
+
+    this._init_touch_events();
+    this._init_templates();
+    this._init_grid();
+    this._init_tasks();
+
+    this.render();
+
+    this._set_scroll_events();
+
+    dhtmlxEvent(this.$container, "click", this._on_click);
+    dhtmlxEvent(this.$container, "dblclick", this._on_dblclick);
+    dhtmlxEvent(this.$container, "mousemove", this._on_mousemove);
+    dhtmlxEvent(this.$container, "contextmenu", this._on_contextmenu);
+};
+
+//renders initial html markup
+gantt._init_html_area = function(node){
+    if (typeof node == "string")
+        this._obj = document.getElementById(node);
+    else
+        this._obj = node;
+    dhtmlx.assert(this._obj, "Invalid html container: "+node);
+    var html = "<div class='gantt_container'><div class='gantt_grid'></div><div class='gantt_task'></div>";
+    html += "<div class='gantt_ver_scroll'><div></div></div><div class='gantt_hor_scroll'><div></div></div></div>";
+    this._obj.innerHTML = html;
+    //store links for further reference
+    this.$container = this._obj.firstChild;
+    var childs = this.$container.childNodes;
+    this.$grid = childs[0];
+    this.$task = childs[1];
+    this.$scroll_ver = childs[2];
+    this.$scroll_hor = childs[3];
+
+    this.$grid.innerHTML = "<div class='gantt_grid_scale'></div><div class='gantt_grid_data'></div>";
+    this.$grid_scale = this.$grid.childNodes[0];
+    this.$grid_data = this.$grid.childNodes[1];
+
+    this.$task.innerHTML = "<div class='gantt_task_scale'></div><div class='gantt_data_area'><div class='gantt_task_bg'></div><div class='gantt_links_area'></div><div class='gantt_bars_area'></div></div>";
+    this.$task_scale = this.$task.childNodes[0];
+
+    this.$task_data = this.$task.childNodes[1];
+
+    this.$task_bg = this.$task_data.childNodes[0];
+    this.$task_links = this.$task_data.childNodes[1];
+    this.$task_bars = this.$task_data.childNodes[2];
+};
+
+gantt.$click={
+    buttons:{
+        "edit":function(id){
+            gantt.showLightbox(id);
+        },
+        "delete":function(id){
+            var question = gantt.locale.labels.confirm_deleting;
+            var title = gantt.locale.labels.confirm_deleting_title;
+
+            gantt._dhtmlx_confirm(question, title, function(){
+                var task = gantt.getTask(id);
+                if(task.$new){
+                    gantt._deleteTask(id, true);
+                    gantt.refreshData();
+                }else{
+                    gantt.deleteTask(id);
+                }
+
+                gantt.hideLightbox();
+            });
+        }
+    }
+};
+
+gantt._calculate_content_height = function(){
+    var scale_height = this.config.scale_height,
+        rows_height = this._order.length*this.config.row_height,
+        hor_scroll_height = this._scroll_hor ? this.config.scroll_size + 1 : 0;
+
+    if(!(this._is_grid_visible() || this._is_chart_visible())){
+        return 0;
+    }else{
+        return scale_height + rows_height + 2 + hor_scroll_height;
+    }
+};
+gantt._calculate_content_width = function(){
+    var grid_width = this._get_grid_width(),
+        chart_width = this._tasks ? this._tasks.full_width : 0,
+        ver_scroll_width = this._scroll_ver ? this.config.scroll_size + 1 : 0;
+
+    if(!this._is_chart_visible()){
+        chart_width = 0;
+    }
+    if(!this._is_grid_visible()){
+        grid_width = 0;
+    }
+    return grid_width + chart_width + 1;
+};
+
+gantt._get_resize_options = function(){
+    var res = {x:false, y:false};
+    if(this.config.autosize == "xy"){
+        res.x = res.y = true;
+    }else if(this.config.autosize == "y" || this.config.autosize === true){
+        res.y = true;
+    }else if(this.config.autosize == "x"){
+        res.x = true;
+    }
+    return res;
+};
+//set sizes to top level html element
+gantt._set_sizes = function(){
+    var resize = this._get_resize_options();
+    if(resize.y){
+        this._obj.style.height = this._calculate_content_height() + 'px';
+    }
+    if(resize.x){
+        this._obj.style.width = this._calculate_content_width() + 'px';
+    }
+
+    this._y = this._obj.clientHeight;
+
+    if (this._y < 20) return;
+
+    //same height
+    this.$grid.style.height = this.$task.style.height = Math.max(this._y - this.$scroll_hor.offsetHeight - 2, 0) +"px";
+
+    var dataHeight = Math.max((this._y - (this.config.scale_height||0) - this.$scroll_hor.offsetHeight - 2), 0);
+    this.$grid_data.style.height = this.$task_data.style.height =  dataHeight + "px";
+
+    //share width
+    var gridWidth = Math.max(this._get_grid_width()-1, 0);
+    this.$grid.style.width =  gridWidth +"px";
+    this.$grid.style.display = gridWidth === 0 ? 'none' : '';
+
+    this._x = this._obj.clientWidth;
+    if (this._x < 20) return;
+
+    this.$grid_data.style.width = Math.max(this._get_grid_width()-1, 0) +"px";
+    this.$task.style.width = Math.max(this._x - this._get_grid_width() - 2, 0) +"px";
+};
+
+gantt.getScrollState=function(){
+    return { x:this.$task.scrollLeft, y:this.$task_data.scrollTop };
+};
+gantt.scrollTo = function(left, top){
+    if (left*1 == left)
+        this.$task.scrollLeft = left;
+    if(top*1 == top){
+        this.$task_data.scrollTop = top;
+        this.$grid_data.scrollTop = top;
+    }
+};
+
+gantt.showDate = function(date){
+    var date_x = this.posFromDate(date);
+    var scroll_to = Math.max(date_x - this.config.task_scroll_offset, 0);
+    this.scrollTo(scroll_to);
+};
+gantt.showTask = function(id) {
+    var el = this.getTaskNode(id);
+    if(!el)
+        return;
+
+    var left = Math.max(el.offsetLeft - this.config.task_scroll_offset, 0);
+    var top = el.offsetTop - (this.$task_data.offsetHeight - this.config.row_height)/2;
+    this.scrollTo(left, top);
+};
+
+
+//called after window resize
+gantt._on_resize = gantt.setSizes = function(){
+    gantt._set_sizes();
+    gantt._scroll_resize();
+};
+
+//renders self
+gantt.render = function(){
+    this._render_grid();	//grid.js
+    this._render_tasks_scales();	//tasks.js
+    this._scroll_resize();
+    this._on_resize();
+    this._render_data();
+    if(this.config.initial_scroll){
+        var id = (this._order[0] || this.config.root_id);
+        if(id)
+            this.showTask(id);
+    }
+
+    this.callEvent("onGanttRender", []);
+};
+
+
+gantt._set_scroll_events = function(){
+    dhtmlxEvent(this.$scroll_hor, "scroll", function() {
+        if (gantt._touch_scroll_active) return;
+        var left = gantt.$scroll_hor.scrollLeft;
+        gantt.scrollTo(left);
+    });
+    dhtmlxEvent(this.$scroll_ver, "scroll", function() {
+        if (gantt._touch_scroll_active) return;
+        var top = gantt.$scroll_ver.scrollTop;
+        gantt.$grid_data.scrollTop = top;
+        gantt.scrollTo(null, top);
+    });
+    dhtmlxEvent(this.$task, "scroll", function() {
+        var left = gantt.$task.scrollLeft,
+            barLeft = gantt.$scroll_hor.scrollLeft;
+        if(barLeft != left)
+            gantt.$scroll_hor.scrollLeft = left;
+    });
+    dhtmlxEvent(this.$task_data, "scroll", function() {
+        var top = gantt.$task_data.scrollTop,
+            barTop = gantt.$scroll_ver.scrollTop;
+        if(barTop != top)
+            gantt.$scroll_ver.scrollTop = top;
+    });
+
+    dhtmlxEvent(gantt.$container, "mousewheel", function(e){
+        var res = gantt._get_resize_options();
+
+        if (e.wheelDeltaX){
+            if(res.x) return true;//no horisontal scroll, must not block scrolling
+
+            var dir  = e.wheelDeltaX/-40;
+            var left = gantt.$task.scrollLeft+dir*30;
+            gantt.scrollTo(left, null);
+            gantt.$scroll_hor.scrollTop = top;
+        } else {
+            if(res.y) return true;//no vertical scroll, must not block scrolling
+
+            var dir  = e.wheelDelta/-40;
+            if (typeof e.wheelDelta == "undefined")
+                dir = e.detail;
+
+            var top = gantt.$grid_data.scrollTop+dir*30;
+            gantt.scrollTo(null, top);
+            gantt.$scroll_ver.scrollTop = top;
+        }
+
+        if (e.preventDefault)
+            e.preventDefault();
+        e.cancelBubble=true;
+        return false;
+    });
+};
+
+
+gantt._scroll_resize = function() {
+    if (this._x < 20 || this._y < 20) return;
+
+    var grid_width = this._get_grid_width();
+
+    var task_width = this._x - grid_width;
+    var task_height = this._y - this.config.scale_height;
+
+    var scroll_size = this.config.scroll_size + 1;//1px for inner content
+
+    var task_data_width = this.$task_data.offsetWidth - scroll_size;
+    var task_data_height = this.config.row_height*this._order.length;
+
+    var resize = this._get_resize_options();
+    var scroll_hor = this._scroll_hor = resize.x ? false : (task_data_width > task_width);
+    var scroll_ver = this._scroll_ver = resize.y ? false : (task_data_height > task_height);
+
+    this.$scroll_hor.style.display = scroll_hor ? "block" : "none";
+    this.$scroll_hor.style.height = (scroll_hor ? scroll_size : 0) + "px";
+    this.$scroll_hor.style.width = (this._x - (scroll_ver ? scroll_size : 2)) + "px";
+    this.$scroll_hor.firstChild.style.width = (task_data_width + grid_width + scroll_size + 2) + "px";
+
+    this.$scroll_ver.style.display = scroll_ver ? "block" : "none";
+    this.$scroll_ver.style.width = (scroll_ver ? scroll_size : 0) + "px";
+    this.$scroll_ver.style.height = (this._y - (scroll_hor ? scroll_size : 0) - this.config.scale_height) + "px";
+    this.$scroll_ver.style.top = this.config.scale_height + "px";
+    this.$scroll_ver.firstChild.style.height = (this.config.scale_height + task_data_height) + "px";
+};
+
+gantt.locate = function(e) {
+    var trg = gantt._get_target_node(e);
+
+    //ignore empty cells
+    if (trg.className == "gantt_task_cell") return null;
+
+    var attribute = arguments[1] || this.config.task_attribute;
+
+    while (trg){
+        if (trg.getAttribute){	//text nodes has not getAttribute
+            var test = trg.getAttribute(attribute);
+            if (test) return test;
+        }
+        trg=trg.parentNode;
+    }
+    return null;
+};
+gantt._get_target_node = function(e){
+    var trg;
+    if (e.tagName)
+        trg = e;
+    else {
+        e=e||window.event;
+        trg=e.target||e.srcElement;
+    }
+    return trg;
+};
+gantt._trim = function(str){
+    var func = String.prototype.trim || function(){ return this.replace(/^\s+|\s+$/g, ""); };
+    return func.apply(str);
+};
+
+gantt._locate_css = function(e, classname, strict){
+    if(strict === undefined)
+        strict = true;
+
+    var trg = gantt._get_target_node(e);
+    var css = '';
+    var test = false;
+    while (trg){
+        css = trg.className;
+
+        if(css){
+            var ind = css.indexOf(classname);
+            if (ind >= 0){
+                if (!strict)
+                    return trg;
+
+                //check that we have exact match
+                var left = (ind === 0) || (!gantt._trim(css.charAt(ind - 1)));
+                var right = ((ind + classname.length >= css.length)) || (!gantt._trim(css.charAt(ind + classname.length)));
+
+                if (left && right)
+                    return trg;
+            }
+        }
+
+        trg=trg.parentNode;
+    }
+    return null;
+};
+gantt._locateHTML = function(e, attribute) {
+    var trg = gantt._get_target_node(e);
+    attribute = attribute || this.config.task_attribute;
+
+    while (trg){
+        if (trg.getAttribute){	//text nodes has not getAttribute
+            var test = trg.getAttribute(attribute);
+            if (test) return trg;
+        }
+        trg=trg.parentNode;
+    }
+    return null;
+};
+
+gantt.getTaskRowNode = function(id) {
+    var els = this.$grid_data.childNodes;
+    var attribute = this.config.task_attribute;
+    for (var i = 0; i < els.length; i++) {
+        if (els[i].getAttribute) {
+            var value = els[i].getAttribute(attribute);
+            if (value == id) return els[i];
+        }
+    }
+    return null;
+};
+
+gantt.getState = function(){
+    return {
+        drag_id : this._tasks_dnd.drag.id,
+        drag_mode : this._tasks_dnd.drag.mode,
+        drag_from_start : this._tasks_dnd.drag.left,
+        selected_task : this._selected_task,
+        min_date : new Date(this._min_date),
+        max_date : new Date(this._max_date),
+        lightbox : this._lightbox_id
+    };
+
+};
+
+
+gantt._checkTimeout = function(host, updPerSecond){
+    if(!updPerSecond)
+        return true;
+    var timeout = 1000/updPerSecond;
+    if(timeout < 1) return true;
+
+    if(host._on_timeout)
+        return false;
+
+    setTimeout(function(){
+        delete host._on_timeout;
+    }, timeout);
+
+    host._on_timeout = true;
+    return true;
+};
+
+gantt.selectTask = function(id){
+    if(!this.config.select_task)
+        return false;
+    if (id){
+
+        if(this._selected_task == id)
+            return this._selected_task;
+
+        if(!this.callEvent("onBeforeTaskSelected", [id])){
+            return false;
+        }
+
+        this.unselectTask();
+        this._selected_task = id;
+
+        this.refreshTask(id);
+        this.callEvent("onTaskSelected", [id]);
+    }
+    return this._selected_task;
+};
+gantt.unselectTask = function(){
+    var id = this._selected_task;
+    if(!id)
+        return;
+    this._selected_task = null;
+    this.refreshTask(id);
+    this.callEvent("onTaskUnselected", [id]);
+};
+gantt.getSelectedId = function() {
+    return dhtmlx.defined(this._selected_task) ? this._selected_task : null;
+};
+
+gantt.changeLightboxType = function(type){
+    if(this.getLightboxType() == type)
+        return true;
+    gantt._silent_redraw_lightbox(type);
+};
+
+
+
+gantt.date={
+    init:function(){
+        var s = gantt.locale.date.month_short;
+        var t = gantt.locale.date.month_short_hash = {};
+        for (var i = 0; i < s.length; i++)
+            t[s[i]]=i;
+
+        var s = gantt.locale.date.month_full;
+        var t = gantt.locale.date.month_full_hash = {};
+        for (var i = 0; i < s.length; i++)
+            t[s[i]]=i;
+    },
+    date_part:function(date){
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        date.setMilliseconds(0);
+        if (date.getHours())
+            date.setTime(date.getTime() + 60 * 60 * 1000 * (24 - date.getHours()));
+        return date;
+    },
+    time_part:function(date){
+        return (date.valueOf()/1000 - date.getTimezoneOffset()*60)%86400;
+    },
+    week_start:function(date){
+        var shift=date.getDay();
+        if (gantt.config.start_on_monday){
+            if (shift===0) shift=6;
+            else shift--;
+        }
+        return this.date_part(this.add(date,-1*shift,"day"));
+    },
+    month_start:function(date){
+        date.setDate(1);
+        return this.date_part(date);
+    },
+    year_start:function(date){
+        date.setMonth(0);
+        return this.month_start(date);
+    },
+    day_start:function(date){
+        return this.date_part(date);
+    },
+    hour_start:function(date){
+        var hour = date.getHours();
+        this.day_start(date);
+        date.setHours(hour);
+        return date;
+    },
+    minute_start:function(date){
+        var min = date.getMinutes();
+        this.hour_start(date);
+        date.setMinutes(min);
+        return date;
+    },
+    _add_days:function(date, inc){
+        var ndate = new Date(date.valueOf());
+
+        ndate.setDate(ndate.getDate() + inc);
+        if (!date.getHours() && ndate.getHours()) //shift to yesterday
+            ndate.setTime(ndate.getTime() + 60 * 60 * 1000 * (24 - ndate.getHours()));
+        return ndate;
+    },
+
+    add:function(date,inc,mode){
+        /*jsl:ignore*/
+        var ndate=new Date(date.valueOf());
+        switch(mode){
+            case "day":
+                ndate = gantt.date._add_days(ndate, inc);
+                break;
+            case "week":
+                ndate = gantt.date._add_days(ndate, inc * 7);
+                break;
+            case "month": ndate.setMonth(ndate.getMonth()+inc); break;
+            case "year": ndate.setYear(ndate.getFullYear()+inc); break;
+            case "hour":
+                /*
+                 adding hours/minutes via setHour(getHour() + inc) gives weird result when
+                 adding one hour to the time before switch to a Daylight Saving time
+
+                 example: //Sun Mar 30 2014 01:00:00 GMT+0100 (W. Europe Standard Time)
+                 new Date(2014, 02, 30, 1).setHours(2)
+                 >>Sun Mar 30 2014 01:00:00 GMT+0100 (W. Europe Standard Time)
+
+                 setTime seems working as expected
+                 */
+                ndate.setTime(ndate.getTime()+inc * 60 * 60 * 1000);
+                break;
+            case "minute":
+
+                ndate.setTime(ndate.getTime() + inc * 60 * 1000);
+
+                break;
+            default:
+                return gantt.date["add_"+mode](date,inc,mode);
+        }
+        return ndate;
+        /*jsl:end*/
+    },
+    to_fixed:function(num){
+        if (num<10)	return "0"+num;
+        return num;
+    },
+    copy:function(date){
+        return new Date(date.valueOf());
+    },
+    date_to_str:function(format,utc){
+        format=format.replace(/%[a-zA-Z]/g,function(a){
+            switch(a){
+                case "%d": return "\"+gantt.date.to_fixed(date.getDate())+\"";
+                case "%m": return "\"+gantt.date.to_fixed((date.getMonth()+1))+\"";
+                case "%j": return "\"+date.getDate()+\"";
+                case "%n": return "\"+(date.getMonth()+1)+\"";
+                case "%y": return "\"+gantt.date.to_fixed(date.getFullYear()%100)+\"";
+                case "%Y": return "\"+date.getFullYear()+\"";
+                case "%D": return "\"+gantt.locale.date.day_short[date.getDay()]+\"";
+                case "%l": return "\"+gantt.locale.date.day_full[date.getDay()]+\"";
+                case "%M": return "\"+gantt.locale.date.month_short[date.getMonth()]+\"";
+                case "%F": return "\"+gantt.locale.date.month_full[date.getMonth()]+\"";
+                case "%h": return "\"+gantt.date.to_fixed((date.getHours()+11)%12+1)+\"";
+                case "%g": return "\"+((date.getHours()+11)%12+1)+\"";
+                case "%G": return "\"+date.getHours()+\"";
+                case "%H": return "\"+gantt.date.to_fixed(date.getHours())+\"";
+                case "%i": return "\"+gantt.date.to_fixed(date.getMinutes())+\"";
+                case "%a": return "\"+(date.getHours()>11?\"pm\":\"am\")+\"";
+                case "%A": return "\"+(date.getHours()>11?\"PM\":\"AM\")+\"";
+                case "%s": return "\"+gantt.date.to_fixed(date.getSeconds())+\"";
+                case "%W": return "\"+gantt.date.to_fixed(gantt.date.getISOWeek(date))+\"";
+                default: return a;
+            }
+        });
+        if (utc) format=format.replace(/date\.get/g,"date.getUTC");
+        return new Function("date","return \""+format+"\";");
+    },
+    str_to_date:function(format,utc){
+        var splt="var temp=date.match(/[a-zA-Z]+|[0-9]+/g);";
+        var mask=format.match(/%[a-zA-Z]/g);
+        for (var i=0; i<mask.length; i++){
+            switch(mask[i]){
+                case "%j":
+                case "%d": splt+="set[2]=temp["+i+"]||1;";
+                    break;
+                case "%n":
+                case "%m": splt+="set[1]=(temp["+i+"]||1)-1;";
+                    break;
+                case "%y": splt+="set[0]=temp["+i+"]*1+(temp["+i+"]>50?1900:2000);";
+                    break;
+                case "%g":
+                case "%G":
+                case "%h":
+                case "%H":
+                    splt+="set[3]=temp["+i+"]||0;";
+                    break;
+                case "%i":
+                    splt+="set[4]=temp["+i+"]||0;";
+                    break;
+                case "%Y": splt+="set[0]=temp["+i+"]||0;";
+                    break;
+                case "%a":
+                case "%A": splt+="set[3]=set[3]%12+((temp["+i+"]||'').toLowerCase()=='am'?0:12);";
+                    break;
+                case "%s": splt+="set[5]=temp["+i+"]||0;";
+                    break;
+                case "%M": splt+="set[1]=gantt.locale.date.month_short_hash[temp["+i+"]]||0;";
+                    break;
+                case "%F": splt+="set[1]=gantt.locale.date.month_full_hash[temp["+i+"]]||0;";
+                    break;
+                default:
+                    break;
+            }
+        }
+        var code ="set[0],set[1],set[2],set[3],set[4],set[5]";
+        if (utc) code =" Date.UTC("+code+")";
+        return new Function("date","var set=[0,0,1,0,0,0]; "+splt+" return new Date("+code+");");
+    },
+    getISOWeek: function(ndate) {
+        if(!ndate) return false;
+        var nday = ndate.getDay();
+        if (nday === 0) {
+            nday = 7;
+        }
+        var first_thursday = new Date(ndate.valueOf());
+        first_thursday.setDate(ndate.getDate() + (4 - nday));
+        var year_number = first_thursday.getFullYear(); // year of the first Thursday
+        var ordinal_date = Math.round( (first_thursday.getTime() - new Date(year_number, 0, 1).getTime()) / 86400000); //ordinal date of the first Thursday - 1 (so not really ordinal date)
+        var week_number = 1 + Math.floor( ordinal_date / 7);
+        return week_number;
+    },
+    getUTCISOWeek: function(ndate){
+        return this.getISOWeek(ndate);
+    },
+    convert_to_utc: function(date) {
+        return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    },
+    parseDate: function(date, format) {
+        if (typeof(date) == "string") {
+            if (dhtmlx.defined(format)){
+                if (typeof(format) == "string")
+                    format = dhtmlx.defined(gantt.templates[format]) ? gantt.templates[format] : gantt.date.str_to_date(format);
+                else
+                    format = gantt.templates.xml_date;
+            }
+            date = format(date);
+        }
+        return date;
+    }
+};
+/*
+ %d - the day as a number with a leading zero ( 01 to 31 );
+ %j - the day as a number without a leading zero ( 1 to 31 );
+ %D - the day as an abbreviation ( Sun to Sat );
+ %l - the day as a full name ( Sunday to Saturday );
+ %W - the ISO-8601 week number of the year. Weeks start on Monday; 1)
+ %m - the month as a number without a leading zero ( 1 to 12 );
+ %n - the month as a number with a leading zero ( 01 to 12);
+ %M - the month as an abbreviation ( Jan to Dec );
+ %F - the month as a full name ( January to December );
+ %y - the year as a two-digit number ( 00 to 99 );
+ %Y - the year as a four-digit number ( 1900–9999 );
+ %h - the hour based on the 12-hour clock ( 00 to 11 );
+ %H - the hour based on the 24-hour clock ( 00 to 23 );
+ %i - the minute as a number with a leading zero ( 00 to 59 );
+ %s - the second as a number without a leading zero ( 00 to 59 ); 2)
+ %a - displays am (for times from midnight until noon) and pm (for times from noon until midnight);
+ %A - displays AM (for times from midnight until noon) and PM (for times from noon until midnight).
+
+ */
+
+if(!gantt.config) gantt.config = {};
+if(!gantt.config) gantt.config = {};
+if(!gantt.templates) gantt.templates = {};
+
+(function(){
+
+    dhtmlx.mixin(gantt.config,
+        {links : {
+            "finish_to_start":"0",
+            "start_to_start":"1",
+            "finish_to_finish":"2",
+            "start_to_finish":"3"
+        },
+            types : {
+                'task':'task',
+                'project':'project',
+                'milestone':'milestone'
+            },
+            duration_unit : "day",
+            work_time:false,
+            correct_work_time:false,
+            skip_off_time:false,
+
+            autosize:false,
+
+            show_links : true,
+            show_task_cells : true,
+            show_chart : true,
+            show_grid : true,
+            min_duration : 60*60*1000,
+            xml_date : "%d-%m-%Y %H:%i",
+            api_date : "%d-%m-%Y %H:%i",
+            start_on_monday: true,
+            server_utc : false,
+            show_progress:true,
+            fit_tasks : false,
+            select_task:true,
+
+            readonly:false,
+
+            /*grid */
+            date_grid: "%Y-%m-%d",
+
+            drag_links : true,
+            drag_progress:true,
+            drag_resize:true,
+            drag_move:true,
+            drag_mode:{
+                "resize":"resize",
+                "progress":"progress",
+                "move":"move",
+                "ignore":"ignore"
+            },
+            round_dnd_dates:true,
+            link_wrapper_width:20,
+            root_id:0,
+
+            autofit: true, // grid column automatic fit
+            columns: [
+                {name:"text", tree:true, width:'*' },
+                {name:"start_date", align: "center" },
+                {name:"duration", align: "center" },
+                {name:"add", width:'44' }
+            ],
+
+            /*scale*/
+            step: 1,
+            scale_unit: "day",
+            subscales : [
+
+            ],
+            time_step: 60,
+            duration_step: 1,
+            date_scale: "%d %M",
+            task_date: "%d %F %Y",
+            time_picker: "%H:%i",
+            task_attribute: "task_id",
+            link_attribute: "link_id",
+            buttons_left: [
+                "dhx_save_btn",
+                "dhx_cancel_btn"
+            ],
+            buttons_right: [
+                "dhx_delete_btn"
+            ],
+            lightbox: {
+                sections: [
+                    {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+                    {name: "time", height: 72, type: "duration", map_to: "auto"}
+                ],
+                project_sections: [
+                    {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+                    {name: "type", type: "typeselect", map_to: "type"},
+                    {name: "time", height: 72, type: "duration", readonly:true, map_to: "auto"}
+                ],
+                milestone_sections: [
+                    {name: "description", height: 70, map_to: "text", type: "textarea", focus: true},
+                    {name: "type", type: "typeselect", map_to: "type"},
+                    {name: "time", height: 72, type: "duration", single_date:true, map_to: "auto"}
+                ]
+            },
+            drag_lightbox: true,
+            sort: false,
+            details_on_create: true,
+            details_on_dblclick:true,
+            initial_scroll : true,
+            task_scroll_offset : 100,
+
+            task_height: "full",//number px of 'full' for row height
+            min_column_width:70
+        });
+    gantt.keys={
+        edit_save:13,
+        edit_cancel:27
+    };
+
+    gantt._init_template = function(name, initial){
+        var registeredTemplates = this._reg_templates || {};
+
+        if(this.config[name] && registeredTemplates[name] != this.config[name]){
+            if(!(initial && this.templates[name])){
+                this.templates[name] = this.date.date_to_str(this.config[name]);
+                registeredTemplates[name] = this.config[name];
+            }
+        }
+        this._reg_templates = registeredTemplates;
+    };
+    gantt._init_templates = function(){
+        var labels = gantt.locale.labels;
+        labels.dhx_save_btn 	= labels.icon_save;
+        labels.dhx_cancel_btn 	= labels.icon_cancel;
+        labels.dhx_delete_btn 	= labels.icon_delete;
+
+
+
+        //build configuration based templates
+        var d = this.date.date_to_str;
+        var c = this.config;
+        gantt._init_template("date_scale", true);
+        gantt._init_template("date_grid", true);
+        gantt._init_template("task_date", true);
+
+
+
+        dhtmlx.mixin(this.templates,{
+            xml_date:this.date.str_to_date(c.xml_date,c.server_utc),
+            xml_format:d(c.xml_date,c.server_utc),
+            api_date:this.date.str_to_date(c.api_date),
+            progress_text:function(start, end, task){return "";},
+            grid_header_class : function(column, config){
+                return "";
+            },
+
+            task_text:function(start, end, task){
+                return task.text;
+            },
+            task_class:function(start, end, task){return "";},
+            grid_row_class:function(start, end, task){
+                return "";
+            },
+            task_row_class:function(start, end, task){
+                return "";
+            },
+            task_cell_class:function(item, date){return "";},
+            scale_cell_class:function(date){return "";},
+            scale_row_class:function(date){return "";},
+
+            grid_indent:function(item) {
+                return "<div class='gantt_tree_indent'></div>";
+            },
+            grid_folder:function(item) {
+                return "<div class='gantt_tree_icon gantt_folder_" + (item.$open ? "open" : "closed") + "'></div>";
+            },
+            grid_file:function(item) {
+                return "<div class='gantt_tree_icon gantt_file'></div>";
+            },
+            grid_open:function(item) {
+                return "<div class='gantt_tree_icon gantt_" + (item.$open ? "close" : "open") + "'></div>";
+            },
+            grid_blank:function(item) {
+                return "<div class='gantt_tree_icon gantt_blank'></div>";
+            },
+
+
+            task_time:function(start,end,ev){
+                return gantt.templates.task_date(start)+" - "+gantt.templates.task_date(end);
+            },
+            time_picker:d(c.time_picker),
+            link_class : function(link){
+                return "";
+            },
+            link_description : function(link){
+                var from = gantt.getTask(link.source),
+                    to = gantt.getTask(link.target);
+
+                return "<b>" + from.text + "</b> &ndash;  <b>" + to.text+"</b>";
+            },
+
+            drag_link : function(from, from_start, to, to_start) {
+                from = gantt.getTask(from);
+                var labels = gantt.locale.labels;
+
+                var text = "<b>" + from.text + "</b> " + (from_start ? labels.link_start : labels.link_end)+"<br/>";
+                if(to){
+                    to = gantt.getTask(to);
+                    text += "<b> " + to.text + "</b> "+ (to_start ? labels.link_start : labels.link_end)+"<br/>";
+                }
+                return text;
+            },
+            drag_link_class: function(from, from_start, to, to_start) {
+                var add = "";
+
+                if(from && to){
+                    var allowed = gantt.isLinkAllowed(from, to, from_start, to_start);
+                    add = " " + (allowed ? "gantt_link_allow" : "gantt_link_deny");
+                }
+
+                return "gantt_link_tooltip" + add;
+            }
+        });
+
+        this.callEvent("onTemplatesReady",[]);
+    };
+
+})();
+if (window.jQuery){
+
+    (function( $ ){
+
+        var methods = [];
+        $.fn.dhx_gantt = function(config){
+            config = config || {};
+            if (typeof(config) === 'string') {
+                if (methods[config] ) {
+                    return methods[config].apply(this, []);
+                }else {
+                    $.error('Method ' +  config + ' does not exist on jQuery.dhx_gantt');
+                }
+            } else {
+                var views = [];
+                this.each(function() {
+                    if (this && this.getAttribute){
+                        if (!this.getAttribute("dhxgantt")){
+                            for (var key in config)
+                                if (key!="data")
+                                    gantt.config[key] = config[key];
+
+                            gantt.init(this);
+                            if (config.data)
+                                gantt.parse(config.data);
+
+                            views.push(gantt);
+                        }
+                    }
+                });
+
+
+                if (views.length === 1) return views[0];
+                return views;
+            }
+        };
+
+    })(jQuery);
+
+}
+
+if (window.dhtmlx){
+
+    if (!dhtmlx.attaches)
+        dhtmlx.attaches = {};
+
+    dhtmlx.attaches.attachGantt=function(start, end){
+        var obj = document.createElement("DIV");
+        obj.id = "gantt_"+dhtmlx.uid();
+        obj.style.width = "100%";
+        obj.style.height = "100%";
+        obj.cmp = "grid";
+
+        document.body.appendChild(obj);
+        this.attachObject(obj.id);
+
+        var that = this.vs[this.av];
+        that.grid = gantt;
+
+        gantt.init(obj.id, start, end);
+        obj.firstChild.style.border = "none";
+
+        that.gridId = obj.id;
+        that.gridObj = obj;
+
+        var method_name="_viewRestore";
+        return this.vs[this[method_name]()].grid;
+    };
+
+}
+gantt.locale = {
+    date:{
+        month_full:["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        month_short:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        day_full:["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        day_short:["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    },
+    labels:{
+        new_task:"New task",
+        icon_save:"Save",
+        icon_cancel:"Cancel",
+        icon_details:"Details",
+        icon_edit:"Edit",
+        icon_delete:"Delete",
+        confirm_closing:"",//Your changes will be lost, are your sure ?
+        confirm_deleting:"Task will be deleted permanently, are you sure?",
+        section_description:"Description",
+        section_time:"Time period",
+        section_type:"Type",
+
+        /* grid columns */
+
+        column_text : "Task name",
+        column_start_date : "Start time",
+        column_duration : "Duration",
+        column_add : "",
+
+        /* link confirmation */
+        link: "Link",
+        confirm_link_deleting:"will be deleted",
+        link_start: " (start)",
+        link_end: " (end)",
+
+        type_task: "Task",
+        type_project: "Project",
+        type_milestone: "Milestone",
+
+        minutes: "Minutes",
+        hours: "Hours",
+        days: "Days",
+        weeks: "Week",
+        months: "Months",
+        years: "Years"
+    }
+};
+
+
+
+
+gantt.skins.skyblue = {
+    config:{
+        grid_width:350,
+        row_height: 27,
+        scale_height: 27,
+        task_height: 24,
+        link_line_width:1,
+        link_arrow_size:8,
+        lightbox_additional_height:75
+    },
+    _second_column_width:95,
+    _third_column_width:80
+};
+gantt.skins.meadow = {
+    config:{
+        grid_width:350,
+        row_height: 27,
+        scale_height: 30,
+        task_height:24,
+        link_line_width:2,
+        link_arrow_size:6,
+        lightbox_additional_height:72
+    },
+    _second_column_width:95,
+    _third_column_width:80
+};
+
+gantt.skins.terrace = {
+    config:{
+        grid_width:360,
+        row_height: 35,
+        scale_height: 35,
+        task_height: 24,
+        link_line_width:2,
+        link_arrow_size:6,
+        lightbox_additional_height:75
+    },
+    _second_column_width:90,
+    _third_column_width:70
+};
+gantt.skins.broadway = {
+    config:{
+        grid_width:360,
+        row_height: 35,
+        scale_height: 35,
+        task_height: 24,
+        link_line_width:1,
+        link_arrow_size:7,
+        lightbox_additional_height:86
+    },
+    _second_column_width:90,
+    _third_column_width:80,
+
+    _lightbox_template:"<div class='dhx_cal_ltitle'><span class='dhx_mark'>&nbsp;</span><span class='dhx_time'></span><span class='dhx_title'></span><div class='dhx_cancel_btn'></div></div><div class='dhx_cal_larea'></div>",
+    _config_buttons_left: {},
+    _config_buttons_right: {
+        "dhx_delete_btn": "icon_delete",
+        "dhx_save_btn": "icon_save"
+    }
+};
+
+
+gantt.config.touch_drag = 50; //nearly immediate dnd
+gantt.config.touch = true;
+
+gantt._init_touch_events = function(){
+    if (this.config.touch != "force")
+        this.config.touch = this.config.touch &&
+            ((navigator.userAgent.indexOf("Mobile")!=-1)    ||
+                (navigator.userAgent.indexOf("iPad")!=-1)    ||
+                (navigator.userAgent.indexOf("Android")!=-1) ||
+                (navigator.userAgent.indexOf("Touch")!=-1));
+
+    if (this.config.touch){
+        if (window.navigator.msPointerEnabled){
+            this._touch_events(["MSPointerMove", "MSPointerDown", "MSPointerUp"], function(ev){
+                if (ev.pointerType == ev.MSPOINTER_TYPE_MOUSE ) return null;
+                return ev;
+            }, function(ev){
+                return (!ev || ev.pointerType == ev.MSPOINTER_TYPE_MOUSE);
+            });
+        } else
+            this._touch_events(["touchmove", "touchstart", "touchend"], function(ev){
+                if (ev.touches && ev.touches.length > 1) return null;
+                if (ev.touches[0])
+                    return { target:ev.target, pageX:ev.touches[0].pageX, pageY:ev.touches[0].pageY };
+                else
+                    return ev;
+            }, function(){ return false; });
+    }
+};
+
+
+//we can't use native scrolling, as we need to sync momentum between different parts
+//so we will block native scroll and use the custom one
+//in future we can add custom momentum
+gantt._touch_events = function(names, accessor, ignore){
+    //webkit on android need to be handled separately
+    var dblclicktime = 0;
+    var action_mode = false;
+    var scroll_mode = false;
+    var dblclick_timer = 0;
+    var action_start = null;
+    var scroll_state;
+
+    //touch move
+    if (!this._gantt_touch_event_ready){
+        this._gantt_touch_event_ready = 1;
+        dhtmlxEvent(document.body, names[0], function(e){
+            if (ignore(e)) return;
+
+            //ignore common and scrolling moves
+            if (!action_mode) return;
+
+            var source = accessor(e);
+            if (source && action_start){
+                var dx = action_start.pageX - source.pageX;
+                var dy = action_start.pageY - source.pageY;
+                if (!scroll_mode && (Math.abs(dx) > 5 || Math.abs(dy) > 5)){
+                    gantt._touch_scroll_active = scroll_mode = true;
+                    dblclicktime = 0;
+                    scroll_state = gantt.getScrollState();
+                }
+
+                if (scroll_mode){
+                    gantt.scrollTo(scroll_state.x + dx, scroll_state.y + dy);
+                }
+            }
+            return block_action(e);
+        });
+    }
+
+
+    //common helper, prevents event
+    function block_action(e){
+        if (e && e.preventDefault)
+            e.preventDefault();
+        (e||event).cancelBubble = true;
+        return false;
+    }
+
+    //block touch context menu in IE10
+    dhtmlxEvent(this.$container, "contextmenu", function(e){
+        if (action_mode)
+            return block_action(e);
+    });
+
+    //touch start
+    dhtmlxEvent(this.$container, names[1], function(e){
+        if (ignore(e)) return;
+        if (e.touches && e.touches.length > 1){
+            action_mode = false;
+            return;
+        }
+
+        action_mode = true;
+        action_start = accessor(e);
+
+
+
+        //dbl-tap handling
+        if (action_start && dblclicktime){
+            var now = new Date();
+            if ((now - dblclicktime) < 500 ){
+                gantt._on_dblclick(action_start);
+                block_action(e);
+            } else
+                dblclicktime = now;
+        } else {
+            dblclicktime = new Date();
+        }
+    });
+
+    //touch end
+    dhtmlxEvent(this.$container, names[2], function(e){
+        if (ignore(e)) return;
+        gantt._touch_scroll_active = action_mode = scroll_mode = false;
+    });
+};
