@@ -15,4 +15,4 @@ ru:
           official_mail:
             attributes:
               recipient_ids:
-                blank: Выберите хотябы одного адресата.
+                blank: Выберите хотя бы одного адресата.
