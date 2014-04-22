@@ -94,6 +94,6 @@ class Gantt
 
 # start flow
 $ ->
-  if $('#gantt_here')
+  if $('#gantt_here')>0
 
     gantt = new Gantt("gantt_here")
