@@ -5,8 +5,10 @@ require 'acceptance/acceptance_helper'
 feature "User review mail", %q() do
 
   let!(:mail) { FactoryGirl.create(:mail) }
-  let(:sender_user) { mail.sender_organization.admin }
-  let(:recipient_user) { mail.recipient_organization.director }
+  let(:sender_user) { mail.approver }
+  let(:recipient_user) { FactoryGirl.create(:user, organization: mail.recipient_organization) }
+  let(:admin) { mail.recipient_organization.admin }
+  let(:director) { mail.recipient_organization.director }
   let(:path) {  documents_official_mail_path(mail) }
 
   describe 'reply action' do
@@ -32,12 +34,18 @@ feature "User review mail", %q() do
         mail.transition_to!(:approved)
         mail.transition_to!(:sent)
         visit path
-        sign_in_with recipient_user.email, 'password'
+        sign_in_with user.email, 'password'
       end
 
-      scenario 'check reply action' do
-        expect(page).to have_content('Ответить')
+      [:recipient_user, :admin, :director].each do |_user|
+        context _user do
+          let(:user) { send(_user) }
+          scenario 'check reply action' do
+            expect(page).to have_selector('a', 'Ответить')
+          end
+        end
       end
+
     end
   end
 end
