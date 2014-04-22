@@ -1,7 +1,7 @@
 class NotificationMailer < ActionMailer::Base
-  default from: "test@cyclonelabs.com"
+  default from: "sake@cyclonelabs.net"
 
-  def notification user, mail_to
+  def document_changed user, mail_to
     @user = user
     mail to: mail_to, subject: 'Notification!'
   end
