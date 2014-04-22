@@ -1,8 +1,11 @@
 # Переопределяем работу jquery-ujs связанную с атрибутом data-confirm у ссылок
 
 # обертка для работы с собственными модальными окнами подтверждений
-myCustomConfirmBox = (message, callback) ->
-  modal = new ModalWindowView
+myCustomConfirmBox = (element, message, callback) ->
+  modal = new ModalWindowView(
+                              theme: element.data('type')
+                              confirm_txt: element.data('agree-txt')
+                              )
   modal.confirm message, callback
   modal.destroy
   return
@@ -17,7 +20,7 @@ $.rails.allowAction = (element) ->
   callback = undefined
   return true  unless message
   if $.rails.fire(element, "confirm")
-    myCustomConfirmBox message, ->
+    myCustomConfirmBox element, message, ->
       callback = $.rails.fire(element, "confirm:complete", [answer])
       if callback
         oldAllowAction = $.rails.allowAction
