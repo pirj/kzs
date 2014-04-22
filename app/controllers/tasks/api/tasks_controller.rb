@@ -5,20 +5,30 @@ class Tasks::Api::TasksController < ResourceController
 
   respond_to :json
 
-  def create
-    @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
-      task.organization = current_user.organization
-    end
+  def index
     super do |success|
-      success.html { redirect_to task_path(@task), notice: 'задача успешно поставлена' }
+      success.json { render json: collection_as_json }
     end
   end
 
-  def update
-    super do |success, failure|
-      success.html { redirect_to task_path(@task), notice: 'задача успешно обновлена' }
-      failure.html { redirect_to edit_task_path(@task), notice: 'произошли ошибки обновления' }
-    end
+  private
+
+  def collection_as_json
+    {
+        :data => collection.map do |task|
+                  {
+                      id: task.id,
+                      text: task.title,
+                      start_date: task.started_at.strftime("%d-%m-%Y"),
+                      duration: days_duration_for(task)
+                  }
+                end
+    }
   end
+
+  def days_duration_for(task)
+    (task.finished_at - task.started_at).to_i/1.day
+  end
+
 
 end
