@@ -1,14 +1,13 @@
 class Tasks::TasksController < ResourceController
   layout 'base'
 
-  # TODO-justvitalius: это надо переделать на соглашение самого inherited resources
-  def index
-    @tasks = Tasks::Task.for_organization(current_organization).page(params[:page]).per(10)
-  end
+  has_scope :per, default: 10, only: [:index]
+  has_scope :for_organization, only: [:index]
 
   def create
-    @task = Tasks::Task.new(params[:tasks_task])
-    @task.organization = current_user.organization
+    @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
+      task.organization = current_user.organization
+    end
     super do |success|
       success.html { redirect_to task_path(@task), notice: 'задача успешно поставлена' }
     end
