@@ -8,11 +8,19 @@ class Gantt
 #    gantt.config.step = 1
 #    gantt.config.date_scale = "%Y"
     gantt.init(dom)
-#    this.addTasks(tasks)
     this.getJSON()
+
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->
-      console.log id
-      console.log item
+      request = $.ajax(
+        url: '/api/tasks/' + id
+        type: 'DELETE'
+      )
+
+      request.done (status) =>
+        console.log (status)
+        return
+
+
 
   addTasks: (data) ->
     gantt.parse(data)
