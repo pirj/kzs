@@ -4,6 +4,10 @@ class Tasks::TasksController < ResourceController
   has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
 
+  def gantt
+
+  end
+
   def create
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
       task.organization = current_user.organization
