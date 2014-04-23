@@ -18,7 +18,8 @@ class Tasks::Api::TasksController < ResourceController
         :data => collection.map do |task|
                   {
                       id: task.id,
-                      text: task.title,
+                      title: task.title,
+                      description: task.text,
                       start_date: task.started_at.localtime.strftime("%d-%m-%Y"),
                       duration: days_duration_for(task)
                   }
