@@ -1,8 +1,6 @@
 Kzs::Application.routes.draw do
   root :to => 'dashboard#index'
 
-  get 'pdfviewer' => 'library#pdf_viewer'
-
   #get "/users/sign_out" => "sessions#destroy"
 
 # TODO BAD
@@ -37,6 +35,7 @@ Kzs::Application.routes.draw do
         get 'reply'
         post 'reply', to: :create_reply
         get 'assign_state'
+        get 'pdf'
       end
       resources :conformations, only: [:create]
 
@@ -51,6 +50,7 @@ Kzs::Application.routes.draw do
         get 'assign_state'
         get 'reject'
         post 'reject', to: :create_reject
+        get 'pdf'
       end
       resources :conformations, only: [:create]
 
@@ -63,6 +63,7 @@ Kzs::Application.routes.draw do
     resources :reports, except: 'index' do
       member do
         get 'assign_state'
+        get 'pdf'
       end
       resources :conformations, only: [:create]
 

@@ -236,6 +236,10 @@ class Document < ActiveRecord::Base
   end
 
 
+  def pdf_link
+    "/system/documents/document_#{self.id}.pdf"
+  end
+
   private
 
 
@@ -263,14 +267,14 @@ class Document < ActiveRecord::Base
 
   # TODO: remove this nightmare
   def create_png
-    path = "public/system/documents/"
+    path = "public/#{self.pdf_link}"
 
     pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "#{path}document_#{id}.pdf"
-    pdf = Magick::Image.read("#{path}document_#{id}.pdf").first
+    pdf.render_file path
+    pdf = Magick::Image.read(path).first
     thumb = pdf.scale(400, 520)
 
     Dir.mkdir(path) unless File.exist?(path)
-    thumb.write "#{path}document_#{id}.png"
+    thumb.write "/public/system/documents/document_#{id}.png"
   end
 end

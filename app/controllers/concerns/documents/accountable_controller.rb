@@ -54,6 +54,11 @@ module Documents::AccountableController
     end
   end
 
+  # рендерим pdf документ с помощью pdfjs
+  def pdf
+    render 'documents/application/pdf', layout: false
+  end
+
   private
 
   def default_metadata

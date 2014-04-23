@@ -5,10 +5,6 @@ class LibraryController < ApplicationController
   def library
   end
 
-  def pdf_viewer
-    render layout: false
-  end
-
   private
 
   def require_admin
