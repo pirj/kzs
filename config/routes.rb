@@ -1,6 +1,8 @@
 Kzs::Application.routes.draw do
   root :to => 'dashboard#index'
 
+  get 'pdfviewer' => 'library#pdf_viewer'
+
   #get "/users/sign_out" => "sessions#destroy"
 
 # TODO BAD

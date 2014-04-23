@@ -78,6 +78,9 @@ gem 'spreadsheet'
 #time_ago
 gem 'rails-timeago', '~> 2.0'
 
+# просмотр pdf в красивом окне
+# gem 'pdfjs-rails', git: 'git://github.com/concordia-publishing-house/pdfjs-rails.git'
+gem 'pdfjs_rails'
 
 
 group :production do
