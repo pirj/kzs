@@ -1,38 +1,13 @@
-#classes
-
-#wasd =
-#  tasks_task:
-##    created_at: "2014-04-18T14:03:27Z"
-#    finished_at: "2014-04-29T00:00:00Z"
-#    id: 1
-#    organization_id: 3
-#    started_at: "2014-04-14T00:00:00Z"
-#    text: "Paste\r\n"
-#    title: "Мазафака"
-#    gantt.config.scale_unit = "year" #задел на маштабирование
-#    gantt.config.step = 1
-#    gantt.config.date_scale = "%Y"
-#    updated_at: "2014-04-23T13:12:12Z"
-
 class Gantt
   constructor: (dom) ->
 
-    gantt.config.types["meeting"] = "type_id"           #определяем свой тип задач
-    gantt.locale.labels["type_meeting"] = "Meeting"
+    @.initNewClass()           #определяем свой тип задач
 
 
     gantt.init(dom)                                     #Инициализация модуля Гант
     @.getJSON()                                         #получение данных
 
-    @.initModal()
-
-
     ########################################## далее обработчики событий ###############################################
-
-
-
-
-
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->  #обработчик на удаление
       request = $.ajax(
         url: '/api/tasks/' + id
@@ -46,51 +21,66 @@ class Gantt
     that = this
 
     gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
-      console.log @
+#      console.log @
       data = @.getTask(id)
 
       that.editTask(data, id)
 
   ############################################ далее методы класса ####################################################
-  initModal: () ->
-    gantt.form_blocks["my_editor"] =
-      render: (sns) ->
-        "<div class='dhx_cal_ltext'>Заголовок&nbsp;<input type='text'><br/>Текст&nbsp;<input type='text'></div>"
 
-      set_value: (node, value, task) ->
-        node.childNodes[1].value = value or ""
-        node.childNodes[4].value = task.users or ""
-        return
+  initNewClass: () ->
+#    gantt.config.types["meeting"] = "type_id"
+    gantt.config.types["meeting"] = "meeting"
+    gantt.locale.labels["type_meeting"] = "Meeting"
 
-      get_value: (node, task) ->
-        task.users = node.childNodes[4].value
-        node.childNodes[1].value
+#    console.log(gantt.config)
 
-      focus: (node) ->
-        a = node.childNodes[1]
-        a.select()
-        a.focus()
-        return
-
-    gantt.config.lightbox.sections = [
+    gantt.locale.labels.section_title = "Subject"
+    gantt.locale.labels.section_details = "Details"
+    gantt.config.lightbox["meeting_sections"] = [
       {
-        name: "description"
-        height: 200
+        name: "title"
+        height: 20
         map_to: "text"
-        type: "my_editor"
+        type: "textarea"
         focus: true
+      }
+      {
+        name: "details"
+        height: 70
+        map_to: "details"
+        type: "textarea"
+        focus: true
+      }
+      {
+        name: "type"
+        type: "typeselect"
+        map_to: "type"
       }
       {
         name: "time"
         height: 72
-        type: "duration"
+        type: "time"
         map_to: "auto"
       }
     ]
 
+    gantt.templates.task_class = (start, end, task) ->
+      return "meeting_task"  if task.type is gantt.config.types.meeting
+      ""
+
+    gantt.templates.task_text = (start, end, task) ->
+      return "Meeting: <b>" + task.text + "</b>"  if task.type is gantt.config.types.meeting
+      task.text
+
+    gantt.templates.rightside_text = (start, end, task) ->
+      return task.text  if task.type is gantt.config.types.milestone
+      ""
+
+
 
   editTask: (data, id) ->
-    console.log data
+#    console.log data
     taskData =
       tasks_task:
         finished_at: data.end_date
@@ -111,8 +101,17 @@ class Gantt
     return
 
   addTasks: (data) ->
+
+
+    _.each data.data, (task, key) ->
+      task.type = 'meeting'
+#    type: gantt.config.types.meeting
+    console.log(data)
+
     gantt.parse(data)
 
+#    gantt.getTask(7).type = "meeting"
+#    gantt.updateTask(7)
   getJSON: () ->
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
@@ -126,7 +125,7 @@ class Gantt
     )
 
     request.done (data) =>
-#      console.log this
+#      console.log data
       this.addTasks(data)
       return
 
