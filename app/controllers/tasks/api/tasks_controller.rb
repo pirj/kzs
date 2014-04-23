@@ -19,7 +19,7 @@ class Tasks::Api::TasksController < ResourceController
                   {
                       id: task.id,
                       text: task.title,
-                      start_date: task.started_at.strftime("%d-%m-%Y"),
+                      start_date: task.started_at.localtime.strftime("%d-%m-%Y"),
                       duration: days_duration_for(task)
                   }
                 end
