@@ -3,7 +3,7 @@ span.spec-doc-action-buttons
     - if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource) && resource.current_state.to_s != 'prepared'
       = change_state_link_to(resource, state, class: 'btn btn-primary')
 
-  - %w(approved sent accept read pending accept).each do |state|
+  - %w(approved sent accepted read pending).each do |state|
     = change_state_link_to(resource, state, class: 'btn btn-primary') if resource.allowed_transitions.include?(state) && can_apply_state?(state, resource)
 
   = link_to 'Редактировать', edit_polymorphic_path(resource.object), \
