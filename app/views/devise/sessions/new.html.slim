@@ -13,7 +13,7 @@
         .row
           .col-sm-9
             .form-group
-              = f.text_field :login, :placeholder => 'логин', :class => "form-control"
+              = f.text_field :login, :placeholder => 'логин', :class => "form-control", autofocus: :autofocus
             .form-group
               = f.password_field :password, :placeholder => 'пароль', :class => "form-control"
           .col-sm-3
