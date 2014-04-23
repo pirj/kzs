@@ -9,16 +9,31 @@
 #    started_at: "2014-04-14T00:00:00Z"
 #    text: "Paste\r\n"
 #    title: "Мазафака"
+#    gantt.config.scale_unit = "year" #задел на маштабирование
+#    gantt.config.step = 1
+#    gantt.config.date_scale = "%Y"
 #    updated_at: "2014-04-23T13:12:12Z"
 
 class Gantt
   constructor: (dom) ->
-#    gantt.config.scale_unit = "year" #задел на маштабирование
-#    gantt.config.step = 1
-#    gantt.config.date_scale = "%Y"
-    gantt.init(dom)
-    @.getJSON()
-    gantt.attachEvent "onAfterTaskDelete", (id, item) ->
+
+    gantt.config.types["meeting"] = "type_id"           #определяем свой тип задач
+    gantt.locale.labels["type_meeting"] = "Meeting"
+
+
+    gantt.init(dom)                                     #Инициализация модуля Гант
+    @.getJSON()                                         #получение данных
+
+    @.initModal()
+
+
+    ########################################## далее обработчики событий ###############################################
+
+
+
+
+
+    gantt.attachEvent "onAfterTaskDelete", (id, item) ->  #обработчик на удаление
       request = $.ajax(
         url: '/api/tasks/' + id
         type: 'DELETE'
@@ -27,12 +42,52 @@ class Gantt
       request.done (status) =>
         console.log (status)
         return
+
     that = this
-    gantt.attachEvent "  ", (id) ->
+
+    gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
       console.log @
       data = @.getTask(id)
 
       that.editTask(data, id)
+
+  ############################################ далее методы класса ####################################################
+  initModal: () ->
+    gantt.form_blocks["my_editor"] =
+      render: (sns) ->
+        "<div class='dhx_cal_ltext'>Заголовок&nbsp;<input type='text'><br/>Текст&nbsp;<input type='text'></div>"
+
+      set_value: (node, value, task) ->
+        node.childNodes[1].value = value or ""
+        node.childNodes[4].value = task.users or ""
+        return
+
+      get_value: (node, task) ->
+        task.users = node.childNodes[4].value
+        node.childNodes[1].value
+
+      focus: (node) ->
+        a = node.childNodes[1]
+        a.select()
+        a.focus()
+        return
+
+    gantt.config.lightbox.sections = [
+      {
+        name: "description"
+        height: 200
+        map_to: "text"
+        type: "my_editor"
+        focus: true
+      }
+      {
+        name: "time"
+        height: 72
+        type: "duration"
+        map_to: "auto"
+      }
+    ]
+
 
   editTask: (data, id) ->
     console.log data
@@ -79,7 +134,7 @@ class Gantt
       console.log('request failed ' + status)
       return
 
-# start flow
+############################################ Поток выполнения  ###################################################
 $ ->
   if $('#gantt_here').length >0
     gantt = new Gantt("gantt_here")
