@@ -18,15 +18,15 @@ ActiveAdmin.register Organization do
        f.inputs t('required_fields') do
          f.input :title
          f.input :short_title
-         f.input :type_of_ownership
-         f.input :legal_address
-         f.input :actual_address
+         f.input :parent_id, :as => :select, :collection => Organization.scoped
          f.input :director_id, :as => :select, :collection => User.scoped.map { |u| [ u.first_name_with_last_name, u.id ] }
+         f.input :admin_id, :as => :select, :collection => User.scoped.map { |u| [ u.first_name_with_last_name, u.id ] }
+         f.input :type_of_ownership
        end
 
        f.inputs t('main_info') do
-         f.input :admin_id, :as => :select, :collection => User.scoped
-         f.input :parent_id, :as => :select, :collection => Organization.scoped
+         f.input :legal_address
+         f.input :actual_address
          f.input :logo, :as => :file
          f.input :phone
          f.input :date_of_registration
@@ -62,18 +62,10 @@ ActiveAdmin.register Organization do
       attributes_table do
         row :title
         row :short_title
-        row :type_of_ownership
-        row :legal_address
-        row :actual_address
-        row :director_id
-
-        row :inn
-        row :admin_id
         row :parent_id
-        row :logo do |row|
-          image_tag row.logo.url(:pdf)
-        end
-        row :phone
+        row :director_id
+        row :admin_id
+        row :type_of_ownership
       end
      end
 end
