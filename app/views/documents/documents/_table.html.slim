@@ -30,7 +30,7 @@
             .pull-right = resource_sortable_icon 'title', class: 'label label-sm label-icon'
 
           th.col-words-5 = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
-          th.col-words-2
+          th = t('documents.table.list_attrs.conformation')
           th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
 
         / строка со статусом фильтра показывается, только если применены настройки фильтра
@@ -58,7 +58,7 @@
           td colspan=8
             .text-center.text-important по заданным параметрам фильтрации документов нет
       - else
-        - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :attachment_icon]
+        - attrs = [:number_and_date, :sender_link, :recipient_link, :title, :type_name, :conformation_icon]
         - collection.each do |resource|
           / simple row with short information
           tr[class=documents_important.row_class(resource)  data-id=resource.id data-server-actions=resource.actions ]

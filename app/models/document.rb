@@ -211,6 +211,9 @@ class Document < ActiveRecord::Base
     conformations.map(&:user)
   end
 
+  # Возвращает true если все пользователи согласовали документ
+  # @example
+  #   doc.approvable?
   def approvable?
     (conformers.count == conformations.count) && conformations.pluck(:conformed).all?
   end

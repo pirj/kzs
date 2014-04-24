@@ -26,7 +26,6 @@ module Documents
 
 
 
-
     # define two same links with for Organization model.
     %w(sender recipient).each do |attr|
       define_method "#{attr}_link" do
@@ -50,6 +49,28 @@ module Documents
         h.content_tag(:span, I18n.t("documents.table.document_labels.attachments_count"), class: "text-help col-sm-#{LABEL_COL_WIDTH}")+
         h.content_tag( :span, object.document_attached_files.try(:count), class: "link col-sm-#{12-LABEL_COL_WIDTH}")
       end
+    end
+
+
+    def conformation_icon
+      icon_class = ['fa']
+      unless object.conformations.blank?
+        if object.approvable?
+          icon_class << 'fa-check-circle text-green'
+        else
+          unless object.conformations.where(conformed: false).blank?
+            icon_class << 'fa-times-circle text-red'
+          else
+            icon_class << 'fa-question-circle text-orange'
+          end
+        end
+      end
+
+      icon_text = "#{object.conformations.count}/#{object.conformers.count}"
+      h.content_tag(:div, class: 'text-center') do
+        h.content_tag(:h4, nil, class: icon_class) +
+        h.content_tag(:div, "------icon_text-------", class: 'text-help')
+      end.html_safe
     end
 
 
