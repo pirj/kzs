@@ -44,6 +44,11 @@ class Gantt
     $(document).on "click", "#day", ->
       that.resizeGant('day')
       return
+
+    $(document).on 'click', '#new-task', ->
+      $('.js-new-task').modal('show')
+#      $('.modal-backdrop').removeClass().addClass('modal-backdrop-white in')
+      $('.modal-backdrop.in').hide();
   ############################################ далее методы класса ####################################################
 
   initCustomFields: () ->

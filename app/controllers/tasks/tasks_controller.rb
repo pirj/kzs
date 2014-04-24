@@ -12,7 +12,10 @@ class Tasks::TasksController < ResourceController
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
       task.organization = current_user.organization
     end
-    super
+    super do |success, failed|
+      success.js { render layout: false; @task = Tasks::Task.new }
+
+    end
   end
 
   def update

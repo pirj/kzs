@@ -1,5 +1,6 @@
+- remote ||= false
 = simple_nested_form_for resource, url: (resource.new_record? ? tasks_path : task_path(resource)), \
-                    html: { class: 'form-horizontal', multiple: true }, \
+                    html: { class: 'form-horizontal', multiple: true,  remote: remote }, \
                     defaults: { input_html: {class: 'form-control'}, \
                                 input_wrapper_html: { class: 'col-sm-8' }, \
                                 label_html: { class: 'col-sm-2' }, \
