@@ -1,0 +1,2 @@
+console.log('responce received')
+$('.js-form').html("<%= j render 'tasks/tasks/form', remote: true, resource: Tasks::Task.new %>")

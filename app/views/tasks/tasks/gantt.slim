@@ -14,5 +14,9 @@ ul.nav.nav-inline.btn-block
 a#month href='#' месяц
 a#day href='#' день
 a#year href='#' год
+br
+/a#new-task href='#' Новая задача
 
-
+.js-new-task.modal-simple.modal
+  - resource = Tasks::Task.new
+  = render 'form', resource: resource, remote: true
