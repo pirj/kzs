@@ -54,7 +54,7 @@ module Documents
 
     def conformation_icon
       icon_class = ['fa']
-      unless object.conformations.blank?
+      unless object.conformers.blank?
         if object.approvable?
           icon_class << 'fa-check-circle text-green'
         else
@@ -67,9 +67,9 @@ module Documents
       end
 
       icon_text = "#{object.conformations.count}/#{object.conformers.count}"
-      h.content_tag(:div, class: 'text-center') do
+      h.content_tag(:div, class: 'text-center js-document-list-conformation-info _document-conform-status') do
         h.content_tag(:h4, nil, class: icon_class) +
-        h.content_tag(:div, "------icon_text-------", class: 'text-help')
+        h.content_tag(:h4, icon_text, class: 'text-gray invisible js-tooltip', title: 'количество проголосовавших из общего числа согласующих' )
       end.html_safe
     end
 

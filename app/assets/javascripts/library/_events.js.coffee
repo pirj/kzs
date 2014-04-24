@@ -167,5 +167,19 @@ $ ->
   # initialize styling file attach button with file-title near attach button
   $('.js-filestyle-with-title').filestyle()
 
+
+  # показываем кол-во голосований в списке документов
+  # при наведении курсора мыши
+  # данный виджет приправлен стилями в css (смотри html)
+  # при наведении курсора, мы пряме один блок и показываем другой.
+  # при сбегания курсора, все возвращаем в обычное состояние
+  $('.js-document-list-conformation-info').hover( (e) ->
+    $(e.currentTarget).closest('.js-document-list-conformation-info').find('.fa').fadeOut(50)
+    $(e.currentTarget).closest('.js-document-list-conformation-info').children().not('.fa').removeClass('invisible')
+  , (e) ->
+    $(e.currentTarget).closest('.js-document-list-conformation-info').children().not('.fa').addClass('invisible')
+    $(e.currentTarget).closest('.js-document-list-conformation-info').find('.fa').fadeIn(50)
+  )
+
   # БЛОК АКТИВАЦИИ КЛАССОВ
   user_conform = new ConformingView()

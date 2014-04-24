@@ -72,6 +72,13 @@
   }
 }
 
+.text-gray{
+  color: $color-gray;
+  &:hover {
+    color: darken($color-gray, 10%);
+  }
+}
+
 // Alignment
 .text-left           { text-align: left !important; }
 .text-right          { text-align: right !important; }
