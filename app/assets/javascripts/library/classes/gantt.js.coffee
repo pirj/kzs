@@ -1,11 +1,12 @@
 class Gantt
   constructor: (dom) ->
 
-    @.initNewClass()           #определяем свой тип задач
+    @.initCustomFields()           #определяем свои поля
 
-    console.log gantt.config
     gantt.init(dom)                                     #Инициализация модуля Гант
-    @.getJSON()                                         #получение данных
+
+    @.getTasks()                                         #получение данных
+
 
     ########################################## далее обработчики событий ###############################################
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->  #обработчик на удаление
@@ -21,35 +22,43 @@ class Gantt
     that = this
 
     gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
-#      console.log @
+
       data = @.getTask(id)
 
       that.editTask(data, id)
 
   ############################################ далее методы класса ####################################################
 
-  initNewClass: () ->
-#    gantt.config.types["meeting"] = "type_id"
-    gantt.config.types["meeting"] = "meeting"
-    gantt.locale.labels["type_meeting"] = "Meeting"
+  initCustomFields: () ->
 
-#    console.log(gantt.config)
+                                                                                   #колонки слева
+    gantt.config.columns=[
+      {name:"title",       label:"Заголовок",  tree:true, width:170 },
+      {name:"start_date", label:"Начало", align: "center" },
+      {name:"end_date",   label:"Окончание",   align: "center" }
+      {name:"add" }
+    ];
 
-    gantt.locale.labels.section_title = "Subject"
-    gantt.locale.labels.section_details = "Details"
-    gantt.locale.labels.section_period = "Time period"
+    gantt.templates.task_text = (start, end, task) ->                 #таск в таблице
+      task.title
+
+
+                                                              # модальное окно
+    gantt.locale.labels.section_title = "Заголовок"
+    gantt.locale.labels.section_details = "Описание"
+    gantt.locale.labels.section_period = "Дата"
     gantt.config.lightbox["task_sections"] = [
       {
         name: "title"
-        height: 20
-        map_to: "text"
+        height: 30
+        map_to: "title"
         type: "textarea"
         focus: true
       }
       {
         name: "details"
         height: 70
-        map_to: "details"
+        map_to: "description"
         type: "textarea"
         focus: true
       }
@@ -63,22 +72,10 @@ class Gantt
       }
     ]
 
-    gantt.templates.task_class = (start, end, task) ->
-      return "meeting_task"  if task.type is gantt.config.types.meeting
-      ""
-
-    gantt.templates.task_text = (start, end, task) ->
-      return "Meeting: <b>" + task.text + "</b>"  if task.type is gantt.config.types.meeting
-      task.text
-
-    gantt.templates.rightside_text = (start, end, task) ->
-      return task.text  if task.type is gantt.config.types.milestone
-      ""
 
 
 
   editTask: (data, id) ->
-    console.log data
     taskData =
       tasks_task:
         finished_at: data.end_date
@@ -98,14 +95,8 @@ class Gantt
       console.log (status)
     return
 
-  addTasks: (data) ->
 
-#    _.each data.data, (task, key) ->                                          #преобразовываем все таски к новому типу
-#      task.type = 'meeting'
-
-    gantt.parse(data)
-
-  getJSON: () ->
+  getTasks: () ->
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
       return
@@ -118,8 +109,7 @@ class Gantt
     )
 
     request.done (data) =>
-#      console.log data
-      this.addTasks(data)
+      gantt.parse(data)
       return
 
     request.fail (status) ->
