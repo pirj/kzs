@@ -11,13 +11,21 @@ module Documents
     # search_field — название поискового поля, к которому привязывается кнопка
     # target
     def table_filter_caption(title, object, search_field, target)
-      classes = 'label label-sm js-table-filter-activate-btn'
-      classes += ' label-gray js-table-filter-filled-form' unless object.try(search_field.to_sym).blank?
+      classes = ['label label-sm js-table-filter-activate-btn']
+
+      # преобразуем атрибут к массиву
+      search_field = [search_field] unless search_field.class == Array
+      search_field.each do |_search_field|
+        classes << 'label-gray js-table-filter-filled-form' unless object.try(_search_field.to_sym).blank?
+      end.compact
+
       content_tag :div, class: classes, data: { target: target } do
         content_tag(:span, title) +
         content_tag(:span, nil, class: 'fa fa-filter')
       end.html_safe
     end
+
+
 
 
     # ячейка таблицы с кусочком фильтровой формы и chosen
