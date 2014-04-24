@@ -52,14 +52,6 @@ class Document < ActiveRecord::Base
 
   belongs_to :flow, class_name: 'Documents::Flow'
 
-  # TODO: refactor this
-  has_and_belongs_to_many :documents,
-                          class_name: "Document",
-                          uniq: true,
-                          join_table: "document_relations",
-                          foreign_key: "document_id",
-                          association_foreign_key: "relational_document_id"
-
   accepts_nested_attributes_for :document_attached_files, allow_destroy: true
   accepts_nested_attributes_for :attached_documents,
                                 :allow_destroy => true
@@ -227,8 +219,6 @@ class Document < ActiveRecord::Base
   def to_s
     "#{id}"
   end
-
-
 
   #  обнуляем все согласования
   def clear_conformations
