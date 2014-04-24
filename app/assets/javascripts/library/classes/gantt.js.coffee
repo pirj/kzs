@@ -24,8 +24,12 @@ class Gantt
     gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
 
       data = @.getTask(id)
-
       that.editTask(data, id)
+
+
+    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
+#      console.log(item)
+      that.createTask(item)
 
   ############################################ далее методы класса ####################################################
 
@@ -115,6 +119,30 @@ class Gantt
     request.fail (status) ->
       console.log('request failed ' + status)
       return
+
+
+  createTask: (data) ->
+    request = $.ajax(
+      url: '/api/tasks/'
+      type: 'POST'
+      dataType: "json"
+      data: data
+    )
+
+    request.done (data) =>
+#      this.createTasks(data)
+      gantt.render
+      return
+
+    request.fail (status) ->
+      console.log('request failed ' + status)
+      return
+
+
+  reloadGantt: () =>
+#    @.getTasks()                    #TODO: нужен ли повторный запрос?
+    gantt.render
+
 
 ############################################ Поток выполнения  ###################################################
 $ ->
