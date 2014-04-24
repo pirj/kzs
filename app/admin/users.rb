@@ -24,31 +24,31 @@ ActiveAdmin.register User do
    form do |f|
      f.inputs t('required_fields') do
        f.input :username
-       f.input :password
-       f.input :password_confirmation
-       f.input :first_name
-       f.input :middle_name
-       f.input :last_name
-       # TODO nullified collection with UserDocumentType
-       f.input :id_type, :as => :select, :collection => [], :include_blank => false
-       f.input :id_sn
-       f.input :id_issue_date
-       f.input :id_issuer
-     end
-
-     f.inputs t('properties') do
-       f.input :alt_name
-       f.input :phone, :as => :string
-       f.input :position
-       f.input :division
-       f.input :dob
-       f.input :avatar
-       f.input :email
        if current_user.sys_user
          f.input :organization_id, :as => :select, :collection => Organization.scoped
        else
          f.input :organization_id, :as => :hidden, :value => current_user.organization_id
        end
+       f.input :position
+       f.input :first_name
+       f.input :middle_name
+       f.input :last_name      
+       f.input :password
+       f.input :password_confirmation
+     end
+
+     f.inputs t('properties') do
+       # TODO nullified collection with UserDocumentType
+       f.input :id_type, :as => :select, :collection => [], :include_blank => false
+       f.input :id_sn
+       f.input :id_issue_date
+       f.input :id_issuer
+       f.input :alt_name
+       f.input :phone, :as => :string
+       f.input :division
+       f.input :dob
+       f.input :avatar
+       f.input :email
        f.input :work_status, :as => :select, :collection => User::WORK_STATUSES.map { |a| [ t(a), a ] }, :include_blank => false
        f.input :groups, :as => :check_boxes
      end
@@ -63,24 +63,12 @@ ActiveAdmin.register User do
           Organization.find(user.organization_id).title
         end
       end
-      row :phone
       row :position
-      row :division
-      row :dob
       row :first_name
+      row :middle_name
       row :last_name
-      row :avatar
-      row :current_sign_in_ip
-      row :last_sign_in_at
-      row :sign_in_count
-      row :email
-      row :organization_id
-      row :work_status do |row|
-        I18n.t(row.work_status)
-      end
-      row :created_at
     end
-
+  
      panel t('permissions') do
        table_for user.permissions do
          column :title
