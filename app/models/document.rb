@@ -95,6 +95,8 @@ class Document < ActiveRecord::Base
   scope :trashed,  -> { where(state: 'trashed') }
 
   scope :not_draft, -> { where { state.not_eq('draft') } }
+  scope :not_trashed, -> { where { state.not_eq('trashed') } }
+
 
   # Scope by type
   scope :orders, -> { where(accountable_type: 'Documents::Order') }
@@ -123,6 +125,8 @@ class Document < ActiveRecord::Base
 
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
+
+  # default_scope { where { state.not_eq('trashed') } }
 
   def self.serial_number_for(document)
     "Д-#{document.id}"

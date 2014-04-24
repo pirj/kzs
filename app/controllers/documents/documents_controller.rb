@@ -16,7 +16,7 @@ class Documents::DocumentsController < ResourceController
   end
 
   has_scope :with_state,
-            default: 'all_but_draft',
+            default: 'all_but_trashed',
             except: [:batch] do |controller, scope, value|
     case value
     when 'draft' then scope.draft
@@ -24,7 +24,7 @@ class Documents::DocumentsController < ResourceController
     when 'approved' then scope.approved
     when 'trashed' then scope.trashed
     else
-      scope.not_draft
+      scope.not_draft.not_trashed
     end
   end
 
