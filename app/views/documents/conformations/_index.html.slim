@@ -22,7 +22,8 @@
             span.col-sm-2.text-center class=css_class
             span.col-sm-8
               span.text-info #{conformer.first_name_with_last_name}&nbsp
-              = is_conformed ? timeago_tag(Time.zone.now, :format => :day_hour) : timeago_tag(Time.zone.now, :format => :wating_time, class: 'text-danger')
+              span.col-words-1
+              span.text-help #{DateFormatter.new conformer.conformations.where(document_id: resource.document.id).first.created_at}
           - elsif conformer == current_user
             = render 'documents/conformations/conform_form', resource: resource
           - else

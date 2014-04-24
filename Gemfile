@@ -75,9 +75,6 @@ gem 'hipchat'
 
 gem 'spreadsheet'
 
-#time_ago
-gem 'rails-timeago', '~> 2.0'
-
 # просмотр pdf в красивом окне
 gem 'pdfjs_rails'
 
