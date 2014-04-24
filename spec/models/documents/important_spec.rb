@@ -24,7 +24,7 @@ describe Documents::Important do
     order.transition_to!(:sent)
   end
 
-  subject { Documents::Important.new(user, organization) }
+  subject { Documents::Important.new(user) }
 
   before do
     inbox_mail

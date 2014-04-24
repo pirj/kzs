@@ -15,8 +15,7 @@ module Documents
 
     def row_class(document)
       readable = incoming.exists?(id: document.id)
-      unread = document.unread?(h.current_user)
-      (readable && unread) ? 'tr-unread' : 'tr-read'
+      readable ? 'tr-unread' : 'tr-read'
     end
   end
 end

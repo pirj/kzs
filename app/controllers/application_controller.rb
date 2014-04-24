@@ -22,11 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def documents_important
-    @documents_important = Documents::ImportantDecorator.new(pure_important)
+    @documents_important ||= Documents::ImportantDecorator.new(pure_important)
   end
 
   def pure_important
-    Documents::Important.new(current_user, current_organization)
+    Documents::Important.new(current_user)
   end
 
   def current_organization
