@@ -20,6 +20,16 @@ class Tasks::Api::TasksController < ResourceController
     end
     super
   end
+  
+
+  def update
+    @task = Tasks::Task.find(params[:id])
+    @task.organization ||= current_user.organization
+    @task.approvers << User.where(organization_id: current_user.organization.id).first  if @task.approvers.blank?
+    @task.executors << User.where(organization_id: current_user.organization.id).last   if @task.executors.blank?
+    params = mapped_post_params
+    super
+  end
 
 
   private
