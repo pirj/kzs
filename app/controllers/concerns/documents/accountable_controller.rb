@@ -15,7 +15,7 @@ module Documents::AccountableController
 
     before_filter :assign_read_state_if_director, only: :show
     before_filter :mark_as_read, only: :show
-    before_filter :clear_notification, only: :show
+    before_filter :clear_notifications, only: :show
     actions :all, except: [:index]
   end
 
@@ -23,15 +23,9 @@ module Documents::AccountableController
   def create
     create! do |success, failure|
       success.html do
-
-        # Посылаем уведомления:
-        # - исполнителю
-        # - контрольному лицу
-        # - всем согласующим
-        # - если кто-то из вышеперечисленных - создатель, ему не посылаем
-        (resource.conformers.to_a << resource.approver << resource.executor).reject {|u| u == resource.creator}.each { |u|
-          u.notifications.create(document_id: resource.document.id)
-        }
+        # Посылаем уведомления исполнителю, контрольному лицу, всем согласующим
+        # (если кто-то из вышеперечисленных - текущий юзер (создатель), ему не посылаем)
+        resource.notify_interested exclude: current_user
 
         # Обычное сохранение - нажата кнопка перевода статуса ("Подготовить" или "В черновик")
         if params.has_key?(:transition_to)
@@ -56,8 +50,11 @@ module Documents::AccountableController
   def update
     update! do |success, failure|
       success.html do
+        # Посылаем уведомления всем, кроме создателя и текущего пользователя
+        resource.clear_notifications
+        resource.reload.notify_interested except: :creator, exclude: current_user
+        
         resource.transition_to!(params[:transition_to], default_metadata)
-        resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
         redirect_to documents_path
       end
       failure.html { render action: 'edit' }
@@ -91,8 +88,8 @@ module Documents::AccountableController
     resource.mark_as_read!(for: current_user)
   end
 
-  def clear_notification
-    resource.clear_notification for: current_user
+  def clear_notifications
+    resource.clear_notifications for: current_user
   end
 
   def authorize_to_read_document
