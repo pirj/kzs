@@ -216,6 +216,13 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
     t.string   "type_of"
   end
 
+  create_table "notifications", :force => true do |t|
+    t.integer "document_id", :null => false
+    t.integer "user_id",     :null => false
+  end
+
+  add_index "notifications", ["document_id", "user_id"], :name => "index_notifications_on_document_id_and_user_id", :unique => true
+
   create_table "official_mails", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

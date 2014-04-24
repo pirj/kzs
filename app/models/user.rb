@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
   # Согласования
   has_many :conformations, dependent: :destroy
 
+  # Уведомления
+  has_many :notifications, dependent: :destroy
+
   belongs_to :organization
 
   scope :superuser, -> { where(is_superuser: true) }
@@ -93,18 +96,6 @@ class User < ActiveRecord::Base
 
   def director?
     organization && organization.director?(self)
-  end
-
-  # Возвращает "важные" документы для этого пользователя
-  # Документ считает важным, если: ты участник документа: исполнитель, контрольное лицо, согласующий
-  #
-  # (нужно для нотификаций: они выводятся только для важных документов)
-  #
-  # @returns [ActiveRecord::Relation]
-  # @see Document
-  def important_documents
-    inbox_ids = Document.to(organization).map(&:id)
-    Document.includes(:conformers).where("approver_id = ? OR executor_id = ? OR documents_users.user_id = ? OR documents.id IN (?)", id, id, id, inbox_ids)
   end
 
   # Согласовать документ

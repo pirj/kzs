@@ -40,6 +40,9 @@ class Document < ActiveRecord::Base
   # Согласования
   has_many :conformations, dependent: :destroy
 
+  # Уведомления
+  has_many :notifications, dependent: :destroy
+
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
   belongs_to :approver, class_name: 'User'
@@ -115,6 +118,8 @@ class Document < ActiveRecord::Base
     .where('document_transitions.to_state' => state)
   }
   scope :inbox, ->(org) { to(org).passed_state('sent') }
+
+  scope :with_notifications_for, -> (user) {includes(:notifications).where("notifications.user_id = #{user.id}")}
 
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
@@ -219,6 +224,10 @@ class Document < ActiveRecord::Base
     conformations.destroy_all
   end
 
+  # Удаляем нотификацию о текущем документе для конкретного пользователя
+  def clear_notification options = {}
+    notifications.where("user_id = #{options[:for].id}").destroy_all
+  end
 
   def pdf_link
     "/system/documents/document_#{id}.pdf"
@@ -227,9 +236,6 @@ class Document < ActiveRecord::Base
 
 
   private
-
-
-
   # Запрещаем удаление "извне"
   # Вместо destroy используйте destroy_by
   #
