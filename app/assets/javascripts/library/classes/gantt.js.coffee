@@ -3,7 +3,7 @@ class Gantt
 
     @.initNewClass()           #определяем свой тип задач
 
-
+    console.log gantt.config
     gantt.init(dom)                                     #Инициализация модуля Гант
     @.getJSON()                                         #получение данных
 
@@ -37,7 +37,8 @@ class Gantt
 
     gantt.locale.labels.section_title = "Subject"
     gantt.locale.labels.section_details = "Details"
-    gantt.config.lightbox["meeting_sections"] = [
+    gantt.locale.labels.section_period = "Time period"
+    gantt.config.lightbox["task_sections"] = [
       {
         name: "title"
         height: 20
@@ -53,15 +54,12 @@ class Gantt
         focus: true
       }
       {
-        name: "type"
-        type: "typeselect"
-        map_to: "type"
-      }
-      {
-        name: "time"
+        name: "period"
         height: 72
         type: "time"
         map_to: "auto"
+
+
       }
     ]
 
@@ -80,7 +78,7 @@ class Gantt
 
 
   editTask: (data, id) ->
-#    console.log data
+    console.log data
     taskData =
       tasks_task:
         finished_at: data.end_date
@@ -102,16 +100,11 @@ class Gantt
 
   addTasks: (data) ->
 
-
-    _.each data.data, (task, key) ->
-      task.type = 'meeting'
-#    type: gantt.config.types.meeting
-    console.log(data)
+#    _.each data.data, (task, key) ->                                          #преобразовываем все таски к новому типу
+#      task.type = 'meeting'
 
     gantt.parse(data)
 
-#    gantt.getTask(7).type = "meeting"
-#    gantt.updateTask(7)
   getJSON: () ->
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
