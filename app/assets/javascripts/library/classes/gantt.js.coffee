@@ -126,7 +126,8 @@ class Gantt
       url: '/api/tasks/'
       type: 'POST'
       dataType: "json"
-      data: data
+      data:
+        tasks_task: data
     )
 
     request.done (data) =>
