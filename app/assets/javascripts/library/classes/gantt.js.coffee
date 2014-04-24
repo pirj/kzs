@@ -1,8 +1,8 @@
 class Gantt
   constructor: (dom) ->
-
+    that = this
     @.initCustomFields()           #определяем свои поля
-
+#    that.resizeGant('year')
     gantt.init(dom)                                     #Инициализация модуля Гант
 
     @.getTasks()                                         #получение данных
@@ -19,7 +19,7 @@ class Gantt
         console.log (status)
         return
 
-    that = this
+
 
 #    gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
 #
@@ -34,6 +34,16 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
 #      console.log(item)
       that.editTask(item)
+
+    $(document).on "click", "#month", ->
+      that.resizeGant('month')
+      return
+    $(document).on "click", "#year", ->
+      that.resizeGant('year')
+      return
+    $(document).on "click", "#day", ->
+      that.resizeGant('day')
+      return
   ############################################ далее методы класса ####################################################
 
   initCustomFields: () ->
@@ -78,30 +88,6 @@ class Gantt
 
       }
     ]
-
-
-
-
-#  editTask: (data, id) ->
-#    taskData =
-#      tasks_task:
-#        finished_at: data.end_date
-#        id: data.id
-#        started_at: data.start_date
-#        text: "Paste\r\n"
-#        title: "Вася Рогов"
-#
-#    request = $.ajax(
-#      url: '/api/tasks/' + id
-#      type: 'PUT'
-#      dataType: "json"
-#      data: taskData
-#    )
-#
-#    request.done (status) =>
-#      console.log (status)
-#    return
-
 
   getTasks: () ->
     $.ajaxSetup beforeSend: (xhr) ->
@@ -162,6 +148,23 @@ class Gantt
 #    @.getTasks()                    #TODO: нужен ли повторный запрос?
     gantt.render
 
+
+  resizeGant: (scale) ->
+    gantt.config.scale_unit = scale #"year" #задел на маштабирование
+    gantt.config.step = 1
+
+    switch scale
+      when 'year'
+        b = '%Y'
+      when 'month'
+        b = '%m'
+      when 'day'
+        b = '%d'
+      else
+
+    gantt.config.date_scale = b #"%Y"
+    gantt.render()
+#    gantt.init($('#gantt_here'))
 
 ############################################ Поток выполнения  ###################################################
 $ ->
