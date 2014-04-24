@@ -32,4 +32,8 @@ class Tasks::Api::TasksController < ResourceController
   end
 
 
+  def mapping_post_params
+    
+  end
+
 end
