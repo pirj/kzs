@@ -140,12 +140,6 @@ class Document < ActiveRecord::Base
     "#{Document.serial_number_for(self)} — #{title}"
   end
 
-  # TODO-justvitalius: please, get it from here
-  # actual methods for one instance of Model
-  def single_applicable_actions
-    %w(edit) if %w(draft prepared).include?(accountable.current_state)
-  end
-
   # only actual states which shows to user
   def sorted_states
     accountable.state_machine.class.states - %w(trashed unsaved)

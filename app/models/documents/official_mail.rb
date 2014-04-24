@@ -23,16 +23,6 @@ module Documents
       clone :document
     end
 
-    # TODO-justvitalius: please, get it from here
-    # actual methods for one instance of Model
-    def single_applicable_actions
-      array = %w(reply)
-      if %w(draft prepared).include?(accountable.current_state)
-        array += %w(edit)
-      end
-      array
-    end
-
     private
 
     def recipients_present?

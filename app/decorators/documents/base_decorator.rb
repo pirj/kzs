@@ -62,11 +62,18 @@ module Documents
     end
 
     def actions
-      @actions = []
-      collection = object.accountable.applicable_states || []
-      single = object.accountable.single_applicable_actions || []
+      @actions = actions_for(object.accountable)
       # удаляем действие удалить, потому что оно как статус не нужно во вьюхах
-      @actions = (collection + single).reject{ |a| a=='trashed' }.compact.to_s
+      @actions.delete('trashed')
+      @actions.compact.to_s
+    end
+
+    # Этот код вынесен из модели, затем перенесем в объектную нотацию.
+    def actions_for(accountable)
+      array = %w(edit reply) + accountable.applicable_states
+      array.delete('reply') unless accountable.instance_of?(Documents::OfficialMail) && incoming?
+      array.delete('edit') unless %w(draft prepared).include?(object.state)
+      array
     end
 
     def state popover_position = :left
