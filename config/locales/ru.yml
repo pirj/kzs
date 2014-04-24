@@ -22,7 +22,7 @@ ru:
   document_successfully_sent: "Документ отправлен"
   documents_successfully_sent: "Документы отправлены"
   mail: "Письмо"
-  writ: "Распоряжение"
+  writ: "Предписание"
   act: "Акт"
   document_sent_for_checking: "Докумет отправлен на проверку исполонения инициатору"
   statement_accepted: "Акт принят"
@@ -148,7 +148,7 @@ ru:
       statement:
         title: "Заголовок"
         text: "Содержимое"
-        document_id: "Распоряжение"
+        document_id: "Предписание"
 
   kids:
     zero: ru_zero

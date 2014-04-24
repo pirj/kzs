@@ -33,7 +33,7 @@ class DocumentPdf < Prawn::Document
 
     case @document.accountable_type.to_s
       when 'Documents::OfficialMail' then text( "Письмо", :align => :center, :size => 20)
-      when 'Documents::Order' then text( "Распоряжение", :align => :center, :size => 20)
+      when 'Documents::Order' then text( "Предписание", :align => :center, :size => 20)
       when 'Documents::Report' then text( "Акт", :align => :center, :size => 20)
     end
 

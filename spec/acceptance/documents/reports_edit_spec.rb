@@ -28,7 +28,7 @@ feature "Users create reports", %q() do
 
     scenario 'should create new one report' do
 
-      select_from_chosen label = 'Распоряжение'
+      select_from_chosen label = 'Предписание'
       select_from_chosen label = 'Контрольное лицо'
 
       expect { click_button 'Подготовить' }.to change(Documents::Report, :count).by(1)

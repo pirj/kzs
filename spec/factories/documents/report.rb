@@ -14,7 +14,7 @@ FactoryGirl.define do
     #   instance.creator = FactoryGirl.create(:user, organization: instance.sender_organization)
     # end
 
-    # Создаем распоряжение и обязательно привязываем по отправителю-получателю
+    # Создаем Предписание и обязательно привязываем по отправителю-получателю
     # Отправитель распоряжения является получателем
     after(:build) do |instance, ev|
       instance.order = FactoryGirl.create(:order)
