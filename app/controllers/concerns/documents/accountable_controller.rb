@@ -15,6 +15,7 @@ module Documents::AccountableController
 
     before_filter :assign_read_state_if_director, only: :show
     before_filter :mark_as_read, only: :show
+    before_filter :clear_notification, only: :show
     actions :all, except: [:index]
   end
 
@@ -22,15 +23,24 @@ module Documents::AccountableController
   def create
     create! do |success, failure|
       success.html do
+
+        # Посылаем уведомления:
+        # - исполнителю
+        # - контрольному лицу
+        # - всем согласующим
+        # - если кто-то из вышеперечисленных - создатель, ему не посылаем
+        (resource.conformers.to_a << resource.approver << resource.executor).reject {|u| u == resource.creator}.each { |u|
+          u.notifications.create(document_id: resource.document.id)
+        }
+
+        # Обычное сохранение - нажата кнопка перевода статуса ("Подготовить" или "В черновик")
         if params.has_key?(:transition_to)
           resource.transition_to!(params[:transition_to], default_metadata)
-          resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
           redirect_to documents_documents_path
 
-        # Когда прикрепляем документы, то сохраняем данный документ в БД. Иначе как крепить файлы то???
+        # Нажата кнопка "Прикрепить документы". В этом случае сохраняем документ как черновик и переадресуем на другую страницу
         elsif params.has_key?(:attached_documents)
           resource.transition_to!(:draft, default_metadata)
-          resource.document.reload.mark_as_read! for: current_user # Должно быть после перевода статуса
           redirect_to polymorphic_path([resource, :attached_documents])
         end
       end
@@ -79,6 +89,10 @@ module Documents::AccountableController
 
   def mark_as_read
     resource.mark_as_read!(for: current_user)
+  end
+
+  def clear_notification
+    resource.clear_notification for: current_user
   end
 
   def authorize_to_read_document
