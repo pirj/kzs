@@ -21,16 +21,19 @@ class Gantt
 
     that = this
 
-    gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
-
-      data = @.getTask(id)
-      that.editTask(data, id)
+#    gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
+#
+#      data = @.getTask(id)
+#      that.editTask(data, id)
 
 
     gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
 #      console.log(item)
       that.createTask(item)
 
+    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
+#      console.log(item)
+      that.editTask(item)
   ############################################ далее методы класса ####################################################
 
   initCustomFields: () ->
@@ -79,25 +82,25 @@ class Gantt
 
 
 
-  editTask: (data, id) ->
-    taskData =
-      tasks_task:
-        finished_at: data.end_date
-        id: data.id
-        started_at: data.start_date
-        text: "Paste\r\n"
-        title: "Вася Рогов"
-
-    request = $.ajax(
-      url: '/api/tasks/' + id
-      type: 'PUT'
-      dataType: "json"
-      data: taskData
-    )
-
-    request.done (status) =>
-      console.log (status)
-    return
+#  editTask: (data, id) ->
+#    taskData =
+#      tasks_task:
+#        finished_at: data.end_date
+#        id: data.id
+#        started_at: data.start_date
+#        text: "Paste\r\n"
+#        title: "Вася Рогов"
+#
+#    request = $.ajax(
+#      url: '/api/tasks/' + id
+#      type: 'PUT'
+#      dataType: "json"
+#      data: taskData
+#    )
+#
+#    request.done (status) =>
+#      console.log (status)
+#    return
 
 
   getTasks: () ->
@@ -131,7 +134,6 @@ class Gantt
     )
 
     request.done (data) =>
-#      this.createTasks(data)
       gantt.render
       return
 
@@ -139,6 +141,22 @@ class Gantt
       console.log('request failed ' + status)
       return
 
+  editTask: (data) ->
+    request = $.ajax(
+      url: '/api/tasks/'+data.id
+      type: 'PUT'
+      dataType: "json"
+      data:
+        tasks_task: data
+    )
+
+    request.done (data) =>
+      gantt.render
+      return
+
+    request.fail (status) ->
+      console.log('request failed ' + status)
+      return
 
   reloadGantt: () =>
 #    @.getTasks()                    #TODO: нужен ли повторный запрос?
