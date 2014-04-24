@@ -28,9 +28,10 @@
           - else
             span.col-sm-2.text-center
               span.fa.fa-question-circle.text-info
-            span.col-sm-8
-              span.text-info #{conformer.first_name_with_last_name}&nbsp
-              = timeago_tag Time.zone.now, :format => :wating_time, :nojs => false, class: 'text-danger'
+            span.col-sm-8.text-info
+              = conformer.first_name_with_last_name
+              span.col-words-1
+              span.text-danger= "(Ожидание решения: #{distance_of_time_in_words(resource.updated_at, Time.now)})"
 
 
     .b
