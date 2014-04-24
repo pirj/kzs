@@ -62,10 +62,11 @@ module Documents
     end
 
     def actions
+      @actions = []
       collection = object.accountable.applicable_states || []
       single = object.accountable.single_applicable_actions || []
       # удаляем действие удалить, потому что оно как статус не нужно во вьюхах
-      (collection + single).reject{ |a| a=='trashed' }.compact.to_s
+      @actions = (collection + single).reject{ |a| a=='trashed' }.compact.to_s
     end
 
     def state popover_position = :left
@@ -194,6 +195,8 @@ module Documents
       DateFormatter.new(object.deadline)
     end
 
-
+    def incoming?
+      h.current_user.organization == object.recipient_organization
+    end
   end
 end

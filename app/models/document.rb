@@ -148,7 +148,7 @@ class Document < ActiveRecord::Base
     "#{Document.serial_number_for(self)} — #{title}"
   end
 
-  # TODO-justvitalius: please, get it ffrom here
+  # TODO-justvitalius: please, get it from here
   # actual methods for one instance of Model
   def single_applicable_actions
     %w(edit) if %w(draft prepared).include?(accountable.current_state)
