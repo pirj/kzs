@@ -30,7 +30,9 @@
             .pull-right = resource_sortable_icon 'title', class: 'label label-sm label-icon'
 
           th.col-words-5 = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
-          th = table_filter_caption t('documents.table.list_attrs.conformation'), f.object, [:conformers_id_present, :conformations_conformed_in], 'document-table-filter-document-conformation'
+          /th = table_filter_caption t('documents.table.list_attrs.conformation'), f.object, [:conformers_id_present, :conformations_conformed_in], 'document-table-filter-document-conformation'
+          th
+            .label.label-sm = t('documents.table.list_attrs.conformation')
           th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
 
         / строка со статусом фильтра показывается, только если применены настройки фильтра

@@ -64,13 +64,12 @@ module Documents
             icon_class << 'fa-question-circle text-orange'
           end
         end
+        icon_text = "#{object.conformations.count}/#{object.conformers.count}"
+        h.content_tag(:div, class: 'text-center js-document-list-conformation-info _document-conform-status js-tooltip', title: 'количество проголосовавших из общего числа согласующих' ) do
+          h.content_tag(:h4, nil, class: icon_class) +
+              h.content_tag(:h4, icon_text, class: 'text-gray invisible')
+        end.html_safe
       end
-
-      icon_text = "#{object.conformations.count}/#{object.conformers.count}"
-      h.content_tag(:div, class: 'text-center js-document-list-conformation-info _document-conform-status') do
-        h.content_tag(:h4, nil, class: icon_class) +
-        h.content_tag(:h4, icon_text, class: 'text-gray invisible js-tooltip', title: 'количество проголосовавших из общего числа согласующих' )
-      end.html_safe
     end
 
 
