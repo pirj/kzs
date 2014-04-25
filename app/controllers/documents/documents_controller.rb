@@ -98,7 +98,7 @@ class Documents::DocumentsController < ResourceController
   def destroy
     document = Document.find(params[:id])
     document.destroy_by(current_user)
-    flash[:notice] = 'Документ удален.'
+    flash[:notice] = 'Документ удален. Вы можете увидеть его в списке удаленных документов.'
     redirect_to documents_path
   end
 
