@@ -177,10 +177,10 @@ class Gantt
     gantt.addTask(
       id: a.id
       title: a.title
-      description: a.text
-      start_date: JSON.parse(JSON.stringify(a.started_at)).substring(0, 10)
+      description: a.description
+      start_date: a.start_date
 #      end_date: JSON.parse(JSON.stringify(a.finished_at)).substring(0, 10)
-#      duration: 3
+      duration: a.duration
       )
 
 #    gantt.render()

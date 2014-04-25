@@ -6,6 +6,8 @@ class Tasks::TasksController < ResourceController
 
   respond_to :js, :html
 
+  helper_method :mapped_resource
+
   def gantt
   end
 
@@ -32,6 +34,20 @@ class Tasks::TasksController < ResourceController
 
   def resource_url
     task_path(resource)
+  end
+
+  def mapped_resource
+    {
+        id: resource.id,
+        title: resource.title,
+        description: resource.text,
+        start_date: resource.started_at.localtime.strftime("%d-%m-%Y"),
+        duration: days_duration_for(resource)
+    }.to_json.html_safe
+  end
+
+  def days_duration_for(task)
+    (task.finished_at - task.started_at).to_i/1.day
   end
 
 end
