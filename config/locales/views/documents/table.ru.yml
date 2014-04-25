@@ -9,6 +9,7 @@ ru:
         recipient_organization: Получатель
         title: Тема
         type: Тип
+        conformation: Согласовано
         attachment_icon: ''
         status: Статус
 

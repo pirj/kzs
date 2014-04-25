@@ -1,5 +1,5 @@
 # coding: utf-8
-module DocumentStatesHelper
+module Documents::StatesHelper
 
   # render result module to views and interact with document states
   def render_document_status_bar doc
@@ -62,6 +62,7 @@ module DocumentStatesHelper
     content_tag(:div, class: '_doc-state__actions') do
       states_action_links(doc) +
       delete_action_link(doc) +
+      reply_action_link(doc) +
       link_to( history_documents_document_path(doc), remote: true ) do
         content_tag(:span, nil, class: 'fa fa-clock-o') +
         content_tag(:span, 'история статусов')
@@ -69,13 +70,12 @@ module DocumentStatesHelper
       link_to( '#', class: 'js-document-state-close-popover' ) do
         content_tag(:span, nil, class: 'fa fa-ban') +
         content_tag(:span, 'отмена')
-      end.html_safe +
-      reply_action_link(doc)
+      end.html_safe
     end.html_safe
   end
 
   def reply_action_link(doc)
-    if doc.accountable_type == 'Documents::OfficialMail'
+    if doc.accountable_type == 'Documents::OfficialMail' && doc.recipient_organization == current_organization
       link_to reply_documents_official_mail_path(doc.accountable) do
         content_tag(:span, nil, class: 'fa fa-mail-reply') +
             content_tag(:span, 'Ответить')

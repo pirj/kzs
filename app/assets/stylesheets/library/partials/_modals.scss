@@ -10,6 +10,10 @@
 // Kill the scroll on the body
 .modal-open {
   overflow: hidden;
+
+  > .page{
+    @include transition-transform(none);
+  }
 }
 
 // Container that the modal scrolls within
