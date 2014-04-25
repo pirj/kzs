@@ -1,6 +1,7 @@
 class Gantt
   constructor: (dom) ->
     that = this
+
     @.initCustomFields()           #определяем свои поля
 #    that.resizeGant('year')
     gantt.init(dom)                                     #Инициализация модуля Гант
@@ -27,9 +28,9 @@ class Gantt
 #      that.editTask(data, id)
 
 
-    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
-#      console.log(item)
-      that.createTask(item)
+#    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
+##      console.log(item)
+#      that.createTask(item)
 
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
 #      console.log(item)
@@ -45,13 +46,13 @@ class Gantt
       that.resizeGant('day')
       return
 
-    $(document).on 'click', '#new-task', ->
-      $('.js-new-task').modal('show')
-#      $('.modal-backdrop').removeClass().addClass('modal-backdrop-white in')
-      $('.modal-backdrop.in').hide();
+
+
+
+
   ############################################ далее методы класса ####################################################
 
-  initCustomFields: () ->
+  initCustomFields: () =>              #!!!
 
                                                                                    #колонки слева
     gantt.config.columns=[
@@ -94,7 +95,8 @@ class Gantt
       }
     ]
 
-  getTasks: () ->
+  getTasks: () =>              #!!!
+
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
       return
@@ -115,7 +117,7 @@ class Gantt
       return
 
 
-  createTask: (data) ->
+  createTask: (data) =>           #!!!
     request = $.ajax(
       url: '/api/tasks/'
       type: 'POST'
@@ -132,7 +134,7 @@ class Gantt
       console.log('request failed ' + status)
       return
 
-  editTask: (data) ->
+  editTask: (data) =>              #!!!
     request = $.ajax(
       url: '/api/tasks/'+data.id
       type: 'PUT'
@@ -154,7 +156,7 @@ class Gantt
     gantt.render
 
 
-  resizeGant: (scale) ->
+  resizeGant: (scale) =>            #!!!
     gantt.config.scale_unit = scale #"year" #задел на маштабирование
     gantt.config.step = 1
 
@@ -171,8 +173,23 @@ class Gantt
     gantt.render()
 #    gantt.init($('#gantt_here'))
 
+  addTask: (a) =>
+    gantt.addTask(
+      id: a.id
+      title: a.title
+      description: a.text
+      start_date: JSON.parse(JSON.stringify(a.started_at)).substring(0, 10)
+#      end_date: JSON.parse(JSON.stringify(a.finished_at)).substring(0, 10)
+#      duration: 3
+      )
+
+#    gantt.render()
+#    gantt.refreshTask(a.id)
+#    console.log (JSON.parse(JSON.stringify(a.started_at))).substring(0, 10)
+
 ############################################ Поток выполнения  ###################################################
 $ ->
   if $('#gantt_here').length >0
-    gantt = new Gantt("gantt_here")
+    window.app.ganttView = new Gantt("gantt_here")
 
+#    console.log(window.app.ganttView)
