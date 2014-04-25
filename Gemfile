@@ -63,7 +63,6 @@ gem 'unread', '~> 0.3.1'
 #gem 'date_validator'
 gem 'validates_timeliness'
 
-
 gem 'jquery-rails', '~> 2.3.0'
 
 # PDF thing
@@ -76,6 +75,8 @@ gem 'hipchat'
 
 gem 'spreadsheet'
 
+# просмотр pdf в красивом окне
+gem 'pdfjs_rails'
 
 
 group :production do

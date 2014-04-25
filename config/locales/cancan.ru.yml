@@ -1,6 +1,6 @@
 ru:
   unauthorized:
     manage:
-      all: "Вы у вас нет прав на действие %{action} с %{subject}."
+      all: "У Вас нет прав на действие %{action} с %{subject}."
     read:
       document: 'Недостаточно прав на чтение документа'

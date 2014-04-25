@@ -31,11 +31,11 @@
                       input_wrapper_html: { class: 'col-sm-offset-2 col-sm-8' }
 
 
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, default: current_organization.director.first_name_with_last_name, label_hint: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица', input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, selected: current_organization.director_id, label_hint: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица', input_html: { class: 'js-chosen' }
 
     = doc.association :recipient_organization, label_html: { title: 'Организации-получатели документа' }, wrapper: :inline_hint, input_html: { class: 'js-chosen' }
 
-    = f.input :deadline, as: :datepicker, input_html: { class: 'js-deadline', data: { min_date: Date.today + 3.days }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой распоряжение должно быть исполнено'
+    = f.input :deadline, as: :datepicker, input_html: { class: 'js-deadline', data: { min_date: Date.today + 3.days }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой Предписание должно быть исполнено'
 
     = doc.input :title, input_html: { maxlength: 255 }
     = doc.input :body, input_html: { rows: 6 }

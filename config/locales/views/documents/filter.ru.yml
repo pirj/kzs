@@ -3,7 +3,7 @@ ru:
     filter:
       document_type:
         documents/official_mail: письмо
-        documents/order: распоряжение
+        documents/order: предписание
         documents/report: акт
 
       states:

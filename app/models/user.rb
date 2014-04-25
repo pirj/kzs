@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :login
 
@@ -25,6 +25,9 @@ class User < ActiveRecord::Base
   # Согласования
   has_many :conformations, dependent: :destroy
 
+  # Уведомления
+  has_many :notifications, dependent: :destroy
+
   belongs_to :organization
 
   scope :superuser, -> { where(is_superuser: true) }
@@ -40,10 +43,14 @@ class User < ActiveRecord::Base
 
   before_save :save_with_empty_password
 
-  validates :organization_id, :first_name, :last_name, :middle_name, :position, presence: true
+  validates :first_name, :last_name, :middle_name, :position, :username, presence: true
   #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
+  validates :username, uniqueness: true
 
-  # validates :username, uniqueness: true
+  # при решение вопроса курици-и-яйца, было решено, что пользователь является главным
+  # и поэтому у него выключаем обязательную организацию
+  # validates :organization_id
+
 
   has_attached_file :avatar, :plugins => { :small => "48x48#", :large => "100x100#" }
 
@@ -93,18 +100,6 @@ class User < ActiveRecord::Base
 
   def director?
     organization && organization.director?(self)
-  end
-
-  # Возвращает "важные" документы для этого пользователя
-  # Документ считает важным, если: ты участник документа: исполнитель, контрольное лицо, согласующий
-  #
-  # (нужно для нотификаций: они выводятся только для важных документов)
-  #
-  # @returns [ActiveRecord::Relation]
-  # @see Document
-  def important_documents
-    inbox_ids = Document.to(organization).map(&:id)
-    Document.includes(:conformers).where("approver_id = ? OR executor_id = ? OR documents_users.user_id = ? OR documents.id IN (?)", id, id, id, inbox_ids)
   end
 
   # Согласовать документ

@@ -93,7 +93,7 @@
 }
 
 .label-blue{
-  @include label-variant($color-sky-blue, #fff);
+  @include label-variant($color-blue, #fff);
 }
 
 .label-gray{

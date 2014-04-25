@@ -56,7 +56,7 @@ window.app.documents =
   render_reply_link: ->
     $el = $('table .js-row-select:checked')
     if $el.length == 1
-      id = $el.parents('tr').data('id')
+      id = $el.parents('tr').data('accountable-id')
       "<li><a href='/documents/mails/#{id}/reply'>ответить</a></li>"
     else
       null
@@ -117,6 +117,6 @@ $ ->
   # styling attachment file fields
   $(document).on('nested:fieldAdded', (e) ->
     $field = $(e.field).find('input')
-    $field.wrap('<div class="col-sm-offset-2 col-sm-8"></div>')
+    $field.wrap('<div class="col-sm-offset-2 col-sm-5"></div>')
     $field.filestyle()
   )

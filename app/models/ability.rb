@@ -42,6 +42,8 @@ class Ability
     can :update, Document, executor_id: user.id
     can :update, Document, approver_id: user.id
 
+    can :reply_to, Documents::OfficialMail, document: { recipient_organization_id: user.organization_id }
+
     # TODO: @babrovka
     # Make use of
     # https://github.com/ryanb/cancan/wiki/Fetching-Records

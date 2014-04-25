@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140409081803) do
+ActiveRecord::Schema.define(:version => 20140424061130) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -146,11 +146,6 @@ ActiveRecord::Schema.define(:version => 20140409081803) do
     t.datetime "updated_at",              :null => false
   end
 
-  create_table "document_relations", :force => true do |t|
-    t.integer "document_id"
-    t.integer "relational_document_id"
-  end
-
   create_table "document_transitions", :force => true do |t|
     t.string   "to_state"
     t.text     "metadata",    :default => "{}"
@@ -220,6 +215,13 @@ ActiveRecord::Schema.define(:version => 20140409081803) do
     t.integer  "organization_id"
     t.string   "type_of"
   end
+
+  create_table "notifications", :force => true do |t|
+    t.integer "document_id", :null => false
+    t.integer "user_id",     :null => false
+  end
+
+  add_index "notifications", ["document_id", "user_id"], :name => "index_notifications_on_document_id_and_user_id", :unique => true
 
   create_table "official_mails", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -431,6 +433,26 @@ ActiveRecord::Schema.define(:version => 20140409081803) do
     t.integer  "approver_id"
     t.text     "executor_comment"
     t.text     "body"
+  end
+
+  create_table "tasks_tasks", :force => true do |t|
+    t.string   "title"
+    t.text     "text"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "organization_id"
+  end
+
+  create_table "tasks_tasks_approvers", :id => false, :force => true do |t|
+    t.integer "task_id", :null => false
+    t.integer "user_id", :null => false
+  end
+
+  create_table "tasks_tasks_executors", :id => false, :force => true do |t|
+    t.integer "task_id", :null => false
+    t.integer "user_id", :null => false
   end
 
   create_table "user_desktop_configurations", :force => true do |t|

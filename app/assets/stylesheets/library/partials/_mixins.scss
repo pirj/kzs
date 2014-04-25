@@ -141,10 +141,10 @@
           transition-duration: $transition-duration;
 }
 @mixin transition-transform($transition...) {
-  -webkit-transition: -webkit-transform $transition;
-     -moz-transition: -moz-transform $transition;
-       -o-transition: -o-transform $transition;
-          transition: transform $transition;
+  -webkit-transform: $transition;
+     -moz-transform: $transition;
+       -o-transform: $transition;
+          transform: $transition;
 }
 
 // Transformations
@@ -593,6 +593,12 @@
 @mixin container-fixed() {
   margin-right: auto;
   margin-left: auto;
+  padding-left:  ($grid-gutter-width / 2);
+  padding-right: ($grid-gutter-width / 2);
+  @include clearfix();
+}
+
+@mixin container-lefted() {
   padding-left:  ($grid-gutter-width / 2);
   padding-right: ($grid-gutter-width / 2);
   @include clearfix();

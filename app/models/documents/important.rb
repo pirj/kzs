@@ -1,9 +1,7 @@
 module Documents
   class Important
-    def initialize(current_user, organization, scope = nil)
-      @organization = organization
+    def initialize(current_user)
       @user = current_user
-      @scope = scope || Document.scoped
     end
 
     def count
@@ -24,22 +22,24 @@ module Documents
     end
 
     def mail_count
-      @mail_count =
+      @mail_count ||=
           incoming.mails.count
     end
 
     def order_count
-      @order_count =
+      @order_count ||=
           incoming.orders.count
     end
 
     def report_count
-      @report_count =
+      @report_count ||=
           incoming.reports.count
     end
 
     def incoming
-      @user.important_documents.unread_by(@user)
+        # TODO: scoped?
+        inbox_ids = Document.to(@user.organization).unread_by(@user).map(&:id)
+        Document.includes(:notifications).where("notifications.user_id = ? OR documents.id IN (?)", @user.id, inbox_ids)
     end
   end
 end

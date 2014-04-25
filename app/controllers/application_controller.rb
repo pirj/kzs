@@ -3,7 +3,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
 
-  helper_method :current_organization, :can_apply_state?, :ability_for, :documents_important, :organizations
+  helper_method :current_organization,
+                :can_apply_state?,
+                :ability_for,
+                :documents_important,
+                :organizations,
+                :current_organization_users
 
   def access_denied(exception)
     redirect_to root_path, alert: t('access_denied')
@@ -17,15 +22,20 @@ class ApplicationController < ActionController::Base
   end
 
   def documents_important
-    @documents_important = Documents::ImportantDecorator.new(pure_important)
+    @documents_important ||= Documents::ImportantDecorator.new(pure_important)
   end
 
   def pure_important
-    Documents::Important.new(current_user, current_organization)
+    Documents::Important.new(current_user)
   end
 
   def current_organization
     current_user.organization
+  end
+
+  def current_organization_users
+    @current_organization_users ||=
+        current_organization.users.order('first_name ASC')
   end
 
   # Referenced in /app/models/ability.rb

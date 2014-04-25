@@ -5,3 +5,12 @@ ru:
         title: заголовок
         body: описание
         deadline: дата сдачи
+
+
+      tasks/task:
+        title: Заголовок
+        text: Описание
+        started_at: Дата начала
+        finished_at: Дата окончания
+        approvers: Контрольные лица
+        executors: Исполнители

@@ -52,10 +52,5 @@
 = render 'documents/application/change_state_links', resource: resource
 = link_to 'Ответить', resource_path, class: 'btn btn-primary' if resource.recipient_organization == current_organization
 .padding-block
-= render 'documents/documents/list', collection: history, title: 'История распоряжений и актов:'
+= render 'documents/documents/list', collection: history, title: 'История писем:'
 
-/.row
-  .col-sm-6.col-sm-offset-3
-    - history.each do |letter|
-      = letter.inspect
-      hr

@@ -43,6 +43,12 @@ RSpec.configure do |config|
   config.include Features::SessionsHelper, type: :feature
   config.include Features::ChosenHelper, type: :feature
 
+
+  # устанавлиаем дефолтное разрешение экрана,под которым будут испольняться js тесты
+  config.before(:each, js: true) do
+    page.driver.resize(1280, 1024)
+  end
+
   # autosave errors screenshots
   # source http://viget.com/extend/auto-saving-screenshots-on-test-failures-other-capybara-tricks
   config.after(:each) do

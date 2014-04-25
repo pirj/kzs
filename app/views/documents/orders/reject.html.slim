@@ -50,7 +50,7 @@
         .text-info.text-left = doc.object.approver.try(:first_name_with_last_name)
 
 
-    /= doc.association :recipient_organization, label_html: { title: 'укажите организацию, которой будет назначено это распоряжение' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' }}
+    /= doc.association :recipient_organization, label_html: { title: 'укажите организацию, которой будет назначено это Предписание' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' }}
     .form-group
       = doc.label :recipient_organization, class: 'control-label col-sm-2'
       .col-sm-8.control-label

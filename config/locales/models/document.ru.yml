@@ -9,7 +9,7 @@ ru:
 
       documents/official_mail: Письмо
       documents/report: Акт
-      documents/order: распоряжение
+      documents/order: Предписание
 
 
     attributes:
@@ -31,13 +31,13 @@ ru:
 
         accountable_types:
           documents_officialmail: письмо
-          documents_order: распоряжение
+          documents_order: предписание
           documents_report: акт
 
 
       documents/report:
         body: текст акта
-        order: Распоряжение
+        order: предписание
       documents/order:
         deadline: дата исполнения
         body: текст распоряжения

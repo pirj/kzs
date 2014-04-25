@@ -10,8 +10,5 @@ html
         #sidebar
           = render 'shared/left'
       .page
-        - if notice
-          .alert.alert-success= notice
-        - if alert
-          .alert.alert-danger= alert
+        = bootstrap_flash
         = yield

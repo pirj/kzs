@@ -4,16 +4,14 @@ FactoryGirl.define do
     short_title "Simple Organization"
   end
 
-  factory :organization do
-    title "OOO Organization"
-    short_title "Organization"
+  factory :organization, class: Organization do
+    title 'Organization Full Name'
+    short_title 'Organization'
+    type_of_ownership 'TypeNested'
 
-    after(:create) do |instance, ev|
-      instance.admin = FactoryGirl.create(:user, organization: instance)
-      instance.accountant = FactoryGirl.create(:user, organization: instance)
-      instance.director = FactoryGirl.create(:user, organization: instance)
-      instance.save!
-    end
+    admin { FactoryGirl.create(:user) }
+    accountant { FactoryGirl.create(:user) }
+    director { FactoryGirl.create(:user) }
 
     factory :sender_organization, class: Organization do
       title "OOO Sender Organization"
@@ -23,7 +21,6 @@ FactoryGirl.define do
       title "OOO Recipient Organization"
       short_title "Recipient Organization"
     end
-  end
 
-  
+  end
 end

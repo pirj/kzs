@@ -11,4 +11,7 @@
       span.switch-text
       span.switch-bg
       a
-  .col-sm-8.text-info = current_user.first_name_with_last_name
+  span.col-sm-8.text-info
+    = current_user.first_name_with_last_name
+    span.col-words-1
+    span.text-danger= "(Ожидание решения: #{distance_of_time_in_words(resource.updated_at, Time.now)})"

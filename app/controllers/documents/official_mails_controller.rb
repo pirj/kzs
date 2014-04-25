@@ -14,6 +14,9 @@ class Documents::OfficialMailsController < ResourceController
   # rubocop:disable LineLength
   def reply
     @parent_mail = end_of_association_chain.find(params[:id])
+
+    authorize!(:reply_to, @parent_mail)
+
     @official_mail = end_of_association_chain.new.tap do |mail|
       mail.build_document.tap do |doc|
         doc.recipient_organization = @parent_mail.sender_organization
@@ -24,6 +27,9 @@ class Documents::OfficialMailsController < ResourceController
 
   def create_reply
     @parent_mail = end_of_association_chain.find(params[:id])
+
+    authorize!(:reply_to, @parent_mail)
+
     @official_mail =
         Documents::OfficialMail.new(attributes).tap do |mail|
           mail.sender_organization = current_organization

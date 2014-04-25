@@ -1,0 +1,36 @@
+= simple_nested_form_for resource, url: (resource.new_record? ? tasks_path : task_path(resource)), \
+                    html: { class: 'form-horizontal', multiple: true }, \
+                    defaults: { input_html: {class: 'form-control'}, \
+                                input_wrapper_html: { class: 'col-sm-8' }, \
+                                label_html: { class: 'col-sm-2' }, \
+                                wrapper: :inline \
+                              } \
+                    do |f|
+
+  = render 'documents/application/error_label', resource: resource
+
+  .form-group
+    .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее задачу в системе' ]
+      | Составитель
+    .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
+
+  = f.association :approvers, collection: current_organization_users, \
+                              label_method: :first_name_with_last_name, \
+                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
+                              label_hint: 'Лицо, указанное в задаче, как контрольное лицо'
+
+  = f.association :executors, collection: current_organization_users, \
+                              label_method: :first_name_with_last_name, \
+                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
+                              label_hint: 'Лицо, указанное в задаче, как исполнитель'
+
+  = f.input :started_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата начала исполнения задачи'
+  = f.input :finished_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой задача должна быть исполнена'
+
+  = f.input :title
+  = f.input :text, input_html: { rows: 4 }
+
+  br
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-primary'

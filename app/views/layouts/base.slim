@@ -9,14 +9,9 @@ html
     = yield(:head)
   body
     - unless controller?('devise/sessions') || controller?('dashboard')
-      #sidebar
-        = render 'shared/left'
+      = render 'shared/left'
     .page
-      /- if notice
-      /  .alert.alert-success= notice
-      /- if alert
-      /  .alert.alert-danger= alert
-      .container
+      .container-lefted
         = render 'shared/welcome_screen'
         / ===============================================================
         .navbar
@@ -27,4 +22,8 @@ html
         / ===============================================================
         = bootstrap_flash
         = yield
+
+
+    /= render 'modal_window'
+    = render 'shared/modal_window'
 

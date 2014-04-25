@@ -40,6 +40,9 @@ class Document < ActiveRecord::Base
   # Согласования
   has_many :conformations, dependent: :destroy
 
+  # Уведомления
+  has_many :notifications, dependent: :destroy
+
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
   belongs_to :approver, class_name: 'User'
@@ -51,14 +54,6 @@ class Document < ActiveRecord::Base
   belongs_to :recipient_organization, class_name: 'Organization'
 
   belongs_to :flow, class_name: 'Documents::Flow'
-
-  # TODO: refactor this
-  has_and_belongs_to_many :documents,
-                          class_name: "Document",
-                          uniq: true,
-                          join_table: "document_relations",
-                          foreign_key: "document_id",
-                          association_foreign_key: "relational_document_id"
 
   accepts_nested_attributes_for :document_attached_files, allow_destroy: true
   accepts_nested_attributes_for :attached_documents,
@@ -97,6 +92,7 @@ class Document < ActiveRecord::Base
   scope :draft,    -> { where(state: 'draft') }
   scope :prepared,  -> { where(state: 'prepared') }
   scope :approved,  -> { where(state: 'approved') }
+  scope :trashed,  -> { where(state: 'trashed') }
 
   scope :not_draft, -> { where { state.not_eq('draft') } }
 
@@ -123,6 +119,8 @@ class Document < ActiveRecord::Base
   }
   scope :inbox, ->(org) { to(org).passed_state('sent') }
 
+  scope :with_notifications_for, -> (user) {includes(:notifications).where("notifications.user_id = #{user.id}")}
+
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
 
@@ -147,12 +145,6 @@ class Document < ActiveRecord::Base
     "#{Document.serial_number_for(self)} — #{title}"
   end
 
-  # TODO-justvitalius: please, get it ffrom here
-  # actual methods for one instance of Model
-  def single_applicable_actions
-    %w(edit) if %w(draft prepared).include?(accountable.current_state)
-  end
-
   # only actual states which shows to user
   def sorted_states
     accountable.state_machine.class.states - %w(trashed unsaved)
@@ -175,6 +167,10 @@ class Document < ActiveRecord::Base
 
   def approved
     document_transitions.exists?(to_state: 'approved')
+  end
+
+  def trashed
+    document_transitions.exists?(to_state: 'trashed')
   end
 
   def prepared
@@ -215,6 +211,9 @@ class Document < ActiveRecord::Base
     conformations.map(&:user)
   end
 
+  # Возвращает true если все пользователи согласовали документ
+  # @example
+  #   doc.approvable?
   def approvable?
     (conformers.count == conformations.count) && conformations.pluck(:conformed).all?
   end
@@ -223,18 +222,57 @@ class Document < ActiveRecord::Base
     "#{id}"
   end
 
-
-
   #  обнуляем все согласования
   def clear_conformations
     conformations.destroy_all
   end
 
+  # Удаляем нотификацию о текущем документе для всех пользователей (или конкретного пользователя)
+  # @param options
+  #   - @param for [User] Для какого пользователя удалить
+  # @example
+  #   doc.clear_notifications # для всех
+  #   doc.clear_notifications for: current_user # только для текущего пользователя
+  # @see User
+  def clear_notifications options = {}
+    (options[:for] ? notifications.where("user_id = #{options[:for].id}") : notifications).destroy_all
+  end
+
+  def pdf_link
+    "/system/documents/document_#{id}.pdf"
+  end
+
+  # Посылаем уведомления
+  # @param options
+  #   - @param only [Array] каким типам интересантов посылать. По-умолчанию: [:approver, :executor, :creator, :conformers]
+  #   - @param except [Array] каким типам интересантов не посылать. По-умолчанию: []
+  #   - @param exclude [Array] of [User] каким пользователям не посылать. По-умолчанию: []
+  # @example
+  #   doc.notify_interested only: [:approver], exclude: current_user # Посылаем уведомление только контрольному лицу, если контрольное лицо не текущий юзер
+  #   doc.notify_interested except: [:creator], exclude: doc.creator # Посылаем уведомление согласующим, исполнителю и контрольному лицу; если кто-то из них создатель - ему не посылаем
+  # @see User
+  def notify_interested options = {}
+    # Options defaults
+    options.reverse_merge! only: [:approver, :executor, :creator, :conformers], except: [], exclude: []
+    
+    # Оборачиваем параметры в массивы, если переданы просто символами
+    options.each {|k, option| options[k] = [option] unless option.class == Array}
+
+    # Убираем те типы, которые не нужны
+    options[:only].reject! {|type| options[:except].include? type}
+
+    interested = []
+
+    interested.concat(conformers.to_a) if options[:only].include? :conformers # Добавляем согласующих
+    interested << approver if options[:only].include? :approver # Добавляем контрольное лицо
+    interested << executor if options[:only].include? :executor # Добавляем исполнителя
+
+    interested.reject! {|user| options[:exclude].include? user} # Не отправляем уведомления тем, кто в списке exclude
+
+    interested.uniq.each { |user| user.notifications.create(document_id: id) }
+  end
 
   private
-
-
-
   # Запрещаем удаление "извне"
   # Вместо destroy используйте destroy_by
   #
@@ -258,14 +296,14 @@ class Document < ActiveRecord::Base
 
   # TODO: remove this nightmare
   def create_png
-    path = "public/system/documents/"
+    path = "public/#{pdf_link}"
 
     pdf = DocumentPdf.new(self, 'show')
-    pdf.render_file "#{path}document_#{id}.pdf"
-    pdf = Magick::Image.read("#{path}document_#{id}.pdf").first
+    pdf.render_file path
+    pdf = Magick::Image.read(path).first
     thumb = pdf.scale(400, 520)
 
     Dir.mkdir(path) unless File.exist?(path)
-    thumb.write "#{path}document_#{id}.png"
+    thumb.write "public/system/documents/document_#{id}.png"
   end
 end

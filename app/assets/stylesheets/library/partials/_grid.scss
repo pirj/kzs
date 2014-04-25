@@ -2,11 +2,37 @@
 // Grid system
 // --------------------------------------------------
 
-// Set the container width, and override it for fixed navbars in media queries
-.container {
-  height: 100%;
-  @include container-fixed();
+// Set global container for grid
+// Because of html have sidebar with animations
+.page{
+  padding-left: $sidebar-width-closed;
+  min-width: $screen-default-width;
+  @include transition(.2s ease-in-out);
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
 }
+
+.sidebar.m-open ~ .page{
+  @include transition(.2s ease-in-out);
+  -webkit-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  -moz-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  -o-transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+  transform: translateX($sidebar-width-opened - $sidebar-width-closed);
+}
+
+
+
+// Set the container width, and override it for fixed navbars in media queries
+.container, .container-lefted{
+  height: 100%;
+  @include transition(width .3s ease-in-out);
+}
+
+.container { @include container-fixed(); }
+.container-lefted { @include container-lefted(); }
+
 .content-container {
   @include container-fixed();
 }
@@ -92,10 +118,16 @@
 //
 // Note that `.col-sm-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
-@media (min-width: $screen-sm-min) {
-  .container {
-    width: $container-sm;
+//
+//
+// по умолчанию media был установлен в $screen-sm-min
+// в целях стилизации всех элементов сетки к единому варианту
+// делаем все сетки одинакового размера
+@media (min-width: $grid-float-breakpoint) {
+  .container, .container-lefted  {
+    // выключаем размер контейнера по умолчанию для маленьких экранов
+    // width: $container-sm;
+    width: $container-md;
   }
 
   @include make-grid-columns-float(sm);
@@ -112,9 +144,13 @@
 //
 // Note that `.col-md-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
-@media (min-width: $screen-md-min) {
-  .container {
+//
+//
+// по умолчанию media был установлен в $screen-md-min
+// в целях стилизации всех элементов сетки к единому варианту
+// делаем все сетки одинакового размера
+@media (min-width: $grid-float-breakpoint) {
+  .container, .container-lefted  {
     width: $container-md;
   }
 
@@ -132,9 +168,8 @@
 //
 // Note that `.col-lg-12` doesn't get floated on purpose--there's no need since
 // it's full-width.
-
 @media (min-width: $screen-lg-min) {
-  .container {
+  .container, .container-lefted {
     width: $container-lg;
   }
 

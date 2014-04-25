@@ -19,6 +19,7 @@ module Kzs
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/models/concerns)
     config.autoload_paths += %W(#{config.root}/app/controllers/concerns)
+    config.autoload_paths += %W["#{config.root}/lib/**/"]
     #config.autoload_paths += %W(#{config.root}/app/models/documents)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
@@ -74,8 +75,11 @@ module Kzs
     
     # Enable the asset pipeline
     config.assets.enabled = true
-    
-    config.assets.initialize_on_precompile = false
+
+    # чтобы assets правильно слипались выставить в true
+    # чтобы вместо .class __subclass{}
+    # было .class__subclass{}
+    config.assets.initialize_on_precompile = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
@@ -88,20 +92,13 @@ module Kzs
       g.test_framework :rspec
     end
 
+    mail_conf_path = 'config/mail.yml'
+    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path).symbolize_keys : {}
 
-
-    config.action_mailer.default_url_options = { host: "sakedev.kzsspb.ru" }
+    # TODO: move to mail.yml
+    config.action_mailer.default_url_options = { host: "cyclonelabs.net" }
     config.action_mailer.delivery_method = :smtp
 
-    config.action_mailer.smtp_settings = YAML::load_file('config/mail.yml').symbolize_keys
-    # {
-    #   address:        "aristotle.krivenko.ru",
-    #   port:           25, 
-    #   domain:         'krivenko.ru',
-    #   authentication: :plain,
-    #   user_name:      "test@cyclonelabs.com",
-    #   password:       "jNYVIFXrztK7H9Bk",
-    #   enable_starttls_auto: true
-    # }
+    config.action_mailer.smtp_settings = mail_config
   end
 end

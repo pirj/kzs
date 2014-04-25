@@ -37,6 +37,7 @@
 //@import "partials/jumbotron";
 //@import "partials/thumbnails";
 @import "partials/alerts";
+@import "partials/confirm-windows";
 @import "partials/progress-bars";
 @import "partials/popover";
 //@import "partials/list-group";
@@ -59,23 +60,14 @@
 @import "partials/responsive-utilities";
 
 // Plugins classes
-@import 'plugins/chosen';
-@import 'plugins/jcrop';
-@import 'plugins/datepicker';
-@import 'plugins/nested-forms';
+//@import 'plugins/chosen';
+//@import 'plugins/jcrop';
+//@import 'plugins/datepicker';
+//@import 'plugins/nested-forms';
+@import 'plugins/*';
 
 // Library page styles
-@import "pages/library";
-@import "pages/docs";
-@import "pages/loginpage";
-@import "pages/dashboard";
-@import "pages/errors";
+@import 'pages/*';
 
 // Widgets classes
-@import "widgets/user-bar";
-@import "widgets/doc-state";
-@import "widgets/task";
-@import "widgets/toggle-switch";
-@import "widgets/document";
-@import "widgets/document";
-@import "widgets/confirmation";
+@import 'widgets/*';

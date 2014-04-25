@@ -37,12 +37,12 @@ module TasksHelper
   #
   #def cause(task)
   #  if task.task_list && task.task_list.document_id
-  #    link_to "Распоряжение", document_path(task.task_list.document_id)
+  #    link_to "Предписание", document_path(task.task_list.document_id)
   #  elsif task.task_list && task.task_list.statement_id
   #    link_to "Лист замечаний", "#"
   #  else
   #    nil
   #  end
   #end
-    
+
 end

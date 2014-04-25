@@ -77,4 +77,4 @@
   - unless resource.task_input_disable_status(current_organization.id)
     = link_to 'Создать Акт', new_documents_report_path(order_id: resource.id), class: "btn btn-primary js-orders-new-report-btn #{css_class}"
 
-  = render 'documents/documents/list', collection: history
+  = render 'documents/documents/list', collection: history, title: 'История распоряжений и актов:'

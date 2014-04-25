@@ -41,6 +41,7 @@
     color: darken($brand-primary, 10%);
   }
 }
+
 .text-warning {
   color: $state-warning-text;
   &:hover {
@@ -48,10 +49,17 @@
   }
 }
 
-.text-danger {
+.text-orange{
+  color: $color-orange;
+  &:hover {
+    color: darken($color-orange, 10%);
+  }
+}
+
+.text-danger, .text-red {
   color: $color-red;
 }
-.text-success {
+.text-success, .text-green {
   color: $state-success-text;
   &:hover {
     color: darken($state-success-text, 10%);
@@ -61,6 +69,13 @@
   color: $state-info-text;
   &:hover {
     color: darken($state-info-text, 10%);
+  }
+}
+
+.text-gray{
+  color: $color-gray;
+  &:hover {
+    color: darken($color-gray, 10%);
   }
 }
 

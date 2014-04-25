@@ -14,10 +14,13 @@ FactoryGirl.define do
     #   instance.creator = FactoryGirl.create(:user, organization: instance.sender_organization)
     # end
 
-    # Создаем распоряжение и обязательно привязываем по отправителю-получателю
+    # Создаем Предписание и обязательно привязываем по отправителю-получателю
     # Отправитель распоряжения является получателем
     after(:build) do |instance, ev|
       instance.order = FactoryGirl.create(:order)
+      instance.order.transition_to!(:prepared)
+      instance.order.transition_to!(:approved)
+      instance.order.transition_to!(:sent)
       instance.document = FactoryGirl.build(:simple_document,
                                             sender_organization: instance.order.recipient_organization,
                                             recipient_organization: instance.order.sender_organization

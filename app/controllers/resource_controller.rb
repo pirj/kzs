@@ -6,8 +6,7 @@ class ResourceController < ApplicationController
                 :attributes,
                 :form_attributes,
                 :sort_column,
-                :sort_direction,
-                :current_organization_users
+                :sort_direction
 
   respond_to :html, :js, :json
   has_scope :page, default: 1, only: [:index]
@@ -43,8 +42,5 @@ class ResourceController < ApplicationController
     assoc
   end
 
-  def current_organization_users
-    @current_organization_users ||=
-        current_organization.users.order('first_name ASC')
-  end
+
 end

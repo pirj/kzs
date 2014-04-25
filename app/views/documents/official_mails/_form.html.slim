@@ -1,4 +1,3 @@
-/ TODO-justvitalius: подсказки вынести в I18n
 = simple_nested_form_for resource, \
                   html: { class: 'form-horizontal', multiple: true }, \
                   defaults: { input_html: {class: 'form-control'}, \
@@ -18,20 +17,16 @@
 
     = doc.association :executor, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }, label_html: { title: 'Лицо, указанное в документе, как исполнитель' }, wrapper: :inline_hint
 
-    .form-group
-      .col-sm-2.col-sm-offset-2
-        .checkbox
-          label.control-label
-            = check_box_tag :is_conformer?, nil, false, class: 'js-active-input', data: { target: 'new-mail-conformer' }
-            span.js-label-hint.label-icon-hint title='Лица, согласующие документ перед его подписанием'
-              | Cогласовать с
-
-      .col-sm-6
-        /= select_tag :conformer, options_from_collection_for_select(current_organization_users, :id, :first_name_with_last_name), class: 'js-chosen', data: { target: 'new-mail-conformer' }, disabled: 'disabled' if current_organization_users
-        = doc.select :conformer_ids, current_organization_users.map{ |u| [u.first_name_with_last_name, u.id] }, {include_blank: false}, { class: 'js-chosen', disabled: :disabled, data: { target: 'new-mail-conformer' }, multiple: true } if current_organization_users if current_organization_users
+    = doc.association :conformers, as: :select_with_checkbox, \
+                            collection: current_organization_users, \
+                            label_method: :first_name_with_last_name, \
+                            selects_checkbox: { text: 'Согласовать с', hint: 'Лица, согласующие документ перед его подписанием' }, \
+                            label: false, \
+                            input_html: { multiple: true }, \
+                            input_wrapper_html: { class: 'col-sm-offset-2 col-sm-8' }
 
     /= doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, input_html: { class: 'js-chosen' }, label_html: { title: 'Лицо, подписывающее документ. Генеральный директор либо уполномоченные лица' }, wrapper: :inline_hint
-    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, default: current_organization.director.first_name_with_last_name, input_html: { class: 'js-chosen' }
+    = doc.association :approver, collection: current_organization_users, label_method: :first_name_with_last_name, selected: current_organization.director_id, input_html: { class: 'js-chosen' }
 
     /= f.association :recipients, label_html: { title: 'Организации-получатели документа' }, wrapper: :inline_hint, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' } }
     = f.association :recipients, input_html: { class: 'js-chosen', data: { placeholder: 'выберите одну организацию' } }

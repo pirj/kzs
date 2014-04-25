@@ -41,7 +41,7 @@ module Documents
 
     def link_to_pdf(options={})
       _object = (object.respond_to?(:document)) ? object.document : object
-      h.link_to "/system/documents/document_#{_object.id}.pdf", class: 'img-bordered', target: '_blank' do
+      h.link_to h.polymorphic_path([:pdf, _object.accountable]), class: 'img-bordered img-whited', target: '_blank' do
         h.image_tag("/system/documents/document_#{_object.id}.png", options)
       end
     end
@@ -62,10 +62,18 @@ module Documents
     end
 
     def actions
-      collection = object.accountable.applicable_states || []
-      single = object.accountable.single_applicable_actions || []
+      @actions = actions_for(object.accountable)
       # удаляем действие удалить, потому что оно как статус не нужно во вьюхах
-      (collection + single).reject{ |a| a=='trashed' }.compact.to_s
+      @actions.delete('trashed')
+      @actions.compact.to_s
+    end
+
+    # Этот код вынесен из модели, затем перенесем в объектную нотацию.
+    def actions_for(accountable)
+      array = %w(edit reply) + accountable.applicable_states
+      array.delete('reply') unless accountable.instance_of?(Documents::OfficialMail) && incoming?
+      array.delete('edit') unless %w(draft prepared).include?(object.state)
+      array
     end
 
     def state popover_position = :left
@@ -91,7 +99,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:first_name_with_last_name), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
         end
       end
     end
@@ -194,6 +202,8 @@ module Documents
       DateFormatter.new(object.deadline)
     end
 
-
+    def incoming?
+      h.current_user.organization == object.recipient_organization
+    end
   end
 end
