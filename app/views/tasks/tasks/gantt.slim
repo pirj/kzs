@@ -15,7 +15,8 @@ a#month href='#' месяц
 a#day href='#' день
 a#year href='#' год
 br
-/a#new-task href='#' Новая задача
+
+= link_to 'new task blah', new_task_path, remote: true
 
 .js-new-task.modal-simple.modal
   - resource = Tasks::Task.new

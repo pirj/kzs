@@ -1,0 +1,5 @@
+$('.js-new-task').html(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
+$('.js-new-task').modal('toggle');
+$('.js-new-task').find('.js-datepicker').datepicker(global.datepicker)
+$('.js-new-task').find('.js-chosen').chosen(global.chosen)
+$('.modal-backdrop.in').hide();

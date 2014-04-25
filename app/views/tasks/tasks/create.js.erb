@@ -1,2 +1,6 @@
-console.log('responce received')
-$('.js-form').html("<%= j render 'tasks/tasks/form', remote: true, resource: Tasks::Task.new %>")
+console.log('responce received');
+
+window.app.ganttView.addTask(<%= resource.to_json.html_safe %>);
+newFormContainer = $('.js-new-task');
+newFormContainer.modal('toggle');
+newFormContainer.empty();
