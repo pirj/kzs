@@ -103,7 +103,7 @@ window.app.table_filter =
     # имя инпутов,которые будут добавляться к форме
     added_field_name = "#{@.form.container}-added-hidden-fields".replace('.', '')
     # берем все инпуты из форм кроме 1) уже добавленных и 2) исключая кнопки сабмита
-    fields = $("#{@.form.container} form").not(e.target).find('input, select').not("[name='utf8'], [type='submit'], .#{added_field_name}")
+    fields = $("#{@.form.container} form").not(e.target).find('input, select').not("[name='utf8'], [type='submit'], input[type='checkbox']:not(:checked),.#{added_field_name}")
     html = []
     _.each(fields, (el) ->
       window.$el = $(el)
