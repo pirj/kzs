@@ -48,27 +48,29 @@ module Documents::AccountableController
   end
 
   def update
-    old_resource = resource.dup
     old_document = resource.document.dup
+    old_conformers = resource.conformers.to_a
 
     update! do |success, failure|
       success.html do
 
         # Отправляем письмо об изменениях
-        # - всем старым согласующим
-        # - старому исполнителю
-        # - новому исполнителю
-        # - старому контрольному лицу
-        # - новому контрольному лицу
-        mailing_list = (old_document.conformers.to_a.concat(resource.conformers.to_a) << old_document.executor << resource.executor << old_document.approver << resource.approver).uniq
+        begin
+          mailing_list = old_conformers + resource.conformers.to_a # всем старым и новым согласующим
+          mailing_list << old_document.executor << resource.executor # старому и новому исполнителю
+          mailing_list << old_document.approver << resource.approver # старому и новому контрольному лицу
+          mailing_list.uniq!
 
-        mailing_list.each do |user|
-          NotificationMailer.document_changed(user, resource.document, old_document).deliver!
+          mailing_list.each do |user|
+            NotificationMailer.document_changed(user, resource.document, old_document, old_conformers).deliver!
+          end
+        rescue
+          flash[:error] = 'Документ изменен, но не удалось отправить один или несколько e-mail уведомлений о статусе письма.'
         end
 
         # Посылаем уведомления всем, кроме создателя и текущего пользователя
         resource.clear_notifications
-        resource.reload.notify_interested except: :creator, exclude: current_user, include: old_list, mailer: NotificationMailer, mail: "document_changed"
+        resource.reload.notify_interested except: :creator, exclude: current_user
         
         resource.transition_to!(params[:transition_to], default_metadata)
         redirect_to documents_path

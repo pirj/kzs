@@ -3,7 +3,7 @@
   <title>САКЭ КЗС. Документ изменился</title>
 </head>
 <body>
-  Документ <a href="#">«<%= @document.title %>»</a> был изменен. Состав изменений:
+  Документ <a href="<%= documents_document_url(@document) %>">«<%= @document.title %>»</a> был изменен. Состав изменений:
   <br/>
 
   <ul>
@@ -20,8 +20,8 @@
     <% end %>
 
     <% if @conformers_changed %>
-      <% old_conformers = @old_document.conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
-      <% conformers = @document.conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
+      <% old_conformers = @old_conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
+      <% conformers = @document.conformers.to_a.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
 
       <li>у документа изменился состав согласующих: вместо <%= old_conformers %> стали <%= conformers %></li>
     <% end %>
@@ -36,6 +36,6 @@
   </ul>
   <br/>
 
-  <a href="#">Посмотреть в САКЭ</a>
+  <a href="<%= documents_document_url(@document) %>">Посмотреть в САКЭ</a>
 </body>
 </html>
