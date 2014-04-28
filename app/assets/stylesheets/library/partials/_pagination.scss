@@ -77,6 +77,13 @@
   }
   .next a, .prev a{
     color:#3b5369;
+    font-weight: bold;
+  }
+  .next i {
+    margin-left: 10px;
+  }
+  .prev i {
+    margin-right: 10px;
   }
 }
 
