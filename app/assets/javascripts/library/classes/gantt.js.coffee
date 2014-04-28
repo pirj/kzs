@@ -43,8 +43,8 @@ class Gantt
       )
 
       request.done (data, textStatus, jqXHR) =>
-        console.log('all right')
-        console.log(data)
+#        console.log('all right')
+#        console.log(data)
         return
 
       request.fail (jqXHR, textStatus, errorThrown) ->

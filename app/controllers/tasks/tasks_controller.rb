@@ -40,13 +40,13 @@ class Tasks::TasksController < ResourceController
         id: resource.id,
         title: resource.title,
         description: resource.text,
-        start_date: resource.started_at.localtime.strftime("%d-%m-%Y"),
+        start_date: resource.started_at.try(:localtime).try(:strftime, "%d-%m-%Y"),
         duration: days_duration_for(resource)
     }.to_json.html_safe
   end
 
   def days_duration_for(task)
-    (task.finished_at - task.started_at).to_i/1.day
+    (task.finished_at - task.started_at).to_i/1.day if task.started_at && task.finished_at
   end
 
 end
