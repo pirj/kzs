@@ -7,6 +7,9 @@ class NotificationMailer < ActionMailer::Base
     @old_document = old_document
     @old_conformers = old_conformers
 
+    @old_conformers_names = @old_conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ')
+    @conformers_names = conformers = @document.conformers.to_a.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ')
+
     @title_changed = true unless document.title == old_document.title
     @body_changed = true unless document.body == old_document.body
     @creator_changed = true unless document.creator_id == old_document.creator_id
@@ -14,7 +17,11 @@ class NotificationMailer < ActionMailer::Base
     @executor_changed = true unless document.executor_id == old_document.executor_id
     @approver_changed = true unless document.approver_id == old_document.approver_id
 
-    mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
+    if @title_changed || @body_changed || @creator_changed || @conformers_changed || @executor_changed || @approver_changed
+      mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
+    else
+      false
+    end
   end
 
   def document_conformed document
