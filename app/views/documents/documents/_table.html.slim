@@ -105,15 +105,15 @@
             h3 Согласованность
             .form-group.b-offset-sm
               = f.label :conformations_conformed_in, class: 'checkbox-inline' do
-                = check_box_tag 'q[conformations_conformed_in][]', true, [*params[:q][:conformations_conformed_in]].include?('true')
+                = check_box_tag 'q[conformations_conformed_in][]', true, ([*params[:q][:conformations_conformed_in]].include?('true') if params.has_key?(:q))
                 span Согласованы
 
               = f.label :conformations_conformed_in, class: 'checkbox-inline' do
-                = check_box_tag 'q[conformations_conformed_in][]', false, [*params[:q][:conformations_conformed_in]].include?('false')
+                = check_box_tag 'q[conformations_conformed_in][]', false, ([*params[:q][:conformations_conformed_in]].include?('false') if params.has_key?(:q))
                 span Отклонены
 
               = f.label :conformations_conformed_in, class: 'checkbox-inline' do
-                = check_box_tag 'q[conformers_id_present]', true, [*params[:q][:conformers_id_present]].include?('true')
+                = check_box_tag 'q[conformers_id_present]', true, ([*params[:q][:conformers_id_present]].include?('true') if params.has_key?(:q))
                 span Ожидают согласования
 
             = table_filter_buttons(f)
