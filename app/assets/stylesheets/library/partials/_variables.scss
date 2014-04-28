@@ -61,6 +61,7 @@ $color-cloud-darker: #bdc3c7;
 
 $color-gray: #95a5a6;
 $color-gray-darker: #7f8c8d;
+$color-gray-lighter: #e6e6e6;
 
 // Scaffolding
 // -------------------------
@@ -470,7 +471,7 @@ $nav-tabs-vertical-padding:                 0.65em;
 $nav-tabs-horizontal-padding:               1.4em;
 
 // Pills
-$nav-pills-container-bg:                    $color-gray;
+$nav-pills-container-bg:                    $color-gray-lighter;
 $nav-pills-container-padding:               $padding-base-horizontal $padding-base-vertical!default;
 $nav-pills-link-padding:                    $btn-vertical-padding $btn-horizontal-padding !default;
 $nav-pills-border-radius:                   $border-radius-base !default;
