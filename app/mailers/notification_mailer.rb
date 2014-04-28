@@ -14,13 +14,11 @@ class NotificationMailer < ActionMailer::Base
     @executor_changed = true unless document.executor_id == old_document.executor_id
     @approver_changed = true unless document.approver_id == old_document.approver_id
 
-    type = case @document.accountable_type
-      when 'Documents::Report' then 'акте'
-      when 'Documents::OfficialMail' then 'письме'
-      when 'Documents::Order' then 'предписании'
-      else 'документе'
-    end
+    mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
+  end
 
-    mail to: user.email, subject: "САКЭ КЗС. Изменение в #{type} «#{document.title}»"
+  def document_conformed document
+    @document = document
+    mail to: document.approver.email, subject: "САКЭ КЗС. Документ «#{document.title}» согласован и готов к подписи"
   end
 end
