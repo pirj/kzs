@@ -25,7 +25,6 @@ class Tasks::TasksController < ResourceController
     super
   end
 
-
   private
 
   def collection_url
