@@ -1,18 +1,41 @@
 <html>
 <head>
-  <title>САКЭ КЗС. Изменение в письме/акте/предписании ххх</title>
+  <title>САКЭ КЗС. Документ изменился</title>
 </head>
 <body>
-  Документ №ххх(линк) был изменен. Состав изменений:
-  — у документа появился другой составитель: вместо ХХХ стал YYY
-  — у документа изменился состав согласующих: вместо A, B, C стали X, Y, Z
-  — у документа появился другой исполнитель: вместо ХХХ стал YYY
-  — у документа появилось другое контрольное лицо: вместо ХХХ стал YYY
+  Документ <a href="#">«<%= @document.title %>»</a> был изменен. Состав изменений:
+  <br/>
+
+  <ul>
+    <% if @title_changed %>
+      <li>у документа изменился заголовок</li>
+    <% end %>
+
+    <% if @body_changed %>
+      <li>у документа изменился текст</li>
+    <% end %>
+
+    <% if @creator_changed %>
+      <li>у документа появился другой составитель: вместо <%= @old_document.creator.first_name_with_last_name %> стал <%= @document.creator.first_name_with_last_name %></li>
+    <% end %>
+
+    <% if @conformers_changed %>
+      <% old_conformers = @old_document.conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
+      <% conformers = @document.conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ') %>
+
+      <li>у документа изменился состав согласующих: вместо <%= old_conformers %> стали <%= conformers %></li>
+    <% end %>
+
+    <% if @executor_changed %>
+      <li>у документа появился другой исполнитель: вместо <%= @old_document.executor.first_name_with_last_name %> стал <%= @document.executor.first_name_with_last_name %></li>
+    <% end %>
+
+    <% if @approver_changed %>
+      <li>у документа появилось другое контрольное лицо: вместо <%= @old_document.approver.first_name_with_last_name %> стал <%= @document.approver.first_name_with_last_name %></li>
+    <% end %>
+  </ul>
+  <br/>
 
   <a href="#">Посмотреть в САКЭ</a>
 </body>
 </html>
-
-
-
-
