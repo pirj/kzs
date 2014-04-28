@@ -70,7 +70,8 @@ namespace :excel do
         username: row[6],
         password: row[7],
         password_confirmation: row[8],
-        sys_user: row[9]
+        sys_user: row[9],
+        email: row[10]
       })
     end
     puts "Users imported"
