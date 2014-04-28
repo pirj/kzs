@@ -186,19 +186,19 @@ $ ->
   user_conform = new ConformingView()
 
 
-  $('.js-hello').on('submit', (e) ->
-    e.preventDefault()
+  $('.js-table-filter-form form').on('submit', (e) ->
+#    e.preventDefault()
 
-    window.fields = $('.js-hello').not(e.target).find('input, select').not('[name="utf8"], [type="submit"]')
+    window.fields = $('.js-table-filter-form form').not(e.target).find('input, select').not('[name="utf8"], [type="submit"]')
     html = []
     _.each(fields, (el) ->
       window.$el = $(el)
       name = $el.prop('name')
       type = $el.prop('type')
       value = $el.val()
-      html.push "<input type='#{type}' name='#{name}' value='#{value}' />"
+      html.push "<input type='#{type}' name='#{name}' value='#{value}' />" if value
     )
     console.log html
-    $(e.target).append(html.join())
+    $(e.target).append(html.join(''))
     return true
   )
