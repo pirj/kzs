@@ -99,17 +99,24 @@
       tr = table_filter_chosen @search, 'document_type', :accountable_type_cont_any, document_filter_document_types, 'document-table-filter-document-type'
       tr
         th.js-table-filter-form.form-horizontal data-target='document-table-filter-conformations' colspan=8
-          /= search_form_for @search,  url: documents_documents_path, \
-          /                                  html: { class: 'form-horizontal', data: { url: search_documents_documents_path }, multiple: true } \
-          /                                  do |f|
-          /  h3 Согласованность
-          /  .form-group
-          /    = f.label :conformations_conformed_in, class: 'checkbox-inline' do
-          /      = check_box_tag 'q[conformations_conformed_in][]', true, false
-          /      span TRUE
-          /
-          /  .btn-block.b-offset-sm
-          /    = f.submit
+          = search_form_for @search,  url: documents_documents_path, \
+                                            html: { class: 'form-horizontal', data: { url: search_documents_documents_path }, multiple: true } \
+                                            do |f|
+            h3 Согласованность
+            .form-group.b-offset-sm
+              = f.label :conformations_conformed_in, class: 'checkbox-inline' do
+                = check_box_tag 'q[conformations_conformed_in][]', true, [*params[:q][:conformations_conformed_in]].include?('true')
+                span Согласованы
+
+              = f.label :conformations_conformed_in, class: 'checkbox-inline' do
+                = check_box_tag 'q[conformations_conformed_in][]', false, [*params[:q][:conformations_conformed_in]].include?('false')
+                span Отклонены
+
+              = f.label :conformations_conformed_in, class: 'checkbox-inline' do
+                = check_box_tag 'q[conformers_id_present]', true, [*params[:q][:conformers_id_present]].include?('true')
+                span Ожидают согласования
+
+            = table_filter_buttons(f)
 
       tr = table_filter_chosen @search, 'state', :state_cont_any, document_filter_states, 'document-table-filter-state'
 
