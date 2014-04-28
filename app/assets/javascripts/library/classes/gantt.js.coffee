@@ -31,7 +31,28 @@ class Gantt
 #    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
 ##      console.log(item)
 #      that.createTask(item)
+    gantt.attachEvent "onTaskDblClick", (id, e) ->
+      e.preventDefault()
+      request = $.ajax(
+        url: "/tasks/#{id}/edit"
+        type: 'GET'
+        dataType: "json"
+#      data: (if type=='POST' then {'data': data} else '')
+      )
 
+      request.done (data) =>
+        console.log('all right')
+        console.log(data)
+        return
+
+      request.fail (status) ->
+        console.log('request failed ' + status)
+        return
+
+      e.preventDefault()
+      #запрос на id/edit
+
+#      false
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
 #      console.log(item)
       that.editTask(item)
@@ -45,6 +66,7 @@ class Gantt
     $(document).on "click", "#day", ->
       that.resizeGant('day')
       return
+
 
 
 
