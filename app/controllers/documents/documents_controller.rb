@@ -9,7 +9,7 @@ class Documents::DocumentsController < ResourceController
     when 'orders' then scope.orders
     when 'mails' then scope.mails
     when 'reports' then scope.reports
-    when 'unread' then scope.unread_by(controller.current_user)
+    when 'unread' then scope.inbox(controller.current_user.organization).unread_by(controller.current_user)
     else
       scope
     end
