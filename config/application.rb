@@ -93,12 +93,12 @@ module Kzs
     end
 
     mail_conf_path = 'config/mail.yml'
-    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path).symbolize_keys : {}
+    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path) : {}
 
     # TODO: move to mail.yml
-    config.action_mailer.default_url_options = { host: "cyclonelabs.net" }
+    config.action_mailer.default_url_options = { host: mail_config['host'] }
     config.action_mailer.delivery_method = :smtp
 
-    config.action_mailer.smtp_settings = mail_config
+    config.action_mailer.smtp_settings = mail_config['smtp'].symbolize_keys!
   end
 end
