@@ -107,9 +107,10 @@ $ ->
 
   # Initialize checkboxes by iCheck plugin
   if jQuery.fn.iCheck != undefined
-    $('input[type="checkbox"], input[type="radio"]').not('.js-icheck-off input').iCheck(
+    $('input[type="checkbox"], input[type="radio"]').not('.js-icheck-off input, .js-icheck-off').iCheck(
       checkboxClass: 'icheckbox_flat-green checkbox-inline'
       radioClass: 'iradio_flat-green radio-inline'
+      disabledClass: 'js-ichecked-input'
     )
 
 
@@ -183,3 +184,21 @@ $ ->
 
   # БЛОК АКТИВАЦИИ КЛАССОВ
   user_conform = new ConformingView()
+
+
+  $('.js-hello').on('submit', (e) ->
+    e.preventDefault()
+
+    window.fields = $('.js-hello').not(e.target).find('input, select').not('[name="utf8"], [type="submit"]')
+    html = []
+    _.each(fields, (el) ->
+      window.$el = $(el)
+      name = $el.prop('name')
+      type = $el.prop('type')
+      value = $el.val()
+      html.push "<input type='#{type}' name='#{name}' value='#{value}' />"
+    )
+    console.log html
+    $(e.target).append(html.join())
+    return true
+  )

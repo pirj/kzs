@@ -1,9 +1,55 @@
 / рисуем список документов с фильтрацией по столбцам
+= search_form_for @search,  url: documents_documents_path, \
+                                                html: { class: 'form-horizontal js-hello', multiple: true, method: :get} \
+                                                do |f|
+  h3 Согласованность
+
+  .form-group
+    = f.label :conformations_conformed_in, class: 'checkbox-inline' do
+      /= check_box_tag 'q[conformations_conformed_in][]', true, false
+      = f.check_box :conformations_conformed_in, {}, true, false
+      span TRUE
+
+  .btn-block.b-offset-sm
+    = f.submit
+
+
+= search_form_for @search,  url: documents_documents_path, \
+                                                html: { class: 'form-horizontal js-hello', multiple: true, method: :get} \
+                                                do |f|
+  h3 Согласованность
+
+  .form-group
+    = f.label :title_cont, class: 'checkbox-inline' do
+      /= check_box_tag 'q[conformations_conformed_in][]', true, false
+      = f.text_field :title_cont
+      span TRUE
+
+  .btn-block.b-offset-sm
+    = f.submit
+
+
+  = search_form_for @search,  url: documents_documents_path, \
+                                                  html: { class: 'form-horizontal js-hello', multiple: true, method: :get} \
+                                                  do |f|
+    h3 Согласованность
+
+    .form-group
+      = f.label :sender_organization_id_in, class: 'checkbox-inline' do
+        /= check_box_tag 'q[conformations_conformed_in][]', true, false
+        = f.text_field :sender_organization_id_in
+        span TRUE
+
+    .btn-block.b-offset-sm
+      = f.submit
+
+
+/ =======================================
 .row
   table.table.js-row-clickable.m-table-replacement.js-table-filter
     thead
-      = search_form_for @search,  url: documents_documents_path, \
-                                  html: { class: 'form-horizontal', data: { url: search_documents_documents_path } } \
+      = search_form_for @search,  url: documents_documents_path(params[:q]), \
+                                  html: { class: 'form-horizontal', data: { url: search_documents_documents_path }, multiple: true } \
                                   do |f|
 
         = hidden_field_tag :with_state, params[:with_state]
@@ -30,8 +76,8 @@
             .pull-right = resource_sortable_icon 'title', class: 'label label-sm label-icon'
 
           th.col-words-5 = table_filter_caption t('documents.table.list_attrs.type'), f.object, :accountable_type_cont_any, 'document-table-filter-document-type'
-          /th = table_filter_caption t('documents.table.list_attrs.conformation'), f.object, [:conformers_id_present, :conformations_conformed_in], 'document-table-filter-document-conformation'
-          th
+          th = table_filter_caption t('documents.table.list_attrs.conformation'), f.object, [:conformers_id_present, :conformations_conformed_in], 'document-table-filter-conformations'
+          /th
             .label.label-sm = t('documents.table.list_attrs.conformation')
           th = table_filter_caption t('documents.table.list_attrs.status'), f.object, :state_cont_any, 'document-table-filter-state'
 
@@ -51,6 +97,20 @@
         tr = table_filter_chosen f, 'recipient_organization', :recipient_organization_id_in, document_filter_organizations, 'document-table-filter-recipient-organization'
         tr = table_filter_text f, 'title', :title_cont, 'document-table-filter-title'
         tr = table_filter_chosen f, 'document_type', :accountable_type_cont_any, document_filter_document_types, 'document-table-filter-document-type'
+        tr
+          th.js-table-filter-form.form-horizontal data-target='document-table-filter-conformations' colspan=8
+            /= search_form_for @search,  url: documents_documents_path, \
+            /                                  html: { class: 'form-horizontal', data: { url: search_documents_documents_path }, multiple: true } \
+            /                                  do |f|
+            /  h3 Согласованность
+            /  .form-group
+            /    = f.label :conformations_conformed_in, class: 'checkbox-inline' do
+            /      = check_box_tag 'q[conformations_conformed_in][]', true, false
+            /      span TRUE
+            /
+            /  .btn-block.b-offset-sm
+            /    = f.submit
+
         tr = table_filter_chosen f, 'state', :state_cont_any, document_filter_states, 'document-table-filter-state'
 
 
