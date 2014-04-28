@@ -31,26 +31,29 @@ class Gantt
 #    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
 ##      console.log(item)
 #      that.createTask(item)
-    gantt.attachEvent "onTaskDblClick", (id, e) ->
+
+
+    gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #запрос на id/edit
       e.preventDefault()
       request = $.ajax(
         url: "/tasks/#{id}/edit"
         type: 'GET'
-        dataType: "json"
+        dataType: "script"
 #      data: (if type=='POST' then {'data': data} else '')
       )
 
-      request.done (data) =>
+      request.done (data, textStatus, jqXHR) =>
         console.log('all right')
         console.log(data)
         return
 
-      request.fail (status) ->
-        console.log('request failed ' + status)
+      request.fail (jqXHR, textStatus, errorThrown) ->
+        console.log('request failed ' + textStatus)
+        console.log(errorThrown)
         return
 
       e.preventDefault()
-      #запрос на id/edit
+
 
 #      false
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
@@ -130,7 +133,7 @@ class Gantt
 #      data: (if type=='POST' then {'data': data} else '')
     )
 
-    request.done (data) =>
+    request.done (data) ->
       gantt.parse(data)
       return
 
@@ -174,7 +177,7 @@ class Gantt
       return
 
   reloadGantt: () =>
-#    @.getTasks()                    #TODO: нужен ли повторный запрос?
+    @.getTasks()                    #TODO: нужен ли повторный запрос?
     gantt.render
 
 
