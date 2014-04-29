@@ -79,6 +79,18 @@
   }
 }
 
+
+.text-cyan{
+  color: $color-cyan;
+  &:hover {
+    color: darken($color-cyan, 10%);
+  }
+}
+
+.text-bold{
+  font-weight: bold;
+}
+
 // Alignment
 .text-left           { text-align: left !important; }
 .text-right          { text-align: right !important; }
