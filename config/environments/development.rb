@@ -7,10 +7,6 @@ Kzs::Application.configure do
 
   
   config.cache_classes = false
-  
-  mail_conf_path = 'config/mail.yml'
-  mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path) : {}
-  config.action_mailer.default_url_options = { host: mail_config['host'] }
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
