@@ -95,7 +95,6 @@ module Kzs
     mail_conf_path = 'config/mail.yml'
     mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path) : {}
 
-    # TODO: move to mail.yml
     config.action_mailer.default_url_options = { host: mail_config['host'] }
     config.action_mailer.delivery_method = :smtp
 
