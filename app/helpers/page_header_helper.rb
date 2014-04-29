@@ -2,10 +2,12 @@
 module PageHeaderHelper
   # render back btn for page header with left-arrow
   # 'path' — path to collection or resource
-  def header_back_btn path
+  # header_back_btn tasks_path
+  def header_back_btn path, opts={}
+    tooltip_title = opts.delete(:tooltip_title) || ''
     if path
       content_tag :li do
-        link_to path, class: 'btn btn-default m-back-btn' do
+        link_to path, class: 'btn btn-default m-back-btn js-label-hint', title: tooltip_title do
           content_tag(:span, nil, class: 'fa fa-arrow-left')+
           content_tag(:span, 'Назад')
         end
