@@ -49,6 +49,11 @@ GEM
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
     bcrypt (3.1.7)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     bourbon (3.1.8)
@@ -107,6 +112,7 @@ GEM
       sprockets (<= 2.11.0)
     daemons (1.1.9)
     database_cleaner (1.2.0)
+    debug_inspector (0.0.2)
     devise (3.2.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -384,6 +390,8 @@ DEPENDENCIES
   activeadmin
   amoeba
   awesome_nested_set
+  better_errors
+  binding_of_caller
   bootstrap-sass
   bullet
   cancan
