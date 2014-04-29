@@ -164,98 +164,105 @@ end
 namespace :documents do
   desc 'Create Mails, Orders and Reports. IMPORTANT: run after creating Users and Organizations.'
   task :create => :environment do
-    Document.delete_all
+    puts '______________________________'
+    puts 'Beginning of the creation of test documents. Please wait for several minutes.'
+    puts ' '
+    # запись немного странная, потому что метод destroy является приватным в модели Document.
+    Document.all.each{|d| d.send(:destroy)}
     Document.reset_pk_sequence
+    puts 'Documents destroyed'
 
-    Documents::OfficialMail.delete_all
+    DocumentTransition.destroy_all
+    DocumentTransition.reset_pk_sequence
+    puts 'Transition destroyed'
+
+    Documents::OfficialMail.destroy_all
     Documents::OfficialMail.reset_pk_sequence
+    puts 'Mails destroyed'
 
-    organizations_count = Organization.count
-    users_count         = User.count
-    
-    
-
-    20.times do |i|
-      sender_organization = Organization.find(rand(1..organizations_count))
-      d = Documents::OfficialMail.new
-      d.title = Populator.words(4)
-      d.body = Populator.sentences(30..50)
-      d.confidential = false
-      d.executor = sender_organization.users.shuffle.first
-      d.approver = sender_organization.users.shuffle.first
-      d.recipients << Organization.where('id != ?', sender_organization.id).last
-      d.recipient_organization = Organization.where('id != ?', sender_organization.id).last #to be deprecated
-      d.conformers << sender_organization.users.last
-      d.sender_organization = sender_organization
-      d.save!
-      d.transition_to!(:draft)
-      d.transition_to!(:prepared)
-    end
-    puts 'Mail created'
-
-    Documents::Order.delete_all
+    Documents::Order.destroy_all
     Documents::Order.reset_pk_sequence
-    TaskList.destroy_all
-    TaskList.reset_pk_sequence
-    Task.destroy_all
-    Task.reset_pk_sequence
+    puts 'Orders destroyed'
 
-    20.times do |i|
-      sender_organization = Organization.find(rand(1..organizations_count))
-      d = Documents::Order.new
-      d.title = Populator.words(4)
-      d.body = Populator.sentences(30..50)
-      d.confidential = false
-      d.executor = sender_organization.users.shuffle.first
-      d.approver = sender_organization.users.shuffle.first
-      d.recipient_organization = Organization.find(rand(1..organizations_count))
-      d.sender_organization = sender_organization
-      task_list = d.build_task_list
-      4.times do |t|
-        t = Task.new
-        t.task_list_id = task_list.id
-        t.title = Populator.words(2)
-        t.body = Populator.words(10)
-        t.completed = true
-        t.document_id = d.id
-        t.executor_organization_id = d.recipient_organization
-        t.sender_organization_id = d.sender_organization
-        t.deadline = DateTime.now + rand(1..6).months
-        t.save!
-        task_list.tasks << t
+
+
+    [:mail, :order].each do |type|
+      puts "Creating #{type}s started"
+      20.times do |i|
+        sender = Organization.find(Organization.pluck(:id).sample)
+        document = FactoryGirl.build(:document,
+                                     sender_organization: sender,
+                                     recipient_organization: Organization.find(Organization.pluck(:id).sample),
+                                     approver: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     executor: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     creator: sender.users.shuffle.first  || FactoryGirl.create(:user, organization: sender)
+        )
+        accountable = FactoryGirl.create(type.to_sym, document: document)
+        accountable.transition_to! :draft
+        accountable.transition_to! :prepared
+        accountable.transition_to! :approved
+        print '.'
       end
-      task_list.save!
-      
-      d.deadline = DateTime.now + rand(1..6).months
 
-      d.save!
-      d.transition_to!(:draft)
-      d.transition_to!(:prepared)
+      20.times do |i|
+        sender = Organization.find(Organization.pluck(:id).sample)
+        document = FactoryGirl.build(:document,
+                                     sender_organization: sender,
+                                     recipient_organization: Organization.find(Organization.pluck(:id).sample),
+                                     approver: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     executor: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     creator: sender.users.shuffle.first  || FactoryGirl.create(:user, organization: sender)
+        )
+        accountable = FactoryGirl.create(type.to_sym, document: document)
+        accountable.transition_to! :draft
+        accountable.transition_to! :prepared
+        print '.'
+      end
+
+      5.times do |i|
+        sender = Organization.find(Organization.pluck(:id).sample)
+        document = FactoryGirl.build(:document,
+                                     sender_organization: sender,
+                                     recipient_organization: Organization.find(Organization.pluck(:id).sample),
+                                     approver: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     executor: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                     creator: sender.users.shuffle.first  || FactoryGirl.create(:user, organization: sender)
+        )
+        accountable = FactoryGirl.create(type.to_sym, document: document)
+        accountable.transition_to! :draft
+        print '.'
+      end
+      puts ' --> done'
     end
-    puts 'Orders created'
+
 
 
     Documents::Report.delete_all
     Documents::Report.reset_pk_sequence
-
+    puts 'reports destroyed'
+    puts 'Creating reports started'
     10.times do |d|
-      sender_organization = Organization.find(rand(1..organizations_count))
-      d = Documents::Report.new
-      d.title = Populator.words(4)
-      d.body = Populator.sentences(30..50)
-      d.confidential = false
-      d.executor = sender_organization.users.shuffle.first
-      d.approver = sender_organization.users.shuffle.first
-      d.recipient_organization = Organization.find(rand(1..organizations_count))
-      d.sender_organization = sender_organization
+      sender = Organization.all.shuffle.first
+      order = Documents::Order.approved.shuffle.first || FactoryGirl.create(:approved_order)
 
-      d.order = Documents::Order.find(rand(1..Documents::Order.count))
+      document = FactoryGirl.build(:document,
+                                   sender_organization: sender,
+                                   recipient_organization: order.sender_organization,
+                                   approver: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                   executor: sender.users.shuffle.first || FactoryGirl.create(:user, organization: sender),
+                                   creator: sender.users.shuffle.first  || FactoryGirl.create(:user, organization: sender)
+      )
+      accountable = FactoryGirl.create(:report, document: document, order: order)
 
-      d.save!
-      d.transition_to!(:draft)
-      d.transition_to!(:prepared)
+      accountable.transition_to!(:draft)
+      accountable.transition_to!(:prepared)
+
+      print '.'
     end
-    puts 'Reports created'
+    puts ' --> done'
+    puts ' '
+    puts 'All test documents was created'
+    puts '______________________________'
   end
 end
 

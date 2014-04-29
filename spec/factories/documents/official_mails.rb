@@ -10,7 +10,7 @@ FactoryGirl.define do
     document { FactoryGirl.build(:simple_document) }
 
     after(:create) do |instance,ev|
-      instance.transition_to!('draft')
+      instance.transition_to! :draft
     end
 
     factory :mail_without_recipient do
@@ -23,6 +23,7 @@ FactoryGirl.define do
     # Подготовленное письмо с одним адресатом
     factory :prepared_mail do
       after(:create) do |instance, ev|
+        instance.transition_to! :draft
         instance.transition_to! :prepared
       end
 
@@ -34,6 +35,8 @@ FactoryGirl.define do
       # Подписанное письмо с одним адресатом
       factory :approved_mail do
         after(:create) do |instance, ev|
+          instance.transition_to! :draft
+          instance.transition_to! :prepared
           instance.transition_to! :approved
         end
       end

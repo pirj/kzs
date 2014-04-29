@@ -25,7 +25,7 @@ class Document < ActiveRecord::Base
 
   after_update :clear_conformations
 
-  has_many :document_attached_files
+  has_many :document_attached_files, dependent: :destroy
 
   # Приложенные документы
   has_and_belongs_to_many :attached_documents,
@@ -35,7 +35,7 @@ class Document < ActiveRecord::Base
                           foreign_key: "document_id",
                           association_foreign_key: "attached_document_id"
 
-  has_many :document_transitions
+  has_many :document_transitions, dependent: :destroy
 
   # Согласования
   has_many :conformations, dependent: :destroy
