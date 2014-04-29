@@ -65,7 +65,7 @@ module Documents::AccountableController
             NotificationMailer.document_changed(user, resource.document, old_document, old_conformers).deliver!
           end
         rescue
-          # flash[:error] = 'Документ изменен, но не удалось отправить одно или несколько e-mail уведомлений о статусе письма.'
+          flash[:error] = 'Документ изменен, но не удалось отправить одно или несколько e-mail уведомлений о статусе письма.'
         end
 
         # Посылаем уведомления всем, кроме создателя и текущего пользователя
