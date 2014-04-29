@@ -84,7 +84,7 @@ class Gantt
       {name:"title",       label:"Заголовок",  tree:true, width:170 },
       {name:"start_date", label:"Начало", align: "center" },
       {name:"end_date",   label:"Окончание",   align: "center" }
-      {name:"add" }
+#      {name:"add" }
     ];
 
     gantt.templates.task_text = (start, end, task) ->                 #таск в таблице
