@@ -17,11 +17,7 @@ class NotificationMailer < ActionMailer::Base
     @executor_changed = true unless document.executor_id == old_document.executor_id
     @approver_changed = true unless document.approver_id == old_document.approver_id
 
-    if @title_changed || @body_changed || @creator_changed || @conformers_changed || @executor_changed || @approver_changed
-      mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
-    else
-      false
-    end
+    mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
   end
 
   def document_conformed document

@@ -3,7 +3,7 @@ html
     p
       | Документ 
       = link_to "«#{@document.title}»", documents_document_url(@document)
-      |  был изменен. Состав изменений:
+      |  был изменен.
   
     ul
       - if @title_changed
