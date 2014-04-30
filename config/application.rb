@@ -99,5 +99,7 @@ module Kzs
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = mail_config
+    #исправление ошибки с серверным временем в ajax формах
+    config.active_record.default_timezone = :utc
   end
 end

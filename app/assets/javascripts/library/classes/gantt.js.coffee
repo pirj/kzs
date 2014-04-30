@@ -1,16 +1,17 @@
 class Gantt
   constructor: (dom) ->
     that = this
+    $.ajaxSetup beforeSend: (xhr) ->
+      xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
+      return
 
-    @.initCustomFields()           #определяем свои поля
-#    that.resizeGant('year')
+    @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)                                     #Инициализация модуля Гант
-
-    @.getTasks()                                         #получение данных
-
+    @.getTasks()
 
     ########################################## далее обработчики событий ###############################################
-    gantt.attachEvent "onAfterTaskDelete", (id, item) ->  #обработчик на удаление
+
+    gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
       request = $.ajax(
         url: '/api/tasks/' + id
         type: 'DELETE'
@@ -20,31 +21,17 @@ class Gantt
         console.log (status)
         return
 
+    gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #двойной клик
 
-
-#    gantt.attachEvent "onAfterTaskDrag", (id) ->     #обработчик на перетаскивание
-#
-#      data = @.getTask(id)
-#      that.editTask(data, id)
-
-
-#    gantt.attachEvent "onAfterTaskAdd", (id, item) ->    #обработчик на создание задачи
-##      console.log(item)
-#      that.createTask(item)
-
-
-    gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #запрос на id/edit
       e.preventDefault()
       request = $.ajax(
         url: "/tasks/#{id}/edit"
         type: 'GET'
         dataType: "script"
-#      data: (if type=='POST' then {'data': data} else '')
       )
 
       request.done (data, textStatus, jqXHR) =>
-#        console.log('all right')
-#        console.log(data)
+#        console.log(textStatus)
         return
 
       request.fail (jqXHR, textStatus, errorThrown) ->
@@ -55,11 +42,10 @@ class Gantt
       e.preventDefault()
 
 
-#      false
-    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->
-#      console.log(item)
+    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->                                           #обработчик для перетаскиваний и растягиваний
       that.editTask(item)
 
+      #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
       that.resizeGant('month')
       return
@@ -69,29 +55,25 @@ class Gantt
     $(document).on "click", "#day", ->
       that.resizeGant('day')
       return
-
-
-
-
+    $(document).on "click", "#hour", ->
+      that.resizeGant('hour')
+      return
 
 
   ############################################ далее методы класса ####################################################
 
   initCustomFields: () =>              #!!!
-
-                                                                                   #колонки слева
+    #колонки слева
     gantt.config.columns=[
       {name:"title",       label:"Заголовок",  tree:true, width:170 },
       {name:"start_date", label:"Начало", align: "center" },
       {name:"end_date",   label:"Окончание",   align: "center" }
 #      {name:"add" }
     ];
-
-    gantt.templates.task_text = (start, end, task) ->                 #таск в таблице
+    #таск в таблице
+    gantt.templates.task_text = (start, end, task) ->
       task.title
-
-
-                                                              # модальное окно
+    # модальное окно
     gantt.locale.labels.section_title = "Заголовок"
     gantt.locale.labels.section_details = "Описание"
     gantt.locale.labels.section_period = "Дата"
@@ -120,17 +102,11 @@ class Gantt
       }
     ]
 
-  getTasks: () =>              #!!!
-
-    $.ajaxSetup beforeSend: (xhr) ->
-      xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
-      return
-
+  getTasks: () =>             #получение данных  (и парсинг)
     request = $.ajax(
       url: '/api/tasks/'
       type: 'GET'
       dataType: "json"
-#      data: (if type=='POST' then {'data': data} else '')
     )
 
     request.done (data) ->
@@ -141,23 +117,22 @@ class Gantt
       console.log('request failed ' + status)
       return
 
-
-  createTask: (data) =>           #!!!
-    request = $.ajax(
-      url: '/api/tasks/'
-      type: 'POST'
-      dataType: "json"
-      data:
-        tasks_task: data
-    )
-
-    request.done (data) =>
-      gantt.render
-      return
-
-    request.fail (status) ->
-      console.log('request failed ' + status)
-      return
+#  createTask: (data) =>           #!!!
+#    request = $.ajax(
+#      url: '/api/tasks/'
+#      type: 'POST'
+#      dataType: "json"
+#      data:
+#        tasks_task: data
+#    )
+#
+#    request.done (data) =>
+#      gantt.render
+#      return
+#
+#    request.fail (status) ->
+#      console.log('request failed ' + status)
+#      return
 
   editTask: (data) =>              #!!!
     request = $.ajax(
@@ -181,8 +156,8 @@ class Gantt
     gantt.render
 
 
-  resizeGant: (scale) =>            #!!!
-    gantt.config.scale_unit = scale #"year" #задел на маштабирование
+  resizeGant: (scale) =>
+    gantt.config.scale_unit = scale
     gantt.config.step = 1
 
     switch scale
@@ -192,11 +167,12 @@ class Gantt
         b = '%m'
       when 'day'
         b = '%d'
+      when 'hour'
+        b = '%H'
       else
 
-    gantt.config.date_scale = b #"%Y"
+    gantt.config.date_scale = b
     gantt.render()
-#    gantt.init($('#gantt_here'))
 
   addTask: (a) =>
     gantt.addTask(
@@ -204,17 +180,27 @@ class Gantt
       title: a.title
       description: a.description
       start_date: a.start_date
-#      end_date: JSON.parse(JSON.stringify(a.finished_at)).substring(0, 10)
       duration: a.duration
       )
 
-#    gantt.render()
-#    gantt.refreshTask(a.id)
-#    console.log (JSON.parse(JSON.stringify(a.started_at))).substring(0, 10)
+  displayForm: (form) =>
+    # запиливаем пришедшую форму в модальное окно
+    $modalContainer = $("#taskForm")
+    $formContainer = $(".js-new-task")
+    $formContainer.html form
+    $("<button type='button' class='btn btn-default' data-dismiss='modal'>Отмена</button>").appendTo ".js-buttons-place"
+    $modalContainer.modal 'show'
+    $(".modal-backdrop.in").hide()
+    $formContainer.find(".js-datepicker").datepicker global.datepicker
+    $(".js-chosen").chosen global.chosen
 
-############################################ Поток выполнения  ###################################################
+  clearForm: () =>
+    $modalContainer = $("#taskForm")
+    $modalContainer.modal 'hide'
+#    modalContainer.empty()
+
+
+########################################################### Поток выполнения  ###################################################
 $ ->
-  if $('#gantt_here').length >0
-    window.app.ganttView = new Gantt("gantt_here")
-
-#    console.log(window.app.ganttView)
+  if $('#gantt_here').length
+    window.app.GanttView = new Gantt("gantt_here")

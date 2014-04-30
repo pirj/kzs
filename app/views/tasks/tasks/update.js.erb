@@ -1,15 +1,6 @@
-newFormContainer = $('.js-new-task');
 <%- if resource.valid? %>
-window.app.ganttView.reloadGantt();
-newFormContainer.modal('toggle');
-newFormContainer.empty();
-
+window.app.GanttView.reloadGantt();
+window.app.GanttView.clearForm()
 <%- else %>
-
-newFormContainer.html(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
-//$('.js-new-task').modal('toggle');
-newFormContainer.find('.js-datepicker').datepicker(global.datepicker);
-newFormContainer.find('.js-chosen').chosen(global.chosen);
-$('.modal-backdrop.in').hide();
-
+window.app.GanttView.displayForm(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
 <%- end %>

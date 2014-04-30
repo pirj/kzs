@@ -11,13 +11,19 @@ ul.nav.nav-inline.btn-block
 #gantt_here style='height: 500px; width: 1050px;'
 
 
+
+a#year href='#' год
 a#month href='#' месяц
 a#day href='#' день
-a#year href='#' год
+a#hour href='#' час
 br
 
-= link_to 'new task blah', new_task_path, remote: true
+= link_to 'new task blah', new_task_path, remote: true, class: 'button btn btn-primary btn-lg '
+/, data: {toggle: 'modal', target: '#taskForm'}
 
-.js-new-task.modal-simple.modal
-  - resource = Tasks::Task.new
-  = render 'form', resource: resource, remote: true
+#taskForm.modal aria-hidden="true"  tabindex="-1"
+  .modal-dialog
+    .modal-content
+      .modal-body.js-new-task
+        /в обычном состоянии данное окно пустое и скрытое
+

@@ -1,7 +1,2 @@
-newFormContainer = $('.js-new-task');
-newFormContainer.html(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
-$("<button type='button' class='btn btn-default' data-dismiss='modal'>Отмена</button>").appendTo('.js-buttons-place');
-newFormContainer.modal('toggle');
-newFormContainer.find('.js-datepicker').datepicker(global.datepicker)
-newFormContainer.find('.js-chosen').chosen(global.chosen)
-$('.modal-backdrop.in').hide();
+window.app.GanttView.displayForm(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
+// в этом файле должен быть функции из обьекта gantt в который оператором мы передаём отрендеренную форму
