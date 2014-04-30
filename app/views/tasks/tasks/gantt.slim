@@ -1,0 +1,23 @@
+= content_for :page_header do
+
+  = header_title do
+    .dropdown.header
+      h1
+        | Диаграмма задач
+
+ul.nav.nav-inline.btn-block
+  li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-default'
+  li = link_to 'Таблица', tasks_path, class: 'btn btn-default'
+#gantt_here style='height: 500px; width: 1050px;'
+
+
+a#month href='#' месяц
+a#day href='#' день
+a#year href='#' год
+br
+
+= link_to 'new task blah', new_task_path, remote: true
+
+.js-new-task.modal-simple.modal
+  - resource = Tasks::Task.new
+  = render 'form', resource: resource, remote: true

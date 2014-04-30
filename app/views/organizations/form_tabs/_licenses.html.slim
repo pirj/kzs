@@ -4,6 +4,7 @@
     = f.link_to_add :licenses, class: 'link link-success big-link', data: { target: ''} do
       span.fa.fa-plus-circle
       span Добавить
+
   = f.simple_fields_for :licenses do |l|
     = l.link_to_remove "Удалить", class: 'text-danger btn-link pull-right'
     = l.input :type_of,
@@ -16,4 +17,4 @@
     = l.input :issuance, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
     = l.input :deadline, as: :datepicker, wrapper: :icon_prepend, input_wrapper_html: { class: 'col-sm-3' }
     = l.input :issued_by, as: :text, input_html: { rows:2, placeholder: "Федеральное агентство по строительству и жилищно-коммунальному хозяйству" }  
-    = l.input :image, as: :filename
+    = l.input :image, as: :filename, input_html: { accept: 'image/jpeg,image/png,image/gif' }

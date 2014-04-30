@@ -46,10 +46,12 @@ class OrganizationsController < ApplicationController
 
   # TODO: need check to user update-permits.
   def update
-    @organization = Organization.find(params[:id])
-    if @organization.update_attributes(params[:organization])
-      redirect_to edit_organization_path(@organization)
+    organization = Organization.find(params[:id])
+    if organization.update_attributes(params[:organization])
+      redirect_to edit_organization_path(organization)
     else
+      @users = User.for_organization(organization.id)
+      @organization = Organizations::EditDecorator.decorate(organization)
       render action: 'edit'
     end
   end

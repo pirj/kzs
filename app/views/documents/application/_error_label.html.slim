@@ -1,4 +1,3 @@
-/render messages of all errors
 /- unless resource.errors.empty?
 /  .row
 /    .alert.alert-danger.col-sm-offset-2.col-sm-8
@@ -10,4 +9,7 @@
 - unless resource.errors.empty?
   .row
     .alert.alert-danger.col-sm-offset-2.col-sm-8
-      p = "Допущено #{resource.errors.messages.count} #{Russian.p(resource.errors.messages.count, "ошибка", "ошибки", "ошибок")}."
+      p
+        = Russian.p(resource.errors.messages.count, "Допущена", "Допущено", "Допущено")
+        = " #{resource.errors.messages.count} "
+        = Russian.p(resource.errors.messages.count, "ошибка", "ошибки", "ошибок")

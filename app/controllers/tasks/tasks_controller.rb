@@ -1,25 +1,52 @@
 class Tasks::TasksController < ResourceController
   layout 'base'
 
-  # TODO-justvitalius: это надо переделать на соглашение самого inherited resources
-  def index
-    @tasks = Tasks::Task.for_organization(current_organization).page(params[:page]).per(10)
+  has_scope :per, default: 10, only: [:index]
+  has_scope :for_organization, only: [:index]
+
+  respond_to :js, :html
+
+  helper_method :mapped_resource
+
+  def gantt
   end
 
+
   def create
-    @task = Tasks::Task.new(params[:tasks_task])
-    @task.organization = current_user.organization
-    super do |success|
-      success.html { redirect_to task_path(@task), notice: 'задача успешно поставлена' }
+    @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
+      task.organization = current_user.organization
     end
+    super
   end
 
   def update
-    super do |success, failure|
-      success.html { redirect_to task_path(@task), notice: 'задача успешно обновлена' }
-      failure.html { redirect_to edit_task_path(@task), notice: 'произошли ошибки обновления' }
-    end
+    @task = Tasks::Task.find(params[:id])
+    @task.organization ||= current_user.organization
+    super
   end
 
+  private
+
+  def collection_url
+    tasks_path
+  end
+
+  def resource_url
+    task_path(resource)
+  end
+
+  def mapped_resource
+    {
+        id: resource.id,
+        title: resource.title,
+        description: resource.text,
+        start_date: resource.started_at.try(:localtime).try(:strftime, "%d-%m-%Y"),
+        duration: days_duration_for(resource)
+    }.to_json.html_safe
+  end
+
+  def days_duration_for(task)
+    (task.finished_at - task.started_at).to_i/1.day if task.started_at && task.finished_at
+  end
 
 end
