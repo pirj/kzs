@@ -7,4 +7,3 @@ jQuery ->
   $(document).on 'nested:fieldAdded', ->
     $('.js-chosen').trigger('chosen:updated')
 
-

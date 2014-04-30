@@ -15,7 +15,6 @@ module PageHeaderHelper
     end
   end
 
-
   # render page-title block html
   def header_title &block
     content_tag :li, class: 'brand' do
