@@ -9,6 +9,8 @@ class Tasks::Task < ActiveRecord::Base
   has_and_belongs_to_many :approvers, class_name: 'User', join_table: "tasks_tasks_approvers"
   belongs_to :organization
 
+  has_many :checklists
+
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
 
