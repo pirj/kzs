@@ -30,17 +30,19 @@ class Documents::OfficialMailsController < ResourceController
 
     authorize!(:reply_to, @parent_mail)
 
+    attributes = params[:documents_official_mail]
     @official_mail =
         Documents::OfficialMail.new(attributes).tap do |mail|
           mail.sender_organization = current_organization
           mail.creator = current_user
           mail.executor ||= current_user
+          mail.recipient_organization = @parent_mail.sender_organization
         end
-    if @parent_mail.save
+    if @official_mail.save
         story = Documents::History.new(@parent_mail)
         story.add @official_mail
-        resource.transition_to!(params[:transition_to], default_metadata)
-        redirect_to documents_path
+        @official_mail.transition_to!(params[:transition_to], default_metadata)
+        redirect_to documents_path, notice: 'Документ успешно создан'
     else
       render action: 'reply'
     end
