@@ -37,19 +37,9 @@ feature "User review mail", %q() do
         expect(current_path).to eq(show_path)
       end
 
-      # [:recipient_user, :admin, :director].each do |_user|
-      [:recipient_user].each do |_user|
+      [:recipient_user, :admin, :director].each do |_user|
         context _user do
           let(:user) { send(_user) }
-
-          # scenario 'user from recipient organization' do
-          #   expect(user.organization).to eq mail.recipient_organization
-          # end
-          #
-          # scenario 'check reply action' do
-          #   expect(page).to_not have_content('Недостаточно прав')
-          #   expect(page).to have_selector('a', 'Ответить')
-          # end
 
           context 'ajax', js: true  do
             background do
