@@ -23,8 +23,6 @@ class Document < ActiveRecord::Base
 
   attr_accessible :document_attached_files_attributes, :attached_documents_attributes
 
-  after_update :clear_conformations
-
   has_many :document_attached_files, dependent: :destroy
 
   # Приложенные документы

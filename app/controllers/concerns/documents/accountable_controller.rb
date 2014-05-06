@@ -51,6 +51,8 @@ module Documents::AccountableController
     old_document = resource.document.dup
     old_conformers = resource.conformers.to_a
 
+    resource.document.clear_conformations
+
     update! do |success, failure|
       success.html do
 
