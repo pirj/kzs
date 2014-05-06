@@ -93,12 +93,14 @@ module Kzs
     end
 
     mail_conf_path = 'config/mail.yml'
-    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path) : {}
+    mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path).symbolize_keys : {}
 
-    config.action_mailer.default_url_options = { host: mail_config['host'] }
+    # TODO: move to mail.yml
+    config.action_mailer.default_url_options = { host: "sakedev.kzsspb.ru" }
     config.action_mailer.delivery_method = :smtp
 
-    config.action_mailer.smtp_settings = mail_config['smtp'].try(:symbolize_keys)
-
+    config.action_mailer.smtp_settings = mail_config
+    #исправление ошибки с серверным временем в ajax формах
+    config.active_record.default_timezone = :utc
   end
 end
