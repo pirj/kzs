@@ -20,6 +20,7 @@ ru:
         approver: Контрольное лицо
         recipient: Получатель
         attachments_count: Приложения
+        started_at: Дата начала
         deadline: Дата исполнения
         related_order: Предписание
         creator: Составитель

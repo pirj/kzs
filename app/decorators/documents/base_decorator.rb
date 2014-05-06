@@ -158,6 +158,15 @@ module Documents
       end
     end
 
+    def started_at_date
+      element_wrapper object.started_at do
+        h.content_tag( :div, I18n.t("documents.table.document_labels.started_at"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
+              h.content_tag( :span, "#{started_at}", class: 'muted' )
+            end
+      end
+    end
+
     def deadline_date
 
       element_wrapper object.deadline do
@@ -196,6 +205,10 @@ module Documents
 
     def approved_at
       DateFormatter.new(object.approved_at, :long)
+    end
+
+    def started_at
+      DateFormatter.new(object.started_at)
     end
 
     def deadline

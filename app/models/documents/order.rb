@@ -1,7 +1,7 @@
 module Documents
   class Order < ActiveRecord::Base
     include Accountable
-    attr_accessible :deadline
+    attr_accessible :deadline, :started_at
     attr_accessible :task_list_attributes
 
     has_one :report
