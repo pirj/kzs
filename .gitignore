@@ -24,3 +24,7 @@ config/mail.yml
 # Ignore documentation
 doc/*
 .yardoc/*
+
+# Ignore documents except ".keep"
+/public/system/documents/*
+!/public/system/documents/.keep
