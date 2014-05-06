@@ -22,14 +22,15 @@ FactoryGirl.define do
 
     # Подготовленное письмо с одним адресатом
     factory :prepared_mail do
-      after(:create) do |instance, ev|
-        instance.transition_to! :draft
-        instance.transition_to! :prepared
-      end
 
       # Подготовленное письмо с одним адресатом и согласующими
       factory :mail_with_direct_recipient_and_conformers do
         document { FactoryGirl.build(:document_with_conformers) }
+        after(:create) do |instance, ev|
+          instance.transition_to! :draft
+          instance.transition_to! :prepared
+          instance.reload
+        end
       end
 
       # Подписанное письмо с одним адресатом
@@ -37,8 +38,16 @@ FactoryGirl.define do
         after(:create) do |instance, ev|
           instance.transition_to! :draft
           instance.transition_to! :prepared
+          instance.reload
           instance.transition_to! :approved
+          instance.reload
         end
+      end
+
+      after(:create) do |instance, ev|
+        instance.transition_to! :draft
+        instance.transition_to! :prepared
+        instance.reload
       end
     end
 
