@@ -6,12 +6,13 @@ module Features
     # работает только при запуске теста через js
     # имя файла формируется как
     # custom-<FILENAME>-<LINE>.png
-    def create_screenshot
+    def create_screenshot(count=-1)
       if example.metadata[:js]
         meta = example.metadata
         filename = File.basename(meta[:file_path])
         line_number = meta[:line_number]
-        screenshot_name = "custom-#{filename}-#{line_number}.png"
+        postfix = (count==-1) ? '' : "#{count}"
+        screenshot_name = "custom-#{filename}-#{line_number}-#{postfix}.png"
         screenshot_path = "#{Rails.root.join("test_images")}/#{screenshot_name}"
         page.save_screenshot(screenshot_path, full: true)
       end
