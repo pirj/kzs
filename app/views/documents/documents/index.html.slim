@@ -35,7 +35,7 @@
         li = link_to 'Акты', documents_path(with_type:'reports')
         li = link_to 'Непрочитанные', documents_path(with_type:'unread')
 
-
+= @test.map(&:id).inspect
 
 /= params[:with_state]
 = content_for :page_header_search do

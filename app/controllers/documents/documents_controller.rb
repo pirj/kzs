@@ -10,6 +10,7 @@ class Documents::DocumentsController < ResourceController
     when 'mails' then scope.mails
     when 'reports' then scope.reports
     when 'unread' then scope.inbox(controller.current_user.organization).unread_by(controller.current_user)
+    when 'conformated' then scope.conformated
     else
       scope
     end
@@ -42,6 +43,15 @@ class Documents::DocumentsController < ResourceController
     each_decorator = Documents::ListShowDecorator
 
     @documents = list_decorator.decorate documents, with: each_decorator
+
+    @test = Document.joins('LEFT JOIN documents_users ON documents.id = documents_users.document_id').
+                      joins('LEFT JOIN users ON users.id = documents_users.user_id').
+                      joins('LEFT JOIN conformations ON users.id =  conformations.user_id').
+                      where('conformations.conformed ISNULL
+                            AND users.id IS NOT NULL').
+                      visible_for(current_organization.id).
+                      select('DISTINCT documents.id')
+    #.where(:conformations)
   end
 
   # TODO: give it descriptive name as it only returns search results count
@@ -116,6 +126,7 @@ class Documents::DocumentsController < ResourceController
     super
     .accessible_by(current_ability)
     .includes(:sender_organization, :recipient_organization)
+    .visible_for(current_organization.id)
     .order(avoid_ambiguous(sort_column) + ' ' + sort_direction)
   end
 
