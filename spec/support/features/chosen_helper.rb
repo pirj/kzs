@@ -6,10 +6,10 @@ module Features
       field_id = find_field(label, visible: false)[:id]
       skip_welcome
       find("##{field_id}_chosen").click
-      sleep 1
+      sleep CHOSEN_SLEEP
       within "##{field_id}_chosen" do
         all('.chosen-results li')[position.to_i].click
-        sleep 1
+        sleep CHOSEN_SLEEP
         execute_script(%Q!$("##{field_id}").trigger('chosen:update')!)
       end
     end
@@ -33,7 +33,7 @@ module Features
     def remove_from_multiple_chosen(opts={}, count=2)
       chosen = find(chosen_name(opts))
       chosen_selected = chosen.find('.chosen-choices').all('li')
-      puts "multi choosen have #{chosen_selected.length} selected items"
+      puts "Will remove first #{count} in Multiple-chosen for '#{opts[:label]}'"
 
       within "#{chosen_name(opts)} .chosen-choices" do
         if chosen_selected.length >= count
@@ -45,26 +45,28 @@ module Features
             all('.search-choice-close').first().click
 
             sleep CHOSEN_SLEEP
-            puts "removed #{pos} element from selected in multiple choosen"
+            # puts "removed #{pos} element from selected in multiple choosen"
           end
         end
         sleep CHOSEN_SLEEP
-        update_chosen_select(chosen_name(opts))
       end
+      update_chosen_select(chosen_name(opts))
     end
 
     # выбираем несколько элементов в chosen
     # метод не определяет, можно ли в данном chosen выбрать несколько элементов, все на откуп программисту
     # выбирает count кол-во первых элементов в списке
     # метод не удаляет уже выбранные значения в списке
-    def select_from_multiple_chosen(opts={}, count=2)
+    def select_from_multiple_chosen(opts={})
+      count = opts.delete(:count) || 2
       chosen = find(chosen_name(opts))
+
       chosen.click
       sleep CHOSEN_SLEEP
 
       within chosen_name(opts) do
         menu_items = all('.chosen-results li')
-        puts "multi chosen menu have #{menu_items.length} elements"
+        puts "Multiple-chosen for '#{opts[:label]}' have #{menu_items.length} elements. Will select first #{count} of it."
         if menu_items.length >= count
           count.times.each do |pos|
             chosen.click
@@ -73,19 +75,19 @@ module Features
             # choosen настроен так, что если элемент выбран, то он пропадает из общего списка результатов в выпадающем меню.do
             # поэтому клик производим каждый раз по первому элементу в ниспадающем меню
             find('.chosen-results li:first-child').click
-            puts "clicked on #{pos} element from multiple choosen"
+            # puts "clicked on #{pos} element from multiple choosen"
           end
         end
         sleep CHOSEN_SLEEP
-        update_chosen_select(chosen_name(opts))
       end
+      update_chosen_select(chosen_name(opts))
     end
 
 
     private
 
     def chosen_name(opts={})
-      field_id = find_field(opts[:label], visible: false)[:id] if opts.has_key?(:label)
+      field_id = find_field(opts[:label].to_s, visible: false)[:id] if opts.has_key?(:label)
       field_id = opts[:id] if opts.has_key?(:id)
       "##{field_id}_chosen"
     end

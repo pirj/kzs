@@ -18,6 +18,7 @@ feature "Users review mails", %q() do
     background do
       visit path
       sign_in_with user.email, 'password'
+      skip_welcome
       # fill auction fields
       fill_in 'Тема', with: 'тест'
       fill_in 'Текст', with: 'тестовый текст'

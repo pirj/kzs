@@ -8,12 +8,14 @@ module Features
         fill_in 'user[password]', with: password
         click_on 'Вход'
       end
-      # find('form').click('войти')
     end
 
-    # TODO-justvitalius: сюда запилить проверку на js тест и автоматически переключать выход
     def sign_out
-      page.driver.submit :delete, destroy_user_session_path, {}
+      if example.metadata[:js]
+        sign_out_js
+      else
+        page.driver.submit :delete, destroy_user_session_path, {}
+      end
     end
 
     def skip_welcome
@@ -22,7 +24,7 @@ module Features
 
     def sign_out_js
       skip_welcome
-      find('.spec-user-logout').click
+      visit destroy_user_session_path
     end
 
   end

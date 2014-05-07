@@ -101,21 +101,84 @@ feature "User receives documents notifications", %q() do
 
   describe 'notifications after editing document', js: true do
     context 'old interested people' do
-      let!(:old_conformer) { mail.conformers.first }
-      let!(:old_creator) { mail.creator }
-      let!(:old_executor) { mail.executor }
-
       context 'edit by approver' do
-        scenario 'displaying badges about notifications' do
+        background do
+          # выделяем текущих интересантов
+
+          # используем принудительное копирование через dup, чтобы записать в переменную значение,а не ссылку.
+          # иначе дальше по коду вызов этой переменной приводит к запросу conformers у измененного mail.
+          old_conformers = mail.conformers.dup
+
+          old_creator = mail.creator
+          old_executor = mail.executor
+          old_approver = mail.approver
           expect(approver).to_not eq creator
 
+          # проходим на страницу для редактирования
           visit edit_path
           sign_in_with approver.email
-          skip_welcome
           expect(current_path).to eq edit_path
+          skip_welcome
 
+          # изменяем список контрольных лиц
           remove_from_multiple_chosen id: 'documents_official_mail_document_attributes_conformer_ids'
+          select_from_multiple_chosen id: 'documents_official_mail_document_attributes_conformer_ids', count: 1
 
+          # изменяем исполнителя и контрольное лицо
+          select_from_chosen 'Исполнитель'
+          select_from_chosen 'Контрольное лицо'
+
+          click_on 'Сохранить'
+
+          # убеждаемся, что обновили данные
+          mail.reload
+          mail.conformers.reload
+          expect(mail.creator).to_not eq old_creator
+          expect(mail.approver).to_not eq old_approver
+          expect(mail.executor).to_not eq old_executor
+          expect(mail.conformers).to_not eq old_conformers
+
+          # подготавливаемся ко входу по каждым отдельным пользователем
+          sign_out
+          visit unreadable_path
+          sign_in_with user.email
+        end
+
+        context 'approver became as creator' do
+          [:approver, :conformer, :executor].each do |_user|
+              context _user do
+                let(:user) { send(_user) }
+
+                scenario 'not empty document list' do
+                  expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
+                  expect(page).to have_content mail.title
+                end
+
+                scenario 'badge about one notification documents count' do
+                  page.all('.spec-notification-badge').each do |elem|
+                    expect(elem).to have_content '1'
+                  end
+                end
+
+              end
+            end
+
+          # у creator другое условие, потому что он является последним,
+          # кто внес редакции в документ, он «как-бы в курсе» изменений документа
+          # поэтому у него и отдельный сценарий
+          context 'creator' do
+            let(:user) { creator }
+
+            scenario 'not empty document list' do
+              expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
+              expect(page).to have_content mail.title
+            end
+
+            scenario 'empty notification badge' do
+              expect(page).to_not have_css '.spec-notification-badge'
+            end
+
+          end
         end
       end
     end
