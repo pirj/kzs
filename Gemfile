@@ -57,6 +57,9 @@ gem 'responders'
 # State Machine decoupled from model itself
 gem 'statesman', '~> 0.3'
 
+# Простая стейт-машина с названиями эвентов
+gem 'workflow'
+
 # Object read/unread management
 gem 'unread', '~> 0.3.1'
 
