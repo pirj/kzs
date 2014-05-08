@@ -1,0 +1,9 @@
+br
+
+= f.simple_fields_for :checklist_items  do |f|
+  | Задачи:
+  = f.input :name, label_hint:  'Название задачи'
+  = f.input :description, label_hint:  'описание'
+  = f.link_to_remove 'delete item'
+br
+= f.link_to_add 'Add a item', :checklist_items

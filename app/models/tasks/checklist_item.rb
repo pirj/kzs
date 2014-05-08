@@ -3,5 +3,5 @@ class Tasks::ChecklistItem < ActiveRecord::Base
   
   belongs_to :checklist
 
-  validates :name, :checklist_id, presence: true
+  validates :name, presence: true
 end

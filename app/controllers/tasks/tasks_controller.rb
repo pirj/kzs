@@ -11,6 +11,11 @@ class Tasks::TasksController < ResourceController
   def gantt
   end
 
+  def new
+    @task = Tasks::Task.new
+    @task.checklists.build
+    @task.checklists.last.checklist_items.build
+  end
 
   def create
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|

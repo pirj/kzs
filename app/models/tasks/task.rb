@@ -3,14 +3,14 @@ class Tasks::Task < ActiveRecord::Base
                   :organization, :organization_id,
                   :executors, :executor_ids,
                   :approvers, :approver_ids,
-                  :started_at, :finished_at
+                  :started_at, :finished_at, :checklists_attributes
   
   has_and_belongs_to_many :executors, class_name: 'User', join_table: "tasks_tasks_executors"
   has_and_belongs_to_many :approvers, class_name: 'User', join_table: "tasks_tasks_approvers"
   belongs_to :organization
 
   has_many :checklists
-
+  accepts_nested_attributes_for :checklists, allow_destroy: true
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
 
