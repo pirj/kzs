@@ -14,12 +14,12 @@
     .col-md-7
       - resource.executors.each do |executor|
         = link_to executor.first_name_with_last_name, '#'
-  - unless resource.started_at == nil
+  - unless resource.started_at.blank?
     .form-group.row
       .col-md-2.text-help.text-right Дата начала:
       .col-md-7
         = DateFormatter.new resource.started_at
-  - unless resource.finished_at == nil
+  - unless resource.finished_at.blank?
     .form-group.row
       .col-md-2.text-help.text-right Дата окончания:
       .col-md-7
@@ -28,4 +28,40 @@
     .col-md-2.text-help.text-right Описание:
     .col-md-7
       = resource.text
-  
+
+- unless resource.checklists.blank?
+
+  .row-fuild
+    h2 Задачи
+    - resource.checklists.each do |list|
+      .form-group.row
+        .col-md-2.text-help.text-right Название списка:
+        .col-md-7 #{list.name}
+      .form-group.row
+        .col-md-2.text-help.text-right Создан:
+        .col-md-7 #{list.updated_at}
+      .form-group.row
+        .col-md-2.text-help.text-right Обновлен:
+        .col-md-7 #{list.created_at}
+
+
+      - list.checklist_items.each do |item|
+
+        - is_completed = item.checked?
+
+        .form-group.row._task class=('m-task-completed' if is_completed)
+          .col-sm-1
+            input.spec-task-checkbox type='checkbox' #{'checked' if is_completed }
+          .col-sm-7
+
+            ._task-title
+              ._task-num = item.id
+              = item.name
+
+            ._task-comment = item.description
+
+  /- unless resource.checklists.checklist_items.blank?
+
+.row
+  .col-md-12
+    = link_to 'Редактировать', edit_task_path(resource), class: 'btn btn-default'

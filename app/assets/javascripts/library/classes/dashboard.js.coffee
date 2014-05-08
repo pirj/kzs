@@ -16,6 +16,7 @@ default_widgets= [
   {"col":4,"row":3,"size_x":1,"size_y":1,"name":"Профиль","class":"widget-profile disable"},
   {"col":1,"row":2,"size_x":1,"size_y":1,"name":"Чат","class":" widget-chat disable"},
   {"col":5,"row":2,"size_x":2,"size_y":2,"name":"Погода","class":"widget-weather","meteo":""},
+  {"col":1,"row":3,"size_x":1,"size_y":1,"name":"Задачи","class":"widget-profile","href":"/tasks"},
 
 ]
 template =
