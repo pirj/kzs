@@ -1,9 +1,22 @@
 br
-
+.row
+  .col-sm-2
+  .col-sm-9
+    h4 Задачи:
 = f.simple_fields_for :checklist_items  do |f|
-  | Задачи:
+
   = f.input :name, label_hint:  'Название задачи'
   = f.input :description, label_hint:  'описание'
-  = f.link_to_remove 'delete item'
-br
-= f.link_to_add 'Add a item', :checklist_items
+
+  .form-group
+    .row-fuild
+      .col-sm-2
+      .col-sm-9
+        = f.link_to_remove 'delete item', class: 'btn btn-danger'
+
+.form-group
+  .row-fuild
+    .col-sm-2
+    .col-sm-9
+      = f.link_to_add 'Add a item', :checklist_items, class: 'btn btn-primary '
+      .col-words-1

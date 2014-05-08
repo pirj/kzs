@@ -1,7 +1,16 @@
 = f.simple_fields_for :checklists  do |builder|
   = builder.input :name, label_hint:  'Название чеклиста'
   /= builder.submit 'save', label_html: { title: 'Название чеклиста' }
-  = builder.link_to_remove 'delete list'
 
+  .form-group
+    .row-fuild
+      .col-sm-2
+      .col-sm-9
+        = builder.link_to_remove 'delete list', class: 'btn btn-danger'
   = render 'item_form', f: builder
-= f.link_to_add 'Add a checklist', :checklists
+.form-group
+  .row-fuild
+    .col-sm-2
+
+    .col-sm-9
+      = f.link_to_add 'Add a checklist', :checklists, class: 'btn btn-default'

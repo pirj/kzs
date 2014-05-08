@@ -36,8 +36,9 @@
 
   = render 'checklist_form', f: f
 
-
-  br
-  .form-group
-    .col-sm-offset-2.col-sm-10.js-buttons-place
-      = f.submit class: 'btn btn-primary'
+  .row-fuild
+    .col-sm-2
+      br
+      .form-group
+        .col-sm-offset-2.col-sm-10.js-buttons-place
+          = f.submit class: 'btn btn-primary'
