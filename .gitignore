@@ -1,5 +1,7 @@
 /.bundle
 .rvmrc
+.DS_Store
+.powrc
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -7,13 +9,11 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/test_images/*
 /.idea
-.DS_Store
-.powrc
 
 # Ignore assets and database.yml
 /public/assets
+/public/system
 /config/database.yml
 config/database.yml
 
@@ -24,9 +24,10 @@ config/mail.yml
 # Ignore documentation
 doc/*
 .yardoc/*
+/test_images/*
 
 # Ignore documents except ".keep"
-/public/system/documents/*
+/public/system/documents
 !/public/system/documents/.keep
 
 /public/system/document_attachments/*
