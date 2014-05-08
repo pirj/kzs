@@ -28,3 +28,6 @@ doc/*
 # Ignore documents except ".keep"
 /public/system/documents/*
 !/public/system/documents/.keep
+
+/public/system/document_attachments/*
+/public/system/document_attached_files/*
