@@ -13,7 +13,7 @@
 
 # Ignore assets and database.yml
 /public/assets
-/public/system
+
 /config/database.yml
 config/database.yml
 
@@ -26,9 +26,13 @@ doc/*
 .yardoc/*
 /test_images/*
 
-# Ignore documents except ".keep"
-/public/system/documents
+# Общее правило для игнорирования контента в system
+/public/system/*
+
+# В каталоге system храним каталог documents за счет неигнорируемого файла .keep
+# Остальные файлы игнорируем
+!/public/system/documents
+/public/system/documents/*
 !/public/system/documents/.keep
 
-/public/system/document_attachments/*
-/public/system/document_attached_files/*
+
