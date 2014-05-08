@@ -109,9 +109,9 @@ module Documents
     # Sender_link --> Recipient_link
     def sender_to_recipient_links
       if object.sender && object.recipient
-        h.link_to( sender_name, h.organization_path(object.sender), class: 'link link-muted' ) +
+        h.link_to( sender_name, h.organization_path(object.sender) ) +
             h.content_tag(:span, nil, class: 'fa fa-long-arrow-right text-muted')+
-            h.link_to( recipient_name, h.organization_path(object.recipient), class: 'link link-muted' )
+            h.link_to( recipient_name, h.organization_path(object.recipient) )
       end
     end
 
@@ -135,7 +135,7 @@ module Documents
     def conformer_link_with_label
       unless object.conformers.empty?
         a = h.content_tag( :div, I18n.t("documents.table.document_labels.conformer"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-            h.content_tag( :div, (conformers_list), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+            h.content_tag( :div, (conformers_list), class: "link-dashed col-sm-#{12-LABEL_COL_WIDTH}" )
         h.content_tag(:div, a, class: "row form-group")
       end
     end

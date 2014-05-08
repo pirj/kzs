@@ -82,6 +82,7 @@ tr{
     vertical-align: bottom;
     border-bottom: 1px solid $table-border-color;
   }
+   
   // Remove top border from thead by default
   > caption + thead,
   > colgroup + thead,
@@ -139,8 +140,30 @@ tr{
     }
 
     .control-label{padding-top: 0;}
+    &.js-more-info {
+      // padding-top: 18px; 
+      .h2 {
+        line-height: 22px;
+        text-decoration: none;
+      }
+    }
+    
+  }
+  &.js-table-filter {
+    > thead > tr > th {
+      background: #f2f2f2;
+      border-left: 2px solid #fff;
+      border-top:none;
+      border-bottom:none !important;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 }
+
+
+
 
 
 
