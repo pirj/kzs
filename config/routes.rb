@@ -172,7 +172,10 @@ Kzs::Application.routes.draw do
       end
     end
     get 'tasks/gantt' => 'tasks#gantt'
-    resources :tasks
+    resources :tasks do
+      resources :checklists
+    end
+
   end
 
   ActiveAdmin.routes(self)

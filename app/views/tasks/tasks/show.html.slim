@@ -33,21 +33,21 @@
 
   .row-fuild
     h2 Задачи
-    - resource.checklists.each do |list|
+    - resource.checklists.each do |checklist|
       .form-group.row
         .col-md-2.text-help.text-right Название списка:
-        .col-md-7 #{list.name}
+        .col-md-7 #{checklist.name}
       .form-group.row
         .col-md-2.text-help.text-right Создан:
-        .col-md-7 #{list.updated_at}
+        .col-md-7 #{checklist.updated_at}
       .form-group.row
         .col-md-2.text-help.text-right Обновлен:
-        .col-md-7 #{list.created_at}
+        .col-md-7 #{checklist.created_at}
 
 
-      - list.checklist_items.each do |item|
+      /- checklist.checklist_items.each do |checklist_item|
 
-        - is_completed = item.checked?
+        - is_completed = checklist_item.checked?
 
         .form-group.row._task class=('m-task-completed' if is_completed)
           .col-sm-1
@@ -55,12 +55,25 @@
           .col-sm-7
 
             ._task-title
-              ._task-num = item.id
-              = item.name
+              ._task-num = checklist_item.id
+              = checklist_item.name
 
-            ._task-comment = item.description
+            ._task-comment = checklist_item.description
 
-  /- unless resource.checklists.checklist_items.blank?
+      = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklists_path([resource,checklist]) do |checklist_builder|
+        - checklist_builder.simple_fields_for :checklist_items do |f|
+          .form-group.row._task
+            .col-sm-1
+              = f.input :checked, label: false, input_html: {class: 'js-form-submit'}
+            .col-sm-7
+
+              ._task-title
+                ._task-num = f.object.id
+                = f.object.name
+              ._task-comment = f.object.description
+              .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.updated_at)
+
+
 
 .row
   .col-md-12
