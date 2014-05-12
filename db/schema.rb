@@ -431,7 +431,7 @@ ActiveRecord::Schema.define(:version => 20140508134446) do
 
   create_table "tasks_checklist_items", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.boolean  "checked"
     t.integer  "checklist_id"
     t.datetime "created_at",   :null => false
@@ -453,6 +453,7 @@ ActiveRecord::Schema.define(:version => 20140508134446) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "organization_id"
+    t.string   "state"
   end
 
   create_table "tasks_tasks_approvers", :id => false, :force => true do |t|

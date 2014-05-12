@@ -160,8 +160,16 @@ Kzs::Application.routes.draw do
   get '/dashboard' => 'dashboard#index'
 
   scope module: 'tasks' do
-    namespace :api, defaults: { format: 'json' } do
-      resources :tasks
+    namespace :api do
+      resources :tasks do
+        member do
+          post 'cancel'
+          post 'start'
+          post 'pause'
+          post 'resume'
+          post 'reformulate'
+        end
+      end
     end
     get 'tasks/gantt' => 'tasks#gantt'
     resources :tasks
