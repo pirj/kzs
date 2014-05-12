@@ -6,7 +6,7 @@ module Documents
 
     def title_link
       if object.title
-        h.link_to object.title, path, class: 'link'
+        h.link_to object.title, path
       end
     end
 

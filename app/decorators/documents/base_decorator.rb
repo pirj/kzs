@@ -89,7 +89,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link-dashed" )
         end
       end
     end
@@ -99,7 +99,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link-dashed" )
         end
       end
     end
@@ -128,7 +128,7 @@ module Documents
     def creator_with_label
       element_wrapper object.creator do
         h.content_tag( :div, I18n.t("documents.table.document_labels.creator"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}  spec-document-creator" )
+          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link-dashed  spec-document-creator" )
       end
     end
 
