@@ -5,10 +5,6 @@
       h1
         | Задачи
 
-= link_to 'api cancel', cancel_api_task_path(1), remote: true, method: :post
-= link_to 'api resume', resume_api_task_path(1), remote: true, method: :post
-= link_to 'api start', start_api_task_path(1), remote: true, method: :post
-
 ul.nav.nav-inline.btn-block
 
   li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-default'
