@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.17'
+gem 'rails', '~> 4.1.1'
 gem 'pg'
 
 # ActiveRecord Query DSL
-gem 'squeel'
+gem 'squeel', github: "activerecord-hackery/squeel"
 # Search object processor
-gem 'ransack'
-
+gem "polyamorous", :github => "activerecord-hackery/polyamorous"
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
 gem 'execjs'
 
 gem 'paperclip', '~> 3.0'
@@ -27,7 +27,7 @@ gem 'amoeba'
 
 gem 'mustache'
 gem 'smt_rails'
-gem 'activeadmin'
+gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'awesome_nested_set'
 
 gem 'haml'
@@ -88,10 +88,10 @@ end
 
 group :assets do
   #gem 'tilt', '~>1.3.3'
-  gem 'sass-rails',   '~> 3.2.6'
+  gem 'sass-rails',   github: 'rails/sass-rails'
   gem 'compass'
   gem 'compass-rails'
-  gem 'coffee-rails', '~> 3.2.2'
+  gem 'coffee-rails', github: 'rails/coffee-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'font-awesome-rails'
