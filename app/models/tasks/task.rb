@@ -23,17 +23,17 @@ class Tasks::Task < ActiveRecord::Base
   workflow do
     state :formulated do
       event :cancel, transitions_to: :cancelled
-      event :start, transitions_to: :active
+      event :start, transitions_to: :activated
     end
 
-    state :active do
+    state :activated do
       event :cancel, transitions_to: :cancelled
       event :finish, transitions_to: :executed
       event :pause, transitions_to: :paused
     end
 
     state :paused do
-      event :resume, transitions_to: :active
+      event :resume, transitions_to: :activated
     end
 
     state :executed do
