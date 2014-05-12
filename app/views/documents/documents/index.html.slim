@@ -35,9 +35,11 @@
         li = link_to 'Акты', documents_path(with_type:'reports')
         li = link_to 'Непрочитанные', documents_path(with_type:'unread')
 
-= @test.map(&:id).inspect
+/ переменная для тестирования видимых документов с согласованиями
+/ по какой-то причине sql запрос работает плохо
+/ но т.к.этот код был в dev, то его скрыли
+/= @test.map(&:id).inspect
 
-/= params[:with_state]
 = content_for :page_header_search do
   = render 'quick_search_for'
 
