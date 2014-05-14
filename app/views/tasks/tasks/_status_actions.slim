@@ -1,4 +1,4 @@
-ul.nav.nav-inline.btn-block
+ul.nav.nav-inline.btn-block.js-tasks-actions
   - resource.current_state.events.keys.each do |event_name|
     - if [:start ,:finish].include?(event_name)
       - additional_classes = 'btn btn-primary'

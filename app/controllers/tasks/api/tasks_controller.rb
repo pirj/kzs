@@ -1,5 +1,5 @@
 class Tasks::Api::TasksController < ResourceController
-  layout nil
+  layout false
 
   before_filter :permit_params, only: [:create, :update]
   has_scope :for_organization, only: [:index]
@@ -51,7 +51,7 @@ class Tasks::Api::TasksController < ResourceController
 
       respond_to do |format|
         format.json { render json: {is_transition: @is_transition, current_state: resource.current_state.to_s} }
-        format.js { render json: {is_transition: @is_transition, data: resource.to_json, current_state: resource.current_state.to_s} }
+        format.js { render "task_state_update" }
       end
     end
   end
