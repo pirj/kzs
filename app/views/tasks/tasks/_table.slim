@@ -6,6 +6,7 @@
         th.col-words-8 Дата
         th.col-words-15 Заголовок
         th.col-words-8 Действия
+        th.col-words-8 Статус
 
     tbody
       - if @tasks.empty?
@@ -22,7 +23,8 @@
             td
               = task.title
             td
-              / TODO-tagir: так роутинг не пишут. Го читать про routes в рельсах
               = link_to 'Редактировать', edit_task_path(task)
+            td
+              = task.current_state
 
 

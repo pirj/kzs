@@ -1,13 +1,19 @@
 ul.nav.nav-inline.btn-block
-  li
-    - if resource.formulated?
-      = link_to 'Начать', start_api_task_path(@task.id), class: "btn btn-primary", remote: true, method: :post
-    - elsif resource.activated?
-      = link_to 'Принять', finish_api_task_path(@task.id), class: "btn btn-primary", remote: true, method: :post
-  li
-    - if resource.activated?
-      = link_to 'На паузу', pause_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
-    - elsif resource.paused?
-      = link_to 'Продолжить', resume_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
-  li  
-    = link_to 'Отменить', cancel_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
+  - resource.current_state.events.keys.each do |event_name|
+    - if [:start ,:finish].include?(event_name)
+      - additional_classes = 'btn btn-primary'
+    - else
+      - additional_classes = 'btn btn-default'
+    li = link_to event_name, polymorphic_path([event_name, :api, resource]), class: additional_classes, remote: true, method: :post
+  /li
+  /  - if resource.formulated?
+  /    = link_to 'Начать', start_api_task_path(@task.id), class: "btn btn-primary", remote: true, method: :post
+  /  - elsif resource.activated?
+  /    = link_to 'Принять', finish_api_task_path(@task.id), class: "btn btn-primary", remote: true, method: :post
+  /li
+  /  - if resource.activated?
+  /    = link_to 'На паузу', pause_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
+  /  - elsif resource.paused?
+  /    = link_to 'Продолжить', resume_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
+  /li
+  /  = link_to 'Отменить', cancel_api_task_path(@task.id), class: "btn btn-default", remote: true, method: :post
