@@ -1,7 +1,14 @@
 = content_for :page_header do
   = header_back_btn tasks_path
   = header_title do
-    h1 = resource.title
+    .col-sm-6
+      span.text-help СТАТУС:
+      span.col-words-1
+      span.spec-doc-state-field = @task.current_state
+
+h1 = resource.title
+
+= render 'status_actions'
 
 .row-fuild
   .form-group.row

@@ -168,6 +168,7 @@ Kzs::Application.routes.draw do
           post 'pause'
           post 'resume'
           post 'reformulate'
+          post 'finish'
         end
       end
     end

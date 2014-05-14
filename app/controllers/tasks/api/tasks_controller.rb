@@ -42,7 +42,7 @@ class Tasks::Api::TasksController < ResourceController
   #
   # самое простое обращение к этим методам через ссылку во вьюхе:
   # link_to 'action_name', action_api_tasks_path(task_id), remote: true, method: :post
-  %w(cancel start pause resume reformulate).each do |method_name|
+  %w(cancel start pause resume reformulate finish).each do |method_name|
     define_method method_name do
       @is_transition = false
       if params[:id] && params[:action] && resource.current_state.events.keys.include?(params[:action].to_sym)
