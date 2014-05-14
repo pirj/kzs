@@ -4,7 +4,7 @@ gem 'rails', '~> 4.1.1'
 gem 'pg'
 
 # ActiveRecord Query DSL
-gem 'squeel', github: "activerecord-hackery/squeel"
+gem "squeel", :git => "git://github.com/activerecord-hackery/squeel.git"
 # Search object processor
 gem "polyamorous", :github => "activerecord-hackery/polyamorous"
 gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4.1"
