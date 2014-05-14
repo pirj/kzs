@@ -1,0 +1,63 @@
+h1 = resource.title
+
+= render 'status_actions'
+
+.row-fuild
+  .form-group.row
+    .col-md-2.text-help.text-right Контрольные лица:
+    .col-md-7
+      - resource.approvers.each do |approver|
+        = link_to approver.first_name_with_last_name, '#'
+  .form-group.row
+    .col-md-2.text-help.text-right Исполнители:
+    .col-md-7
+      - resource.executors.each do |executor|
+        = link_to executor.first_name_with_last_name, '#'
+  - unless resource.started_at.blank?
+    .form-group.row
+      .col-md-2.text-help.text-right Дата начала:
+      .col-md-7
+        = DateFormatter.new resource.started_at
+  - unless resource.finished_at.blank?
+    .form-group.row
+      .col-md-2.text-help.text-right Дата окончания:
+      .col-md-7
+        = DateFormatter.new resource.finished_at
+  .form-group.row
+    .col-md-2.text-help.text-right Описание:
+    .col-md-7
+      = resource.text
+
+- unless resource.checklists.blank?
+
+  .row-fuild
+    h2 Задачи
+    - resource.checklists.each do |checklist|
+      .form-group.row
+        .col-md-2.text-help.text-right Название списка:
+        .col-md-7 #{checklist.name}
+      .form-group.row
+        .col-md-2.text-help.text-right Создан:
+        .col-md-7 #{checklist.updated_at}
+      .form-group.row
+        .col-md-2.text-help.text-right Обновлен:
+        .col-md-7 #{checklist.created_at}
+
+      = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
+        - i = 1
+        - checklist_builder.simple_fields_for :checklist_items do |f|
+          .form-group.row._task
+            .col-sm-1
+              = f.input :checked, label: false, input_html: {class: 'js-form-submit'}
+            .col-sm-7
+
+              ._task-title
+                ._task-num = i
+                - i+=1
+                = f.object.name
+              ._task-comment = f.object.description
+            .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.updated_at)
+
+.row
+  .col-md-12.js-buttons-place
+    = link_to 'Редактировать', edit_task_path(resource), class: 'btn btn-default'

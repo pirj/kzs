@@ -25,13 +25,15 @@ class Gantt
 
       e.preventDefault()
       request = $.ajax(
-        url: "/tasks/#{id}/edit"
+        url: "/tasks/#{id}/"
         type: 'GET'
         dataType: "script"
       )
 
       request.done (data, textStatus, jqXHR) =>
-#        console.log(textStatus)
+#        console.log(data)
+
+#        window.app.GanttView.displayPage(data);
         return
 
       request.fail (jqXHR, textStatus, errorThrown) ->
@@ -193,6 +195,21 @@ class Gantt
     $(".modal-backdrop.in").hide()
     $formContainer.find(".js-datepicker").datepicker global.datepicker
     $(".js-chosen").chosen global.chosen
+
+  displayPage: (page) =>
+    $modalContainer = $("#taskForm")
+    $formContainer = $(".js-new-task")
+    $formContainer.html page
+
+    $("<button type='button' class='btn btn-default' data-dismiss='modal'>Отмена</button>").appendTo ".js-buttons-place"
+    $modalContainer.modal 'show'
+
+    $(".modal-backdrop.in").hide()
+    $('input[type="checkbox"], input[type="radio"]').not('.js-icheck-off input, .js-icheck-off').iCheck(
+      checkboxClass: 'icheckbox_flat-green checkbox-inline'
+      radioClass: 'iradio_flat-green radio-inline'
+      disabledClass: 'js-ichecked-input'
+    )
 
   clearForm: () =>
     $modalContainer = $("#taskForm")
