@@ -13,8 +13,8 @@ class Tasks::TasksController < ResourceController
 
   def new
     @task = Tasks::Task.new
-    @task.checklists.build
-    @task.checklists.last.checklist_items.build
+    # @task.checklists.build
+    # @task.checklists.last.checklist_items.build
   end
 
   def create

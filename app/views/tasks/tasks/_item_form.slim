@@ -1,22 +1,15 @@
-br
-.row
-  .col-sm-2
-  .col-sm-9
-    h4 Задачи:
-= f.simple_fields_for :checklist_items  do |f|
+= f.simple_fields_for :checklist_items  do |item_builder|
+  = item_builder.input :name, label_hint:  'Краткое название дела'
+  = item_builder.input :description, label_hint:  'Подробности дела', input_html: { rows: 2 }
 
-  = f.input :name, label_hint:  'Название задачи'
-  = f.input :description, label_hint:  'описание'
+  .col-sm-12.b-offset-sm
+    .b
+      .col-sm-3.col-sm-offset-2
+        = item_builder.link_to_remove class: 'link link-danger' do
+          span.fa.fa-minus-circle
+          span Убрать дело
 
-  .form-group
-    .row-fuild
-      .col-sm-2
-      .col-sm-9
-        = f.link_to_remove 'delete item', class: 'btn btn-danger'
-
-.form-group
-  .row-fuild
-    .col-sm-2
-    .col-sm-9
-      = f.link_to_add 'Add a item', :checklist_items, class: 'btn btn-primary '
-      .col-words-1
+.b
+  = f.link_to_add :checklist_items, class: 'btn btn-primary col-sm-offset-2' do
+    span.fa.fa-plus-circle
+    span Добавить дело

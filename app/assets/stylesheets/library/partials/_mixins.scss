@@ -992,6 +992,6 @@
 @mixin icon-offset($offset){
   .fa + span,
   span + .fa{
-    padding-left: $offset;
+    margin-left: $offset;
   }
 }

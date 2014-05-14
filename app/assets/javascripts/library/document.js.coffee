@@ -116,7 +116,7 @@ $ ->
 
   # styling attachment file fields
   $(document).on('nested:fieldAdded', (e) ->
-    $field = $(e.field).find('input')
+    $field = $(e.field).find('input[type=file]')
     $field.wrap('<div class="col-sm-offset-2 col-sm-5"></div>')
     $field.filestyle()
   )

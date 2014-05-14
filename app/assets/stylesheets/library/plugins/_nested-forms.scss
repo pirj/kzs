@@ -1,3 +1,7 @@
+.fields{
+  @include clearfix();
+}
+
 .fields-inline{
   .fields{
     display: inline;

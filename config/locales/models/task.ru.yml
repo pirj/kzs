@@ -14,3 +14,11 @@ ru:
         finished_at: Дата окончания
         approvers: Контрольные лица
         executors: Исполнители
+
+
+      tasks/checklist:
+        name: Название списка дел
+
+      tasks/checklist_item:
+        name: Название дела
+        description: Описание дела

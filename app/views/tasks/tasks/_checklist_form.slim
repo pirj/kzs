@@ -1,16 +1,21 @@
-= f.simple_fields_for :checklists  do |builder|
-  = builder.input :name, label_hint:  'Название чеклиста'
-  /= builder.submit 'save', label_html: { title: 'Название чеклиста' }
+= f.simple_fields_for :checklists do |checklist_builder|
+  .well
+    .b
+      .col-sm-12.col-sm-offset-2
+        h3
+          | Список дел
+          .col-words-1
+          small
+            = checklist_builder.link_to_remove class: 'link link-danger' do
+              span.fa.fa-minus-circle
+              span исключить
 
-  .form-group
-    .row-fuild
-      .col-sm-2
-      .col-sm-9
-        = builder.link_to_remove 'delete list', class: 'btn btn-danger'
-  = render 'item_form', f: builder
-.form-group
-  .row-fuild
-    .col-sm-2
+    .b-offset-sm = checklist_builder.input :name, label_hint:  'Название чеклиста'
 
-    .col-sm-9
-      = f.link_to_add 'Add a checklist', :checklists, class: 'btn btn-default'
+    = render 'item_form', f: checklist_builder
+
+/ кнопка добавить чеклист
+= f.link_to_add :checklists, class: 'btn btn-big btn-mega-primary' do
+  span.fa.fa-plus-circle
+  span Добавить список дел
+
