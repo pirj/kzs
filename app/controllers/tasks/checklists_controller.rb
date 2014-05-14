@@ -4,6 +4,8 @@ class Tasks::ChecklistsController < ResourceController
 
   respond_to :js, :html
 
-
+  def update
+    render nothing: true
+  end
 
 end

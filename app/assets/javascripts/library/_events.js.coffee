@@ -149,7 +149,7 @@ $ ->
 
 
   $(document).on('ifChecked ifUnchecked', ".js-form-submit", (e) ->
-#    $(e.target).closest('form').submit()
+    $(e.target).closest('form').submit()
     )
 #    return
   # CLEAR PAGE

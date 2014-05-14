@@ -67,7 +67,10 @@ h1 = resource.title
 
             ._task-comment = checklist_item.description
 
-      = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklists_path([resource,checklist]) do |checklist_builder|
+      = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
+
+
+
         - checklist_builder.simple_fields_for :checklist_items do |f|
           .form-group.row._task
             .col-sm-1
@@ -78,7 +81,7 @@ h1 = resource.title
                 ._task-num = f.object.id
                 = f.object.name
               ._task-comment = f.object.description
-              .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.updated_at)
+            .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.updated_at)
 
 
 
