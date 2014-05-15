@@ -68,7 +68,10 @@ class Tasks::Api::TasksController < ResourceController
                       description: task.text,
                       start_date: task.started_at.localtime.strftime("%d-%m-%Y"),
                       duration: days_duration_for(task),
-                      checklist: task.checklists
+                      checklist: task.checklists,
+                      checklist_items: task.checklists.map do |check_list|
+                         check_list.checklist_items
+                      end
                   }
                 end
     }

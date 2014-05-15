@@ -7,4 +7,5 @@ class Tasks::Checklist < ActiveRecord::Base
   accepts_nested_attributes_for :checklist_items, allow_destroy: true
 
   validates :name, presence: true
+
 end
