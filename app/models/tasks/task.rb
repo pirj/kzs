@@ -2,7 +2,7 @@ class Tasks::Task < ActiveRecord::Base
   attr_accessible :text, :title,
                   :organization, :organization_id,
                   :executors, :executor_ids,
-                  :inspectors, :inspectors_ids,
+                  :inspectors, :inspector_ids,
                   :started_at, :finished_at, :checklists_attributes
   
   has_and_belongs_to_many :executors, class_name: 'User', join_table: "tasks_tasks_executors"
