@@ -2,11 +2,11 @@ class Tasks::Task < ActiveRecord::Base
   attr_accessible :text, :title,
                   :organization, :organization_id,
                   :executors, :executor_ids,
-                  :approvers, :approver_ids,
+                  :inspectors, :inspectors_ids,
                   :started_at, :finished_at, :checklists_attributes
   
   has_and_belongs_to_many :executors, class_name: 'User', join_table: "tasks_tasks_executors"
-  has_and_belongs_to_many :approvers, class_name: 'User', join_table: "tasks_tasks_approvers"
+  has_and_belongs_to_many :inspectors, class_name: 'User', join_table: "tasks_tasks_inspectors"
   belongs_to :organization
 
   has_many :checklists
@@ -14,7 +14,7 @@ class Tasks::Task < ActiveRecord::Base
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
 
-  validates :title, :text, :executor_ids, :approver_ids, :organization_id, :presence => true
+  validates :title, :text, :executor_ids, :inspector_ids, :organization_id, :presence => true
 
   include Workflow
 

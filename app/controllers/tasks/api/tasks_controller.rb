@@ -15,7 +15,7 @@ class Tasks::Api::TasksController < ResourceController
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
       task.organization = current_user.organization
       # заглушка на первое время,чтобы не выключать валидации в модели
-      task.approvers << User.where(organization_id: current_user.organization.id).first
+      task.inspectors << User.where(organization_id: current_user.organization.id).first
       task.executors << User.where(organization_id: current_user.organization.id).last
     end
     super
@@ -25,7 +25,7 @@ class Tasks::Api::TasksController < ResourceController
   def update
     @task = Tasks::Task.find(params[:id])
     @task.organization ||= current_user.organization
-    @task.approvers << User.where(organization_id: current_user.organization.id).first  if @task.approvers.blank?
+    @task.inspectors << User.where(organization_id: current_user.organization.id).first  if @task.inspectors.blank?
     @task.executors << User.where(organization_id: current_user.organization.id).last   if @task.executors.blank?
     super
   end

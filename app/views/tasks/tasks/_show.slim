@@ -6,8 +6,8 @@ h1 = resource.title
   .form-group.row
     .col-md-2.text-help.text-right Контрольные лица:
     .col-md-7
-      - resource.approvers.each do |approver|
-        = link_to approver.first_name_with_last_name, '#'
+      - resource.inspectors.each do |inspector|
+        = link_to inspector.first_name_with_last_name, '#'
   .form-group.row
     .col-md-2.text-help.text-right Исполнители:
     .col-md-7

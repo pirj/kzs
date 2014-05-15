@@ -15,7 +15,7 @@
       | Составитель
     .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
 
-  = f.association :approvers, collection: current_organization_users, \
+  = f.association :inspectors, collection: current_organization_users, \
                               label_method: :first_name_with_last_name, \
                               input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
                               label_hint: 'Лицо, указанное в задаче, как контрольное лицо'
