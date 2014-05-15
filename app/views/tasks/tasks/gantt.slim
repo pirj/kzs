@@ -2,13 +2,51 @@
 
   = header_title do
     .dropdown.header
-      h1
-        | Диаграмма задач
+      h1.dropdown-toggle data-toggle="dropdown"
+        a href="/tasks"
+        - case params[:with_state]
+          - when 'formulated'
+          | Сформированные
+          - when 'activated'
+          | В работе
+          - when 'cancelled'
+          | Отмененные
+          - when 'paused'
+          | Приостановленные
+          - when 'executed'
+          | Выполненные
+          - else
+          | Задачи
+        span.caret
+      ul.dropdown-menu role="menu"
+        - if params[:with_state] || params[:with_type]
+          li
+            = link_to 'Все задачи', tasks_tasks_path
+        li = link_to 'Сформированные', tasks_tasks_path(with_state:'formulated')
+        li = link_to 'В работе', tasks_tasks_path(with_state:'activated')
+        li = link_to 'Отмененные', tasks_tasks_path(with_state:'cancelled')
+        li = link_to 'Приостановенные', tasks_tasks_path(with_state:'paused')
+        li = link_to 'Выполненные', tasks_tasks_path(with_state:'executed')
 
-  ul.nav.nav-inline.btn-block
-    li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-default'
-    li = link_to 'Таблица', tasks_path, class: 'btn btn-default'
-  #gantt_here style='height: 500px; width: 1050px;'
+  = content_for :page_header_search do
+    = render 'shared/quick_search_for'
+.row
+  .col-sm-9
+    ul.nav.nav-inline.btn-block
+      li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-primary'
+      li = link_to '', tasks_tasks_path, class: 'btn btn-default fa fa-arrow-left'
+      /li = link_to 'Таблица', tasks_path, class: 'btn btn-default'
+  .col-sm-3
+    .dropdown.btn.btn-link-muted.pull-left
+      .dropdown-toggle data-toggle="dropdown"
+        span Период
+        span.caret
+      ul.dropdown-menu role="menu"
+        li
+          a раз
+        li
+          a два
+#gantt_here style='height: 500px; max-width: 1100px;'
 
 
   a#year href='#' год

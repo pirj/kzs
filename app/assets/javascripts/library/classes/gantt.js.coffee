@@ -67,9 +67,11 @@ class Gantt
   initCustomFields: () =>              #!!!
     #колонки слева
     gantt.config.columns=[
+      {name:"checkbox",       label:"",  tree:true, width:34 },
       {name:"title",       label:"Заголовок",  tree:true, width:170 },
-      {name:"start_date", label:"Начало", align: "center" },
-      {name:"end_date",   label:"Окончание",   align: "center" }
+      {name:"start_date", label:"Начало", align: "left" },
+      {name:"inspector",   label:"Инспектор",   align: "left" },
+      {name:"state",   label:"Статус",   align: "left" }
 #      {name:"add" }
     ];
     #таск в таблице
