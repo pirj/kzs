@@ -4,7 +4,7 @@ h1 = resource.title
 
 .row-fuild
   .form-group.row
-    .col-md-2.text-help.text-right Контрольные лица:
+    .col-md-2.text-help.text-right Инспектора:
     .col-md-7
       - resource.inspectors.each do |inspector|
         = link_to inspector.first_name_with_last_name, '#'
