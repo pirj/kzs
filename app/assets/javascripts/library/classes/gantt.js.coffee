@@ -76,7 +76,8 @@ class Gantt
     ];
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
-      task.title
+      console.log(task)
+      task.title + "<b>Text:</b> "
     # модальное окно
     gantt.locale.labels.section_title = "Заголовок"
     gantt.locale.labels.section_details = "Описание"
