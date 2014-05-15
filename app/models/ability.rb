@@ -86,6 +86,61 @@ class Ability
         doc.conformers.include?(user) && !user.made_decision?(doc)
     end
 
+    ### Модуль «Задачи»
+
+    # Инспектор может редактировать все аттрибуты задачи
+    can :edit_attributes, Tasks::Task do |task|
+        task.inspectors.include? user
+    end
+
+    # Инспектор или исполнитель могут редактировать контрольные списки (чеклисты)
+    can :edit_checklists, Tasks::Task do |task| 
+        task.inspectors.include?(user) || task.executors.include?(user)
+    end
+
+    # Инспектор может редактировать список инспекторов
+    can :edit_inspectors, Tasks::Task do |task|
+        task.inspectors.include? user
+    end
+
+    # Инспектор или исполнитель могут редактировать список исполнителей 
+    can :edit_executors, Tasks::Task do |task|
+        task.inspectors.include?(user) || task.executors.include?(user)
+    end
+
+    # Исполнитель может начать задачу
+    can :start, Tasks::Task do |task| 
+        task.executors.include? user
+    end
+
+    # Исполнитель может закончить задачу
+    can :finish, Tasks::Task do |task|
+        task.executors.include? user
+    end
+
+    # Исполнитель может поставить задачу на паузу
+    can :pause, Tasks::Task do |task|
+        task.executors.include? user
+    end
+
+    # Исполнитель может возобновить выполнение задачи
+    can :resume, Tasks::Task do |task|
+        task.executors.include? user
+    end
+
+    # Инспектор может переформулировать задачу
+    can :reformulate, Tasks::Task do |task|
+        task.inspectors.include? user
+    end
+
+    # Инспектор может отменить задачу
+    can :cancel, Tasks::Task do |task|
+        task.inspectors.include? user
+    end
+
+    ### / Модуль «Задачи»
+    
+
     if user.sys_user
       can :manage, User
       can :manage, Group
