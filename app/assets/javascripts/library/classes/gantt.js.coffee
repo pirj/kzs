@@ -69,9 +69,9 @@ class Gantt
     gantt.config.columns=[
       {name:"checkbox",       label:"",  tree:true, width:34 },
       {name:"title",       label:"Заголовок",  tree:true, width:170 },
-      {name:"start_date", label:"Начало", align: "left" },
-      {name:"inspector",   label:"Инспектор",   align: "left" },
-      {name:"state",   label:"Статус",   align: "left" }
+      {name:"start_date", label:"Начало", align: "left", width:170 },
+      {name:"inspector",   label:"Инспектор",   align: "left", width:170 },
+      {name:"state",   label:"Статус",   align: "left", width:170 }
 #      {name:"add" }
     ];
 

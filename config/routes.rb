@@ -172,7 +172,6 @@ Kzs::Application.routes.draw do
         end
       end
     end
-    get 'tasks/gantt' => 'tasks#gantt', :as => 'tasks_tasks'
     resources :tasks do
       resources :checklists
     end

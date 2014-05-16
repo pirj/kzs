@@ -28,7 +28,7 @@
 .gantt_grid{border-right:1px solid #cecece}.gantt_task_scroll{overflow-x:scroll}
 .gantt_task{position:relative}.gantt_task,.gantt_grid{overflow-x:hidden;overflow-y:hidden;display:inline-block;vertical-align:top}
 .gantt_grid_scale,.gantt_task_scale{color:#6b6b6b;font-size:12px;border-bottom:1px solid #cecece}
-.gantt_grid_scale{background-color:#fff}.gantt_task_scale{background-color:#fff}
+.gantt_grid_scale{background-color:#ecf0f1}.gantt_task_scale{background-color:#fff}
 .gantt_scale_line{box-sizing:border-box;-moz-box-sizing:border-box;border-top:1px solid #cecece}
 .gantt_scale_line:first-child{border-top:0}
 .gantt_grid_head_cell{display:inline-block;vertical-align:top;border-right:1px solid #cecece;text-align:center;position:relative;cursor:default;height:100%;box-sizing:border-box;-moz-box-sizing:border-box;line-height:33px;-moz-user-select:-moz-none;-webkit-user-select:none;-user-select:none}
@@ -85,3 +85,7 @@
 .gantt_row.gantt_transparent .gantt_cell{opacity:.7}
 .gantt_task_row.gantt_transparent{background-color:#f8fdfd}
 .dhtmlx_popup_button.dhtmlx_delete_button{background:#3db9d3;text-shadow:0 -1px 0 #248a9f;color:#fff;font-weight:700;border-width:0}
+
+gantt_grid_head_title {
+
+}

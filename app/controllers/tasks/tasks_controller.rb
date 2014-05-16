@@ -6,10 +6,8 @@ class Tasks::TasksController < ResourceController
 
   respond_to :js, :html
 
-  helper_method :mapped_resource
+  helper_method :mapped_resource, :collection_path
 
-  def gantt
-  end
 
   def new
     @task = Tasks::Task.new
@@ -36,6 +34,10 @@ class Tasks::TasksController < ResourceController
     tasks_path
   end
 
+  def collection_path
+    tasks_path
+  end
+
   def resource_url
     task_path(resource)
   end
@@ -53,5 +55,7 @@ class Tasks::TasksController < ResourceController
   def days_duration_for(task)
     (task.finished_at - task.started_at).to_i/1.day if task.started_at && task.finished_at
   end
+
+
 
 end
