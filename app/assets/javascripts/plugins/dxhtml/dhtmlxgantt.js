@@ -5517,17 +5517,6 @@ gantt.addLink = function(link) {
     return link.id;
 };
 
-
-/*          custom              */
-
-gantt.addFlag = function(flag) {
-
-}
-
-
-/*          custom end             */
-
-
 gantt.updateLink = function(id, data) {
     if (!dhtmlx.defined(data))
         data = this.getLink(id);

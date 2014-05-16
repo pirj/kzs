@@ -71,3 +71,11 @@
 
 // Widgets classes
 @import 'widgets/*';
+
+.task_flag {
+  width: 5px;
+  height: 5px;
+  background: red;
+  position: absolute;
+  top: 12px;
+}

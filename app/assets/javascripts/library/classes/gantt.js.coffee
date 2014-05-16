@@ -74,9 +74,11 @@ class Gantt
       {name:"state",   label:"Статус",   align: "left" }
 #      {name:"add" }
     ];
+
+    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
-      console.log(task)
+#      console.log(task)
       task.title + "<b>Text:</b> "
     # модальное окно
     gantt.locale.labels.section_title = "Заголовок"
