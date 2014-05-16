@@ -1,7 +1,14 @@
+.gantt_task_content > div {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .task_flag {
   width: 5px;
   height: 5px;
   background: red;
   position: absolute;
   top: 12px;
+
 }

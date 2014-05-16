@@ -1,6 +1,7 @@
 = f.simple_fields_for :checklist_items  do |item_builder|
   = item_builder.input :name, label_hint:  'Краткое название дела'
   = item_builder.input :description, label_hint:  'Подробности дела', input_html: { rows: 2 }
+  = item_builder.input :finished_at, input_html: { rows: 2 }, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой задача должна быть исполнена'
 
   .col-sm-12.b-offset-sm
     .b

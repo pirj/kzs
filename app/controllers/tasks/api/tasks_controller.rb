@@ -70,7 +70,16 @@ class Tasks::Api::TasksController < ResourceController
                       duration: days_duration_for(task),
                       checklist: task.checklists,
                       checklist_items: task.checklists.map do |check_list|
-                         check_list.checklist_items
+                         check_list.checklist_items.map do |item|
+                          {
+                            checked: item.checked,
+                            id: item.id,
+                            checklist_id: item.checklist_id,
+                            finished_at: item.finished_at.try(:localtime).try(:strftime, "%d-%m-%Y"),
+                            description: item.description,
+                            name: item.name
+                          }
+                         end
                       end
                   }
                 end

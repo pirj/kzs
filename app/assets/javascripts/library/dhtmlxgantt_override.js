@@ -1,32 +1,36 @@
 gantt._render_task_flags = function (task, width) {
-//    console.log(width)
-// ;
-//    console.log(task.started_at);
 
     var flag_container = document.createElement('div');
 
     // сколько чеклистов
     for (var i = 0; i < task.checklist_items.length; i++) {
-
-
         for (var j=0; j < task.checklist_items[i].length; j++){
-            flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date));
+            flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date, width));
         }
+    }
+    console.log(task)
+    return flag_container;
 
+};
+
+gantt._render_task_flag = function(flag, task_started_at, width) {
+
+    var offset_left,  x_pos_end, x_pos_start;
+    if (flag.finished_at===null) {
+        x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date')) ;
+//        x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
+        offset_left = width;
+        console.log(width);
+    }
+    else
+    {
+         x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
+            x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date'));
+         offset_left = x_pos_end-x_pos_start ;
     }
 
 
-    return flag_container;
 
-//
-//    return document.createElement('p');
-};
-
-gantt._render_task_flag = function(flag, task_started_at) {
-//    console.log(task_started_at)
-    var  x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date')),
-        x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date'));
-    var offset_left = x_pos_end-x_pos_start ;
 
     var div =document.createElement('div');
 

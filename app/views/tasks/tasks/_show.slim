@@ -56,7 +56,7 @@ h1 = resource.title
                 - i+=1
                 = f.object.name
               ._task-comment = f.object.description
-            .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.updated_at)
+            .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.finished_at)
 
 .row
   .col-md-12.js-buttons-place

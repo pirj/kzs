@@ -5,7 +5,7 @@ class Tasks::ChecklistItem < ActiveRecord::Base
 
   validates :name, presence: true
 
-  def finished_at
-    (DateTime.now + rand(3).days).strftime("%d-%m-%Y")
-  end
+  #def finished_at
+  #  (self.checklist.task.started_at + rand(3).days).strftime("%d-%m-%Y")
+  #end
 end
