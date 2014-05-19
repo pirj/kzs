@@ -1,0 +1,34 @@
+.task_flag {
+  width: 5px;
+  height: 5px;
+  background: red;
+  position: absolute;
+  top: 12px;
+}
+
+.js-gantt-timeline {
+  position: absolute;
+  width: 2px;
+  background: red;
+  height: 1000px;
+  z-index: 1000;
+  top: -50px;
+  display: block;
+  .gantt-timeline-label {
+    position: relative;
+    left: 2px;
+    color: #fff;
+    background: green;
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    top: 50px;
+    display: inline-block;
+  }
+}
+
+.gantt_task {
+  top:-50px;
+  padding-top: 50px;
+}

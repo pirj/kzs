@@ -1,23 +1,9 @@
-gantt._render_now_line = function (task, width) {
-//    console.log(width)
-// ;
-//    console.log(task.started_at);
+gantt.templates.scale_cell_class = function(date){
+    var time_now = new Date("2014, 04, 16");
+    var clean_dates = date.setHours(0, 0, 0, 0);
 
-var flag_container = document.createElement('div');
+    if( clean_dates == time_now.setHours(0, 0, 0, 0)){
+        return 'gantt-timeline';
+    }
 
-// сколько чеклистов
-for (var i = 0; i < task.checklist_items.length; i++) {
-
-
-  for (var j=0; j < task.checklist_items[i].length; j++){
-  flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date));
-}
-
-}
-
-
-return flag_container;
-
-//
-//    return document.createElement('p');
 };

@@ -8,7 +8,7 @@ class Gantt
     @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)                                     #Инициализация модуля Гант
     @.getTasks()
-
+    @.createTimeline()
     ########################################## далее обработчики событий ###############################################
 
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
@@ -108,6 +108,15 @@ class Gantt
 
       }
     ]
+
+
+  createTimeline: ->
+    gantt.attachEvent "onGanttRender", ->
+      $(".gantt-timeline").append "<div class=\"js-gantt-timeline\"><div class=\"gantt-timeline-label\">Сегодня</div></div>"
+      console.log "dsd"
+      return
+    return
+
 
   getTasks: () =>             #получение данных  (и парсинг)
     request = $.ajax(
