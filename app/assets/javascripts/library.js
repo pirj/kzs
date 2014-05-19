@@ -22,4 +22,7 @@
 //= require ckeditor/init
 //= require library/permit
 //= require ckeditor/ckeditor
+//= require react
+//= require react_ujs
 //= require_tree ./library
+//= require_tree ./react_widgets

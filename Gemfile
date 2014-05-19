@@ -127,3 +127,9 @@ group :test do
   gem 'database_cleaner'
   gem 'test_after_commit'
 end
+
+
+# reactjs requires
+gem 'react-rails', git: 'https://github.com/reactjs/react-rails'
+gem 'execjs'
+gem 'therubyracer'
