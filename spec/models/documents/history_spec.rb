@@ -12,8 +12,8 @@ describe Documents::History do
   end
 
   describe '#fetch_documents_for' do
-    let(:sender)      { FactoryGirl.create :simple_organization              }
-    let(:recipient)   { FactoryGirl.create :simple_organization              }
+    let(:sender)      { FactoryGirl.create :organization }
+    let(:recipient)   { FactoryGirl.create :organization }
     let(:accountable) do
       mail = FactoryGirl.create :mail
       mail.sender_organization = sender

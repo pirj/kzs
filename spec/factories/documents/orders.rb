@@ -28,10 +28,20 @@ FactoryGirl.define do
       end
     end
 
-    factory :approved_order do
+    factory :prepared_order do
+
+      after(:build) do |instance, ev|
+        instance.recipient_organization { FactoryGirl.create(:recipient_organization) }
+      end
+
       after(:create) do |instance, ev|
         instance.transition_to! :prepared
-        instance.transition_to! :approved
+      end
+
+      factory :approved_order do
+        after(:create) do |instance, ev|
+          instance.transition_to! :approved
+        end
       end
     end
 

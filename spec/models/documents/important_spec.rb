@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe Documents::Important do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:organization) { user.organization }
+  let(:organization) { FactoryGirl.create(:organization) }
+  let(:user) { organization.admin }
+  
 
-  let(:mail) { FactoryGirl.create(:mail) }
+  let(:mail) { FactoryGirl.create(:prepared_mail) }
 
   let(:inbox_mail) do
-    mail = FactoryGirl.build(:mail)
     mail.recipient_organization = organization
     mail.save!
     mail.transition_to!(:prepared)
@@ -16,10 +16,9 @@ describe Documents::Important do
   end
 
   let(:inbox_order) do
-    order = FactoryGirl.build(:order)
+    order = FactoryGirl.create(:prepared_order)
     order.recipient_organization = organization
     order.save!
-    order.transition_to!(:prepared)
     order.transition_to!(:approved)
     order.transition_to!(:sent)
   end
