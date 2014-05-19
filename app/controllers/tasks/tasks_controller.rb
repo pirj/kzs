@@ -9,6 +9,9 @@ class Tasks::TasksController < ResourceController
   helper_method :mapped_resource, :collection_path
 
 
+  def list
+  end
+
   def new
     @task = Tasks::Task.new
     # @task.checklists.build

@@ -172,6 +172,7 @@ Kzs::Application.routes.draw do
         end
       end
     end
+    get 'tasks/list' => 'tasks#list', :as => 'tasks_list'
     resources :tasks do
       resources :checklists
     end
