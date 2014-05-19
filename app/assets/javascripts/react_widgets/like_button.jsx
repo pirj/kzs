@@ -7,7 +7,6 @@ var LikeButton = React.createClass({
 
    getInitialState: function(props) {
      props = props || this.props;
-     console.log(props);
      return {liked: props.liked};
    },
 

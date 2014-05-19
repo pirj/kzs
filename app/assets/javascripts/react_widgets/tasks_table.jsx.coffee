@@ -35,9 +35,9 @@ R = React.DOM
       ])
     )
 
-    console.log JSON.stringify(@.state.data)
-    R.div({className: 'vit-class'}, [
-      R.p({}, @.props.name),
-      R.p({}, @.props.url),
-      { render_data }
-    ])
+    column_names = ['title', 'checked', 'start_date', 'duration']
+
+    R.table({className: 'vit-table'}, [
+      TasksTableHeader({column_names: column_names}),
+      TasksTableList({column_names: column_names, data: @.state.data})
+])
