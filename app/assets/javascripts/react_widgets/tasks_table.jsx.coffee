@@ -8,11 +8,14 @@ R = React.DOM
 
   getInitialState: ->
     data: []
+    search_params: {}
 
-  componentWillMount: ->
+  getDataFromServer: ->
     $.ajax
       url: @props.url
       dataType: "json"
+      data:
+        q: @.state.search_params
       success: ((data) ->
         @setState data: data['data']
         return
@@ -21,6 +24,15 @@ R = React.DOM
         console.error @props.url, status, err.toString()
         return
       ).bind(this)
+
+  componentWillMount: ->
+    @.getDataFromServer()
+
+
+  onChangeSearchParams: (params) ->
+    console.log window.app=params
+    @.state = search_params: params
+    @.getDataFromServer()
 
 
 
@@ -35,9 +47,9 @@ R = React.DOM
       ])
     )
 
-    column_names = ['title', 'checked', 'start_date', 'duration']
+    column_names = ['title', 'start_date', 'duration']
 
     R.table({className: 'vit-table'}, [
-      TasksTableHeader({column_names: column_names}),
+      TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams}),
       TasksTableList({column_names: column_names, data: @.state.data})
 ])

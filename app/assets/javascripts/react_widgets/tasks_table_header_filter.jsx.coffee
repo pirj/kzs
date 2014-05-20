@@ -3,25 +3,27 @@ R = React.DOM
 
 @TasksTableHeaderFilter = React.createClass
 
-  getInitialState: ->
-    data: []
-    name: 'filter'
-
-
   getInitialState: (props) ->
     props = props || this.props
-    name: props.name
+    name: props.name || 'filter'
+    data: props.data || []
+    filter_popup_opened: false
+
+  # пробрасываем параметры из всплывающего окна наверх по цепочке зависимостей
+  onChangeFilterParams: (params) ->
+    @.props.onChangeFilterParams(
+      params
+    )
+
 
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
   iconClick: ->
-    console.log 'click'
     @.setState filter_popup_opened: !@.state.filter_popup_opened
 
   render: ->
     R.span({}, [
       R.span({onClick: @.iconClick}, @.state.name),
-      TasksTableHeaderFilterPopup()
+      TasksTableHeaderFilterPopup({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })
     ])
-

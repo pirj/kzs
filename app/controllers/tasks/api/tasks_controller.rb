@@ -6,8 +6,9 @@ class Tasks::Api::TasksController < ResourceController
   respond_to :json
 
   def index
+    @search = collection.ransack(params[:q])
     super do |success|
-      success.json { render json: collection_as_json }
+      success.json { render json: collection_as_json(@search.result(distinct:true)) }
     end
   end
 
@@ -59,9 +60,9 @@ class Tasks::Api::TasksController < ResourceController
 
   private
 
-  def collection_as_json
+  def collection_as_json(data)
     {
-        :data => collection.map do |task|
+        :data => data.map do |task|
                   {
                       id: task.id,
                       title: task.title,
