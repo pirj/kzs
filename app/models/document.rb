@@ -39,7 +39,7 @@ class Document < ActiveRecord::Base
   has_many :conformations, dependent: :destroy
 
   # Уведомления
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 

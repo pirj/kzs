@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140516094447) do
+ActiveRecord::Schema.define(:version => 20140519145034) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -217,11 +217,12 @@ ActiveRecord::Schema.define(:version => 20140516094447) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.integer "document_id", :null => false
-    t.integer "user_id",     :null => false
+    t.integer "notifiable_id",   :null => false
+    t.integer "user_id",         :null => false
+    t.string  "notifiable_type"
   end
 
-  add_index "notifications", ["document_id", "user_id"], :name => "index_notifications_on_document_id_and_user_id", :unique => true
+  add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], :name => "notification_uniqueness", :unique => true
 
   create_table "official_mails", :force => true do |t|
     t.datetime "created_at", :null => false
