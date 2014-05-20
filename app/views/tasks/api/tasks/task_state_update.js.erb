@@ -1,2 +1,2 @@
-$('.js-task-state').html('<%= @task.current_state %>');
+$('.js-task-state').html('<%= t("activerecord.tasks/task.state.#{@task.current_state}") %>');
 $('.js-tasks-actions a').closest('.js-tasks-actions').html('<%= j render("tasks/tasks/status_actions") %>');

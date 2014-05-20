@@ -4,6 +4,6 @@
     .col-sm-6
       span.text-help СТАТУС:
       span.col-words-1
-      span.js-task-state = @task.current_state
+      span.js-task-state = t("activerecord.tasks/task.state.#{@task.current_state}")
 
 = render 'show'
