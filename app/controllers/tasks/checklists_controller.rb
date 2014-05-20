@@ -5,7 +5,10 @@ class Tasks::ChecklistsController < ResourceController
   respond_to :js, :html
 
   def update
-    render nothing: true
+    super do |format|
+      format.js {render nothing: true}
+    end
+
   end
 
 end

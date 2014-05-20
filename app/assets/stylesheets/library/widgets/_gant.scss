@@ -10,5 +10,7 @@
   background: red;
   position: absolute;
   top: 12px;
-
+  &.f-checked{
+    background: green;
+  }
 }

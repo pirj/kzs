@@ -8,7 +8,7 @@ gantt._render_task_flags = function (task, width) {
             flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date, width));
         }
     }
-    console.log(task)
+
     return flag_container;
 
 };
@@ -20,7 +20,6 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
         x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date')) ;
 //        x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
         offset_left = width;
-        console.log(width);
     }
     else
     {
@@ -33,10 +32,11 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 
 
     var div =document.createElement('div');
-
+    console.log(flag)
     div.className = "task_flag";
-
-
+    if (flag.checked === true) {
+       div.classList.add('f-checked')
+    }
     div.style.cssText = [
         "left:" + offset_left + "px"
     ].join(";");
@@ -72,10 +72,8 @@ gantt._render_task_element = function(task){
 
 //    ADDDEDDDD @TAGIR
 
-//    console.log(task);
 
     div.appendChild(gantt._render_task_flags(task, width));
-//    ENDDDDDDD
     div.className = this._combine_item_class("gantt_task_line",
         this.templates.task_class(task.start_date, task.end_date, task),
         task.id);

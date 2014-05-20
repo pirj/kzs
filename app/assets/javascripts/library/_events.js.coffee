@@ -68,6 +68,19 @@ $ ->
   opts = _.extend(global.datepicker, minDate: date + data_days, max_date )
   $( '.js-datepicker.js-deadline' ).datepicker(opts)
 
+  # datepicker - for nested form
+
+  $(document).on "nested:fieldAdded", (event) ->
+
+    # this field was just inserted into your form
+    field = event.field
+
+    # it's a jQuery object already! Now you can find date input
+    dateField = field.find(".js-datepicker")
+    console.log(field)
+    # and activate datepicker on it
+    dateField.datepicker()
+    return
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
