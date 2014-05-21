@@ -76,6 +76,16 @@ class Gantt
     gantt.config.task_height = 6;
     console.log gantt.config.min_column_width = 54
 #    console.log gantt.config
+
+    #mouth scale_cell
+    gantt.config.scale_unit = "month";
+    gantt.config.step = 1;
+    gantt.config.date_scale = "%F %Y";
+    gantt.config.subscales = [
+      {unit:"day", step:1, date:"%d"}
+    ];
+
+    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
 #      task.title
@@ -116,7 +126,6 @@ class Gantt
   createTimeline: ->
     gantt.attachEvent "onGanttRender", ->
       $(".gantt-timeline").append "<div class=\"js-gantt-timeline\"><div class=\"gantt-timeline-label\">Сегодня</div></div>"
-
       return
     return
 

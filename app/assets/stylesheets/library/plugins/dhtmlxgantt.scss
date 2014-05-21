@@ -8,27 +8,36 @@
 
 .js-gantt-timeline {
   position: absolute;
-  width: 2px;
-  background: red;
-  height: 1000px;
+  width: 5px;
+  background: rgba(26,188,156, 0.2);
+  height: 100%;
   z-index: 1000;
-  top: -50px;
+  top: 13px;
   display: block;
+  border-radius: 10px;
   .gantt-timeline-label {
     position: relative;
-    left: 2px;
-    color: #fff;
-    background: green;
-    padding: 5px;
+    text-transform: uppercase;
+    color: #159f85;
+    background: #cdefee;
     text-align: center;
-    font-size: 14px;
+    font-size: 10px;
+    width: 72px;
     line-height: 20px;
-    top: 50px;
+    top: -2px;
     display: inline-block;
+    border-radius: 5px;
   }
 }
 
 .gantt_task {
+  height: 100%;
   top:-50px;
   padding-top: 50px;
+  .gantt_scale_cell {
+    &.weekend {
+      color: $color-red;
+    }
+  }
 }
+
