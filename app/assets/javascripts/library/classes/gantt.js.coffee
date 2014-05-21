@@ -73,7 +73,8 @@ class Gantt
       {name:"state",   label:"Статус",   align: "left", width:170 }
 #      {name:"add" }
     ];
-
+    gantt.config.task_height = 6;
+    console.log gantt.config.min_column_width = 54
 #    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->

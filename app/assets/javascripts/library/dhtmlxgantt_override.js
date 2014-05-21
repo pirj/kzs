@@ -1,7 +1,7 @@
 gantt._render_task_flags = function (task, width) {
 
     var flag_container = document.createElement('div');
-
+    flag_container.className = "task_flag_container";
     // сколько чеклистов
     for (var i = 0; i < task.checklist_items.length; i++) {
         for (var j=0; j < task.checklist_items[i].length; j++){
@@ -25,7 +25,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     {
          x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
             x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date'));
-         offset_left = x_pos_end-x_pos_start ;
+         offset_left = x_pos_end-x_pos_start -1;
     }
 
 
@@ -36,6 +36,9 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     div.className = "task_flag";
     if (flag.checked === true) {
        div.classList.add('f-checked')
+    }
+    if (flag.checked === false) {
+        div.classList.add('f-unchecked')
     }
     div.style.cssText = [
         "left:" + offset_left + "px"
@@ -82,7 +85,7 @@ gantt._render_task_element = function(task){
     div.style.cssText = [
         "left:" + pos.x + "px",
         "top:" + (padd + pos.y) + 'px',
-//        "height:" + height + 'px',
+        "height:" + height + 'px',
         "line-height:" + height + 'px',
         "width:" + width + 'px'
     ].join(";");
