@@ -21,8 +21,9 @@ R = React.DOM
     )
 
   render: ->
+
     render_data = @.state.column_names.map( (col_name) =>
-      R.td({},
+      R.th({},
         R.span({}, col_name),
         TasksTableHeaderFilter({name: 'filter', onChangeFilterParams: @.onChangeFilterParams}) if col_name == 'start_date'
       )

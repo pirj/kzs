@@ -37,7 +37,7 @@ R = React.DOM
 
 
   render: ->
-
+    table_css = 'table new '
     render_data = @.state.data.map( (el) ->
       R.p({}, [
         R.span({}, el.title),
@@ -49,7 +49,7 @@ R = React.DOM
 
     column_names = ['title', 'start_date', 'duration']
 
-    R.table({className: 'vit-table'}, [
+    R.table({className: table_css}, [
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams}),
       TasksTableList({column_names: column_names, data: @.state.data})
 ])

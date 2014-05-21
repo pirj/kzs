@@ -31,9 +31,11 @@ R = React.DOM
     @.setState filter_popup_opened: !@.state.filter_popup_opened
 
   render: ->
+    icon_css = 'fa fa-filter '
+    icon_css += 'm-active' if @.state.filter_popup_opened
     state_txt = if @.state.filter_popup_opened then 'opened' else 'hidden'
     text = "#{@.state.name} --> #{state_txt}"
-    R.span({}, [
-      R.span({onClick: @.handleClick}, text),
+    R.span({className: 'table-filter'}, [
+      R.span({onClick: @.handleClick, className: icon_css}),
       TasksTableHeaderFilterPopup({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })
     ])
