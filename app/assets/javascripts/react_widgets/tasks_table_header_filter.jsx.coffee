@@ -3,11 +3,16 @@ R = React.DOM
 
 @TasksTableHeaderFilter = React.createClass
 
+  getDefaultProps: ->
+    name: 'filter'
+    data: []
+    filter_popup_opened: false
+
   getInitialState: (props) ->
     props = props || this.props
-    name: props.name || 'filter'
-    data: props.data || []
-    filter_popup_opened: false
+    name: props.name
+    data: props.data
+    filter_popup_opened: props.filter_popup_opened
 
   # пробрасываем параметры из всплывающего окна наверх по цепочке зависимостей
   onChangeFilterParams: (params) ->
@@ -19,11 +24,16 @@ R = React.DOM
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
-  iconClick: ->
+  handleClick: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    console.log 'click'
     @.setState filter_popup_opened: !@.state.filter_popup_opened
 
   render: ->
+    state_txt = if @.state.filter_popup_opened then 'opened' else 'hidden'
+    text = "#{@.state.name} --> #{state_txt}"
     R.span({}, [
-      R.span({onClick: @.iconClick}, @.state.name),
+      R.span({onClick: @.handleClick}, text),
       TasksTableHeaderFilterPopup({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })
     ])
