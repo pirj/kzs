@@ -42,7 +42,7 @@
   }
   &.formulated{
 
-    background-color: $color-orange-lighter;
+    background-color: lighten($color-yellow-darker, 20);
     &.gantt_selected{
       background-color: $color-orange;
     }
