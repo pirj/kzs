@@ -85,9 +85,9 @@ gem 'spreadsheet'
 gem 'pdfjs_rails'
 
 
-group :production do
-  gem 'thin'
-end
+gem 'private_pub'
+gem 'thin'
+
 
 group :assets do
   #gem 'tilt', '~>1.3.3'
