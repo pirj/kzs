@@ -162,6 +162,10 @@ Kzs::Application.routes.draw do
   scope module: 'tasks' do
     namespace :api do
       resources :tasks do
+        collection do
+          get 'list'
+        end
+
         member do
           post 'cancel'
           post 'start'

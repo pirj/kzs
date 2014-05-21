@@ -12,6 +12,14 @@ class Tasks::Api::TasksController < ResourceController
     end
   end
 
+  # отдаем все атрибуты самой модели
+  def list
+    @search = collection.ransack(params[:q])
+    respond_to do |success|
+      success.json { render json: { data: @search.result(distinct: true) } }
+    end
+  end
+
   def create
     @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
       task.organization = current_user.organization

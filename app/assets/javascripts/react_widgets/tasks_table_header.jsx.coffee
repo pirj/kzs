@@ -20,12 +20,15 @@ R = React.DOM
       _.extend(@.state.filter_params, params)
     )
 
+  translatedName: (title) ->
+    I18n.t(title, { scope: 'tasks/tasks.table.headers'})
+
   render: ->
 
     render_data = @.state.column_names.map( (col_name) =>
       R.th({},
-        R.span({}, col_name),
-        TasksTableHeaderFilter({name: 'filter', onChangeFilterParams: @.onChangeFilterParams}) if col_name == 'start_date'
+        R.span({}, @.translatedName(col_name)),
+        TasksTableHeaderFilter({name: 'filter', onChangeFilterParams: @.onChangeFilterParams}) if col_name == 'started_at'
       )
     )
 

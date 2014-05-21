@@ -13,6 +13,8 @@ R = React.DOM
     )
 
 
+
+
   render: ->
     class_name = 'popup '
     class_name += (if @.props.opened then "" else "hidden")
