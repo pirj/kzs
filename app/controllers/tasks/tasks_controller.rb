@@ -16,7 +16,7 @@ class Tasks::TasksController < ResourceController
   end
 
   def create
-    @task = Tasks::Task.new(params[:tasks_task]).tap do |task|
+    @task = Tasks::Task.new(params[:task]).tap do |task|
       task.organization = current_user.organization
     end
     super

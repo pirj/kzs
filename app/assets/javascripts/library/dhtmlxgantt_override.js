@@ -32,7 +32,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 
 
     var div =document.createElement('div');
-    console.log(flag)
+//    console.log(flag)
     div.className = "task_flag";
     if (flag.checked === true) {
        div.classList.add('f-checked')
@@ -53,7 +53,7 @@ gantt._render_task_element = function(task){
 
     var cfg = this.config;
     var height = this._get_task_height();
-
+//    console.log(cfg)
     var padd = Math.floor((this.config.row_height - height)/2);
     if(task.type == cfg.types.milestone && cfg.link_line_width > 1){
         //little adjust milestone position, so horisontal corners would match link arrow when thickness of link line is more than 1px
@@ -82,7 +82,7 @@ gantt._render_task_element = function(task){
     div.style.cssText = [
         "left:" + pos.x + "px",
         "top:" + (padd + pos.y) + 'px',
-        "height:" + height + 'px',
+//        "height:" + height + 'px',
         "line-height:" + height + 'px',
         "width:" + width + 'px'
     ].join(";");

@@ -14,3 +14,39 @@
     background: green;
   }
 }
+
+.gantt_task_line{
+  height: 6px;
+  border: none;
+
+
+  &:hover,&.gantt_selected{
+    height: 10px;
+  }
+
+  &.activated{
+    background-color: $color-blue-lighter;
+  }
+  &.cancelled{
+    background-color: $color-midnightblue-lighten;
+  }
+  &.formulated{
+
+    background-color: $color-orange-lighter;
+    &.gantt_selected{
+      background-color: $color-orange;
+    }
+  }
+  &.paused{
+    background-color: $color-silver-lighten;
+  }
+  &.executed{
+    background-color: $color-sea-green-lighten;
+  }
+}
+
+.gantt_task_drag{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAWAQMAAADQP9/qAAAAA1BMVEUxMTEVULX1AAAAC0lEQVQI12MgAQAAACwAAReYEKYAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  width: 2px;
+}

@@ -31,7 +31,6 @@ class Gantt
       )
 
       request.done (data, textStatus, jqXHR) =>
-#        console.log(data)
 
 #        window.app.GanttView.displayPage(data);
         return
@@ -67,7 +66,7 @@ class Gantt
   initCustomFields: () =>              #!!!
     #колонки слева
     gantt.config.columns=[
-      {name:"checkbox",       label:"",  tree:true, width:34 },
+#      {name:"checkbox",       label:"",  tree:true, width:34 },
       {name:"title",       label:"Заголовок",  tree:true, width:170 },
       {name:"start_date", label:"Начало", align: "left", width:170 },
       {name:"inspector",   label:"Инспектор",   align: "left", width:170 },
@@ -75,11 +74,12 @@ class Gantt
 #      {name:"add" }
     ];
 
-    console.log gantt.config
+#    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
-#      console.log(task)
-      task.title + "<b>Text:</b> "
+#      task.title
+      #+ "<b>Text:</b> "
+      ''
     # модальное окно
     gantt.locale.labels.section_title = "Заголовок"
     gantt.locale.labels.section_details = "Описание"
@@ -109,11 +109,13 @@ class Gantt
       }
     ]
 
+    gantt.templates.task_class = (start, end, task) ->
+      task.state
 
   createTimeline: ->
     gantt.attachEvent "onGanttRender", ->
       $(".gantt-timeline").append "<div class=\"js-gantt-timeline\"><div class=\"gantt-timeline-label\">Сегодня</div></div>"
-      console.log "dsd"
+
       return
     return
 
@@ -147,7 +149,6 @@ class Gantt
 #      return
 #
 #    request.fail (status) ->
-#      console.log('request failed ' + status)
 #      return
 
   editTask: (data) =>              #!!!
