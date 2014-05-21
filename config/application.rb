@@ -100,7 +100,15 @@ module Kzs
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = mail_config
+
     #исправление ошибки с серверным временем в ajax формах
     config.active_record.default_timezone = :utc
+
+    # генерация перевод для их использования в js файлах
+    # данный middleware отличается от того,что написан в оф.документации
+    # но именно он и работает
+    # при первом запуске нужно запустить rake-задачи
+    # rake i18n:js:export && rake i18n:js:setup
+    config.middleware.use SimplesIdeias::I18n::Middleware
   end
 end

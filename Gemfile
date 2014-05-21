@@ -133,3 +133,4 @@ end
 gem 'react-rails', git: 'https://github.com/reactjs/react-rails'
 gem 'execjs'
 gem 'therubyracer'
+gem 'i18n-js'

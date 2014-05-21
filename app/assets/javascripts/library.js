@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require i18n
+//= require i18n/translations
 //= require mustache
 //= require bootstrap
 //= require jquery_nested_form
