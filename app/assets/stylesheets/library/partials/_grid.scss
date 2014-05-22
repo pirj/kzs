@@ -5,7 +5,7 @@
 // Set global container for grid
 // Because of html have sidebar with animations
 .page{
-  padding-left: $sidebar-width-closed;
+  margin-left: $sidebar-width-closed;
   min-width: $screen-default-width;
   @include transition(.2s ease-in-out);
   -webkit-transform: translateX(0);

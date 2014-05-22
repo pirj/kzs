@@ -16,13 +16,14 @@ R = React.DOM
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
-  formatData: (data) ->
+  formatData: (col_name, data) ->
     # если на сервере в БД не записано значение, то приходит в json значение null
     if data != null
       result = data
+
       # если передана дата в UTC, то преобразуем ее
       _date = new Date(data)
-      unless isNaN(_date)
+      if !isNaN(_date) && col_name.search(/_at$|deadline/) > -1
         result = moment(_date).format('L')
 
       return result
@@ -31,7 +32,7 @@ R = React.DOM
     render_data = @.state.data.map((el) =>
       R.tr({},
         @.state.column_names.map((col_name) =>
-          R.td({}, @.formatData(el[col_name]))
+          R.td({}, @.formatData(col_name, el[col_name]))
         )
       )
     )
