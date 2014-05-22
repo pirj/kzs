@@ -1,3 +1,11 @@
+gantt._render_task_control = function(task,width) {
+    var control_container = document.createElement('div');
+    control_container.className = 'gantt_task_control';
+    control_container.innerHTML = '+';
+    return control_container;
+
+}
+
 gantt._render_task_flags = function (task, width) {
 
     var flag_container = document.createElement('div');
@@ -8,9 +16,7 @@ gantt._render_task_flags = function (task, width) {
             flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date, width));
         }
     }
-
     return flag_container;
-
 };
 
 gantt._render_task_flag = function(flag, task_started_at, width) {
@@ -28,11 +34,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
          offset_left = x_pos_end-x_pos_start -1;
     }
 
-
-
-
     var div =document.createElement('div');
-//    console.log(flag)
     div.className = "task_flag";
     if (flag.checked === true) {
        div.classList.add('f-checked')
@@ -43,10 +45,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     div.style.cssText = [
         "left:" + offset_left + "px"
     ].join(";");
-
     return div;
-
-
 }
 /* @tag */
 
@@ -70,6 +69,7 @@ gantt._render_task_element = function(task){
 
     div.setAttribute(this.config.task_attribute, task.id);
     //use separate div to display content above progress bar
+    div.appendChild(gantt._render_task_control(task,width));
     div.appendChild(gantt._render_task_content(task, width));
 
 

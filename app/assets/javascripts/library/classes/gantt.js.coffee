@@ -46,6 +46,25 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->                                           #обработчик для перетаскиваний и растягиваний
       that.editTask(item)
 
+
+    gantt.attachEvent "onMouseMove", (taskId, e) ->
+      if taskId!=null and e.target.classList.contains('gantt_task_content')
+        control = e.target.previousElementSibling
+        control.style.display = 'block'
+        control.style.left = e.offsetX + 'px'
+        e.target.onmouseout = (e) ->
+          control.style.display = 'none'
+#        e.target.onclick = (e) ->
+#          e.preventDefault()
+#          console.log(e)
+
+
+
+    gantt.attachEvent "onTaskClick", (id, e) ->
+      console.log(e)
+#      console.log(e)
+
+
       #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
       that.resizeGant('month')
@@ -80,6 +99,8 @@ class Gantt
     #mouth scale_cell
     gantt.config.scale_unit = "month";
     gantt.config.step = 1;
+    gantt.config.show_grid = false;
+#    gantt.config.con = false;
     gantt.config.date_scale = "%F %Y";
     gantt.config.subscales = [
       {unit:"day", step:1, date:"%d"}
