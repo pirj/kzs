@@ -5,6 +5,7 @@ R = React.DOM
 
   getDefaultProps: ->
     url: '/api/tasks'
+    filter_opts: {}
 
   getInitialState: ->
     data: []
@@ -50,6 +51,6 @@ R = React.DOM
     column_names = ['title', 'started_at', 'finished_at', 'executors', 'approvers', 'state']
 
     R.table({className: table_css}, [
-      TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams}),
+      TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),
       TasksTableList({column_names: column_names, data: @.state.data})
 ])

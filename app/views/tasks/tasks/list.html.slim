@@ -1,6 +1,17 @@
 h1 список задач
 = react_component('LikeButton')
-= react_component('TasksTable', { url: list_api_tasks_path })
+/ свойства на фильтр.
+/ имя столбца, где вставить фильтр — должен соответствовать атрибуту элемента коллекции, над которым проводится сортировка
+/ data — json данные, для select элементов в фильтрах
+/ type — тип фильтра. Скорее всего будет имя, по которому будет происходить подгрузка хелпера с содержимым формы фильтра
+- filter_opts = { \
+                  executors: { \
+                    data: current_organization_users.map{ |user| { id:user.id, title: user.first_name_with_last_name } }, \
+                    input_names: [ :executors_id_in ] \
+                } \
+
+  }
+= react_component('TasksTable', { url: list_api_tasks_path, filter_opts: filter_opts })
 
 
 css:

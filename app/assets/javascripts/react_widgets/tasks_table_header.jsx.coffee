@@ -8,6 +8,7 @@ R = React.DOM
     column_names: props.column_names || ['title']
     data: props.data || []
     filter_params: {}
+    filter_opts: {}
 
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
@@ -28,7 +29,7 @@ R = React.DOM
     render_data = @.state.column_names.map( (col_name) =>
       R.th({},
         R.span({}, @.translatedName(col_name)),
-        TasksTableHeaderFilter({name: 'filter', onChangeFilterParams: @.onChangeFilterParams}) if col_name == 'started_at'
+        TasksTableHeaderFilter({name: col_name, onChangeFilterParams: @.onChangeFilterParams, filter_opts: @.props.filter_opts})
       )
     )
 

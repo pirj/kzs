@@ -4,8 +4,9 @@ R = React.DOM
 @TasksTableHeaderFilter = React.createClass
 
   getDefaultProps: ->
-    name: 'filter'
+    name: ''
     data: []
+    filter_opts: {}
     filter_popup_opened: false
 
   getInitialState: (props) ->
@@ -30,12 +31,22 @@ R = React.DOM
     console.log 'click'
     @.setState filter_popup_opened: !@.state.filter_popup_opened
 
+
+
   render: ->
     icon_css = 'fa fa-filter '
     icon_css += 'm-active' if @.state.filter_popup_opened
-    state_txt = if @.state.filter_popup_opened then 'opened' else 'hidden'
-    text = "#{@.state.name} --> #{state_txt}"
-    R.span({className: 'table-filter'}, [
-      R.span({onClick: @.handleClick, className: icon_css}),
-      TasksTableHeaderFilterPopup({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })
-    ])
+
+
+
+    filter_dom = if @.props.name == 'started_at'
+                    [R.span({onClick: @.handleClick, className: icon_css}),
+                    TasksTableHeaderFilterPopupStartedAt({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })]
+                  else if @.props.name == 'title'
+                    [R.span({onClick: @.handleClick, className: icon_css}),
+                     TasksTableHeaderFilterPopupTitle({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })]
+                  else if @.props.name == 'executors'
+                    [R.span({onClick: @.handleClick, className: icon_css}),
+                     TasksTableHeaderFilterPopupExecutor({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, filter_opts: @.props.filter_opts[@.props.name] })]
+
+    R.span({className: 'table-filter'}, filter_dom)

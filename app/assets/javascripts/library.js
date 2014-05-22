@@ -21,10 +21,13 @@
 //= require jquery.icheck
 //= require_tree ./plugins
 //= require chosen-jquery
+//= require react
+//= require react_ujs
+//= require select2
+//= require moment
+//= require moment/ru.js
 //= require ckeditor/init
 //= require library/permit
 //= require ckeditor/ckeditor
-//= require react
-//= require react_ujs
 //= require_tree ./library
 //= require_tree ./react_widgets

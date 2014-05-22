@@ -20,7 +20,8 @@ window.global =
   datepicker:
     showOtherMonths: true
     dateFormat: "dd.mm.yy"
-    minDate: new Date()
+    # убираем это свойство,потому что из-за него нельзя выбрать дату ранее сегодня в фильтрах по дате
+    # minDate: new Date()
 
 
 # Исполнение js-кода внутри кастомного контекста

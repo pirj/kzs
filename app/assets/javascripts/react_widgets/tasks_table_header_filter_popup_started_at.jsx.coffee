@@ -1,7 +1,7 @@
 `/** @jsx React.DOM */`
 R = React.DOM
 
-@TasksTableHeaderFilterPopup = React.createClass
+@TasksTableHeaderFilterPopupStartedAt = React.createClass
 
   getDefaultProps: ->
     opened: false
