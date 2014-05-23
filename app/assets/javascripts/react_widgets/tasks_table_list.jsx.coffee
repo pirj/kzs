@@ -35,7 +35,12 @@ R = React.DOM
                   ''
         result = R.a({href: '#', className: 'link link-dashed'}, title)
 
-
+      else if col_name.search(/state|status/) > -1
+        title = try
+                  I18n.t(data.title, { scope: 'activerecord.tasks/task.state' })
+                catch
+                  ''
+        result = R.span({className: 'label label-default'}, title)
 
       return result
 
