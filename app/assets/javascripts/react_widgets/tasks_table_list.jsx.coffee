@@ -37,7 +37,7 @@ R = React.DOM
 
       else if col_name.search(/state|status/) > -1
         title = try
-                  I18n.t(data.title, { scope: 'activerecord.tasks/task.state' })
+                  I18n.t(data, { scope: 'activerecord.tasks/task.state' })
                 catch
                   ''
         result = R.span({className: 'label label-default'}, title)
