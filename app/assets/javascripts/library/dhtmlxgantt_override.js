@@ -6,6 +6,15 @@ gantt._render_task_control = function(task,width) {
 
 }
 
+gantt._render_task_notifications = function (task, width) {
+
+    var notifications_container = document.createElement('div');
+    notifications_container.className = "task_notifications_container";
+    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
+    notifications_container.innerHTML = summe;
+
+    return notifications_container;
+};
 gantt._render_task_flags = function (task, width) {
 
     var flag_container = document.createElement('div');
@@ -69,6 +78,8 @@ gantt._render_task_element = function(task){
 
     div.setAttribute(this.config.task_attribute, task.id);
     //use separate div to display content above progress bar
+
+    div.appendChild(gantt._render_task_notifications(task,width));
     div.appendChild(gantt._render_task_control(task,width));
     div.appendChild(gantt._render_task_content(task, width));
 
