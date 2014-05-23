@@ -6,7 +6,9 @@ ru:
         text: Описание
         started_at: Начало
         finished_at: Конец
-        executors: Исполнитель
-        approvers: Исполнитель
+        executors: Исполнители
+        executor: Исполнитель
+        inspectors: Инспектора
+        inspector: Инспектор
         checked: завершена
         state: Статус

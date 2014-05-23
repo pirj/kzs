@@ -16,7 +16,8 @@ R = React.DOM
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
-  formatData: (col_name, data) ->
+  formatData: (col_name, obj) ->
+    data = obj[col_name]
     # если на сервере в БД не записано значение, то приходит в json значение null
     if data != null
       result = data
@@ -25,6 +26,16 @@ R = React.DOM
       _date = new Date(data)
       if !isNaN(_date) && col_name.search(/_at$|deadline/) > -1
         result = moment(_date).format('L')
+      else if col_name.search(/title$|name$/) > -1
+        result = R.a({href: "/tasks/#{obj.id}", className: 'link'}, data)
+      else if col_name.search(/user|executor|approver|creator|inspector/) > -1
+        title = try
+                  data.title
+                catch
+                  ''
+        result = R.a({href: '#', className: 'link link-dashed'}, title)
+
+
 
       return result
 
@@ -32,7 +43,7 @@ R = React.DOM
     render_data = @.state.data.map((el) =>
       R.tr({},
         @.state.column_names.map((col_name) =>
-          R.td({}, @.formatData(col_name, el[col_name]))
+          R.td({}, @.formatData(col_name, el))
         )
       )
     )

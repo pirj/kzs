@@ -58,4 +58,5 @@ class Tasks::Task < ActiveRecord::Base
     state :cancelled
   end
 
+
 end

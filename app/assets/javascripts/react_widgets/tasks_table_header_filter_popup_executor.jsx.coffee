@@ -12,6 +12,8 @@ R = React.DOM
 
   handleSubmit: (e) ->
     e.preventDefault()
+    console.log 'submited'
+    console.log window.form = @.refs.popup_filter_form.getDOMNode()
     @.props.onPopupSubmit(
       $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
     )
@@ -23,7 +25,6 @@ R = React.DOM
   componentDidMount: ->
     $('.js-select2').select2(
       query: (query) =>
-        console.log @.props.filter_opts.data
         data =
           results: []
         $.each @.props.filter_opts.data, ->
@@ -36,7 +37,11 @@ R = React.DOM
     )
 
   render: ->
-    input_name = @.props.filter_opts.input_names
+    input_name = try
+                    @.props.filter_opts.input_names.first
+                  catch
+                    ''
+
     class_name = 'popup '
     class_name += (if @.props.opened then "" else "hidden")
     R.div({className: class_name}, [

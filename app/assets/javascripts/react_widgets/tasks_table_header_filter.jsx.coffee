@@ -28,7 +28,6 @@ R = React.DOM
   handleClick: (e) ->
     e.preventDefault()
     e.stopPropagation()
-    console.log 'click'
     @.setState filter_popup_opened: !@.state.filter_popup_opened
 
 
@@ -45,7 +44,10 @@ R = React.DOM
                   else if @.props.name == 'title'
                     [R.span({onClick: @.handleClick, className: icon_css}),
                      TasksTableHeaderFilterPopupTitle({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams })]
-                  else if @.props.name == 'executors'
+                  else if @.props.name == 'executor'
+                    [R.span({onClick: @.handleClick, className: icon_css}),
+                     TasksTableHeaderFilterPopupExecutor({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, filter_opts: @.props.filter_opts[@.props.name] })]
+                  else if @.props.name == 'inspector'
                     [R.span({onClick: @.handleClick, className: icon_css}),
                      TasksTableHeaderFilterPopupExecutor({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, filter_opts: @.props.filter_opts[@.props.name] })]
 

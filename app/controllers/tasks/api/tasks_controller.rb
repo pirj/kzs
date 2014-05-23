@@ -15,8 +15,25 @@ class Tasks::Api::TasksController < ResourceController
   # отдаем все атрибуты самой модели
   def list
     @search = collection.ransack(params[:q])
+    data = @search.result(distinct: true).map do |task|
+      {
+          id: task.id,
+          title: task.title,
+          state: task.current_state.to_s,
+          executor: {
+                      id: task.executor.id,
+                      title: task.executor.first_name_with_last_name
+                    },
+          inspector: {
+                      id: task.inspector.id,
+                      title: task.inspector.first_name_with_last_name
+                    },
+          started_at: task.started_at,
+          finished_at: task.finished_at
+      }
+    end
     respond_to do |success|
-      success.json { render json: { data: @search.result(distinct: true) } }
+      success.json { render json: { data: data } }
     end
   end
 
