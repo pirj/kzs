@@ -46,22 +46,25 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->                                           #обработчик для перетаскиваний и растягиваний
       that.editTask(item)
 
-
+    gantt.attachEvent "onBeforeTaskSelected", (id,item) ->
+      return false
     gantt.attachEvent "onMouseMove", (taskId, e) ->
       if taskId!=null and e.target.classList.contains('gantt_task_content')
         control = e.target.previousElementSibling
         control.style.display = 'block'
-        control.style.left = e.offsetX + 'px'
+        left = e.offsetX
+        control.style.left = left + 'px'
+
         e.target.onmouseout = (e) ->
           control.style.display = 'none'
-#        e.target.onclick = (e) ->
-#          e.preventDefault()
-#          console.log(e)
+        e.target.onclick = (e) ->
+          task = gantt.getTask(taskId)
+          delta = Math.floor(left/gantt.config.min_column_width)
+          need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
+          console.log(need)
 
-
-
-    gantt.attachEvent "onTaskClick", (id, e) ->
-      console.log(e)
+#    gantt.attachEvent "onTaskClick", (id, e) ->
+#      console.log(e)
 #      console.log(e)
 
 
@@ -93,8 +96,7 @@ class Gantt
 #      {name:"add" }
     ];
     gantt.config.task_height = 6;
-    console.log gantt.config.min_column_width = 54
-#    console.log gantt.config
+    gantt.config.min_column_width = 54
 
     #mouth scale_cell
     gantt.config.scale_unit = "month";
@@ -106,7 +108,7 @@ class Gantt
       {unit:"day", step:1, date:"%d"}
     ];
 
-    console.log gantt.config
+#    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
 #      task.title
