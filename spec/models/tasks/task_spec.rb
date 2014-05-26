@@ -18,4 +18,13 @@ describe Tasks::Task do
       it{ should be_a_kind_of(Array)}
     end
   end
+
+  context('scopes') do
+    context('.overdue') do
+      let!(:one_day_past) { FactoryGirl.create(:tasks_task, finished_at: Time.now - 1.day) }
+      let!(:one_day_left) { FactoryGirl.create(:tasks_task, finished_at: Time.now + 1.day) }
+      subject { Tasks::Task.overdue }
+      it { should eq [one_day_past]}
+    end
+  end
 end

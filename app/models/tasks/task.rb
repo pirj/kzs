@@ -29,6 +29,8 @@ class Tasks::Task < ActiveRecord::Base
 
   validates :title, :text, :executor_ids, :inspector_ids, :organization_id, :presence => true
 
+  scope :overdue, -> { where('finished_at <= ?', Time.now )}
+
   include Workflow
 
   workflow_column :state
@@ -55,4 +57,5 @@ class Tasks::Task < ActiveRecord::Base
 
     state :cancelled
   end
+
 end
