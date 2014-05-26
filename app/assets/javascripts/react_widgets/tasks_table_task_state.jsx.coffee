@@ -5,10 +5,12 @@ R = React.DOM
 
   getDefaultProps: ->
     state_title: 'UFO'
+    is_active: false
 
   getInitialState: (props) ->
     props = props || this.props
     state_title: props.state_title
+    is_active: props.is_active
 
 
   componentWillReceiveProps: (newProps, oldProps) ->
@@ -22,15 +24,20 @@ R = React.DOM
 
 
   className: ->
-    class_name = switch @.state.state_title
+    class_name = []
+    class_name.push switch @.state.state_title
       when 'UFO' then 'label-default'
-      when 'formulated' then 'label-warning'
+      when 'formulated' then 'label-orange '
       when 'activated' then 'label-blue'
       when 'paused' then 'label-gray'
-      when 'executed' then 'label-success'
-      when 'paused' then 'label-default'
+      when 'executed' then 'label-green'
+      when 'canceled' then 'label-asphalt'
 
-    class_name += ' label'
+    class_name.push 'label'
+    class_name.push 'm-label-active' if @.state.is_active
+
+    class_name.join(' ')
+
 
 
 
