@@ -79,7 +79,7 @@ $ ->
     dateField = field.find(".js-datepicker")
     console.log(field)
     # and activate datepicker on it
-    dateField.datepicker()
+    dateField.datepicker(opts)
     return
 
   # events to colorizing input and it icon

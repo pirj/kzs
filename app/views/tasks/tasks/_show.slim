@@ -43,8 +43,10 @@ h1 = resource.title
         .col-md-2.text-help.text-right Обновлен:
         .col-md-7 #{checklist.created_at}
 
+      /= undisable = can? :edit_checklists,resource
       = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
         - i = 1
+
         - checklist_builder.simple_fields_for :checklist_items do |f|
           .form-group.row._task
             .col-sm-1
@@ -61,3 +63,4 @@ h1 = resource.title
 .row
   .col-md-12.js-buttons-place
     = link_to 'Редактировать', edit_task_path(resource), class: 'btn btn-default'
+
