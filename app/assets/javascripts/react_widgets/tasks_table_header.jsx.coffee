@@ -28,7 +28,7 @@ R = React.DOM
 
 
   handleCheckboxChange: ->
-
+    console.log 'table header clicked'
 
   render: ->
 

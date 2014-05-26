@@ -39,16 +39,12 @@ R = React.DOM
         result = R.a({href: '#', className: 'link link-dashed'}, title)
 
       else if col_name.search(/state|status/) > -1
-        title = try
-          I18n.t(data, { scope: 'activerecord.tasks/task.state' })
-        catch
-          ''
-        result = R.span({className: 'label label-default'}, title)
+        result = TasksTableTaskState({state_title: data})
 
       return result
 
   handleCheckboxChange: (e) ->
-    console.log e.target
+    console.log 'task row checkbox clicked'
 
   render: ->
     render_data = R.tr({ref: 'row'},

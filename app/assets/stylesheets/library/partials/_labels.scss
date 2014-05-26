@@ -76,7 +76,7 @@
   @include label-variant($label-primary-bg, #00a499);
 }
 
-.label-success {
+.label-success, {
   @include label-variant($label-success-bg, #fff);
 }
 
@@ -84,18 +84,18 @@
   @include label-variant($label-info-bg);
 }
 
-.label-warning {
+.label-warning, {
   @include label-variant($label-warning-bg);
 }
 
-.label-danger {
+.label-danger, {
   @include label-variant($label-danger-bg);
 }
 
-.label-blue{
+.label-blue,{
   @include label-variant($color-blue, #fff);
 }
 
-.label-gray{
+.label-gray,{
   @include label-variant($color-gray, #fff);
 }
