@@ -1,6 +1,5 @@
 # coding: utf-8
 module ApplicationHelper
-
   def pageTitle
     base_title = "САКЭ КЗС"
     if @title.nil?
@@ -9,7 +8,6 @@ module ApplicationHelper
       "#{base_title} | #{@title}"
     end
   end
-
 
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
@@ -44,7 +42,6 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil, :status_sort => nil), :remote => true, :class => css_class
   end
-   
    
    def sortable_status 
      css_class = params[:status_sort] ? "current #{sort_direction}" : nil

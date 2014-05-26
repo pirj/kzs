@@ -11,5 +11,4 @@ module Tasks
   def self._railtie
     true
   end
-
 end
