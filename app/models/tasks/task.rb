@@ -1,4 +1,8 @@
 class Tasks::Task < ActiveRecord::Base
+
+  # TODO-justvitalius: хук для того,чтобы эти таски работали только с этой таблицей, а не просто с Task
+  self.table_name = 'tasks_tasks'
+
   attr_accessible :text,
                   :title,
                   :organization,
@@ -15,6 +19,8 @@ class Tasks::Task < ActiveRecord::Base
 
   has_many :subtasks, class_name: "Task", foreign_key: :parent_id
   belongs_to :parent, class_name: "Task"
+
+
 
   has_and_belongs_to_many :executors, class_name: 'User', join_table: "tasks_tasks_executors"
   has_and_belongs_to_many :inspectors, class_name: 'User', join_table: "tasks_tasks_inspectors"

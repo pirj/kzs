@@ -21,12 +21,12 @@ class Tasks::Api::TasksController < ResourceController
           title: task.title,
           state: task.current_state.to_s,
           executor: {
-                      id: task.executor.id,
-                      title: task.executor.first_name_with_last_name
+                      id: task.executor.try(:id),
+                      title: task.executor.try(:first_name_with_last_name)
                     },
           inspector: {
-                      id: task.inspector.id,
-                      title: task.inspector.first_name_with_last_name
+                      id: task.inspector.try(:id),
+                      title: task.inspector.try(:first_name_with_last_name)
                     },
           started_at: task.started_at,
           finished_at: task.finished_at

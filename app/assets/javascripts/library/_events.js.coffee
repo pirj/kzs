@@ -23,6 +23,11 @@ window.global =
     # убираем это свойство,потому что из-за него нельзя выбрать дату ранее сегодня в фильтрах по дате
     # minDate: new Date()
 
+  icheck:
+    checkboxClass: 'icheckbox_flat-green checkbox-inline'
+    radioClass: 'iradio_flat-green radio-inline'
+    disabledClass: 'js-ichecked-input'
+
 
 # Исполнение js-кода внутри кастомного контекста
 window.eval_js_in_context = (data, context) ->
@@ -121,10 +126,8 @@ $ ->
 
   # Initialize checkboxes by iCheck plugin
   if jQuery.fn.iCheck != undefined
-    $('input[type="checkbox"], input[type="radio"]').not('.js-icheck-off input, .js-icheck-off').iCheck(
-      checkboxClass: 'icheckbox_flat-green checkbox-inline'
-      radioClass: 'iradio_flat-green radio-inline'
-      disabledClass: 'js-ichecked-input'
+    $('input[type="checkbox"], input[type="radio"], .js-checkbox').not('.js-icheck-off input, .js-icheck-off').iCheck(
+      global.icheck
     )
 
 
