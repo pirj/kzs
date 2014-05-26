@@ -1,6 +1,6 @@
 gantt.templates.scale_cell_class = function(date){
     //gantt-timeline
-    var time_now = new Date();
+    var time_now = new Date("2014, 05, 9");
     var clean_dates = date.setHours(0, 0, 0, 0);
 
     if( clean_dates == time_now.setHours(0, 0, 0, 0)){
@@ -19,3 +19,5 @@ gantt.templates.task_cell_class = function(item,date){
         return "weekend" ;
     }
 };
+
+

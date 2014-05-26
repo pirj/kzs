@@ -9,6 +9,9 @@ class Gantt
     gantt.init(dom)                                     #Инициализация модуля Гант
     @.getTasks()
     @.createTimeline()
+    @.clickTimelineLabel()
+#    @.stickyTimelineLabel()
+
     ########################################## далее обработчики событий ###############################################
 
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
@@ -66,6 +69,27 @@ class Gantt
 #    gantt.attachEvent "onTaskClick", (id, e) ->
 #      console.log(e)
 #      console.log(e)
+
+
+    gantt.attachEvent "onGanttRender", ->
+      $(".gantt_task").scroll ->
+
+        box = $(".gantt_task")
+        boxContent = $(".gantt_task_scale")
+        docElem = $('.js-gantt-timeline')
+
+        X = docElem.offset().left - box.offset().left
+        Y = docElem.offset().top - box.offset().top
+
+        leftTimelinePos = boxContent.offset().left * (-1) + docElem.width()
+        rightTimelinePos = (box.width() - (boxContent.offset().left + boxContent.outerWidth()))
+        console.log(rightTimelinePos)
+        if X <= 0
+          docElem.css("left", leftTimelinePos).addClass "stickyLeft"
+        else docElem.css("right", rightTimelinePos).addClass "stickyRight" if X >= rightTimelinePos
+
+        top: parseInt(Y)
+        left: parseInt(X)
 
 
       #----------------------------------------------- раздел для маштабирования
@@ -148,10 +172,9 @@ class Gantt
 
   createTimeline: ->
     gantt.attachEvent "onGanttRender", ->
-      $(".gantt-timeline").append "<div class=\"js-gantt-timeline\"><div class=\"gantt-timeline-label\">Сегодня</div></div>"
+      $(".gantt-timeline").append "<div class=\"js-gantt-timeline\"><div class=\"js-gantt-timeline-label\">Сегодня</div></div>"
       return
     return
-
 
   getTasks: () =>             #получение данных  (и парсинг)
     request = $.ajax(
@@ -263,6 +286,20 @@ class Gantt
     $modalContainer = $("#taskForm")
     $modalContainer.modal 'hide'
 #    modalContainer.empty()
+
+  clickTimelineLabel: () =>
+    timelineLabel= $(".js-gantt-timeline-label")
+    $(document).on "click", ".js-gantt-timeline-label", ->
+      gantt.showDate(new Date());
+
+    leftOffset = parseInt(timelineLabel.css("left"))
+
+
+
+
+
+
+
 
 
 ########################################################### Поток выполнения  ###################################################

@@ -125,4 +125,6 @@ gantt._render_task_element = function(task){
         }
     }
     return div;
+
+
 };

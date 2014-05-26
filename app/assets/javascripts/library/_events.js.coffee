@@ -207,3 +207,4 @@ $ ->
 
   # БЛОК АКТИВАЦИИ КЛАССОВ
   user_conform = new ConformingView()
+
