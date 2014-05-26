@@ -1,0 +1,15 @@
+.row
+  .col-md-3
+    h2 Даты
+    div
+      |Старт:&nbsp
+      = DateFormatter.new resource.started_at
+    div
+      - unless resource.finished_at.blank?
+        |Финиш:&nbsp
+        = DateFormatter.new resource.finished_at
+
+  .col-md-9#gantt_here data-gantt=resource.id
+
+
+

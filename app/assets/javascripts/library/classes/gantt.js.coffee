@@ -1,13 +1,17 @@
 class Gantt
-  constructor: (dom) ->
+  constructor: (dom, id) ->
     that = this
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
       return
 
     @.initCustomFields()                              #определяем свои поля
-    gantt.init(dom)                                     #Инициализация модуля Гант
-    @.getTasks()
+    gantt.init(dom)
+                                       #Инициализация модуля Гант
+    if id
+      @.getTask(id)
+    else
+      @.getTasks()
     @.createTimeline()
     @.clickTimelineLabel()
 #    @.stickyTimelineLabel()
@@ -184,6 +188,7 @@ class Gantt
     )
 
     request.done (data) ->
+      console.log data
       gantt.parse(data)
       return
 
@@ -191,21 +196,21 @@ class Gantt
       console.log('request failed ' + status)
       return
 
-#  createTask: (data) =>           #!!!
-#    request = $.ajax(
-#      url: '/api/tasks/'
-#      type: 'POST'
-#      dataType: "json"
-#      data:
-#        tasks_task: data
-#    )
-#
-#    request.done (data) =>
-#      gantt.render
-#      return
-#
-#    request.fail (status) ->
-#      return
+  getTask: (id) =>
+    request = $.ajax(
+      url: '/api/tasks/'+id
+      type: 'GET'
+      dataType: "json"
+    )
+
+    request.done (data) ->
+
+      gantt.parse(data)
+      return
+
+    request.fail (status) ->
+      console.log('request failed ' + status)
+      return
 
   editTask: (data) =>              #!!!
     request = $.ajax(
@@ -306,3 +311,10 @@ class Gantt
 $ ->
   if $('#gantt_here').length
     window.app.GanttView = new Gantt("gantt_here")
+
+  if $('#gantt_here_local').length
+    dom  = $('#gantt_here_local')
+    id = dom.data('gantt')
+    window.app.GanttView = new Gantt("gantt_here_local", id)
+
+
