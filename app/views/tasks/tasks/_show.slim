@@ -43,14 +43,14 @@ h1 = resource.title
         .col-md-2.text-help.text-right Обновлен:
         .col-md-7 #{checklist.created_at}
 
-      /= undisable = can? :edit_checklists,resource
+      - undisable = can? :edit_checklists,resource
       = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
         - i = 1
 
         - checklist_builder.simple_fields_for :checklist_items do |f|
           .form-group.row._task
             .col-sm-1
-              = f.input :checked, label: false, input_html: {class: 'js-form-submit'}
+              = f.input :checked, label: false, input_html: {class: 'js-form-submit', disabled: ( 'disabled' unless undisable )}
             .col-sm-7
 
               ._task-title
