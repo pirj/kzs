@@ -281,7 +281,6 @@ class Gantt
     timelineLabel= $(".js-gantt-timeline-label")
     $(document).on "click", ".js-gantt-timeline-label", ->
       gantt.showDate(new Date());
-
     leftOffset = parseInt(timelineLabel.css("left"))
 
 ########################################################### Поток выполнения  ###################################################
