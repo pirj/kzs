@@ -6,13 +6,14 @@ feature "Users create and edit tasks", %q() do
 
   # создаем заранее несколько пользователей,
   # чтобы выбрать их как исполнителей или контрольных лиц при создании задачи
-  let!(:task) { FactoryGirl.create(:task) }
-  let!(:user) { task.approvers.first }
+  let!(:tasks_task) { FactoryGirl.create(:tasks_task) }
+  let!(:user) { tasks_task.inspector }
   let!(:user_1) { FactoryGirl.create(:user, organization: user.organization) }
   let!(:user_2) { FactoryGirl.create(:user, organization: user.organization) }
 
+
   let(:new_path) {  new_task_path }
-  let(:edit_path) {  edit_task_path(task) }
+  let(:edit_path) {  edit_task_path(tasks_task) }
 
   background do
     visit root_path
@@ -33,8 +34,8 @@ feature "Users create and edit tasks", %q() do
         fill_in 'Описание', with: 'Описание тестовой задачи'
         fill_in 'Дата начала', with: Date.today
         fill_in 'Дата окончания', with: Date.today + 2.days
-        select_from_multiple_chosen 'Исполнители'
-        select_from_multiple_chosen 'Контрольные лица'
+        select_from_chosen 'Исполнитель'
+        select_from_chosen 'Инспектор'
 
         expect { click_on 'Создать' }.to change(Tasks::Task, :count).by(1)
         _task = Tasks::Task.where(title: title).first
@@ -57,18 +58,18 @@ feature "Users create and edit tasks", %q() do
         fill_in 'Заголовок', with: new_title
 
         expect { click_on 'Сохранить' }.to_not change(Tasks::Task, :count)
-        expect(current_path).to eq task_path(task)
+        expect(current_path).to eq task_path(tasks_task)
         expect(page).to have_selector('h1', new_title)
       end
     end
 
     context 'fail editing' do
       scenario 'start date earlier than today' do
-        fill_in 'Дата начала', with: Date.today - 1.day
+        fill_in 'Дата начала', with: Date.today - 5.days
         create_screenshot
         expect { click_on 'Сохранить' }.to_not change(Tasks::Task, :count)
         create_screenshot
-        expect(page).to have_content 'дата не может ранее'
+        expect(page).to have_content 'должно быть не ранее'
       end
     end
   end

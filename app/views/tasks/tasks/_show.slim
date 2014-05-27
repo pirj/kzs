@@ -8,7 +8,7 @@ h1 = resource.title
     .col-md-7
         = link_to resource.inspector.first_name_with_last_name, '#'
   .form-group.row
-    .col-md-2.text-help.text-right Исполнител:
+    .col-md-2.text-help.text-right Исполнитель:
     .col-md-7
         = link_to resource.executor.first_name_with_last_name, '#'
   - unless resource.started_at.blank?

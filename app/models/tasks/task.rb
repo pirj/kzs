@@ -29,6 +29,12 @@ class Tasks::Task < ActiveRecord::Base
 
   validates :title, :text, :executor_id, :inspector_id, :organization_id, :presence => true
 
+
+  validates :started_at, timeliness: {
+      on_or_after: -> { DateTime.now },
+      type: :date
+  }
+
   scope :overdue, -> { where('finished_at <= ?', Time.now )}
 
   include Workflow

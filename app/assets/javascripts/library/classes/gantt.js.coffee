@@ -72,8 +72,9 @@ class Gantt
         boxContent = $(".gantt_task_scale")
         docElem = $('.js-gantt-timeline')
 
-        X = docElem.offset().left - box.offset().left
-        Y = docElem.offset().top - box.offset().top
+        if docElem.length
+          X = docElem.offset().left - box.offset().left
+          Y = docElem.offset().top - box.offset().top
 
         leftTimelinePos = boxContent.offset().left * (-1) + docElem.width()
         rightTimelinePos = (box.width() - (boxContent.offset().left + boxContent.outerWidth()))

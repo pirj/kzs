@@ -10,7 +10,7 @@ feature "Users see show-page task", %q() do
   let!(:user_1) { FactoryGirl.create(:user, organization: user.organization) }
   let!(:user_2) { FactoryGirl.create(:user, organization: user.organization) }
 
-  let(:task) { FactoryGirl.create(:task) }
+  let(:task) { FactoryGirl.create(:tasks_task) }
   let(:show_path) {  task_path(task) }
 
   background do
@@ -26,11 +26,11 @@ feature "Users see show-page task", %q() do
 
     context 'show fill args' do
       scenario 'show args' do
-        expect(page).to have_content 'Контрольные лица'
-        expect(page).to have_content 'Исполнители'
+        expect(page).to have_content 'Инспектор'
+        expect(page).to have_content 'Исполнитель'
         expect(page).to have_content 'Дата начала'
-        expect(page).to have_content 'Дата окончания '
-        expect(page).to have_content 'Описание '
+        expect(page).to have_content 'Дата окончания'
+        expect(page).to have_content 'Описание'
       end
     end
   end
