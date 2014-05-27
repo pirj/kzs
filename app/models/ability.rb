@@ -89,54 +89,29 @@ class Ability
     ### Модуль «Задачи»
 
     # Инспектор может редактировать все аттрибуты задачи
-    can :edit_attributes, Tasks::Task do |task|
-        task.inspectors.include? user
-    end
+    can :edit_attributes, Tasks::Task, inspector_id: user.id
 
     # Инспектор или исполнитель могут редактировать контрольные списки (чеклисты)
-    can :edit_checklists, Tasks::Task do |task| 
-        [task.inspector, task.executor].include? user
-    end
-
-    # Инспектор может редактировать список инспекторов
-    can :edit_inspectors, Tasks::Task do |task|
-        task.inspectors.include? user
-    end
-
-    # Инспектор или исполнитель могут редактировать список исполнителей 
-    can :edit_executors, Tasks::Task do |task|
-        task.inspectors.include?(user) || task.executors.include?(user)
-    end
+    can :edit_checklists, Tasks::Task, inspector_id: user.id
+    can :edit_checklists, Tasks::Task, executor_id: user.id
 
     # Исполнитель может начать задачу
-    can :start, Tasks::Task do |task| 
-        task.executors.include? user
-    end
+    can :start, Tasks::Task, executor_id: user.id
 
     # Исполнитель может закончить задачу
-    can :finish, Tasks::Task do |task|
-        task.executors.include? user
-    end
+    can :finish, Tasks::Task, executor_id: user.id
 
     # Исполнитель может поставить задачу на паузу
-    can :pause, Tasks::Task do |task|
-        task.executors.include? user
-    end
+    can :pause, Tasks::Task, executor_id: user.id
 
     # Исполнитель может возобновить выполнение задачи
-    can :resume, Tasks::Task do |task|
-        task.executors.include? user
-    end
+    can :resume, Tasks::Task, executor_id: user.id
 
     # Инспектор может переформулировать задачу
-    can :reformulate, Tasks::Task do |task|
-        task.inspectors.include? user
-    end
+    can :reformulate, Tasks::Task, inspector_id: user.id
 
     # Инспектор может отменить задачу
-    can :cancel, Tasks::Task do |task|
-        task.inspectors.include? user
-    end
+    can :cancel, Tasks::Task, inspector_id: user.id
 
     ### / Модуль «Задачи»
     
