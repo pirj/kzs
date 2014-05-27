@@ -1,7 +1,24 @@
 ul.nav.nav-inline.btn-block.js-tasks-actions.b-offset-sm
-  - resource.current_state.events.keys.each do |event_name|
-    - if [:start ,:finish, :resume].include?(event_name)
+  - events = resource.current_state.events.keys.dup
+  - [:start, :finish, :resume].each do |green_event|
+    - if  events.include?(green_event)
+      - events.delete(green_event)
       - additional_classes = 'btn btn-primary'
-    - else
-      - additional_classes = 'btn btn-default'
-    li = link_to t("activerecord.tasks/task.to_state.#{event_name}"), polymorphic_path([event_name, :api, resource]), class: additional_classes, remote: true, method: :post
+      - icon_class = 'fa fa-check' if green_event == :start
+      - icon_class = 'fa fa-play' if green_event == :resume
+      - icon_class = 'fa fa-play' if green_event == :finish
+      li
+        = link_to  polymorphic_path([green_event, :api, resource]), class: additional_classes, remote: true, method: :post do
+          span class=icon_class
+          span = t("activerecord.tasks/task.to_state.#{green_event}")
+
+  - events.each do |event_name|
+    - icon_class = 'fa fa-times text-red-darker' if event_name == :cancel
+    - icon_class = 'fa fa-pause' if event_name == :pause
+    - icon_class = 'fa fa-pause' if event_name == :reformulate
+    - additional_classes = %w(btn btn-default)
+    - additional_classes.push('text-red-darker') if event_name == :cancel
+    li
+      = link_to  polymorphic_path([event_name, :api, resource]), class: additional_classes.join(' '), remote: true, method: :post do
+        span class=icon_class
+        span = t("activerecord.tasks/task.to_state.#{event_name}")

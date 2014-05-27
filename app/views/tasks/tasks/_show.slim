@@ -3,28 +3,26 @@ h1.b-offset-sm = resource.title
 = render 'status_actions'
 = render 'mini_grid'
 .row-fuild
-  .form-group.row
-    .col-md-2.text-help.text-right Инспектор:
-    .col-md-7
-        = link_to resource.inspector.first_name_with_last_name, '#'
-  .form-group.row
-    .col-md-2.text-help.text-right Исполнитель:
-    .col-md-7
-        = link_to resource.executor.first_name_with_last_name, '#'
-  - unless resource.started_at.blank?
-    .form-group.row
-      .col-md-2.text-help.text-right Дата начала:
-      .col-md-7
-        = DateFormatter.new resource.started_at
-  - unless resource.finished_at.blank?
-    .form-group.row
-      .col-md-2.text-help.text-right Дата окончания:
-      .col-md-7
-        = DateFormatter.new resource.finished_at
-  .form-group.row
-    .col-md-2.text-help.text-right Описание:
-    .col-md-7
-      = resource.text
+
+
+  .col-md-8.row.b-offset-sm
+    h2 Цель задачи:
+    .form-group.text-help = resource.text
+
+  .col-md-3.col-md-offset-1.well.well-filled.pull-right
+    .form-group Команда проекта
+
+    ul.form-group
+      li.text-help Инспектора:
+      - resource.inspectors.each do |inspector|
+        li
+            = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
+
+    ul.form-group
+      li.text-help Исполнители:
+      - resource.executors.each do |executor|
+        li
+          = link_to executor.first_name_with_last_name, '#', class: "link-dashed"
 
 .row
   .col-md-4
@@ -33,18 +31,18 @@ h1.b-offset-sm = resource.title
 
 - unless resource.checklists.blank?
 
-  .row-fuild
-    h2 Задачи
+  .col-md-8.row
+    h2.b-offset-sm Дела
     - resource.checklists.each do |checklist|
-      .form-group.row
-        .col-md-2.text-help.text-right Название списка:
-        .col-md-7 #{checklist.name}
-      .form-group.row
-        .col-md-2.text-help.text-right Создан:
-        .col-md-7 #{checklist.updated_at}
-      .form-group.row
-        .col-md-2.text-help.text-right Обновлен:
-        .col-md-7 #{checklist.created_at}
+      /.form-group.row
+      /  .col-md-2.text-help.text-right Название списка:
+      /  .col-md-7 #{checklist.name}
+      /.form-group.row
+      /  .col-md-2.text-help.text-right Создан:
+      /  .col-md-7 #{checklist.updated_at}
+      /.form-group.row
+      /  .col-md-2.text-help.text-right Обновлен:
+      /  .col-md-7 #{checklist.created_at}
 
       - undisable = can? :edit_checklists,resource
       = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
@@ -54,14 +52,18 @@ h1.b-offset-sm = resource.title
           .form-group.row._task
             .col-sm-1
               = f.input :checked, label: false, input_html: {class: 'js-form-submit', disabled: ( 'disabled' unless undisable )}
-            .col-sm-7
-
+            .pull-left.col-md-10
               ._task-title
                 ._task-num = i
                 - i+=1
                 = f.object.name
-              ._task-comment = f.object.description
-            .col-sm-2.col-sm-offset-2 = DateFormatter.new(f.object.finished_at)
+                .pull-right
+                  span.fa.fa-clock-o
+                  span = DateFormatter.new(f.object.finished_at)
+              p._task-comment.text-help = f.object.description
+
+
+
 
 .row
   .col-md-12.js-buttons-place

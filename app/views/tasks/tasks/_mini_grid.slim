@@ -1,13 +1,13 @@
-.row
+.row.b-offset-md
   .col-md-3
     h2 Даты
-    div
-      |Старт:&nbsp
-      = DateFormatter.new resource.started_at
-    div
+    .row
+      .text-help.text-right.col-md-2 Старт:
+      .col-md-7.col-md-offset-1 = DateFormatter.new resource.started_at
+    .row
       - unless resource.finished_at.blank?
-        |Финиш:&nbsp
-        = DateFormatter.new resource.finished_at
+        .text-help.text-right.col-md-2 Финиш:
+        .col-md-7.col-md-offset-1 = DateFormatter.new resource.finished_at
 
   .col-md-9#gantt_here_local data-gantt=resource.id
 

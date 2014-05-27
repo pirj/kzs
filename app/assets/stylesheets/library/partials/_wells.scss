@@ -8,10 +8,16 @@
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: $well-bg;
+  background-color: transparent;
   border: $well-border;
   border-radius: $well-border-radius;
+  &.well-filled{
+    background-color: $well-bg;
+    border: none;
+  }
 }
+
+
 
 .well-active{
   @extend .well !optional;

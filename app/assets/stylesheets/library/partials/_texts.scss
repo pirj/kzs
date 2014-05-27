@@ -59,6 +59,11 @@
 .text-danger, .text-red {
   color: $color-red;
 }
+
+.text-red-darker, .text-red-darker:hover {
+  color: $color-red-darker;
+}
+
 .text-success, .text-green {
   color: $state-success-text;
   &:hover {
