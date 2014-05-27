@@ -1,6 +1,6 @@
-ul.nav.nav-inline.btn-block.js-tasks-actions
+ul.nav.nav-inline.btn-block.js-tasks-actions.b-offset-sm
   - resource.current_state.events.keys.each do |event_name|
-    - if [:start ,:finish].include?(event_name)
+    - if [:start ,:finish, :resume].include?(event_name)
       - additional_classes = 'btn btn-primary'
     - else
       - additional_classes = 'btn btn-default'
