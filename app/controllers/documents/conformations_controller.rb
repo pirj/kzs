@@ -18,7 +18,7 @@ class Documents::ConformationsController < ApplicationController
         rescue
           # Nothing
         end
-        doc.reload.notify_interested only: :approver, exclude: current_user
+        doc.reload.notify_interesants only: :approver, exclude: current_user
       end
 
       respond_to { |format| format.js { render layout: false } }

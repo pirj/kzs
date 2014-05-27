@@ -1,7 +1,11 @@
 # coding: utf-8
 class Document < ActiveRecord::Base
-  # TODO: remove attributes that never should be assigned using mass-assignment
 
+  # Нотификации
+  include Notifiable
+  default_interesants :approver, :executor, :conformers
+
+  # TODO: remove attributes that never should be assigned using mass-assignment
   attr_accessible :accountable_id,
                   :accountable_type,
                   :approver_id,
@@ -37,9 +41,6 @@ class Document < ActiveRecord::Base
 
   # Согласования
   has_many :conformations, dependent: :destroy
-
-  # Уведомления
-  has_many :notifications, as: :notifiable, dependent: :destroy
 
   belongs_to :accountable, polymorphic: true, dependent: :destroy
 
@@ -229,49 +230,8 @@ class Document < ActiveRecord::Base
     conformations.destroy_all
   end
 
-  # Удаляем нотификацию о текущем документе для всех пользователей (или конкретного пользователя)
-  # @param options
-  #   - @param for [User] Для какого пользователя удалить
-  # @example
-  #   doc.clear_notifications # для всех
-  #   doc.clear_notifications for: current_user # только для текущего пользователя
-  # @see User
-  def clear_notifications options = {}
-    (options[:for] ? notifications.where("user_id = #{options[:for].id}") : notifications).destroy_all
-  end
-
   def pdf_link
     "/system/documents/document_#{id}.pdf"
-  end
-
-  # Посылаем уведомления
-  # @param options
-  #   - @param only [Array] каким типам интересантов посылать. По-умолчанию: [:approver, :executor, :creator, :conformers]
-  #   - @param except [Array] каким типам интересантов не посылать. По-умолчанию: []
-  #   - @param exclude [Array] of [User] каким пользователям не посылать. По-умолчанию: []
-  # @example
-  #   doc.notify_interested only: [:approver], exclude: current_user # Посылаем уведомление только контрольному лицу, если контрольное лицо не текущий юзер
-  #   doc.notify_interested except: [:creator], exclude: doc.creator # Посылаем уведомление согласующим, исполнителю и контрольному лицу; если кто-то из них создатель - ему не посылаем
-  # @see User
-  def notify_interested options = {}
-    # Options defaults
-    options.reverse_merge! only: [:approver, :executor, :creator, :conformers], except: [], exclude: []
-    
-    # Оборачиваем параметры в массивы, если переданы просто символами
-    options.each {|k, option| options[k] = [option] unless option.class == Array}
-
-    # Убираем те типы, которые не нужны
-    options[:only].reject! {|type| options[:except].include? type}
-
-    interested = []
-
-    interested.concat(conformers.to_a) if options[:only].include? :conformers # Добавляем согласующих
-    interested << approver if options[:only].include? :approver # Добавляем контрольное лицо
-    interested << executor if options[:only].include? :executor # Добавляем исполнителя
-
-    interested.reject! {|user| options[:exclude].include? user} # Не отправляем уведомления тем, кто в списке exclude
-
-    interested.uniq.each { |user| user.notifications.create(document_id: id) }
   end
 
   private
