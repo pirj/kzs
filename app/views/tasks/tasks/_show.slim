@@ -26,6 +26,11 @@ h1 = resource.title
     .col-md-7
       = resource.text
 
+.row
+  .col-md-4
+    .btn Добавить подзадачу
+    = react_component('LikeButton', { liked: false })
+
 - unless resource.checklists.blank?
 
   .row-fuild
