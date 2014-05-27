@@ -87,7 +87,7 @@ class Gantt
 
         leftTimelinePos = boxContent.offset().left * (-1) + docElem.width()
         rightTimelinePos = (box.width() - (boxContent.offset().left + boxContent.outerWidth()))
-        console.log(rightTimelinePos)
+#        console.log(rightTimelinePos)
         if X <= 0
           docElem.css("left", leftTimelinePos).addClass "stickyLeft"
         else docElem.css("right", rightTimelinePos).addClass "stickyRight" if X >= rightTimelinePos
@@ -188,6 +188,7 @@ class Gantt
     )
 
     request.done (data) ->
+
       console.log data
       gantt.parse(data)
       return
@@ -202,10 +203,11 @@ class Gantt
       type: 'GET'
       dataType: "json"
     )
-
+    console.log id
     request.done (data) ->
 
-      gantt.parse(data)
+      console.log {data: [data.task]}
+      gantt.parse({data: [data.task]})
       return
 
     request.fail (status) ->

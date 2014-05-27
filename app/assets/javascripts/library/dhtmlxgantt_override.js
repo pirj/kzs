@@ -20,6 +20,9 @@ gantt._render_task_flags = function (task, width) {
     var flag_container = document.createElement('div');
     flag_container.className = "task_flag_container";
     // сколько чеклистов
+    console.log(999);
+    console.log(task);
+    console.log(999);
     if (task.checklists.length) {
         for (var i = 0; i < task.checklists.length; i++) {
             for (var j=0; j < task.checklists[i].checklist_items.length; j++){
