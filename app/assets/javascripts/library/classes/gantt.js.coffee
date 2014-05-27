@@ -14,7 +14,6 @@ class Gantt
       @.getTasks()
     @.createTimeline()
     @.clickTimelineLabel()
-#    @.stickyTimelineLabel()
 
     ########################################## далее обработчики событий ###############################################
 
@@ -29,7 +28,6 @@ class Gantt
         return
 
     gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #двойной клик
-
       e.preventDefault()
       request = $.ajax(
         url: "/tasks/#{id}/"
@@ -38,7 +36,6 @@ class Gantt
       )
 
       request.done (data, textStatus, jqXHR) =>
-
 #        window.app.GanttView.displayPage(data);
         return
 
@@ -46,9 +43,7 @@ class Gantt
         console.log('request failed ' + textStatus)
         console.log(errorThrown)
         return
-
       e.preventDefault()
-
 
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->                                           #обработчик для перетаскиваний и растягиваний
       that.editTask(item)
@@ -70,11 +65,6 @@ class Gantt
           need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
           console.log(need)
 
-#    gantt.attachEvent "onTaskClick", (id, e) ->
-#      console.log(e)
-#      console.log(e)
-
-
     gantt.attachEvent "onGanttRender", ->
       $(".gantt_task").scroll ->
 
@@ -87,14 +77,12 @@ class Gantt
 
         leftTimelinePos = boxContent.offset().left * (-1) + docElem.width()
         rightTimelinePos = (box.width() - (boxContent.offset().left + boxContent.outerWidth()))
-#        console.log(rightTimelinePos)
         if X <= 0
           docElem.css("left", leftTimelinePos).addClass "stickyLeft"
         else docElem.css("right", rightTimelinePos).addClass "stickyRight" if X >= rightTimelinePos
 
         top: parseInt(Y)
         left: parseInt(X)
-
 
       #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
@@ -110,7 +98,6 @@ class Gantt
       that.resizeGant('hour')
       return
 
-
   ############################################ далее методы класса ####################################################
 
   initCustomFields: () =>              #!!!
@@ -121,7 +108,6 @@ class Gantt
       {name:"start_date", label:"Начало", align: "left", width:170 },
       {name:"inspector",   label:"Инспектор",   align: "left", width:170 },
       {name:"state",   label:"Статус",   align: "left", width:170 }
-#      {name:"add" }
     ];
     gantt.config.task_height = 6;
     gantt.config.min_column_width = 54
@@ -136,12 +122,10 @@ class Gantt
       {unit:"day", step:1, date:"%d"}
     ];
 
-#    console.log gantt.config
     #таск в таблице
     gantt.templates.task_text = (start, end, task) ->
-#      task.title
-      #+ "<b>Text:</b> "
       ''
+
     # модальное окно
     gantt.locale.labels.section_title = "Заголовок"
     gantt.locale.labels.section_details = "Описание"
@@ -166,8 +150,6 @@ class Gantt
         height: 72
         type: "time"
         map_to: "auto"
-
-
       }
     ]
 
@@ -301,14 +283,6 @@ class Gantt
 
     leftOffset = parseInt(timelineLabel.css("left"))
 
-
-
-
-
-
-
-
-
 ########################################################### Поток выполнения  ###################################################
 $ ->
   if $('#gantt_here').length
@@ -318,5 +292,3 @@ $ ->
     dom  = $('#gantt_here_local')
     id = dom.data('gantt')
     window.app.GanttView = new Gantt("gantt_here_local", id)
-
-
