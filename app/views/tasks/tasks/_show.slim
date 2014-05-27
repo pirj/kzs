@@ -17,7 +17,7 @@ h1.b-offset-sm = resource.title
       - resource.inspectors.each do |inspector|
         li
             = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
-
+            
     ul.form-group
       li.text-help Исполнители:
       - resource.executors.each do |executor|
