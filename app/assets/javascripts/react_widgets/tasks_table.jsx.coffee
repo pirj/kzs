@@ -53,4 +53,4 @@ R = React.DOM
     R.table({className: table_css}, [
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),
       TasksTableList({column_names: column_names, data: @.state.data})
-])
+    ])

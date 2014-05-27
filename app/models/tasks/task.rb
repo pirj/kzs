@@ -65,4 +65,14 @@ class Tasks::Task < ActiveRecord::Base
   end
 
 
+  def executor
+    self.executors.first
+  end
+
+  def inspector
+    self.inspectors.first
+  end
+
+
+
 end

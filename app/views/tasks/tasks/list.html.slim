@@ -1,5 +1,5 @@
 h1 список задач
-= react_component('LikeButton')
+= react_component('LikeButton', { liked: false })
 
 = react_component('TasksTable', { url: list_api_tasks_path, filter_opts: tasks_table_filter_opts })
 
