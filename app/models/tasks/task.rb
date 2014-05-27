@@ -1,4 +1,8 @@
 class Tasks::Task < ActiveRecord::Base
+  # Нотификации
+  include Notifiable
+  default_interesants :inspector, :executor
+
   attr_accessible :text,
                   :title,
                   :organization,
@@ -30,6 +34,7 @@ class Tasks::Task < ActiveRecord::Base
 
   validates :title, :text, :executor_id, :inspector_id, :organization_id, :presence => true
 
+  after_save :send_notifications
 
   validates :started_at, timeliness: {
       on_or_after: -> { DateTime.now },
@@ -63,6 +68,13 @@ class Tasks::Task < ActiveRecord::Base
     end
 
     state :cancelled
+  end
+
+private
+  def send_notifications
+    if changed.any? {|cf| ['title', 'text', 'executor_id', 'inspector_id'].include? cf}
+      notify_interesants except: User.find(updated_by)
+    end
   end
 
 end

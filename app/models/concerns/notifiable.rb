@@ -24,6 +24,10 @@ module Notifiable
         return self.interesants
       end
     end
+
+    def notifications_for user
+      Notification.where(user_id: user.id, notifiable_type: self.to_s)
+    end
   end
 
   # Посылаем уведомления

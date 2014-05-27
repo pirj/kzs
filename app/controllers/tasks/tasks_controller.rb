@@ -21,12 +21,17 @@ class Tasks::TasksController < ResourceController
     @task = Tasks::Task.new(params[:task]).tap do |task|
       task.organization = current_user.organization
     end
+
+    @task.updated_by = current_user.id
     super
   end
 
   def update
     @task = Tasks::Task.find(params[:id])
     @task.organization ||= current_user.organization
+
+    @task.updated_by = current_user.id
+
     super
   end
 
