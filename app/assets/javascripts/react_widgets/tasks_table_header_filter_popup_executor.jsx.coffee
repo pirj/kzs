@@ -10,10 +10,17 @@ R = React.DOM
                     input_names: ['']
                   }
 
+
+  getInitialState: (props) ->
+    props = props || this.props
+    opened: props.opened
+
+
+  componentWillReceiveProps: (newProps, oldProps) ->
+    @.setState(@.getInitialState(newProps))
+
   handleSubmit: (e) ->
     e.preventDefault()
-    console.log 'submited'
-    console.log window.form = @.refs.popup_filter_form.getDOMNode()
     @.props.onPopupSubmit(
       $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
     )
@@ -24,6 +31,8 @@ R = React.DOM
 
   componentDidMount: ->
     $('.js-select2').select2(
+      multiple: true
+      width: '100%'
       query: (query) =>
         data =
           results: []
@@ -36,22 +45,31 @@ R = React.DOM
         query.callback data
     )
 
+  handleCancel: ->
+    console.log 'clicked'
+    @.setState(opened: !@.state.opened)
+
+  popupClassName: ->
+    class_name = ['popup']
+    class_name.push 'hidden' unless @.state.opened
+    class_name.join(' ')
+
+
   render: ->
     input_name = try
-                    @.props.filter_opts.input_names.first
+                    @.props.filter_opts.input_names[0]
                   catch
                     ''
 
-    class_name = 'popup '
-    class_name += (if @.props.opened then "" else "hidden")
-    R.div({className: class_name}, [
+
+    R.div({className: @.popupClassName()}, [
       R.h5({}, 'форма для фильтра'),
       R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, class: 'form-horizontal'}, [
         R.div({}, [
-          R.input({name: input_name, className: 'form-control js-select2', multiple: 'multiple'})
+          R.input({name: input_name, className: 'js-select2', multiple: 'multiple'})
         ]),
         R.input({type: 'submit', onClick: @.handleSubmit, value: 'применить', className: 'btn'}),
-        R.link({href: '#', onClick: @.handleCancel, className: 'btn'}, 'отмена')
+        R.a({href: '#', onClick: @.handleCancel, className: 'btn'}, 'отмена')
       ])
     ])
 

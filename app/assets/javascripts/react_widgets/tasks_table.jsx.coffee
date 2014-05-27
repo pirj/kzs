@@ -31,7 +31,6 @@ R = React.DOM
 
 
   onChangeSearchParams: (params) ->
-    console.log window.app=params
     @.state = search_params: params
     @.getDataFromServer()
 

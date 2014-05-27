@@ -18,12 +18,12 @@ module Tasks::TableFilterHelper
         executor: {
             type: :select,
             data: current_organization_users.map { |user| {id: user.id, title: user.first_name_with_last_name} },
-            input_names: [:executors_id_in]
+            input_names: ['executors_id_in']
         },
         inspector: {
             type: :select_multiple,
             data: current_organization_users.map { |user| {id: user.id, title: user.first_name_with_last_name} },
-            input_names: [:inspector_id_in]
+            input_names: ['inspector_id_in[]']
         },
         state: {
             type: :select_multiple,
