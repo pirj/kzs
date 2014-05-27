@@ -46,13 +46,19 @@ R = React.DOM
     )
 
   handleCancel: ->
-    console.log 'clicked'
-    @.setState(opened: !@.state.opened)
+    @.props.onPopupCancel(false)
 
   popupClassName: ->
     class_name = ['popup']
     class_name.push 'hidden' unless @.state.opened
     class_name.join(' ')
+
+
+  handleBodyClick: (e) ->
+    console.log 'h'
+    if (@.state.opened)
+      @.setState opened: false
+
 
 
   render: ->

@@ -176,7 +176,9 @@ $ ->
     return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
     clearPopover()
 
-    event.stopPropagation()
+    # останавливало весь код.
+    # поэтому закомментировал
+    # event.stopPropagation()
     return
 
 
