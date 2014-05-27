@@ -95,7 +95,7 @@ class Ability
 
     # Инспектор или исполнитель могут редактировать контрольные списки (чеклисты)
     can :edit_checklists, Tasks::Task do |task| 
-        task.inspectors.include?(user) || task.executors.include?(user)
+        [task.inspector, task.executor].include? user
     end
 
     # Инспектор может редактировать список инспекторов

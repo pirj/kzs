@@ -20,25 +20,29 @@ gantt._render_task_flags = function (task, width) {
     var flag_container = document.createElement('div');
     flag_container.className = "task_flag_container";
     // сколько чеклистов
-    for (var i = 0; i < task.checklist_items.length; i++) {
-        for (var j=0; j < task.checklist_items[i].length; j++){
-            flag_container.appendChild(this._render_task_flag(task.checklist_items[i][j], task.start_date, width));
+    if (task.checklists.length) {
+        for (var i = 0; i < task.checklists.length; i++) {
+            for (var j=0; j < task.checklists[i].checklist_items.length; j++){
+                flag_container.appendChild(this._render_task_flag(task.checklists[i].checklist_items[j], task.start_date, width));
+
+            }
         }
     }
+
     return flag_container;
 };
 
 gantt._render_task_flag = function(flag, task_started_at, width) {
 
     var offset_left,  x_pos_end, x_pos_start;
-    if (flag.finished_at===null) {
+    if (flag.deadline===null) {
         x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date')) ;
 //        x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
         offset_left = width;
     }
     else
     {
-         x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
+         x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.deadline, 'xml_date'));
             x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date'));
          offset_left = x_pos_end-x_pos_start -1;
     }
