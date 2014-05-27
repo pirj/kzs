@@ -46,20 +46,20 @@ R = React.DOM
     icon_css = 'fa fa-filter '
     icon_css += 'm-active' if @.state.filter_popup_opened
 
-
+    filter_component_params = { opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel, filter_opts: @.props.filter_opts[@.props.name] }
 
 
     filter_dom = if @.props.name == 'started_at'
                     [R.span({onClick: @.handleClick, className: icon_css}),
-                    TasksTableHeaderFilterPopupStartedAt({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel })]
+                    TasksTableHeaderFilterPopupStartedAt(filter_component_params)]
                   else if @.props.name == 'title'
                     [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupTitle({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel })]
+                     TasksTableHeaderFilterPopupTitle(filter_component_params)]
                   else if @.props.name == 'executor'
                     [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupExecutor({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel, filter_opts: @.props.filter_opts[@.props.name] })]
+                     TasksTableHeaderFilterPopupExecutor(filter_component_params)]
                   else if @.props.name == 'inspector'
                     [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupExecutor({ opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel, filter_opts: @.props.filter_opts[@.props.name] })]
+                     TasksTableHeaderFilterPopupExecutor(filter_component_params)]
 
     R.span({className: 'table-filter'}, filter_dom)
