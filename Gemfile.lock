@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/reactjs/react-rails
-  revision: c09a0c6522301db7cb2bcea6673aa349298847f2
+  revision: 8b0a799e9cd9e3f4aa293a8beb3ef477ca4fca00
   specs:
     react-rails (1.0.0.pre)
       connection_pool

@@ -1,5 +1,4 @@
-module Tasks
-  module TableFilterHelper
+module Tasks::TableFilterHelper
 
     # набор параметров фильтрации для списка задач
     #
@@ -34,5 +33,5 @@ module Tasks
       }
     end
 
-  end
+
 end
