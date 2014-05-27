@@ -12,8 +12,8 @@ FactoryGirl.define do
       after(:build) do |instance, ev|
         organization = FactoryGirl.create(:organization)
         instance.organization = organization
-        instance.inspectors << FactoryGirl.create(:user, organization: organization)
-        instance.executors << FactoryGirl.create(:user, organization: organization)
+        instance.inspector = FactoryGirl.create(:user, organization: organization)
+        instance.executor = FactoryGirl.create(:user, organization: organization)
       end
     end
   end

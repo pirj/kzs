@@ -25,6 +25,9 @@ gem 'cancan'
 # ActiveRecord object duplication DSL
 gem 'amoeba'
 
+# Serialize
+gem 'active_model_serializers'
+
 gem 'mustache'
 gem 'smt_rails'
 gem 'activeadmin'

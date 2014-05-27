@@ -4,15 +4,13 @@ h1 = resource.title
 = render 'mini_grid'
 .row-fuild
   .form-group.row
-    .col-md-2.text-help.text-right Инспектора:
+    .col-md-2.text-help.text-right Инспектор:
     .col-md-7
-      - resource.inspectors.each do |inspector|
-        = link_to inspector.first_name_with_last_name, '#'
+        = link_to resource.inspector.first_name_with_last_name, '#'
   .form-group.row
-    .col-md-2.text-help.text-right Исполнители:
+    .col-md-2.text-help.text-right Исполнител:
     .col-md-7
-      - resource.executors.each do |executor|
-        = link_to executor.first_name_with_last_name, '#'
+        = link_to resource.executor.first_name_with_last_name, '#'
   - unless resource.started_at.blank?
     .form-group.row
       .col-md-2.text-help.text-right Дата начала:

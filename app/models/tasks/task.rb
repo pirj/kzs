@@ -1,29 +1,23 @@
 class Tasks::Task < ActiveRecord::Base
-
-  # TODO-justvitalius: хук для того,чтобы эти таски работали только с этой таблицей, а не просто с Task
-  self.table_name = 'tasks_tasks'
-
   attr_accessible :text,
                   :title,
                   :organization,
                   :organization_id,
-                  :executors,
-                  :executor_ids,
-                  :inspectors,
-                  :inspector_ids,
+                  :executor,
+                  :executor_id,
+                  :inspector,
+                  :inspector_id,
                   :started_at,
                   :finished_at,
                   :checklists_attributes,
                   :parent_id,
                   :parent
 
-  has_many :subtasks, class_name: "Task", foreign_key: :parent_id
-  belongs_to :parent, class_name: "Task"
+  has_many :subtasks, class_name: 'Task', foreign_key: :parent_id
+  belongs_to :parent, class_name: 'Task'
 
-
-
-  has_and_belongs_to_many :executors, class_name: 'User', join_table: "tasks_tasks_executors"
-  has_and_belongs_to_many :inspectors, class_name: 'User', join_table: "tasks_tasks_inspectors"
+  belongs_to :executor, class_name: 'User'
+  belongs_to :inspector, class_name: 'User'
   belongs_to :organization
 
   has_many :checklists
@@ -33,7 +27,7 @@ class Tasks::Task < ActiveRecord::Base
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
 
-  validates :title, :text, :executor_ids, :inspector_ids, :organization_id, :presence => true
+  validates :title, :text, :executor_id, :inspector_id, :organization_id, :presence => true
 
   scope :overdue, -> { where('finished_at <= ?', Time.now )}
 
@@ -63,16 +57,5 @@ class Tasks::Task < ActiveRecord::Base
 
     state :cancelled
   end
-
-
-  def executor
-    self.executors.first
-  end
-
-  def inspector
-    self.inspectors.first
-  end
-
-
 
 end

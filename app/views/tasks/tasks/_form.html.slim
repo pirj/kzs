@@ -15,14 +15,14 @@
       | Составитель
     .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
 
-  = f.association :inspectors, collection: current_organization_users, \
+  = f.association :inspector, collection: current_organization_users, \
                               label_method: :first_name_with_last_name, \
-                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
+                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
                               label_hint: 'Лицо, указанное в задаче, как контрольное лицо'
 
-  = f.association :executors, collection: current_organization_users, \
+  = f.association :executor, collection: current_organization_users, \
                               label_method: :first_name_with_last_name, \
-                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: true}, \
+                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
                               label_hint: 'Лицо, указанное в задаче, как исполнитель'
 
   = f.input :started_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата начала исполнения задачи'

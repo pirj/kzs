@@ -2,14 +2,12 @@ class Tasks::Api::TasksController < ResourceController
   layout false
 
   before_filter :permit_params, only: [:create, :update]
-  has_scope :for_organization, only: [:index]
   respond_to :json
 
   def index
-    @search = collection.ransack(params[:q])
-    super do |success|
-      success.json { render json: collection_as_json(@search.result(distinct:true)) }
-    end
+    @search = Tasks::Task.for_organization(current_organization).ransack(params[:q])
+    @tasks = @search.result(distinct: true)
+    render json: collection, root: 'data', each_serializer: Tasks::TaskSerializer    
   end
 
   # отдаем все атрибуты самой модели

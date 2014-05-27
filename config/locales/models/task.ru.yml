@@ -12,8 +12,8 @@ ru:
         text: Описание
         started_at: Дата начала
         finished_at: Дата окончания
-        inspectors: Инспектора
-        executors: Исполнители
+        inspector: Инспектор
+        executor: Исполнитель
 
 
       tasks/checklist:

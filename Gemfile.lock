@@ -24,6 +24,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activeadmin (0.6.3)
       arbre (~> 1.0)
       bourbon (>= 1.0.0, < 4)
@@ -406,6 +408,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   activeadmin
   amoeba
   awesome_nested_set
