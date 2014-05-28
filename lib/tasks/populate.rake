@@ -284,3 +284,42 @@ namespace :initial_data do
 end
 
 
+namespace :tasks do
+  desc 'Import test tasks and subtasks of Task module'
+  task :create_tasks => :environment do
+    Tasks::Task.reset_pk_sequence
+    Tasks::Task.destroy_all
+    30.times do |i|
+      organization = Organization.all.shuffle.first
+      executor = User.where(organization_id: organization.id).shuffle.sample || FactoryGirl.create(:user, organization: organization)
+      inspector = User.where(organization_id: organization.id).shuffle.sample || FactoryGirl.create(:user, organization: organization)
+      FactoryGirl.create(:tasks_plain_task,
+                         organization: organization,
+                         executor: executor,
+                         inspector: inspector,
+                         started_at: Date.today+1.day,
+                         finished_at: rand(Date.today+2.day..Date.civil(2014, 10, 30))
+      )
+    end
+    puts 'Testing Tasks created'
+  end
+
+  task :create_subtasks => :environment do
+    parent_tasks = Tasks::Task.all
+    100.times do |i|
+      parent = parent_tasks.shuffle.first
+      organization = parent.organization
+      executor = User.where(organization_id: organization.id).shuffle.sample || FactoryGirl.create(:user, organization: organization)
+      inspector = User.where(organization_id: organization.id).shuffle.sample || FactoryGirl.create(:user, organization: organization)
+      FactoryGirl.create(:tasks_plain_task,
+                         organization: organization,
+                         executor: executor,
+                         inspector: inspector,
+                         parent: parent,
+                         started_at: parent.started_at,
+                         finished_at: parent.finished_at
+      )
+    end
+    puts 'Testing Tasks created'
+  end
+end
