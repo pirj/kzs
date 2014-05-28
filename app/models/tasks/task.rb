@@ -73,7 +73,7 @@ class Tasks::Task < ActiveRecord::Base
 private
   def send_notifications
     if changed.any? {|cf| ['title', 'text', 'executor_id', 'inspector_id'].include? cf}
-      notify_interesants except: User.find(updated_by)
+      notify_interesants exclude: User.find(updated_by)
     end
   end
 
