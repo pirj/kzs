@@ -1,0 +1,9 @@
+html
+  body
+    p
+      | Статус задачи 
+      = link_to "«#{@task.title}»", task_url(@task)
+      |  изменился, теперь задача «#{I18n.t("activerecord.tasks/task.state.#{@task.current_state}")}».
+  
+    p
+      = link_to 'Посмотреть в САКЭ', task_url(@task)

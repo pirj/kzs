@@ -1,9 +1,7 @@
-host: localhost:3000
-smtp:
-  address:        smtp.gmail.com
-  port:           25
-  domain:         gmail.com
-  authentication: plain
-  user_name:      
-  password:       
-  enable_starttls_auto: true
+address:        smtp.gmail.com
+port:           25
+domain:         gmail.com
+authentication: plain
+user_name:      
+password:       
+enable_starttls_auto: true

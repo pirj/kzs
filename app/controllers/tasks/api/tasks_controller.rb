@@ -42,6 +42,10 @@ class Tasks::Api::TasksController < ResourceController
 
       resource.notify_interesants(exclude: current_user) if success
 
+      [resource.inspector, resource.executor].uniq.reject{|u| u == current_user}.each do |user|
+        NotificationMailer.task_state_changed(user, resource).deliver!
+      end
+
       respond_to do |format|
         format.json { render json: {current_state: resource.current_state.to_s} }
         format.js { render "task_state_update" }

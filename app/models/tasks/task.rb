@@ -74,6 +74,11 @@ private
   def send_notifications
     if changed.any? {|cf| ['title', 'text', 'executor_id', 'inspector_id'].include? cf}
       notify_interesants exclude: User.find(updated_by)
+
+      # Refactor this list to be dynamic
+      [inspector, executor, User.find(inspector_id_was), User.find(executor_id_was)].uniq.reject{|u| u == User.find(updated_by)}.each do |user|
+        NotificationMailer.task_changed(user, self).deliver!
+      end
     end
   end
 

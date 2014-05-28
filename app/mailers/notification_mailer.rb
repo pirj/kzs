@@ -18,7 +18,7 @@ class NotificationMailer < ActionMailer::Base
     @executor_changed = true unless document.executor_id == old_document.executor_id
     @approver_changed = true unless document.approver_id == old_document.approver_id
 
-    mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
+    mail to: user.email, subject: "САКЭ КЗС. Изменение в документе «#{document.title}»"
   end
 
   def document_conformed document
@@ -26,20 +26,19 @@ class NotificationMailer < ActionMailer::Base
     mail to: document.approver.email, subject: "САКЭ КЗС. Документ «#{document.title}» согласован и готов к подписи"
   end
 
-  # def task_changed user, task
-  #   @user = user
+  def task_changed user, task
+    @user = user
+    @task = task
+    @changed = task.changed
 
-  #   @old_conformers_names = @old_conformers.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ')
-  #   @conformers_names = conformers = @document.conformers.to_a.map{|user| [user.last_name, user.first_name].join(' ') }.join(', ')
+    mail to: user.email, subject: "САКЭ КЗС. Изменение в задаче «#{task.title}»"
+  end
 
-  #   @title_changed = true unless document.title == old_document.title
-  #   @body_changed = true unless document.body == old_document.body
-  #   @creator_changed = true unless document.creator_id == old_document.creator_id
-  #   @conformers_changed = true unless document.conformers.to_a == old_conformers
-  #   @executor_changed = true unless document.executor_id == old_document.executor_id
-  #   @approver_changed = true unless document.approver_id == old_document.approver_id
+  def task_state_changed user, task
+    @user = user
+    @task = task
 
-  #   mail to: user.email, subject: "САКЭ КЗС. Изменение в докумете «#{document.title}»"
-  # end
+    mail to: user.email, subject: "САКЭ КЗС. Статус задачи «#{task.title}» изменился на «#{I18n.t("activerecord.tasks/task.state.#{task.current_state}")}»"
+  end
 
 end
