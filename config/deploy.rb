@@ -84,6 +84,12 @@ task :mercury do
     end
   end
   
+  namespace(:private_pub) do
+    task :start do
+      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml}
+    end
+  end
+  
   namespace(:populate) do
     task :data do
       run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=production}
