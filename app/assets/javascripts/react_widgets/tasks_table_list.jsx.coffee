@@ -73,12 +73,11 @@ R = React.DOM
 
   componentDidMount: ->
     $(document).on('tasks_table:collection:check_all', (e) =>
-      console.log 'handle check all'
       @.checkAllRows()
     )
 
     $(document).on('tasks_table:collection:change_checked', (e, data) ->
-      console.log data
+      data
     )
 
 

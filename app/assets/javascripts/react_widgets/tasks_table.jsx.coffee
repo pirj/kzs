@@ -18,7 +18,9 @@ R = React.DOM
       data:
         q: @.state.search_params
       success: ((data) ->
-        @setState data: data['data']
+        data = data['data']
+        $(document).trigger('tasks_table:collection:update_data', [data])
+        @setState data: data
         return
       ).bind(this)
       error: ((xhr, status, err) ->
