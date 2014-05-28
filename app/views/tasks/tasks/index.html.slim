@@ -58,6 +58,9 @@ br
 = link_to 'new task ajax', new_task_path, remote: true, class: 'button btn btn-primary btn-lg '
 /, data: {toggle: 'modal', target: '#taskForm'}
 
+= react_component('TasksTable', { url: api_tasks_path, filter_opts: tasks_table_filter_opts })
+
+
 #taskForm.modal aria-hidden=" true"  tabindex="-1"
   .modal-dialog
     .modal-content
