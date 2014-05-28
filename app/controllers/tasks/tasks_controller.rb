@@ -11,6 +11,14 @@ class Tasks::TasksController < ResourceController
   def list
   end
 
+  def show
+    # Clear notifications
+    @task = Tasks::Task.find(params[:id])
+    @task.clear_notifications for: current_user
+
+    super
+  end
+
   def new
     @task = Tasks::Task.new
     # @task.checklists.build
