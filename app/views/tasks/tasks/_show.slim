@@ -2,9 +2,8 @@ h1.b-offset-sm = resource.title
 
 = render 'status_actions'
 = render 'mini_grid'
+
 .row-fuild
-
-
   .col-md-8.row.b-offset-sm
     h2 Цель задачи:
     .form-group.text-help = resource.text
@@ -16,8 +15,8 @@ h1.b-offset-sm = resource.title
       li.text-help Инспектора:
       - resource.inspectors.each do |inspector|
         li
-            = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
-            
+          = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
+          
     ul.form-group
       li.text-help Исполнители:
       - resource.executors.each do |executor|
