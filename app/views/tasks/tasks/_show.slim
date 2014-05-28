@@ -13,15 +13,13 @@ h1.b-offset-sm = resource.title
 
     ul.form-group
       li.text-help Инспектора:
-      - resource.inspectors.each do |inspector|
-        li
-          = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
-          
+      li
+        = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
+
     ul.form-group
       li.text-help Исполнители:
-      - resource.executors.each do |executor|
-        li
-          = link_to executor.first_name_with_last_name, '#', class: "link-dashed"
+      li
+        = link_to executor.first_name_with_last_name, '#', class: "link-dashed"
 
 .row
   .col-md-4
