@@ -33,3 +33,5 @@
       = link_to tasks_path, :class => (controller_name == 'tasks' ? 'menu-link tasks active' : 'menu-link tasks') do
         i
         .text Задачи
+        - if Tasks::Task.notifications_for(current_user).count > 0
+          span.badge = Tasks::Task.notifications_for(current_user).count
