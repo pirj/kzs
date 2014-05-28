@@ -44,7 +44,7 @@ R = React.DOM
       return result
 
   handleCheckboxChange: (e) ->
-    console.log 'task row checkbox clicked'
+    @.props.checked_row @.props.data.id
 
   render: ->
     render_data = R.tr({ref: 'row'},

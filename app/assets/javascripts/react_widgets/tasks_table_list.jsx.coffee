@@ -12,19 +12,97 @@ R = React.DOM
   getInitialState: (props) ->
     props = props || this.props
     column_names: props.column_names
-    data: props.data
+    original_data: props.data
+    data: @.formatData(props.data)
     checked_all: props.checked_all
+
+  formatData: (data) ->
+    _.map(data, (el) ->
+      {
+        id: el.id
+        data: el
+        checked: false
+      }
+    )
+
+  handleRowCheck: (id) ->
+    # копируем коллекцию и работаем с копией,
+    # обновляя в ней атрибуты нужных нам объектов
+    new_data = @.state.data
+    finded_obj = _.findWhere(new_data,{id: id})
+    i = new_data.indexOf(finded_obj)
+    new_data[i].checked = !new_data[i].checked
+
+    @.changeCheckedRows(new_data)
+
+    @.setState data: new_data
+
+
+  # метод создания ивента с чекнутыми задачами
+  # фильтрует задачи только сортированными
+  # в событии передает коллекцию чекнутых объектов
+  changeCheckedRows: (data) ->
+    # фильтруем только те задачи, которые имеют checked: true
+    checked = _.where(data, {checked: true})
+    $(document).trigger('tasks_table:collection:change_checked', [checked])
+    checked
 
 
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
 
+  # обрабатываем выделение всех строк
+  # обрабатываем копию данных
+  # бросаем событие «строки чекнуты»
+  # меняем статус,что приводит к перерисовке
+  checkAllRows: ->
+    new_data = _.map(@.state.data, (el) =>
+      el.checked = !@.state.checked_all
+      el
+    )
+
+    @.changeCheckedRows(new_data)
+
+    @.setState
+      data: new_data
+      checked_all: !@.state.checked_all
+
+
+
+
+  componentDidMount: ->
+    $(document).on('tasks_table:collection:check_all', (e) =>
+      console.log 'handle check all'
+      @.checkAllRows()
+    )
+
+    $(document).on('tasks_table:collection:change_checked', (e, data) ->
+      console.log data
+    )
+
+
   render: ->
+    window.arr = @.state.data
 
     render_data = @.state.data.map((el) =>
-      TasksTableRow({column_names: @.state.column_names, data: el, checked: @.state.checked_all})
+      TasksTableRow({column_names: @.state.column_names, data: el.data, checked: el.checked, checked_row: @.handleRowCheck})
     )
 
     R.tbody({ref: 'task_rows'}, render_data)
+
+
+###
+
+  obj:{
+    id: 5
+    data: {}
+    checked: true
+  }
+
+  obj = _.findWhere(arr, {id: 5})
+  i = arr.indexOf(obj)
+  obj[i].checked = true
+
+###
 

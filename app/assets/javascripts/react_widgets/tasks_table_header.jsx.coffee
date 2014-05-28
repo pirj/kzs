@@ -28,7 +28,8 @@ R = React.DOM
 
 
   handleCheckboxChange: ->
-    console.log 'table header clicked'
+    console.log 'clicked on header'
+    $(document).trigger('tasks_table:collection:check_all')
 
   render: ->
 
