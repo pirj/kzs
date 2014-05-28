@@ -35,13 +35,15 @@ class Tasks::Api::TasksController < ResourceController
   # link_to 'action_name', action_api_tasks_path(task_id), remote: true, method: :post
   %w(cancel start pause resume reformulate finish).each do |method_name|
     define_method method_name do
-      @is_transition = false
+      success = false
       if params[:id] && params[:action] && resource.current_state.events.keys.include?(params[:action].to_sym)
-        @is_transition = resource.send("#{params[:action]}!")
+        success = resource.send("#{params[:action]}!")
       end
 
+      resource.notify_interesants(exclude: current_user) if success
+
       respond_to do |format|
-        format.json { render json: {is_transition: @is_transition, current_state: resource.current_state.to_s} }
+        format.json { render json: {current_state: resource.current_state.to_s} }
         format.js { render "task_state_update" }
       end
     end
