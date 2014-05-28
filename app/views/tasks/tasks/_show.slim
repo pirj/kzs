@@ -11,15 +11,17 @@ h1.b-offset-sm = resource.title
   .col-md-3.col-md-offset-1.well.well-filled.pull-right
     .form-group Команда проекта
 
-    ul.form-group
-      li.text-help Инспектора:
-      li
-        = link_to inspector.first_name_with_last_name, '#', class: "link-dashed"
+    - if resource.inspector
+      ul.form-group
+        li.text-help Инспектора:
+        li
+          = link_to resource.inspector.try(:first_name_with_last_name), '#', class: "link-dashed"
 
-    ul.form-group
-      li.text-help Исполнители:
-      li
-        = link_to executor.first_name_with_last_name, '#', class: "link-dashed"
+    - if resource.executor
+      ul.form-group
+        li.text-help Исполнители:
+        li
+          = link_to resource.executor.try(:first_name_with_last_name), '#', class: "link-dashed"
 
 .row
   .col-md-4
