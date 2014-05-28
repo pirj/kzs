@@ -18,7 +18,7 @@ R = React.DOM
       data:
         q: @.state.search_params
       success: ((data) ->
-        @setState data: data['tasks']
+        @setState data: data['data']
         return
       ).bind(this)
       error: ((xhr, status, err) ->
