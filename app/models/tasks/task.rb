@@ -26,6 +26,7 @@ class Tasks::Task < ActiveRecord::Base
   accepts_nested_attributes_for :checklists, allow_destroy: true
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
+  scope :parents_only, where(parent_id: nil)
 
   validates :title, :text, :executor_id, :inspector_id, :organization_id, :presence => true
 

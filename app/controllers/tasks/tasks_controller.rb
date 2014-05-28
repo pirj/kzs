@@ -4,10 +4,9 @@ class Tasks::TasksController < ResourceController
   has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
 
-  respond_to :js, :html
+  respond_to :js, :json, :html
 
   helper_method :mapped_resource, :collection_path
-
 
   def list
   end

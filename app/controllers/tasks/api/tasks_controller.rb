@@ -2,13 +2,25 @@ class Tasks::Api::TasksController < ResourceController
   layout false
   respond_to :json
 
+  # by default you get parent tasks only.
+  # It you want to search - just add parent_only: false to params
+  has_scope :parents_only, type: :boolean, default: true
+
   def index
-    @search = Tasks::Task.for_organization(current_organization).ransack(params[:q])
+    @search = search_scope.ransack(params[:q])
     @tasks = @search.result(distinct: true)
     render json: collection, root: 'data', each_serializer: Tasks::TaskSerializer    
   end
 
-  #
+
+  # GET /api/tasks/:id/subtasks
+  # url helper subtasks_api_task(:id)
+
+  def subtasks
+    @task = Tasks::Task.find(params[:id])
+    @tasks = @task.subtasks
+    render json: @tasks, root: false, each_serializer: Tasks::TaskSerializer
+  end
 
   # api методы для передвижения задачи по статусам
   #
@@ -34,6 +46,16 @@ class Tasks::Api::TasksController < ResourceController
         format.js { render "task_state_update" }
       end
     end
+  end
+
+  private
+
+  def search_scope
+    apply_scopes(scope)
+  end
+
+  def scope
+    Tasks::Task.for_organization(current_organization)
   end
 
 end
