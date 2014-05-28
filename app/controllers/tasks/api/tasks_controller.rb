@@ -8,10 +8,9 @@ class Tasks::Api::TasksController < ResourceController
 
   def index
     @search = search_scope.ransack(params[:q])
-    @tasks = @search.result(distinct: true)
+    @tasks = @search.result(distinct: true).includes(:inspector, :executor, :checklists=>:checklist_items)
     render json: collection, root: 'data', each_serializer: Tasks::TaskSerializer    
   end
-
 
   # GET /api/tasks/:id/subtasks
   # url helper subtasks_api_task(:id)

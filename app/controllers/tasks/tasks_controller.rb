@@ -58,6 +58,4 @@ class Tasks::TasksController < ResourceController
     (task.finished_at - task.started_at).to_i/1.day if task.started_at && task.finished_at
   end
 
-
-
 end
