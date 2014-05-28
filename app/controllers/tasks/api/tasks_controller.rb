@@ -1,7 +1,5 @@
 class Tasks::Api::TasksController < ResourceController
   layout false
-
-  before_filter :permit_params, only: [:create, :update]
   respond_to :json
 
   def index
@@ -9,6 +7,8 @@ class Tasks::Api::TasksController < ResourceController
     @tasks = @search.result(distinct: true)
     render json: collection, root: 'data', each_serializer: Tasks::TaskSerializer    
   end
+
+  #
 
   # api методы для передвижения задачи по статусам
   #

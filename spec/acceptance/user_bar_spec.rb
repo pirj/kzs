@@ -69,11 +69,6 @@ feature "User views user bar", %q() do
         expect(page).to have_selector('._user-bar', visible: false)
         create_screenshot
       end
-
-
     end
-
   end
-
-
 end
