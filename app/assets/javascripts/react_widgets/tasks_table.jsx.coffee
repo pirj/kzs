@@ -4,7 +4,7 @@ R = React.DOM
 @TasksTable = React.createClass
 
   getDefaultProps: ->
-    url: '/api/tasks'
+    url: '/api'
     filter_opts: {}
 
   getInitialState: ->
@@ -18,7 +18,7 @@ R = React.DOM
       data:
         q: @.state.search_params
       success: ((data) ->
-        @setState data: data['data']
+        @setState data: data['tasks']
         return
       ).bind(this)
       error: ((xhr, status, err) ->

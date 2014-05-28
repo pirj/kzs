@@ -32,6 +32,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
     (object.finished_at.to_i - object.started_at.to_i)/1.day
   end
 
+  def state
+    object.current_state.to_s
+  end
+
   has_one :executor, serializer: NameOnlyUserSerializer
   has_one :inspector, serializer: NameOnlyUserSerializer
 
