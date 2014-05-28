@@ -9,32 +9,46 @@
                     do |f|
 
   = render 'documents/application/error_label', resource: resource
+  .row.b-offset-md
 
-  .form-group
-    .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее задачу в системе' ]
-      | Составитель
-    .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
+    = f.input :title
+    .form-group
+      label.string.required.control-label.col-sm-2 Дата начала:
+      .col-sm-2
+        .input-group
+          .input-group-icon
+            span.fa.fa-calendar
+          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
 
-  = f.association :inspector, collection: current_organization_users, \
-                              label_method: :first_name_with_last_name, \
-                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
-                              label_hint: 'Лицо, указанное в задаче, как контрольное лицо'
+      label.string.required.control-label.col-sm-2 Дата окончания:
+      .col-sm-2
+        .input-group
+          .input-group-icon
+            span.fa.fa-calendar
+          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата, к которой задача должна быть исполнена'
 
-  = f.association :executor, collection: current_organization_users, \
-                              label_method: :first_name_with_last_name, \
-                              input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
-                              label_hint: 'Лицо, указанное в задаче, как исполнитель'
+    /= f.association :inspector, collection: current_organization_users, \
+    /                            label_method: :first_name_with_last_name, \
+    /                            input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
+    /                            label_hint: 'Лицо, указанное в задаче, как контрольное лицо'
+    .form-group
+      .text-help.text-right.col-sm-2.label-icon-hint.js-label-hint[ title='Лицо, составившее задачу в системе' ]
+        | Инспектор
+      .text-help.col-sm-8.spec-document-creator = "#{current_user.first_name_with_last_name} (это Вы)"
+    = f.association :executor, collection: current_organization_users, \
+                                label_method: :first_name_with_last_name, \
+                                input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
+                                label_hint: 'Лицо, указанное в задаче, как исполнитель'
 
-  = f.input :started_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата начала исполнения задачи'
-  = f.input :finished_at, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой задача должна быть исполнена'
 
-  = f.input :title
-  = f.input :text, input_html: { rows: 4 }
+
+    = f.input :text, input_html: { rows: 4 }
 
 
   /TODO: going to controller
-
-  = render 'checklist_form', f: f
+  .row.col-md-offset-2
+    h2 Дела
+    = render 'checklist_form', f: f
 
   .row
     .col-sm-2

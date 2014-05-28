@@ -1,7 +1,7 @@
 = f.simple_fields_for :checklists do |checklist_builder|
-  .well
+  .well.col-sm-9
     .b
-      .col-sm-12.col-sm-offset-2
+      .col-sm-12
         h3
           | Список дел
           .col-words-1
@@ -15,7 +15,7 @@
     = render 'item_form', f: checklist_builder
 
 / кнопка добавить чеклист
-= f.link_to_add :checklists, class: 'btn btn-big btn-mega-primary' do
+= f.link_to_add :checklists, class: 'btn btn-primary-empty' do
   span.fa.fa-plus-circle
   span Добавить список дел
 
