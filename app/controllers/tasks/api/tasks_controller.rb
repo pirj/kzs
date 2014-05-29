@@ -62,5 +62,4 @@ class Tasks::Api::TasksController < ResourceController
   def scope
     Tasks::Task.for_organization(current_organization)
   end
-
 end
