@@ -24,8 +24,13 @@ h1.b-offset-sm = resource.title
           = link_to resource.executor.try(:first_name_with_last_name), '#', class: "link-dashed"
 
 .row
-  .col-md-4
+  .col-md-3.row.b-offset-sm
+    h2 Подзадачи:
+  .col-md-3
     = react_component('TasksAddSubtask', { opened: false })
+
+.row
+  = render 'subtask_form', resource: @newtask
 
 - unless resource.checklists.blank?
 

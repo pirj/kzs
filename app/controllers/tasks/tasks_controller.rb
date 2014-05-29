@@ -16,6 +16,8 @@ class Tasks::TasksController < ResourceController
     @task = Tasks::Task.find(params[:id])
     @task.clear_notifications for: current_user
 
+    @newtask = Tasks::Task.new(:parent_id => @task.id )
+
     super
   end
 

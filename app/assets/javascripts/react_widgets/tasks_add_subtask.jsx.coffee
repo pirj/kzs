@@ -31,6 +31,14 @@ R = React.DOM
       ''
     else 'hidden')
 
+    popupBody = R.div({className:'inner'}, [
+      R.input({className: 'name', type: 'text', name: 'title', placeholder: 'Название'}),
+      R.select({className: 'executor', name: 'executor', type: 'text', placeholder: 'Исполнитель'}, [R.option({}),R.option({}, 'Опция1'),R.option({}, 'Опция2')]),
+      R.input({className: 'started_at', type: 'text', name: 'started_at', placeholder: 'Дата начала'}),
+      R.input({className: 'started_at', type: 'text', name: 'finished_at', placeholder: 'Дата конца'}),
+
+    ])
+
     button = R.span({className: status, onClick: @handleClick}, 'Добавить подзадачу')
-    popup = R.div({className: popup_status}, 'wasd')
+    popup = R.div({className: popup_status}, popupBody)
     R.div(className: ' ', [button, popup])
