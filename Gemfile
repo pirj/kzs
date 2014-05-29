@@ -8,11 +8,8 @@ gem 'squeel'
 # Search object processor
 gem 'ransack'
 
-gem 'execjs'
-
 gem 'paperclip', '~> 3.0'
 gem 'devise'
-
 
 gem 'russian', '~> 0.6.0'
 
@@ -99,7 +96,6 @@ group :assets do
   gem 'chosen-rails'
   gem 'font-awesome-rails'
   # gem 'turbo-sprockets-rails3'
-  gem 'therubyracer'
 end
 
 group :development, :test do
