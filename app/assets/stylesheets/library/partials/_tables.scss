@@ -223,6 +223,18 @@ tr{
         vertical-align: top;
         cursor: pointer;
       }
+
+      > th{
+        border-left: 1px solid #fff;
+        padding-right: 0;
+
+        .table-filter span.fa{
+          margin-top:  -$table-cell-padding;
+          margin-bottom:  -$table-cell-padding;
+          height: 40px;
+          padding-top: $table-cell-padding;
+        }
+      }
     }
   }
   // заголовки в таблице
