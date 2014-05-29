@@ -8,12 +8,25 @@ $el: '.popup';
   right: -$popup-offset;
 
   width: auto;
-  min-width: 300px;
+  min-width: 400px;
   position: absolute;
   background: rgba(0, 0, 0, 0.8); //default background-color
   z-index: 999;
   border-radius: $border-radius-base;
-  padding: 30px;
+
+  &.popup-right{
+    top: -30px;
+    left: 0;
+    margin-left: 30px;
+
+    &:before {
+      @include arrow-left(rgba(0, 0, 0, 0.8));
+      right: $popup-offset;
+      left: -2*$dropdown-arrow-width-base;
+      top: 30px + $dropdown-arrow-width-base/2;
+    }
+  }
+
   &:before {
     @include arrow-top(rgba(0, 0, 0, 0.8));
     right: $popup-offset;
@@ -28,8 +41,8 @@ $el: '.popup';
     border-top: 1px solid #fff;
     display: block;
     width: 100%;
-    padding: 10px 0;
     text-transform: uppercase;
+    padding: 10px 30px;
     @include links-all-states{
       color: #fff;
       text-decoration: none;
@@ -44,15 +57,23 @@ $el: '.popup';
     font-size: 20px;
     color: #fff;
     margin-bottom: 30px;
+    padding: 0 30px;
   }
 
   #{$el}-body{
     color: #fff;
     margin-bottom: 30px;
+    padding: 0 30px;
   }
 
   #{$el}-fa{
     display: inline-block !important;
+  }
+
+  // инпуты внутри попапа
+  .form-control{
+    background-color: transparent;
+    color: #fff;
   }
 }
 

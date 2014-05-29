@@ -915,6 +915,19 @@
   position: absolute;
 }
 
+@mixin arrow-left($color: white) {
+  border-right: $dropdown-arrow-width-base solid $color;
+  border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-bottom: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-top: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  width: $dropdown-arrow-width-base;
+  left: 2*$dropdown-arrow-width-base;
+  top: -2*$dropdown-arrow-width-base;
+  display: block;
+  content: '';
+  position: absolute;
+}
+
 // fonts icon with FontAwesome
 @mixin fa-icon($icon-code, $size: $base-font-size){
   font-family: FontAwesome;

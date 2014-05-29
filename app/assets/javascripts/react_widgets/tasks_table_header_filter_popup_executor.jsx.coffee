@@ -51,7 +51,7 @@ R = React.DOM
     @.props.onPopupCancel(false)
 
   popupClassName: ->
-    class_name = ['popup']
+    class_name = ['popup popup-right']
     class_name.push 'hidden' unless @.state.opened
     class_name.join(' ')
 
@@ -71,7 +71,7 @@ R = React.DOM
 
 
     R.div({className: @.popupClassName()}, [
-      R.h5({className: 'popup-header'}, 'форма для фильтра'),
+      R.h5({className: 'popup-header'}, 'Фильтр по полю'),
       R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, className: 'form-vertical'}, [
         R.div({className: 'popup-body'}, [
           R.input({name: input_name, className: 'js-select2', multiple: 'multiple'})

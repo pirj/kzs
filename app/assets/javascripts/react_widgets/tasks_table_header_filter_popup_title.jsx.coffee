@@ -15,16 +15,23 @@ R = React.DOM
 
 
   render: ->
-    class_name = 'popup '
+    class_name = 'popup popup-right '
     class_name += (if @.props.opened then "" else "hidden")
     R.div({className: class_name}, [
-      R.h5({}, 'форма для фильтра'),
+      R.h5({className: 'popup-header'}, 'Фильтр по полю'),
       R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, class: 'form-horizontal'}, [
-        R.div({}, [
+        R.div({className: 'popup-body'}, [
           R.input({name: 'title_cont', type: 'text', className: 'form-control'})
         ]),
-        R.input({type: 'submit', onClick: @.handleSubmit, value: 'применить', className: 'btn'}),
-        R.link({href: '#', onClick: @.handleCancel, className: 'btn'}, 'отмена')
+
+        R.a({href: '#', onClick: @.handleSubmit, className: 'popup-btn'}, [
+          R.span({className: 'popup-fa fa fa-check-circle'})
+          R.span({}, 'применить')
+        ]),
+        R.a({href: '#', onClick: @.handleCancel, className: 'popup-btn'}, [
+          R.span({className: 'popup-fa fa fa-ban'})
+          R.span({}, 'отменить')
+        ])
       ])
     ])
 
