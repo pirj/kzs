@@ -26,6 +26,13 @@ class NotificationMailer < ActionMailer::Base
     mail to: document.approver.email, subject: "САКЭ КЗС. Документ «#{document.title}» согласован и готов к подписи"
   end
 
+  def task_created user, task
+    @user = user
+    @task = task
+
+    mail to: user.email, subject: "САКЭ КЗС. Новая задача «#{task.title}»"
+  end
+
   def task_changed user, task
     @user = user
     @task = task
