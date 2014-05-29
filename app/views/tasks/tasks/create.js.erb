@@ -1,7 +1,11 @@
 //Для работы с сабтасками на странице просмотра
 <%- if resource.valid? %>
-//window.app.GanttView.addTask(<%= mapped_resource %>);
-//window.app.GanttView.clearForm()
+//$('.js-popover-content').hide();
+//$('.js-popover').removeClass('active');
+//$(".js-datepicker").datepicker(global.datepicker);
+
+window.location.reload()
 <%- else %>
-//window.app.GanttView.displayForm(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
+$(".js-popover-content[data-target='add-subtask']").html("<%= j render 'tasks/tasks/subtask_form', remote: true, resource: resource %>");
+$(".js-datepicker").datepicker(global.datepicker);
 <%- end %>
