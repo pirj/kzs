@@ -32,15 +32,13 @@ class Tasks::Task < ActiveRecord::Base
   scope :for_organization, ->(org) { where(organization_id: org) }
   scope :parents_only, where(parent_id: nil)
 
-  validates :title, :executor_id, :inspector_id, :organization_id, :presence => true
+  validates :title, :text, :executor_id, :inspector_id, :organization_id, presence: true
+  validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}
+  validates :finished_at, timeliness: {type: :date}
+  validate :start_must_be_before_end_time
 
   after_create :send_create_notifications
   after_update :send_update_notifications
-
-  validates :started_at, timeliness: {
-      on_or_after: -> { DateTime.now },
-      type: :date
-  }
 
   scope :overdue, -> { where('finished_at <= ?', Time.now )}
 
@@ -91,5 +89,10 @@ private
       end
     end
   end
+
+  def start_must_be_before_end_time
+      
+      errors.add(:started_at, "не должна быть позже даты окончания задачи") unless (started_at <= finished_at) unless started_at.nil? && finished_at.nil?
+  end 
 
 end
