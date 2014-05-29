@@ -53,7 +53,7 @@ R = React.DOM
         result = R.a({href: "/tasks/#{obj.id}", className: linkClassName}, data)
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
         title = try
-          data.title
+          data.first_name_with_last_name
         catch
           ''
         result = R.a({href: '#', className: 'link link-dashed'}, title)
