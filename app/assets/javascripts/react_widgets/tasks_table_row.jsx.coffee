@@ -45,7 +45,8 @@ R = React.DOM
       result = data
 
       # если передана дата в UTC, то преобразуем ее
-      _date = new Date(data)
+      console.log data
+      console.log _date = new Date(data)
       if !isNaN(_date) && col_name.search(/_at$|deadline/) > -1
         result = moment(_date).format('L')
       else if col_name.search(/title$|name$/) > -1

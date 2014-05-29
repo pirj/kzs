@@ -20,12 +20,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
 
   def started_at
     @started_at = object.started_at
-    @started_at ? @started_at.localtime.strftime("%d-%m-%Y") : nil
   end
 
   def finished_at
-    @started_at = object.started_at
-    @started_at ? @started_at.localtime.strftime("%d-%m-%Y") : nil
+    @finished_at = object.finished_at
   end
 
   def duration

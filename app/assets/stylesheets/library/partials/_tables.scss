@@ -240,13 +240,13 @@ tr{
 
       .fa {
         display: block;
-        padding: 0 4px;
+        padding: 0 8px;
         // наследуем свойство для того,чтобы выровнять иконку по линии с текстом
         line-height: inherit;
 
         &.m-active {
-          background-color: $color-cloud-darker;
-          color: $color-sea-green;
+          background-color: $color-blue;
+          color: #fff;
         }
       }
     }

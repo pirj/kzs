@@ -12,6 +12,8 @@ R = React.DOM
       $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
     )
 
+  handleCancel: ->
+    @.props.onPopupCancel(false)
 
 
   render: ->
