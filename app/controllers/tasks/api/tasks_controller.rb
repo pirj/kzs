@@ -42,7 +42,7 @@ class Tasks::Api::TasksController < ResourceController
 
       resource.notify_interesants(exclude: current_user) if success
 
-      [resource.inspector, resource.executor].uniq.reject{|u| u == current_user}.each do |user|
+      [resource.inspector, resource.executor].compact.uniq.reject{|u| u == current_user}.each do |user|
         NotificationMailer.task_state_changed(user, resource).deliver!
       end
 
