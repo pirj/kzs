@@ -33,6 +33,8 @@ R = React.DOM
     $('.js-select2').select2(
       multiple: true
       width: '100%'
+      containerCssClass: 'select2-black-mode'
+      dropdownCssClass: 'select2-black-mode'
       query: (query) =>
         data =
           results: []
