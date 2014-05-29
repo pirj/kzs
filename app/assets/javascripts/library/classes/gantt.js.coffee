@@ -172,7 +172,7 @@ class Gantt
 
     request.done (data) ->
 
-      console.log data
+#      console.log data
       gantt.parse(data)
       return
 
@@ -186,10 +186,10 @@ class Gantt
       type: 'GET'
       dataType: "json"
     )
-    console.log id
+#    console.log id
     request.done (data) ->
 
-      console.log {data: [data.task]}
+#      console.log {data: [data.task]}
       gantt.parse({data: [data.task]})
       return
 

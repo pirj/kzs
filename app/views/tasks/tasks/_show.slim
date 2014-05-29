@@ -25,8 +25,7 @@ h1.b-offset-sm = resource.title
 
 .row
   .col-md-4
-    .btn Добавить подзадачу
-    = react_component('LikeButton', { liked: false })
+    = react_component('TasksAddSubtask', { opened: false })
 
 - unless resource.checklists.blank?
 
@@ -67,4 +66,3 @@ h1.b-offset-sm = resource.title
 .row
   .col-md-12.js-buttons-place
     = link_to 'Редактировать', edit_task_path(resource), class: 'btn btn-default'
-
