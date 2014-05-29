@@ -32,7 +32,7 @@ class Tasks::Task < ActiveRecord::Base
   scope :for_organization, ->(org) { where(organization_id: org) }
   scope :parents_only, where(parent_id: nil)
 
-  validates :title, :text, :executor_id, :inspector_id, :organization_id, :presence => true
+  validates :title, :executor_id, :inspector_id, :organization_id, :presence => true
 
   after_create :send_create_notifications
   after_update :send_update_notifications

@@ -6,6 +6,8 @@
   background: rgba(0,0,0,0.8); //default background-color
   width: auto;
   z-index: 999;
+  border-radius: 15px;
+  margin-top: 15px;
   &:before{
     @include arrow-top(rgba(0,0,0,0.8));
   }

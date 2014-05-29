@@ -8,7 +8,8 @@
                               } \
                     do |f|
   = render 'documents/application/error_label', resource: resource
-  .row.b-offset-md
+  div style='width: 800px'
+    h3.text-center Добавление подзадачи
     = f.input :title
     = f.input :text, input_html: { rows: 4 }
     .form-group
