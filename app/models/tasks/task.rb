@@ -77,7 +77,7 @@ private
 
     # Refactor this list to be dynamic
     [inspector, executor].compact.uniq.reject{|u| u == User.find(updated_by) if updated_by}.each do |user|
-      NotificationMailer.task_created(user, self).deliver!
+      NotificationMailer.delay.task_created(user, self)
     end
   end
 
@@ -87,7 +87,7 @@ private
 
       # Refactor this list to be dynamic
       [inspector.id, executor.id, inspector_id_was, executor_id_was].compact.uniq.map {|id| User.find(id)}.reject{|u| u == User.find(updated_by) if updated_by}.each do |user|
-        NotificationMailer.task_changed(user, self).deliver!
+        NotificationMailer.delay.task_changed(user, self)
       end
     end
   end

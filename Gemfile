@@ -19,6 +19,9 @@ gem 'faker'
 # Authorization rules
 gem 'cancan'
 
+# Background process
+gem 'delayed_job_active_record'
+
 # ActiveRecord object duplication DSL
 gem 'amoeba'
 
