@@ -71,13 +71,19 @@ R = React.DOM
 
 
     R.div({className: @.popupClassName()}, [
-      R.h5({}, 'форма для фильтра'),
-      R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, class: 'form-horizontal'}, [
-        R.div({}, [
+      R.h5({className: 'popup-header'}, 'форма для фильтра'),
+      R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, className: 'form-vertical'}, [
+        R.div({className: 'popup-body'}, [
           R.input({name: input_name, className: 'js-select2', multiple: 'multiple'})
         ]),
-        R.input({type: 'submit', onClick: @.handleSubmit, value: 'применить', className: 'btn'}),
-        R.a({href: '#', onClick: @.handleCancel, className: 'btn'}, 'отмена')
+        R.a({href: '#', onClick: @.handleSubmit, className: 'popup-btn'},[
+          R.span({className: 'popup-fa fa fa-check-circle'})
+          R.span({}, 'применить')
+        ]),
+        R.a({href: '#', onClick: @.handleCancel, className: 'popup-btn'},[
+          R.span({className: 'popup-fa fa fa-ban'})
+          R.span({}, 'отменить')
+        ])
       ])
     ])
 

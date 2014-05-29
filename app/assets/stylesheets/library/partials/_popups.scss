@@ -1,4 +1,5 @@
-$el: '._user-bar';
+$el: '.popup';
+
 .popup{
   $popup-offset: 2*$dropdown-arrow-width-base;
 
@@ -18,7 +19,50 @@ $el: '._user-bar';
     right: $popup-offset;
     left: initial;
   }
+
+  //  buttons
+  #{$el}-btn {
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #fff;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    text-transform: uppercase;
+    @include links-all-states{
+      color: #fff;
+      text-decoration: none;
+    }
+
+    &:hover, &:active, &:focus{
+      background: rgba(255,255,255,0.2);
+    }
+  }
+
+  #{$el}-header{
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 30px;
+  }
+
+  #{$el}-body{
+    color: #fff;
+    margin-bottom: 30px;
+  }
+
+  #{$el}-fa{
+    display: inline-block !important;
+  }
 }
+
+
+//
+// _user-bar component
+//
+
+
+$el: '._user-bar';
 
 #{$el} {
 

@@ -41,7 +41,10 @@
   }
 
   // выделеный пункт меню в выпадающем списке
-  .select2-results .select2-highlighted{
+  .select2-results .select2-highlighted,
+  .select2-results .select2-no-results,
+  .select2-results .select2-searching,
+  .select2-results .select2-selection-limit{
     background: $color-cyan-d;
   }
 }
