@@ -17,6 +17,25 @@ R = React.DOM
   componentWillReceiveProps: (newProps, oldProps) ->
     @.setState(@.getInitialState(newProps))
 
+  titleClassName: ->
+    cx = React.addons.classSet
+    result = ''
+    result = cx(
+      'link-orange' : @.state.data.state == 'formulated',
+      'link-success' : @.state.data.state == 'executed',
+      'link-default' : @.state.data.state == 'paused',
+      'link-asphalt' : @.state.data.state == 'cancelled',
+    )
+    result += ' link'
+    return result
+
+  ###
+  data:
+    id:
+    title:
+    started_at:
+    state: 'formulated' || 'paused' ||  ...
+  ###
 
   formatData: (col_name) ->
     obj = @.state.data
@@ -30,7 +49,8 @@ R = React.DOM
       if !isNaN(_date) && col_name.search(/_at$|deadline/) > -1
         result = moment(_date).format('L')
       else if col_name.search(/title$|name$/) > -1
-        result = R.a({href: "/tasks/#{obj.id}", className: 'link'}, data)
+        linkClassName = @.titleClassName()
+        result = R.a({href: "/tasks/#{obj.id}", className: linkClassName}, data)
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
         title = try
           data.title

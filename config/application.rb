@@ -110,5 +110,8 @@ module Kzs
     # при первом запуске нужно запустить rake-задачи
     # rake i18n:js:export && rake i18n:js:setup
     config.middleware.use SimplesIdeias::I18n::Middleware
+
+    # React addons
+    config.react.addons = true
   end
 end
