@@ -20,7 +20,6 @@
 //= require bootstrap
 //= require jquery_nested_form
 //= require jquery.icheck
-//= require_tree ./plugins
 //= require chosen-jquery
 //= require react
 //= require react_ujs
@@ -28,6 +27,7 @@
 //= require moment
 //= require moment/ru.js
 //= require ckeditor/init
+//= require_tree ./plugins
 //= require library/permit
 //= require ckeditor/ckeditor
 //= require_tree ./library
