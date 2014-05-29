@@ -41,7 +41,7 @@ feature "User receives documents notifications", %q() do
               expect(page).to_not have_css '.spec-notification-badge'
             end
 
-            scenario 'empty important-docments list' do
+            pending 'empty important-docments list' do
               expect(page).to have_content 'по заданным параметрам фильтрации документов нет'
             end
 
@@ -72,7 +72,7 @@ feature "User receives documents notifications", %q() do
         context _user do
           let(:user) { send(_user) }
 
-          scenario 'not empty important-docments list' do
+          pending 'not empty important-docments list' do
             expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
             expect(page).to have_content mail.title
           end
@@ -92,7 +92,7 @@ feature "User receives documents notifications", %q() do
       context 'approver' do
         let(:user) { approver }
 
-        scenario 'empty important-docments list' do
+        pending 'empty important-docments list' do
           expect(page).to have_content 'по заданным параметрам фильтрации документов нет'
           expect(page).to_not have_content mail.title
         end
@@ -155,7 +155,7 @@ feature "User receives documents notifications", %q() do
               context _user do
                 let(:user) { send(_user) }
 
-                scenario 'not empty important-docments list' do
+                pending 'not empty important-docments list' do
                   expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
                   expect(page).to have_content mail.title
                 end
@@ -175,7 +175,7 @@ feature "User receives documents notifications", %q() do
           context 'creator' do
             let(:user) { creator }
 
-            scenario 'empty important-docments list' do
+            pending 'empty important-docments list' do
               expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
               expect(page).to have_content mail.title
             end
@@ -217,11 +217,11 @@ feature "User receives documents notifications", %q() do
       end
 
       context 'approver became as creator' do
-        [:craeator, :conformer, :executor].each do |_user|
+        [:creator, :conformer, :executor].each do |_user|
           context _user do
             let(:user) { send(_user) }
 
-            scenario 'empty important-docments list' do
+            pending 'empty important-docments list' do
               expect(page).to have_content 'по заданным параметрам фильтрации документов нет'
               expect(page).to_not have_content mail.title
             end
@@ -238,7 +238,7 @@ feature "User receives documents notifications", %q() do
         context 'approver' do
           let(:user) { approver }
 
-          scenario 'empty important-docments list' do
+          pending 'empty important-docments list' do
             expect(page).to have_content 'по заданным параметрам фильтрации документов нет'
             expect(page).to_not have_content mail.title
           end
@@ -287,7 +287,7 @@ feature "User receives documents notifications", %q() do
           expect(user).to_not eq creator
         end
 
-        scenario 'not empty important-docments list' do
+        pending 'not empty important-docments list' do
           expect(page).to_not have_content 'по заданным параметрам фильтрации документов нет'
           expect(page).to have_content mail.title
         end
@@ -305,7 +305,7 @@ feature "User receives documents notifications", %q() do
       context 'creator of the reply' do
         let(:user) { creator }
 
-        scenario 'empty important-docments list' do
+        pending 'empty important-docments list' do
           expect(page).to have_content 'по заданным параметрам фильтрации документов нет'
           expect(page).to_not have_content mail.title
         end
