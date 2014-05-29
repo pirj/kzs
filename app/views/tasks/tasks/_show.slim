@@ -30,7 +30,7 @@ h1.b-offset-sm = resource.title
     = react_component('TasksAddSubtask', { opened: false })
 
 .row
-  = render 'subtask_form', resource: @newtask
+  = render 'subtask_form', resource: @subtask, remote: true
 
 - unless resource.checklists.blank?
 

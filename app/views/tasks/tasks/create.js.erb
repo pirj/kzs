@@ -1,6 +1,7 @@
+//Для работы с сабтасками на странице просмотра
 <%- if resource.valid? %>
-window.app.GanttView.addTask(<%= mapped_resource %>);
-window.app.GanttView.clearForm()
+//window.app.GanttView.addTask(<%= mapped_resource %>);
+//window.app.GanttView.clearForm()
 <%- else %>
-window.app.GanttView.displayForm(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
+//window.app.GanttView.displayForm(("<%= j render 'tasks/tasks/form', remote: true, resource: resource %>"));
 <%- end %>
