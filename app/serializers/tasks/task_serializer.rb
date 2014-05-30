@@ -15,7 +15,7 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
   end
 
   def start_date
-    started_at
+    started_at ? started_at.strftime('%d-%m-%Y') : nil
   end
 
   def started_at
