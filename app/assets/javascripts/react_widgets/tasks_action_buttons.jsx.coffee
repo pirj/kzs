@@ -41,7 +41,7 @@ R = React.DOM
         task_ids: @.state.data.ids
         event: action
       success: (responce) ->
-        console.log responce
+        $(document).trigger('tasks_actions:update_success')
       error: (responce) ->
         console.log responce
 
@@ -52,7 +52,6 @@ R = React.DOM
   handleCheckedData: (checked) ->
     # получаем массив массивов действий [ [1,2], [2,3], [1,2], ...]
     _actions = checked.map((el) -> el.data.actions )
-    console.log _actions
 
     # блок выделения общих действий среди массива массивов
     result = _actions[0]

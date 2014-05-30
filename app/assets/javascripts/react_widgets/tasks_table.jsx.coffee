@@ -31,6 +31,8 @@ R = React.DOM
   componentWillMount: ->
     @.getDataFromServer()
 
+    $(document).on('tasks_actions:update_success', => @.getDataFromServer())
+
 
   onChangeSearchParams: (params) ->
     @.state = search_params: params
