@@ -1,6 +1,14 @@
 h1 список задач
-
-= react_component('TasksTable', { url: api_tasks_path, filter_opts: tasks_table_filter_opts })
+- actions = [ \
+  { name: 'start' }, \
+  { name: 'pause' }, \
+  { name: 'resume' }, \
+  { name: 'finish' }, \
+  { name: 'reformulated' }, \
+  { name: 'cancel' }, \
+]
+.b-offset-sm = react_component('TasksActionButtons', {actions: actions}, url: change_state_api_tasks_path)
+.b-offset-sm = react_component('TasksTable', { url: api_tasks_path, filter_opts: tasks_table_filter_opts })
 
 
 css:

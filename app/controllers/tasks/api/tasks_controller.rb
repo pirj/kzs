@@ -6,7 +6,7 @@ class Tasks::Api::TasksController < ResourceController
   # It you want to search - just add parent_only: false to params
   # has_scope :parents_only, only: [:index], type: :boolean, default: true
   has_scope :for_organization, only: [:index]
-  has_scope :by_started_at, only: [:index, :subtasks]
+  has_scope :by_started_at, only: [:index, :subtasks, :change_state]
 
   def index
     @search = search_scope.ransack(params[:q])
@@ -53,6 +53,26 @@ class Tasks::Api::TasksController < ResourceController
         format.js { render "task_state_update" }
       end
     end
+  end
+
+  def change_state
+    responce = []
+    if params[:task_ids] && params[:task_ids].is_a?(Array) && params[:action_name]
+      action = params[:action_name].to_s
+      _collection = collection.where(id: params[:ids])
+      responce = _collection.map do |task|
+        begin
+          if task.send("#{action}!")
+            true
+          end
+        rescue NoMethodError, Workflow::NoTransitionAllowed
+          false
+        end
+        true
+      end
+    end
+
+    render json: responce
   end
 
   private

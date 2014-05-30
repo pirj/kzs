@@ -162,6 +162,9 @@ Kzs::Application.routes.draw do
   scope module: 'tasks' do
     namespace :api do
       resources :tasks do
+        collection do
+          post 'change_state'
+        end
 
         member do
           get 'subtasks'
