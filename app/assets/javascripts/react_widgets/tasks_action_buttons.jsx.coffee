@@ -32,11 +32,14 @@ R = React.DOM
 
   # обработка клика на кнопке
   # отправляем запрос на сервер
-  handleClick: ->
+  handleClick: (e) ->
+    action = e.target.dataset['action']
     $.ajax
       type: 'POST'
       url: @.props.url
-      data: @.state.data
+      data:
+        task_ids: @.state.data.ids
+        event: action
       success: (responce) ->
         console.log responce
       error: (responce) ->
@@ -75,7 +78,7 @@ R = React.DOM
 
   render_single_btn: (action) ->
     # свойства для активной кнопки
-    opts = {href: '#', className: @.iconClassByAction(action.name), ref: action.name, onClick: @.handleClick}
+    opts = {href: '#', className: @.iconClassByAction(action.name), 'data-action': action.name, onClick: @.handleClick}
 
     # корректируем свойства для неактивной кнопки
     if @.state.data.actions == undefined || @.state.data.actions.indexOf(action.name) < 0

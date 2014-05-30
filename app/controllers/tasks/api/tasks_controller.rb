@@ -5,8 +5,8 @@ class Tasks::Api::TasksController < ResourceController
   # by default you get parent tasks only.
   # It you want to search - just add parent_only: false to params
   # has_scope :parents_only, only: [:index], type: :boolean, default: true
-  has_scope :for_organization, only: [:index]
-  has_scope :by_started_at, only: [:index, :subtasks, :change_state]
+  has_scope :for_organization,  only: [:index, :subtasks, :change_state]
+  has_scope :by_started_at,     only: [:index, :subtasks, :change_state]
 
   def index
     @search = search_scope.ransack(params[:q])
@@ -57,18 +57,15 @@ class Tasks::Api::TasksController < ResourceController
 
   def change_state
     responce = []
-    if params[:task_ids] && params[:task_ids].is_a?(Array) && params[:action_name]
-      action = params[:action_name].to_s
-      _collection = collection.where(id: params[:ids])
+    if params[:task_ids].present? && params[:task_ids].is_a?(Array) && params[:event].present?
+      event = params[:event].to_s
+      _collection = collection.where(id: params[:task_ids])
       responce = _collection.map do |task|
         begin
-          if task.send("#{action}!")
-            true
-          end
+          task.send("#{event}!")
         rescue NoMethodError, Workflow::NoTransitionAllowed
           false
         end
-        false
       end
     end
 
