@@ -8,7 +8,6 @@ class Tasks::Checklist < ActiveRecord::Base
 
   validates :name, presence: true
 
-  after_create :send_notifications
   after_update :send_notifications
 
 private
