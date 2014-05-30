@@ -4,7 +4,7 @@ class Tasks::Api::TasksController < ResourceController
 
   # by default you get parent tasks only.
   # It you want to search - just add parent_only: false to params
-  has_scope :parents_only, type: :boolean, default: true
+  has_scope :parents_only, only: [:index], type: :boolean, default: true
   has_scope :for_organization, only: [:index]
 
   def index
@@ -19,7 +19,7 @@ class Tasks::Api::TasksController < ResourceController
   def subtasks
     @task = Tasks::Task.find(params[:id])
     @tasks = @task.subtasks
-    render json: @tasks, root: false, each_serializer: Tasks::TaskSerializer
+    render json: @tasks, root: 'data', each_serializer: Tasks::TaskSerializer
   end
 
   # api методы для передвижения задачи по статусам

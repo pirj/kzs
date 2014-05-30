@@ -20,10 +20,10 @@ module Tasks
     def css_class_for state
       css_class = 'primary'
       css_class = case current_state.to_sym
-                    when :formulated then 'label-warning label'
-                    when :activated then 'label-info label'
-                    when :cancelled then 'label-primary label'
-                    when :executed then 'label-success label'
+                    when :formulated then 'label-orange label'
+                    when :activated then 'label-blue label'
+                    when :cancelled then 'label-asphalt label'
+                    when :executed then 'label-green label'
                     when :paused then 'label-default label'
                     else 'label-default label'
                   end

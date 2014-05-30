@@ -3,10 +3,49 @@ h1.b-offset-sm = resource.title
 = render 'status_actions'
 = render 'mini_grid'
 
-.row-fuild
-  .col-md-8.row.b-offset-sm
-    h2 Цель задачи:
-    .form-group.text-help = resource.text
+.row
+  .col-md-8
+    .row.b-offset-sm
+      .col-sm-12
+        h2 Цель задачи:
+        .form-group.text-help = resource.text
+
+
+    = render 'task_subtasks_list'
+
+
+    - unless resource.checklists.blank?
+      .row.b-offset-sm
+        .col-sm-12
+          h2.b-offset-sm Дела
+          - resource.checklists.each do |checklist|
+            /.form-group.row
+            /  .col-md-2.text-help.text-right Название списка:
+            /  .col-md-7 #{checklist.name}
+            /.form-group.row
+            /  .col-md-2.text-help.text-right Создан:
+            /  .col-md-7 #{checklist.updated_at}
+            /.form-group.row
+            /  .col-md-2.text-help.text-right Обновлен:
+            /  .col-md-7 #{checklist.created_at}
+
+            - undisable = can? :edit_checklists,resource
+            = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
+              - i = 1
+
+              - checklist_builder.simple_fields_for :checklist_items do |f|
+                .form-group.row._task
+                  .col-sm-1
+                    = f.input :checked, label: false, input_html: {class: 'js-form-submit', disabled: ( 'disabled' unless undisable )}
+                  .pull-left.col-md-10
+                    ._task-title
+                      ._task-num = i
+                      - i+=1
+                      = f.object.name
+                      .pull-right
+                        span.fa.fa-clock-o
+                        span = DateFormatter.new(f.object.finished_at)
+                    p._task-comment.text-help = f.object.description
 
   .col-md-3.col-md-offset-1.well.well-filled.pull-right
     .form-group Команда проекта
@@ -22,52 +61,6 @@ h1.b-offset-sm = resource.title
         li.text-help Исполнители:
         li
           = link_to resource.executor.try(:first_name_with_last_name), '#', class: "link-dashed"
-
-.row
-  .col-md-3.row.b-offset-sm
-    h2 Подзадачи:
-  .col-md-3
-    /= react_component('TasksAddSubtask', { opened: false })
-    = link_to '',  class: 'btn js-popover btn-primary-empty ', data: {target: 'add-subtask'} do
-      .fa.fa-plus-circle
-      | Добавить подзадачу
-    .js-popover-content data-target='add-subtask'
-      = render 'subtask_form', resource: @subtask, remote: true
-
-- unless resource.checklists.blank?
-
-  .col-md-8.row
-    h2.b-offset-sm Дела
-    - resource.checklists.each do |checklist|
-      /.form-group.row
-      /  .col-md-2.text-help.text-right Название списка:
-      /  .col-md-7 #{checklist.name}
-      /.form-group.row
-      /  .col-md-2.text-help.text-right Создан:
-      /  .col-md-7 #{checklist.updated_at}
-      /.form-group.row
-      /  .col-md-2.text-help.text-right Обновлен:
-      /  .col-md-7 #{checklist.created_at}
-
-      - undisable = can? :edit_checklists,resource
-      = simple_form_for [resource, checklist], html: { remote: true}, url: task_checklist_path(resource,checklist) do |checklist_builder|
-        - i = 1
-
-        - checklist_builder.simple_fields_for :checklist_items do |f|
-          .form-group.row._task
-            .col-sm-1
-              = f.input :checked, label: false, input_html: {class: 'js-form-submit', disabled: ( 'disabled' unless undisable )}
-            .pull-left.col-md-10
-              ._task-title
-                ._task-num = i
-                - i+=1
-                = f.object.name
-                .pull-right
-                  span.fa.fa-clock-o
-                  span = DateFormatter.new(f.object.finished_at)
-              p._task-comment.text-help = f.object.description
-
-
 
 
 .row
