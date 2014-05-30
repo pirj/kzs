@@ -31,6 +31,7 @@ class Tasks::Task < ActiveRecord::Base
   default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
   scope :parents_only, where(parent_id: nil)
+  scope :by_started_at, order('started_at ASC')
 
   validates :title, :text, :executor_id, :inspector_id, :organization_id, presence: true
   validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}

@@ -4,8 +4,9 @@ class Tasks::Api::TasksController < ResourceController
 
   # by default you get parent tasks only.
   # It you want to search - just add parent_only: false to params
-  has_scope :parents_only, only: [:index], type: :boolean, default: true
+  # has_scope :parents_only, only: [:index], type: :boolean, default: true
   has_scope :for_organization, only: [:index]
+  has_scope :by_started_at, only: [:index, :subtasks]
 
   def index
     @search = search_scope.ransack(params[:q])

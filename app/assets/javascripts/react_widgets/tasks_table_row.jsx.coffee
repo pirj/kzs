@@ -29,6 +29,12 @@ R = React.DOM
     result += ' link'
     return result
 
+  renderTitle: (obj) ->
+    if typeof(obj.parent_id)=='number' && obj.parent_id > 0
+      [ R.span({className: 'fa fa-chain'}),
+        R.span({}, obj.title)]
+    else
+      obj.title
   ###
   data:
     id:
@@ -50,7 +56,8 @@ R = React.DOM
         result = moment(_date).format('L')
       else if col_name.search(/title$|name$/) > -1
         linkClassName = @.titleClassName()
-        result = R.a({href: "/tasks/#{obj.id}", className: linkClassName}, data)
+        _title = @.renderTitle(obj)
+        result = R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
         title = try
           data.first_name_with_last_name
