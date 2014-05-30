@@ -16,9 +16,7 @@ R = React.DOM
     }
 
 
-  getInitialButtonsState: ->
-    false
-
+  # класс иконки в зависимости от события,которое совершает кнопка
   iconClassByAction: (action) ->
     cx = React.addons.classSet
     css_class = cx(
@@ -32,6 +30,8 @@ R = React.DOM
     )
     return css_class
 
+  # обработка клика на кнопке
+  # отправляем запрос на сервер
   handleClick: ->
     $.ajax
       type: 'POST'
@@ -72,19 +72,20 @@ R = React.DOM
     $(document).on('tasks_table:collection:change_checked', (e, checked) =>
       @.handleCheckedData(checked)
     )
-    
+
+  render_single_btn: (action) ->
+    # свойства для активной кнопки
+    opts = {href: '#', className: @.iconClassByAction(action.name), ref: action.name, onClick: @.handleClick}
+
+    # корректируем свойства для неактивной кнопки
+    if @.state.data.actions == undefined || @.state.data.actions.indexOf(action.name) < 0
+      new_css_class = opts.className + ' disabled'
+      opts = _.extend(opts, {onClick: null, className: new_css_class})
+
+    R.a(opts, '')
 
   render: ->
-    console.log @.state
-    one_btn = (action) =>
-      opts = {href: '#', className: @.iconClassByAction(action.name), ref: action.name, onClick: @.handleClick}
-      # если свойство не найдено, то затераем колбэк на клики и выставляем disabled свойство
-      if @.state.data.actions == undefined || @.state.data.actions.indexOf(action.name) < 0
-        new_css_class = opts.className + ' disabled'
-        opts = _.extend(opts, {onClick: null, className: new_css_class})
-      R.a(opts, '')
-
     action_btns = @.props.actions.map((action) =>
-      one_btn(action)
+      @.render_single_btn(action)
     )
     R.div({}, action_btns)
