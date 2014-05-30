@@ -5,6 +5,7 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
             :finished_at,
             :parent_id,
             :state,
+            :actions,
             :description,
             :start_date,
             :duration,
@@ -32,6 +33,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
 
   def state
     object.current_state.to_s
+  end
+
+  def actions
+    object.current_state.events.keys
   end
 
   has_one :executor, serializer: NameOnlyUserSerializer

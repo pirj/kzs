@@ -68,7 +68,7 @@ class Tasks::Api::TasksController < ResourceController
         rescue NoMethodError, Workflow::NoTransitionAllowed
           false
         end
-        true
+        false
       end
     end
 

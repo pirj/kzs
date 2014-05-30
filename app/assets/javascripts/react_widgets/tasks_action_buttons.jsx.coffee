@@ -9,13 +9,82 @@ R = React.DOM
 
 
   getInitialState: ->
-    obj = {}
-    return enable_actions: @.props.actions.map((action) -> obj[action] = false )
+    active_btns: []
+    data: {
+      actions: []
+      ids: []
+    }
 
 
+  getInitialButtonsState: ->
+    false
+
+  iconClassByAction: (action) ->
+    cx = React.addons.classSet
+    css_class = cx(
+      'fa-bolt': action == 'start'
+      'fa-pause': action == 'pause'
+      'fa-play': action == 'resume'
+      'fa-check-square': action == 'finish'
+      'fa-rotate-right': action == 'reformulate'
+      'fa-times': action == 'cancel'
+      'fa btn btn-default': true
+    )
+    return css_class
+
+  handleClick: ->
+    $.ajax
+      type: 'POST'
+      url: @.props.url
+      data: @.state.data
+      success: (responce) ->
+        console.log responce
+      error: (responce) ->
+        console.log responce
+
+
+  # обрабатываем данные,которые пришли
+  # находим общие действия над коллекцией
+  # выделяем список id коллекции
+  handleCheckedData: (checked) ->
+    # получаем массив массивов действий [ [1,2], [2,3], [1,2], ...]
+    _actions = checked.map((el) -> el.data.actions )
+    console.log _actions
+
+    # блок выделения общих действий среди массива массивов
+    result = _actions[0]
+    _others = _actions.slice(1)
+    if _others.length
+      _.each(_others, (el) ->
+        result = _.intersection(_.flatten(result), _.flatten(el));
+      )
+
+    data_actions = result
+    data_ids = checked.map((el) -> el.id)
+
+    new_data =
+      actions: data_actions
+      ids: data_ids
+
+    @.setState(data: new_data)
+
+  componentDidMount: ->
+    $(document).on('tasks_table:collection:change_checked', (e, checked) =>
+      @.handleCheckedData(checked)
+    )
+    
 
   render: ->
     console.log @.state
-    R.div({},[
-      R.a({href: '#', className: 'fa fa-play btn btn-default'}, '')
-    ])
+    one_btn = (action) =>
+      opts = {href: '#', className: @.iconClassByAction(action.name), ref: action.name, onClick: @.handleClick}
+      # если свойство не найдено, то затераем колбэк на клики и выставляем disabled свойство
+      if @.state.data.actions == undefined || @.state.data.actions.indexOf(action.name) < 0
+        new_css_class = opts.className + ' disabled'
+        opts = _.extend(opts, {onClick: null, className: new_css_class})
+      R.a(opts, '')
+
+    action_btns = @.props.actions.map((action) =>
+      one_btn(action)
+    )
+    R.div({}, action_btns)

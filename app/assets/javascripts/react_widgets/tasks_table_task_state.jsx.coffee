@@ -31,7 +31,7 @@ R = React.DOM
       when 'activated' then 'label-blue'
       when 'paused' then 'label-gray'
       when 'executed' then 'label-green'
-      when 'canceled' then 'label-asphalt'
+      when 'cancelled' then 'label-asphalt'
 
     class_name.push 'label'
     class_name.push 'm-label-active' if @.state.is_active
