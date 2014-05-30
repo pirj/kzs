@@ -1,3 +1,16 @@
+.gantt-main{
+  width: 100%;
+  & > div{
+    display: inline-block;
+    height:400px;
+    width: 50%;
+  }
+  & > #gantt_here{
+
+
+  }
+}
+
 .gantt_task_content > .task_flag_container {
   position: absolute;
   left: 0;

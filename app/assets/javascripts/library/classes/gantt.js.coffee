@@ -7,6 +7,9 @@ class Gantt
 
     @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)
+    console.log 222
+    console.log gantt.config.subscales
+    console.log 333
                                        #Инициализация модуля Гант
     if id
       @.getTask(id)
@@ -87,17 +90,34 @@ class Gantt
 
       #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
+
+
+
+      gantt.config.step = 1;
+      gantt.config.show_grid = false;
+      gantt.config.date_scale = "%F %Y";
+      gantt.config.subscales = [
+        {unit:"day", step:1, date:"%d"}
+      ];
       that.resizeGant('month')
       return
     $(document).on "click", "#year", ->
+
+      gantt.config.subscales = []
+      gantt.config.scale_unit = "month";
+      gantt.config.date_scale = "%Y"
       that.resizeGant('year')
+#      gantt.config.scale_unit = "month";
       return
     $(document).on "click", "#day", ->
+      gantt.config.step = 1;
+      gantt.config.date_scale = "%d %F"
+      gantt.config.subscales = [
+        {unit:"hour", step:1, date:"%h"}
+      ];
       that.resizeGant('day')
       return
-    $(document).on "click", "#hour", ->
-      that.resizeGant('hour')
-      return
+
 
   ############################################ далее методы класса ####################################################
 
@@ -234,7 +254,7 @@ class Gantt
         b = '%H'
       else
 
-    gantt.config.date_scale = b
+#    gantt.config.date_scale = b
     gantt.render()
 
   addTask: (a) =>

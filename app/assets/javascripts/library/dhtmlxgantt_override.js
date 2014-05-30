@@ -11,7 +11,7 @@ gantt._render_task_notifications = function (task, width) {
     var notifications_container = document.createElement('div');
     notifications_container.className = "task_notifications_container";
     var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
-    notifications_container.innerHTML = summe;
+    notifications_container.innerHTML = '';
 
     return notifications_container;
 };
