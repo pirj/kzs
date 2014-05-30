@@ -5,7 +5,12 @@ class Tasks::ChecklistItem < ActiveRecord::Base
 
   validates :name, presence: true
 
-  #def finished_at
-  #  (self.checklist.task.started_at + rand(3).days).strftime("%d-%m-%Y")
-  #end
+  validate :finished_at_should_be_within_task_time
+
+private
+  def finished_at_should_be_within_task_time
+    unless checklist.task.started_at.nil? && checklist.task.finished_at.nil?
+      errors.add(:finished_at, "должна не выходить за рамки задачи") unless finished_at.between? checklist.task.started_at, checklist.task.finished_at
+    end
+  end
 end

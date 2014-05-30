@@ -24,7 +24,7 @@ class Tasks::Task < ActiveRecord::Base
   belongs_to :inspector, class_name: 'User'
   belongs_to :organization
 
-  has_many :checklists
+  has_many :checklists, inverse_of: :task
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   accepts_nested_attributes_for :checklists, allow_destroy: true
