@@ -5,15 +5,13 @@
     height:400px;
     width: 50%;
     position:relative;
-    overflow-y: hidden;
   }
   & > #gantt_here{
 
-//  & .table.new{
-//    height:400px;
-//  }
+    overflow-y: hidden;
+
   }
-  td {
+  /*td {
     box-sizing: border-box;
     height: 34px;
     padding: 4px!important;
@@ -40,7 +38,7 @@
     .title{
       width: 50px;
     }
-  }
+  }*/
 }
 
 .gantt_task_content > .task_flag_container {

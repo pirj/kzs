@@ -10,10 +10,10 @@ class Gantt
                                        #Инициализация модуля Гант
     if id
       @.getTask(id)
-    else
-      @.getTasks()
+#    else
+#      @.getTasks()
     @.createTimeline()
-    @.clickTimelineLabel()
+#    @.clickTimelineLabel()
 
     ########################################## далее обработчики событий ###############################################
 
@@ -64,32 +64,10 @@ class Gantt
           delta = Math.floor(left/gantt.config.min_column_width)
           need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
           console.log(need)
-# Залипание timelineLabel доделать
-#    gantt.attachEvent "onGanttRender", ->
-#      $(".gantt_task").scroll ->
-#
-#        box = $(".gantt_task")
-#        boxContent = $(".gantt_task_scale")
-#        docElem = $('.js-gantt-timeline')
-#
-#        if docElem.length
-#          X = docElem.offset().left - box.offset().left
-#          Y = docElem.offset().top - box.offset().top
-#
-#        leftTimelinePos = boxContent.offset().left * (-1) + docElem.width()
-#        rightTimelinePos = (box.width() - (boxContent.offset().left + boxContent.outerWidth()))
-#        if X <= 0
-#          docElem.css("left", leftTimelinePos).addClass "stickyLeft"
-#        else docElem.css("right", rightTimelinePos).addClass "stickyRight" if X >= rightTimelinePos
-#
-#        top: parseInt(Y)
-#        left: parseInt(X)
+
 
       #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
-
-
-
       gantt.config.step = 1;
       gantt.config.show_grid = false;
       gantt.config.date_scale = "%F %Y";
@@ -118,7 +96,14 @@ class Gantt
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)
 
-  ############################################ далее методы класса ####################################################
+    $(document).on "tasks_table:collection:update_data", (e, data) ->
+      console.log e
+      gantt.clearAll()
+      gantt.parse({data: data})
+      console.log data
+#      gantt.render
+
+      ############################################ далее методы класса ####################################################
 
   initCustomFields: () =>              #!!!
     #колонки слева
@@ -296,10 +281,10 @@ class Gantt
     $modalContainer.modal 'hide'
 #    modalContainer.empty()
 
-  clickTimelineLabel: () =>
-    timelineLabel= $(".js-gantt-timeline-label")
-    $(document).on "click", ".js-gantt-timeline-label", ->
-      gantt.showDate(new Date());
+#  clickTimelineLabel: () =>
+#    timelineLabel= $(".js-gantt-timeline-label")
+#    $(document).on "click", ".js-gantt-timeline-label", ->
+#      gantt.showDate(new Date());
 
   scrollY: (y) =>
     console.log y
