@@ -7,9 +7,6 @@ class Gantt
 
     @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)
-    console.log 222
-    console.log gantt.config.subscales
-    console.log 333
                                        #Инициализация модуля Гант
     if id
       @.getTask(id)
@@ -117,7 +114,9 @@ class Gantt
       ];
       that.resizeGant('day')
       return
-
+    $('#gantt_here .gantt_data_area').on 'scroll', (e) ->
+      y = $(this)[0].scrollTop
+      window.app.scrollTable(y)
 
   ############################################ далее методы класса ####################################################
 
@@ -301,6 +300,11 @@ class Gantt
     timelineLabel= $(".js-gantt-timeline-label")
     $(document).on "click", ".js-gantt-timeline-label", ->
       gantt.showDate(new Date());
+
+  scrollY: (y) =>
+    console.log y
+    $('#gantt_here .gantt_data_area').scrollTop(y)
+#      //
 
 ########################################################### Поток выполнения  ###################################################
 $ ->

@@ -71,7 +71,7 @@ R = React.DOM
         [
           R.td({}, R.input({type: 'checkbox', checked: @.state.checked, name: "task_#{@.state.data.id}", className: 'js-icheck-off', onChange: @.handleCheckboxChange})),
           @.state.column_names.map((col_name) =>
-            R.td({}, @.formatData(col_name))
+            R.td({className: col_name}, @.formatData(col_name))
           )
         ]
       )

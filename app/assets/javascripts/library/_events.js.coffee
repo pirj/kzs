@@ -214,3 +214,15 @@ $ ->
   # БЛОК АКТИВАЦИИ КЛАССОВ
   user_conform = new ConformingView()
 
+  #scroll for gantt page
+
+#  return
+$(document).ready ->
+
+  $('#table_here tbody').on "scroll", (e) ->
+    y = $($(this)[0]).scrollTop()
+    window.app.GanttView.scrollY(y)
+    return
+
+window.app.scrollTable = (y) ->
+  $('#table_here tbody').scrollTop(y)

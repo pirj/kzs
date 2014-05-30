@@ -37,7 +37,7 @@
       li = link_to '', tasks_path, class: 'btn btn-default fa fa-arrow-left'
       /li = link_to 'Таблица', tasks_path, class: 'btn btn-default'
   .col-sm-3
-    .dropdown.btn.btn-link-muted.pull-left
+    /.dropdown.btn.btn-link-muted.pull-left
       .dropdown-toggle data-toggle="dropdown"
         span Период
         span.caret
@@ -58,7 +58,7 @@ div
   /a#hour href='#' час
 
   br
-  = link_to 'new task ajax', new_task_path, remote: true, class: 'button btn btn-primary btn-lg '
+  /= link_to 'new task ajax', new_task_path, remote: true, class: 'button btn btn-primary btn-lg '
 /, data: {toggle: 'modal', target: '#taskForm'}
 
 

@@ -4,10 +4,42 @@
     display: inline-block;
     height:400px;
     width: 50%;
+    position:relative;
+    overflow-y: hidden;
   }
   & > #gantt_here{
 
+//  & .table.new{
+//    height:400px;
+//  }
+  }
+  td {
+    box-sizing: border-box;
+    height: 34px;
+    padding: 4px!important;
+  }
+  thead{
+    position: absolute;
+    right: 0;
+    left: 0;
 
+  }
+  tbody{
+
+    position: absolute;
+    top:33px;
+    right: 0;
+    left: 0;
+    bottom: 15px;
+    overflow-y: scroll;
+    tr{
+      max-height: 34px;
+      display: block;
+      overflow: hidden;
+    }
+    .title{
+      width: 50px;
+    }
   }
 }
 
