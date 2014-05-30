@@ -2,15 +2,39 @@
   width: 100%;
   & > div{
     display: inline-block;
-    height:400px;
+    height:700px;
     width: 50%;
     position:relative;
+    border-right: 10px solid $color-cloud;
+    border-left: none;
   }
   & > #gantt_here{
-
+    border: none;
     overflow-y: hidden;
-
   }
+
+  // особые стили для отрисовки таблицы рядом с диаграммой
+  .table.new > thead > tr > th,
+  .table.new > thead > tr > td,
+  .table.new > tbody > tr > th,
+  .table.new > tbody > tr > td,
+  .table.new > tfoot > tr > th,
+  .table.new > tfoot > tr > td{
+    white-space: nowrap;
+    position: relative;
+    padding: 5px 5px 6px;
+
+    .table-filter{
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .table.new > tbody > tr > td {
+    overflow-x: hidden;
+  }
+
+
   /*td {
     box-sizing: border-box;
     height: 34px;

@@ -30,22 +30,23 @@
 
   = content_for :page_header_search do
     = render 'shared/quick_search_for'
-.row
+.row.b-offset-sm
   .col-sm-9
     ul.nav.nav-inline.btn-block
       li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-primary'
-      li = link_to '', tasks_path, class: 'btn btn-default fa fa-arrow-left'
-      /li = link_to 'Таблица', tasks_path, class: 'btn btn-default'
-  .col-sm-3
-    /.dropdown.btn.btn-link-muted.pull-left
-      .dropdown-toggle data-toggle="dropdown"
-        span Период
-        span.caret
-      ul.dropdown-menu role="menu"
-        li
-          a раз
-        li
-          a два
+      /li = link_to '', tasks_path, class: 'btn btn-default fa fa-arrow-left'
+
+- actions = [ \
+  { name: 'start' }, \
+  { name: 'pause' }, \
+  { name: 'resume' }, \
+  { name: 'finish' }, \
+  { name: 'reformulate' }, \
+  { name: 'cancel' }, \
+]
+.row
+  .col-sm-12
+    .b-offset-sm = react_component('TasksActionButtons', {actions: actions, url: change_state_api_tasks_path})
 div.gantt-main
   = react_component('TasksTable', { url: api_tasks_path, filter_opts: tasks_table_filter_opts })
   #gantt_here
