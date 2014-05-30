@@ -21,7 +21,7 @@ gem 'cancan'
 
 # Background process
 gem 'delayed_job_active_record'
-
+gem "daemons"
 # ActiveRecord object duplication DSL
 gem 'amoeba'
 
