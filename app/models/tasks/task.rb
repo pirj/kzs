@@ -91,7 +91,6 @@ private
   end
 
   def start_must_be_before_end_time
-
       errors.add(:started_at, "не должна быть позже даты окончания задачи") unless (started_at <= finished_at) unless started_at.nil? && finished_at.nil?
   end
 
