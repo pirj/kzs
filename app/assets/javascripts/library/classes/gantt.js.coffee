@@ -97,11 +97,11 @@ class Gantt
       window.app.scrollTable(y)
 
     $(document).on "tasks_table:collection:update_data", (e, data) ->
-      console.log e
+#      console.log e
       gantt.clearAll()
       window.app.GanttView.modSampleHeight()
       gantt.parse({data: data})
-      console.log data
+#      console.log data
 #      gantt.render
 
       ############################################ далее методы класса ####################################################
@@ -288,7 +288,7 @@ class Gantt
 #      gantt.showDate(new Date());
 
   scrollY: (y) =>
-    console.log y
+#    console.log y
     $('#gantt_here .gantt_data_area').scrollTop(y)
 #      //
 
@@ -296,12 +296,14 @@ class Gantt
     headHeight = 200
     table = document.getElementsByClassName("js-tasks-table")[0]
     sch = document.getElementById("gantt_here")
-    sch.style.height = document.documentElement.clientHeight - table.offsetHeight - headHeight
+    sch.style.height = document.documentElement.clientHeight - $(table).offset().top
 
     table.style.height = sch.style.height
-    console.log(22)
-    console.log(sch.style.height)
-    console.log(22)
+#    console.log('sch.style.height')
+#    console.log(sch.style.height)
+#    console.log('table.offsetHeight')
+#    console.log($(table).offset().top)
+
 
     gantt.setSizes()
     return
