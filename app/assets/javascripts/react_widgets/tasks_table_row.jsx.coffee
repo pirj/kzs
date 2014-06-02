@@ -29,6 +29,8 @@ R = React.DOM
     result += ' link'
     return result
 
+
+
   renderTitle: (obj) ->
     if typeof(obj.parent_id)=='number' && obj.parent_id > 0
       [ R.span({className: 'fa fa-chain'}),
@@ -72,7 +74,7 @@ R = React.DOM
         result = R.a({href: '#', className: 'link link-dashed'}, title)
 
       else if col_name.search(/state|status/) > -1
-        result = TasksTableTaskState({state_title: data})
+        result = TasksTableTaskState({state_title: data, active: obj.has_notification})
 
       return result
 

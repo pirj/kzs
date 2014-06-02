@@ -5,12 +5,12 @@ R = React.DOM
 
   getDefaultProps: ->
     state_title: 'UFO'
-    is_active: false
+    active: false
 
   getInitialState: (props) ->
     props = props || this.props
     state_title: props.state_title
-    is_active: props.is_active
+    active: props.active
 
 
   componentWillReceiveProps: (newProps, oldProps) ->
@@ -24,19 +24,28 @@ R = React.DOM
 
 
   className: ->
-    class_name = []
-    class_name.push switch @.state.state_title
-      when 'UFO' then 'label-default'
-      when 'formulated' then 'label-orange '
-      when 'activated' then 'label-blue'
-      when 'paused' then 'label-gray'
-      when 'executed' then 'label-green'
-      when 'cancelled' then 'label-asphalt'
+#    class_name = []
+#    class_name.push switch @.state.state_title
+#      when 'UFO' then 'label-default'
+#      when 'formulated' then 'label-orange '
+#      when 'activated' then 'label-blue'
+#      when 'paused' then 'label-gray'
+#      when 'executed' then 'label-green'
+#      when 'cancelled' then 'label-asphalt'
 
-    class_name.push 'label'
-    class_name.push 'm-label-active' if @.state.is_active
+    cx = React.addons.classSet
+    result = cx(
+      'label-default': @.state.state_title == 'UFO',
+      'label-orange': @.state.state_title == 'formulated',
+      'label-blue': @.state.state_title == 'activated',
+      'label-gray': @.state.state_title == 'paused',
+      'label-sea-green': @.state.state_title == 'executed',
+      'label-asphalt': @.state.state_title == 'cancelled',
+      'm-label-active': @.state.active
+      'label': true
+    )
 
-    class_name.join(' ')
+    result
 
 
 
