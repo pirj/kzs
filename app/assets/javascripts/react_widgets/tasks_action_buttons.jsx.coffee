@@ -33,6 +33,7 @@ R = React.DOM
   # обработка клика на кнопке
   # отправляем запрос на сервер
   handleClick: (e) ->
+    e.preventDefault()
     action = e.target.dataset['action']
     $.ajax
       type: 'POST'

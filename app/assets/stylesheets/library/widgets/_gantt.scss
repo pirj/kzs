@@ -2,11 +2,12 @@
   width: 100%;
   & > div{
     display: inline-block;
-    height:700px;
+    height:756px;
     width: 50%;
     position:relative;
     border-right: 10px solid $color-cloud;
     border-left: none;
+    overflow-y: scroll;
   }
   & > #gantt_here{
     border: none;

@@ -41,7 +41,7 @@ R = React.DOM
 
 
   render: ->
-    table_css = 'table new '
+    table_css = 'table new'
     render_data = @.state.data.map( (el) ->
       R.p({}, [
         R.span({}, el.title),
@@ -55,5 +55,5 @@ R = React.DOM
 
     R.table({className: table_css, id: 'table_here'}, [
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),
-      R.div({}, TasksTableList({column_names: column_names, data: @.state.data}))
+      TasksTableList({column_names: column_names, data: @.state.data})
     ])
