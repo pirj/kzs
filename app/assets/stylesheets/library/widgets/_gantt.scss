@@ -2,12 +2,12 @@
   width: 100%;
   & > div{
     display: inline-block;
-    height: auto;
+    height: 100%;
     width: 50%;
     position:relative;
     border-right: 10px solid $color-gray;
     border-left: none;
-    overflow-y: scroll;
+//    overflow-y: scroll;
   }
   & > #gantt_here{
     border: none;

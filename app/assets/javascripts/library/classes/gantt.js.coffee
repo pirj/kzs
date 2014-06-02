@@ -99,7 +99,7 @@ class Gantt
     $(document).on "tasks_table:collection:update_data", (e, data) ->
 #      console.log e
       gantt.clearAll()
-      window.app.GanttView.modSampleHeight()
+#      window.app.GanttView.modSampleHeight()
       gantt.parse({data: data})
 #      console.log data
 #      gantt.render
