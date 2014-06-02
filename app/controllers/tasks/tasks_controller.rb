@@ -65,7 +65,7 @@ class Tasks::TasksController < ResourceController
   end
 
   def subtask
-    @subtask ||= Tasks::Task.new(parent: resource)
+    @subtask ||= Tasks::Task.new(:parent_id => resource.id)
   end
 
   #def mapped_resource

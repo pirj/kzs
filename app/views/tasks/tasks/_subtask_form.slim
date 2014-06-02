@@ -12,6 +12,7 @@
     h3.text-center Добавление подзадачи
     = render 'documents/application/error_label', resource: resource
     = f.input :title
+    = f.hidden_field :parent_id
     = f.input :text, input_html: { rows: 4 }
     .form-group
       label.string.required.control-label.col-sm-2 Дата начала:
