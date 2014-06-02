@@ -3,7 +3,8 @@ class Tasks::Api::TasksController < ApplicationController
 
   layout false
 
-  before_filter :permit_params, only: [:create, :update]
+  after_filter :send_notifications
+
   has_scope :for_organization, only: [:index]
   respond_to :json
 
@@ -91,6 +92,12 @@ class Tasks::Api::TasksController < ApplicationController
 
   def scope
     Tasks::Task.for_organization(current_organization)
+  end
+
+  # отсылаем оповещения о модуле задач через faye
+  def send_notifications
+    data = Tasks::Task.notifications_for(current_user).count
+    PrivatePub.publish_to '/notifications/update', notifications: { tasks_module: data }
   end
 
 end

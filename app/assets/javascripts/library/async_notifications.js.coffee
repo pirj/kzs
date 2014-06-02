@@ -1,2 +1,2 @@
 PrivatePub.subscribe "/notifications/update", (data, channel) ->
-  console.log('sdasdas')
+  new NotificationView(data)

@@ -38,4 +38,4 @@
         i
         .text Задачи
         - if Tasks::Task.notifications_for(current_user).count > 0
-          span.badge = Tasks::Task.notifications_for(current_user).count
+          span.badge.js-sidebar-notification-tasks-module = Tasks::Task.notifications_for(current_user).count
