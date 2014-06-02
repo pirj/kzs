@@ -99,6 +99,7 @@ class Gantt
     $(document).on "tasks_table:collection:update_data", (e, data) ->
       console.log e
       gantt.clearAll()
+      window.app.GanttView.modSampleHeight()
       gantt.parse({data: data})
       console.log data
 #      gantt.render
@@ -290,6 +291,20 @@ class Gantt
     console.log y
     $('#gantt_here .gantt_data_area').scrollTop(y)
 #      //
+
+  modSampleHeight:  =>
+    headHeight = 200
+    table = document.getElementsByClassName("js-tasks-table")[0]
+    sch = document.getElementById("gantt_here")
+    sch.style.height = document.documentElement.clientHeight - table.offsetHeight - headHeight
+
+    table.style.height = sch.style.height
+    console.log(22)
+    console.log(sch.style.height)
+    console.log(22)
+
+    gantt.setSizes()
+    return
 
 ########################################################### Поток выполнения  ###################################################
 $ ->

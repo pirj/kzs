@@ -35,7 +35,11 @@
     ul.nav.nav-inline.btn-block
       li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-primary'
       /li = link_to '', tasks_path, class: 'btn btn-default fa fa-arrow-left'
-
+  .col-sm-3
+    div
+      a#year href='#' год &nbsp
+      a#month href='#' месяц &nbsp
+      a#day href='#' день &nbsp
 - actions = [ \
   { name: 'start' }, \
   { name: 'pause' }, \
@@ -52,19 +56,7 @@ div.gantt-main
     = react_component('TasksTable', { url: api_tasks_path, filter_opts: tasks_table_filter_opts })
   #gantt_here
 
-
-/div
-  a#year href='#' год
-  a#month href='#' месяц
-  a#day href='#' день
-  /a#hour href='#' час
-
-  br
-  /= link_to 'new task ajax', new_task_path, remote: true, class: 'button btn btn-primary btn-lg '
-/, data: {toggle: 'modal', target: '#taskForm'}
-
-
-
+/= link_to 'new task ajax', new_task_path, remote: true, class: 'button btn btn-primary btn-lg ', data: {toggle: 'modal', target: '#taskForm'}
 
 #taskForm.modal aria-hidden=" true"  tabindex="-1"
   .modal-dialog
