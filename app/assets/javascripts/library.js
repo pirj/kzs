@@ -20,6 +20,8 @@
 //= require bootstrap
 //= require jquery_nested_form
 //= require jquery.icheck
+//= require private_pub
+//= require_tree ./plugins
 //= require chosen-jquery
 //= require react
 //= require react_ujs

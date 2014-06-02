@@ -2,6 +2,9 @@ class Tasks::Api::TasksController < ApplicationController
 
 
   layout false
+
+  before_filter :permit_params, only: [:create, :update]
+  has_scope :for_organization, only: [:index]
   respond_to :json
 
   inherit_resources
@@ -89,4 +92,5 @@ class Tasks::Api::TasksController < ApplicationController
   def scope
     Tasks::Task.for_organization(current_organization)
   end
+
 end
