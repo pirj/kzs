@@ -15,11 +15,11 @@
 }
 
 .link-dashed{
-  @include btn-link-style($link-color, $link-hover-color);
+  @include btn-link-dashed-style($link-color, $link-hover-color);
 }
 
 .link-muted-dashed{
-  @include btn-link-style($link-muted-color, $link-muted-hover-color);
+  @include btn-link-dashed-style($link-muted-color, $link-muted-hover-color);
 }
 
 .link-orange{

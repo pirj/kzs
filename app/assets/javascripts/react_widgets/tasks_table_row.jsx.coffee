@@ -46,6 +46,7 @@ R = React.DOM
   formatData: (col_name) ->
     obj = @.state.data
     data = obj[col_name]
+
     # если на сервере в БД не записано значение, то приходит в json значение null
     if data != null
       result = data
@@ -55,9 +56,14 @@ R = React.DOM
       if !isNaN(_date) && col_name.search(/_at$|deadline/) > -1
         result = moment(_date).format('L')
       else if col_name.search(/title$|name$/) > -1
+        result = []
         linkClassName = @.titleClassName()
         _title = @.renderTitle(obj)
-        result = R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
+
+        if obj.has_subtasks == true
+          result.push R.span({className: 'fa fa-plus-square-o'}, '')
+        result.push R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
+
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
         title = try
           data.first_name_with_last_name

@@ -9,7 +9,8 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
             :description,
             :start_date,
             :duration,
-            :parent_id
+            :parent_id,
+            :has_subtasks
 
   def description
     object.text
@@ -37,6 +38,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
 
   def actions
     object.current_state.events.keys
+  end
+
+  def has_subtasks
+    object.subtasks.any?
   end
 
   has_one :executor, serializer: NameOnlyUserSerializer
