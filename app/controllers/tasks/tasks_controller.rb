@@ -43,6 +43,10 @@ class Tasks::TasksController < ResourceController
     @task.inspector = current_user
     @task.updated_by = current_user.id
 
+    @task.checklists.each do |c|
+      c.updated_by = current_user.id
+    end
+
     super
   end
 
