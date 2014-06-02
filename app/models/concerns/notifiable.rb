@@ -74,6 +74,15 @@ module Notifiable
   #   obj.clear_notifications for: current_user # только для текущего пользователя
   # @see User
   def clear_notifications options = {}
-    (options[:for] ? self.notifications.where("user_id = #{options[:for].id}") : self.notifications).destroy_all
+    (options[:for] ? self.notifications.where(user_id: options[:for].id) : self.notifications).destroy_all
+  end
+
+  # Есть ли у объекта нотификация для конкретного пользователя?
+  # @param user [User] Пользователь
+  # @example
+  #   obj.has_notifications_for? current_user
+  # @see User
+  def has_notification_for? user
+    self.notifications.where(user_id: user.id).count > 0 ? true : false
   end
 end
