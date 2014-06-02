@@ -10,10 +10,12 @@ class Gantt
                                        #Инициализация модуля Гант
     if id
       @.getTask(id)
-#    else
-#      @.getTasks()
+    else
+      $(document).on "tasks_table:collection:update_data", (e, data) ->
+        gantt.clearAll()
+        gantt.parse({data: data})
+
     @.createTimeline()
-#    @.clickTimelineLabel()
 
     ########################################## далее обработчики событий ###############################################
 
@@ -82,7 +84,6 @@ class Gantt
       gantt.config.scale_unit = "month";
       gantt.config.date_scale = "%Y"
       that.resizeGant('year')
-#      gantt.config.scale_unit = "month";
       return
     $(document).on "click", "#day", ->
       gantt.config.step = 1;
@@ -96,13 +97,6 @@ class Gantt
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)
 
-    $(document).on "tasks_table:collection:update_data", (e, data) ->
-#      console.log e
-      gantt.clearAll()
-#      window.app.GanttView.modSampleHeight()
-      gantt.parse({data: data})
-#      console.log data
-#      gantt.render
 
       ############################################ далее методы класса ####################################################
 
@@ -117,12 +111,9 @@ class Gantt
     ];
     gantt.config.task_height = 6;
     gantt.config.min_column_width = 54
-
-    #mouth scale_cell
     gantt.config.scale_unit = "month";
     gantt.config.step = 1;
     gantt.config.show_grid = false;
-#    gantt.config.con = false;
     gantt.config.date_scale = "%F %Y";
     gantt.config.subscales = [
       {unit:"day", step:1, date:"%d"}
@@ -176,8 +167,6 @@ class Gantt
     )
 
     request.done (data) ->
-
-#      console.log data
       gantt.parse(data)
       return
 
@@ -191,10 +180,7 @@ class Gantt
       type: 'GET'
       dataType: "json"
     )
-#    console.log id
     request.done (data) ->
-
-#      console.log {data: [data.task]}
       gantt.parse({data: [data.task]})
       return
 
@@ -223,7 +209,6 @@ class Gantt
     @.getTasks()                    #TODO: нужен ли повторный запрос?
     gantt.render
 
-
   resizeGant: (scale) =>
     gantt.config.scale_unit = scale
     gantt.config.step = 1
@@ -239,7 +224,6 @@ class Gantt
         b = '%H'
       else
 
-#    gantt.config.date_scale = b
     gantt.render()
 
   addTask: (a) =>
@@ -280,17 +264,9 @@ class Gantt
   clearForm: () =>
     $modalContainer = $("#taskForm")
     $modalContainer.modal 'hide'
-#    modalContainer.empty()
-
-#  clickTimelineLabel: () =>
-#    timelineLabel= $(".js-gantt-timeline-label")
-#    $(document).on "click", ".js-gantt-timeline-label", ->
-#      gantt.showDate(new Date());
 
   scrollY: (y) =>
-#    console.log y
     $('#gantt_here .gantt_data_area').scrollTop(y)
-#      //
 
   modSampleHeight:  =>
     headHeight = 200
@@ -299,11 +275,6 @@ class Gantt
     sch.style.height = document.documentElement.clientHeight - $(table).offset().top
 
     table.style.height = sch.style.height
-#    console.log('sch.style.height')
-#    console.log(sch.style.height)
-#    console.log('table.offsetHeight')
-#    console.log($(table).offset().top)
-
 
     gantt.setSizes()
     return
