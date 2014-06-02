@@ -1,16 +1,19 @@
+.row
+  .col-sm-4
+    h2 Подзадачи:
+  .col-sm-6
+    = link_to '',  class: 'btn js-popover btn-primary-empty ', data: {target: 'add-subtask'} do
+      span.fa.fa-plus-circle
+      span Добавить подзадачу
+    .js-popover-content data-target='add-subtask'
+      = render 'subtask_form', resource: @subtask, remote: true
 - if resource.subtasks.any?
-  .row
-    .col-sm-4
-      h2 Подзадачи:
-    .col-sm-6
-      = link_to '',  class: 'btn js-popover btn-primary-empty ', data: {target: 'add-subtask'} do
-        span.fa.fa-plus-circle
-        span Добавить подзадачу
-      .js-popover-content data-target='add-subtask'
-        = render 'subtask_form', resource: @subtask, remote: true
-
   .row.b-offset-sm
     .col-sm-12 = react_component('TasksTable', { url: subtasks_api_task_path(resource), filter_opts: tasks_table_filter_opts })
+- else
+  .row.b-offset-sm
+    .col-sm-12
+      .text-help подзадачи отсутствуют
 
 /- if resource.parent_id.present?
 /  .row
