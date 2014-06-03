@@ -9,6 +9,7 @@ R = React.DOM
 
   getInitialState: ->
     data: []
+    subtasks: []
     search_params: {}
 
   getDataFromServer: ->
@@ -28,9 +29,28 @@ R = React.DOM
         return
       ).bind(this)
 
+  getSubtasksFromServer: (id) ->
+    $.ajax
+      url: "/api/tasks/#{id}/subtasks"
+      dataType: "json"
+      success: ((data) ->
+        subtasks = data['data']
+        $(document).trigger('tasks_table:collection:update_subtasks', [id, subtasks])
+
+        # добавляем новый массив в общий список подзадач
+        new_subtasks = @.state.subtasks
+        new_subtasks.push({ id: id, subtasks: subtasks })
+        @setState subtasks: new_subtasks
+
+        return
+      ).bind(this)
+      error: ((xhr, status, err) ->
+        console.error "/api/tasks/#{id}/subtasks", status, err.toString()
+        return
+      ).bind(this)
+
   componentWillMount: ->
     @.getDataFromServer()
-
     $(document).on('tasks_actions:update_success', => @.getDataFromServer())
 
 
@@ -38,6 +58,9 @@ R = React.DOM
     @.state = search_params: params
     @.getDataFromServer()
 
+  handleQuerySubtasks: (id) ->
+    console.log id
+    @.getSubtasksFromServer(id)
 
 
   render: ->
@@ -55,5 +78,5 @@ R = React.DOM
 
     R.table({className: table_css, id: 'table_here'}, [
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),
-      TasksTableList({column_names: column_names, data: @.state.data})
+      TasksTableList({column_names: column_names, data: @.state.data, subtasks: @.state.subtasks, query_subtasks: @.handleQuerySubtasks})
     ])

@@ -33,7 +33,7 @@ R = React.DOM
 
   renderTitle: (obj) ->
     if typeof(obj.parent_id)=='number' && obj.parent_id > 0
-      [ R.span({className: 'fa fa-chain'}),
+      [ R.span({className: 'fa fa-level-up text-gray table-subelement'}),
         R.span({}, obj.title)]
     else
       obj.title
@@ -63,7 +63,7 @@ R = React.DOM
         _title = @.renderTitle(obj)
 
         if obj.has_subtasks == true
-          result.push R.span({className: 'fa fa-plus-square-o'}, '')
+          result.push R.span({className: 'fa fa-plus-square-o', onClick: @.handleQuerySubtasks}, '')
         result.push R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
 
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
@@ -77,6 +77,10 @@ R = React.DOM
         result = TasksTableTaskState({state_title: data, active: obj.has_notification})
 
       return result
+
+
+  handleQuerySubtasks: ->
+    @.props.query_subtasks @.state.data.id
 
   handleCheckboxChange: (e) ->
     @.props.checked_row @.props.data.id

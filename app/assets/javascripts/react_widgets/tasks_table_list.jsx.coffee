@@ -69,6 +69,8 @@ R = React.DOM
       checked_all: !@.state.checked_all
 
 
+  handleQuerySubtasks: (id) ->
+    @.props.query_subtasks id
 
 
   componentDidMount: ->
@@ -80,12 +82,26 @@ R = React.DOM
       data
     )
 
+  getSubtasks: (id) ->
+    collection = _.findWhere(@.props.subtasks, {id: id})
+    unless collection == undefined
+      collection.subtasks
+    else
+      []
+
+
 
   render: ->
+    console.log @.props.subtasks
     window.arr = @.state.data
 
     render_data = @.state.data.map((el) =>
-      TasksTableRow({column_names: @.state.column_names, data: el.data, checked: el.checked, checked_row: @.handleRowCheck})
+      [
+        TasksTableRow({column_names: @.state.column_names, data: el.data, checked: el.checked, checked_row: @.handleRowCheck, query_subtasks: @.handleQuerySubtasks }),
+        @.getSubtasks(el.data.id).map((sub_el) =>
+          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, checked_row: @.handleRowCheck, query_subtasks: @.handleQuerySubtasks })
+        )
+      ]
     )
 
     R.tbody({ref: 'task_rows'}, render_data)
