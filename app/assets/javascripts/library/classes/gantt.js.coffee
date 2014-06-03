@@ -101,9 +101,15 @@ class Gantt
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)
 
-    $(document).on "tasks_table:collection:update_subtask", (e, data, json) ->
-      gantt.parse({data: data})
-      gantt.open(id)
+    $(document).on "tasks_table:collection:update_subtasks", (e, id, data) =>
+
+
+      console.log [data]
+      console.log 'wasd'
+
+      console.log id
+      @.gantt.parse({data: [data[0]]})
+      @.gantt.open(id)
 
 
       ############################################ далее методы класса ####################################################

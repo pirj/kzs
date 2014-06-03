@@ -92,7 +92,7 @@ R = React.DOM
 
 
   render: ->
-    console.log @.props.subtasks
+#    console.log @.props.subtasks
     window.arr = @.state.data
 
     render_data = @.state.data.map((el) =>

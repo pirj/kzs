@@ -59,7 +59,7 @@ R = React.DOM
     @.getDataFromServer()
 
   handleQuerySubtasks: (id) ->
-    console.log id
+#    console.log id
     @.getSubtasksFromServer(id)
 
 
