@@ -33,7 +33,7 @@ class Tasks::Task < ActiveRecord::Base
   scope :parents_only, where(parent_id: nil)
   scope :by_started_at, order('started_at ASC')
 
-  validates :title, :text, :executor_id, :inspector_id, :organization_id, presence: true
+  validates :title, :executor_id, :inspector_id, :organization_id, presence: true
   validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}, on: :create
   validates :finished_at, timeliness: {type: :date}
   validate :start_must_be_before_end_time
