@@ -8,36 +8,37 @@
                               } \
                     do |f|
 
-  div style='width: 800px'
-    h3.text-center Добавление подзадачи
+  h3.popover-title Добавление подзадачи
+  .popover-form
     = render 'documents/application/error_label', resource: resource
     = f.input :title
     = f.hidden_field :parent_id
     = f.input :text, input_html: { rows: 4 }
-    .form-group
-      label.string.required.control-label.col-sm-2 Дата начала:
-      .col-sm-2
-        .input-group
-          .input-group-icon
-            span.fa.fa-calendar
-          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
-
-      label.string.required.control-label.col-sm-2 Дата окончания:
-      .col-sm-2
-        .input-group
-          .input-group-icon
-            span.fa.fa-calendar
-          = f.text_field :finished_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата, к которой задача должна быть исполнена'
-
+    = f.input :title, label_html: {class: 'col-sm-4'}
     = f.association :executor, collection: current_organization_users, \
-                                label_method: :first_name_with_last_name, \
-                                input_html: { data: { placeholder: 'Нажмите галку, чтобы выбрать' }, class: 'js-chosen', multiple: false}, \
-                                label_hint: 'Лицо, указанное в задаче, как исполнитель'
+                                      label_html: {class: 'col-sm-4'}, \
+                                      label_method: :first_name_with_last_name, \
+                                      label_hint: 'Лицо, указанное в задаче, как исполнитель',\
+                                      input_html: {  class: 'js-chosen', data: { placeholder: 'Нажмите галку, чтобы выбрать' }, multiple: false}
 
 
-  .row
-    .col-sm-2
-      br
-      .form-group
-        .col-sm-offset-2.col-sm-10.js-buttons-place
-          = f.submit class: 'btn btn-primary'
+    .form-group
+      label.string.required.control-label.col-sm-4 Начало и конец
+      .col-md-4
+        .input-group
+          .input-group-icon
+              span.fa.fa-calendar
+            = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
+      .col-md-4
+        .input-group
+          .input-group-icon
+            span.fa.fa-calendar
+          = f.text_field :finished_at, class: 'js-datepicker datepicker optional form-control', data: { min_date: Date.today }, label_hint: 'Дата, к которой задача должна быть исполнена'
+
+
+
+  .btn-group.btn-group.js-buttons-place.popover-bottom-btn
+    = f.submit class: 'btn link-success'
+    a.js-popover-close.btn.link-default
+      span.fa.fa-times-circle
+      span Отмена
