@@ -28,7 +28,7 @@ class Tasks::Task < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   accepts_nested_attributes_for :checklists, allow_destroy: true
-  default_scope order('created_at DESC')
+  #default_scope order('created_at DESC')
   scope :for_organization, ->(org) { where(organization_id: org) }
   scope :parents_only, where(parent_id: nil)
   scope :by_started_at, order('started_at ASC')

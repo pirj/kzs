@@ -1,6 +1,7 @@
 class Gantt
   constructor: (dom, id) ->
     that = this
+    @.gantt = gantt
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
 #      console.log 'xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")'
@@ -99,6 +100,10 @@ class Gantt
     $('#gantt_here .gantt_data_area').on 'scroll', (e) ->
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)
+
+    $(document).on "tasks_table:collection:update_subtask", (e, data, json) ->
+      gantt.parse({data: data})
+      gantt.open(id)
 
 
       ############################################ далее методы класса ####################################################

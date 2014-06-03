@@ -4,6 +4,7 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
             :started_at,
             :finished_at,
             :parent_id,
+            :parent,
             :state,
             :actions,
             :description,
@@ -47,6 +48,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
 
   def has_notification
     object.has_notification_for?(current_user)
+  end
+
+  def parent
+    object.parent_id
   end
 
   has_one :executor, serializer: NameOnlyUserSerializer
