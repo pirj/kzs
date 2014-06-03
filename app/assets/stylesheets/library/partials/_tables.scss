@@ -155,6 +155,12 @@ tr{
       border-left: 2px solid #fff;
       border-top:none;
       border-bottom:none !important;
+      color: $color-asphalt;
+       .label{
+         & > span{
+           color: $color-asphalt;
+         }
+       }
       &:first-child {
         margin-left: 0;
       }
