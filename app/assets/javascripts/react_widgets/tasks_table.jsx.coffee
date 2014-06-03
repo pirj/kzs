@@ -63,6 +63,10 @@ R = React.DOM
     @.getSubtasksFromServer(id)
 
 
+#  componentWillUpdate: ->
+#    $('table tr').velocity('transition.slideDown')
+
+
   render: ->
     table_css = 'table new'
     render_data = @.state.data.map( (el) ->

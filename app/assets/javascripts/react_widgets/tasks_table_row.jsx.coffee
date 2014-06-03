@@ -85,6 +85,7 @@ R = React.DOM
   handleCheckboxChange: (e) ->
     @.props.checked_row @.props.data.id
 
+
   render: ->
     render_data = R.tr({ref: 'row'},
         [

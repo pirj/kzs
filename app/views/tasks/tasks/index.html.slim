@@ -34,7 +34,10 @@
   .col-sm-9
     ul.nav.nav-inline.btn-block
       li = link_to 'Создать новую задачу', new_task_path, class: 'btn btn-primary'
-      /li = link_to '', tasks_path, class: 'btn btn-default fa fa-arrow-left'
+      li
+        = link_to tasks_path, class: 'btn btn-default' do
+          span.fa.fa-rotate-left
+
   .col-sm-3
     div
       a#year href='#' год &nbsp
