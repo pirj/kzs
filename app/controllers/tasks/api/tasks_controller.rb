@@ -3,7 +3,7 @@ class Tasks::Api::TasksController < ApplicationController
 
   layout false
 
-  after_filter :send_notifications
+  after_filter :send_notifications, except: [:index, :subtasks]
 
   has_scope :for_organization, only: [:index]
   respond_to :json

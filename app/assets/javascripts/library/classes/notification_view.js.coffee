@@ -18,5 +18,5 @@ class window.NotificationView
 
 
   render_notification: ($elem, data) ->
-    $elem.text(data)
+    $elem.text(data).velocity('transition.bounceIn', {duration: 300})
 
