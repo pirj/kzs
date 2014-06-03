@@ -1,6 +1,11 @@
-class Tasks::Api::TasksController < ResourceController
+class Tasks::Api::TasksController < ApplicationController
+
+
   layout false
   respond_to :json
+
+  inherit_resources
+  actions :index, :show
 
   # by default you get parent tasks only.
   # It you want to search - just add parent_only: false to params
@@ -55,6 +60,8 @@ class Tasks::Api::TasksController < ResourceController
     end
   end
 
+
+
   def change_state
     responce = []
     if params[:task_ids].present? && params[:task_ids].is_a?(Array) && params[:event].present?
@@ -71,6 +78,7 @@ class Tasks::Api::TasksController < ResourceController
 
     render json: responce
   end
+
 
   private
 

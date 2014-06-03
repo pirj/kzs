@@ -3,6 +3,9 @@ class Gantt
     that = this
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
+#      console.log 'xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")'
+#      console.log $("meta[name=\"csrf-token\"]").attr("content")
+
       return
 
     @.initCustomFields()                              #определяем свои поля
@@ -127,6 +130,11 @@ class Gantt
     gantt.locale.labels.section_title = "Заголовок"
     gantt.locale.labels.section_details = "Описание"
     gantt.locale.labels.section_period = "Дата"
+    gantt.config.drag_move = false;
+    gantt.config.show_links = false;
+    gantt.config.drag_progress = false;
+    gantt.config.drag_links = false;
+    gantt.config.drag_resize = false;
     gantt.config.lightbox["task_sections"] = [
       {
         name: "title"
@@ -189,12 +197,16 @@ class Gantt
       return
 
   editTask: (data) =>              #!!!
+#    console.log(data)
     request = $.ajax(
       url: '/api/tasks/'+data.id
       type: 'PUT'
       dataType: "json"
       data:
-        tasks_task: data
+        authenticity_token: $("meta[name=\"csrf-token\"]").attr("content")
+        task:
+          finished_at: data.finished_at
+          started_at: data.started_at
     )
 
     request.done (data) =>
