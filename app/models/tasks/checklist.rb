@@ -7,13 +7,4 @@ class Tasks::Checklist < ActiveRecord::Base
   accepts_nested_attributes_for :checklist_items, allow_destroy: true
 
   validates :name, presence: true
-
-  after_update :send_notifications
-
-private
-
-  def send_notifications
-    task.notify_interesants exclude: User.find(updated_by)
-  end
-
 end
