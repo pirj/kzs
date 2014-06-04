@@ -17,6 +17,9 @@ R = React.DOM
     checked_all: props.checked_all
 
   formatData: (data) ->
+    console.log _.groupBy(data, (attr) ->
+      attr.parent_id
+    )
     _.map(data, (el) ->
       {
         id: el.id
@@ -69,9 +72,6 @@ R = React.DOM
       checked_all: !@.state.checked_all
 
 
-  handleQuerySubtasks: (id) ->
-    @.props.query_subtasks id
-
 
   componentDidMount: ->
     $(document).on('tasks_table:collection:check_all', (e) =>
@@ -92,14 +92,13 @@ R = React.DOM
 
 
   render: ->
-#    console.log @.props.subtasks
     window.arr = @.state.data
 
     render_data = @.state.data.map((el) =>
       [
-        TasksTableRow({column_names: @.state.column_names, data: el.data, checked: el.checked, checked_row: @.handleRowCheck, query_subtasks: @.handleQuerySubtasks }),
-        @.getSubtasks(el.data.id).map((sub_el) =>
-          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, checked_row: @.handleRowCheck, query_subtasks: @.handleQuerySubtasks })
+        TasksTableRow({column_names: @.state.column_names, data: el, checked: el.data.checked, opened: el.data.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
+        @.getSubtasks(el.id).map((sub_el) =>
+          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
         )
       ]
     )
