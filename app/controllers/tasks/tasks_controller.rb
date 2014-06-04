@@ -1,12 +1,15 @@
-class Tasks::TasksController < ResourceController
+class Tasks::TasksController < ApplicationController
+  include Tasks::NotificationsController
+
   layout 'base'
 
   before_filter :subtask, only: [:show]
-  after_filter :send_notifications, only: [:create, :update, :destroy]
+
 
   has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
 
+  inherit_resources
   respond_to :js, :json, :html
 
   helper_method :mapped_resource, :collection_path
@@ -69,10 +72,5 @@ class Tasks::TasksController < ResourceController
     @subtask ||= Tasks::Task.new(:parent_id => resource.id)
   end
 
-  # отсылаем оповещения о модуле задач через faye
-  def send_notifications
-    data = Tasks::Task.notifications_for(current_user).count
-    PrivatePub.publish_to '/notifications/update', notifications: {tasks_module: data}
-  end
 
 end

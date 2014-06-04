@@ -1,15 +1,12 @@
 class Tasks::Api::TasksController < ApplicationController
-
+  include Tasks::NotificationsController
 
   layout false
 
-  after_filter :send_notifications, except: [:subtasks]
-
-  has_scope :for_organization, only: [:index]
-  respond_to :json
 
   inherit_resources
   actions :index, :show
+  respond_to :json
 
   # by default you get parent tasks only.
   # It you want to search - just add parent_only: false to params
@@ -83,7 +80,6 @@ class Tasks::Api::TasksController < ApplicationController
     render json: responce
   end
 
-
   private
 
   def search_scope
@@ -92,18 +88,6 @@ class Tasks::Api::TasksController < ApplicationController
 
   def scope
     Tasks::Task.for_organization(current_organization)
-  end
-
-  # отсылаем оповещения о модуле задач через faye
-  def send_notifications
-    Rails.logger.info '#########'
-    Rails.logger.info "events for #{current_organization.users.count}"
-    Rails.logger.info '#########'
-    current_organization.users.each do |user|
-      Rails.logger.info "send event for #{user.id}"
-      data = Tasks::Task.notifications_for(user).count
-      PrivatePub.publish_to "/notifications/update/#{user.id}", notifications: { tasks_module: data }
-    end
   end
 
 end
