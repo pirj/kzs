@@ -31,7 +31,8 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
   end
 
   def duration
-    (object.finished_at.to_i - object.started_at.to_i)/1.day
+    duration = (object.finished_at.to_i - object.started_at.to_i)/1.day
+    (duration == 0) ? 1 : duration
   end
 
   def state
