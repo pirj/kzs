@@ -8,7 +8,7 @@ h1.b-offset-sm = resource.title
     .row.b-offset-sm
       .col-sm-12
         h2 Цель задачи:
-        .form-group.text-help = resource.text
+        .form-group.text-gray = resource.text
 
 
     = render 'task_subtasks_list'
@@ -20,13 +20,13 @@ h1.b-offset-sm = resource.title
           h2.b-offset-sm Дела
           - resource.checklists.each do |checklist|
             /.form-group.row
-            /  .col-md-2.text-help.text-right Название списка:
+            /  .col-md-2.text-gray.text-right Название списка:
             /  .col-md-7 #{checklist.name}
             /.form-group.row
-            /  .col-md-2.text-help.text-right Создан:
+            /  .col-md-2.text-gray.text-right Создан:
             /  .col-md-7 #{checklist.updated_at}
             /.form-group.row
-            /  .col-md-2.text-help.text-right Обновлен:
+            /  .col-md-2.text-gray.text-right Обновлен:
             /  .col-md-7 #{checklist.created_at}
 
             - undisable = can? :edit_checklists,resource
@@ -45,20 +45,20 @@ h1.b-offset-sm = resource.title
                       .pull-right
                         span.fa.fa-clock-o
                         span = DateFormatter.new(f.object.finished_at)
-                    p._task-comment.text-help = f.object.description
+                    p._task-comment.text-gray = f.object.description
 
   .col-md-3.col-md-offset-1.well.well-filled.pull-right
     .form-group Команда проекта
 
     - if resource.inspector
       ul.form-group
-        li.text-help Инспектора:
+        li.text-gray Инспектор:
         li
           = link_to resource.inspector.try(:first_name_with_last_name), '#', class: "link-dashed"
 
     - if resource.executor
       ul.form-group
-        li.text-help Исполнители:
+        li.text-gray Исполнитель:
         li
           = link_to resource.executor.try(:first_name_with_last_name), '#', class: "link-dashed"
 
