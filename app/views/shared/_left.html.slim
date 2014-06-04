@@ -1,14 +1,5 @@
 / async notifications
-= subscribe_to "/notifications/update/#{current_user.id}"
-
-javascript:
-  var channel_id = "#{current_user.id}";
-
-coffee:
-  PrivatePub.subscribe "/notifications/update/#{channel_id}", (data, channel) ->
-    console.log data
-    new NotificationView(data)
-
+= subscribe_to_sidebar_notifications
 
 
 #sidebar.sidebar.js-sidebar
