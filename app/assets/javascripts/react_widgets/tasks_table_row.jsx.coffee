@@ -1,30 +1,32 @@
 `/** @jsx React.DOM */`
+###
+data:
+  id:
+  title:
+  started_at:
+  state: 'formulated' || 'paused' ||  ...
+###
+
 R = React.DOM
 
 @TasksTableRow = React.createClass
 
   getDefaultProps: ->
     checked: false
+    opened: false
     data: {}
     column_names: ['title']
+    type: 'root'
 
-  getInitialState: (props) ->
-    props = props || this.props
-    checked: props.checked
-    data: props.data
-    column_names: props.column_names
-
-  componentWillReceiveProps: (newProps, oldProps) ->
-    @.setState(@.getInitialState(newProps))
 
   titleClassName: ->
     cx = React.addons.classSet
     result = ''
     result = cx(
-      'link-orange' : @.state.data.state == 'formulated',
-      'link-success' : @.state.data.state == 'executed',
-      'link-default' : @.state.data.state == 'paused',
-      'link-asphalt' : @.state.data.state == 'cancelled',
+      'link-orange' : @.props.data.state == 'formulated',
+      'link-success' : @.props.data.state == 'executed',
+      'link-default' : @.props.data.state == 'paused',
+      'link-asphalt' : @.props.data.state == 'cancelled',
     )
     result += ' link'
     return result
@@ -32,21 +34,15 @@ R = React.DOM
 
 
   renderTitle: (obj) ->
-    if typeof(obj.parent_id)=='number' && obj.parent_id > 0
+    if @.props.type == 'sub'
       [ R.span({className: 'fa fa-level-up text-gray table-subelement'}),
         R.span({}, obj.title)]
     else
       obj.title
-  ###
-  data:
-    id:
-    title:
-    started_at:
-    state: 'formulated' || 'paused' ||  ...
-  ###
+
 
   formatData: (col_name) ->
-    obj = @.state.data
+    obj = @.props.data
     data = obj[col_name]
 
     # если на сервере в БД не записано значение, то приходит в json значение null
@@ -62,8 +58,10 @@ R = React.DOM
         linkClassName = @.titleClassName()
         _title = @.renderTitle(obj)
 
-        if obj.has_subtasks == true
-          result.push R.span({className: 'fa fa-plus-square-o', onClick: @.handleQuerySubtasks}, '')
+        if @.props.type == 'root'
+#          className = if @.props.opened then 'fa fa-minus-square-o' : 'fa fa-plus-square-o'
+          className = 'fa fa-minus-square-o'
+          result.push R.span({className: className, onClick: @.handleQuerySubtasks}, '')
         result.push R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
 
       else if col_name.search(/user|executor|approver|creator|inspector/) > -1
@@ -80,17 +78,21 @@ R = React.DOM
 
 
   handleQuerySubtasks: ->
-    @.props.query_subtasks @.state.data.id
+    @.props.query_subtasks @.props.data.id
 
   handleCheckboxChange: (e) ->
-    @.props.checked_row @.props.data.id
+    @.props.on_row_checked @.props.data
+
+
+  componentDidMount: ->
+#    console.log @.props.data
 
 
   render: ->
     render_data = R.tr({ref: 'row'},
         [
-          R.td({}, R.input({type: 'checkbox', checked: @.state.checked, name: "task_#{@.state.data.id}", className: 'js-icheck-off', onChange: @.handleCheckboxChange})),
-          @.state.column_names.map((col_name) =>
+          R.td({}, R.input({type: 'checkbox', checked: @.props.checked, name: "task_#{@.props.data.id}", className: 'js-icheck-off', onChange: @.handleCheckboxChange})),
+          @.props.column_names.map((col_name) =>
             R.td({className: col_name}, @.formatData(col_name))
           )
         ]

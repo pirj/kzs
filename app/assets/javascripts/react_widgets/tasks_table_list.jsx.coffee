@@ -3,45 +3,30 @@ R = React.DOM
 
 @TasksTableList = React.createClass
 
-  data: []
-
   getDefaultProps: ->
     data: []
     column_names: ['title']
+
+
+
+  getInitialState: ->
+    data: []
     checked_all: false
 
 
-#  getInitialState: ->
-
-
-  formatData: (data) ->
-    console.log data
-    if data.length
-      formatedData = _.groupBy(data, (attr) ->
-        attr.parent_id
-      )
-      console.log formatedData || []
-  #    _.map(data, (el) ->
-  #      {
-  #        id: el.id
-  #        data: el
-  #        checked: false
-  #      }
-  #    )
-      formatedData
-    else
-      data
-
-  handleRowCheck: (id) ->
+  handleRowCheck: (obj) ->
     # копируем коллекцию и работаем с копией,
     # обновляя в ней атрибуты нужных нам объектов
     new_data = @.state.data
-    finded_obj = _.findWhere(new_data,{id: id})
-    i = new_data.indexOf(finded_obj)
-    new_data[i].checked = !new_data[i].checked
+    if obj.hasOwnProperty('parent_id')
+      data_pos = if obj.parent_id < 1 then 'null' else obj.parent_id
+      try
+        finded_obj = _.findWhere(new_data[data_pos], {id: obj.id})
+        finded_obj_pos = new_data[data_pos].indexOf(finded_obj)
+        new_data[data_pos][finded_obj_pos].checked = !obj.checked
+
 
     @.changeCheckedRows(new_data)
-
     @.setState data: new_data
 
 
@@ -50,13 +35,11 @@ R = React.DOM
   # в событии передает коллекцию чекнутых объектов
   changeCheckedRows: (data) ->
     # фильтруем только те задачи, которые имеют checked: true
-    checked = _.where(data, {checked: true})
-    $(document).trigger('tasks_table:collection:change_checked', [checked])
-    checked
+    checked_data = _.where(_.flatten(_.values(data)), {checked: true})
+    $(document).trigger('tasks_table:collection:change_checked', [checked_data])
+    checked_data
 
 
-#  componentWillReceiveProps: (newProps, oldProps) ->
-#    @.setState(@.getInitialState(newProps))
 
 
   # обрабатываем выделение всех строк
@@ -64,10 +47,20 @@ R = React.DOM
   # бросаем событие «строки чекнуты»
   # меняем статус,что приводит к перерисовке
   checkAllRows: ->
-    new_data = _.map(@.state.data, (el) =>
-      el.checked = !@.state.checked_all
-      el
+    keys = _.keys(@.state.data)
+    new_data = {}
+    _.each(keys, (key) =>
+      new_data[key] =
+        _.map(@.state.data[key], (obj) =>
+
+          obj.checked = !@.state.checked_all
+          obj
+      )
     )
+
+
+    console.log @.state.checked_all
+    console.log @.state.data, new_data
 
     @.changeCheckedRows(new_data)
 
@@ -82,49 +75,37 @@ R = React.DOM
       @.checkAllRows()
     )
 
-    $(document).on('tasks_table:collection:change_checked', (e, data) ->
-      data
-    )
-
+  # сортируем пришедшую коллекцию по родителям-предкам
   componentWillReceiveProps: (newProps, oldProps) ->
     data = newProps.data
-    @.data = _.groupBy(data, (obj) ->
+    window.arr = @.state.data = _.groupBy(data, (obj) ->
       obj.parent_id
     )
 
-    console.log @.data
+    @.setState data: @.state.data
 
 
-  render_task_with_subtasks: (obj) ->
-    subtasks = if @.data.hasOwnProperty(obj.id) then @.data[obj.id] else []
-    console.log subtasks
-    # нужна рекурсия в отрисовке
+
+  # рисует строку с задачей и рекурсивно вызывает отрисовку подзадач
+  render_task_with_subtasks: (obj, is_subtasks=false) ->
+    subtasks = if @.state.data.hasOwnProperty(obj.id) then @.state.data[obj.id] else []
+    type = if is_subtasks then 'sub' else 'root'
     [
-      TasksTableRow({column_names: @.props.column_names, data: obj, checked: obj.checked, opened: obj.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
+      TasksTableRow({column_names: @.props.column_names, data: obj, checked: obj.checked, opened: obj.opened, type: type, on_row_checked: @.handleRowCheck, on_opened: @.handleQuerySubtasks }),
       subtasks.map((sub_el) =>
-#        TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
-        R.tr({}, R.td({colSpan: @.props.column_names.length}, 'подзадачи есть'))
+        @.render_task_with_subtasks(sub_el, true)
       )
     ]
 
   render: ->
-    unless _.keys(@.data).length
-      rows = R.tr({}, R.td({colSpan: @.props.column_names.length},'данные загружаются...'))
+    unless _.keys(@.state.data).length
+      rows = R.tr({}, R.td({colSpan: @.props.column_names.length},'Данные загружаются...'))
     else
-      collection = @.data['null']
-      rows = collection.map((obj) =>
-        @.render_task_with_subtasks(obj)
-      )
-
-#    render_data = @.state.data.map((el) =>
-#      console.log el
-#      [
-#        TasksTableRow({column_names: @.state.column_names, data: el, checked: el.data.checked, opened: el.data.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
-#        @.getSubtasks(el.id).map((sub_el) =>
-#          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
-#        )
-#      ]
-#    )
+      try
+        collection = @.state.data['null']
+        rows = collection.map((obj) => @.render_task_with_subtasks(obj) )
+      catch
+        rows = R.tr({}, R.td({colSpan: @.props.column_names.length}, 'Ошибка в пришедших. Невозможно составить список задач...'))
 
     R.tbody({ref: 'task_rows'}, rows)
 

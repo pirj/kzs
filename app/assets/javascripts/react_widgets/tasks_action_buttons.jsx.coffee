@@ -52,7 +52,7 @@ R = React.DOM
   # выделяем список id коллекции
   handleCheckedData: (checked) ->
     # получаем массив массивов действий [ [1,2], [2,3], [1,2], ...]
-    _actions = checked.map((el) -> el.data.actions )
+    _actions = checked.map((el) -> el.actions )
 
     # блок выделения общих действий среди массива массивов
     result = _actions[0]
