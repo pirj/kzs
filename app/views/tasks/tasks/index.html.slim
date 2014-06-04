@@ -2,23 +2,24 @@
 
   = header_title do
     .dropdown.header
-      h1.dropdown-toggle data-toggle="dropdown"
-        a href="/tasks"
-        - case params[:with_state]
-          - when 'formulated'
-          | Сформированные
-          - when 'activated'
-          | В работе
-          - when 'cancelled'
-          | Отмененные
-          - when 'paused'
-          | Приостановленные
-          - when 'executed'
-          | Выполненные
-          - else
-          | Задачи
-        span.caret
-      ul.dropdown-menu role="menu"
+      h1
+        = link_to('Задачи',tasks_path)
+        /.dropdown-toggle data-toggle="dropdown"
+          - case params[:with_state]
+            - when 'formulated'
+            | Сформированные
+            - when 'activated'
+            | В работе
+            - when 'cancelled'
+            | Отмененные
+            - when 'paused'
+            | Приостановленные
+            - when 'executed'
+            | Выполненные
+            - else
+            |
+          span.caret
+      /ul.dropdown-menu role="menu"
         - if params[:with_state] || params[:with_type]
           li
             = link_to 'Все задачи', tasks_path
@@ -38,7 +39,7 @@
         = link_to tasks_path, class: 'btn btn-default' do
           span.fa.fa-rotate-left
 
-  .col-sm-3
+  /.col-sm-3
     div
       a#year href='#' год &nbsp
       a#month href='#' месяц &nbsp
