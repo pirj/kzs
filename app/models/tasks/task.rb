@@ -74,21 +74,17 @@ private
   def send_create_notifications
     notify_interesants exclude: (updated_by ? User.find(updated_by) : [])
 
-    # Refactor this list to be dynamic
-    [inspector, executor].compact.uniq.reject{|u| u == User.find(updated_by) if updated_by}.each do |user|
+    interesants.reject{|u| u == User.find(updated_by) if updated_by}.each do |user|
       NotificationMailer.delay.task_created(user, self)
     end
   end
 
   def send_update_notifications
-    if changed.any? {|cf| ['title', 'text', 'executor_id', 'inspector_id'].include? cf}
       notify_interesants exclude: (updated_by ? User.find(updated_by) : [])
 
-      # Refactor this list to be dynamic
       [inspector.id, executor.id, inspector_id_was, executor_id_was].compact.uniq.map {|id| User.find(id)}.reject{|u| u == User.find(updated_by) if updated_by}.each do |user|
         NotificationMailer.delay.task_changed(user, self)
       end
-    end
   end
 
   def start_must_be_before_end_time
