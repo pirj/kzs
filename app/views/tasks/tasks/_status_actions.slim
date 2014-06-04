@@ -18,7 +18,7 @@ ul.nav.nav-inline.btn-block.js-tasks-actions.b-offset-sm
     - if can? event_name.to_sym, resource
       - icon_class = 'fa fa-times text-red-darker' if event_name == :cancel
       - icon_class = 'fa fa-pause' if event_name == :pause
-      - icon_class = 'fa fa-pause' if event_name == :reformulate
+      - icon_class = 'fa fa-rotate-left' if event_name == :reformulate
       - additional_classes = %w(btn btn-default)
       - additional_classes.push('text-red-darker') if event_name == :cancel
       li
