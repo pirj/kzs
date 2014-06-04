@@ -3,30 +3,34 @@ R = React.DOM
 
 @TasksTableList = React.createClass
 
+  data: []
+
   getDefaultProps: ->
-    data: [{title: 'hi'}]
+    data: []
     column_names: ['title']
     checked_all: false
 
 
-  getInitialState: (props) ->
-    props = props || this.props
-    column_names: props.column_names
-    original_data: props.data
-    data: @.formatData(props.data)
-    checked_all: props.checked_all
+#  getInitialState: ->
+
 
   formatData: (data) ->
-    console.log _.groupBy(data, (attr) ->
-      attr.parent_id
-    )
-    _.map(data, (el) ->
-      {
-        id: el.id
-        data: el
-        checked: false
-      }
-    )
+    console.log data
+    if data.length
+      formatedData = _.groupBy(data, (attr) ->
+        attr.parent_id
+      )
+      console.log formatedData || []
+  #    _.map(data, (el) ->
+  #      {
+  #        id: el.id
+  #        data: el
+  #        checked: false
+  #      }
+  #    )
+      formatedData
+    else
+      data
 
   handleRowCheck: (id) ->
     # копируем коллекцию и работаем с копией,
@@ -51,8 +55,8 @@ R = React.DOM
     checked
 
 
-  componentWillReceiveProps: (newProps, oldProps) ->
-    @.setState(@.getInitialState(newProps))
+#  componentWillReceiveProps: (newProps, oldProps) ->
+#    @.setState(@.getInitialState(newProps))
 
 
   # обрабатываем выделение всех строк
@@ -82,28 +86,47 @@ R = React.DOM
       data
     )
 
-  getSubtasks: (id) ->
-    collection = _.findWhere(@.props.subtasks, {id: id})
-    unless collection == undefined
-      collection.subtasks
-    else
-      []
-
-
-
-  render: ->
-    window.arr = @.state.data
-
-    render_data = @.state.data.map((el) =>
-      [
-        TasksTableRow({column_names: @.state.column_names, data: el, checked: el.data.checked, opened: el.data.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
-        @.getSubtasks(el.id).map((sub_el) =>
-          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
-        )
-      ]
+  componentWillReceiveProps: (newProps, oldProps) ->
+    data = newProps.data
+    @.data = _.groupBy(data, (obj) ->
+      obj.parent_id
     )
 
-    R.tbody({ref: 'task_rows'}, render_data)
+    console.log @.data
+
+
+  render_task_with_subtasks: (obj) ->
+    subtasks = if @.data.hasOwnProperty(obj.id) then @.data[obj.id] else []
+    console.log subtasks
+    # нужна рекурсия в отрисовке
+    [
+      TasksTableRow({column_names: @.props.column_names, data: obj, checked: obj.checked, opened: obj.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
+      subtasks.map((sub_el) =>
+#        TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
+        R.tr({}, R.td({colSpan: @.props.column_names.length}, 'подзадачи есть'))
+      )
+    ]
+
+  render: ->
+    unless _.keys(@.data).length
+      rows = R.tr({}, R.td({colSpan: @.props.column_names.length},'данные загружаются...'))
+    else
+      collection = @.data['null']
+      rows = collection.map((obj) =>
+        @.render_task_with_subtasks(obj)
+      )
+
+#    render_data = @.state.data.map((el) =>
+#      console.log el
+#      [
+#        TasksTableRow({column_names: @.state.column_names, data: el, checked: el.data.checked, opened: el.data.opened, checked_row: @.handleRowCheck, type: 'root', on_opened: @.handleQuerySubtasks }),
+#        @.getSubtasks(el.id).map((sub_el) =>
+#          TasksTableRow({column_names: @.state.column_names, data: sub_el, checked: el.checked, type: 'sub', checked_row: @.handleRowCheck })
+#        )
+#      ]
+#    )
+
+    R.tbody({ref: 'task_rows'}, rows)
 
 
 ###
