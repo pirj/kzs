@@ -28,7 +28,8 @@
         .input-group
           .input-group-icon
             span.fa.fa-calendar
-            = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
+          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
+
       .col-md-4
         .input-group
           .input-group-icon
