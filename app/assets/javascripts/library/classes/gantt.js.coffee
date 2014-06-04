@@ -105,10 +105,14 @@ class Gantt
       console.log data
       @.gantt.parse({data: data})
       @.gantt.open(id)
-#      for i in [0...data.length]
-#        gantt.open(data[i].id)
 
-
+      for i in [0...data.length]
+        gantt.addLink({
+          id: i
+          source:id
+          target:data[i].id
+          type:1
+        })
 
 
       ############################################ далее методы класса ####################################################
@@ -141,7 +145,7 @@ class Gantt
     gantt.locale.labels.section_details = "Описание"
     gantt.locale.labels.section_period = "Дата"
     gantt.config.drag_move = false;
-    gantt.config.show_links = false;
+    gantt.config.show_links = true;
     gantt.config.drag_progress = false;
     gantt.config.drag_links = false;
     gantt.config.drag_resize = false;
