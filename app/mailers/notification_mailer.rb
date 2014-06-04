@@ -48,4 +48,10 @@ class NotificationMailer < ActionMailer::Base
     mail to: user.email, subject: "САКЭ КЗС. Статус задачи «#{task.title}» изменился на «#{I18n.t("activerecord.tasks/task.state.#{task.current_state}")}»"
   end
 
+  def task_checklist_item_changed user, item
+    @item = item
+
+    mail to: user.email, subject: "САКЭ КЗС. Статус дела «#{item.name}» изменился"
+  end
+
 end
