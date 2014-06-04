@@ -50,20 +50,15 @@ module Notifiable
     options[:only].reject! {|type| options[:except].include? type}
 
     # Наполняем массив объектами типа User
-    interested = []
-    options[:only].each do |in_sym| 
-      obj = self.send(in_sym)
-      if obj.is_a? Array
-        obj.each do |elem|
-         interested << elem if elem.instance_of? User 
-       end
-      else
-        interested << obj if obj.instance_of? User
-      end
-    end
+    interested = types_to_users options[:only]
 
     interested.reject! {|user| options[:exclude].include? user} # Не отправляем уведомления тем, кто в списке exclude
-    interested.uniq.each { |user| self.notifications.find_or_create_by_user_id(user.id) } # Создаем нотификацию, если ее еще нет
+    interested.each { |user| self.notifications.find_or_create_by_user_id(user.id) } # Создаем нотификацию, если ее еще нет
+  end
+
+  # Возвращает массив объектов [User], которые являются интересантами данного объекта
+  def interesants
+    types_to_users self.class.interesants
   end
 
   # Удаляем нотификацию о текущем объекте для всех пользователей (или конкретного пользователя)
@@ -84,5 +79,24 @@ module Notifiable
   # @see User
   def has_notification_for? user
     self.notifications.where(user_id: user.id).count > 0 ? true : false
+  end
+
+private
+  
+  # Делает из массива списка интересантов список интересантов
+  # (т.е. из [:executors, :approver] - [User, User, User])
+  def types_to_users list
+    interested = []
+
+    list.each do |in_sym| 
+      obj = self.send(in_sym)
+      if obj.is_a? Array
+        obj.each { |elem| interested << elem if elem.instance_of? User }
+      else
+        interested << obj if obj.instance_of? User
+      end
+    end
+
+    return interested.compact.uniq
   end
 end
