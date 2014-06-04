@@ -59,9 +59,6 @@ R = React.DOM
     )
 
 
-    console.log @.state.checked_all
-    console.log @.state.data, new_data
-
     @.changeCheckedRows(new_data)
 
     @.setState
@@ -88,14 +85,43 @@ R = React.DOM
 
   # рисует строку с задачей и рекурсивно вызывает отрисовку подзадач
   render_task_with_subtasks: (obj, is_subtasks=false) ->
-    subtasks = if @.state.data.hasOwnProperty(obj.id) then @.state.data[obj.id] else []
+    subtasks = if @.state.data.hasOwnProperty(obj.id) && obj.opened then @.state.data[obj.id] else []
     type = if is_subtasks then 'sub' else 'root'
+    opts =
+      column_names: @.props.column_names
+      data: obj
+      checked: obj.checked
+      opened: obj.opened
+      type: type
+      on_row_checked: @.handleRowCheck,
+      on_opened: @.handleQuerySubtasks
     [
-      TasksTableRow({column_names: @.props.column_names, data: obj, checked: obj.checked, opened: obj.opened, type: type, on_row_checked: @.handleRowCheck, on_opened: @.handleQuerySubtasks }),
+      TasksTableRow(opts),
       subtasks.map((sub_el) =>
         @.render_task_with_subtasks(sub_el, true)
       )
     ]
+
+  # обрабатываем запрос на отображение подзадач
+  handleQuerySubtasks: (obj) ->
+    new_data = @.state.data
+    if obj.hasOwnProperty('parent_id')
+      console.log data_pos = if obj.parent_id < 1 then 'null' else obj.parent_id
+      try
+        finded_obj = _.findWhere(new_data[data_pos], {id: obj.id})
+        finded_obj_pos = new_data[data_pos].indexOf(finded_obj)
+        new_data[data_pos][finded_obj_pos].opened = !obj.opened
+        updated_obj = new_data[data_pos][finded_obj_pos]
+      catch
+        console.error 'error in finding obj in data array'
+
+    # бросить ивент с id-родительской-задачи и [id, id]-потомков
+    obj_id = updated_obj.id
+    children_ids = @.state.data[updated_obj.parent_id]
+    is_opened = updated_obj.opened
+    $(document).trigger('tasks_table:collection:update_subtasks', [obj_id, children_ids, is_opened])
+    @.setState data: new_data
+
 
   render: ->
     unless _.keys(@.state.data).length

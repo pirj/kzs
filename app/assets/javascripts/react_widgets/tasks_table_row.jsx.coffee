@@ -59,8 +59,7 @@ R = React.DOM
         _title = @.renderTitle(obj)
 
         if @.props.type == 'root'
-#          className = if @.props.opened then 'fa fa-minus-square-o' : 'fa fa-plus-square-o'
-          className = 'fa fa-minus-square-o'
+          className = if @.props.opened then 'fa fa-minus-square-o' else 'fa fa-plus-square-o'
           result.push R.span({className: className, onClick: @.handleQuerySubtasks}, '')
         result.push R.a({href: "/tasks/#{obj.id}", className: linkClassName}, _title)
 
@@ -77,8 +76,9 @@ R = React.DOM
       return result
 
 
-  handleQuerySubtasks: ->
-    @.props.query_subtasks @.props.data.id
+  handleQuerySubtasks: (e) ->
+    e.preventDefault()
+    @.props.on_opened @.props.data
 
   handleCheckboxChange: (e) ->
     @.props.on_row_checked @.props.data
