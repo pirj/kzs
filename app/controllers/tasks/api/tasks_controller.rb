@@ -3,7 +3,7 @@ class Tasks::Api::TasksController < ApplicationController
 
   layout false
 
-  after_filter :send_notifications, except: [:index, :subtasks]
+  after_filter :send_notifications, except: [:subtasks]
 
   has_scope :for_organization, only: [:index]
   respond_to :json
@@ -96,8 +96,14 @@ class Tasks::Api::TasksController < ApplicationController
 
   # отсылаем оповещения о модуле задач через faye
   def send_notifications
-    data = Tasks::Task.notifications_for(current_user).count
-    PrivatePub.publish_to '/notifications/update', notifications: { tasks_module: data }
+    Rails.logger.info '#########'
+    Rails.logger.info "events for #{current_organization.users.count}"
+    Rails.logger.info '#########'
+    current_organization.users.each do |user|
+      Rails.logger.info "send event for #{user.id}"
+      data = Tasks::Task.notifications_for(user).count
+      PrivatePub.publish_to "/notifications/update/#{user.id}", notifications: { tasks_module: data }
+    end
   end
 
 end
