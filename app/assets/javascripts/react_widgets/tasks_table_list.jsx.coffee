@@ -106,7 +106,7 @@ R = React.DOM
   handleQuerySubtasks: (obj) ->
     new_data = @.state.data
     if obj.hasOwnProperty('parent_id')
-      console.log data_pos = if obj.parent_id < 1 then 'null' else obj.parent_id
+      data_pos = if obj.parent_id < 1 then 'null' else obj.parent_id
       try
         finded_obj = _.findWhere(new_data[data_pos], {id: obj.id})
         finded_obj_pos = new_data[data_pos].indexOf(finded_obj)
@@ -116,14 +116,13 @@ R = React.DOM
         console.error 'error in finding obj in data array'
 
     # бросить ивент с id-родительской-задачи и [id, id]-потомков
-    console.log @.state.data
-    console.log updated_obj
-
     obj_id = updated_obj.id
     children_ids = @.state.data[updated_obj.id]
     is_opened = updated_obj.opened
     $(document).trigger('tasks_table:collection:update_subtasks', [obj_id, children_ids, is_opened])
     @.setState data: new_data
+
+
 
 
   render: ->
