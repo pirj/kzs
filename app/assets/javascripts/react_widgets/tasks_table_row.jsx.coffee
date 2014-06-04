@@ -84,6 +84,14 @@ R = React.DOM
     @.props.on_row_checked @.props.data
 
 
+  # анимирует элементы при первом рендере, т.е.при каждом открытии
+  componentDidMount: ->
+    console.log $(@.refs.row.getDOMNode())
+    $(@.refs.row.getDOMNode()).velocity('transition.slideDownBigIn', {duration: 100})
+
+
+
+
 
   render: ->
     render_data = R.tr({ref: 'row'},

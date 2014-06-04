@@ -6,7 +6,7 @@ class Tasks::TasksController < ApplicationController
   before_filter :subtask, only: [:show]
 
 
-  has_scope :per, default: 10, only: [:index]
+  # has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
 
   inherit_resources
