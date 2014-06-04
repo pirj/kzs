@@ -8,12 +8,9 @@
                               } \
                     do |f|
 
-  h3.popover-title Добавление подзадачи
-  .popover-form
+  .h3.popover-title.text-center Добавление подзадачи
+  .popover-form-content
     = render 'documents/application/error_label', resource: resource
-    = f.input :title
-    = f.hidden_field :parent_id
-    = f.input :text, input_html: { rows: 4 }
     = f.input :title, label_html: {class: 'col-sm-4'}
     = f.association :executor, collection: current_organization_users, \
                                       label_html: {class: 'col-sm-4'}, \
@@ -38,8 +35,9 @@
 
 
 
-  .btn-group.btn-group.js-buttons-place.popover-bottom-btn
+  .btn-group.js-buttons-place.popover-bottom-btn
     = f.submit class: 'btn link-success'
     a.js-popover-close.btn.link-default
       span.fa.fa-times-circle
       span Отмена
+  .arrow
