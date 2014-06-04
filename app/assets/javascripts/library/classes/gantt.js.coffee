@@ -102,10 +102,11 @@ class Gantt
       window.app.scrollTable(y)
 
     $(document).on "tasks_table:collection:update_subtasks", (e, id, data) =>
-      @.gantt.parse({data: [data[0]]})
+      console.log data
+      @.gantt.parse({data: data})
       @.gantt.open(id)
-      for i in [0...data.length]
-        gantt.open(data[i].id)
+#      for i in [0...data.length]
+#        gantt.open(data[i].id)
 
 
 
