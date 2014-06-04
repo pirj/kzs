@@ -101,16 +101,16 @@ class Gantt
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)
 
-    $(document).on "tasks_table:collection:update_subtasks", (e, id, data) =>
-      console.log data
-      @.gantt.parse({data: data})
-      @.gantt.open(id)
+    $(document).on "tasks_table:collection:update_subtasks", (e, id, children_ids, is_opened) =>
+      console.log children_ids
+      @.gantt.parse({data: children_ids})
+      if is_opened then @.gantt.open(id) else @.gantt.close(id)
 
-      for i in [0...data.length]
+      for i in [0...children_ids.length]
         gantt.addLink({
           id: i
           source:id
-          target:data[i].id
+          target:children_ids[i].id
           type:1
         })
 

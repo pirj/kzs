@@ -75,7 +75,7 @@
 //  border-width: 4px 0 4px 6px;
   border-color: transparent transparent transparent lighten($color-blue, 30);
   margin-top: -1px;}
-.gantt_task_link .gantt_link_arrow_right{border-width:5px;margin-top: -2px;}
+.gantt_task_link .gantt_link_arrow_right{border-width:0px;margin-top: -2px;}
 
 .gantt_task_content > .task_flag_container {
   position: absolute;

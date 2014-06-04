@@ -116,8 +116,11 @@ R = React.DOM
         console.error 'error in finding obj in data array'
 
     # бросить ивент с id-родительской-задачи и [id, id]-потомков
+    console.log @.state.data
+    console.log updated_obj
+
     obj_id = updated_obj.id
-    children_ids = @.state.data[updated_obj.parent_id]
+    children_ids = @.state.data[updated_obj.id]
     is_opened = updated_obj.opened
     $(document).trigger('tasks_table:collection:update_subtasks', [obj_id, children_ids, is_opened])
     @.setState data: new_data
