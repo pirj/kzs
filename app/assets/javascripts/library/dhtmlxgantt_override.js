@@ -48,6 +48,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     }
 
     var div =document.createElement('div');
+    div.title = flag.name;
     div.className = "task_flag";
     if (flag.checked === true) {
        div.classList.add('f-checked')
