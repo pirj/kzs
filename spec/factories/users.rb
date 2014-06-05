@@ -19,6 +19,10 @@ FactoryGirl.define do
       instance.username = email
     end
 
+    factory :user_with_organization do
+      organization { FactoryGirl.create(:organization) }
+    end
+
   end
 
 end

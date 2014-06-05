@@ -3,7 +3,7 @@ require 'acceptance/acceptance_helper'
 feature "Users work with documents states", %q() do
   let!(:accountable) { FactoryGirl.create(:mail) }
   let!(:document) { accountable.document }
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user_with_organization) }
   let(:path) {  polymorphic_path(accountable) }
   let(:index_path) { documents_documents_path }
   let(:show_path) { polymorphic_path(accountable) }
