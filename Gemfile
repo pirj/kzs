@@ -114,6 +114,7 @@ group :development, :test do
   gem 'guard-rubocop', require: false
   gem 'bullet'
   gem 'yard' # Для документации
+  gem 'jasminerice'
 end
 
 group :development do

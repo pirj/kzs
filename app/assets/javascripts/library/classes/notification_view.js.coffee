@@ -5,12 +5,15 @@ class window.NotificationView
 
 
   constructor: (data) ->
+    @.data = data
     @.$sidebar_tasks_container = $(@.params.module.tasks)
     console.error 'not find sidebar container' unless @.$sidebar_tasks_container.length
-    if data.hasOwnProperty('notifications')
-      @.process_data(data.notifications)
+    @
 
 
+  render: ->
+    if @.data.hasOwnProperty('notifications')
+      @.process_data(@.data.notifications)
 
   process_data: (notifications) ->
     if notifications.hasOwnProperty('tasks_module')
@@ -19,4 +22,5 @@ class window.NotificationView
 
   render_notification: ($elem, data) ->
     $elem.text(data).velocity('transition.bounceIn', {duration: 300})
+    data
 

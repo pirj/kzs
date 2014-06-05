@@ -215,6 +215,9 @@ GEM
     inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
       responders (~> 0.9)
+    jasminerice (0.0.10)
+      coffee-rails
+      haml
     journey (1.0.4)
     jquery-rails (2.3.0)
       railties (>= 3.0, < 5.0)
@@ -471,6 +474,7 @@ DEPENDENCIES
   i18n-js
   icheck-rails
   inherited_resources
+  jasminerice
   jquery-rails (~> 2.3.0)
   kaminari
   launchy
