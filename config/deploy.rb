@@ -84,23 +84,23 @@ task :mercury do
     end
   end
   
-  namespace(:private_pub) do
-    task :start do
-      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml}
-    end
-  end
+  # old recipe
+  # namespace(:private_pub) do
+  #   task :start do
+  #     run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml}
+  #   end
+  # end
   
   namespace :private_pub do
     desc "Start private_pub server"
     task :start do
       # run "cd #{current_path};RAILS_ENV=production bundle exec rackup private_pub.ru -s thin -E production -D -P tmp/pids/private_pub.pid"
-      run %Q{ cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml -D -P tmp/pids/private_pub.pid }
+      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml}
     end
 
     desc "Stop private_pub server"
     task :stop do
-      # run "cd #{current_path};if [ -f tmp/pids/private_pub.pid ] && [ -e /proc/$(cat tmp/pids/private_pub.pid) ]; then kill -9 `cat tmp/pids/private_pub.pid`; fi"
-      run %Q{ cd #{latest_release}; if [ -f tmp/pids/private_pub.pid ] && [ -e /proc/$(cat tmp/pids/private_pub.pid) ]; then kill -9 `cat tmp/pids/private_pub.pid`; fi }      
+      run "cd #{current_path};if [ -f tmp/pids/private_pub.pid ] && [ -e /proc/$(cat tmp/pids/private_pub.pid) ]; then kill -9 `cat tmp/pids/private_pub.pid`; fi"
     end
 
     desc "Restart private_pub server"

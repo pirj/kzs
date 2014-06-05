@@ -31,6 +31,7 @@ set :scm, :none
 set :repository, "."
 set :deploy_via, :copy
 set :local_repository, "."
+set :precompile_only_if_changed, true
 
 
 set :branch, "master"
