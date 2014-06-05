@@ -34,9 +34,16 @@ class Tasks::Task < ActiveRecord::Base
   scope :by_started_at, order('started_at ASC')
 
   validates :title, :executor_id, :inspector_id, :organization_id, presence: true
-  validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}, on: :create
-  validates :finished_at, timeliness: {type: :date}
+  validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}, on: :create, if: Proc.new {|task| task.parent.nil?}
+  validates :finished_at, timeliness: {type: :date}, if: Proc.new{|task| task.parent.nil?}
+
+  # Если есть parent_id
+  validates :started_at,  timeliness: {on_or_after: ->  { parent.started_at  } }, if: Proc.new {|task| task.parent}
+  validates :finished_at, timeliness: {on_or_before: -> { parent.finished_at } }, if: Proc.new {|task| task.parent}
+
   validate :start_must_be_before_end_time
+  validate :validate_parent_start_date
+  validate :validate_parent_end_date
 
   after_create :send_create_notifications
   after_update :send_update_notifications
@@ -89,6 +96,14 @@ private
 
   def start_must_be_before_end_time
       errors.add(:started_at, "не должна быть позже даты окончания задачи") unless (started_at <= finished_at) unless started_at.nil? && finished_at.nil?
+  end
+
+  def validate_parent_start_date
+    errors.add(:started_at, "не должна быть раньше даты начала родительской задачи") if parent && parent.started_at && (started_at < parent.started_at) 
+  end
+
+  def validate_parent_end_date
+    errors.add(:finished_at, "не должна быть позже даты окончания родительской задачи") if parent && parent.finished_at && (finished_at > parent.finished_at) 
   end
 
 end
