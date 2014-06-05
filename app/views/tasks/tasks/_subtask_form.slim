@@ -35,9 +35,10 @@
 
 
 
-  .btn-group.js-buttons-place.popover-bottom-btn
-    = f.submit class: 'btn link-success'
-    a.js-popover-close.btn.link-default
-      span.fa.fa-times-circle
-      span Отмена
+  ul.popover-footer.nav.nav-justified.js-buttons-place
+    li = f.submit class: 'btn text-success'
+    li
+      a.js-popover-close.btn.text-gray
+        span.fa.fa-times-circle
+        span Отмена
   .arrow

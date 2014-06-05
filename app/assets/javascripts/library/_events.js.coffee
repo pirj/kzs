@@ -154,6 +154,11 @@ $ ->
 
     $('.js-popover-content[data-target=' + target + ']').toggle()
     $(this).toggleClass('active')
+    if $(this).hasClass('active')
+      $("<div class=\"modal-backdrop-transparent\"></div>").appendTo(".page")
+      $('.modal-backdrop-transparent').toggleClass('in')
+    else
+      $('.modal-backdrop-transparent').remove()
   )
   $('.js-popover-close').on('click', (e) ->
     clearPopover()

@@ -30,59 +30,20 @@
 
 }
 
-$el: '._user-bar';
-
-#{$el}{
-
+.user-bar {
   font-family: open_sans, arial, sans-serif;
-
-  &::before{
-    right: 21px;
-    left: auto;
-  }
-
-
-  #{$el}-status {
+  right: 0;
+  .user-bar-status {
     color: #00e335;
     font-size: 13px;
     padding-left: 21px;
-
     margin-bottom: 6px;
     i {
       margin-right: 5px;
     }
   }
 
-  .btn-group-vertical{
-    .btn{
-      border-top:
-         #666666 solid 1px;
-
-      text-align: left;
-
-      border-radius: 0!important;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      transition: background 0.5s ease;
-      &:hover{
-        background: rgba(255, 255, 255, 0.91);
-        color: #3C3A3A;
-      }
-      i{
-        font-size: 22px;
-        margin-right: 20px;
-      }
-    }
-
-
-  }
-
-  background: rgba(0,0,0,0.8);
-  right: 0;
-
-  #{$el}-header{
+  .user-bar-header {
     width: 360px;
     color: #f1ede4;
     font-size: 18px;
@@ -92,19 +53,19 @@ $el: '._user-bar';
     margin-bottom: 6px;
   }
 
-  #{$el}-image{
+  .user-bar-image {
     width: 100px;
     height: 100px;
     margin: 0 21px 21px 21px;
   }
 
-  #{$el}-exit{
-    a{
+  .user-bar-exit {
+    a {
       color: #fff;
       font-size: 14px;
     }
 
   }
-
+  border-radius: 15px;
 
 }

@@ -102,6 +102,11 @@
   &.in { @include opacity(.9); }
 }
 
+.modal-backdrop-transparent {
+  @extend .modal-backdrop;
+  &.in { @include opacity(.0); }
+}
+
 // Modal header
 // Top section of the modal w/ title and dismiss
 .modal-header {
