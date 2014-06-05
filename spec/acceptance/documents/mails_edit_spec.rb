@@ -37,7 +37,7 @@ feature "Users review mails", %q() do
       skip_welcome
       expect { click_button 'Подготовить' }.to_not change(Documents::OfficialMail, :count)
       expect(current_path).to_not eq(new_documents_official_mail_path)
-      expect(page).to have_content 'Выберите хотябы одного адресата'
+      expect(page).to have_content 'Выберите хотя бы одного адресата'
     end
 
   end

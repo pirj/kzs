@@ -44,6 +44,9 @@ class Documents::DocumentsController < ResourceController
 
     @documents = list_decorator.decorate documents, with: each_decorator
 
+    puts '#######'
+    puts current_user.inspect
+    puts '#######'
     @test = Document.joins('LEFT JOIN documents_users ON documents.id = documents_users.document_id').
                       joins('LEFT JOIN users ON users.id = documents_users.user_id').
                       joins('LEFT JOIN conformations ON users.id =  conformations.user_id').
@@ -126,8 +129,8 @@ class Documents::DocumentsController < ResourceController
     super
     .accessible_by(current_ability)
     .includes(:sender_organization, :recipient_organization)
-    .visible_for(current_organization.id)
     .order(avoid_ambiguous(sort_column) + ' ' + sort_direction)
+    # .visible_for(current_organization.id)
   end
 
   def default_metadata
