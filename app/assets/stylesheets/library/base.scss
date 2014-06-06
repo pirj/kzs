@@ -1,3 +1,4 @@
+@import 'compass';
 
 // Core variables and mixins
 @import 'javascripts';
@@ -70,6 +71,7 @@
 
 // Library page styles
 @import 'pages/*';
+@import 'sidebar';
 
 // Widgets classes
 @import 'widgets/*';

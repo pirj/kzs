@@ -39,3 +39,39 @@
         .text Задачи
         - if Tasks::Task.notifications_for(current_user).count > 0
           span.badge.js-sidebar-notification-tasks-module = Tasks::Task.notifications_for(current_user).count
+
+      = link_to drive_mock_path, :class => (controller_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
+        i
+        .text Библиотека
+
+      = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
+        i
+        .text Охрана
+
+      = link_to dispatcher_mock_path, :class => (controller_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
+        i
+        .text Диспетчер
+
+      = link_to storehouse_mock_path, :class => (controller_name == 'storehouse' ? 'menu-link storehouse active' : 'menu-link storehouse') do
+        i
+        .text Склад
+
+      = link_to maintenance_mock_path, :class => (controller_name == 'maintenance' ? 'menu-link maintenance active' : 'menu-link maintenance') do
+        i
+        .text ТО и ТР
+
+      = link_to maneuvers_mock_path, :class => (controller_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
+        i
+        .text Маневры
+
+      = link_to settings_mock_path, :class => (controller_name == 'settings' ? 'menu-link settings active' : 'menu-link settings') do
+        i
+        .text Настройки
+
+      = link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
+        i
+        .text Обучение
+
+      = link_to administration_mock_path, :class => (controller_name == 'administration' ? 'menu-link administration active' : 'menu-link administration') do
+        i
+        .text Администрирование
