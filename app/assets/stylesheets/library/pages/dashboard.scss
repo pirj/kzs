@@ -336,8 +336,12 @@
     position: absolute;
     bottom: 11px;
     left: 10px;
-    font-size: 18px;
+    font-size: 16px;
     @include widget-text();
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    right: 10px;
   }
   .icon-resize-full-alt, .icon-resize-full {
     display: none;

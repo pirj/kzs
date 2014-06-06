@@ -11,20 +11,20 @@ default_widgets= [
   {"col":1,"row":1,"size_x":1,"size_y":1,"name":"Документы","class":"widget-docs","href":"/documents"},
   {"col":2,"row":1,"size_x":1,"size_y":1,"name":"Пропуска","class":"widget-admission","href":"/permits"},
   {"col":3,"row":1,"size_x":1,"size_y":1,"name":"Организации и сотрудники","class":"widget-org","href":"/organizations"},
-  {"col":4,"row":1,"size_x":1,"size_y":1,"name":"Библиотека","class":"widget-library disable"},
-  {"col":5,"row":1,"size_x":1,"size_y":1,"name":"Охрана","class":"widget-security disable"},
+  {"col":4,"row":1,"size_x":1,"size_y":1,"name":"Библиотека","class":"widget-library ", 'href': '/drive'},
+  {"col":5,"row":1,"size_x":1,"size_y":1,"name":"Охрана","class":"widget-security", 'href': '/guard'},
   {"col":4,"row":3,"size_x":1,"size_y":1,"name":"Профиль","class":"widget-profile disable"},
   {"col":1,"row":2,"size_x":1,"size_y":1,"name":"Чат","class":" widget-chat disable"},
   {"col":5,"row":2,"size_x":2,"size_y":2,"name":"Погода","class":"widget-weather","meteo":""},
   {"col":1,"row":3,"size_x":1,"size_y":1,"name":"Задачи","class":"widget-profile","href":"/tasks"},
   {"col":2,"row":3,"size_x":1,"size_y":1,"name":"Объекты","class":"widget-profile disable"},
-  {"col":3,"row":3,"size_x":1,"size_y":1,"name":"Диспетчер","class":"widget-profile disable"},
-  {"col":2,"row":2,"size_x":1,"size_y":1,"name":"Склад","class":"widget-profile disable"},
-  {"col":3,"row":2,"size_x":1,"size_y":1,"name":"ТО и ТР","class":"widget-profile disable"},
-  {"col":4,"row":2,"size_x":1,"size_y":1,"name":"Маневры","class":"widget-profile disable"},
-  {"col":6,"row":1,"size_x":1,"size_y":1,"name":"Настройка","class":"widget-profile disable"},
-  {"col":1,"row":4,"size_x":1,"size_y":1,"name":"Обучение","class":"widget-profile disable"},
-  {"col":2,"row":4,"size_x":1,"size_y":1,"name":"Администрирование","class":"widget-profile disable"},
+  {"col":3,"row":3,"size_x":1,"size_y":1,"name":"Диспетчер","class":"widget-profile", 'href': '/dispatcher'},
+  {"col":2,"row":2,"size_x":1,"size_y":1,"name":"Склад","class":"widget-profile", 'href': '/storehouse'},
+  {"col":3,"row":2,"size_x":1,"size_y":1,"name":"ТО и ТР","class":"widget-profile", 'href': '/maintenance'},
+  {"col":4,"row":2,"size_x":1,"size_y":1,"name":"Маневры","class":"widget-profile ", 'href': '/maneuvers'},
+  {"col":6,"row":1,"size_x":1,"size_y":1,"name":"Настройка","class":"widget-profile", 'href': '/settings'},
+  {"col":1,"row":4,"size_x":1,"size_y":1,"name":"Обучение","class":"widget-profile", 'href': '/education'},
+  {"col":2,"row":4,"size_x":1,"size_y":1,"name":"Администрирование","class":"widget-profile", 'href':'/administration'},
 
 
   {"col":3,"row":4,"size_x":1,"size_y":1,"name":"Трафик через С-1","class":"widget-profile disable"},
@@ -37,7 +37,6 @@ template =
 
 window.widgets = {                  # This object contains references to widgets
 }
-
 
 
 sendRequest = (url, type, protect, data) ->
@@ -109,7 +108,7 @@ class Dashboard
 
     $.when(sendRequest(url.positions, 'GET', true)).done (data, textStatus) ->
 
-      if data.desktop_conf #is null
+      if data.desktop_conf is null
         a = default_widgets
       else
         a = data.desktop_conf
