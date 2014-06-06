@@ -31,6 +31,8 @@ set :scm, :none
 set :repository, "."
 set :deploy_via, :copy
 set :local_repository, "."
+
+# свойство включет компилинг ассетов только если они были изменены между деплоями
 set :precompile_only_if_changed, true
 
 
