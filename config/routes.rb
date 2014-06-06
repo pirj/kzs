@@ -19,6 +19,11 @@ Kzs::Application.routes.draw do
   get 'settings' => 'mock_modules#settings', as: :settings_mock
   get 'education' => 'mock_modules#education', as: :education_mock
   get 'administration' => 'mock_modules#administration', as: :administration_mock
+  get 'im' => 'mock_modules#im', as: :im_mock
+  get 'objects' => 'mock_modules#objects', as: :objects_mock
+  get 'profile' => 'mock_modules#profile', as: :profile_mock
+  get 'important_traffic' => 'mock_modules#important_traffic', as: :important_traffic_mock
+  get 'news' => 'mock_modules#news', as: :news_mock
 
   get 'library' => 'library#library'
 
