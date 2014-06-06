@@ -126,14 +126,23 @@ R = React.DOM
 
 
   render: ->
+    collection = []
     unless _.keys(@.state.data).length
       rows = R.tr({}, R.td({colSpan: @.props.column_names.length},'Данные загружаются...'))
     else
       try
-        collection = @.state.data['null']
-        rows = collection.map((obj) => @.render_task_with_subtasks(obj) )
+        # проверка на наличие рутовых и подзадач
+        if @.state.data.hasOwnProperty('null')
+          collection = @.state.data['null']
+        else
+         collection = _.flatten(_.values(@.state.data))
+
+        rows = collection.map((obj) =>
+          @.render_task_with_subtasks(obj)
+        )
+
       catch
-        rows = R.tr({}, R.td({colSpan: @.props.column_names.length}, 'Ошибка в пришедших. Невозможно составить список задач...'))
+        rows = R.tr({}, R.td({colSpan: @.props.column_names.length}, 'Ошибка в пришедших данных. Невозможно составить список задач...'))
 
     R.tbody({ref: 'task_rows'}, rows)
 
