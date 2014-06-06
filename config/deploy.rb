@@ -42,7 +42,7 @@ task :mercury do
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
   # set :branch, "dev"
-  set :branch, "release/0.2"
+  set :branch, "releases/0.2"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
