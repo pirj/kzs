@@ -37,7 +37,7 @@ ru:
 
       documents/report:
         body: текст акта
-        order: предписание
+        order: Предписание
       documents/order:
         started_at: Дата начала исполнения
         deadline: Дата исполнения

@@ -13,14 +13,14 @@
 
     = f.input :title
     .form-group
-      label.string.required.control-label.col-sm-2 Дата начала:
+      = f.label :started_at, t('activerecord.attributes.tasks/task.started_at'), class: 'string required control-label col-sm-2'
       .col-sm-2
         .input-group
           .input-group-icon
             span.fa.fa-calendar
           = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
 
-      label.string.required.control-label.col-sm-2 Дата окончания:
+      = f.label :finished_at, t('activerecord.attributes.tasks/task.finished_at'), class: 'string required control-label col-sm-2'
       .col-sm-2
         .input-group
           .input-group-icon

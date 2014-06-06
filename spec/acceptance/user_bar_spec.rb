@@ -2,7 +2,7 @@ require 'acceptance/acceptance_helper'
 
 feature "User views user bar", %q() do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user_with_organization) }
   let(:path) { root_path }
 
   describe 'user-bar button is available', js: true do
