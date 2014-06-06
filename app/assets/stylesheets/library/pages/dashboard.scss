@@ -387,27 +387,19 @@
 
 
   &.widget-security {
-    background: image-url("library/sec.png") no-repeat #52ade6;
+    background: image-url("dashboard/03_security.png") no-repeat #52ade6;
   }
 
   &.widget-docs {
-    background: image-url("library/mail.png") no-repeat #01b9c5;
+    background: image-url("dashboard/01_docs.png") no-repeat #01b9c5;
   }
 
   &.widget-admission {
-    background: image-url("library/propusk_main.png") no-repeat #375eab;
-  }
-
-  &.widget-chat {
-    background: image-url("library/chat.png") no-repeat #56b5ef;
-  }
-
-  &.widget-library {
-    background: image-url("library/library.png") no-repeat #1bbc9b;
+    background: image-url("dashboard/02_propusk.png") no-repeat #375eab;
   }
 
   &.widget-weather {
-    background: image-url("library/cloud.png") no-repeat #1bbc9b;
+    background: image-url("dashboard/07_meteo.png") no-repeat #1bbc9b;
     .status{
       color: white;
       margin-right: 55px;
@@ -438,16 +430,60 @@
   }
 
   &.widget-org {
-    background: image-url("library/people.png") no-repeat #e53d4c;
+    background: image-url("dashboard/04_organisations.png") no-repeat #e53d4c;
   }
 
-  &.widget-odject {
-    background: image-url("library/place.png") no-repeat #00bfca;
-  }
+
 
   &.widget-profile {
     background: #00bfca;
   }
+  &.widget-tasks {
+    background: image-url("dashboard/09_tasks.png") no-repeat #2b6cca;
+  }
+
+  &.widget-library{
+    background: image-url("dashboard/05_AZ.png") no-repeat #00bfca;
+  }
+
+  &.widget-profile{
+    background: image-url("dashboard/19_profile.png") no-repeat #1bbc9b;
+  }
+  &.widget-chat{
+    background: image-url("dashboard/08_chat.png") no-repeat #1bbc9b;
+  }
+  &.widget-obj{
+    background: image-url("dashboard/06_objects.png") no-repeat #1bbc9b;
+  }
+  &.widget-disp{
+    background: image-url("dashboard/11_dispatcher.png") no-repeat #1bbc9b;
+  }
+  &.widget-store{
+    background: image-url("dashboard/12_warehouse.png") no-repeat #1bbc9b;
+  }
+  &.widget-main{
+    background: image-url("dashboard/10_TO.png") no-repeat #1bbc9b;
+  }
+  &.widget-maneuv{
+    background: image-url("dashboard/13_manevr.png") no-repeat #1bbc9b;
+  }
+  &.widget-setting{
+    background: image-url("dashboard/15_settings.png") no-repeat #1bbc9b;
+  }
+  &.widget-educ{
+    background: image-url("dashboard/16_training.png") no-repeat #1bbc9b;
+  }
+  &.widget-admin{
+    background: image-url("dashboard/17_admin.png") no-repeat #1bbc9b;
+  }
+  &.widget-traffic{
+    background: image-url("dashboard/14_traffic.png") no-repeat #1bbc9b;
+  }
+  &.widget-news{
+    background: image-url("dashboard/18_news.png") no-repeat #1bbc9b;
+  }
+
+
   .notifi {
     background: #EE3D4F;
     width: 30px;
@@ -465,6 +501,9 @@
     letter-spacing: -0.5px;
   }
 
+  &.m-demo {
+    background-color: #b4dee3;
+  }
 
   &.disable{
     opacity: 0.7;

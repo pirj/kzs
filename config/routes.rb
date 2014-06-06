@@ -24,6 +24,7 @@ Kzs::Application.routes.draw do
   get 'profile' => 'mock_modules#profile', as: :profile_mock
   get 'important_traffic' => 'mock_modules#important_traffic', as: :important_traffic_mock
   get 'news' => 'mock_modules#news', as: :news_mock
+  get 'meteo' => 'mock_modules#meteo', as: :meteo_mock
 
   get 'library' => 'library#library'
 
