@@ -410,6 +410,9 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.1.1)
+    turbo-sprockets-rails3 (0.3.11)
+      railties (> 3.2.8, < 4.0.0)
+      sprockets (>= 2.2.0)
     tzinfo (0.3.39)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
@@ -505,6 +508,7 @@ DEPENDENCIES
   test_after_commit
   therubyracer
   thin
+  turbo-sprockets-rails3
   uglifier (>= 1.0.3)
   unread (~> 0.3.1)
   validates_timeliness
