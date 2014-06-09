@@ -14,14 +14,20 @@ module Library
       content_tag :h2, title, id: item_uniq_id
     end
 
-    private
+    def library_example(&block)
+      content_tag :div, class: 'lib-example' do
+        yield
+      end
+    end
+
+
 
     # генерирует имя,состоящее из названия папки и имени паршиала
     # к примеру паршиал находится по адресу library/headers/index
     # в итоге получаем headers_index
     def item_uniq_id
       current_path = controller.view_context.view_renderer.instance_variable_get('@_partial_renderer').instance_values['path'].inspect
-      current_path.gsub!('library/', '').gsub!('/', '_')
+      current_path.gsub!('library/', '').gsub!('/', '_').gsub!('"', '')
     end
 
   end
