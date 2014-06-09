@@ -3,4 +3,12 @@
     h1 Диспетчер
 
 
-= mock_presentation_img '8_dispatcher.gif'
+/= mock_presentation_img '8_dispatcher.gif'
+
+- img_urls = [ \
+  image_path('mock_modules/8_dispatcher/1.png'), \
+  image_path('mock_modules/8_dispatcher/2.png'), \
+  image_path('mock_modules/8_dispatcher/3.png'), \
+  image_path('mock_modules/8_dispatcher/4.png'), \
+]
+= react_component('MockModuleSlides', {img_urls: img_urls})

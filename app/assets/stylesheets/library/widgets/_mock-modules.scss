@@ -6,8 +6,6 @@
   margin-left: -90px;
   margin-top: -90px;
 
-  // по умолчанию скрываем изображения
-  display: none;
-
+  &.m-hidden{ display: none; }
   &.m-visible{ display: block; }
 }

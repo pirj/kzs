@@ -37,7 +37,11 @@ R = React.DOM
     # рисуем одно изображение
     render_img = (path, num) =>
       className = ['_mock-module-img']
-      className.push('m-visible') if num == @.state.num
+      if num == @.state.num
+        className.push('m-visible')
+      else
+        className.push('m-hidden')
+
       R.img({src: path, className: className.join(' '), onClick: @.handleClick})
 
     R.div({className: 'row'},

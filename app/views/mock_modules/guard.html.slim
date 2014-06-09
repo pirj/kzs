@@ -2,4 +2,12 @@
 /  = header_title do
 /    h1 Охрана
 
-= mock_presentation_img '6_guard.gif'
+/= mock_presentation_img '6_guard.gif'
+- img_urls = [ \
+  image_path('mock_modules/6_guard/1.png'), \
+  image_path('mock_modules/6_guard/2.png'), \
+  image_path('mock_modules/6_guard/3.png'), \
+  image_path('mock_modules/6_guard/4.png'), \
+  image_path('mock_modules/6_guard/5.png'), \
+]
+= react_component('MockModuleSlides', {img_urls: img_urls})

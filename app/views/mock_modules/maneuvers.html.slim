@@ -1,2 +1,13 @@
-= mock_presentation_img '11_manevr.gif'
-
+/= mock_presentation_img '11_manevr.gif'
+- img_urls = [ \
+  image_path('mock_modules/11_manevr/1.png'), \
+  image_path('mock_modules/11_manevr/2.png'), \
+  image_path('mock_modules/11_manevr/3.png'), \
+  image_path('mock_modules/11_manevr/4.png'), \
+  image_path('mock_modules/11_manevr/5.png'), \
+  image_path('mock_modules/11_manevr/6.png'), \
+  image_path('mock_modules/11_manevr/7.png'), \
+  image_path('mock_modules/11_manevr/8.png'), \
+  image_path('mock_modules/11_manevr/9.png'), \
+]
+= react_component('MockModuleSlides', {img_urls: img_urls})
