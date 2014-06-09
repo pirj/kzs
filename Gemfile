@@ -98,7 +98,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'font-awesome-rails'
-  # gem 'turbo-sprockets-rails3'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :development, :test do
@@ -138,3 +138,4 @@ gem 'therubyracer'
 gem 'i18n-js'
 gem 'select2-rails'
 gem 'momentjs-rails'
+# gem 'yui-compressor'

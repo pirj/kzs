@@ -75,6 +75,16 @@ namespace :deploy do
   end
 end
 
+
+# invoke custom rake task
+namespace :rake do
+  desc "Invoke rake task"
+  task :invoke do
+    run "cd #{latest_release}"
+    run "bundle exec rake #{ENV['task']} RAILS_ENV=#{rails_env}"
+  end
+end
+
 namespace(:uwsgi) do
   task :stop do
     run "service uwsgi stop"
