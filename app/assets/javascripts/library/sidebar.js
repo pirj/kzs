@@ -53,4 +53,8 @@ $(document).ready(function () {
             document.location.href = $('.sidebar-header ')[0].getAttribute('href');
         }
     });
+    $('.js-v-scroll').scrollingCarousel( {
+        scrollerAlignment : 'vertical',
+        autoScroll: false
+    });
 });

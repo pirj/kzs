@@ -11,90 +11,93 @@
           span
           span
         .text Виджеты
-      .menu-dir
-        div class=(controller_name == 'documents' ? "menu-link documents active" : "menu-link documents")
-          = link_to documents_path, :class => (controller_name == 'documents' ? 'active sidebar-header ' : 'sidebar-header ') do
-            i
-            .text Документооборот
-            b
-            = documents_important.badge
-        .child-dir
-          = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
-            i
-            .text= humanize_documents_menu_item_name(:all)
-            -%w(draft prepared approved trashed).each do |state|
-              = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
-            -%w(mails orders reports unread).each do |doctype|
-              = link_to documents_path(with_type: doctype), class: 'menu-link' do
-                = humanize_documents_menu_item_name(doctype)
-                = documents_important.badge(doctype)
-
-      = link_to tasks_path, :class => (controller_name == 'tasks' ? 'menu-link tasks active' : 'menu-link tasks') do
-        i
-        .text Задачи
-        - if Tasks::Task.notifications_for(current_user).count > 0
-          span.badge.js-sidebar-notification-tasks-module = Tasks::Task.notifications_for(current_user).count
-
-      = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
-        i
-        .text Организации
-
-      = link_to drive_mock_path, :class => (controller_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
-        i
-        .text Библиотека
-
-      = link_to objects_mock_path, :class => (controller_name == 'objects' ? 'menu-link objects active' : 'menu-link objects') do
-        i
-        .text Обьекты
-
-      = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
-        i
-        .text Охрана
-
-      = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
-        i
-        .text Пропуска
-
-      = link_to dispatcher_mock_path, :class => (controller_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
-        i
-        .text Диспетчер
-
-      = link_to storehouse_mock_path, :class => (controller_name == 'storehouse' ? 'menu-link storehouse active' : 'menu-link storehouse') do
-        i
-        .text Склад
-
-      /= link_to maintenance_mock_path, :class => (controller_name == 'maintenance' ? 'menu-link maintenance active' : 'menu-link maintenance') do
-      /  i
-      /  .text ТО и ТР
-
-      = link_to maneuvers_mock_path, :class => (controller_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
-        i
-        .text Маневры
-
-      = link_to important_traffic_mock_path, :class => (controller_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
-        i
-        .text Трафик
-
-      = link_to meteo_mock_path, :class => (controller_name == 'meteo' ? 'menu-link meteo active' : 'menu-link meteo') do
-        i
-        .text Метео
-
-      = link_to im_mock_path, :class => (controller_name == 'im' ? 'menu-link im active' : 'menu-link im') do
-        i
-        .text Чат
-
-      = link_to settings_mock_path, :class => (controller_name == 'settings' ? 'menu-link settings active' : 'menu-link settings') do
-        i
-        .text Настройка
-
-      = link_to news_mock_path, :class => (controller_name == 'news' ? 'menu-link news active' : 'menu-link news') do
-        i
-        .text Новости
-
-      = link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
-        i
-        .text Обучение
-
-      = link_to administration_mock_path, :class => (controller_name == 'administration' ? 'menu-link administration active' : 'menu-link administration') do
-        i
-        .text Администрирование
+      .js-v-scroll.vigets-list
+        ul
+          li
+            .menu-dir
+              div class=(controller_name == 'documents' ? "menu-link documents active" : "menu-link documents")
+                = link_to documents_path, :class => (controller_name == 'documents' ? 'active sidebar-header ' : 'sidebar-header ') do
+                  i
+                  .text Документооборот
+                  b
+                  = documents_important.badge
+              .child-dir
+                = link_to documents_path, :class => (controller_name == 'documents' ? 'menu-link active' : 'menu-link ') do
+                  i
+                  .text= humanize_documents_menu_item_name(:all)
+                  -%w(draft prepared approved trashed).each do |state|
+                    = link_to humanize_documents_menu_item_name(state), documents_path(with_state: state), class: 'menu-link'
+                  -%w(mails orders reports unread).each do |doctype|
+                    = link_to documents_path(with_type: doctype), class: 'menu-link' do
+                      = humanize_documents_menu_item_name(doctype)
+                      = documents_important.badge(doctype)
+          li
+            = link_to tasks_path, :class => (controller_name == 'tasks' ? 'menu-link tasks active' : 'menu-link tasks') do
+              i
+              .text Задачи
+              - if Tasks::Task.notifications_for(current_user).count > 0
+                span.badge.js-sidebar-notification-tasks-module = Tasks::Task.notifications_for(current_user).count
+          li
+            = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
+              i
+              .text Организации
+          li
+            = link_to drive_mock_path, :class => (controller_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
+              i
+              .text Библиотека
+          li
+            = link_to objects_mock_path, :class => (controller_name == 'objects' ? 'menu-link objects active' : 'menu-link objects') do
+              i
+              .text Обьекты
+          li
+            = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
+              i
+              .text Охрана
+          li
+            = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
+              i
+              .text Пропуска
+          li
+            = link_to dispatcher_mock_path, :class => (controller_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
+              i
+              .text Диспетчер
+          li
+            = link_to storehouse_mock_path, :class => (controller_name == 'storehouse' ? 'menu-link storehouse active' : 'menu-link storehouse') do
+              i
+              .text Склад
+          /li
+            /= link_to maintenance_mock_path, :class => (controller_name == 'maintenance' ? 'menu-link maintenance active' : 'menu-link maintenance') do
+            /  i
+            /  .text ТО и ТР
+          li
+            = link_to maneuvers_mock_path, :class => (controller_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
+              i
+              .text Маневры
+          li
+            = link_to important_traffic_mock_path, :class => (controller_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
+              i
+              .text Трафик
+          li
+            = link_to meteo_mock_path, :class => (controller_name == 'meteo' ? 'menu-link meteo active' : 'menu-link meteo') do
+              i
+              .text Метео
+          li
+            = link_to im_mock_path, :class => (controller_name == 'im' ? 'menu-link im active' : 'menu-link im') do
+              i
+              .text Чат
+          li
+            = link_to settings_mock_path, :class => (controller_name == 'settings' ? 'menu-link settings active' : 'menu-link settings') do
+              i
+              .text Настройка
+          li
+            = link_to news_mock_path, :class => (controller_name == 'news' ? 'menu-link news active' : 'menu-link news') do
+              i
+              .text Новости
+          li
+            = link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
+              i
+              .text Обучение
+          li
+            = link_to administration_mock_path, :class => (controller_name == 'administration' ? 'menu-link administration active' : 'menu-link administration') do
+              i
+              .text Администрирование
