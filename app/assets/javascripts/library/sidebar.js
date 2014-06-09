@@ -53,8 +53,19 @@ $(document).ready(function () {
             document.location.href = $('.sidebar-header ')[0].getAttribute('href');
         }
     });
+
+
+
     $('.js-v-scroll').scrollingCarousel( {
         scrollerAlignment : 'vertical',
         autoScroll: false
     });
+
+    var sidebarScroll = $('.js-v-scroll').scrollingCarousel();
+
+    $('.js-v-scroll ul li ~ a').mouseover(function()  {
+        console.log(322);
+        sidebarScroll.Pause();
+    });
+
 });
