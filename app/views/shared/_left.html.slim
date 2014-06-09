@@ -74,7 +74,7 @@
               i
               .text Маневры
           li
-            = link_to important_traffic_mock_path, :class => (action_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
+            = link_to important_traffic_mock_path, :class => (action_name == 'important_traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
               i
               .text Трафик
           li
@@ -90,7 +90,7 @@
               i
               .text Настройка
           li
-            = link_to news_mock_path, :class => (controller_name == 'news' ? 'menu-link news active' : 'menu-link news') do
+            = link_to news_mock_path, :class => (action_name == 'news' ? 'menu-link news active' : 'menu-link news') do
               i
               .text Новости
           /li
