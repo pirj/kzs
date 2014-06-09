@@ -43,9 +43,9 @@
         i
         .text Библиотека
 
-      /= link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
-      /  i
-      /  .text Обьекты
+      = link_to objects_mock_path, :class => (controller_name == 'objects' ? 'menu-link objects active' : 'menu-link objects') do
+        i
+        .text Обьекты
 
       = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
         i
@@ -63,17 +63,33 @@
         i
         .text Склад
 
-      = link_to maintenance_mock_path, :class => (controller_name == 'maintenance' ? 'menu-link maintenance active' : 'menu-link maintenance') do
-        i
-        .text ТО и ТР
+      /= link_to maintenance_mock_path, :class => (controller_name == 'maintenance' ? 'menu-link maintenance active' : 'menu-link maintenance') do
+      /  i
+      /  .text ТО и ТР
 
       = link_to maneuvers_mock_path, :class => (controller_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
         i
         .text Маневры
 
+      = link_to important_traffic_mock_path, :class => (controller_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
+        i
+        .text Трафик
+
+      = link_to meteo_mock_path, :class => (controller_name == 'meteo' ? 'menu-link meteo active' : 'menu-link meteo') do
+        i
+        .text Метео
+
+      = link_to im_mock_path, :class => (controller_name == 'im' ? 'menu-link im active' : 'menu-link im') do
+        i
+        .text Чат
+
       = link_to settings_mock_path, :class => (controller_name == 'settings' ? 'menu-link settings active' : 'menu-link settings') do
         i
-        .text Настройки
+        .text Настройка
+
+      = link_to news_mock_path, :class => (controller_name == 'news' ? 'menu-link news active' : 'menu-link news') do
+        i
+        .text Новости
 
       = link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
         i

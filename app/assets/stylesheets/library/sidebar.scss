@@ -465,6 +465,130 @@ $icon-documents-active: -152px -230px;
           @include sidebar-icons-sprite(library_hover);
         }
       }
+      &.objects {
+        i {
+          @include sidebar-icons-sprite(objects);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(objects_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(objects_hover);
+        }
+      }
+      &.guard {
+        i {
+          @include sidebar-icons-sprite(guard);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(guard_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(guard_hover);
+        }
+      }
+      &.dispatcher {
+        i {
+          @include sidebar-icons-sprite(dispatcher);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(dispatcher_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(dispatcher_hover);
+        }
+      }
+      &.storehouse {
+        i {
+          @include sidebar-icons-sprite(storehouse);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(storehouse_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(storehouse_hover);
+        }
+      }
+      &.maneuvers {
+        i {
+          @include sidebar-icons-sprite(maneuvers);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(maneuvers_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(storehouse_hover);
+        }
+      }
+      &.traffic {
+        i {
+          @include sidebar-icons-sprite(traffic);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(traffic_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(traffic_hover);
+        }
+      }
+      &.meteo {
+        i {
+          @include sidebar-icons-sprite(meteo);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(meteo_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(meteo_hover);
+        }
+      }
+      &.im {
+        i {
+          @include sidebar-icons-sprite(chat);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(chat_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(chat_hover);
+        }
+      }
+      &.settings {
+        i {
+          @include sidebar-icons-sprite(settings);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(settings_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(settings_hover);
+        }
+      }
+
+      &.news {
+      }
+      &.education {
+        i {
+          @include sidebar-icons-sprite(education);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(education_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(education_hover);
+        }
+      }
+      &.administration {
+        i {
+          @include sidebar-icons-sprite(admin);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(admin_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(admin_hover);
+        }
+      }
     }
 
   }
