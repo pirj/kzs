@@ -1,6 +1,10 @@
 module Library
   module RenderSectionsHelper
 
+
+    # рендерим последовательность файлов секции
+    # вначале идет _index.html
+    # далее все остальные файлы
     def render_library_section(name)
       out = []
       paths_to_files = Dir.glob("app/views/library/#{name}/*")
@@ -21,7 +25,7 @@ module Library
       end
     end
 
-    # рендерим главный файл с описанием
+    # рендерим главный файл с описанием из директории
     # он называется _index
     def render_section_index(files_path)
       partial_path = files_path.select{|p| p.include?('index')}.first
@@ -30,6 +34,7 @@ module Library
       end
     end
 
+    # рендер паршиалов из директории
     def render_section_files(files_path)
       files_path = files_path.reject{|p| p.include?('index')}
       files_path.map do |partial_path|

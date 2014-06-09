@@ -6,14 +6,25 @@ p{
   font-size: 14px;
 }
 
+
+// номера строк у подсветки кода
+// передвигаем их в светло-серую область блока
+ol.linenums{
+  margin-left: -10px;
+}
+
 // styles for 'code' and 'code-name' and 'functios-name' in description to examples.
-.lib-prop{
+.lib-prop, .lib-highlighted{
   color: #D14;
   background: #f2f2f0;
   padding: 3px 7px;
   border-radius: 4px;
   border: none;
   font-family: monospace;
+}
+
+.lib-striked{
+  text-decoration: line-through;
 }
 
 // styles for sidebar-menu

@@ -1,10 +1,15 @@
 module Library
   module RenderItemsHelper
 
+
+    # подзаголовок
+    # применяется для подраздела раздела в библиотеке
     def library_item_caption title
       content_tag :h3, title, id: item_uniq_id
     end
 
+    # заголовок
+    # применяется для обозначения раздела с подразделами
     def library_section_caption title
       content_tag :h2, title, id: item_uniq_id
     end

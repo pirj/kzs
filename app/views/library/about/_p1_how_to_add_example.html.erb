@@ -1,0 +1,26 @@
+<%= library_item_caption 'Как добавить свой пример' %>
+<p>Библиотека обладается несколькими методами, которые облегчают написание примеров.</p>
+
+<table class="table">
+  <tr>
+    <th>Заголовок раздела, к примеру: <span class="lib-highlighted">Ссылки</span>
+    <th><%= highlight_code %q{ library_section_caption 'Ссылки'  } %></th>
+  </tr>
+  <tr>
+    <th>Подзаголовок раздела, к примеру: <span class="lib-highlighted">Неактивные ссылки</span>
+    <th><%= highlight_code %q{ library_item_caption 'Неактивные ссылки'  } %></th>
+  </tr>
+
+  <tr>
+    <th>Подсветка кода на js, ruby, slim и т.д.</th>
+    <th> <%= highlight_code %q{ highlight_code %q{ ruby_code }  } %></th>
+  </tr>
+  <tr>
+    <th>Поддерживается и многострочные вставки кода</th>
+    <th><%= highlight_code %Q{
+def foo
+  bar
+end } %>
+    </th>
+  </tr>
+</table>
