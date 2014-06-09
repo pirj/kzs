@@ -56,16 +56,16 @@ $(document).ready(function () {
 
 
 
-    $('.js-v-scroll').scrollingCarousel( {
+    var sidebarScroll = $('.js-v-scroll').scrollingCarousel( {
         scrollerAlignment : 'vertical',
-        autoScroll: false
+        autoScroll: false,
+        looped: true
     });
 
-    var sidebarScroll = $('.js-v-scroll').scrollingCarousel();
-
-    $('.js-v-scroll ul li ~ a').mouseover(function()  {
-        console.log(322);
+    $('.js-v-scroll ul li a').hover(function()  {
         sidebarScroll.Pause();
+    }, function(){
+        sidebarScroll.Play()
     });
 
 });
