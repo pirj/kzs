@@ -42,15 +42,15 @@
               i
               .text Организации
           li
-            = link_to drive_mock_path, :class => (controller_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
+            = link_to drive_mock_path, :class => (action_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
               i
               .text Библиотека
           li
-            = link_to objects_mock_path, :class => (controller_name == 'objects' ? 'menu-link objects active' : 'menu-link objects') do
+            = link_to objects_mock_path, :class => (action_name == 'objects' ? 'menu-link objects active' : 'menu-link objects') do
               i
               .text Обьекты
           li
-            = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
+            = link_to guard_mock_path, :class => (action_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
               i
               .text Охрана
           li
@@ -58,7 +58,7 @@
               i
               .text Пропуска
           li
-            = link_to dispatcher_mock_path, :class => (controller_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
+            = link_to dispatcher_mock_path, :class => (action_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
               i
               .text Диспетчер
           /li
@@ -70,15 +70,15 @@
             /  i
             /  .text ТО и ТР
           li
-            = link_to maneuvers_mock_path, :class => (controller_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
+            = link_to maneuvers_mock_path, :class => (action_name == 'maneuvers' ? 'menu-link maneuvers active' : 'menu-link maneuvers') do
               i
               .text Маневры
           li
-            = link_to important_traffic_mock_path, :class => (controller_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
+            = link_to important_traffic_mock_path, :class => (action_name == 'traffic' ? 'menu-link traffic active' : 'menu-link traffic') do
               i
               .text Трафик
           li
-            = link_to meteo_mock_path, :class => (controller_name == 'meteo' ? 'menu-link meteo active' : 'menu-link meteo') do
+            = link_to meteo_mock_path, :class => (action_name == 'meteo' ? 'menu-link meteo active' : 'menu-link meteo') do
               i
               .text Метео
           /li
