@@ -28,25 +28,32 @@
               = link_to documents_path(with_type: doctype), class: 'menu-link' do
                 = humanize_documents_menu_item_name(doctype)
                 = documents_important.badge(doctype)
-      = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
-        i
-        .text Пропуска
-      = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
-        i
-        .text Организации
+
       = link_to tasks_path, :class => (controller_name == 'tasks' ? 'menu-link tasks active' : 'menu-link tasks') do
         i
         .text Задачи
         - if Tasks::Task.notifications_for(current_user).count > 0
           span.badge.js-sidebar-notification-tasks-module = Tasks::Task.notifications_for(current_user).count
 
+      = link_to organizations_path, :class => (controller?("organizations") ? 'contragent active menu-link ' : 'menu-link contragent') do
+        i
+        .text Организации
+
       = link_to drive_mock_path, :class => (controller_name == 'drive' ? 'menu-link drive active' : 'menu-link drive') do
         i
         .text Библиотека
 
+      /= link_to education_mock_path, :class => (controller_name == 'education' ? 'menu-link education active' : 'menu-link education') do
+      /  i
+      /  .text Обьекты
+
       = link_to guard_mock_path, :class => (controller_name == 'guard' ? 'menu-link guard active' : 'menu-link guard') do
         i
         .text Охрана
+
+      = link_to permits_path, :class => (controller?("permits") ? 'menu-link permits active' : 'menu-link permits ') do
+        i
+        .text Пропуска
 
       = link_to dispatcher_mock_path, :class => (controller_name == 'dispatcher' ? 'menu-link dispatcher active' : 'menu-link dispatcher') do
         i
