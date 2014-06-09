@@ -447,6 +447,23 @@ $icon-documents-active: -152px -230px;
         i {
           @include sidebar-icons-sprite(library);
         }
+        &:hover i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+      }
+      &.drive {
+        i {
+          @include sidebar-icons-sprite(library);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(library_hover);
+        }
       }
     }
 
