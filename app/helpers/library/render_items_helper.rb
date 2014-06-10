@@ -5,13 +5,13 @@ module Library
     # подзаголовок
     # применяется для подраздела раздела в библиотеке
     def library_item_caption title
-      content_tag :h3, title, id: item_uniq_id
+      content_tag :h3, title, id: item_uniq_id, class: 'js-library-subheader'
     end
 
     # заголовок
     # применяется для обозначения раздела с подразделами
     def library_section_caption title
-      content_tag :h2, title, id: item_uniq_id
+      content_tag :h2, title, id: item_uniq_id, class: 'js-library-header'
     end
 
     def library_example(&block)

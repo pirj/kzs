@@ -5,12 +5,17 @@ module Library
     # рендерим последовательность файлов секции
     # вначале идет _index.html
     # далее все остальные файлы
+    # оборачиваем в колоночную верстку
     def render_library_section(name)
       out = []
       paths_to_files = Dir.glob("app/views/library/#{name}/*")
       out << render_section_index(paths_to_files)
       out << render_section_files(paths_to_files)
-      out.join.html_safe
+      content_tag(:div, class: 'row') do
+        content_tag(:div, class: 'col-sm-12') do
+          out.join.html_safe
+        end
+      end
     end
 
     protected
