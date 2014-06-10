@@ -11,7 +11,7 @@ module Library
       paths_to_files = Dir.glob("app/views/library/#{name}/*")
       out << render_section_index(paths_to_files)
       out << render_section_files(paths_to_files)
-      content_tag(:div, class: 'row') do
+      content_tag(:div, class: 'row js-library-row') do
         content_tag(:div, class: 'col-sm-12') do
           out.join.html_safe
         end

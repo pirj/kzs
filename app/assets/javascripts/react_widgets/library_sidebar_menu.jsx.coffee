@@ -7,6 +7,15 @@ menu_obj =
     title: header_text
     parent: parent_header_id
   ]
+
+
+  Рендер подразумевает следующую структуру документа
+  .js-library-row
+    ... (some elements)
+      .js-library-header TITLE
+      .js-library-subheader TITLE
+      ...
+        .js-library-subheader TITLE
 ###
 R = React.DOM
 
@@ -35,7 +44,7 @@ R = React.DOM
       obj =
         id: el.id
         title: el.textContent
-        parent_id: $(el).closest('.row').find('.js-library-header')[0].id
+        parent_id: $(el).closest('.js-library-row').find('.js-library-header')[0].id
       new_menu_obj.push obj
     )
 
