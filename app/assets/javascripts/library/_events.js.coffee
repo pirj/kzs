@@ -151,15 +151,29 @@ $ ->
   $('.js-popover').on('click', (e) ->
     e.preventDefault()
     target = this.dataset.target
+    $sourcePopover = $('.js-popover-content[data-target=' + target + ']')
 
-    $('.js-popover-content[data-target=' + target + ']').toggle()
     $(this).toggleClass('active')
     if $(this).hasClass('active')
-      $("<div class=\"modal-backdrop-transparent\"></div>").appendTo(".page")
-      $('.modal-backdrop-transparent').toggleClass('in')
+      $sourcePopover.clone(true).appendTo(document.body).addClass('cloned')
+      $('.cloned').show().find('form').css
+        maxWidth: "740px"
+      $sourcePopover.hide()
     else
-      $('.modal-backdrop-transparent').remove()
+      $('.cloned').remove()
+
+    activeBtnHeight = $(@).outerHeight()
+    activeBtnWidth = $(@).outerWidth()
+    activeBtnOffset = $(@).offset()
+    popoverWidth = $(".js-popover-content.cloned").outerWidth()
+    currentTop = activeBtnOffset.top
+    currentLeft = activeBtnOffset.left
+
+    $(".js-popover-content.cloned").css
+      top:  currentTop + activeBtnHeight + "px"
+      left: (currentLeft + activeBtnWidth/2) - popoverWidth/2  + "px"
   )
+
   $('.js-popover-close').on('click', (e) ->
     clearPopover()
   )
