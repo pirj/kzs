@@ -4,5 +4,35 @@
     h1 Новая задача
 
 
+
+= link_to 'react component', '#', class: 'js-react-popover'
+
+
+css:
+  #example{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    background: rgba(255,0,0,0.2);
+    overflow: visible;
+  }
+
+  .js-react-popup-component{
+    width: 300px;
+    height: 200px;
+    background: rgba(255,0,0,0.3);
+    left: 500px;
+    top: 300px;
+    position:absolute;
+  }
+
+javascript:
+  $(document).ready(function(){
+    $('body').append('<div id="example"></div>')
+    React.renderComponent(ReactPopupComponent({ parent: '.js-react-popover' }), document.getElementById('example'))
+  });
+
 = render 'form'
 
