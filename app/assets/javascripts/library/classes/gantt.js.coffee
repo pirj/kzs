@@ -117,7 +117,30 @@ class Gantt
     gantt.attachEvent "onLinkDblClick", (id, e) ->
       e.preventDefault()
 
-      ############################################ далее методы класса ####################################################
+
+                                                      ########################## реализация drag n drop
+    dragObject = null   #переменная для записи перетаскиваемого объекта
+
+    scrollArea = document.getElementsByClassName('gantt_task')[0] #обьект, который мы "тянем"
+    vertcalArea = document.getElementsByClassName('gantt_data_area')[0]
+    scrollArea.onmousedown = (e) ->
+
+      dragObject  = this
+      dragObject.x = e.x
+      dragObject.y = e.y
+
+    scrollArea.onmousemove = (e) ->
+      if dragObject
+        dragObject.scrollLeft += ((dragObject.x - e.x)*2)
+        vertcalArea.scrollTop += ((dragObject.y - e.y)*2)
+        dragObject.x = e.x
+        dragObject.y = e.y
+
+    document.onmouseup = ->
+      # опустить переносимый объект
+      dragObject = null
+      return
+  ############################################ далее методы класса ####################################################
 
   initCustomFields: () =>              #!!!
     #колонки слева
