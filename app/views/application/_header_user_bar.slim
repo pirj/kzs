@@ -5,7 +5,7 @@ ul.nav.navbar-nav.navbar-right
       = content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
       span.caret
 
-    .js-popover-content.popover.bottom.user-bar data-target='user-bar'
+    .js-popover-content.popover.user-bar data-target='user-bar'
 
       .h4.popover-title.user-bar.text-left = current_user.first_name_with_last_name
       .user-bar-status
