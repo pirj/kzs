@@ -3,9 +3,6 @@
 R = React.DOM
 
 
-#PopupMixin =
-  
-
 @ReactPopupComponent = React.createClass
 
   getDefaultProps: ->
@@ -16,7 +13,8 @@ R = React.DOM
     opened: false
 
   componentDidMount: ->
-    $(@.props.parent).on('click', =>
+    console.log $(@.props.parent).children()
+    $(@.props.parent).children().on('click', =>
       @.handleParentClick()
     )
 
@@ -35,6 +33,7 @@ R = React.DOM
 
 
   handleParentClick: ->
+    console.log 'click'
     @.setState opened: !@.state.opened
 
 
@@ -44,4 +43,9 @@ R = React.DOM
       'hidden': @.state.opened==false
       'js-react-popup-component': true
     )
-    R.div({className: className, ref: 'popup'}, 'react popup component rendered')
+    console.log @.state.opened
+    R.div({
+      className: className
+      ref: 'popup',
+      dangerouslySetInnerHTML: {__html: @.props.body}
+    })

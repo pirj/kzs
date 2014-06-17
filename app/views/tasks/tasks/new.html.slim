@@ -4,12 +4,17 @@
     h1 Новая задача
 
 
+= element_with_popup do
+  = link_to 'react component', '#', class: 'js-react-popover'
+/- html = text_field_tag :test_component, 'hhh', class: 'vit-class'
+/= react_popup_component('LikeButton', {html: html} )
 
-= link_to 'react component', '#', class: 'js-react-popover'
+
+
 
 
 css:
-  #example{
+  .js-popup-layout{
     position: absolute;
     left: 0;
     top: 0;
@@ -29,10 +34,10 @@ css:
   }
 
 javascript:
-  $(document).ready(function(){
-    $('body').append('<div id="example"></div>')
-    React.renderComponent(ReactPopupComponent({ parent: '.js-react-popover' }), document.getElementById('example'))
-  });
+//  $(document).ready(function(){
+//    $('body').append('<div id="example"></div>')
+//    React.renderComponent(ReactPopupComponent({ parent: '.js-react-popover' }), document.getElementById('example'))
+//  });
 
 = render 'form'
 

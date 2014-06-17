@@ -24,7 +24,8 @@ var LikeButton = React.createClass({
      var text = this.state.liked ? 'like' : 'unlike';
      return (
      <p onClick={this.handleClick}>
-         You { text } this.Click to toggle.
+         <span>You { text } this.Click to toggle.</span>
+         <span dangerouslySetInnerHTML={{__html: this.props.html}}></span>
      </p>
      );
    }
