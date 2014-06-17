@@ -142,8 +142,6 @@ $ ->
     popover.css('height': popover.height(), width: popover.width() )
   )
 
-  $('.js-popover').popover()
-  $('.js-popover').popover()
   # popover-over
 #  clearPopover = () ->
 #    $('.js-popover-content').hide()
