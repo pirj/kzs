@@ -1,19 +1,19 @@
 //
 // Popovers
 // --------------------------------------------------
-.js-popover-content{
-    position: absolute;
-    top: 100%;
-    display: none;
-    background: rgba(0,0,0,0.8); //default background-color
-    width: auto;
-    z-index: 999;
-    border-radius: 15px;
-    margin-top: 15px;
-}
+//.js-popover-content{
+//  position: absolute;
+//
+//  display: none;
+//  background: rgba(0,0,0,0.8); //default background-color
+//  width: auto;
+//  z-index: 999;
+//  border-radius: 15px;
+//  margin-top: 15px;
+//}
 .popover {
   position: absolute;
-  top: 0;
+  top: 100%;
   left: 0;
   z-index: $zindex-popover;
   display: none;
@@ -26,52 +26,99 @@
 
   // Overrides for proper insertion
   white-space: normal;
+  // Overrides for proper insertion
 
   // Offset the popover to account for the popover arrow
-  &.top     { margin-top: -10px; }
-  &.right   { margin-left: 10px; }
-  &.bottom  { margin-top: 10%; }
-  &.left    { margin-left: -10px; }
+  &.top {
+    margin-top: -10px;
+  }
+  &.right {
+    margin-left: 10px;
+  }
+  &.bottom {
+    margin-top: 10px;
+  }
+  &.left {
+    margin-left: -10px;
+  }
 
   form {
     padding: 0;
   }
-  .btn-group {
-    border-top: 1px solid $color-gray;
-    width: 100%;
+
+  .popover-title {
+    margin: 0; // reset heading margin
+    padding: 8px 36px;
+    font-size: $font-size-base;
+    font-weight: normal;
+    line-height: 18px;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    //  display: none;
+    &.h3 {
+      font-size: $font-size-h3;
+      padding: 14px 36px;
+    }
+    &.h4 {
+      font-size: $font-size-h4;
+      padding: 18px 21px 8px;
+      margin: 0;
+    }
+  }
+  .popover-content {
+    padding: 8px 21px;
+  }
+  .popover-form-content {
+    padding: 14px 36px;
+    input, textarea, label {
+      background: none;
+      color: #fff;
+    }
+  }
+
+
+  .btn-group-vertical {
     .btn {
-      width: 50%;
-      text-decoration: none;
-      &:first-child {
-        border-right: 1px solid $color-gray;
+      border-top: #666666 solid 1px;
+      text-align: left;
+      border-radius: 0 !important;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      transition: background 0.5s ease;
+      &:hover {
+        background: rgba(255, 255, 255, 0.91);
+        color: #3C3A3A;
+      }
+      i {
+        font-size: 22px;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .popover-footer {
+    border-top: 1px solid $color-gray;
+    margin:0;
+    &.nav {
+      li {
+        padding: 0;
+        border-left: 1px solid $color-gray;
+        &:first-child {
+          border-left: none;
+        }
+      }
+      .btn {
+        background: none;
+        width: 100%;
+        @include links-active-states{
+          background: rgba(255,255,255, 0.1);
+        }
       }
     }
   }
 }
-
-.popover-title {
-  margin: 0; // reset heading margin
-  padding: 8px 36px;
-  font-size: $font-size-base;
-  font-weight: normal;
-  line-height: 18px;
-  border-radius: 5px 5px 0 0;
-  color:#fff;
-//  display: none;
-  &.h3 {
-    font-size: $font-size-h3;
-    padding: 14px 36px;
-  }
-}
-
-.popover-form-content {
-  padding: 14px 36px;
-  input, textarea, label {
-    background: none;
-    color:#fff;
-  }
-}
-
 // Arrows
 //
 // .arrow is outer, .arrow:after is inner
@@ -162,5 +209,4 @@
       bottom: -$popover-arrow-width;
     }
   }
-
 }
