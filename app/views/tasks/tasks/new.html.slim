@@ -4,10 +4,17 @@
     h1 Новая задача
 
 
-= element_with_popup do
-  = link_to 'react component', '#', class: 'js-react-popover'
+/= element_with_popup do
+/- name = "js-ui-with-popup-id-#{Time.now.to_f.to_s.gsub('.', '')}"
+/= content_tag :span, class: name do
+/  = link_to 'react component', '#', class: 'js-react-popover'
+/= content_for :popup_layout do
+/  = react_component('ReactPopupComponent', { parent: ".#{name}" })
 /- html = text_field_tag :test_component, 'hhh', class: 'vit-class'
 /= react_popup_component('LikeButton', {html: html} )
+
+= element_with_popup do
+  = link_to 'react component', '#', class: 'js-react-popover'
 
 
 
@@ -33,11 +40,11 @@ css:
     position:absolute;
   }
 
-javascript:
-//  $(document).ready(function(){
-//    $('body').append('<div id="example"></div>')
-//    React.renderComponent(ReactPopupComponent({ parent: '.js-react-popover' }), document.getElementById('example'))
-//  });
+/javascript:
+  $(document).ready(function(){
+    $('body').append('<div id="example"></div>')
+    React.renderComponent(ReactPopupComponent({ parent: '.js-react-popover' }), document.getElementById('example'))
+  });
 
 = render 'form'
 

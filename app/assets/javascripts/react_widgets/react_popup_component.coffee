@@ -13,12 +13,11 @@ R = React.DOM
     opened: false
 
   componentDidMount: ->
-    console.log $(@.props.parent).children()
     $(@.props.parent).children().on('click', =>
       @.handleParentClick()
     )
 
-    @.handleOutsideClick( => @.setState opened: false)
+#    @.handleOutsideClick( => @.setState opened: false)
 
 
   handleOutsideClick: (callback)->

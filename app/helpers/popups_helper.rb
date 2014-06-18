@@ -5,7 +5,9 @@ module PopupsHelper
     content_tag(:span, class: "_no-styles #{_nested_name}") do
       yield
     end +
-    react_popup_component('ReactPopupComponent', {parent: ".#{_nested_name}", body: 'adas'})
+    content_for(:popup_layout) do
+      react_component('ReactPopupComponent', {parent: ".#{_nested_name}", body: 'adas'})
+    end
   end
 
   private
