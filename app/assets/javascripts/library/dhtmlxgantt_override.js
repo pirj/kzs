@@ -59,6 +59,14 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     div.style.cssText = [
         "left:" + offset_left + "px"
     ].join(";");
+
+    // тут инициализируем react component и крепим его на popup-layout
+    // json_of_all_flags — json всех пунктов в данном флажке
+    //    elem = $('.js-popup-layout').append('<div></div>')
+    //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
+
+    // и флажку нужно выставить класс .uniq_name
+    //
     return div;
 }
 /* @tag */
