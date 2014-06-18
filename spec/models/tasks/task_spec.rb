@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe Tasks::Task do
-  subject { Tasks::Task.new() }
+  subject!(:task) { FactoryGirl.create(:tasks_task) }
   it{should respond_to :subtasks}
   it{should respond_to :parent_id}
   it{should respond_to :parent}
 
-  it_behaves_like 'notifiable object', FactoryGirl.create(:tasks_task)
+  it_behaves_like 'notifiable object'
 
   context('instantiate subtask'){
     it{ expect { Tasks::Task.new(parent_id: 1) }.not_to raise_error }
