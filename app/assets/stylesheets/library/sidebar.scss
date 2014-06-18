@@ -517,7 +517,7 @@ $icon-documents-active: -152px -230px;
           @include sidebar-icons-sprite(maneuvers_hover);
         }
         &.active i {
-          @include sidebar-icons-sprite(storehouse_hover);
+          @include sidebar-icons-sprite(maneuvers_hover);
         }
       }
       &.traffic {
