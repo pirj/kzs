@@ -143,6 +143,10 @@ $ ->
   )
 
   # popover-over
+#  $('.js-popover').css
+#    left: "800px",
+#    top: "20px",
+#    position: "absolute"
   clearPopover = () ->
     $('.js-popover-content').hide()
     $('.js-popover').removeClass('active')
@@ -177,13 +181,37 @@ $ ->
 
     offset = popoverClone.offset()
     vert = 0.5 * docHeight - currentTop
+    vertBalance = docHeight - currentTop
     vertPlacement = (if vert > 0 then "bottom" else  "top")
-    horiz = 0.5 * docWidth - currentLeft
-    horizPlacement = (if horiz > 0 then "right" else "left")
-    placement = (if Math.abs(horiz) > Math.abs(vert) then horizPlacement else vertPlacement)
 
+    horiz = 0.5 * docWidth - currentLeft
+    horizBalance = docWidth - currentLeft
+    horizPlacement = (if horiz > 0 then "right" else "left")
+
+    aslantPlacement = (
+      if currentLeft > horizBalance and currentTop > vertBalance
+        "top-left"
+      else if currentLeft > horizBalance and currentTop < vertBalance
+        "bottom-left"
+      else if currentLeft < horizBalance and currentTop > vertBalance
+        "top-right"
+      else
+        "bottom-right"
+    )
+
+
+
+    placement = (
+      if Math.abs(horiz) > Math.abs(vert)
+        horizPlacement
+      else if (currentLeft + popoverWidth) > docWidth
+          aslantPlacement
+      else
+        vertPlacement
+    )
+    #положение можно задать напрямую в placement = "right" например
     popoverClone.addClass(placement)
-    console.log vert
+
     if popoverClone.hasClass('bottom')
       popoverClone.css
         top:  currentTop + activeBtnHeight + "px"
@@ -204,7 +232,10 @@ $ ->
       popoverClone.css
         top:  currentTop - popoverHeight/2 + activeBtnHeight/2 + "px"
         left: currentLeft - popoverWidth - activeBtnHeight/2 + "px"
+
   )
+
+
 
   $('.js-popover-close').on('click', (e) ->
     clearPopover()
