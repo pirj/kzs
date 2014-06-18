@@ -1,5 +1,16 @@
 `/** @jsx React.DOM */`
 
+###
+Как работает?
+
+  Этот компонент связвается с parent по уникальному имени класса.
+  Связь происходит при инициализации,в то самое время навешиваются и все события и т.д.
+
+  При клике на parent переключаем state между состояниями «показывать» и «скрыть».
+
+  При клике вне попапа и parent скрываем окно
+###
+
 R = React.DOM
 
 
@@ -17,14 +28,14 @@ R = React.DOM
       @.handleParentClick()
     )
 
-#    @.handleOutsideClick( => @.setState opened: false)
+    @.handleOutsideClick( => @.setState opened: false)
 
 
   handleOutsideClick: (callback)->
     popup = @.refs.popup.getDOMNode()
     event = (e) =>
       el = $(e.target);
-      unless el.closest(popup).length || el.hasClass(@.props.parent.replace('.',''))
+      unless el.closest(popup).length || el.closest(@.props.parent).length
         callback()
         #off()
 
@@ -32,7 +43,6 @@ R = React.DOM
 
 
   handleParentClick: ->
-    console.log 'click'
     @.setState opened: !@.state.opened
 
 
@@ -42,7 +52,6 @@ R = React.DOM
       'hidden': @.state.opened==false
       'js-react-popup-component': true
     )
-    console.log @.state.opened
     R.div({
       className: className
       ref: 'popup',
