@@ -20,6 +20,10 @@ R = React.DOM
   getInitialState: ->
     opened: false
 
+  propTypes:
+    onPopupToggle: React.PropTypes.func
+
+  # обработка кликов снаружи всплывающего окна
   handleOutsideClick: (callback)->
     popup = @.refs.popup.getDOMNode()
     event = (e) =>
@@ -29,19 +33,38 @@ R = React.DOM
     document.body.addEventListener('click', event, false)
 
 
+  # наклеиваем взаимодействие с пользователем, после того, как компонент отрисовался
+  # в этот момент уже есть dom и к нему можно обращаться
   componentDidMount: ->
     $(document).on('click', @.props.parent, =>
       @.handleParentClick()
     )
 
-    @.handleOutsideClick(=> @.setState opened: false )
+    @.handleOutsideClick(=> @.PopupHide() )
 
   componenDidUnmount: ->
     document.body.removeEventListener('click')
 
 
+  # метод скрытия всплывающего окна
   handleParentClick: ->
     @.setState opened: !@.state.opened
+
+
+  # метод скрытия всплывающего окна
+  PopupHide: ->
+    @.setState opened: false
+
+
+  # переключаем состояние всплывающего окна
+  popupToggle: ->
+    @.props.onPopupToggle(@.state.opened)
+
+
+  # после перерисовки компонента отсылаем текущий статус всем компонентам,
+  # которые подписаны на это свойство
+  componentDidUpdate: ->
+    @.popupToggle()
 
 
   renderPopupHtml: (body) ->

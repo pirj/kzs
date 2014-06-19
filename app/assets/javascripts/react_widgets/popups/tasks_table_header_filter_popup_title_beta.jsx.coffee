@@ -13,20 +13,12 @@ R = React.DOM
     @.props.onPopupSubmit(
       $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
     )
-    @.setState opened: !@.state.opened
+    @.PopupHide()
 
   handleCancel: ->
-    @.setState opened: false
-
-
-  componentDidUpdate: ->
-    @.props.onPopupToggle(@.state.opened)
-
-
-
+    @.PopupHide()
 
   render: ->
-    console.log @.props.parent
     popup_body = [
       R.h5({className: 'popup-header'}, 'Фильтр по полю'),
       R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, class: 'form-horizontal'}, [
