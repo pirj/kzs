@@ -50,7 +50,20 @@ R = React.DOM
       filter_opts: @.props.filter_opts[@.props.name]
     }
 
-    React.renderComponent(TasksTableHeaderFilterPopupTitleBeta(filter_component_params), $el[0])
+    popupClassName = @.choosePopupRenderer()
+    if _.isFunction(popupClassName)
+      React.renderComponent(popupClassName(filter_component_params), $el[0])
+
+
+  choosePopupRenderer: ->
+    if @.props.name == 'title'
+      TasksTableHeaderFilterPopupTitleBeta
+    else if @.props.name == 'started_at'
+      TasksTableHeaderFilterPopupStartedAtBeta
+    else if @.props.name == 'executor'
+      TasksTableHeaderFilterPopupUsersBeta
+
+
 
   render: ->
     cx = React.addons.classSet

@@ -5,9 +5,6 @@ R = React.DOM
 
   mixins: [PopupMixin]
 
-#  getDefaultProps: ->
-#    opened: false
-
   handleSubmit: (e) ->
     e.preventDefault()
     @.props.onPopupSubmit(
