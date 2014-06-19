@@ -60,7 +60,7 @@ R = React.DOM
       TasksTableHeaderFilterPopupTitleBeta
     else if @.props.name == 'started_at'
       TasksTableHeaderFilterPopupStartedAtBeta
-    else if @.props.name == 'executor'
+    else if @.props.name == 'executor' || @.props.name == 'inspector'
       TasksTableHeaderFilterPopupUsersBeta
 
 
