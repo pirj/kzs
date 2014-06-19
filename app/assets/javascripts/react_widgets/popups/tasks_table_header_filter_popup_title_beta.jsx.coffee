@@ -20,13 +20,13 @@ R = React.DOM
 
 
   componentDidUpdate: ->
-    console.log 'popup state', @.state.opened
     @.props.onPopupToggle(@.state.opened)
 
 
 
 
   render: ->
+    console.log @.props.parent
     popup_body = [
       R.h5({className: 'popup-header'}, 'Фильтр по полю'),
       R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, class: 'form-horizontal'}, [

@@ -3,6 +3,8 @@ R = React.DOM
 
 @TasksTableHeaderFilter = React.createClass
 
+  popup_nested_name: ''
+
   getDefaultProps: ->
     name: ''
     data: []
@@ -23,7 +25,6 @@ R = React.DOM
 
 
   handlePopupToggle: (current_popup_state) ->
-    console.log 'income state', current_popup_state
     @.setState filter_popup_opened: current_popup_state
 
 
@@ -41,25 +42,30 @@ R = React.DOM
 #    $(document).on('tasks_table:filter_popup:change_display', (e) =>
 #      @.setState filter_popup_opened: false
 #    )
-    $el = $('.js-popup-layout').append('<div></div>')
+    $el = $('<div></div>').appendTo('.js-popup-layout')
+
+    @.popup_nested_name = "js-tasks-table-filter-popup-#{(new Date()).getTime()}"
+    popup_nested_name_class_name = ".#{@.popup_nested_name}"
+
     filter_component_params = {
-      parent: '.js-custom-popup',
+      parent: popup_nested_name_class_name,
       opened: @.state.filter_popup_opened,
       onPopupSubmit: @.onChangeFilterParams,
       onPopupToggle: @.handlePopupToggle,
       filter_opts: @.props.filter_opts[@.props.name]
     }
 
-    @.React.renderComponent(TasksTableHeaderFilterPopupTitleBeta(filter_component_params), $el[0])
+    React.renderComponent(TasksTableHeaderFilterPopupTitleBeta(filter_component_params), $el[0])
 
   render: ->
-    console.log 'render state', @.state.filter_popup_opened
     cx = React.addons.classSet
     icon_css = cx(
       'm-active': @.state.filter_popup_opened == true
-      'fa fa-filter js-custom-popup': true
+      'fa fa-filter': true
 
     )
+
+    icon_css += " #{@.popup_nested_name}"
 
 #    filter_component_params = { opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.handlePopupCancel, filter_opts: @.props.filter_opts[@.props.name] }
 

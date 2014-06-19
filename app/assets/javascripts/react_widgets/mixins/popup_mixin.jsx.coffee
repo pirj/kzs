@@ -13,19 +13,12 @@ R = React.DOM
 
 
 @PopupMixin =
+
   getDefaultProps: ->
     parent: ''
 
   getInitialState: ->
     opened: false
-
-  componentDidMount: ->
-    $(@.props.parent).children().on('click', =>
-      @.handleParentClick()
-    )
-
-    @.handleOutsideClick(=> @.setState opened: false )
-
 
   handleOutsideClick: (callback)->
     popup = @.refs.popup.getDOMNode()
@@ -33,10 +26,15 @@ R = React.DOM
       el = $(e.target);
       unless el.closest(popup).length || el.closest(@.props.parent).length
         callback()
-    #off()
-
     document.body.addEventListener('click', event, false)
 
+
+  componentDidMount: ->
+    $(document).on('click', @.props.parent, =>
+      @.handleParentClick()
+    )
+
+    @.handleOutsideClick(=> @.setState opened: false )
 
   componenDidUnmount: ->
     document.body.removeEventListener('click')
