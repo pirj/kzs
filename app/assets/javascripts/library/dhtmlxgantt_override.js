@@ -76,7 +76,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 //    console.log(reactContainer);
 
     React.renderComponent(
-        ReactPopupComponent({parent: '.'+uniq_flag_class_name, body: 'aassada dasdasdasda ads'}),
+        FlagPopup({parent: '.'+uniq_flag_class_name, body: 'aassada dasdasdasda ads'}),
         elem[0]
     );
     return div;
