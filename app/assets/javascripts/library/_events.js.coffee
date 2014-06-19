@@ -142,36 +142,38 @@ $ ->
     popover.css('height': popover.height(), width: popover.width() )
   )
 
-  # popover-over
-#  $('.js-popover').css
-#    left: "800px",
-#    top: "20px",
-#    position: "absolute"
+# POPOVER !!!
+  $('.js-popover').css
+    left: "810px",
+    top: "850px",
+    position: "absolute"
   clearPopover = () ->
     $('.js-popover-content').hide()
-    $('.js-popover').removeClass('active')
+    $('.js-popover').not($(this)).removeClass('active')
+    $('.cloned').remove()
     return
 
   $('.js-popover').on('click', (e) ->
+    clearPopover()
     e.preventDefault()
     target = this.dataset.target
     $sourcePopover = $('.js-popover-content[data-target=' + target + ']')
 
+
     $(this).toggleClass('active')
     if $(this).hasClass('active')
       $sourcePopover.clone(true).appendTo(document.body).addClass('cloned')
-      $('.cloned').show().find('form').css
-        maxWidth: "740px",
-        width: "740px"
+      $('.cloned').show().css
+        width: "550px"
       $sourcePopover.hide()
     else
       $('.cloned').remove()
-
 
     popoverClone = $(".js-popover-content.cloned")
     activeBtnHeight = $(@).outerHeight()
     activeBtnWidth = $(@).outerWidth()
     activeBtnOffset = $(@).offset()
+    popoverCloneOffset = popoverClone.offset()
     popoverHeight = popoverClone.outerHeight()
     popoverWidth = popoverClone.outerWidth()
     currentTop = activeBtnOffset.top
@@ -199,18 +201,23 @@ $ ->
         "bottom-right"
     )
 
-
-
     placement = (
-      if Math.abs(horiz) > Math.abs(vert)
-        horizPlacement
-      else if (currentLeft + popoverWidth) > docWidth
-          aslantPlacement
+      if docHeight - (popoverCloneOffset.top + popoverHeight) < 0 || docHeight - (vertBalance + popoverHeight) < 0 || docWidth - (popoverCloneOffset.left + popoverWidth) < 0 || docWidth - (horizBalance + popoverWidth) < 0
+        aslantPlacement
       else
-        vertPlacement
+        if Math.abs(horiz) > Math.abs(vert)
+          horizPlacement
+        else
+          vertPlacement
     )
     #положение можно задать напрямую в placement = "right" например
+    placement = "top-left"
     popoverClone.addClass(placement)
+
+    #arrow position formula
+    balancePopoverWidth = popoverWidth - activeBtnWidth
+    arrowPosRight = balancePopoverWidth + activeBtnWidth/2
+    arrowPosLeft = popoverWidth - balancePopoverWidth - activeBtnWidth/2
 
     if popoverClone.hasClass('bottom')
       popoverClone.css
@@ -228,14 +235,32 @@ $ ->
       popoverClone.css
         top:  currentTop - popoverHeight/2 + activeBtnHeight/2 + "px"
         left: currentLeft - popoverWidth - activeBtnHeight/2 + "px"
-    else if popoverClone.hasClass('bottom left')
+    else if popoverClone.hasClass('bottom-left')
       popoverClone.css
-        top:  currentTop - popoverHeight/2 + activeBtnHeight/2 + "px"
-        left: currentLeft - popoverWidth - activeBtnHeight/2 + "px"
+        top:  currentTop + activeBtnHeight + "px"
+        left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
+      popoverClone.find('.arrow').css
+        left: arrowPosRight + "px"
+    else if popoverClone.hasClass('bottom-right')
+      popoverClone.css
+        top:  currentTop + activeBtnHeight + "px"
+        left: currentLeft + "px"
+      popoverClone.find('.arrow').css
+        left: arrowPosLeft + "px"
+    else if popoverClone.hasClass('top-left')
+      popoverClone.css
+        top:  currentTop - activeBtnHeight/2 - popoverHeight + "px"
+        left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
+      popoverClone.find('.arrow').css
+        left: arrowPosRight + "px"
+    else if popoverClone.hasClass('top-right')
+      popoverClone.css
+        top:  currentTop - activeBtnHeight/2 - popoverHeight + "px"
+        left: currentLeft + "px"
+      popoverClone.find('.arrow').css
+        left: arrowPosLeft + "px"
 
   )
-
-
 
   $('.js-popover-close').on('click', (e) ->
     clearPopover()
