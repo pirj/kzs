@@ -128,7 +128,18 @@ ol.linenums{
     margin-left: 0
   }
 }
-
 .highlight > .lib-control-tabs{
-  margin-bottom: 0;
+   margin-bottom: 0;
+ }
+
+.highlight {
+  overflow-x: auto;
 }
+/*
+.highlight > .prettyprint {
+  overflow: auto;
+}
+
+
+
+.prettyprint span {display: inline;}*/

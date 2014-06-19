@@ -1,66 +1,5 @@
-<p>
-  примеры поискового инпута
-</p>
-<div class="bs-example">
-  <div class="input-group">
-    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
-    <span class="input-group-icon search"></span>
-  </div>
-</div>
-<div class="highlight">
-  <pre class="prettyprint lang-html"><%= html_escape %q{
-  <div class="input-group">
-    <input type="search" class="form-control js-input-with-icon" placeholder="поисковый инпут">
-    <span class="input-group-icon search"></span>
-  </div>
-  } %></pre>
-</div>
-
-
-
-
-<p>
-  пример инпута с ниспадающим списком С множественным выбором
-</p>
-<div class="bs-example">
-  <select class="form-control js-chosen" data-placeholder="Организация-получатель" multiple="multiple">
-    <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
-    <option value="2">ФКП «Дирекция КЗС Минрегиона России»</option>
-  </select>
-</div>
-<div class="highlight">
-  <pre class="prettyprint lang-html"><%= html_escape %q{
-    <select class="form-control js-chosen" data-placeholder="Организация-получатель" multiple="multiple">
-      <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
-      <option value="2">ФКП «Дирекция КЗС Минрегиона России» </option>
-    </select>
-  } %></pre>
-</div>
-
-<p>
-  пример инпута с ниспадающим списком С ПОИСКОМ
-</p>
-<div class="bs-example">
-  <select class="form-control js-chosen-search" data-placeholder="Организация-получатель">
-    <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
-    <option value="2">ФКП «Дирекция КЗС Минрегиона России»</option>
-  </select>
-</div>
-
-
-
-
-<div class="highlight">
-  <pre class="prettyprint lang-html"><%= html_escape %q{
-    <select class="form-control js-chosen-search" data-placeholder="Организация-получатель" multiple="multiple">
-      <option value="1">ОП "УЭ КЗС" ОАО "Метрострой</option>
-      <option value="2">ФКП «Дирекция КЗС Минрегиона России» </option>
-    </select>
-  } %></pre>
-</div>
-
-<p>Вызов/сокрытие скрытого поля формы</p>
-<div class="bs-example">
+<%= library_item_caption 'Вызов/сокрытие скрытого поля формы' %>
+<%= library_example do %>
   <div class="form-group js-hidden-field">
     <label class="col-sm-3"></label>
     <div class="form-group">
@@ -72,25 +11,9 @@
       </a>
     </div>
   </div>
-</div>
-<div class="highlight">
-  <ul class="nav nav-pills">
-    <li><a href="#hidden-input-slim" data-toggle="tab">slim</a></li>
-
-  </ul>
-
-
-  <div class="tab-content">
-    <div class="tab-pane" id="hidden-input-slim">
-    <pre class="prettyprint linenums lang-ruby">
-       <%= html_escape %q{
+<% end %>
+<%= highlight_named_code slim: %Q{
       = f.hidden_field :permit_type, value: 'vehicle'
-                       } %>
-
-     </pre>
-    </div>
-  </div>
-
-</div>
+} %>
 
 

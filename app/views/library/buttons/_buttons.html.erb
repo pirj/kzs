@@ -22,66 +22,68 @@
   <span class="lib-prop">.text-right</span>
   <span class="lib-prop">.text-left</span>
 </p>
-<div class="bs-example">
-  <a href="#" class="btn btn-primary">Primary</a>
-  <a href="#" class="btn btn-default">Default</a>
-  <a href="#" class="btn btn-link">Link</a>
-  <a href="#" class="btn btn-link-muted">Link-muted</a>
-  <a href="#" class="btn btn-primary btn-icon"><span class="fa fa-sign-out"></span></a>
-  <a href="#" class="btn btn-link btn-no-hover">Link-no-hover</a>
-  <a href="#" class="btn btn-link-muted btn-no-hover">Link-no-hover</a>
-  <a href="#" class="btn btn-primary btn-divide-by-word"><span>top line</span><span>& bottom</span></a>
-  <a href="#" class="btn btn-primary btn-divide-by-word text-right"><span>top</span><span>& bottom line</span></a>
-  <a href="#" class="btn btn-primary btn-divide-by-word text-left"><span>top</span><span>& bottom line</span></a>
+<table class="table">
+  <tr>
+    <td><a href="#" class="btn btn-primary">Primary</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Primary, '#', class: 'btn btn-primary'}
+    %>
+    </td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-default">Default</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Default, '#', class: 'btn btn-default'}
+    %></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-link">Link</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Link, '#', class: 'btn btn-link'}
+    %></td>
 
-</div>
-<div class="highlight">
-  <ul class="nav nav-pills lib-control-tabs">
-    <li><a href="#buttons-slim" data-toggle="tab">slim</a></li>
-    <li><a href="#buttons-html" data-toggle="tab">html</a></li>
-  </ul>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane" id="buttons-slim">
-      <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
-  = link_to Primary, '#', class: 'btn btn-primary'
-  = link_to Default, '#', class: 'btn btn-default'
-  = link_to Link, '#', class: 'btn btn-link'
-  = link_to Link-muted, '#', class: 'btn btn-link-muted'
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-link-muted">Link-muted</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Link-muted, '#', class: 'btn btn-link-muted' }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-primary btn-icon"><span class="fa fa-sign-out"></span></a></td>
+    <td><%= highlight_code %Q{
+    = link_to '#', class: 'btn btn-primary btn-icon' do
+      .span.fa.fa-sign-out }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-link btn-no-hover">Link-no-hover</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Link-no-hover, '#', class: 'btn btn-link btn-no-hover' }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-link-muted btn-no-hover">Link-no-hover</a></td>
+    <td><%= highlight_code %Q{
+    = link_to Link-no-hover, '#', class: 'btn btn-link-muted btn-no-hover' }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-primary btn-divide-by-word"><span>top line</span><span>& bottom</span></a></td>
+    <td><%= highlight_code %Q{
+    = link_to '#', class: 'btn btn-primary btn-divide-by-word' do
+      .span top line
+      .span & bottom }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-primary btn-divide-by-word text-right"><span>top</span><span>& bottom line</span></a></td>
+    <td><%= highlight_code %Q{
+    = link_to '#', class: 'btn btn-primary btn-divide-by-word text-right' do
+      .span top line
+      .span & bottom }%></td>
+  </tr>
+  <tr>
+    <td><a href="#" class="btn btn-primary btn-divide-by-word text-left"><span>top</span><span>& bottom line</span></a></td>
+    <td><%= highlight_code %Q{
+    = link_to '#', class: 'btn btn-primary btn-divide-by-word text-left' do
+      .span top line
+      .span & bottom }%></td>
+  </tr>
+</table>
 
-  = link_to '#', class: 'btn btn-primary btn-icon' do
-    .span.fa.fa-sign-out
-
-  = link_to Link-no-hover, '#', class: 'btn btn-link btn-no-hover'
-  = link_to Link-no-hover, '#', class: 'btn btn-link-muted btn-no-hover'
-
-  = link_to '#', class: 'btn btn-primary btn-divide-by-word' do
-    .span top line
-    .span & bottom
-
-  = link_to '#', class: 'btn btn-primary btn-divide-by-word text-right' do
-    .span top line
-    .span & bottom
-
-  = link_to '#', class: 'btn btn-primary btn-divide-by-word text-left' do
-    .span top line
-    .span & bottom
-      }%></pre>
-    </div>
-
-    <div class="tab-pane" id="buttons-html">
-      <pre class="prettyprint linenums lang-html"><%= html_escape %q{
-  <a href="#" class="btn btn-primary">Primary</a>
-  <a href="#" class="btn btn-default">Default</a>
-  <a href="#" class="btn btn-link">Link</a>
-  <a href="#" class="btn btn-link-muted">Link-muted</a>
-  <a href="#" class="btn btn-primary btn-icon"><span class="fa fa-sign-out"></span></a>
-  <a href="#" class="btn btn-link btn-no-hover">Link-no-hover</a>
-  <a href="#" class="btn btn-link-muted btn-no-hover">Link-no-hover</a>
-  <a href="#" class="btn btn-primary btn-divide-by-word"><span>top line</span><span>& bottom</span></a>
-  <a href="#" class="btn btn-primary btn-divide-by-word text-right"><span>top</span><span>& bottom line</span></a>
-  <a href="#" class="btn btn-primary btn-divide-by-word text-left"><span>top</span><span>& bottom line</span></a>
-      }%></pre>
-    </div>
-  </div>
-</div>

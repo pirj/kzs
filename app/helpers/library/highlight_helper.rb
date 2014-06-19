@@ -43,8 +43,9 @@ module Library
     private
 
     def prepare_to_highlight(code)
-      # lines = 'linenums' unless code.match('\n').blank?
       lines = ' '
+      # lines = 'linenums' unless code.match('\n').blank?
+      lines = 'linenums'
       content_tag(:pre, class: "prettyprint #{lines}") do
         html_escape code
       end
