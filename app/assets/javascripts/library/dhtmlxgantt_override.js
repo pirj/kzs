@@ -49,7 +49,9 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 
     var div =document.createElement('div');
     div.title = flag.name;
-    div.className = "task_flag";
+    uniq_flag_class_name = (new Date()).getTime();
+    div.className = "task_flag " + uniq_flag_class_name;
+
     if (flag.checked === true) {
        div.classList.add('f-checked')
     }
@@ -62,11 +64,21 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 
     // тут инициализируем react component и крепим его на popup-layout
     // json_of_all_flags — json всех пунктов в данном флажке
-    //    elem = $('.js-popup-layout').append('<div></div>')
+    elem = $('.js-popup-layout').append("<div id='unicname'></div>");
     //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
 
     // и флажку нужно выставить класс .uniq_name
     //
+//    var reactContainer = document.createElement('div');
+//    reactContainer.id = 'unicname';
+//    div.appendChild(reactContainer);
+
+//    console.log(reactContainer);
+
+    React.renderComponent(
+        ReactPopupComponent({parent: '.'+uniq_flag_class_name, body: 'aassada dasdasdasda ads'}),
+        elem[0]
+    );
     return div;
 }
 /* @tag */
