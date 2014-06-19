@@ -34,6 +34,9 @@ class Gantt
         return
 
     gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #двойной клик
+
+      return false
+
       e.preventDefault()
       request = $.ajax(
         url: "/tasks/#{id}/"

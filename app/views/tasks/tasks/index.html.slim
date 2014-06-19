@@ -52,6 +52,27 @@
   { name: 'reformulate' }, \
   { name: 'cancel' }, \
 ]
+
+css:
+  .js-popup-layout{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    background: rgba(255,0,0,0.2);
+    overflow: visible;
+  }
+
+  .js-react-popup-component{
+    width: 300px;
+    height: 200px;
+    background: rgba(255,0,0,0.3);
+    left: 500px;
+    top: 300px;
+    position:absolute;
+  }
+
 .row
   .col-sm-12
     .b-offset-sm = react_component('TasksActionButtons', {actions: actions, url: change_state_api_tasks_path})

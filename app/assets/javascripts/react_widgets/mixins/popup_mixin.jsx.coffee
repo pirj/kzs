@@ -20,7 +20,8 @@ R = React.DOM
     opened: false
 
   componentDidMount: ->
-    $(@.props.parent).children().on('click', =>
+    $(document).on('click', @.props.parent, =>
+      console.log @.props.parent
       @.handleParentClick()
     )
 

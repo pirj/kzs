@@ -5,9 +5,11 @@ R = React.DOM
 @FlagPopup = React.createClass
   mixins: [PopupMixin]
 
-  getDefaultProps: ->
-    body: ''
+#  console.log('wasd')
 
+  getDefaultProps: ->
+    opened: false
 
   render: ->
     @.renderPopup(@.props.body)
+

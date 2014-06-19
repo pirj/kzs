@@ -64,19 +64,19 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
 
     // тут инициализируем react component и крепим его на popup-layout
     // json_of_all_flags — json всех пунктов в данном флажке
-    elem = $('.js-popup-layout').append("<div id='unicname'></div>");
-    //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
+    $('.js-popup-layout').append("<div id="+uniq_flag_class_name+"></div>");
+
+    elem = $('#'+uniq_flag_class_name)
+        //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
 
     // и флажку нужно выставить класс .uniq_name
-    //
-//    var reactContainer = document.createElement('div');
-//    reactContainer.id = 'unicname';
-//    div.appendChild(reactContainer);
 
-//    console.log(reactContainer);
+
+//    console.log(flag);
+    body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
 
     React.renderComponent(
-        FlagPopup({parent: '.'+uniq_flag_class_name, body: 'aassada dasdasdasda ads'}),
+        FlagPopup({parent: '.'+uniq_flag_class_name, body: body}),
         elem[0]
     );
     return div;
