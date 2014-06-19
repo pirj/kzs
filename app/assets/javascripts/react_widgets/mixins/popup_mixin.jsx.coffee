@@ -20,8 +20,7 @@ R = React.DOM
     opened: false
 
   componentDidMount: ->
-    $(document).on('click', @.props.parent, =>
-      console.log @.props.parent
+    $(@.props.parent).children().on('click', =>
       @.handleParentClick()
     )
 
@@ -47,7 +46,7 @@ R = React.DOM
     @.setState opened: !@.state.opened
 
 
-  renderPopup: (body) ->
+  renderPopupHtml: (body) ->
     cx = React.addons.classSet
     className = cx(
       'hidden': @.state.opened == false
@@ -58,3 +57,15 @@ R = React.DOM
       ref: 'popup',
       dangerouslySetInnerHTML: {__html: body}
     })
+
+
+  renderPopup: (body) ->
+    cx = React.addons.classSet
+    className = cx(
+      'hidden': @.state.opened == false
+      'js-react-popup-component': true
+    )
+    R.div({
+      className: className
+      ref: 'popup'
+    }, body)
