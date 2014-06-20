@@ -14,8 +14,11 @@ R = React.DOM
 
 
   render: ->
+    console.log @.props.json
+    data = @.props.json.data
+    task_id = @.props.json.task_id
+    current_date = @.props.json.deadline
 
-    data = [@.props.json]
 
     items = data.map((el) ->
       [
@@ -32,8 +35,8 @@ R = React.DOM
 
     bottom_links = [
       R.div({className: 'row'}, [
-        R.a({className: 'col-sm-4 link text-center', href: "/tasks/task_id"}, 'Открыть задачу'),
-        R.a({className: 'col-sm-4 link text-center', href: "/tasks/task_id/edit"}, 'Править дела'),
+        R.a({className: 'col-sm-4 link text-center', href: "/tasks/#{task_id}"}, 'Открыть задачу'),
+        R.a({className: 'col-sm-4 link text-center', href: "/tasks/#{task_id}/edit"}, 'Править дела'),
         R.a({className: 'col-sm-4 link text-center', onClick: @.popupHide}, [ R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена') ])
       ])
     ]

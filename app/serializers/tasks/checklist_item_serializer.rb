@@ -3,7 +3,13 @@ class Tasks::ChecklistItemSerializer < ActiveModel::Serializer
             :deadline,
             :checked,
             :description,
-            :name
+            :name,
+            :task_id
+
+
+  def task_id
+    object.checklist.task.id
+  end
 
   def deadline
     if object.finished_at

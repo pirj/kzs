@@ -91,12 +91,22 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     custom_method_name = function() {
 //        console.log('callback');
     };
+
+
+    parent_class_name = '.' + uniq_flag_class_name;
+
+    current_flag_json = {
+        data: json[flag.deadline],
+        date: flag.deadline,
+        task_id: flag.task_id
+    };
+
     React.renderComponent(
-        FlagPopup({parent: '.'+uniq_flag_class_name, body: body, json: json, date: flag.deadline, onPopupToggle: custom_method_name}),
+        FlagPopup({parent: parent_class_name, json: current_flag_json, onPopupToggle: custom_method_name}),
         elem[0]
     );
     return div;
-}
+};
 /* @tag */
 
 
