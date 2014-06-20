@@ -13,10 +13,10 @@ R = React.DOM
     @.props.onPopupSubmit(
       $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
     )
-    @.PopupHide()
+    @.popupHide()
 
   handleCancel: ->
-    @.PopupHide()
+    @.popupHide()
 
 
   componentDidMount: ->
