@@ -14,6 +14,7 @@ R = React.DOM
 
 @PopupMixin =
 
+  placement: null
   # API ZONE
 
   # обработка кликов снаружи всплывающего окна
@@ -114,9 +115,11 @@ R = React.DOM
   _popupClassName: ->
     cx = React.addons.classSet
     className = cx(
-      'hidden': @.state.opened == false
-      'js-react-popup-component': true
+      'm-active': @.state.opened == true
+      'js-react-popup-component popover': true
     )
+
+    className += " #{@.placement}"
 
 
 
@@ -169,8 +172,7 @@ R = React.DOM
           vertPlacement
     )
     #положение можно задать напрямую в placement = "right" например
-    placement = "top-left"
-    $popup.addClass(placement)
+    @.placement = placement
 
     #arrow position formula
     balancePopoverWidth = popoverWidth - activeBtnWidth
@@ -217,4 +219,6 @@ R = React.DOM
         left: currentLeft + "px"
       $popup.find('.arrow').css
         left: arrowPosLeft + "px"
+
+
   # ==================================================================================
