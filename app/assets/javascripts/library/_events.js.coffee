@@ -150,11 +150,11 @@ $ ->
     return
 
   $('.js-popover').on('click', (e) ->
+
     clearPopover()
     e.preventDefault()
     target = this.dataset.target
     $sourcePopover = $('.js-popover-content[data-target=' + target + ']')
-
 
     $(this).toggleClass('active')
     if $(this).hasClass('active')
@@ -207,7 +207,6 @@ $ ->
           vertPlacement
     )
     #положение можно задать напрямую в placement = "right" например
-    placement = "top-left"
     popoverClone.addClass(placement)
 
     #arrow position formula
@@ -221,7 +220,7 @@ $ ->
         left: (currentLeft + activeBtnWidth/2) - popoverWidth/2  + "px"
     else if popoverClone.hasClass('top')
       popoverClone.css
-        top:  currentTop - activeBtnHeight/2 - popoverHeight + "px"
+        top:  currentTop - popoverHeight + "px"
         left: (currentLeft + activeBtnWidth/2) - popoverWidth/2  + "px"
     else if popoverClone.hasClass('right')
       popoverClone.css
@@ -245,13 +244,13 @@ $ ->
         left: arrowPosLeft + "px"
     else if popoverClone.hasClass('top-left')
       popoverClone.css
-        top:  currentTop - activeBtnHeight/2 - popoverHeight + "px"
+        top:  currentTop - popoverHeight + "px"
         left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
       popoverClone.find('.arrow').css
         left: arrowPosRight + "px"
     else if popoverClone.hasClass('top-right')
       popoverClone.css
-        top:  currentTop - activeBtnHeight/2 - popoverHeight + "px"
+        top:  currentTop - popoverHeight + "px"
         left: currentLeft + "px"
       popoverClone.find('.arrow').css
         left: arrowPosLeft + "px"
