@@ -76,7 +76,7 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
 
     React.renderComponent(
-        FlagPopup({parent: '.'+uniq_flag_class_name, body: body}),
+        FlagPopup({parent: '.'+uniq_flag_class_name, body: body, json: flag}),
         elem[0]
     );
     return div;
