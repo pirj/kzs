@@ -17,27 +17,39 @@ gantt._render_task_notifications = function (task, width) {
 };
 gantt._render_task_flags = function (task, width) {
 
+
+    //_.where(listOfPlays, {author: "Shakespeare", year: 1611});
+
+
+
     var flag_container = document.createElement('div');
     flag_container.className = "task_flag_container";
     // сколько чеклистов
+    var compressFlags = [];
     if (task.checklists.length) {
         for (var i = 0; i < task.checklists.length; i++) {
+
+            var Flags = task.checklists[i].checklist_items;
+            compressFlags = (_.groupBy(Flags, 'deadline'));
+            //для новых значений
+
             for (var j=0; j < task.checklists[i].checklist_items.length; j++){
-                flag_container.appendChild(this._render_task_flag(task.checklists[i].checklist_items[j], task.start_date, width));
+
+                flag_container.appendChild(this._render_task_flag(task.checklists[i].checklist_items[j], task.start_date, width, compressFlags));
 
             }
         }
+
     }
 
     return flag_container;
 };
 
-gantt._render_task_flag = function(flag, task_started_at, width) {
+gantt._render_task_flag = function(flag, task_started_at, width, json) {
 
     var offset_left,  x_pos_end, x_pos_start;
     if (flag.deadline===null) {
         x_pos_start = gantt.posFromDate(gantt.date.parseDate(task_started_at, 'xml_date')) ;
-//        x_pos_end = gantt.posFromDate(gantt.date.parseDate(flag.finished_at, 'xml_date'));
         offset_left = width;
     }
     else
@@ -72,11 +84,15 @@ gantt._render_task_flag = function(flag, task_started_at, width) {
     // и флажку нужно выставить класс .uniq_name
 
 
-//    console.log(flag);
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
 
+
+
+    custom_method_name = function() {
+//        console.log('callback');
+    };
     React.renderComponent(
-        FlagPopup({parent: '.'+uniq_flag_class_name, body: body, json: flag}),
+        FlagPopup({parent: '.'+uniq_flag_class_name, body: body, json: json, date: flag.deadline, onPopupToggle: custom_method_name}),
         elem[0]
     );
     return div;
@@ -89,7 +105,6 @@ gantt._render_task_element = function(task){
 
     var cfg = this.config;
     var height = this._get_task_height();
-//    console.log(cfg)
     var padd = Math.floor((this.config.row_height - height)/2);
     if(task.type == cfg.types.milestone && cfg.link_line_width > 1){
         //little adjust milestone position, so horisontal corners would match link arrow when thickness of link line is more than 1px
@@ -161,6 +176,4 @@ gantt._render_task_element = function(task){
         }
     }
     return div;
-
-
 };
