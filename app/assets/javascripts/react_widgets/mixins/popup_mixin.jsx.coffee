@@ -46,7 +46,8 @@ R = React.DOM
 
 
   # метод скрытия всплывающего окна
-  popupHide: ->
+  popupHide: (e=null)->
+    e.preventDefault() if _.isObject(e)
     @.setState opened: false
 
 
@@ -96,6 +97,7 @@ R = React.DOM
 
   getDefaultProps: ->
     parent: ''
+    onPopupToggle: ->
 
   getInitialState: ->
     opened: false
@@ -119,8 +121,8 @@ R = React.DOM
 
 
   _calculatePosition: ->
-    console.log $parent = $(@.props.parent)
-    console.log $popup = $(@.refs.popup.getDOMNode())
+    $parent = $(@.props.parent)
+    $popup = $(@.refs.popup.getDOMNode())
 
     $popup.css({width: '550px'})
 
