@@ -143,10 +143,6 @@ $ ->
   )
 
 # POPOVER !!!
-  $('.js-popover').css
-    left: "810px",
-    top: "850px",
-    position: "absolute"
   clearPopover = () ->
     $('.js-popover-content').hide()
     $('.js-popover').not($(this)).removeClass('active')
