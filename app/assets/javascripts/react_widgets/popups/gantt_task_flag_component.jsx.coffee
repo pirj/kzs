@@ -9,7 +9,6 @@ R = React.DOM
     json: React.PropTypes.object
 
   getDefaultProps: ->
-    opened: false
     json: {}
     data: []
 
