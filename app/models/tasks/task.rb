@@ -2,6 +2,7 @@ class Tasks::Task < ActiveRecord::Base
   # Нотификации
   include Notifiable
   default_interesants :inspector, :executor
+  allow_multiple_notifications  
 
   attr_accessible :text,
                   :title,
