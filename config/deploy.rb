@@ -116,7 +116,7 @@ task :mercury do
   
   before "deploy:assets:precompile", "copy_database_config"
   after "copy_database_config", "copy_mail_config"
-  after "deploy", "deploy:cleanup"
+  # after "deploy", "deploy:cleanup"
 end
 
 #mars
