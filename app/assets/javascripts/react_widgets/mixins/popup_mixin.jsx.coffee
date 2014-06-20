@@ -29,20 +29,24 @@ R = React.DOM
   # вешаем обработчики кликов на родителе или вне попапа
   popupDidMount: ->
     $(document).on('click', @.props.parent, => @.handleParentClick() )
-    @.handleOutsideClick(=> @.PopupHide())
+    @.handleOutsideClick(=> @.popupHide())
 
   # убираем все ивенты при уничтожении компонента
   popupDidUmnount: ->
     document.body.removeEventListener('click')
 
-  # метод скрытия всплывающего окна
+  # метод обрабатывающий клик по родительской кнопки для данного окна
+  #
+  # внутри также идет расчет местоположения текущего всплывающего окна,
+  # т.к.возможно асинхронное поведение,
+  # это когда всплывающее окно рисуется первее родительской кнопки
   handleParentClick: ->
     @._calculatePosition() if @.refs.hasOwnProperty('popup')
     @.setState opened: !@.state.opened
 
 
   # метод скрытия всплывающего окна
-  PopupHide: ->
+  popupHide: ->
     @.setState opened: false
 
 
