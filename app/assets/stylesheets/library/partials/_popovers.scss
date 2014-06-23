@@ -23,6 +23,7 @@
   background-clip: padding-box;
   border: none;
   border-radius: $border-radius-large;
+  padding-top: 30px;
 
   // Overrides for proper insertion
   white-space: normal;
@@ -44,10 +45,6 @@
 
   form {
     padding: 0;
-  }
-
-  a {
-    color:#fff;
   }
 
   .popover-title {
@@ -72,6 +69,13 @@
   .popover-content {
     padding: 8px 21px;
   }
+  .popover-content-item{
+    border-top: 1px solid $color-gray;
+
+    h3, h4{margin: 0; padding: 0;}
+  }
+
+
   .popover-form-content {
     padding: 14px 36px;
     input, textarea, label {
@@ -116,8 +120,15 @@
       .btn {
         background: none;
         width: 100%;
+        @include links-active-states {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+      }
+      .link, .btn{
+        color: white;
         @include links-active-states{
-          background: rgba(255,255,255, 0.1);
+          color: rgba(255,255,255,0.9);
         }
       }
     }
