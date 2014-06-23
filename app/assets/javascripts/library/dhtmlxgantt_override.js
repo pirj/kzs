@@ -1,10 +1,7 @@
 gantt._render_task_control = function(task,width) {
     var control_container = document.createElement('div');
-
     control_container.className = 'gantt_task_control';
-
     control_container.innerHTML = '+';
-
 
     return control_container;
 
@@ -123,7 +120,7 @@ gantt._render_task_content = function(task, width){
     content.className = "gantt_task_content " + uniq_control_class_name;
 
     var parent_class_name = '.' + uniq_control_class_name;
-    $('.js-popup-layout').append("<div id="+uniq_control_class_name+"></div>");
+    $('.js-popover-layout').append("<div id="+uniq_control_class_name+"></div>");
     var elem = $('#'+uniq_control_class_name)
     React.renderComponent(
         GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task}),
