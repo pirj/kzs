@@ -17,14 +17,21 @@ R = React.DOM
 #    console.log @.props.json
     data = @.props.json.data
     task_id = @.props.json.task_id
-    current_date = @.props.json.deadline
+    current_date = moment(@.props.json.date, 'DD-MM-YYYY')
 
 
+
+    header = R.div({},[
+      R.div({className: 'row'},
+        R.div({className: 'col-sm-9 col-sm-offset-3'}, current_date)
+      ),
+      R.hr({})
+    ])
     items = data.map((el) ->
-      [
+      R.div({className: 'popover-content'}, [
         R.div({className: 'row'},[
           R.div({className: 'col-sm-3'}, R.input({type: 'checkbox', checked: el.checked})),
-          R.div({className: 'col-sm-9'}, R.h3({}, el.name))
+          R.div({className: 'col-sm-9'}, R.h3({className: 'text-sea-green'}, el.name))
         ]),
         R.div({className: 'row'}, [
           R.div({className: 'col-sm-3'}, R.div({className: 'text-help'}, 'суть')),
@@ -32,6 +39,7 @@ R = React.DOM
         ]),
         R.hr({})
       ])
+    )
 
     bottom_links = [
       R.div({className: 'row'}, [
@@ -41,5 +49,5 @@ R = React.DOM
       ])
     ]
 
-    @.renderPopover([items, bottom_links])
+    @.renderPopup([header, items, bottom_links])
 
