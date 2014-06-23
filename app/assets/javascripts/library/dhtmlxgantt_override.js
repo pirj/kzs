@@ -211,3 +211,39 @@ gantt._render_task_element = function(task){
     }
     return div;
 };
+
+gantt.selectTask = function(id){
+    if(!this.config.select_task)
+        return false;
+    if (id){
+
+        if(this._selected_task == id)
+            return this._selected_task;
+
+        if(!this.callEvent("onBeforeTaskSelected", [id])){
+            return false;
+        }
+
+        this.unselectTask();
+        this._selected_task = id;
+
+        this.refreshTask(id);
+        this.callEvent("onTaskSelected", [id]);
+    }
+    return this._selected_task;
+};
+
+
+gantt.unselectTask = function(spec){
+    var id = this._selected_task;
+
+    if(!id)
+        return;
+    this._selected_task = null;
+    this.refreshTask(id);
+//    if (spec){
+//
+//        this.refreshTask(spec);
+//    }
+    this.callEvent("onTaskUnselected", [id]);
+};

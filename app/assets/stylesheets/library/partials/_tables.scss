@@ -53,6 +53,10 @@ tr{
     th, td{
       &:first-child{ border-left: 3px solid transparent;}
     }
+
+    &.active{
+      background-color: #EAE7EE;
+    }
   }
 
   .tr-unread{
@@ -69,7 +73,7 @@ tr{
         @include clearfix();
         padding: $table-cell-padding;
         line-height: $line-height-base;
-        border-top: 1px solid $table-border-color;
+//        border-top: 1px solid $table-border-color;
         color: $table-simple-text-color;
         font-size: $font-size-base;
         vertical-align: top;
@@ -228,7 +232,7 @@ tr{
         @include clearfix();
         padding: $table-cell-padding;
         line-height: $line-height-base;
-        border-top: 1px solid $table-border-color;
+//        border-top: 1px solid $table-border-color;
         color: $table-simple-text-color;
         font-size: $font-size-base;
         vertical-align: top;

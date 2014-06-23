@@ -28,7 +28,7 @@ R = React.DOM
 
     @.changeCheckedRows(new_data)
     @.setState data: new_data
-
+    window.app.GanttView.updateSelectTask(finded_obj.id, obj.checked)
 
   # метод создания ивента с чекнутыми задачами
   # фильтрует задачи только сортированными

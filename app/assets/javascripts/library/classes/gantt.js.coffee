@@ -19,6 +19,8 @@ class Gantt
 
     @.createTimeline()
 
+    @.selected = []
+
     ########################################## далее обработчики событий ###############################################
 
     gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
@@ -55,9 +57,10 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
       that.editTask(item)
 
-    gantt.attachEvent "onBeforeTaskSelected", (id,item) ->          #<------ событие перед выделением таска, раньше блокировалось
-      console.log(id);
-
+    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, раньше блокировалось
+#      console.log(id);
+#      gantt.unselectTask();
+      @.selected.push(id);
       $(document).trigger('tasks_table:collection:uncheck_all');
 
       if document.getElementsByName('task_'+id)[0].checked == false
@@ -333,6 +336,11 @@ class Gantt
 
     gantt.setSizes()
     return
+
+  updateSelectTask: (id, status) =>
+#    console.log(status)
+#    console.log('----')
+#    console.log(id)
 
 ########################################################### Поток выполнения  ###################################################
 $ ->
