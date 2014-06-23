@@ -55,8 +55,17 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
       that.editTask(item)
 
-    gantt.attachEvent "onBeforeTaskSelected", (id,item) ->
-      return false
+    gantt.attachEvent "onBeforeTaskSelected", (id,item) ->          #<------ событие перед выделением таска, раньше блокировалось
+      console.log(id);
+
+      $(document).trigger('tasks_table:collection:uncheck_all');
+
+      if document.getElementsByName('task_'+id)[0].checked == false
+        $(document.getElementsByName('task_'+id)[0]).trigger('click');
+
+
+      return true
+
     gantt.attachEvent "onMouseMove", (taskId, e) ->                     #<----- показ плюсика при наведении на таск
 
       if taskId!=null and e.target.classList.contains('gantt_task_content')
@@ -98,7 +107,7 @@ class Gantt
       window.app.scrollTable(y)                                   #-------------------------------------- событие - при фильтрации
 
     $(document).on "tasks_table:collection:update_subtasks", (e, id, children_ids, is_opened) =>
-      console.log children_ids
+#      console.log children_ids
       @.gantt.parse({data: children_ids})
       if is_opened then @.gantt.open(id) else @.gantt.close(id)
 
