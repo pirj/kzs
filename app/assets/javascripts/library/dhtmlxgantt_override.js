@@ -89,8 +89,9 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
 
 
 
-    custom_method_name = function() {
-//        console.log('callback');
+    custom_method_name = function(a) {
+        console.log('callback');
+        console.log(a);
     };
 
 

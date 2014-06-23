@@ -60,14 +60,14 @@ class Gantt
     gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, раньше блокировалось
 #      console.log(id);
 #      gantt.unselectTask();
-      @.selected.push(id);
-      $(document).trigger('tasks_table:collection:uncheck_all');
+#      @.selected.push(id);
+#      $(document).trigger('tasks_table:collection:uncheck_all');
+#
+#      if document.getElementsByName('task_'+id)[0].checked == false
+#        $(document.getElementsByName('task_'+id)[0]).trigger('click');
 
-      if document.getElementsByName('task_'+id)[0].checked == false
-        $(document.getElementsByName('task_'+id)[0]).trigger('click');
 
-
-      return true
+      return false
 
     gantt.attachEvent "onMouseMove", (taskId, e) ->                     #<----- показ плюсика при наведении на таск
 
