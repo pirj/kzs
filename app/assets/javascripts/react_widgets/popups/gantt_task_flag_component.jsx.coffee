@@ -14,7 +14,7 @@ R = React.DOM
 
 
   render: ->
-    console.log @.props.json
+#    console.log @.props.json
     data = @.props.json.data
     task_id = @.props.json.task_id
     current_date = @.props.json.deadline

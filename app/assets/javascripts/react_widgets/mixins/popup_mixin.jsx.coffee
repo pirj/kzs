@@ -29,7 +29,7 @@ R = React.DOM
 
   # вешаем обработчики кликов на родителе или вне попапа
   popupDidMount: ->
-    $(document).on('click', @.props.parent, => @.handleParentClick() )
+    $(document).on('mouseup', @.props.parent, => @.handleParentClick() )
     @.handleOutsideClick(=> @.popupHide())
 
   # убираем все ивенты при уничтожении компонента
@@ -42,6 +42,7 @@ R = React.DOM
   # т.к.возможно асинхронное поведение,
   # это когда всплывающее окно рисуется первее родительской кнопки
   handleParentClick: ->
+    console.log @.props.parent
     @._calculatePosition() if @.refs.hasOwnProperty('popup')
     @.setState opened: !@.state.opened
 

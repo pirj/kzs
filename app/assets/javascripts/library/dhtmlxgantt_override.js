@@ -1,7 +1,11 @@
 gantt._render_task_control = function(task,width) {
     var control_container = document.createElement('div');
-    control_container.className = 'gantt_task_control';
+
+    control_container.className = 'gantt_task_control ';
+
     control_container.innerHTML = '+';
+
+
     return control_container;
 
 }
@@ -78,7 +82,7 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     // json_of_all_flags — json всех пунктов в данном флажке
     $('.js-popup-layout').append("<div id="+uniq_flag_class_name+"></div>");
 
-    elem = $('#'+uniq_flag_class_name)
+    var elem = $('#'+uniq_flag_class_name)
         //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
 
     // и флажку нужно выставить класс .uniq_name
@@ -93,9 +97,9 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     };
 
 
-    parent_class_name = '.' + uniq_flag_class_name;
+    var parent_class_name = '.' + uniq_flag_class_name;
 
-    current_flag_json = {
+    var current_flag_json = {
         data: json[flag.deadline],
         date: flag.deadline,
         task_id: flag.task_id
@@ -108,6 +112,29 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     return div;
 };
 /* @tag */
+gantt._render_task_content = function(task, width){
+    var content = document.createElement("div");
+    if(this._get_safe_type(task.type) != this.config.types.milestone)
+        content.innerHTML = this.templates.task_text(task.start_date, task.end_date, task);
+
+
+
+    var uniq_control_class_name = (new Date()).getTime() + 'control';
+    content.className = "gantt_task_content " + uniq_control_class_name;
+
+    var parent_class_name = '.' + uniq_control_class_name;
+    $('.js-popup-layout').append("<div id="+uniq_control_class_name+"></div>");
+    var elem = $('#'+uniq_control_class_name)
+    React.renderComponent(
+        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: {a:2}}),
+        elem[0]
+    );
+
+    //content.style.width = width + 'px';
+    return content;
+};
+
+
 
 
 gantt._render_task_element = function(task){

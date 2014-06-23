@@ -9,12 +9,12 @@ R = React.DOM
     json: React.PropTypes.object
 
   getDefaultProps: ->
-    opened: false
     json: {}
 
 
   render: ->
     el = @.props.json
+#    console.log @.props
 
     open_link = R.a({}, [R.span({className: 'fa'}), R.span({}, 'Открыть задачу')])
     add_subtask_link = R.a({href: '/tasks/task_id/edit#add_subtask'}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])

@@ -60,6 +60,7 @@ class Gantt
     gantt.attachEvent "onBeforeTaskSelected", (id,item) ->
       return false
     gantt.attachEvent "onMouseMove", (taskId, e) ->
+#      console.log(e.target);
       if taskId!=null and e.target.classList.contains('gantt_task_content')
         control = e.target.previousElementSibling
         control.style.display = 'block'
@@ -68,11 +69,11 @@ class Gantt
 
         e.target.onmouseout = (e) ->
           control.style.display = 'none'
-        e.target.onclick = (e) ->
-          task = gantt.getTask(taskId)
-          delta = Math.floor(left/gantt.config.min_column_width)
-          need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
-          console.log(need)
+#        e.target.onclick = (e) ->
+#          task = gantt.getTask(taskId)
+#          delta = Math.floor(left/gantt.config.min_column_width)
+#          need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
+#          console.log(need)
 
 
       #----------------------------------------------- раздел для маштабирования

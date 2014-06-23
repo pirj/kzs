@@ -276,7 +276,7 @@ $ ->
   $(document).click (e) ->
 
     return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
-    clearPopover()
+#    clearPopover()
 
     # останавливало весь код.
     # поэтому закомментировал
