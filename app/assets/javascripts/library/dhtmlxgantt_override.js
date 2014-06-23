@@ -126,7 +126,7 @@ gantt._render_task_content = function(task, width){
     $('.js-popup-layout').append("<div id="+uniq_control_class_name+"></div>");
     var elem = $('#'+uniq_control_class_name)
     React.renderComponent(
-        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: {a:2}}),
+        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task}),
         elem[0]
     );
 
