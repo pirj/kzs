@@ -3,18 +3,18 @@ R = React.DOM
 
 @TasksTableHeaderFilter = React.createClass
 
-  popup_nested_name: ''
+  popover_nested_name: ''
 
   getDefaultProps: ->
     name: ''
     data: []
     filter_opts: {}
-    filter_popup_opened: false
+    filter_popover_opened: false
 
   getInitialState: (props) ->
     props = props || this.props
     data: props.data
-    filter_popup_opened: props.filter_popup_opened
+    filter_popover_opened: props.filter_popover_opened
 
 
   # пробрасываем параметры из всплывающего окна наверх по цепочке зависимостей
@@ -24,8 +24,8 @@ R = React.DOM
     )
 
 
-  handlePopupToggle: (current_popup_state) ->
-    @.setState filter_popup_opened: current_popup_state
+  handlePopoverToggle: (current_popover_state) ->
+    @.setState filter_popover_opened: current_popover_state
 
 
   componentWillReceiveProps: (newProps, oldProps) ->
@@ -37,42 +37,42 @@ R = React.DOM
 
 
   componentDidMount: ->
-    $el = $('<div></div>').appendTo('.js-popup-layout')
+    $el = $('<div></div>').appendTo('.js-popover-layout')
 
-    @.popup_nested_name = "js-tasks-table-filter-popup-#{(new Date()).getTime()}"
-    popup_nested_name_class_name = ".#{@.popup_nested_name}"
+    @.popover_nested_name = "js-tasks-table-filter-popover-#{(new Date()).getTime()}"
+    popover_nested_name_class_name = ".#{@.popover_nested_name}"
 
     filter_component_params = {
-      parent: popup_nested_name_class_name,
-      opened: @.state.filter_popup_opened,
-      onPopupSubmit: @.onChangeFilterParams,
-      onPopupToggle: @.handlePopupToggle,
+      parent: popover_nested_name_class_name,
+      opened: @.state.filter_popover_opened,
+      onPopoverSubmit: @.onChangeFilterParams,
+      onPopoverToggle: @.handlePopoverToggle,
       filter_opts: @.props.filter_opts[@.props.name]
     }
 
-    popupClassName = @.choosePopupRenderer()
-    if _.isFunction(popupClassName)
-      React.renderComponent(popupClassName(filter_component_params), $el[0])
+    popoverClassName = @.choosePopoverRenderer()
+    if _.isFunction(popoverClassName)
+      React.renderComponent(popoverClassName(filter_component_params), $el[0])
 
 
-  choosePopupRenderer: ->
+  choosePopoverRenderer: ->
     if @.props.name == 'title'
-      TasksTableHeaderFilterPopupTitleBeta
+      TasksTableHeaderFilterPopoverTitleBeta
     else if @.props.name == 'started_at'
-      TasksTableHeaderFilterPopupStartedAtBeta
+      TasksTableHeaderFilterPopoverStartedAtBeta
     else if @.props.name == 'executor' || @.props.name == 'inspector'
-      TasksTableHeaderFilterPopupUsersBeta
+      TasksTableHeaderFilterPopoverUsersBeta
 
 
 
   render: ->
     cx = React.addons.classSet
     icon_css = cx(
-      'm-active': @.state.filter_popup_opened == true
+      'm-active': @.state.filter_popover_opened == true
       'fa fa-filter': true
     )
 
-    icon_css += " #{@.popup_nested_name}"
+    icon_css += " #{@.popover_nested_name}"
 
 
 

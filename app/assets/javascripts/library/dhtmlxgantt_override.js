@@ -1,7 +1,7 @@
 gantt._render_task_control = function(task,width) {
     var control_container = document.createElement('div');
 
-    control_container.className = 'gantt_task_control ';
+    control_container.className = 'gantt_task_control';
 
     control_container.innerHTML = '+';
 
@@ -78,12 +78,12 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
         "left:" + offset_left + "px"
     ].join(";");
 
-    // тут инициализируем react component и крепим его на popup-layout
+    // тут инициализируем react component и крепим его на popover-layout
     // json_of_all_flags — json всех пунктов в данном флажке
-    $('.js-popup-layout').append("<div id="+uniq_flag_class_name+"></div>");
+        $('.js-popover-layout').append("<div id="+uniq_flag_class_name+"></div>");
 
-    var elem = $('#'+uniq_flag_class_name)
-        //    React.renderComponent(ReactPopupComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
+    elem = $('#'+uniq_flag_class_name)
+        //    React.renderComponent(ReactPopoverComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
 
     // и флажку нужно выставить класс .uniq_name
 
@@ -106,7 +106,7 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     };
 
     React.renderComponent(
-        FlagPopup({parent: parent_class_name, json: current_flag_json, onPopupToggle: custom_method_name}),
+        FlagPopover({parent: parent_class_name, json: current_flag_json, onPopoverToggle: custom_method_name}),
         elem[0]
     );
     return div;
