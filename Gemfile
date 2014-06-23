@@ -91,9 +91,10 @@ gem 'thin'
 
 group :assets do
   #gem 'tilt', '~>1.3.3'
+  # gem 'sass',   '~> 3.3.8'
   gem 'sass-rails',   '~> 3.2.6'
   gem 'compass'
-  gem 'compass-rails'
+  gem 'compass-rails', '~> 1.1.7'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
