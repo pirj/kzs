@@ -86,10 +86,13 @@
 
 
   .btn-group-vertical {
+    width: 100%;
+
     .btn {
       border-top: #666666 solid 1px;
       text-align: left;
       border-radius: 0 !important;
+      color: $color-cloud;
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-top-left-radius: 0;
