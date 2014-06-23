@@ -2,8 +2,8 @@
 
 R = React.DOM
 
-@FlagPopup = React.createClass
-  mixins: [PopupMixin]
+@FlagPopover = React.createClass
+  mixins: [PopoverMixin]
 
   propTypes:
     json: React.PropTypes.object
@@ -37,9 +37,9 @@ R = React.DOM
       R.div({className: 'row'}, [
         R.a({className: 'col-sm-4 link text-center', href: "/tasks/#{task_id}"}, 'Открыть задачу'),
         R.a({className: 'col-sm-4 link text-center', href: "/tasks/#{task_id}/edit"}, 'Править дела'),
-        R.a({className: 'col-sm-4 link text-center', onClick: @.popupHide}, [ R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена') ])
+        R.a({className: 'col-sm-4 link text-center', onClick: @.popoverHide}, [ R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена') ])
       ])
     ]
 
-    @.renderPopup([items, bottom_links])
+    @.renderPopover([items, bottom_links])
 

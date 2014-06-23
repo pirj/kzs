@@ -1,39 +1,39 @@
 `/** @jsx React.DOM */`
 
 ###
-  React Mixin для отрисовки popup окон
+  React Mixin для отрисовки popover окон
 
   интерфейс использования
-    parent — класс родительского элемента, клики по которому активируют popup
-    renderPopup(html) — метод для отрисовки popup с любым html контентом
+    parent — класс родительского элемента, клики по которому активируют popover
+    renderPopover(html) — метод для отрисовки popover с любым html контентом
 
 ###
 
 R = React.DOM
 
 
-@PopupMixin =
+@PopoverMixin =
 
   placement: null
   # API ZONE
 
   # обработка кликов снаружи всплывающего окна
   handleOutsideClick: (callback)->
-    popup = @.refs.popup.getDOMNode()
+    popover = @.refs.popover.getDOMNode()
     event = (e) =>
       el = $(e.target);
-      unless el.closest(popup).length || el.closest(@.props.parent).length
+      unless el.closest(popover).length || el.closest(@.props.parent).length
         callback()
     document.body.addEventListener('click', event, false)
 
 
   # вешаем обработчики кликов на родителе или вне попапа
-  popupDidMount: ->
-    $(document).on('mouseup', @.props.parent, => @.handleParentClick() )
-    @.handleOutsideClick(=> @.popupHide())
+  popoverDidMount: ->
+    $(document).on('click', @.props.parent, => @.handleParentClick() )
+    @.handleOutsideClick(=> @.popoverHide())
 
   # убираем все ивенты при уничтожении компонента
-  popupDidUmnount: ->
+  popoverDidUmnount: ->
     document.body.removeEventListener('click')
 
   # метод обрабатывающий клик по родительской кнопки для данного окна
@@ -42,36 +42,35 @@ R = React.DOM
   # т.к.возможно асинхронное поведение,
   # это когда всплывающее окно рисуется первее родительской кнопки
   handleParentClick: ->
-    console.log @.props.parent
-    @._calculatePosition() if @.refs.hasOwnProperty('popup')
+    @._calculatePosition() if @.refs.hasOwnProperty('popover')
     @.setState opened: !@.state.opened
 
 
   # метод скрытия всплывающего окна
-  popupHide: (e=null)->
+  popoverHide: (e=null)->
     e.preventDefault() if _.isObject(e)
     @.setState opened: false
 
 
   # переключаем состояние всплывающего окна
-  popupToggle: ->
-    @.props.onPopupToggle(@.state.opened)
+  popoverToggle: ->
+    @.props.onPopoverToggle(@.state.opened)
 
   # рендерим попап и передаем готовый html внутрь
-  renderPopupHtml: (body) ->
+  renderPopoverHtml: (body) ->
     R.div({
-      className: @._popupClassName()
-      ref: 'popup'
+      className: @._popoverClassName()
+      ref: 'popover'
     },[
       R.span({className: 'arrow'}),
       R.div({dangerouslySetInnerHTML: {__html: body}})
     ])
 
   # рендерим попап и передаем react-dom массив
-  renderPopup: (body) ->
+  renderPopover: (body) ->
     R.div({
-      className: @._popupClassName()
-      ref: 'popup'
+      className: @._popoverClassName()
+      ref: 'popover'
     },[
       R.span({className: 'arrow'}),
       R.div({},body)
@@ -87,25 +86,25 @@ R = React.DOM
   # в этот момент уже есть dom и к нему можно обращаться
   # тесты показали, что эти методы выполняются первее методов, вызванных из потомка, где подключается mixin
   componentDidMount: ->
-    @.popupDidMount()
+    @.popoverDidMount()
 
   componenDidUnmount: ->
-    @.popupDidUmnount()
+    @.popoverDidUmnount()
 
   # после перерисовки компонента отсылаем текущий статус всем компонентам,
   # которые подписаны на это свойство
   componentDidUpdate: ->
-    @.popupToggle()
+    @.popoverToggle()
 
   getDefaultProps: ->
     parent: ''
-    onPopupToggle: ->
+    onPopoverToggle: ->
 
   getInitialState: ->
     opened: false
 
   propTypes:
-    onPopupToggle: React.PropTypes.func
+    onPopoverToggle: React.PropTypes.func
 
   # ==================================================================================
 
@@ -113,11 +112,11 @@ R = React.DOM
   # PRIVATE ZONE
 
   # возвращает css имя классов для контейнера всплывающего окна
-  _popupClassName: ->
+  _popoverClassName: ->
     cx = React.addons.classSet
     className = cx(
       'm-active': @.state.opened == true
-      'js-react-popup-component popover': true
+      'js-react-popover-component popover': true
     )
 
     className += " #{@.placement}"
@@ -126,9 +125,9 @@ R = React.DOM
 
   _calculatePosition: ->
     $parent = $(@.props.parent)
-    $popup = $(@.refs.popup.getDOMNode())
+    $popover = $(@.refs.popover.getDOMNode())
 
-    $popup.css({width: '550px'})
+    $popover.css({width: '550px'})
 
     activeBtnHeight = $parent.outerHeight()
     activeBtnWidth = $parent.outerWidth()
@@ -137,13 +136,13 @@ R = React.DOM
     currentTop = activeBtnOffset.top
     currentLeft = activeBtnOffset.left
 
-    popoverCloneOffset = $popup.offset()
-    popoverHeight = $popup.outerHeight()
-    popoverWidth = $popup.outerWidth()
+    popoverCloneOffset = $popover.offset()
+    popoverHeight = $popover.outerHeight()
+    popoverWidth = $popover.outerWidth()
     docHeight = $(document).outerHeight()
     docWidth = $(document).outerWidth()
 
-    offset = $popup.offset()
+    offset = $popover.offset()
     vert = 0.5 * docHeight - currentTop
     vertBalance = docHeight - currentTop
     vertPlacement = (if vert > 0 then "bottom" else  "top")
@@ -180,46 +179,55 @@ R = React.DOM
     arrowPosRight = balancePopoverWidth + activeBtnWidth / 2
     arrowPosLeft = popoverWidth - balancePopoverWidth - activeBtnWidth / 2
 
-    if $popup.hasClass('bottom')
-      $popup.css
+    if $popover.hasClass('bottom')
+      $popover.css
         top: currentTop + activeBtnHeight + "px"
         left: (currentLeft + activeBtnWidth / 2) - popoverWidth / 2 + "px"
-    else if $popup.hasClass('top')
-      $popup.css
+
+    else if $popover.hasClass('top')
+      $popover.css
         top: currentTop - activeBtnHeight / 2 - popoverHeight + "px"
         left: (currentLeft + activeBtnWidth / 2) - popoverWidth / 2 + "px"
-    else if $popup.hasClass('right')
-      $popup.css
+
+    else if $popover.hasClass('right')
+      $popover.css
         top: currentTop - popoverHeight / 2 + activeBtnHeight / 2 + "px"
         left: currentLeft + activeBtnWidth + activeBtnHeight / 2 + "px"
-    else if $popup.hasClass('left')
-      $popup.css
+
+    else if $popover.hasClass('left')
+      $popover.css
         top: currentTop - popoverHeight / 2 + activeBtnHeight / 2 + "px"
         left: currentLeft - popoverWidth - activeBtnHeight / 2 + "px"
-    else if $popup.hasClass('bottom-left')
-      $popup.css
+
+    else if $popover.hasClass('bottom-left')
+      $popover.css
         top: currentTop + activeBtnHeight + "px"
         left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
-      $popup.find('.arrow').css
+      $popover.find('.arrow').css
         left: arrowPosRight + "px"
-    else if $popup.hasClass('bottom-right')
-      $popup.css
+
+    else if $popover.hasClass('bottom-right')
+      $popover.css
         top: currentTop + activeBtnHeight + "px"
         left: currentLeft + "px"
-      $popup.find('.arrow').css
+      $popover.find('.arrow').css
         left: arrowPosLeft + "px"
-    else if $popup.hasClass('top-left')
-      $popup.css
+
+    else if $popover.hasClass('top-left')
+      $popover.css
         top: currentTop - activeBtnHeight / 2 - popoverHeight + "px"
         left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
-      $popup.find('.arrow').css
+      $popover.find('.arrow').css
         left: arrowPosRight + "px"
-    else if $popup.hasClass('top-right')
-      $popup.css
+
+    else if $popover.hasClass('top-right')
+      $popover.css
         top: currentTop - activeBtnHeight / 2 - popoverHeight + "px"
         left: currentLeft + "px"
-      $popup.find('.arrow').css
+      $popover.find('.arrow').css
         left: arrowPosLeft + "px"
+
+
 
 
   # ==================================================================================

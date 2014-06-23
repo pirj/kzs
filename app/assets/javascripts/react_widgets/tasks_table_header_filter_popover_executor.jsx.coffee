@@ -1,7 +1,7 @@
 `/** @jsx React.DOM */`
 R = React.DOM
 
-@TasksTableHeaderFilterPopupExecutor = React.createClass
+@TasksTableHeaderFilterPopoverExecutor = React.createClass
 
   getDefaultProps: ->
     opened: false
@@ -21,8 +21,8 @@ R = React.DOM
 
   handleSubmit: (e) ->
     e.preventDefault()
-    @.props.onPopupSubmit(
-      $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
+    @.props.onPopoverSubmit(
+      $(@.refs.popover_filter_form.getDOMNode()).serializeObject()
     )
 
 
@@ -48,10 +48,10 @@ R = React.DOM
     )
 
   handleCancel: ->
-    @.props.onPopupCancel(false)
+    @.props.onPopoverCancel(false)
 
-  popupClassName: ->
-    class_name = ['popup popup-right']
+  popoverClassName: ->
+    class_name = ['popover popover-right']
     class_name.push 'hidden' unless @.state.opened
     class_name.join(' ')
 
@@ -70,18 +70,18 @@ R = React.DOM
                     ''
 
 
-    R.div({className: @.popupClassName()}, [
-      R.h5({className: 'popup-header'}, 'Фильтр по полю'),
-      R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, className: 'form-vertical'}, [
-        R.div({className: 'popup-body'}, [
+    R.div({className: @.popoverClassName()}, [
+      R.h5({className: 'popover-header'}, 'Фильтр по полю'),
+      R.form({ref: 'popover_filter_form', onSubmit: @.handleSubmit, className: 'form-vertical'}, [
+        R.div({className: 'popover-body'}, [
           R.input({name: input_name, className: 'js-select2', multiple: 'multiple'})
         ]),
-        R.a({href: '#', onClick: @.handleSubmit, className: 'popup-btn'},[
-          R.span({className: 'popup-fa fa fa-check-circle'})
+        R.a({href: '#', onClick: @.handleSubmit, className: 'popover-btn'},[
+          R.span({className: 'popover-fa fa fa-check-circle'})
           R.span({}, 'применить')
         ]),
-        R.a({href: '#', onClick: @.handleCancel, className: 'popup-btn'},[
-          R.span({className: 'popup-fa fa fa-ban'})
+        R.a({href: '#', onClick: @.handleCancel, className: 'popover-btn'},[
+          R.span({className: 'popover-fa fa fa-ban'})
           R.span({}, 'отменить')
         ])
       ])

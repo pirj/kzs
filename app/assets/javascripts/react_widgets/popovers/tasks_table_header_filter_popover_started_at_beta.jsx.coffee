@@ -1,28 +1,26 @@
 `/** @jsx React.DOM */`
 R = React.DOM
 
-@TasksTableHeaderFilterPopupStartedAt = React.createClass
+@TasksTableHeaderFilterPopoverStartedAtBeta = React.createClass
 
-  getDefaultProps: ->
-    opened: false
+  mixins: [PopoverMixin]
 
   handleSubmit: (e) ->
     e.preventDefault()
-    @.props.onPopupSubmit(
-      $(@.refs.popup_filter_form.getDOMNode()).serializeObject()
+    @.props.onPopoverSubmit(
+      $(@.refs.popover_filter_form.getDOMNode()).serializeObject()
     )
+    @.popoverHide()
 
   handleCancel: ->
-    @.props.onPopupCancel(false)
+    @.popoverHide()
 
 
   render: ->
-    class_name = 'popup popup-right '
-    class_name += (if @.props.opened then "" else "hidden")
-    R.div({className: class_name}, [
-      R.h5({className: 'popup-header'}, 'Фильтр по полю'),
-      R.form({ref: 'popup_filter_form', onSubmit: @.handleSubmit, className: 'form form-horizontal'}, [
-        R.div({className: 'row popup-body'},
+    popover_body = [
+      R.h5({className: 'popover-header'}, 'Фильтр по полю'),
+      R.form({ref: 'popover_filter_form', onSubmit: @.handleSubmit, className: 'form form-horizontal'}, [
+        R.div({className: 'row popover-body'},
 
           R.div({className: 'col-sm-6'},
             R.div({className: 'row'}, [
@@ -49,14 +47,16 @@ R = React.DOM
           )
 
         )
-        R.a({href: '#', onClick: @.handleSubmit, className: 'popup-btn'}, [
-          R.span({className: 'popup-fa fa fa-check-circle'})
+        R.a({href: '#', onClick: @.handleSubmit, className: 'popover-btn'}, [
+          R.span({className: 'popover-fa fa fa-check-circle'})
           R.span({}, 'применить')
         ]),
-        R.a({href: '#', onClick: @.handleCancel, className: 'popup-btn'}, [
-          R.span({className: 'popup-fa fa fa-ban'})
+        R.a({href: '#', onClick: @.handleCancel, className: 'popover-btn'}, [
+          R.span({className: 'popover-fa fa fa-ban'})
           R.span({}, 'отменить')
         ])
       ])
-    ])
+    ]
+
+    @.renderPopover(popover_body)
 
