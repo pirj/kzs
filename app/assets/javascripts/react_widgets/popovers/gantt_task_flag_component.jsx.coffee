@@ -49,5 +49,5 @@ R = React.DOM
       ])
     ]
 
-    @.renderPopup([header, items, bottom_links])
+    @.renderPopover([header, items, bottom_links])
 
