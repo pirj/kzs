@@ -18,4 +18,8 @@ class Tasks::ChecklistItemSerializer < ActiveModel::Serializer
       nil
     end
   end
+  
+  def checked
+    object.checked ? 'true' : 'false'
+  end
 end
