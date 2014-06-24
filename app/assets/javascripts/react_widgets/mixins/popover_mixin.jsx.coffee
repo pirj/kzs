@@ -142,15 +142,17 @@ R = React.DOM
     docHeight = $(document).outerHeight()
     docWidth = $(document).outerWidth()
 
-    offset = $popover.offset()
+    # Определение класса позиционирования при вертикальной композиции
     vert = 0.5 * docHeight - currentTop
     vertBalance = docHeight - currentTop
     vertPlacement = (if vert > 0 then "bottom" else  "top")
 
+    # Определение класса позиционирования при горизонтальной композиции
     horiz = 0.5 * docWidth - currentLeft
     horizBalance = docWidth - currentLeft
     horizPlacement = (if horiz > 0 then "right" else "left")
 
+    # Определение класса позиционирования при композиции "наискось"
     aslantPlacement = (
       if currentLeft > horizBalance and currentTop > vertBalance
         "top-left"
@@ -162,7 +164,9 @@ R = React.DOM
         "bottom-right"
     )
 
+    # Установка класса позиционирования в заисимости от композиции
     placement = (
+      # Если popover выходит за рамки window
       if docHeight - (popoverCloneOffset.top + popoverHeight) < 0 || docHeight - (vertBalance + popoverHeight) < 0 || docWidth - (popoverCloneOffset.left + popoverWidth) < 0 || docWidth - (horizBalance + popoverWidth) < 0
         aslantPlacement
       else
@@ -175,9 +179,11 @@ R = React.DOM
     @.placement = placement
 
     #arrow position formula
+    popArrow = $popover.find('.arrow')
     balancePopoverWidth = popoverWidth - activeBtnWidth
     arrowPosRight = balancePopoverWidth + activeBtnWidth / 2
     arrowPosLeft = popoverWidth - balancePopoverWidth - activeBtnWidth / 2
+    arrowWidth = popArrow.outerWidth()
 
     if $popover.hasClass('bottom')
       $popover.css
@@ -203,31 +209,38 @@ R = React.DOM
       $popover.css
         top: currentTop + activeBtnHeight + "px"
         left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
-      $popover.find('.arrow').css
+      popArrow.css
         left: arrowPosRight + "px"
 
     else if $popover.hasClass('bottom-right')
       $popover.css
         top: currentTop + activeBtnHeight + "px"
         left: currentLeft + "px"
-      $popover.find('.arrow').css
+      popArrow.css
         left: arrowPosLeft + "px"
 
     else if $popover.hasClass('top-left')
       $popover.css
         top: currentTop - activeBtnHeight / 2 - popoverHeight + "px"
         left: (currentLeft - popoverWidth) + activeBtnWidth + "px"
-      $popover.find('.arrow').css
+      popArrow.css
         left: arrowPosRight + "px"
 
     else if $popover.hasClass('top-right')
       $popover.css
         top: currentTop - activeBtnHeight / 2 - popoverHeight + "px"
         left: currentLeft + "px"
-      $popover.find('.arrow').css
+      popArrow.css
         left: arrowPosLeft + "px"
 
-
-
+    if arrowWidth > activeBtnWidth
+      if $popover.is('.bottom-right, .top-right')
+        $popover.css
+          marginLeft: - arrowWidth/2 + "px"
+        popArrow.css
+          marginLeft: "0px"
+      if $popover.is('.bottom-left, .top-left')
+        $popover.css
+          left: popoverCssLeft + arrowWidth + "px"
 
   # ==================================================================================
