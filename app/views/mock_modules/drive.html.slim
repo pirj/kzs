@@ -1,0 +1,15 @@
+= content_for :page_header do
+  = header_title do
+    h1 Библиотека
+
+/= mock_presentation_img '4_bibl.gif'
+- img_urls = [ \
+  image_path('mock_modules/4_bibl/2.png'), \
+  image_path('mock_modules/4_bibl/3.png'), \
+  image_path('mock_modules/4_bibl/4.png'), \
+  image_path('mock_modules/4_bibl/5.png'), \
+  image_path('mock_modules/4_bibl/6.png'), \
+  image_path('mock_modules/4_bibl/7.png'), \
+  image_path('mock_modules/4_bibl/8.png'), \
+]
+= react_component('MockModuleSlides', {img_urls: img_urls})

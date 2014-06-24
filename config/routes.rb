@@ -7,6 +7,25 @@ Kzs::Application.routes.draw do
 #  match '/library' => 'admin/users#index'
 #  match '/library' => 'library#library'
 # GOOD
+
+  # for release 0.2
+  # some routing to modules mocks
+  get 'drive' => 'mock_modules#drive', as: :drive_mock
+  get 'guard' => 'mock_modules#guard', as: :guard_mock
+  get 'dispatcher' => 'mock_modules#dispatcher', as: :dispatcher_mock
+  get 'storehouse' => 'mock_modules#storehouse', as: :storehouse_mock
+  get 'maintenance' => 'mock_modules#maintenance', as: :maintenance_mock
+  get 'maneuvers' => 'mock_modules#maneuvers', as: :maneuvers_mock
+  get 'settings' => 'mock_modules#settings', as: :settings_mock
+  get 'education' => 'mock_modules#education', as: :education_mock
+  get 'administration' => 'mock_modules#administration', as: :administration_mock
+  get 'im' => 'mock_modules#im', as: :im_mock
+  get 'objects' => 'mock_modules#objects', as: :objects_mock
+  get 'profile' => 'mock_modules#profile', as: :profile_mock
+  get 'important_traffic' => 'mock_modules#important_traffic', as: :important_traffic_mock
+  get 'news' => 'mock_modules#news', as: :news_mock
+  get 'meteo' => 'mock_modules#meteo', as: :meteo_mock
+
   get 'library' => 'library#library'
 
   devise_for :users

@@ -53,4 +53,18 @@ $(document).ready(function () {
             document.location.href = $('.sidebar-header ')[0].getAttribute('href');
         }
     });
+
+
+
+    var $sidebarScroll = $('.js-v-scroll').scrollingCarousel( {
+        scrollerAlignment : 'vertical',
+        autoScroll: false
+    });
+
+    $('.js-v-scroll ul li a').on('mouseover', function()  {
+        $sidebarScroll.Pause();
+    }).on('mouseleave', function()  {
+        $sidebarScroll.Play();
+    });
+
 });
