@@ -1,5 +1,5 @@
 #sakedemo.cyclonelabs.com
-task :release do
+task :demo do
   module UseScpForDeployment
     def self.included(base)
       base.send(:alias_method, :old_upload, :upload)
@@ -35,7 +35,7 @@ task :release do
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
-  set :branch, "release/0.2"
+  set :branch, "demo"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
