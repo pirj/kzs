@@ -88,6 +88,19 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
 
 
+//    var toggle_flag = function(status, parent){
+//
+//        console.log(a);
+//
+//        if (status==true){
+//       $('.task_flag'+parent).addClass('active');
+//        } else {
+//            $('.task_flag'+parent).removeClass('active');
+//
+//        }
+//
+//    };
+
     var parent_class_name = '.' + uniq_flag_class_name;
 
     var current_flag_json = {
