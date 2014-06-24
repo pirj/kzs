@@ -1,4 +1,4 @@
-#sake.cyclonelabs.com
+#sakedemo.cyclonelabs.com
 task :release do
   module UseScpForDeployment
     def self.included(base)
@@ -23,19 +23,19 @@ task :release do
   
   Capistrano::Configuration.send(:include, UseScpForDeployment)
 
-  server "neptun.cyclonelabs.com", :web, :app, :db, primary: true
+  server "mercury.cyclonelabs.com", :web, :app, :db, primary: true
 
-  ssh_options[:port] = 13527
+  ssh_options[:port] = 23813
 
   set :user, "babrovka"
   set :application, "kzs"
-  set :deploy_to, "/srv/web/sake.cyclonelabs.com"
+  set :deploy_to, "/srv/webdata/sakedemo.cyclonelabs.com"
   set :deploy_via, :remote_cache
   set :use_sudo, false
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
-  set :branch, "staging"
+  set :branch, "release/0.2"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
@@ -45,13 +45,18 @@ task :release do
   set :hipchat_announce, true
 
 
-  namespace :deploy do
-    namespace :assets do
-      task :precompile, :roles => :web, :except => { :no_release => true } do
-          run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile --trace}
-      end
-    end
-  end
+  # namespace :deploy do
+  #   namespace :assets do
+  #     task :precompile, :roles => :web, :except => { :no_release => true } do
+  #       from = source.next_revision(current_revision)
+  #       if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+  #         run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile --trace}
+  #       else
+  #         logger.info "Skipping asset pre-compilation because there were no asset changes"
+  #       end
+  #     end
+  #   end
+  # end
   
   namespace(:uwsgi) do
     task :restart do
@@ -61,15 +66,15 @@ task :release do
   
   namespace(:thin) do
     task :stop do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sake.cyclonelabs.com sake}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sakedemo.cyclonelabs.com sakedemo}
      end
 
     task :start do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage start sake.cyclonelabs.com sake}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage start sakedemo.cyclonelabs.com sakedemo}
     end
 
     task :restart do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sake.cyclonelabs.com sake && sudo /home/babrovka/scripts/thinManage start sake.cyclonelabs.com sake}
+      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sakedemo.cyclonelabs.com sakedemo && sudo /home/babrovka/scripts/thinManage start sakedemo.cyclonelabs.com sakedemo}
     end
   end
   
@@ -105,4 +110,3 @@ task :release do
   after "copy_database_config", "copy_mail_config"
   # after "deploy", "deploy:cleanup"
 end
-
