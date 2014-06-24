@@ -167,25 +167,39 @@ $ ->
   # POPOVER !!!
   clearPopover = () ->
     $('.js-popover-content').hide()
-    $('.js-popover').not($(this)).removeClass('active')
     $('.cloned').remove()
     return
 
-  $('.js-popover').on('click', (e) ->
+  missClick = ->
+    yourClick = true
+    $(document).bind "click", (e) ->
+      if not yourClick and $(e.target).closest('.cloned').length is 0
+        $('.cloned').remove()
+        $('.js-popover').removeClass('active')
+        $(document).unbind('click');
+      yourClick = false
+      return
+    return
 
+  $('.js-popover').on('click', (e) ->
     clearPopover()
     e.preventDefault()
-    target = this.dataset.target
+    target = @.dataset.target
     $sourcePopover = $('.js-popover-content[data-target=' + target + ']')
+    $sourcePopover.clone(true).appendTo(document.body).addClass('cloned')
+    missClick()
 
-    $(this).toggleClass('active')
-    if $(this).hasClass('active')
-      $sourcePopover.clone(true).appendTo(document.body).addClass('cloned')
+    $(@).toggleClass('active')
+
+    if $(@).hasClass('active')
+      $('.js-popover').not($(@)).removeClass('active')
       $('.cloned').show().css
         width: "550px"
       $sourcePopover.hide()
+
     else
       $('.cloned').remove()
+
 
     popoverClone = $(".js-popover-content.cloned")
     activeBtnHeight = $(@).outerHeight()
