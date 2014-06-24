@@ -6,8 +6,6 @@ module Documents
     # translating current state in 'now state' style
     def current_humanize_state
       humanize_state current_state
-      #"#{object.read_at.to_s} - #{accountable.read_at.to_s} - #{h.current_user.id} #{object.recipient_organization.director.id} "
-      #"#{accountable.recipient_organization.inspect}"
     end
 
     # translating state name in 'now state' style

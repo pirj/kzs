@@ -10,7 +10,8 @@
   cursor: pointer;
   display: inline-block;
   font-weight: normal;
-  line-height: 1;
+  line-height: $label-font-size+2px;
+  letter-spacing: 1.5px;
   min-width: 100px;
   text-align: center;
   text-decoration: none;
