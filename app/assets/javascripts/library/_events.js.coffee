@@ -142,7 +142,29 @@ $ ->
     popover.css('height': popover.height(), width: popover.width() )
   )
 
-# POPOVER !!!
+
+  # AJAX Form-Submit
+
+
+
+  $(document).on('ifChecked ifUnchecked', ".js-form-submit", (e) ->
+    $(e.target).closest('form').submit()
+    )
+#    return
+  # CLEAR PAGE
+
+  $(document).click (e) ->
+
+    return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
+#    clearPopover()
+
+    # останавливало весь код.
+    # поэтому закомментировал
+    # event.stopPropagation()
+    return
+
+
+  # POPOVER !!!
   clearPopover = () ->
     $('.js-popover-content').hide()
     $('.js-popover').not($(this)).removeClass('active')
@@ -260,30 +282,6 @@ $ ->
   $('.js-popover-close').on('click', (e) ->
     clearPopover()
   )
-
-
-
-  # AJAX Form-Submit
-
-
-
-  $(document).on('ifChecked ifUnchecked', ".js-form-submit", (e) ->
-    $(e.target).closest('form').submit()
-    )
-#    return
-  # CLEAR PAGE
-
-  $(document).click (e) ->
-
-    return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
-#    clearPopover()
-
-    # останавливало весь код.
-    # поэтому закомментировал
-    # event.stopPropagation()
-    return
-
-
 
 
   # click on 'back' button

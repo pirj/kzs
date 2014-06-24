@@ -23,7 +23,6 @@
   background-clip: padding-box;
   border: none;
   border-radius: $border-radius-large;
-  padding-top: 30px;
 
   // Overrides for proper insertion
   white-space: normal;
@@ -87,7 +86,6 @@
 
   .btn-group-vertical {
     width: 100%;
-
     .btn {
       border-top: #666666 solid 1px;
       text-align: left;
