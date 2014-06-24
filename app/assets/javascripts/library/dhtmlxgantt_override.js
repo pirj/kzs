@@ -62,7 +62,7 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
 
     var div =document.createElement('div');
     div.title = flag.name;
-    uniq_flag_class_name = (new Date()).getTime();
+    uniq_flag_class_name = (new Date()).getTime()+'flag';
     div.className = "task_flag " + uniq_flag_class_name;
 
     if (flag.checked === true) {
@@ -150,7 +150,7 @@ gantt._render_task_content = function(task, width){
 
 
 
-    var uniq_control_class_name = (new Date()).getTime() + 'control';
+    var uniq_control_class_name = (new Date()).getTime() + 'actions';
     content.className = "gantt_task_content " + uniq_control_class_name;
 
     var parent_class_name = '.' + uniq_control_class_name;
