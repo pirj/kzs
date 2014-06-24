@@ -47,7 +47,8 @@ R = React.DOM
       opened: @.state.filter_popover_opened,
       onPopoverSubmit: @.onChangeFilterParams,
       onPopoverToggle: @.handlePopoverToggle,
-      filter_opts: @.props.filter_opts[@.props.name]
+      filter_opts: @.props.filter_opts[@.props.name],
+      placement: 'bottom'
     }
 
     popoverClassName = @.choosePopoverRenderer()

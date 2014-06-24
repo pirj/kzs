@@ -95,6 +95,8 @@ R = React.DOM
   # которые подписаны на это свойство
   componentDidUpdate: ->
     @.popoverToggle()
+    @._calculatePosition()
+    @.popoverDidUpdate() if @.hasOwnProperty('popoverDidUpdate')
 
   getDefaultProps: ->
     parent: ''
@@ -105,6 +107,8 @@ R = React.DOM
 
   propTypes:
     onPopoverToggle: React.PropTypes.func
+    placement: React.PropTypes.string
+    parent: React.PropTypes.string
 
   # ==================================================================================
 
@@ -177,8 +181,9 @@ R = React.DOM
         else
           vertPlacement
     )
+
     #положение можно задать напрямую в placement = "right" например
-    @.placement = placement
+    @.placement = @.props.placement || placement
 
     #arrow position formula
     popArrow = $popover.find('.arrow')
