@@ -59,6 +59,11 @@
 .text-danger, .text-red {
   color: $color-red;
 }
+
+.text-red-darker, .text-red-darker:hover {
+  color: $color-red-darker;
+}
+
 .text-success, .text-green {
   color: $state-success-text;
   &:hover {
@@ -77,6 +82,22 @@
   &:hover {
     color: darken($color-gray, 10%);
   }
+}
+
+
+.text-cyan{
+  color: $color-cyan;
+  &:hover {
+    color: darken($color-cyan, 10%);
+  }
+}
+
+
+
+
+
+.text-bold{
+  font-weight: bold;
 }
 
 // Alignment

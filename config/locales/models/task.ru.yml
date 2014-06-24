@@ -12,5 +12,13 @@ ru:
         text: Описание
         started_at: Дата начала
         finished_at: Дата окончания
-        approvers: Контрольные лица
-        executors: Исполнители
+        inspector: Инспектор
+        executor: Исполнитель
+
+
+      tasks/checklist:
+        name: Название списка дел
+
+      tasks/checklist_item:
+        name: Название дела
+        description: Описание дела

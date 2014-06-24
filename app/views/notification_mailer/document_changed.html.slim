@@ -1,0 +1,28 @@
+html
+  body
+    p
+      | Документ 
+      = link_to "«#{@document.title}»", documents_document_url(@document)
+      |  был изменен.
+  
+    ul
+      - if @title_changed
+        li у документа изменился заголовок
+
+      - if @body_changed
+        li у документа изменился текст
+
+      - if @creator_changed
+        li у документа появился другой составитель: вместо #{@old_document.creator.first_name_with_last_name} стал #{@document.creator.first_name_with_last_name}
+
+      - if @conformers_changed
+        li у документа изменился состав согласующих: вместо #{@old_conformers_names} стали #{@conformers_names}
+
+      - if @executor_changed
+        li у документа появился другой исполнитель: вместо #{@old_document.executor.first_name_with_last_name} стал #{@document.executor.first_name_with_last_name}
+
+      - if @approver_changed
+        li у документа появилось другое контрольное лицо: вместо #{@old_document.approver.first_name_with_last_name} стал #{@document.approver.first_name_with_last_name}
+
+    p
+      = link_to 'Посмотреть в САКЭ', documents_document_url(@document)

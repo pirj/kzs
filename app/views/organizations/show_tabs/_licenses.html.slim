@@ -1,25 +1,26 @@
 .tab-pane#licenses
   - resource.licenses.each do |license|
-    .pull-left.col-sm-4
-        = image_tag(license.image.url(:medium))
-    .row.pull-right.col-sm-8
-      h2
-        = license.image_file_name
-      .form-group
-        .text-help Тип документа:
-        = license.type
-      .form-group
-        .text-help Серия и номер:
-        = license.number
-      .form-group
-        .text-help Дата выдачи:
-        = license.issuance
-      .form-group
-        .text-help Срок действия, до:
-        = license.deadline
-      .form-group
-        .text-help Кем выдан:
-        = license.issued_by
-      .form-group
-        .text-help Скан документа:
-        = link_to "Скачать", license.image.url, target: 'blank'
+    .license-item.row.b-offset-md
+      .pull-left.col-sm-4
+          = image_tag(license.image.url(:medium))
+      .row.pull-right.col-sm-8
+        h2
+          = license.image_file_name
+        .form-group
+          .text-help Тип документа:
+          = license.type
+        .form-group
+          .text-help Серия и номер:
+          = license.number
+        .form-group
+          .text-help Дата выдачи:
+          = license.issuance
+        .form-group
+          .text-help Срок действия, до:
+          = license.deadline
+        .form-group
+          .text-help Кем выдан:
+          = license.issued_by
+        .form-group
+          .text-help Скан документа:
+          = link_to "Скачать", license.image.url, target: 'blank'

@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups, :uniq => true
   has_many :statement_approvers
   has_many :statements, through: :statement_approvers
-  has_many :open_notices
   belongs_to :permit
 
   has_many :vehicle_users

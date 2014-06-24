@@ -1,0 +1,14 @@
+ru:
+  tasks/tasks:
+    table:
+      headers:
+        title: Название
+        text: Описание
+        started_at: Начало
+        finished_at: Конец
+        executors: Исполнители
+        executor: Исполнитель
+        inspectors: Инспектора
+        inspector: Инспектор
+        checked: завершена
+        state: Статус

@@ -5,7 +5,7 @@
 // Set global container for grid
 // Because of html have sidebar with animations
 .page{
-  padding-left: $sidebar-width-closed;
+  margin-left: $sidebar-width-closed;
   min-width: $screen-default-width;
   @include transition(.2s ease-in-out);
   -webkit-transform: translateX(0);
@@ -151,7 +151,9 @@
 // делаем все сетки одинакового размера
 @media (min-width: $grid-float-breakpoint) {
   .container, .container-lefted  {
-    width: $container-md;
+//    TODO-justvitalius: хук, чтобы Гантт был во всю ширину экрана
+//    width: $container-md;
+    width: 100%;
   }
 
   @include make-grid-columns-float(md);
@@ -171,6 +173,9 @@
 @media (min-width: $screen-lg-min) {
   .container, .container-lefted {
     width: $container-lg;
+    //    TODO-justvitalius: хук, чтобы Гантт был во всю ширину экрана
+//    width: $container-lg;
+    width: 100%;
   }
 
   @include make-grid-columns-float(lg);

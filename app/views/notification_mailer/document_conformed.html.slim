@@ -1,0 +1,12 @@
+html
+  head
+    title САКЭ КЗС. Документ согласован и готов к подписи
+  body
+    p
+      | Документ 
+      = link_to "«#{@document.title}»", documents_document_url(@document)
+      |  был согласован всеми согласующими.
+    p
+      | Теперь вы можете его 
+      = link_to 'подписать', documents_document_url(@document)
+      | .

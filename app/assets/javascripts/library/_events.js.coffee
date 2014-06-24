@@ -20,7 +20,13 @@ window.global =
   datepicker:
     showOtherMonths: true
     dateFormat: "dd.mm.yy"
-    minDate: new Date()
+    # убираем это свойство,потому что из-за него нельзя выбрать дату ранее сегодня в фильтрах по дате
+    # minDate: new Date()
+
+  icheck:
+    checkboxClass: 'icheckbox_flat-green checkbox-inline'
+    radioClass: 'iradio_flat-green radio-inline'
+    disabledClass: 'js-ichecked-input'
 
 
 # Исполнение js-кода внутри кастомного контекста
@@ -68,6 +74,19 @@ $ ->
   opts = _.extend(global.datepicker, minDate: date + data_days, max_date )
   $( '.js-datepicker.js-deadline' ).datepicker(opts)
 
+  # datepicker - for nested form
+
+  $(document).on "nested:fieldAdded", (event) ->
+
+    # this field was just inserted into your form
+    field = event.field
+
+    # it's a jQuery object already! Now you can find date input
+    dateField = field.find(".js-datepicker")
+    console.log(field)
+    # and activate datepicker on it
+    dateField.datepicker(opts)
+    return
 
   # events to colorizing input and it icon
   $(document).on('focusin', '.input-group input, .js-input-with-icon', (e) ->
@@ -107,9 +126,8 @@ $ ->
 
   # Initialize checkboxes by iCheck plugin
   if jQuery.fn.iCheck != undefined
-    $('input[type="checkbox"], input[type="radio"]').not('.js-icheck-off input').iCheck(
-      checkboxClass: 'icheckbox_flat-green checkbox-inline'
-      radioClass: 'iradio_flat-green radio-inline'
+    $('input[type="checkbox"], input[type="radio"], .js-checkbox').not('.js-icheck-off input, .js-icheck-off').iCheck(
+      global.icheck
     )
 
 
@@ -141,6 +159,16 @@ $ ->
     clearPopover()
   )
 
+
+
+  # AJAX Form-Submit
+
+
+
+  $(document).on('ifChecked ifUnchecked', ".js-form-submit", (e) ->
+    $(e.target).closest('form').submit()
+    )
+#    return
   # CLEAR PAGE
 
   $(document).click (e) ->
@@ -148,7 +176,9 @@ $ ->
     return if $(e.target).closest('.js-popover-content').length || $(e.target).closest('.js-popover').length
     clearPopover()
 
-    event.stopPropagation()
+    # останавливало весь код.
+    # поэтому закомментировал
+    # event.stopPropagation()
     return
 
 
@@ -183,3 +213,18 @@ $ ->
 
   # БЛОК АКТИВАЦИИ КЛАССОВ
   user_conform = new ConformingView()
+
+
+
+
+#scroll for gantt page
+#  return
+$(document).ready ->
+
+  $('.js-tasks-table').on "scroll", (e) ->
+    y = $($(this)[0]).scrollTop()
+    window.app.GanttView.scrollY(y)
+    return
+
+window.app.scrollTable = (y) ->
+  $('.js-tasks-table').scrollTop(y)

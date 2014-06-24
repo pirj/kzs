@@ -1,9 +1,14 @@
 FactoryGirl.define do
   sequence(:document_title) { | n | "Document_#{n}" }
 
+  factory :document, class: Document do
+    title { generate(:document_title) }
+    body Populator.sentences(30..50)
+  end
+
   factory :simple_document, class: Document do
     title { generate(:document_title) }
-    body 'document body'
+    body Populator.sentences(30..50)
 
     sender_organization { FactoryGirl.create(:sender_organization) }
     recipient_organization { FactoryGirl.create(:recipient_organization) }

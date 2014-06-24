@@ -96,9 +96,22 @@ module Kzs
     mail_config = File.exists?(mail_conf_path) ? YAML::load_file(mail_conf_path).symbolize_keys : {}
 
     # TODO: move to mail.yml
-    config.action_mailer.default_url_options = { host: "cyclonelabs.net" }
+    config.action_mailer.default_url_options = { host: "sakedev.kzsspb.ru" }
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = mail_config
+
+    #исправление ошибки с серверным временем в ajax формах
+    config.active_record.default_timezone = :utc
+
+    # генерация перевод для их использования в js файлах
+    # данный middleware отличается от того,что написан в оф.документации
+    # но именно он и работает
+    # при первом запуске нужно запустить rake-задачи
+    # rake i18n:js:export && rake i18n:js:setup
+    config.middleware.use SimplesIdeias::I18n::Middleware
+
+    # React addons
+    config.react.addons = true
   end
 end

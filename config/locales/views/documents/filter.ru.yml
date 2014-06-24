@@ -13,7 +13,7 @@ ru:
         sent: Отправлено/Получено
         trashed: Удалено
         accepted: Исполнено
-        rejected: Отклонено
+        rejected: Не исполнено
 
       headers:
         state: 'Фильтрация по статусу:'

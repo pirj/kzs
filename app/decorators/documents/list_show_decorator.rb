@@ -6,7 +6,7 @@ module Documents
 
     def title_link
       if object.title
-        h.link_to object.title, path, class: 'link'
+        h.link_to object.title, path
       end
     end
 
@@ -67,7 +67,7 @@ module Documents
         icon_text = "#{object.conformations.count}/#{object.conformers.count}"
         h.content_tag(:div, class: 'text-center js-document-list-conformation-info _document-conform-status js-tooltip', title: 'количество проголосовавших из общего числа согласующих' ) do
           h.content_tag(:h4, nil, class: icon_class) +
-              h.content_tag(:h4, icon_text, class: 'text-gray invisible')
+              h.content_tag(:h5, icon_text, class: 'text-cyan text-bold invisible')
         end.html_safe
       end
     end

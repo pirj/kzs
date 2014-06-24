@@ -8,11 +8,8 @@ gem 'squeel'
 # Search object processor
 gem 'ransack'
 
-gem 'execjs'
-
 gem 'paperclip', '~> 3.0'
 gem 'devise'
-
 
 gem 'russian', '~> 0.6.0'
 
@@ -22,8 +19,14 @@ gem 'faker'
 # Authorization rules
 gem 'cancan'
 
+# Background process
+gem 'delayed_job_active_record'
+gem "daemons"
 # ActiveRecord object duplication DSL
 gem 'amoeba'
+
+# Serialize
+gem 'active_model_serializers'
 
 gem 'mustache'
 gem 'smt_rails'
@@ -57,6 +60,9 @@ gem 'responders'
 # State Machine decoupled from model itself
 gem 'statesman', '~> 0.3'
 
+# Простая стейт-машина с названиями эвентов
+gem 'workflow'
+
 # Object read/unread management
 gem 'unread', '~> 0.3.1'
 
@@ -79,9 +85,9 @@ gem 'spreadsheet'
 gem 'pdfjs_rails'
 
 
-group :production do
-  gem 'thin'
-end
+gem 'private_pub'
+gem 'thin'
+
 
 group :assets do
   #gem 'tilt', '~>1.3.3'
@@ -92,8 +98,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
   gem 'font-awesome-rails'
-  # gem 'turbo-sprockets-rails3'
-  gem 'therubyracer'
+  gem 'turbo-sprockets-rails3'
 end
 
 group :development, :test do
@@ -111,6 +116,11 @@ group :development, :test do
   gem 'yard' # Для документации
 end
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 group :test do
   gem 'shoulda-matchers'
   gem 'capybara'
@@ -119,3 +129,12 @@ group :test do
   gem 'database_cleaner'
   gem 'test_after_commit'
 end
+
+
+# reactjs requires
+gem 'react-rails', git: 'https://github.com/reactjs/react-rails'
+gem 'execjs'
+gem 'therubyracer'
+gem 'i18n-js'
+gem 'select2-rails'
+gem 'momentjs-rails'

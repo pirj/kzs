@@ -1,0 +1,16 @@
+= f.simple_fields_for :checklist_items  do |item_builder|
+  = item_builder.input :name, label_hint:  'Краткое название дела'
+  = item_builder.input :description, label_hint:  'Подробности дела', input_html: { rows: 2 }
+  = item_builder.input :finished_at, input_html: { rows: 2 }, as: :datepicker, input_html: { class: 'js-datepicker', data: { min_date: Date.today }}, input_wrapper_html: { class: 'col-sm-2' }, label_hint: 'Дата, к которой задача должна быть исполнена'
+
+  .col-sm-12.b-offset-sm
+    .b
+      .col-sm-3.col-sm-offset-2
+        = item_builder.link_to_remove class: 'link link-danger' do
+          span.fa.fa-minus-circle
+          span Убрать дело
+
+.b
+  = f.link_to_add :checklist_items, class: 'btn btn-primary col-sm-offset-2' do
+    span.fa.fa-plus-circle
+    span Добавить дело

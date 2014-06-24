@@ -5,7 +5,7 @@ ul.nav.navbar-nav.navbar-right
       = content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
       span.caret
 
-    .js-popover-content._user-bar data-target='user-bar'
+    .js-popover-content.bottom._user-bar data-target='user-bar'
 
       h3._user-bar-header = current_user.first_name_with_last_name
       ._user-bar-status
@@ -27,9 +27,7 @@ ul.nav.navbar-nav.navbar-right
           a.js-popover-close.btn
             i.fa.fa-times-circle
             | Отмена
-          /=
-          /
-          /
+      .arrow
 
 
 /  i.fa.fa-user    /  i.fa.fa-plus-square - чтобы потом не искать

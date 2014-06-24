@@ -11,6 +11,16 @@ class Documents::ConformationsController < ApplicationController
       # TODO-vladimir: как-то не красиво выглядит эта связь, надо уже и в контроллерах писать «релоад» согласований
       @conformations = doc.conformations.reload
 
+      # Если все согласовали положительно
+      if @conformations.where(conformed: true).count == doc.conformers.count
+        begin
+          NotificationMailer.document_conformed(doc).deliver!
+        rescue
+          # Nothing
+        end
+        doc.reload.notify_interesants only: :approver, exclude: current_user
+      end
+
       respond_to { |format| format.js { render layout: false } }
     end
   rescue Exception => e

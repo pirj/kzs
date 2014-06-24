@@ -1,0 +1,3 @@
+<% t = Tasks::StateDecorator.decorate(@task) %>
+$('.js-task-state').html('<%= t.state %>');
+$('.js-tasks-actions a').closest('.js-tasks-actions').html('<%= j render("tasks/tasks/status_actions") %>');

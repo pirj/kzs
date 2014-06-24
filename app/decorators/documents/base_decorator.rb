@@ -89,7 +89,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:title), h.organization_path(object.send(attr)), class: "link-dashed" )
         end
       end
     end
@@ -99,7 +99,7 @@ module Documents
       define_method "#{attr}_link_with_label" do
         element_wrapper object.send(attr) do
           h.content_tag( :div, I18n.t("documents.table.document_labels.#{attr}"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+              h.link_to( object.send(attr).try(:first_name_with_last_name), h.user_path(object.send(attr)), class: "link-dashed" )
         end
       end
     end
@@ -109,9 +109,9 @@ module Documents
     # Sender_link --> Recipient_link
     def sender_to_recipient_links
       if object.sender && object.recipient
-        h.link_to( sender_name, h.organization_path(object.sender), class: 'link link-muted' ) +
+        h.link_to( sender_name, h.organization_path(object.sender) ) +
             h.content_tag(:span, nil, class: 'fa fa-long-arrow-right text-muted')+
-            h.link_to( recipient_name, h.organization_path(object.recipient), class: 'link link-muted' )
+            h.link_to( recipient_name, h.organization_path(object.recipient) )
       end
     end
 
@@ -128,14 +128,14 @@ module Documents
     def creator_with_label
       element_wrapper object.creator do
         h.content_tag( :div, I18n.t("documents.table.document_labels.creator"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link col-sm-#{12-LABEL_COL_WIDTH}  spec-document-creator" )
+          h.link_to( object.creator.try(:first_name_with_last_name), h.organization_path( object.creator), class: "link-dashed  spec-document-creator" )
       end
     end
 
     def conformer_link_with_label
       unless object.conformers.empty?
         a = h.content_tag( :div, I18n.t("documents.table.document_labels.conformer"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
-            h.content_tag( :div, (conformers_list), class: "link col-sm-#{12-LABEL_COL_WIDTH}" )
+            h.content_tag( :div, (conformers_list), class: "link-dashed col-sm-#{12-LABEL_COL_WIDTH}" )
         h.content_tag(:div, a, class: "row form-group")
       end
     end
@@ -155,6 +155,15 @@ module Documents
             h.link_to( file.attachment_file_name, file.attachment.url, class: 'col-sm-12 link ', target: '_blank' )
           end.join('  ').html_safe)   , class: '')
         h.content_tag(:div, title.html_safe + files, class: 'row')
+      end
+    end
+
+    def started_at_date
+      element_wrapper object.started_at do
+        h.content_tag( :div, I18n.t("documents.table.document_labels.started_at"), class: "text-help col-sm-#{LABEL_COL_WIDTH}" )+
+            h.content_tag( :div, class: " col-sm-#{12-LABEL_COL_WIDTH}" ) do
+              h.content_tag( :span, "#{started_at}", class: 'muted' )
+            end
       end
     end
 
@@ -196,6 +205,10 @@ module Documents
 
     def approved_at
       DateFormatter.new(object.approved_at, :long)
+    end
+
+    def started_at
+      DateFormatter.new(object.started_at)
     end
 
     def deadline

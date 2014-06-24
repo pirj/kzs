@@ -218,14 +218,20 @@
   font-family: $font-family-sans-serif-light;
 
   // caret must be bigger
-  .caret{ font-size: $btn-font-size; }
+  .caret{ 
+    font-size: $btn-font-size; 
+    margin-left: 16px;
+    width: 10px;
+  }
 
   // dropdown header
   .dropdown-toggle{
     background-color: transparent; // set to transparent for beautiful animation with change background color
     margin: 0;
-    padding: $padding-base-vertical*3 $_padding $padding-base-vertical;
+    min-width: 264px;
+    padding: 8px 28px $padding-base-vertical*2;
     @include border-top-radius(15px);
+    margin: 10px 0 0 -24px;
 
 
     &, &:hover, &:visited, &:active, &:focus,
@@ -239,12 +245,13 @@
   .dropdown-menu{
     background-color: $dropdown-header-bg;
     border-top: 1px solid $dropdown-header-divider-bg;
-    padding-bottom: $_padding/2;
-
+    padding-bottom: 0;
+    margin-left: -24px;
     margin-top: 0;
     padding-top: 0;
     color: #fff;
-
+    border-radius: 0;
+    
     @include border-top-radius(0);
     @include border-bottom-radius(15px);
 
@@ -254,16 +261,23 @@
 
       // menu item divider
       border-bottom: 1px solid $dropdown-header-divider-bg;
-      &:last-child{border-bottom: none;}
+      &:last-child{
+        border-bottom: none;
+        a { 
+          @include border-top-radius(0);
+          @include border-bottom-radius(15px);
+        }
+      }
 
       a{
+        font-size: 20px;
         padding: $_padding/2 $_padding;
       }
 
       & a:hover,
       & a:focus {
         background: $dropdown-header-item-hover-bg;
-        color: $link-hover-color;
+        color: #000;
       }
     }
 
@@ -288,6 +302,9 @@
       a, a:hover, a:visited, a:active, a:focus{
         color: #fff;
       }
+    }
+    > .dropdown-menu, .dropdown-toggle {
+      z-index: 26;
     }
   }
 }

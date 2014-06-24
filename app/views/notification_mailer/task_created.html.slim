@@ -1,0 +1,9 @@
+html
+  body
+    p
+      | Появилась новая задача 
+      = link_to "«#{@task.title}»", task_url(@task)
+      | .
+
+    p
+      = link_to 'Посмотреть в САКЭ', task_url(@task)

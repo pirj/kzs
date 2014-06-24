@@ -1,0 +1,17 @@
+ru:
+  activerecord:
+    tasks/task:
+      state:
+        formulated: Сформирована
+        cancelled: Отменена
+        activated: В работе
+        executed: Выполнена
+        paused: Приостановлена
+
+      to_state:
+        cancel: Отменить
+        start: Начать
+        finish: Завершить
+        pause: Приостановить
+        resume: Продолжить
+        reformulate: Переоткрыть

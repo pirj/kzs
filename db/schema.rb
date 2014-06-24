@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140424061130) do
+ActiveRecord::Schema.define(:version => 20140529143530) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -129,6 +129,22 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
     t.string   "id_number"
   end
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0, :null => false
+    t.integer  "attempts",   :default => 0, :null => false
+    t.text     "handler",                   :null => false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "delete_notices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "document_id"
@@ -217,11 +233,12 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.integer "document_id", :null => false
-    t.integer "user_id",     :null => false
+    t.integer "notifiable_id",   :null => false
+    t.integer "user_id",         :null => false
+    t.string  "notifiable_type"
   end
 
-  add_index "notifications", ["document_id", "user_id"], :name => "index_notifications_on_document_id_and_user_id", :unique => true
+  add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], :name => "notification_uniqueness", :unique => true
 
   create_table "official_mails", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -233,17 +250,11 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
     t.integer "organization_id",  :null => false
   end
 
-  create_table "open_notices", :force => true do |t|
-    t.integer  "document_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "orders", :force => true do |t|
     t.datetime "deadline"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "started_at"
   end
 
   create_table "organizations", :force => true do |t|
@@ -435,6 +446,24 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
     t.text     "body"
   end
 
+  create_table "tasks_checklist_items", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "checked"
+    t.integer  "checklist_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.datetime "finished_at"
+  end
+
+  create_table "tasks_checklists", :force => true do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "updated_by"
+  end
+
   create_table "tasks_tasks", :force => true do |t|
     t.string   "title"
     t.text     "text"
@@ -443,16 +472,11 @@ ActiveRecord::Schema.define(:version => 20140424061130) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "organization_id"
-  end
-
-  create_table "tasks_tasks_approvers", :id => false, :force => true do |t|
-    t.integer "task_id", :null => false
-    t.integer "user_id", :null => false
-  end
-
-  create_table "tasks_tasks_executors", :id => false, :force => true do |t|
-    t.integer "task_id", :null => false
-    t.integer "user_id", :null => false
+    t.string   "state"
+    t.integer  "parent_id"
+    t.integer  "executor_id"
+    t.integer  "inspector_id"
+    t.integer  "updated_by"
   end
 
   create_table "user_desktop_configurations", :force => true do |t|

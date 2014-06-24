@@ -1,0 +1,7 @@
+html
+  body
+    p
+      | Статус дела «#{@item.name}» изменился.
+  
+    p
+      = link_to 'Посмотреть в САКЭ', task_url(@item.checklist.task)

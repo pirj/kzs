@@ -534,16 +534,46 @@
 
 // Labels
 // -------------------------
-@mixin label-variant($color, $txt-color: $label-color) {
-  background-color: $color;
+@mixin label-variant($border-color: $label-default-bg, $txt-color: $border-color, $bg-color: $border-color) {
   color: $txt-color;
+  border-color: $border-color;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
   &[href] {
     &:hover,
     &:focus {
-      @if $color != transparent{
-        background-color: darken($color, 10%);
+      @if $border-color != transparent{
+        border-color: darken($border-color, 10%);
       }
-      color: $txt-color;
+
+      @if $txt-color != transparent {
+        color: darken($txt-color, 10%);
+      }
+    }
+  }
+
+  // активное состояние, добавляем к классу модификатор
+  &.m-label-active{
+    background-color: $bg-color;
+    color: #fff;
+    border-color: $border-color;
+
+    &[href] {
+      &:hover,
+      &:focus {
+        @if $border-color != transparent {
+          border-color: darken($border-color, 10%);
+        }
+
+        @if $bg-color != transparent {
+          border-color: darken($bg-color, 10%);
+        }
+
+        @if $txt-color != transparent {
+          color: #fff;
+        }
+      }
     }
   }
 }
@@ -885,6 +915,19 @@
   position: absolute;
 }
 
+@mixin arrow-left($color: white) {
+  border-right: $dropdown-arrow-width-base solid $color;
+  border-left: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-bottom: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  border-top: $dropdown-arrow-width-base solid rgba(0, 0, 0, 0);
+  width: $dropdown-arrow-width-base;
+  left: 2*$dropdown-arrow-width-base;
+  top: -2*$dropdown-arrow-width-base;
+  display: block;
+  content: '';
+  position: absolute;
+}
+
 // fonts icon with FontAwesome
 @mixin fa-icon($icon-code, $size: $base-font-size){
   font-family: FontAwesome;
@@ -992,6 +1035,6 @@
 @mixin icon-offset($offset){
   .fa + span,
   span + .fa{
-    padding-left: $offset;
+    margin-left: $offset;
   }
 }

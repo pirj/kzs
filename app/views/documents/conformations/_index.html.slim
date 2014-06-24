@@ -7,7 +7,6 @@
       h3.text-danger.b-offset-sm.js-document-conform-alert = "Внимание! #{current_user.first_name_with_last_name}, мы ждем вашего решения"
 
 
-
     / список согласующих с кнопками согласования
     ul.b-offset-md.conformers-list.list-unstyled
       li.row.list-title.text-help
@@ -15,6 +14,8 @@
         span.col-sm-8 Согласующий
 
       - resource.conformers.order('last_name ASC').each do |conformer|
+
+
         li.row.spec-conform
           - if conformer.made_decision? resource.document
             - is_conformed = conformer.conformations.where(document_id: resource.document.id).first.conformed
@@ -24,8 +25,17 @@
               span.text-info #{conformer.first_name_with_last_name}&nbsp
               span.col-words-1
               span.text-help #{DateFormatter.new conformer.conformations.where(document_id: resource.document.id).first.created_at}
+
+          - elsif conformer == current_user && resource.document.state == "trashed"
+            span.col-sm-2.text-center
+              span.fa.fa-question-circle.text-info
+            span.col-sm-8
+              span.text-info #{current_user.first_name_with_last_name}&nbsp
+
           - elsif conformer == current_user
             = render 'documents/conformations/conform_form', resource: resource
+
+
           - else
             span.col-sm-2.text-center
               span.fa.fa-question-circle.text-info

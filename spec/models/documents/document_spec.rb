@@ -6,7 +6,8 @@ describe Document do
     let(:mail) {FactoryGirl.create(:mail_with_direct_recipient_and_conformers)}
     let(:conformer) {mail.conformers.first}
 
-    before :each do
+    before do
+      pending "Specs to be rewritten after architecture changed to use guard transitions; https://trello.com/c/bCSA9IbU/356--"
       conformer.conform mail.document
     end
 

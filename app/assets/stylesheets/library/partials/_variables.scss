@@ -31,25 +31,35 @@ $brand-info:            #5fc6f9 !default;
 
 $brand-rich-info: #1ba0e1 !default;
 
+$color-cyan: #81d9d4;
+$color-cyan-d: #23ada8;
 
+$color-sea-green-lighten: rgb(118,215,196);
 $color-sea-green: #1abc9c;
 $color-sea-green-darker: #16a085;
 
 $color-green: #2ecc71;
 $color-green-darker: #27ae60;
 
+$color-blue-lighter: rgb(133,193,233);
 $color-blue: #3490db;
 $color-blue-d: #2980b9;
 
 $color-magenta: #9b59b6;
 $color-magenta-darker: #8e44ad;
 
+$color-silver-lighten: rgb(202,207,210);
+$color-midnightblue-lighten: rgb(128,139,150);
 $color-stern-blue: #34495e;
 $color-stern-blue-darker: #2c3e50;
 
-$color-yellow: #f1c40f;
-$color-yellow-darker: #f39c12;
+$color-asphalt: #34495e;
+$color-asphalt-d: #2c3e50;
 
+$color-yellow: #f1c40f;
+$color-yellow-darker: rgb(243,156,18);
+
+$color-orange-lighter: rgb(248,196,113);
 $color-orange: #e67e22;
 $color-orange-darker: #d35400;
 
@@ -61,6 +71,7 @@ $color-cloud-darker: #bdc3c7;
 
 $color-gray: #95a5a6;
 $color-gray-darker: #7f8c8d;
+$color-gray-lighter: #e6e6e6;
 
 // Scaffolding
 // -------------------------
@@ -87,6 +98,8 @@ $link-success-hover-color:     darken($brand-success, 8%) !default;
 
 // Typography
 // -------------------------
+
+$base-font-size: 16px;
 
 $font-family-sans-serif:  'open_sansregular', arial, sans-serif !default; //'open_sansregular'
 $font-family-sans-serif-italic:  'open_sansitalic', arial, sans-serif !default;
@@ -470,7 +483,7 @@ $nav-tabs-vertical-padding:                 0.65em;
 $nav-tabs-horizontal-padding:               1.4em;
 
 // Pills
-$nav-pills-container-bg:                    $color-gray;
+$nav-pills-container-bg:                    $color-gray-lighter;
 $nav-pills-container-padding:               $padding-base-horizontal $padding-base-vertical!default;
 $nav-pills-link-padding:                    $btn-vertical-padding $btn-horizontal-padding !default;
 $nav-pills-border-radius:                   $border-radius-base !default;
@@ -567,6 +580,7 @@ $popover-arrow-outer-fallback-color:  #999 !default;
 // Labels
 // -------------------------
 
+$label-default-color:         $color-gray !default;
 $label-default-bg:            $gray-lighter !default;
 $label-primary-bg:            $brand-default !default;
 $label-success-bg:            $brand-success !default;
@@ -576,6 +590,10 @@ $label-danger-bg:             $brand-danger !default;
 
 $label-color:                 $gray !default;
 $label-link-hover-color:      $gray-darker !default;
+
+$label-font-size:             10px;
+$label-padding:               5px;
+$label-border-radius:         5px;
 
 
 // Modals
@@ -690,7 +708,7 @@ $thumbnail-caption-padding:   9px !default;
 
 // Wells
 // -------------------------
-$well-bg:                     transparent !default;
+$well-bg:                     #f5f5f5 !default;
 $well-border:                 1px solid $color-cloud-darker !default;
 $well-border-radius:          $border-radius-base*3 !default;
 

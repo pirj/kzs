@@ -39,7 +39,8 @@ ru:
         body: текст акта
         order: предписание
       documents/order:
-        deadline: дата исполнения
+        started_at: Дата начала исполнения
+        deadline: Дата исполнения
         body: текст распоряжения
       documents/official_mail:
         recipients: Получатели

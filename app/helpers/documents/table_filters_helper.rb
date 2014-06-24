@@ -29,15 +29,15 @@ module Documents
 
 
     # ячейка таблицы с кусочком фильтровой формы и chosen
-    def table_filter_chosen(f, caption, search_field, collection, target)
-      table_filter_wrapper f, caption, target do
+    def table_filter_chosen(resource, caption, search_field, collection, target)
+      table_filter_wrapper resource, caption, target do |f|
         f.select search_field, collection, {}, class: 'js-chosen', multiple: true
       end
     end
 
     # ячейка таблицы с кусочком фильтровой формы и текстового поля
-    def table_filter_text(f, caption, search_field, target)
-      table_filter_wrapper f, caption, target do
+    def table_filter_text(resource, caption, search_field, target)
+      table_filter_wrapper resource, caption, target do |f|
         f.text_field search_field, class: 'form-control', autocomplete: :off
       end
     end
@@ -46,15 +46,23 @@ module Documents
     private
 
     # обертка для ячейки таблицы. Внутрь помещаем элемент формы, параметры которого и отправляются на сервер
-    def table_filter_wrapper(f, caption, target, &block)
+    def table_filter_wrapper(resource, caption, target, &block)
       content_tag :th, class: 'js-table-filter-form form-horizontal', data: { target: target }, colspan: 8 do
-        content_tag(:h3, t(caption, scope: 'documents.filter.headers')) +
-        content_tag(:div, class: 'form-group') do
-          content_tag(:div, class: 'col-sm-6') do
-            yield
-          end
-        end.html_safe +
-        table_filter_buttons(f)
+        search_form_for resource, url: documents_documents_path, html: { class: 'form-horizontal', data: { url: search_documents_documents_path }, multiple: true } do |f|
+          content_tag(:h3, t(caption, scope: 'documents.filter.headers')) +
+          content_tag(:div, class: 'form-group') do
+            content_tag(:div, class: 'col-sm-6') do
+              # судя по документации к form_for
+              # https://github.com/rails/rails/blob/7a085dac2a2820856cbe6c2ca8c69779ac766a97/actionview/lib/action_view/helpers/form_helper.rb#L413
+              # метод capture() нужно использовать,чтобы работать с блоком кода извне и передавать по цепочке вниз
+              # к примеру:
+              #     my_custom_method do |builder|
+              #       builder.form_input_tag()
+              capture(f, &block)
+            end
+          end.html_safe +
+          table_filter_buttons(f)
+        end
       end
     end
 

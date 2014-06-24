@@ -15,7 +15,7 @@ $icon-documents-hover: -83px -230px;
 $icon-documents-active: -152px -230px;
 
 .l-page__column.left {
-  z-index: 25;
+  z-index: 0;
   float: left;
   position: fixed;
   background-color: #ededed;
@@ -27,13 +27,15 @@ $icon-documents-active: -152px -230px;
   .badge { margin-top: 0; }
 }
 
+@import "sidebar-icons/*.png";
+
 #sidebar {
   position: fixed;
   width: 70px;
   background-color: #ededed;
   height: 100%;
   left: 0;
-  z-index: 25;
+  z-index: 990;
 
   .menu-dir {
 
@@ -230,12 +232,12 @@ $icon-documents-active: -152px -230px;
       i {
         margin-top: 7px;
         position: relative;
-        left: 0;
+//        left: 0;
         display: inline-block;
-        width: 45px;
+        width: 30px;
         height: 30px;
-        background: image-url('icons-shortcuts.png') no-repeat;
         z-index: 10;
+        text-align: center;
       }
 
     }
@@ -391,14 +393,13 @@ $icon-documents-active: -152px -230px;
       &.documents {
         //standart
         i {
-          background-position: $icon-documents-stan;
-          cursor: pointer;
+          @include sidebar-icons-sprite(documents);
         }
         &:hover i {
-          background-position: $icon-documents-hover;
+          @include sidebar-icons-sprite(documents_hover);
         }
         &.active i {
-          background-position: $icon-documents-active;
+          @include sidebar-icons-sprite(documents_hover);
         }
 
         &.active:hover {
@@ -408,37 +409,184 @@ $icon-documents-active: -152px -230px;
       /*permits*/
       &.permits {
         i {
-          background-position: $icon-permit-stan;
+          @include sidebar-icons-sprite(permits);
         }
         &:hover i {
-          background-position: $icon-permit-hover;
+          @include sidebar-icons-sprite(permits_hover);
         }
         &.active i {
-          background-position: $icon-permit-active;
+          @include sidebar-icons-sprite(permits_hover);
         }
       }
       /*orgaanizations*/
       &.contragent {
         i {
-          background-position: $icon-contragent-stan;
+          @include sidebar-icons-sprite(contragents);
         }
         &:hover i {
-          background-position: $icon-contragent-hover;
+          @include sidebar-icons-sprite(organizations_hover);
         }
         &.active i {
-          background-position: $icon-contragent-active;
+          @include sidebar-icons-sprite(organizations_hover);
         }
 
       }
       &.tasks {
         i {
-          background-position: $icon-tasks-stan;
+          @include sidebar-icons-sprite(tasks);
         }
         &:hover i {
-          background-position: $icon-tasks-hover;
+          @include sidebar-icons-sprite(tasks_hover);
         }
         &.active i {
-          background-position: $icon-tasks-active;
+          @include sidebar-icons-sprite(tasks_hover);
+        }
+      }
+
+      &.drive {
+        i {
+          @include sidebar-icons-sprite(library);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+      }
+      &.drive {
+        i {
+          @include sidebar-icons-sprite(library);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(library_hover);
+        }
+      }
+      &.objects {
+        i {
+          @include sidebar-icons-sprite(objects);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(objects_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(objects_hover);
+        }
+      }
+      &.guard {
+        i {
+          @include sidebar-icons-sprite(guard);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(guard_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(guard_hover);
+        }
+      }
+      &.dispatcher {
+        i {
+          @include sidebar-icons-sprite(dispatcher);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(dispatcher_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(dispatcher_hover);
+        }
+      }
+      &.storehouse {
+        i {
+          @include sidebar-icons-sprite(storehouse);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(storehouse_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(storehouse_hover);
+        }
+      }
+      &.maneuvers {
+        i {
+          @include sidebar-icons-sprite(maneuvers);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(maneuvers_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(maneuvers_hover);
+        }
+      }
+      &.traffic {
+        i {
+          @include sidebar-icons-sprite(traffic);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(traffic_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(traffic_hover);
+        }
+      }
+      &.meteo {
+        i {
+          @include sidebar-icons-sprite(meteo);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(meteo_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(meteo_hover);
+        }
+      }
+      &.im {
+        i {
+          @include sidebar-icons-sprite(chat);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(chat_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(chat_hover);
+        }
+      }
+      &.settings {
+        i {
+          @include sidebar-icons-sprite(settings);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(settings_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(settings_hover);
+        }
+      }
+
+      &.news {
+      }
+      &.education {
+        i {
+          @include sidebar-icons-sprite(education);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(education_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(education_hover);
+        }
+      }
+      &.administration {
+        i {
+          @include sidebar-icons-sprite(admin);
+        }
+        &:hover i {
+          @include sidebar-icons-sprite(admin_hover);
+        }
+        &.active i {
+          @include sidebar-icons-sprite(admin_hover);
         }
       }
     }
@@ -502,3 +650,6 @@ $icon-documents-active: -152px -230px;
 
 }
 
+.vigets-list {
+  height:100%;
+}

@@ -93,6 +93,29 @@ window.app.table_filter =
     $(@.container).find('.js-chosen-search').filter(':visible').chosen(global.chosen_search)
 
 
+  # отправка фильтрующей формы на сервер
+  # каждый столбец в таблице представляет из себя отдельную форму
+  # при сабмите какой-либо из них, мы пробегаем все заполненные формы
+  # берем из них значения и прописываем в текущую форму фильтрации
+  # после чего позволяем отправить форму на сервер
+  submit_filter_form: (e) ->
+    #e.preventDefault()
+    # имя инпутов,которые будут добавляться к форме
+    added_field_name = "#{@.form.container}-added-hidden-fields".replace('.', '')
+    # берем все инпуты из форм кроме 1) уже добавленных и 2) исключая кнопки сабмита
+    fields = $("#{@.form.container} form").not(e.target).find('input, select').not("[name='utf8'], [type='submit'], input[type='checkbox']:not(:checked),.#{added_field_name}")
+    html = []
+    _.each(fields, (el) ->
+      window.$el = $(el)
+      name = $el.prop('name')
+      type = $el.prop('type')
+      value = $el.val()
+      html.push "<input type='hidden' name='#{name}' value='#{value}' class='#{added_field_name}'/>" if value
+    )
+    # убираем все инпуты,которые были добавлены ранее,чтобы никакие прошлые значения не переписывали обновленные
+    $(e.target).find(".#{added_field_name}").remove()
+    $(e.target).append(html.join(''))
+    return true
 
 $ ->
   F = app.table_filter
@@ -136,4 +159,9 @@ $ ->
     e.preventDefault()
     $(F.table.btn).filter(F.table.filled_form).first().trigger('click')
     F.toggle_status_bar()
+  )
+
+  # обработка сабмита формы с фильтром
+  $('.js-table-filter-form form').on('submit', (e) ->
+    F.submit_filter_form(e)
   )

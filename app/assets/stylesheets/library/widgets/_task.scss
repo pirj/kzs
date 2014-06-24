@@ -6,20 +6,24 @@ $el: '._task';
   margin-left: 0;
   margin-right: 0;
   height: auto;
-  font-family: "open_sanslight", arial, sans-serif;
+  border-bottom: 1px solid $color-gray-lighter;
+//  font-family: "open_sanslight", arial, sans-serif;
 
   &.m-new-task{
     @extend %form-control !optional;
   }
 
   #{$el}-title{
-    color: gray;
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 5px;
   }
 
   #{$el}-num{
     display: inline;
 
-    color: gray;
+    color: #000;
     &:after{
       content: '. '
     }

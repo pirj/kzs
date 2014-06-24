@@ -1,0 +1,11 @@
+//Для работы с сабтасками на странице просмотра
+<%- if resource.valid? %>
+//$('.js-popover-content').hide();
+//$('.js-popover').removeClass('active');
+//$(".js-datepicker").datepicker(global.datepicker);
+
+window.location.reload()
+<%- else %>
+$(".js-popover-content[data-target='add-subtask']").html("<%= j render 'tasks/tasks/subtask_form', remote: true, resource: resource %>");
+$(".js-datepicker").datepicker(global.datepicker);
+<%- end %>

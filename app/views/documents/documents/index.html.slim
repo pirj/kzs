@@ -35,20 +35,20 @@
         li = link_to 'Акты', documents_path(with_type:'reports')
         li = link_to 'Непрочитанные', documents_path(with_type:'unread')
 
+/ переменная для тестирования видимых документов с согласованиями
+/ по какой-то причине sql запрос работает плохо
+/ но т.к.этот код был в dev, то его скрыли
+/= @test.map(&:id).inspect
 
-
-/= params[:with_state]
 = content_for :page_header_search do
   = render 'quick_search_for'
 
 = render 'filter'
-
 ul.nav.nav-inline.btn-block
   li.dropdown
     = link_to '#', class: 'dropdown-toggle btn btn-primary', data:{ toggle: 'dropdown' } do
       span Создать
       span.caret
-    span.dropdown-arr
     ul.dropdown-menu
       li= link_to 'письмо', new_polymorphic_path(Documents::OfficialMail)
       li= link_to 'Предписание', new_polymorphic_path(Documents::Order)
@@ -57,7 +57,6 @@ ul.nav.nav-inline.btn-block
     = link_to '#', class: 'dropdown-toggle btn btn-default', data:{ toggle: 'dropdown' } do
       span Действия
       span.caret
-    span.dropdown-arr
     ul.dropdown-menu.js-documents-actions-list
       li выберите документы
   li

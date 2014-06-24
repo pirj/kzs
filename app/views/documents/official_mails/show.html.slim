@@ -1,5 +1,5 @@
 = content_for :page_header do
-  = header_back_btn documents_documents_path
+  = header_back_btn documents_documents_path, tooltip_title: 'К списку документов'
   = header_title do
     .row
       .col-sm-6
@@ -50,7 +50,7 @@
 = resource.attached_files
 .padding-block
 = render 'documents/application/change_state_links', resource: resource
-= link_to 'Ответить', resource_path, class: 'btn btn-primary' if resource.recipient_organization == current_organization
+= link_to 'Ответить', reply_documents_official_mail_path(resource), class: 'btn btn-primary' if resource.recipient_organization == current_organization
 .padding-block
 = render 'documents/documents/list', collection: history, title: 'История писем:'
 

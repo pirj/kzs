@@ -1,0 +1,14 @@
+= content_for :page_header do
+  = header_title do
+    h1 Обьекты
+
+
+/= mock_presentation_img '5_objects.gif'
+
+- img_urls = [ \
+    image_path('mock_modules/5_objects/1.png'), \
+    image_path('mock_modules/5_objects/2.png'), \
+    image_path('mock_modules/5_objects/3.png'), \
+    image_path('mock_modules/5_objects/4.png'), \
+  ]
+= react_component('MockModuleSlides', {img_urls: img_urls})

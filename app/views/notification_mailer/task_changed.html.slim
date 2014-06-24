@@ -1,0 +1,22 @@
+html
+  body
+    p
+      | Задача 
+      = link_to "«#{@task.title}»", task_url(@task)
+      |  была изменена.
+  
+    / ul
+    /   - if @changed.include? 'title'
+    /     li у задачи изменился заголовок
+
+    /   - if @changed.include? 'text'
+    /     li у документа изменился текст
+
+    /   - if @changed.include? 'executor_id'
+    /     li у задачи теперь другой исполнитель: вместо #{User.find(@task.executor_id_was).first_name_with_last_name} стал #{@task.executor.first_name_with_last_name}
+
+    /   - if @changed.include? 'inspector_id'
+    /     li у задачи теперь другой инспектор: вместо #{User.find(@task.inspector_id_was).first_name_with_last_name} стал #{@task.inspector.first_name_with_last_name}
+
+    p
+      = link_to 'Посмотреть в САКЭ', task_url(@task)

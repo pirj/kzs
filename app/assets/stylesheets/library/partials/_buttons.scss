@@ -40,7 +40,7 @@
   fieldset[disabled] & {
     cursor: not-allowed;
     pointer-events: none; // Future-proof disabling of clicks
-    @include opacity(.65);
+    @include opacity(.25);
     @include box-shadow(none);
   }
 
@@ -79,6 +79,16 @@
 
 .btn-primary { @include button-variant($btn-primary-color, $btn-primary-bg);}
 .btn-primary-light { @include button-variant($btn-primary-light-color, $btn-primary-light-bg);}
+.btn-primary-empty {
+  background: transparent;
+  border: 1px solid $color-sea-green;
+  color:$color-sea-green;
+  border-radius: $pager-border-radius;
+  padding:5px 10px;
+  &:hover {
+    color:$color-sea-green;
+  }
+}
 
 .btn-danger { @include button-variant($btn-danger-color, $btn-danger-bg);}
 

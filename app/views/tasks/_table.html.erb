@@ -24,6 +24,6 @@
 			<td><%= task_deadline(task) %></td>
 			<td><%= link_to "Подробнее", task %></td>
 			<td><% if task.completed %> Выполнена <% else %> <%= link_to "Выполнить", execute_task_path(task), data: { confirm: "Вы уверены?" } %><% end %></td>
-	  </tr> 
+	  </tr>
 	<% end %>
 </table>

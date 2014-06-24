@@ -1,0 +1,167 @@
+.gantt-main{
+  width: 100%;
+  & > div{
+    display: inline-block;
+    height: 100%;
+    width: 50%;
+    position:relative;
+    border-right: 10px solid $color-gray;
+    border-left: none;
+//    overflow-y: scroll;
+  }
+  & > #gantt_here{
+    border: none;
+    overflow-y: hidden;
+  }
+
+  // особые стили для отрисовки таблицы рядом с диаграммой
+  .table.new > thead > tr > th,
+  .table.new > thead > tr > td,
+  .table.new > tbody > tr > th,
+  .table.new > tbody > tr > td,
+  .table.new > tfoot > tr > th,
+  .table.new > tfoot > tr > td{
+    white-space: nowrap;
+    position: relative;
+    padding: 5px 5px 6px;
+
+    .table-filter{
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .table.new > tbody > tr > td {
+    overflow-x: hidden;
+  }
+
+
+  /*td {
+    box-sizing: border-box;
+    height: 34px;
+    padding: 4px!important;
+  }
+  thead{
+    position: absolute;
+    right: 0;
+    left: 0;
+
+  }
+  tbody{
+
+    position: absolute;
+    top:33px;
+    right: 0;
+    left: 0;
+    bottom: 15px;
+    overflow-y: scroll;
+    tr{
+      max-height: 34px;
+      display: block;
+      overflow: hidden;
+    }
+    .title{
+      width: 50px;
+    }
+  }*/
+}
+
+.gantt_line_wrapper div{
+  background-color: transparent;
+  border: dashed 1px lighten($color-blue, 30);
+}
+.gantt_task_link:hover .gantt_line_wrapper div{box-shadow: none}
+.gantt_link_arrow_right {
+//  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent lighten($color-blue, 30);
+  margin-top: -1px;}
+.gantt_task_link .gantt_link_arrow_right{border-width:0px;margin-top: -2px;}
+
+.gantt_task_content > .task_flag_container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#gantt_here_local{
+  height: 130px;
+}
+.task_notifications_container{
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.gantt_task_control{
+  position: absolute;
+  width:20px;
+  height: 20px;
+  background: white;
+  display: none;
+  margin-left: -10px;
+  margin-top: -5px;
+  border: 3px solid #27ae60;
+  color: #27ae60;
+  font-size: 19px;
+  border-radius: 4px;
+  font-weight: bold;
+  line-height: 15px;
+  text-align: center;
+}
+
+//.task_flag_container{
+//  position: relative;
+//  top: 11px;
+//}
+
+.task_flag {
+  width: 8px;
+  height: 12px;
+  position: absolute;
+  top: -12px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAMCAMAAAAwP5+2AAAAWlBMVEUAAADnSzvnSzuUpKaUpKbnSzvnSzsau5yXi36UpKaUpKaUpKYau5wau5yUpKbnSzvnSzvnSzvnSzsau5wau5wau5wau5wau5wau5wau5wau5wau5znSzuUpKb0wd/0AAAAG3RSTlMAoOJCdhp2EAYb4qDOka0dQ61AN1o8bCDsqnau47vuAAAAcElEQVQY073ORwrAMAxEUaX33iP5/tcMlkUmJ8jfGMEDD3G7EHJ9hUOmQV9mvg4Q59LyJSK5P9jXFSCuTkAkHj3RdiNaY0SLjLTbhzS2J4hMybmShX8Cieew5S4JJMVha0mnglSEJAsvewFCX0L/kgdWJwwDkV34wAAAAABJRU5ErkJggg==);
+  background-repeat: no-repeat;
+  background-position: -14px 0;
+
+  &.f-unchecked{
+    background-position: right;
+  }
+  &.f-checked{
+    background-position: left;
+  }
+}
+
+.gantt_task_line{
+//  height: 6px;
+  border: none;
+  border-radius: 0;
+
+  &:hover,&.gantt_selected{
+    height: 10px!important;
+  }
+
+  &.activated{
+    background-color: $color-blue-lighter;
+  }
+  &.cancelled{
+    background-color: $color-midnightblue-lighten;
+  }
+  &.formulated{
+
+    background-color: lighten($color-yellow-darker, 20);
+    &.gantt_selected{
+      background-color: $color-orange;
+    }
+  }
+  &.paused{
+    background-color: $color-silver-lighten;
+  }
+  &.executed{
+    background-color: $color-sea-green-lighten;
+  }
+}
+
+.gantt_task_drag{
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAWAQMAAADQP9/qAAAAA1BMVEUxMTEVULX1AAAAC0lEQVQI12MgAQAAACwAAReYEKYAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  width: 2px;
+}

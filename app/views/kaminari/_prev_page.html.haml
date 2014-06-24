@@ -6,4 +6,5 @@
 -#    per_page:      number of items to fetch per page
 -#    remote:        data-remote
 %span.prev
-  = link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, :rel => 'prev', :remote => remote
+	- name = content_tag(:i, nil, class: 'fa fa-chevron-left') + t('views.pagination.previous')
+	= link_to_unless current_page.first?, name.html_safe, url, :rel => 'prev', :remote => remote

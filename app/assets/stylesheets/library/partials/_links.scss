@@ -22,6 +22,18 @@
   @include btn-link-dashed-style($link-muted-color, $link-muted-hover-color);
 }
 
+.link-orange{
+  @include btn-link-style($color-orange, $color-orange-darker);
+}
+
+.link-default{
+  @include btn-link-style($color-gray, $color-gray-darker);
+}
+
+.link-asphalt{
+  @include btn-link-style($color-asphalt, $color-asphalt);
+}
+
 .link-nounderline{
   text-decoration: none;
   border: none;

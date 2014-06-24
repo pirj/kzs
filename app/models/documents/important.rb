@@ -38,7 +38,7 @@ module Documents
 
     def incoming
         # TODO: scoped?
-        inbox_ids = Document.to(@user.organization).unread_by(@user).map(&:id)
+        inbox_ids = Document.inbox(@user.organization).unread_by(@user).map(&:id)
         Document.includes(:notifications).where("notifications.user_id = ? OR documents.id IN (?)", @user.id, inbox_ids)
     end
   end

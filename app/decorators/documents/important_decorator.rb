@@ -5,7 +5,7 @@ module Documents
 
     def badge(type = nil)
       counter = count_by_type(type)
-      h.content_tag(:span, counter, class: 'badge') unless counter < 1
+      h.content_tag(:span, counter, class: 'badge spec-notification-badge') unless counter < 1
     end
 
     def badge_label(type = nil)
