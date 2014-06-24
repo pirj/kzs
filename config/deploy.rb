@@ -268,7 +268,7 @@ task :release do
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
-  set :branch, "release/0.2"
+  set :branch, "staging"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
