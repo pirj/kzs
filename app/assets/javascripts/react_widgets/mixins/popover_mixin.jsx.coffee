@@ -132,7 +132,6 @@ R = React.DOM
     $popover = $(@.refs.popover.getDOMNode())
 
     setWidth = 500
-
     $popover.css({width: setWidth + 'px'})
 
     activeBtnHeight = $parent.outerHeight()
