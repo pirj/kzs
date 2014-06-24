@@ -56,15 +56,5 @@ $(document).ready(function () {
 
 
 
-    var $sidebarScroll = $('.js-v-scroll').scrollingCarousel( {
-        scrollerAlignment : 'vertical',
-        autoScroll: false
-    });
-
-    $('.js-v-scroll ul li a').on('mouseover', function()  {
-        $sidebarScroll.Pause();
-    }).on('mouseleave', function()  {
-        $sidebarScroll.Play();
-    });
-
+   
 });
