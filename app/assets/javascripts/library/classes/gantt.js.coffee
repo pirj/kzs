@@ -57,17 +57,16 @@ class Gantt
     gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
       that.editTask(item)
 
-    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, раньше блокировалось
-#      console.log(id);
-#      gantt.unselectTask();
-#      @.selected.push(id);
-#      $(document).trigger('tasks_table:collection:uncheck_all');
-#
-#      if document.getElementsByName('task_'+id)[0].checked == false
-#        $(document.getElementsByName('task_'+id)[0]).trigger('click');
-
-
+    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, все блокируется
       return false
+
+
+    $(document).on 'tasks_table:collection:change_checked', (e, data ) =>  #<------- Выделение тасков при отметках таблицы
+#      console.log 'чанж чекед'
+      gantt.customSelect(data)
+#      console.log
+
+
 
     gantt.attachEvent "onMouseMove", (taskId, e) ->                     #<----- показ плюсика при наведении на таск
 

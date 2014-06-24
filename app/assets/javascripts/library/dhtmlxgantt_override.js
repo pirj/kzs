@@ -88,13 +88,6 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
 
 
-
-    custom_method_name = function(a) {
-        console.log('callback');
-        console.log(a);
-    };
-
-
     var parent_class_name = '.' + uniq_flag_class_name;
 
     var current_flag_json = {
@@ -104,13 +97,40 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     };
 
     React.renderComponent(
-        FlagPopover({parent: parent_class_name, json: current_flag_json, onPopoverToggle: custom_method_name}),
+        FlagPopover({parent: parent_class_name, json: current_flag_json}),
         elem[0]
     );
     return div;
 };
 /* @tag */
 gantt._render_task_content = function(task, width){
+
+
+
+
+    var select_task = function(a){
+
+
+//        $(document).trigger('tasks_table:collection:uncheck_all');
+//        var data = [];
+//        data.push(task);
+
+
+//
+        if (a==true){
+
+//            if (document.getElementsByName('task_'+task.id)[0].checked == false) {
+//                $(document.getElementsByName('task_'+task.id)[0]).trigger('click');
+//                return true
+//            }
+
+//        $(document).trigger('tasks_table:collection:change_checked', [task]);
+//            var data = [task.id];
+//            gantt.customSelect(data);
+        }
+          return true
+
+    };
     var content = document.createElement("div");
     if(this._get_safe_type(task.type) != this.config.types.milestone)
         content.innerHTML = this.templates.task_text(task.start_date, task.end_date, task);
@@ -124,7 +144,7 @@ gantt._render_task_content = function(task, width){
     $('.js-popover-layout').append("<div id="+uniq_control_class_name+"></div>");
     var elem = $('#'+uniq_control_class_name)
     React.renderComponent(
-        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task}),
+        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task, onPopoverToggle: select_task}),
         elem[0]
     );
 
@@ -213,38 +233,25 @@ gantt._render_task_element = function(task){
     return div;
 };
 
-gantt.selectTask = function(id){
-    if(!this.config.select_task)
-        return false;
-    if (id){
 
-        if(this._selected_task == id)
-            return this._selected_task;
+gantt.customSelect = function(scope){
 
-        if(!this.callEvent("onBeforeTaskSelected", [id])){
-            return false;
+
+    function select(id) {
+
+        if (id) {
+            if(id.id){
+                $('.gantt_task_row[task_id='+id.id+']').addClass('gantt_selected');
+            } else {
+                $('.gantt_task_row[task_id='+id+']').addClass('gantt_selected');
+            }
+
         }
 
-        this.unselectTask();
-        this._selected_task = id;
-
-        this.refreshTask(id);
-        this.callEvent("onTaskSelected", [id]);
     }
-    return this._selected_task;
-};
 
+    $('.gantt_task_row').removeClass('gantt_selected');
+    _.each(scope, function(id){ select(id); });
 
-gantt.unselectTask = function(spec){
-    var id = this._selected_task;
-
-    if(!id)
-        return;
-    this._selected_task = null;
-    this.refreshTask(id);
-//    if (spec){
-//
-//        this.refreshTask(spec);
-//    }
-    this.callEvent("onTaskUnselected", [id]);
+    return true
 };
