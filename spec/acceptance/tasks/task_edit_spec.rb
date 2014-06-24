@@ -28,7 +28,7 @@ feature "Users create and edit tasks", %q() do
     end
 
     context 'valid' do
-      scenario 'create new one task' do
+      pending 'create new one task' do
         title = 'Тестовая задача'
         fill_in 'Заголовок', with: title
         fill_in 'Описание', with: 'Описание тестовой задачи'
@@ -64,7 +64,7 @@ feature "Users create and edit tasks", %q() do
     end
 
     context 'fail editing' do
-      scenario 'start date earlier than today' do
+      pending 'start date earlier than today' do
         fill_in 'Дата начала', with: Date.today - 5.days
         create_screenshot
         expect { click_on 'Сохранить' }.to_not change(Tasks::Task, :count)

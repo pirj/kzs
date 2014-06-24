@@ -4,12 +4,15 @@
   background: red;
   position: absolute;
   top: 12px;
+  &.active{
+    border:1px solid red;
+  }
 }
 
 .js-gantt-timeline {
   position: absolute;
   display: block;
-  z-index: 100;
+  z-index: 1;
   top: 2px;
   height: 100%;
 

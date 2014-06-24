@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe Tasks::Task do
-  subject { Tasks::Task.new() }
+  subject!(:task) { FactoryGirl.create(:tasks_task) }
   it{should respond_to :subtasks}
   it{should respond_to :parent_id}
   it{should respond_to :parent}
+
+  it_behaves_like 'notifiable object'
 
   context('instantiate subtask'){
     it{ expect { Tasks::Task.new(parent_id: 1) }.not_to raise_error }
@@ -21,7 +23,12 @@ describe Tasks::Task do
 
   context('scopes') do
     context('.overdue') do
-      let!(:one_day_past) { FactoryGirl.create(:tasks_task, finished_at: Time.now - 1.day) }
+      let!(:one_day_past) { 
+        a=FactoryGirl.create(:tasks_task) 
+        a.update_attributes(started_at: 2.days.ago, finished_at: 1.day.ago)
+        a
+      }
+
       let!(:one_day_left) { FactoryGirl.create(:tasks_task, finished_at: Time.now + 1.day) }
       subject { Tasks::Task.overdue }
       it { should eq [one_day_past]}

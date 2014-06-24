@@ -4,8 +4,8 @@
   .col-sm-6
     = link_to '',  class: 'btn js-popover btn-primary-empty ', data: {target: 'add-subtask'} do
       span.fa.fa-plus-circle
-      span Добавить подзадачу
-    .js-popover-content.popover.bottom data-target='add-subtask'
+      span#add_subtask Добавить подзадачу
+    .js-popover-content.popover data-target='add-subtask'
       = render 'subtask_form', resource: @subtask, remote: true
 - if resource.subtasks.any?
   .row.b-offset-sm

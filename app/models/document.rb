@@ -120,8 +120,6 @@ class Document < ActiveRecord::Base
   }
   scope :inbox, ->(org) { to(org).passed_state('sent') }
 
-  scope :with_notifications_for, -> (user) {includes(:notifications).where("notifications.user_id = #{user.id}")}
-
   # TODO: default scope for non trashed records
   #   this is also applicable for associated records.
 

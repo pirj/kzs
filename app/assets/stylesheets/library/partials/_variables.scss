@@ -36,17 +36,20 @@ $color-cyan-d: #23ada8;
 
 $color-sea-green-lighten: rgb(118,215,196);
 $color-sea-green: #1abc9c;
-$color-sea-green-darker: #16a085;
+$color-sea-green-d: #16a085;
+$color-sea-green-darker: $color-sea-green-d;
 
 $color-green: #2ecc71;
-$color-green-darker: #27ae60;
+$color-green-d: #27ae60;
+$color-green-darker: $color-green-d;
 
 $color-blue-lighter: rgb(133,193,233);
 $color-blue: #3490db;
 $color-blue-d: #2980b9;
 
 $color-magenta: #9b59b6;
-$color-magenta-darker: #8e44ad;
+$color-magenta-d: #8e44ad;
+$color-magenta-darker: $color-magenta-d;
 
 $color-silver-lighten: rgb(202,207,210);
 $color-midnightblue-lighten: rgb(128,139,150);
@@ -57,21 +60,52 @@ $color-asphalt: #34495e;
 $color-asphalt-d: #2c3e50;
 
 $color-yellow: #f1c40f;
-$color-yellow-darker: rgb(243,156,18);
+$color-yellow-d: rgb(243,156,18);
+$color-yellow-darker: $color-yellow-d;
 
 $color-orange-lighter: rgb(248,196,113);
 $color-orange: #e67e22;
-$color-orange-darker: #d35400;
+$color-orange-d: #d35400;
+$color-orange-darker: $color-orange-d;
 
 $color-red: #e74c3c;
-$color-red-darker: #c0392b;
+$color-red-d: #c0392b;
+$color-red-darker: $color-red-d;
 
 $color-cloud: #ecf0f1;
-$color-cloud-darker: #bdc3c7;
+$color-cloud-d: #bdc3c7;
+$color-cloud-darker: $color-cloud-d;
 
 $color-gray: #95a5a6;
-$color-gray-darker: #7f8c8d;
+$color-gray-d: #7f8c8d;
+$color-gray-darker: $color-gray-d;
 $color-gray-lighter: #e6e6e6;
+
+$colors-map: (
+        cyan: $color-cyan,
+        cyan-d: $color-cyan-d,
+        sea-green: $color-sea-green,
+        sea-green-d: $color-sea-green-d,
+        green: $color-green,
+        green-d: $color-green-d,
+        blue: $color-blue,
+        blue-d: $color-blue-d,
+        magenta: $color-magenta,
+        magenta-d: $color-magenta-d,
+        asphalt: $color-asphalt,
+        asphalt-d: $color-asphalt-d,
+        yellow: $color-yellow,
+        yellow-d: $color-yellow-d,
+        orange: $color-orange,
+        orange-d: $color-orange-d,
+        red: $color-red,
+        red-d: $color-red-d,
+        cloud: $color-cloud,
+        cloud-d: $color-cloud-d,
+        gray: $color-gray,
+        gray-d: $color-gray-d,
+
+);
 
 // Scaffolding
 // -------------------------
@@ -592,8 +626,8 @@ $label-color:                 $gray !default;
 $label-link-hover-color:      $gray-darker !default;
 
 $label-font-size:             10px;
-$label-padding:               5px;
-$label-border-radius:         5px;
+$label-padding:               5px 5px 4px;
+$label-border-radius:         6px;
 
 
 // Modals

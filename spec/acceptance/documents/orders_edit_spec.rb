@@ -17,10 +17,10 @@ feature "Users edit and create an order", %q() do
         visit new_path
         sign_in_with user.email
         skip_welcome
-        create_screenshot
 
           # fill auction fields
-        fill_in 'дата исполнения', with: DateTime.now + 5.days
+        fill_in 'Дата начала исполнения', with: DateTime.now + 5.days
+        fill_in 'Дата исполнения', with: DateTime.now + 10.days
         fill_in 'Тема', with: 'тест'
         fill_in 'Текст', with: 'тестовый текст'
       end

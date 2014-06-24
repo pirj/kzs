@@ -74,7 +74,7 @@ shared_examples_for 'document_approvable' do
       end
 
       context 'to other user' do
-        let!(:user) { FactoryGirl.create(:user) }
+        let!(:user) { FactoryGirl.create(:user_with_organization) }
         its(:current_path) { should match '/documents' }
         it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
       end

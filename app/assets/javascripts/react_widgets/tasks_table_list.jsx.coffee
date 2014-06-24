@@ -28,7 +28,7 @@ R = React.DOM
 
     @.changeCheckedRows(new_data)
     @.setState data: new_data
-
+    window.app.GanttView.updateSelectTask(finded_obj.id, obj.checked)
 
   # метод создания ивента с чекнутыми задачами
   # фильтрует задачи только сортированными
@@ -65,11 +65,34 @@ R = React.DOM
       data: new_data
       checked_all: !@.state.checked_all
 
+  uncheckAllRows: ->
+    keys = _.keys(@.state.data)
+    new_data = {}
+    _.each(keys, (key) =>
+      new_data[key] =
+        _.map(@.state.data[key], (obj) =>
+
+          obj.checked = false
+          obj
+      )
+    )
+
+
+    @.changeCheckedRows(new_data)
+
+    @.setState
+      data: new_data
+      checked_all: @.state.checked_all
+
 
 
   componentDidMount: ->
     $(document).on('tasks_table:collection:check_all', (e) =>
       @.checkAllRows()
+    )
+#  componentDidMount: ->
+    $(document).on('tasks_table:collection:uncheck_all', (e) =>
+      @.uncheckAllRows()
     )
 
   # сортируем пришедшую коллекцию по родителям-предкам

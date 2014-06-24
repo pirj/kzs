@@ -4,14 +4,12 @@ class Gantt
     @.gantt = gantt
     $.ajaxSetup beforeSend: (xhr) ->
       xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")
-#      console.log 'xhr.setRequestHeader "X-CSRF-Token", $("meta[name=\"csrf-token\"]").attr("content")'
-#      console.log $("meta[name=\"csrf-token\"]").attr("content")
 
       return
 
     @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)
-                                       #Инициализация модуля Гант
+                                                      #Инициализация модуля Гант
     if id
       @.getTask(id)
     else
@@ -20,6 +18,8 @@ class Gantt
         gantt.parse({data: data})
 
     @.createTimeline()
+
+    @.selected = []
 
     ########################################## далее обработчики событий ###############################################
 
@@ -33,7 +33,10 @@ class Gantt
         console.log (status)
         return
 
-    gantt.attachEvent "onTaskDblClick", (id, e) ->                                                 #двойной клик
+    gantt.attachEvent "onTaskDblClick", (id, e) ->                        #двойной клик - раньше показывал подробное инфо, теперь ничего не делает
+
+      return false
+
       e.preventDefault()
       request = $.ajax(
         url: "/tasks/#{id}/"
@@ -51,12 +54,22 @@ class Gantt
         return
       e.preventDefault()
 
-    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->                                           #обработчик для перетаскиваний и растягиваний
+    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
       that.editTask(item)
 
-    gantt.attachEvent "onBeforeTaskSelected", (id,item) ->
+    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, все блокируется
       return false
-    gantt.attachEvent "onMouseMove", (taskId, e) ->
+
+
+    $(document).on 'tasks_table:collection:change_checked', (e, data ) =>  #<------- Выделение тасков при отметках таблицы
+#      console.log 'чанж чекед'
+      gantt.customSelect(data)
+#      console.log
+
+
+
+    gantt.attachEvent "onMouseMove", (taskId, e) ->                     #<----- показ плюсика при наведении на таск
+
       if taskId!=null and e.target.classList.contains('gantt_task_content')
         control = e.target.previousElementSibling
         control.style.display = 'block'
@@ -65,14 +78,8 @@ class Gantt
 
         e.target.onmouseout = (e) ->
           control.style.display = 'none'
-        e.target.onclick = (e) ->
-          task = gantt.getTask(taskId)
-          delta = Math.floor(left/gantt.config.min_column_width)
-          need = gantt.calculateEndDate(task.start_date,delta,gantt.config.scale_unit)
-          console.log(need)
 
-
-      #----------------------------------------------- раздел для маштабирования
+                                                               #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->
       gantt.config.step = 1;
       gantt.config.show_grid = false;
@@ -99,10 +106,10 @@ class Gantt
       return
     $('#gantt_here .gantt_data_area').on 'scroll', (e) ->
       y = $(this)[0].scrollTop
-      window.app.scrollTable(y)
+      window.app.scrollTable(y)                                   #-------------------------------------- событие - при фильтрации
 
     $(document).on "tasks_table:collection:update_subtasks", (e, id, children_ids, is_opened) =>
-      console.log children_ids
+#      console.log children_ids
       @.gantt.parse({data: children_ids})
       if is_opened then @.gantt.open(id) else @.gantt.close(id)
 
@@ -116,8 +123,30 @@ class Gantt
 
     gantt.attachEvent "onLinkDblClick", (id, e) ->
       e.preventDefault()
+                                                                                                  #------------------ реализация drag n drop
+    dragObject = null   #переменная для записи перетаскиваемого объекта
 
-      ############################################ далее методы класса ####################################################
+    scrollArea = document.getElementsByClassName('gantt_task')[0] #обьект, который мы "тянем"
+    vertcalArea = document.getElementsByClassName('gantt_data_area')[0]
+    scrollArea.onmousedown = (e) ->
+
+      dragObject  = this
+      dragObject.x = e.x
+      dragObject.y = e.y
+
+    scrollArea.onmousemove = (e) ->
+      if dragObject
+        dragObject.scrollLeft += ((dragObject.x - e.x)*2)
+        vertcalArea.scrollTop += ((dragObject.y - e.y)*2)
+        dragObject.x = e.x
+        dragObject.y = e.y
+
+    document.onmouseup = ->
+      # опустить переносимый объект
+      dragObject = null
+      return
+                                                                                                   #------------------ drag n drop end
+  ############################################ далее методы класса ####################################################
 
   initCustomFields: () =>              #!!!
     #колонки слева
@@ -306,6 +335,11 @@ class Gantt
 
     gantt.setSizes()
     return
+
+  updateSelectTask: (id, status) =>
+#    console.log(status)
+#    console.log('----')
+#    console.log(id)
 
 ########################################################### Поток выполнения  ###################################################
 $ ->

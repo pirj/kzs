@@ -3,7 +3,9 @@ module Notifiable
 
   included do
     has_many :notifications, as: :notifiable, dependent: :destroy
-    class << self; attr_accessor :interesants end # Class-level instance variable для хранения интересантов
+    class << self; attr_accessor :interesants, :multiple_notifications end # Class-level instance variable для хранения интересантов
+
+    scope :with_notifications_for, -> (user) {includes(:notifications).where("notifications.user_id = #{user.id}")}
   end
 
   module ClassMethods
@@ -28,6 +30,10 @@ module Notifiable
     def notifications_for user
       Notification.where(user_id: user.id, notifiable_type: self.to_s)
     end
+
+    def allow_multiple_notifications
+      self.multiple_notifications = true 
+    end
   end
 
   # Посылаем уведомления
@@ -41,7 +47,7 @@ module Notifiable
   # @see User
   def notify_interesants options = {}
     # Options defaults
-    options.reverse_merge! only: self.class.interesants, except: [], exclude: []
+    options.reverse_merge! only: self.class.interesants, except: [], exclude: [], message: '', changer: nil
     
     # Оборачиваем параметры в массивы, если переданы просто символами
     options.each {|k, option| options[k] = [option] unless option.class == Array}
@@ -53,7 +59,14 @@ module Notifiable
     interested = types_to_users options[:only]
 
     interested.reject! {|user| options[:exclude].include? user} # Не отправляем уведомления тем, кто в списке exclude
-    interested.each { |user| self.notifications.find_or_create_by_user_id(user.id) } # Создаем нотификацию, если ее еще нет
+    
+    interested.each do |user|
+      if self.class.multiple_notifications # разрешены множественные нотификации?
+        self.notifications.create(user: user, message: options[:message])#, changer: options[:changer]) # создаем новую нотификацию в любом случае
+      else
+        self.notifications.find_or_create_by_user_id(user.id) # Создаем нотификацию, если ее еще нет
+      end
+    end 
   end
 
   # Возвращает массив объектов [User], которые являются интересантами данного объекта

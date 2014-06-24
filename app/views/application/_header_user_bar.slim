@@ -5,30 +5,30 @@ ul.nav.navbar-nav.navbar-right
       = content_tag(:span, current_user.first_name)+content_tag(:span, current_user.last_name)
       span.caret
 
-    .js-popover-content.bottom._user-bar data-target='user-bar'
+    .js-popover-content.popover.user-bar data-target='user-bar'
 
-      h3._user-bar-header = current_user.first_name_with_last_name
-      ._user-bar-status
+      .h4.popover-title.user-bar.text-left = current_user.first_name_with_last_name
+      .user-bar-status
         i.fa.fa-circle
         | на работе
-      .row
+      .row.popover-content
         .col-sm-4
           img._user-bar-image src='/assets/user1.jpg'
-        .col-sm-8.btn-group.btn-group-vertical._user-bar-exit
-          a.btn href='#'
-            i.fa.fa-plus-square
-            | Сменить статус
-          a.btn href='#'
-            i.fa.fa-user
-            | Личная страница
-          = link_to destroy_user_session_path, class: 'btn ', method: :delete do
-            i.fa.fa-power-off
-            | Выйти из системы
-          a.js-popover-close.btn
-            i.fa.fa-times-circle
-            | Отмена
+        .col-sm-8
+          .btn-group.btn-group-vertical._user-bar-exit
+            a.btn href='#'
+              i.fa.fa-plus-square
+              | Сменить статус
+            a.btn href='#'
+              i.fa.fa-user
+              | Личная страница
+            = link_to destroy_user_session_path, class: 'btn ', method: :delete do
+              i.fa.fa-power-off
+              | Выйти из системы
+            a.js-popover-close.btn
+              i.fa.fa-times-circle
+              | Отмена
       .arrow
-
 
 /  i.fa.fa-user    /  i.fa.fa-plus-square - чтобы потом не искать
 

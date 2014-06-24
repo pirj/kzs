@@ -4,5 +4,22 @@
     h1 Новая задача
 
 
+/= element_with_popover do
+/- name = "js-ui-with-popover-id-#{Time.now.to_f.to_s.gsub('.', '')}"
+/= content_tag :span, class: name do
+/  = link_to 'react component', '#', class: 'js-react-popover'
+/= content_for :popover_layout do
+/  = react_component('ReactPopoverComponent', { parent: ".#{name}" })
+/- html = text_field_tag :test_component, 'hhh', class: 'vit-class'
+/= react_popover_component('LikeButton', {html: html} )
+
+= element_with_popover do
+  = link_to 'react component', '#', class: 'js-react-popover'
+
+
+= element_with_popover(popover: {body: '<input value="eee"/>'}) do
+  = link_to 'react component', '#', class: 'js-react-popover'
+
+
 = render 'form'
 

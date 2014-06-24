@@ -6,7 +6,7 @@ feature "Users can create and views tasks in list", %q() do
 
   # создаем заранее несколько пользователей,
   # чтобы выбрать их как исполнителей или контрольных лиц при создании задачи
-  let!(:user) { FactoryGirl.create(:user) }
+  let!(:user) { FactoryGirl.create(:user_with_organization) }
   let!(:user_1) { FactoryGirl.create(:user, organization: user.organization) }
   let!(:user_2) { FactoryGirl.create(:user, organization: user.organization) }
 

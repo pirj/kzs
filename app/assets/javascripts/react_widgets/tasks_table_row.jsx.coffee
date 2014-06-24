@@ -89,11 +89,14 @@ R = React.DOM
     $(@.refs.row.getDOMNode()).velocity('transition.slideDownBigIn', {duration: 100})
 
 
+  activeRow: (status) ->
+    return if status==true
+      return 'active'
 
 
 
   render: ->
-    render_data = R.tr({ref: 'row'},
+    render_data = R.tr({ref: 'row', className: @.activeRow(@.props.checked)},
         [
           R.td({}, R.input({type: 'checkbox', checked: @.props.checked, name: "task_#{@.props.data.id}", className: 'js-icheck-off', onChange: @.handleCheckboxChange})),
           @.props.column_names.map((col_name) =>

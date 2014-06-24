@@ -11,19 +11,14 @@ module Features
     end
 
     def sign_out
-      if example.metadata[:js]
-        sign_out_js
-      else
-        page.driver.submit :delete, destroy_user_session_path, {}
-      end
+      visit destroy_user_session_path
     end
 
     def skip_welcome
-      execute_script(%Q!$('.js-welcome-screen, .modal-backdrop-white').remove()!)
+      execute_script(%Q!$(document).ready(function(){$('.js-welcome-screen, .modal-backdrop-white').remove()})!)
     end
 
     def sign_out_js
-      skip_welcome
       visit destroy_user_session_path
     end
 

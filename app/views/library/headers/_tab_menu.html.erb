@@ -1,7 +1,5 @@
-<h3 id="headers-tab-menu">
-  меню с вкладками
-</h3>
-<div class="bs-example">
+<%= library_item_caption 'меню с вкладками' %>
+<%= library_example do %>
   <ul class="nav nav-tabs">
     <li class="active"><a href="#main" data-toggle="tab">Общие</a></li>
     <li><a href="#details" data-toggle="tab">Реквизиты</a></li>
@@ -13,18 +11,10 @@
     <div class="tab-pane active" id="main">Main information</div>
     <div class="tab-pane" id="details">:) only smile...</div>
   </div>
-</div>
+<% end %>
 
-<div class="highlight">
-  <ul class="nav nav-pills lib-control-tabs">
-    <li><a href="#tab-menu-slim" data-toggle="tab">slim</a></li>
-    <li><a href="#tab-menu-html" data-toggle="tab">html</a></li>
-  </ul>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane" id="tab-menu-slim">
-      <pre class="prettyprint linenums lang-ruby"><%= html_escape %q{
-  ul.nav.nav-tabs
+<%= highlight_named_code slim: %Q{
+= library_example doul.nav.nav-tabs
     li.active = link_to 'Общие', '#main', data: { toggle: 'tab' }
     li = link_to 'Реквизиты', '#details', data: { toggle: 'tab' }
     li = link_to 'Сотрудники', '#users', data: { toggle: 'tab' }
@@ -33,23 +23,5 @@
   .tab-content
     .tab-pane.active#main
     .tab-pane#details
-      }%></pre>
-    </div>
+}%>
 
-    <div class="tab-pane" id="tab-menu-html">
-      <pre class="prettyprint linenums lang-html"><%= html_escape %q{
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#main" data-toggle="tab">Общие</a></li>
-    <li><a href="#details" data-toggle="tab">Реквизиты</a></li>
-    <li><a href="#users" data-toggle="tab">Сотрудники</a></li>
-    <li><a href="#licenses" data-toggle="tab">Лицензии</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div class="tab-pane active" id="main">Main information</div>
-    <div class="tab-pane" id="details">:) only smile...</div>
-  </div>
-      }%></pre>
-    </div>
-  </div>
-</div>

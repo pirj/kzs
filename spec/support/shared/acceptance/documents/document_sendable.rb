@@ -33,7 +33,7 @@ shared_examples_for 'document_sendable' do
       end
 
       context 'other user' do
-        let(:user){ FactoryGirl.create(:user) }
+        let(:user){ FactoryGirl.create(:user_with_organization) }
         it { should_not have_content accountable.title }
       end
     end
@@ -65,7 +65,7 @@ shared_examples_for 'document_sendable' do
       end
 
       context 'to other user' do
-        let!(:user) { FactoryGirl.create(:user) }
+        let!(:user) { FactoryGirl.create(:user_with_organization) }
         its(:current_path) { should match '/documents' }
         it{ should have_selector('.alert.alert-danger', text: 'Недостаточно прав на чтение документа') }
       end

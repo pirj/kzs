@@ -126,8 +126,8 @@ class Documents::DocumentsController < ResourceController
     super
     .accessible_by(current_ability)
     .includes(:sender_organization, :recipient_organization)
-    .visible_for(current_organization.id)
     .order(avoid_ambiguous(sort_column) + ' ' + sort_direction)
+    # .visible_for(current_organization.id)
   end
 
   def default_metadata

@@ -3,17 +3,18 @@ R = React.DOM
 
 @TasksTableHeaderFilter = React.createClass
 
+  popover_nested_name: ''
+
   getDefaultProps: ->
     name: ''
     data: []
     filter_opts: {}
-    filter_popup_opened: false
+    filter_popover_opened: false
 
   getInitialState: (props) ->
     props = props || this.props
-    name: props.name
     data: props.data
-    filter_popup_opened: props.filter_popup_opened
+    filter_popover_opened: props.filter_popover_opened
 
 
   # пробрасываем параметры из всплывающего окна наверх по цепочке зависимостей
@@ -23,8 +24,8 @@ R = React.DOM
     )
 
 
-  onPopupCancel: (opened) ->
-    @.setState filter_popup_opened: opened
+  handlePopoverToggle: (current_popover_state) ->
+    @.setState filter_popover_opened: current_popover_state
 
 
   componentWillReceiveProps: (newProps, oldProps) ->
@@ -33,33 +34,50 @@ R = React.DOM
 
   handleClick: (e) ->
     e.preventDefault()
-    $(document).trigger('tasks_table:filter_popup:change_display')
-    @.setState filter_popup_opened: !@.state.filter_popup_opened
 
 
   componentDidMount: ->
-    $(document).on('tasks_table:filter_popup:change_display', (e) =>
-      @.setState filter_popup_opened: false
-    )
+    $el = $('<div></div>').appendTo('.js-popover-layout')
+
+    @.popover_nested_name = "js-tasks-table-filter-popover-#{(new Date()).getTime()}"
+    popover_nested_name_class_name = ".#{@.popover_nested_name}"
+
+    filter_component_params = {
+      parent: popover_nested_name_class_name,
+      opened: @.state.filter_popover_opened,
+      onPopoverSubmit: @.onChangeFilterParams,
+      onPopoverToggle: @.handlePopoverToggle,
+      filter_opts: @.props.filter_opts[@.props.name],
+      placement: 'bottom'
+    }
+
+    popoverClassName = @.choosePopoverRenderer()
+    if _.isFunction(popoverClassName)
+      React.renderComponent(popoverClassName(filter_component_params), $el[0])
+
+
+  choosePopoverRenderer: ->
+    if @.props.name == 'title'
+      TasksTableHeaderFilterPopoverTitleBeta
+    else if @.props.name == 'started_at'
+      TasksTableHeaderFilterPopoverStartedAtBeta
+    else if @.props.name == 'executor' || @.props.name == 'inspector'
+      TasksTableHeaderFilterPopoverUsersBeta
+
+
 
   render: ->
-    icon_css = 'fa fa-filter '
-    icon_css += 'm-active' if @.state.filter_popup_opened
+    cx = React.addons.classSet
+    icon_css = cx(
+      'm-active': @.state.filter_popover_opened == true
+      'fa fa-filter': true
+    )
 
-    filter_component_params = { opened: @.state.filter_popup_opened, onPopupSubmit: @.onChangeFilterParams, onPopupCancel: @.onPopupCancel, filter_opts: @.props.filter_opts[@.props.name] }
+    icon_css += " #{@.popover_nested_name}"
 
 
-    filter_dom = if @.props.name == 'started_at'
-                    [R.span({onClick: @.handleClick, className: icon_css}),
-                    TasksTableHeaderFilterPopupStartedAt(filter_component_params)]
-                  else if @.props.name == 'title'
-                    [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupTitle(filter_component_params)]
-                  else if @.props.name == 'executor'
-                    [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupExecutor(filter_component_params)]
-                  else if @.props.name == 'inspector'
-                    [R.span({onClick: @.handleClick, className: icon_css}),
-                     TasksTableHeaderFilterPopupExecutor(filter_component_params)]
+
+    filter_dom = if ['title', 'started_at', 'executor', 'inspector'].indexOf(@.props.name) > -1
+      [R.span({onClick: @.handleClick, className: icon_css})]
 
     R.span({className: 'table-filter'}, filter_dom)

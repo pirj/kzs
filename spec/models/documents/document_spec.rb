@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe Document do
 
+  subject!(:document) { FactoryGirl.create(:approved_mail) }
+  it_behaves_like 'notifiable object'
+
   context 'when have conformations and being updated' do
     let(:mail) {FactoryGirl.create(:mail_with_direct_recipient_and_conformers)}
     let(:conformer) {mail.conformers.first}

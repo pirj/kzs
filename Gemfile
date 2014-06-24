@@ -91,9 +91,10 @@ gem 'thin'
 
 group :assets do
   #gem 'tilt', '~>1.3.3'
+  gem 'sass',   '~> 3.3.8'
   gem 'sass-rails',   '~> 3.2.6'
-  gem 'compass'
-  gem 'compass-rails'
+  gem 'compass', '~> 0.13.alpha.12 '
+  gem 'compass-rails', '~> 1.1.7'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'chosen-rails'
@@ -108,10 +109,10 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'capistrano'
   gem 'rvm-capistrano'
-  gem 'guard'
-  gem 'guard-rspec', require: false
-  gem 'guard-zeus'
-  gem 'guard-rubocop', require: false
+  # gem 'guard'
+  # gem 'guard-rspec', require: false
+  # gem 'guard-zeus'
+  # gem 'guard-rubocop', require: false
   gem 'bullet'
   gem 'yard' # Для документации
 end
@@ -138,3 +139,4 @@ gem 'therubyracer'
 gem 'i18n-js'
 gem 'select2-rails'
 gem 'momentjs-rails'
+# gem 'yui-compressor'

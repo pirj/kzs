@@ -28,9 +28,8 @@ feature "Users see show-page task", %q() do
       scenario 'show args' do
         expect(page).to have_content 'Инспектор'
         expect(page).to have_content 'Исполнитель'
-        expect(page).to have_content 'Дата начала'
-        expect(page).to have_content 'Дата окончания'
-        expect(page).to have_content 'Описание'
+        expect(page).to have_content 'Старт'
+        expect(page).to have_content 'Финиш'
       end
     end
   end

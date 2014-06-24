@@ -24,6 +24,12 @@ html
         = yield
 
 
+    / область для рендеринга всплывающих окон
+    ._popover-backdrop.js-popover-layout = yield :popover_layout
+
+
+
+
     /= render 'modal_window'
     = render 'shared/modal_window'
 
