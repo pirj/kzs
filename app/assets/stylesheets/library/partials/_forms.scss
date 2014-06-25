@@ -194,6 +194,26 @@ output {
 }
 
 
+// Инвертированный form-control.
+// Применяется для построения в темной версии интерфейса
+%form-control-invert {
+  @extend %form-control !optional;
+  background-color: transparent;
+  border: 2px solid $color-cloud;
+  color: $color-cloud;
+  // Customize the `:focus` state to imitate native WebKit styles.
+  @include form-control-focus($color-cyan);
+
+  &[disabled],
+  &[readonly],
+  fieldset[disabled] & {
+    cursor: not-allowed;
+    background-color: $color-gray-d;
+    border: $color-asphalt;
+  }
+}
+
+
 .form-control {
   height: $input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
   @extend %form-control !optional;

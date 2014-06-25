@@ -13,7 +13,11 @@ module Tasks::TableFilterHelper
         },
         started_at: {
             type: :date,
-            input_names: [:started_at, :finished_at]
+            input_names: [:started_at_gteq, :started_at_lteq]
+        },
+        finished_at: {
+            type: :date,
+            input_names: [:finished_at_gteq, :finished_at_lteq]
         },
         executor: {
             type: :select,

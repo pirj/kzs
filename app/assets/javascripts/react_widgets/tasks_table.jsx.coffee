@@ -77,8 +77,8 @@ R = React.DOM
       ])
     )
 
-#    column_names = ['title', 'started_at', 'finished_at', 'executor', 'inspector', 'state']
-    column_names = ['title', 'started_at', 'executor', 'inspector']
+    column_names = ['title', 'started_at', 'finished_at', 'executor', 'inspector', 'state']
+#    column_names = ['title', 'started_at', 'executor', 'inspector']
 
     R.table({className: table_css, id: 'table_here'}, [
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),

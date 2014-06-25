@@ -41,7 +41,7 @@ R = React.DOM
 
     @.popover_nested_name = "js-tasks-table-filter-popover-#{(new Date()).getTime()}"
     popover_nested_name_class_name = ".#{@.popover_nested_name}"
-
+    console.log @.props.filter_opts[@.props.name]
     filter_component_params = {
       parent: popover_nested_name_class_name,
       opened: @.state.filter_popover_opened,
@@ -59,7 +59,7 @@ R = React.DOM
   choosePopoverRenderer: ->
     if @.props.name == 'title'
       TasksTableHeaderFilterPopoverTitleBeta
-    else if @.props.name == 'started_at'
+    else if @.props.name == 'started_at' || @.props.name == 'finished_at'
       TasksTableHeaderFilterPopoverStartedAtBeta
     else if @.props.name == 'executor' || @.props.name == 'inspector'
       TasksTableHeaderFilterPopoverUsersBeta
@@ -77,7 +77,7 @@ R = React.DOM
 
 
 
-    filter_dom = if ['title', 'started_at', 'executor', 'inspector'].indexOf(@.props.name) > -1
+    filter_dom = if ['title', 'started_at', 'finished_at', 'executor', 'inspector'].indexOf(@.props.name) > -1
       [R.span({onClick: @.handleClick, className: icon_css})]
 
     R.span({className: 'table-filter'}, filter_dom)

@@ -3,32 +3,33 @@ R = React.DOM
 
 @TasksTableHeaderFilterPopoverStartedAtBeta = React.createClass
 
-  mixins: [PopoverMixin]
+  mixins: [@TasksTableHeaderShareElementsPopoverMixin]
 
-  handleSubmit: (e) ->
-    e.preventDefault()
-    @.props.onPopoverSubmit(
-      $(@.refs.popover_filter_form.getDOMNode()).serializeObject()
-    )
-    @.popoverHide()
-
-  handleCancel: ->
-    @.popoverHide()
-
+  getDefaultProps: ->
+    filter_header: 'Фильтр по времени'
 
   render: ->
-    popover_body = [
-      R.h5({className: 'popover-header'}, 'Фильтр по полю'),
-      R.form({ref: 'popover_filter_form', onSubmit: @.handleSubmit, className: 'form form-horizontal'}, [
-        R.div({className: 'row popover-body'},
+    left_input_name = try
+      @.props.filter_opts.input_names[0]
+    catch
+      ''
 
+    right_input_name = try
+      @.props.filter_opts.input_names[1]
+    catch
+      ''
+
+    popover_body = [
+      @.render_header(),
+      @.render_form(
+        R.div({className: 'row'}, [
           R.div({className: 'col-sm-6'},
             R.div({className: 'row'}, [
               R.label({className: 'control-label col-sm-2'}, 'от'),
               R.div({className: 'col-sm-10'},
                 R.div({className: 'input-group'}, [
                   R.div({className: 'input-group-icon'}, R.span({className: 'fa fa-calendar'})),
-                  R.input({name: 'started_at_gteq', type: 'text', className: 'form-control js-datepicker'})
+                  R.input({name: left_input_name, type: 'text', className: 'form-control js-datepicker'})
                 ]),
               )
             ])
@@ -40,23 +41,15 @@ R = React.DOM
               R.div({className: 'col-sm-10'},
                 R.div({className: 'input-group'}, [
                   R.div({className: 'input-group-icon'}, R.span({className: 'fa fa-calendar'})),
-                  R.input({name: 'started_at_lteq', type: 'text', className: 'form-control js-datepicker'})
+                  R.input({name: right_input_name, type: 'text', className: 'form-control js-datepicker'})
                 ])
               )
             ])
           )
-
-        )
-        R.a({href: '#', onClick: @.handleSubmit, className: 'popover-btn'}, [
-          R.span({className: 'popover-fa fa fa-check-circle'})
-          R.span({}, 'применить')
-        ]),
-        R.a({href: '#', onClick: @.handleCancel, className: 'popover-btn'}, [
-          R.span({className: 'popover-fa fa fa-ban'})
-          R.span({}, 'отменить')
         ])
-      ])
+      )
     ]
 
     @.renderPopover(popover_body)
+
 
