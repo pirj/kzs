@@ -80,26 +80,9 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
         $('.js-popover-layout').append("<div id="+uniq_flag_class_name+"></div>");
 
     elem = $('#'+uniq_flag_class_name)
-        //    React.renderComponent(ReactPopoverComponent({parent: '.uniq_name' data: json_of_all_flags}), elem)
-
-    // и флажку нужно выставить класс .uniq_name
 
 
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
-
-
-//    var toggle_flag = function(status, parent){
-//
-//        console.log(a);
-//
-//        if (status==true){
-//       $('.task_flag'+parent).addClass('active');
-//        } else {
-//            $('.task_flag'+parent).removeClass('active');
-//
-//        }
-//
-//    };
 
     var parent_class_name = '.' + uniq_flag_class_name;
 
@@ -115,39 +98,14 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     );
     return div;
 };
+
 /* @tag */
 gantt._render_task_content = function(task, width){
 
 
-
-
-    var select_task = function(a){
-
-
-//        $(document).trigger('tasks_table:collection:uncheck_all');
-//        var data = [];
-//        data.push(task);
-
-
-//
-        if (a==true){
-
-//            if (document.getElementsByName('task_'+task.id)[0].checked == false) {
-//                $(document.getElementsByName('task_'+task.id)[0]).trigger('click');
-//                return true
-//            }
-
-//        $(document).trigger('tasks_table:collection:change_checked', [task]);
-//            var data = [task.id];
-//            gantt.customSelect(data);
-        }
-          return true
-
-    };
     var content = document.createElement("div");
     if(this._get_safe_type(task.type) != this.config.types.milestone)
         content.innerHTML = this.templates.task_text(task.start_date, task.end_date, task);
-
 
 
     var uniq_control_class_name = (new Date()).getTime() + 'actions';
@@ -157,16 +115,13 @@ gantt._render_task_content = function(task, width){
     $('.js-popover-layout').append("<div id="+uniq_control_class_name+"></div>");
     var elem = $('#'+uniq_control_class_name)
     React.renderComponent(
-        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task, onPopoverToggle: select_task}),
+        GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task}),
         elem[0]
     );
 
     //content.style.width = width + 'px';
     return content;
 };
-
-
-
 
 gantt._render_task_element = function(task){
     var pos = this._get_task_pos(task);

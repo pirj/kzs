@@ -96,7 +96,7 @@ R = React.DOM
   componentDidUpdate: ->
     @.popoverToggle()
     @._calculatePosition()
-    @.popoverDidUpdate() if @.hasOwnProperty('popoverDidUpdate')
+    @.popoverDidUpdate()
 
   getDefaultProps: ->
     parent: ''

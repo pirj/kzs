@@ -17,7 +17,7 @@ R = React.DOM
     json = @.props.json
 
     if @.state.opened==true
-      console.log $('.gantt_task_content'+@.props.parent).prev()
+#      console.log $('.gantt_task_control'+@.props.parent).prev()
       $('.gantt_task_content'+@.props.parent).prev().addClass('active')
     if @.state.opened==false
 #      console.log @.props.parent
