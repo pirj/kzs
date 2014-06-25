@@ -81,6 +81,7 @@
   border-radius: $input-border-radius;
   text-align: center;
   display: inline-block;
+  border: 1px solid white;
   width: $size;
   height: $size;
   line-height: $size;
@@ -123,3 +124,30 @@
     color: #fff;
   }
 }
+
+.ui-datepicker-calendar .ui-datepicker-unselectable {
+  span.ui-state-default {
+    color: $color-cloud-darker; cursor: default;
+  }
+}
+.ui-datepicker-calendar .ui-datepicker-today {
+  a.ui-state-default.ui-state-highlight  {
+    color: $color-cyan; background: white; border: 1px solid $color-cyan;
+  }
+  a.ui-state-default.ui-state-highlight.ui-state-hover {
+    color: white; background: $color-sea-green; border: 1px solid white;
+  }
+}
+.ui-datepicker-calendar .ui-datepicker-current-day {
+  a.ui-state-default.ui-state-active {
+    color: white; background: $color-cyan;
+  }
+}
+.ui-datepicker-unselectable.ui-state-disabled.ui-datepicker-today {
+  span.ui-state-default {
+    border-color: $color-cloud-darker //background: $color-cloud-darker ; color: white;
+  }
+}
+
+
+
