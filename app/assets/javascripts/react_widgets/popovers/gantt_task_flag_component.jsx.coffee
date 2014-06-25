@@ -18,6 +18,10 @@ R = React.DOM
     else
       $(".task_flag#{@.props.parent}").removeClass('active');
 
+
+  componentDidUpdate: ->
+    console.log $(@.refs.popover.getDOMNode()).find('input[type="checkbox"]').iCheck(global.icheck)
+
   render: ->
     @.activateParent()
 
@@ -35,24 +39,29 @@ R = React.DOM
         ]
       )
     )
+    
+    render_description = (el) ->
+      description = R.div({})
+      unless _.isUndefined(el.description) || _.isEmpty(el.description)
+        description = R.div({className: 'row'}, [
+          R.div({className: 'col-sm-1 col-sm-offset-1'}, R.div({className: 'text-help'}, 'суть')),
+          R.div({className: 'col-sm-9'}, R.p({className: 'text-cloud'}, el.description))
+        ])
 
     items = data.map((el) ->
       R.div({className: 'popover-content-item b-offset-sm'}, [
         R.div({className: 'row'},[
           R.div({className: 'col-sm-1 col-sm-offset-1'}, R.input({type: 'checkbox', checked: el.checked, disabled: 'disabled'})),
-          R.div({className: 'col-sm-9'}, R.a({className: 'link-sea-green', href: "/tasks/#{task_id}"}, el.name))
+          R.div({className: 'col-sm-9'}, R.a({className: 'h4 link-sea-green', href: "/tasks/#{task_id}"}, el.name))
         ]),
-        R.div({className: 'row'}, [
-          R.div({className: 'col-sm-1 col-sm-offset-1'}, R.div({className: 'text-help'}, 'суть')),
-          R.div({className: 'col-sm-9'}, R.p({className: 'text-cloud'}, el.description))
-        ]),
+        render_description(el),
       ])
     )
 
     bottom_links =
       R.div({className: 'popover-footer nav nav-justified'}, [
           R.li({}, R.a({className: 'col-sm-4 btn text-center', href: "/tasks/#{task_id}"}, 'Открыть задачу') ),
-          R.li({}, R.a({className: 'col-sm-4 btn text-center', href: "/tasks/#{task_id}/edit"}, 'Править дела') ),
+          R.li({}, R.a({className: 'col-sm-4 btn text-center', href: "/tasks/#{task_id}/edit#checklist"}, 'Править дела') ),
           R.li({}, R.a({className: 'col-sm-4 btn text-center', onClick: @.popoverHide}, [ R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена') ]) )
       ])
 
