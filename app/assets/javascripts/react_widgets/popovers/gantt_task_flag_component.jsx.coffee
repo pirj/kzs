@@ -29,7 +29,9 @@ R = React.DOM
 
     header = R.div({},
       R.div({className: 'row'},[
-          R.div({className: 'col-sm-9 col-sm-offset-2 text-gray'}, current_date)
+          R.div({className: 'col-sm-9 col-sm-offset-1'},
+            R.div({className: 'popover-title m-tasks-gantt-flag'}, current_date)
+          )
         ]
       )
     )
@@ -37,12 +39,12 @@ R = React.DOM
     items = data.map((el) ->
       R.div({className: 'popover-content-item b-offset-sm'}, [
         R.div({className: 'row'},[
-          R.div({className: 'col-sm-1'}, R.input({type: 'checkbox', checked: el.checked})),
-          R.div({className: 'col-sm-11'}, R.a({className: 'link-sea-green', href: "/tasks/#{task_id}"}, el.name))
+          R.div({className: 'col-sm-1 col-sm-offset-1'}, R.input({type: 'checkbox', checked: el.checked, disabled: 'disabled'})),
+          R.div({className: 'col-sm-9'}, R.a({className: 'link-sea-green', href: "/tasks/#{task_id}"}, el.name))
         ]),
         R.div({className: 'row'}, [
-          R.div({className: 'col-sm-1'}, R.div({className: 'text-help'}, 'суть')),
-          R.div({className: 'col-sm-11'}, R.p({className: 'text-cloud'}, el.description))
+          R.div({className: 'col-sm-1 col-sm-offset-1'}, R.div({className: 'text-help'}, 'суть')),
+          R.div({className: 'col-sm-9'}, R.p({className: 'text-cloud'}, el.description))
         ]),
       ])
     )
