@@ -29,7 +29,7 @@ R = React.DOM
 
     open_link = R.a({className: 'btn'}, [R.span({className: 'fa col-words-1'}), R.span({}, 'Открыть задачу')])
     add_subtask_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}{/edit#add_subtask"}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
-    add_checklist_item_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}/edit#add_checklist_item"}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
+    add_checklist_item_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}/edit#add_checklist_item"}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить дело')])
     edit_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}/edit"}, [R.span({className: 'fa fa-pencil'}), R.span({}, 'Редактировать задачу')])
     cancel_link = R.a({className: 'btn', onClick: @.popoverHide}, [R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена')])
 

@@ -93,3 +93,10 @@
   display: none;
 }
 
+.gantt_task_row.gantt_selected{
+  $select-color: lighten($color-blue, 40%);
+  background-color: $select-color;
+  .gantt_task_cell{ border-right-color: darken($select-color, 10%);}
+}
+
+
