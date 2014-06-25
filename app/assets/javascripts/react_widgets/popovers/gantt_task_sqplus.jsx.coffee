@@ -10,28 +10,37 @@ R = React.DOM
 
   getDefaultProps: ->
     json: {}
+    placement: 'bottom'
 
   componentWillUpdate: ->
     @.props.target_position = $('.gantt_task_content'+@.props.parent).prev()[0]
 
+  activeParent: ->
+    if @.state.opened
+      $(".gantt_task_content#{@.props.parent}").prev().addClass('active')
+    else
+      $(".gantt_task_content#{@.props.parent}").prev().removeClass('active')
+
+
   render: ->
-    el = @.props.json
-    json = @.props.json
+    @.activeParent()
+    
+    data = @.props.json
 
-    if @.state.opened==true
-      $('.gantt_task_content'+@.props.parent).prev().addClass('active')
-    if @.state.opened==false
-      $('.gantt_task_content'+@.props.parent).prev().removeClass('active')
-
-
-
-    open_link = R.a({className: 'btn'}, [R.span({className: 'fa'}), R.span({}, 'Открыть задачу')])     #TODO @justvit @tag необходимо поправить линки обратно, из за переименования не нашел старой версии
-    add_subtask_link = R.a({className: 'btn', href: '/tasks/task_id/edit#add_subtask'}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
-    add_checklist_item_link = R.a({className: 'btn', href: '/tasks/task_id/edit#add_checklist_item'}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
-    edit_link = R.a({className: 'btn', href: '/tasks/task_id/edit'}, [R.span({className: 'fa fa-pen'}), R.span({}, 'Редактировать задачу')])
+    open_link = R.a({className: 'btn'}, [R.span({className: 'fa col-words-1'}), R.span({}, 'Открыть задачу')])
+    add_subtask_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}{/edit#add_subtask"}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
+    add_checklist_item_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}/edit#add_checklist_item"}, [R.span({className: 'fa fa-plus'}), R.span({}, 'Добавить подзадчу')])
+    edit_link = R.a({className: 'btn', href: "/tasks/#{data.task_id}/edit"}, [R.span({className: 'fa fa-pencil'}), R.span({}, 'Редактировать задачу')])
     cancel_link = R.a({className: 'btn', onClick: @.popoverHide}, [R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена')])
 
+    data_range = "#{moment(data.started_at).format('DD MMMM')} - #{moment(data.finished_at).format('DD MMMM')}"
 
+    header = R.div({className: 'row'},
+              R.div({className: 'col-sm-9 col-sm-offset-1 b-offset-sm'},[
+                R.div({className: 'popover-title m-tasks-gantt-sqplus'}, data.title),
+                R.div({className: 'text-cloud'}, data_range)
+              ])
+    )
     items = R.div({className: 'btn-group-vertical'},[
               open_link,
               add_subtask_link,
@@ -40,5 +49,5 @@ R = React.DOM
               cancel_link
             ])
 
-    @.renderPopover(items)
+    @.renderPopover([header, items])
 

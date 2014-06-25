@@ -97,7 +97,7 @@
       border-top-right-radius: 0;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      transition: background 0.5s ease;
+      transition: background 0.1s ease-in-out;
       &:hover {
         background: rgba(255, 255, 255, 0.91);
         color: #3C3A3A;
