@@ -11,21 +11,18 @@ R = React.DOM
   getDefaultProps: ->
     json: {}
 
+  componentWillUpdate: ->
+    @.props.target_position = $('.gantt_task_content'+@.props.parent).prev()[0]
 
   render: ->
     el = @.props.json
     json = @.props.json
 
     if @.state.opened==true
-#      console.log $('.gantt_task_control'+@.props.parent).prev()
       $('.gantt_task_content'+@.props.parent).prev().addClass('active')
     if @.state.opened==false
-#      console.log @.props.parent
       $('.gantt_task_content'+@.props.parent).prev().removeClass('active')
 
-#    $('.task_flag'+@.props.parent).addClass('active');
-#    if @.state.opened == false
-#      $('.task_flag'+@.props.parent).removeClass('active');
 
 
     open_link = R.a({className: 'btn'}, [R.span({className: 'fa'}), R.span({}, 'Открыть задачу')])     #TODO @justvit @tag необходимо поправить линки обратно, из за переименования не нашел старой версии

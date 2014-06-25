@@ -96,7 +96,7 @@ R = React.DOM
   componentDidUpdate: ->
     @.popoverToggle()
     @._calculatePosition()
-    @.popoverDidUpdate()
+    @.popoverDidUpdate() if @.hasOwnProperty('popoverDidUpdate')
 
   getDefaultProps: ->
     parent: ''
@@ -128,7 +128,8 @@ R = React.DOM
 
 
   _calculatePosition: ->
-    $parent = $(@.props.parent)
+    parent = @.props.target_position || @.props.parent
+    $parent = $(parent)
     $popover = $(@.refs.popover.getDOMNode())
 
     setWidth = 500
