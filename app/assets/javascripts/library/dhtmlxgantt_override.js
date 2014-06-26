@@ -11,18 +11,14 @@ gantt._render_task_notifications = function (task, width) {
 
     var notifications_container = document.createElement('div');
     notifications_container.className = "task_notifications_container";
-    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
-    notifications_container.innerHTML = '';
+    notifications_container.innerHTML = task.notifications_count;
+//    notifications_container.innerHTML = 'task.notification_count';
+//    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
+//    notifications_container.innerHTML = '';
 
     return notifications_container;
 };
 gantt._render_task_flags = function (task, width) {
-
-
-    //_.where(listOfPlays, {author: "Shakespeare", year: 1611});
-
-
-
     var flag_container = document.createElement('div');
     flag_container.className = "task_flag_container";
     // сколько чеклистов
@@ -100,6 +96,7 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
 };
 
 /* @tag */
+
 gantt._render_task_content = function(task, width){
 
     var content = document.createElement("div");
@@ -140,7 +137,7 @@ gantt._render_task_element = function(task){
     div.setAttribute(this.config.task_attribute, task.id);
     //use separate div to display content above progress bar
 
-    div.appendChild(gantt._render_task_notifications(task,width));
+
     div.appendChild(gantt._render_task_control(task,width));
     div.appendChild(gantt._render_task_content(task, width));
 
@@ -149,6 +146,7 @@ gantt._render_task_element = function(task){
 
 
     div.appendChild(gantt._render_task_flags(task, width));
+
     div.className = this._combine_item_class("gantt_task_line",
         this.templates.task_class(task.start_date, task.end_date, task),
         task.id);
@@ -161,6 +159,13 @@ gantt._render_task_element = function(task){
         "line-height:" + height + 'px',
         "width:" + width + 'px'
     ].join(";");
+    if (task.has_notification===true) {
+        console.log(task.has_notification);
+        console.log(task.id);
+        div.appendChild(gantt._render_task_notifications(task,width));
+    }
+//    div.appendChild(gantt._render_task_notifications(task,width));
+
 
     var side = this._render_leftside_content(task);
     if(side) div.appendChild(side);
