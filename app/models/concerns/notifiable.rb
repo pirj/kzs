@@ -94,6 +94,15 @@ module Notifiable
     self.notifications.where(user_id: user.id).count > 0 ? true : false
   end
 
+  # Количество нотификаций для конкретного пользователя
+  # @param user [User] Пользователь
+  # @example
+  #   obj.notifications_count_for current_user
+  # @see User
+  def notifications_count_for user
+    self.notifications.where(user_id: user.id).count
+  end
+
 private
   
   # Делает из массива списка интересантов список интересантов
