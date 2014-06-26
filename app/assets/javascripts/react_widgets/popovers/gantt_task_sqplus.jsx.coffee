@@ -26,7 +26,7 @@ R = React.DOM
 
   render: ->
     @.activeParent()
-    
+
     data = @.props.json
 
     open_link = R.a({className: 'btn'}, [R.span({className: 'fa col-words-1'}), R.span({}, 'Открыть задачу')])
@@ -51,5 +51,8 @@ R = React.DOM
               cancel_link
             ])
 
+
+
     @.renderPopover([header, items])
+
 

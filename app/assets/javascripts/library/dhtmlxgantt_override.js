@@ -102,11 +102,9 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
 /* @tag */
 gantt._render_task_content = function(task, width){
 
-
     var content = document.createElement("div");
     if(this._get_safe_type(task.type) != this.config.types.milestone)
         content.innerHTML = this.templates.task_text(task.start_date, task.end_date, task);
-
 
     var uniq_control_class_name = (new Date()).getTime() + 'actions';
     content.className = "gantt_task_content " + uniq_control_class_name;
@@ -114,29 +112,12 @@ gantt._render_task_content = function(task, width){
     var parent_class_name = '.' + uniq_control_class_name;
     $('.js-popover-layout').append("<div id="+uniq_control_class_name+"></div>");
     var elem = $('#'+uniq_control_class_name);
-//    var hidePlus = function(status) {                               //срабатывает при закрытии окна
-//        if (status==false) {
-//            var target = document.getElementsByClassName('gantt_task_control');
-//            console.log(target[0]);
-//            _.each(target, function(item) {
-//                item.classList.remove('active');
-////                console.log(item);
-////                target[item].classList.remove('active');
-////                if (item.classList.contains('active')) {
-////                    console.log(item);
-//////                    item.classList.remove('active');
-////                }
-//            });
-//
-//
-//        }
-//    };
+
     React.renderComponent(
         GanttTaskSQPlus({parent: parent_class_name, body: 'body!', json: task}),
         elem[0]
     );
 
-    //content.style.width = width + 'px';
     return content;
 };
 

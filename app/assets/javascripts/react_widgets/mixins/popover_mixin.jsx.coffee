@@ -128,7 +128,13 @@ R = React.DOM
 
 
   _calculatePosition: ->
-    parent = @.props.target_position || @.props.parent
+#    parent =  @.props.parent
+    if  @.props.target_position
+      if $(@.props.target_position).is(':visible')
+      then  parent = @.props.target_position
+      else parent =  @.props.parent
+    else
+      parent =  @.props.parent
     $parent = $(parent)
     $popover = $(@.refs.popover.getDOMNode())
 
