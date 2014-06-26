@@ -79,7 +79,7 @@ class Tasks::Task < ActiveRecord::Base
   end
 
   def expired?
-    finished_at < Time.now
+    !finished_at.nil? ? finished_at < Time.now : false
   end
 
 private
