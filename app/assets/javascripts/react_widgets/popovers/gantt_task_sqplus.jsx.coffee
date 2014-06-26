@@ -19,7 +19,9 @@ R = React.DOM
     if @.state.opened
       $(".gantt_task_content#{@.props.parent}").prev().addClass('active')
     else
-      $(".gantt_task_content#{@.props.parent}").prev().removeClass('active')
+      plus = $(".gantt_task_content#{@.props.parent}").prev()
+      plus.removeClass('active')
+      plus.hide()
 
 
   render: ->

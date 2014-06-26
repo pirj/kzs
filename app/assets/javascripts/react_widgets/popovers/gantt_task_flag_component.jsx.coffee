@@ -20,7 +20,7 @@ R = React.DOM
 
 
   componentDidUpdate: ->
-    console.log $(@.refs.popover.getDOMNode()).find('input[type="checkbox"]').iCheck(global.icheck)
+    $(@.refs.popover.getDOMNode()).find('input[type="checkbox"]').iCheck(global.icheck)
 
   render: ->
     @.activateParent()

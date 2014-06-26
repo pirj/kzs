@@ -69,15 +69,24 @@ class Gantt
 
 
     gantt.attachEvent "onMouseMove", (taskId, e) ->                     #<----- показ плюсика при наведении на таск
-
+      status = ''
       if taskId!=null and e.target.classList.contains('gantt_task_content')
         control = e.target.previousElementSibling
-        control.style.display = 'block'
-        left = e.offsetX
-        control.style.left = left + 'px'
+        if control.classList.contains('active')
+#          console.log ('ниче не делать')
+          status = 'opened'
+
+        else
+          status = ''
+          control.style.display = 'block'
+          left = e.offsetX
+          control.style.left = left + 'px'
 
         e.target.onmouseout = (e) ->
-          control.style.display = 'none'
+          if status == 'opened'
+          else
+            control.style.display = 'none'
+            status = ''
 
                                                                #----------------------------------------------- раздел для маштабирования
     $(document).on "click", "#month", ->

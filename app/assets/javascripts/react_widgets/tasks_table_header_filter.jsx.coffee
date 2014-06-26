@@ -41,7 +41,7 @@ R = React.DOM
 
     @.popover_nested_name = "js-tasks-table-filter-popover-#{(new Date()).getTime()}"
     popover_nested_name_class_name = ".#{@.popover_nested_name}"
-    console.log @.props.filter_opts[@.props.name]
+#    console.log @.props.filter_opts[@.props.name]
     filter_component_params = {
       parent: popover_nested_name_class_name,
       opened: @.state.filter_popover_opened,
