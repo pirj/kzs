@@ -104,7 +104,7 @@ end
 
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.14.1'
   gem 'zeus', '0.13.4.pre2'
   gem 'quiet_assets'
   gem 'capistrano'
