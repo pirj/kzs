@@ -12,7 +12,8 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
             :duration,
             :parent_id,
             :has_subtasks,
-            :has_notification
+            :has_notification,
+            :expired?
 
   def description
     object.text

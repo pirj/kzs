@@ -78,6 +78,10 @@ class Tasks::Task < ActiveRecord::Base
     state :cancelled
   end
 
+  def expired?
+    finished_at < Time.now
+  end
+
 private
   def send_create_notifications
     notify_interesants exclude: (updated_by ? User.find(updated_by) : [])
