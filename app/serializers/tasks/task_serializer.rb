@@ -61,8 +61,10 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
     object.parent_id
   end
 
+
   has_one :executor, serializer: NameOnlyUserSerializer
   has_one :inspector, serializer: NameOnlyUserSerializer
 
   has_many :checklists, serializer: Tasks::ChecklistSerializer
+  has_many :notifications, serializer: Tasks::NotificationSerializer
 end

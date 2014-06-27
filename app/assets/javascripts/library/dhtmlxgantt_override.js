@@ -10,14 +10,23 @@ gantt._render_task_control = function(task,width) {
 gantt._render_task_notifications = function (task, width) {
 
     var notifications_container = document.createElement('div');
-    notifications_container.className = "task_notifications_container";
+
+    var uniq_class_name = (new Date()).getTime()+'notification';
+    notifications_container.className = task.state + " task_notifications_container " + uniq_class_name;
     notifications_container.innerHTML = task.notifications_count;
 //    notifications_container.innerHTML = 'task.notification_count';
 //    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
 //    notifications_container.innerHTML = '';
-
+    var parent_class_name = '.' + uniq_class_name;
+    React.renderComponent(
+        NptificationPopover({parent: parent_class_name, json: task}),
+        elem[0]
+    );
     return notifications_container;
 };
+
+
+
 gantt._render_task_flags = function (task, width) {
     var flag_container = document.createElement('div');
     flag_container.className = "task_flag_container";
