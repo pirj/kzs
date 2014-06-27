@@ -17,9 +17,6 @@ class Gantt
       $(document).on "tasks_table:collection:update_data", (e, data) ->
         gantt.clearAll()
         gantt.parse({data: data})
-#        currentDayPos = gantt.posFromDate(new Date())
-#        timeLineWidth = $('.js-gantt-timeline').outerWidth()
-
         gantt.scrollTo(gantt.posFromDate(new Date()), 0)
 
 
