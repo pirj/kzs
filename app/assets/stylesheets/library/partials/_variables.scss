@@ -49,6 +49,7 @@ $color-blue-d: #2980b9;
 
 $color-magenta: #9b59b6;
 $color-magenta-d: #8e44ad;
+$color-magenta-lighter: lighten( #9b59b6, 60.5%); // #eee
 $color-magenta-darker: $color-magenta-d;
 
 $color-silver-lighten: rgb(202,207,210);
@@ -69,6 +70,7 @@ $color-orange-d: #d35400;
 $color-orange-darker: $color-orange-d;
 
 $color-red: #e74c3c;
+$color-red-lighter: lighten( #e74c3c, 40.5%) !default; // #eee
 $color-red-d: #c0392b;
 $color-red-darker: $color-red-d;
 
@@ -80,6 +82,8 @@ $color-gray: #95a5a6;
 $color-gray-d: #7f8c8d;
 $color-gray-darker: $color-gray-d;
 $color-gray-lighter: #e6e6e6;
+
+
 
 $colors-map: (
         cyan: $color-cyan,
