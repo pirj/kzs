@@ -9,11 +9,12 @@
   }
 }
 
+
 .js-gantt-timeline {
   position: absolute;
   display: block;
   z-index: 1;
-  top: 2px;
+  top: 5px;
   height: 100%;
 
   &:after {
@@ -48,6 +49,7 @@
   border-top: none;
   overflow: hidden;
   border: none;
+  top: 0;
   &:before,&:after {
     content:".";
     position:absolute;
@@ -84,7 +86,7 @@
     border-top:1px solid #cecece;
   }
   .gantt_scale_cell {
-    &.weekend {
+    &.weekd {
       color: $color-red;
     }
   }

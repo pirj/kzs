@@ -161,8 +161,6 @@ gantt._render_task_element = function(task){
         "width:" + width + 'px'
     ].join(";");
     if (task.has_notification===true) {
-        console.log(task.has_notification);
-        console.log(task.id);
         div.appendChild(gantt._render_task_notifications(task,width));
     }
 //    div.appendChild(gantt._render_task_notifications(task,width));

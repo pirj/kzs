@@ -1,5 +1,8 @@
 .gantt-main{
   width: 100%;
+  top:-40px;
+  padding-top: 40px;
+  position: relative;
   & > div{
     display: inline-block;
     height: 100%;
@@ -10,6 +13,7 @@
 //    overflow-y: scroll;
   }
   & > #gantt_here{
+    top:-40px;
     border: none;
     overflow-y: hidden;
   }
