@@ -203,7 +203,7 @@ class Gantt
     gantt.config.show_links = true;
     gantt.config.drag_progress = false;
     gantt.config.drag_links = false;
-    gantt.config.drag_resize = false;
+    gantt.config.drag_resize = true;
     gantt.config.lightbox["task_sections"] = [
       {
         name: "title"
@@ -268,13 +268,13 @@ class Gantt
   editTask: (data) =>              #!!!
 #    console.log(data)
     request = $.ajax(
-      url: '/api/tasks/'+data.id
+      url: '/tasks/'+data.id
       type: 'PUT'
       dataType: "json"
       data:
         authenticity_token: $("meta[name=\"csrf-token\"]").attr("content")
         task:
-          finished_at: data.finished_at
+          finished_at: '04.04.2014' #data.finished_at
           started_at: data.started_at
     )
 
