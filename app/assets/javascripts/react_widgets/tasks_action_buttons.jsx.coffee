@@ -27,8 +27,22 @@ R = React.DOM
       'fa-rotate-right': action == 'reformulate'
       'fa-times': action == 'cancel'
       'fa btn btn-default': true
+      'js-tooltip': true
     )
     return css_class
+    
+    
+  tooltipTitleByAction: (action) ->
+    cx = React.addons.classSet
+    title = cx(
+      'Приступить': action == 'start'
+      'Приостановить': action == 'pause'
+      'Продолжить': action == 'resume'
+      'Завершить': action == 'finish'
+      'Переформулировать': action == 'reformulate'
+      'Отменить': action == 'cancel'
+    )
+    return title
 
   # обработка клика на кнопке
   # отправляем запрос на сервер
@@ -76,9 +90,12 @@ R = React.DOM
       @.handleCheckedData(checked)
     )
 
+  componentDidUpdate: ->
+#    console.log $('.js-tooltip').tooltip(placement: 'top')
+
   render_single_btn: (action) ->
     # свойства для активной кнопки
-    opts = {href: '#', className: @.iconClassByAction(action.name), 'data-action': action.name, onClick: @.handleClick}
+    opts = {href: '#', className: @.iconClassByAction(action.name), 'data-action': action.name, title: @.tooltipTitleByAction(action.name), onClick: @.handleClick}
 
     # корректируем свойства для неактивной кнопки
     if @.state.data.actions == undefined || @.state.data.actions.indexOf(action.name) < 0

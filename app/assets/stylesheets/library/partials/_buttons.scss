@@ -193,7 +193,11 @@
   h3 + .link,
   .link + h3,
   .link + .link,
-  .btn + .btn{
+  .btn + .btn,
+  .tooltip + .btn,
+  .tooltip + .link,
+  .tooltip + .h3,
+  .tooltip + .span{
     margin-left: $padding-base-horizontal;
   }
 
