@@ -25,3 +25,7 @@ ul.nav.nav-inline.btn-block.js-tasks-actions.b-offset-sm
         = link_to  polymorphic_path([event_name, :api, resource]), class: additional_classes.join(' '), remote: true, method: :post do
           span class=icon_class
           span = t("activerecord.tasks/task.to_state.#{event_name}")
+
+
+  li.js-buttons-place
+    = link_to 'Редактировать', edit_task_path(resource), class: 'btn btn-default'
