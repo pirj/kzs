@@ -25,6 +25,7 @@
     height: 100%;
     border-radius: 10px;
     top:0;
+    z-index: 1;
   }
   .js-gantt-timeline-label {
     position: relative;
@@ -67,27 +68,29 @@
   }
 }
 
-//.gantt_task {
-//  height: 100%;
-//  width: 100% !important;
-//  &:before,&:after {
-//    content:".";
-//    position:relative;
-//    height:40px;
-//    display: block;
-//  }
-//  &:after {
-//    height: 20px;
-//  }
-//  .gantt_task_scale {
-//    border-top:1px solid #cecece;
-//  }
-//  .gantt_scale_cell {
-//    &.weekend {
-//      color: $color-red;
-//    }
-//  }
-//}
+.gantt_task {
+  height: 100%;
+  width: 100% !important;
+  &:before,&:after {
+    content:".";
+    position:relative;
+    height:40px;
+    display: block;
+  }
+  &:after {
+    height: 20px;
+  }
+  .gantt_task_scale {
+    border-top:1px solid #cecece;
+  }
+  .gantt_scale_cell {
+    &.weekend {
+      color: $color-red;
+    }
+  }
+}
+
+
 
 .gantt_grid {
   display: none;

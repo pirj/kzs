@@ -9,13 +9,20 @@ class Gantt
 
     @.initCustomFields()                              #определяем свои поля
     gantt.init(dom)
-                                                      #Инициализация модуля Гант
+    #Инициализация модуля Гант
+
     if id
       @.getTask(id)
     else
       $(document).on "tasks_table:collection:update_data", (e, data) ->
         gantt.clearAll()
         gantt.parse({data: data})
+#        currentDayPos = gantt.posFromDate(new Date())
+#        timeLineWidth = $('.js-gantt-timeline').outerWidth()
+
+        gantt.scrollTo(gantt.posFromDate(new Date()), 0)
+
+
 
     @.createTimeline()
 
@@ -120,6 +127,8 @@ class Gantt
     $(document).on "tasks_table:collection:update_subtasks", (e, id, children_ids, is_opened) =>
 #      console.log children_ids
       @.gantt.parse({data: children_ids})
+      gantt.scrollTo(gantt.posFromDate(new Date()), 0)
+
       if is_opened then @.gantt.open(id) else @.gantt.close(id)
 
       for i in [0...children_ids.length]
@@ -308,7 +317,7 @@ class Gantt
       description: a.description
       start_date: a.start_date
       duration: a.duration
-      )
+    )
 
   displayForm: (form) =>
     # запиливаем пришедшую форму в модальное окно
@@ -342,6 +351,12 @@ class Gantt
 
   scrollY: (y) =>
     $('#gantt_here .gantt_data_area').scrollTop(y)
+
+
+
+#  scrollCurrentDate: () =>
+
+#    $('#gantt_here .gantt_data_area').scrollTop(y)
 
   modSampleHeight:  =>
     headHeight = 200

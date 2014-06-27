@@ -24,11 +24,18 @@
     white-space: nowrap;
     position: relative;
     padding: 5px 5px 6px;
-
     .table-filter{
       position: absolute;
       right: 0;
     }
+  }
+
+  .table.new > thead > tr > th {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
   }
 
   .table.new > tbody > tr > td {
@@ -139,6 +146,7 @@
 //  height: 6px;
   border: none;
   border-radius: 0;
+  z-index: 5;
 
   &:hover,&.gantt_selected{
     height: 10px!important;

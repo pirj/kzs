@@ -19,7 +19,6 @@
   left: 0;
   z-index: $zindex-popover;
   display: none;
-  padding: 1px;
   text-align: left; // Reset given new insertion method
   background-color: $popover-bg;
   background-clip: padding-box;
@@ -105,6 +104,9 @@
       i {
         font-size: 22px;
         margin-right: 20px;
+      }
+      &:first-child {
+        border:none;
       }
     }
   }

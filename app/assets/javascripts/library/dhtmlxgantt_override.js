@@ -40,6 +40,7 @@ gantt._render_task_flags = function (task, width) {
     }
 
     return flag_container;
+
 };
 
 gantt._render_task_flag = function(flag, task_started_at, width, json) {
