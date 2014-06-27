@@ -17,7 +17,7 @@ class Gantt
       $(document).on "tasks_table:collection:update_data", (e, data) ->
         gantt.clearAll()
         gantt.parse({data: data})
-        gantt.scrollTo(gantt.posFromDate(new Date()), 0)
+        gantt.showDate(new Date());
 
 
 
@@ -124,7 +124,7 @@ class Gantt
     $(document).on "tasks_table:collection:update_subtasks", (e, id, children_ids, is_opened) =>
 #      console.log children_ids
       @.gantt.parse({data: children_ids})
-      gantt.scrollTo(gantt.posFromDate(new Date()), 0)
+      gantt.showDate(new Date());
 
       if is_opened then @.gantt.open(id) else @.gantt.close(id)
 
