@@ -2,7 +2,7 @@
 
 R = React.DOM
 
-@NptificationPopover = React.createClass
+@NotificationPopover = React.createClass
   mixins: [PopoverMixin]
 
   propTypes:
@@ -19,17 +19,12 @@ R = React.DOM
 #      $(".task_notifications_container#{@.props.parent}").removeClass('active');
 
 
-  componentDidUpdate: ->
-    $(@.refs.popover.getDOMNode()).find('input[type="checkbox"]').iCheck(global.icheck)
-
   render: ->
     @.activateParent()
 
-
     task = @.props.json
     data = task.notifications
-    task_id = @.props.json.task_id
-    window.task_date = @.props.json.date
+
     current_date = moment(@.props.json.date, 'DD-MM-YYYY').format('DD MMMM, dddd')
 
     header = R.div({className: 'b-offset-sm'},
@@ -76,7 +71,7 @@ R = React.DOM
 
     bottom_links =
       R.div({className: 'popover-footer nav nav-justified'}, [
-          R.li({}, R.a({className: 'col-sm-6 btn text-center', href: "/tasks/#{task_id}"}, 'Открыть задачу') ),
+          R.li({}, R.a({className: 'col-sm-6 btn text-center', href: "/tasks/#{task.id}"}, 'Открыть задачу') ),
           R.li({}, R.a({className: 'col-sm-6 btn text-center', onClick: @.popoverHide}, [ R.span({className: 'fa fa-ban'}), R.span({}, 'Отмена') ]) )
       ])
 

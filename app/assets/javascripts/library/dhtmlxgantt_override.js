@@ -18,8 +18,11 @@ gantt._render_task_notifications = function (task, width) {
 //    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
 //    notifications_container.innerHTML = '';
     var parent_class_name = '.' + uniq_class_name;
+    $('.js-popover-layout').append("<div id="+uniq_class_name+"></div>");
+    var elem = $('#'+uniq_class_name)
+
     React.renderComponent(
-        NptificationPopover({parent: parent_class_name, json: task}),
+        NotificationPopover({parent: parent_class_name, json: task}),
         elem[0]
     );
     return notifications_container;
@@ -85,7 +88,7 @@ gantt._render_task_flag = function(flag, task_started_at, width, json) {
     // json_of_all_flags — json всех пунктов в данном флажке
         $('.js-popover-layout').append("<div id="+uniq_flag_class_name+"></div>");
 
-    elem = $('#'+uniq_flag_class_name)
+    var elem = $('#'+uniq_flag_class_name)
 
 
     body = 'id: '+flag.id+', deadline: '+flag.deadline+', checked: '+flag.checked+', description: '+flag.description+', name: '+flag.name
