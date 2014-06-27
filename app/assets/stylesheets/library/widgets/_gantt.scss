@@ -1,3 +1,6 @@
+// подключаем спрайты через compass к диаграмме гантта
+@import "gantt-icons/*.png";
+
 .gantt-main{
   width: 100%;
   top:-40px;
@@ -130,19 +133,21 @@
 //}
 
 .task_flag {
-  width: 8px;
-  height: 12px;
+  @include gantt-icons-sprite(flag-gray);
+  width: 30px;
+  height: 30px;
   position: absolute;
-  top: -12px;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAMCAMAAAAwP5+2AAAAWlBMVEUAAADnSzvnSzuUpKaUpKbnSzvnSzsau5yXi36UpKaUpKaUpKYau5wau5yUpKbnSzvnSzvnSzvnSzsau5wau5wau5wau5wau5wau5wau5wau5wau5znSzuUpKb0wd/0AAAAG3RSTlMAoOJCdhp2EAYb4qDOka0dQ61AN1o8bCDsqnau47vuAAAAcElEQVQY073ORwrAMAxEUaX33iP5/tcMlkUmJ8jfGMEDD3G7EHJ9hUOmQV9mvg4Q59LyJSK5P9jXFSCuTkAkHj3RdiNaY0SLjLTbhzS2J4hMybmShX8Cieew5S4JJMVha0mnglSEJAsvewFCX0L/kgdWJwwDkV34wAAAAABJRU5ErkJggg==);
-  background-repeat: no-repeat;
-  background-position: -14px 0;
+  top: -20px;
+  margin-left: 10px;
   cursor: pointer;
   &.f-unchecked{
-    background-position: right;
+    @include gantt-icons-sprite(flag-red);
   }
   &.f-checked{
-    background-position: left;
+    @include gantt-icons-sprite(flag-green);
+  }
+  &.active{
+    @include gantt-icons-sprite(flag-active);
   }
 }
 
