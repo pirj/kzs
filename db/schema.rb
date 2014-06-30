@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140620151702) do
+ActiveRecord::Schema.define(:version => 20140626095835) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -191,7 +191,6 @@ ActiveRecord::Schema.define(:version => 20140620151702) do
     t.integer  "creator_id"
     t.datetime "read_at"
     t.integer  "flow_id"
-    t.integer  "notifications_count",       :default => 0
   end
 
   add_index "documents", ["accountable_id", "accountable_type"], :name => "index_documents_on_accountable_id_and_accountable_type", :unique => true
@@ -470,15 +469,14 @@ ActiveRecord::Schema.define(:version => 20140620151702) do
     t.text     "text"
     t.datetime "started_at"
     t.datetime "finished_at"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "organization_id"
     t.string   "state"
     t.integer  "parent_id"
     t.integer  "executor_id"
     t.integer  "inspector_id"
     t.integer  "updated_by"
-    t.integer  "notifications_count", :default => 0
   end
 
   create_table "user_desktop_configurations", :force => true do |t|
