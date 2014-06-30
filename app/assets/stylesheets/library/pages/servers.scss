@@ -6,6 +6,7 @@
   color: $color-stern-blue-darker;
   font-size: 12px;
   line-height: 30px;
+  display: none;
   a {
     color: $color-stern-blue-darker;
     text-decoration: underline;
@@ -18,6 +19,8 @@
   }
   &.dev {
     background: #e6b0aa;
+    position: absolute;
+    z-index: 1500;
   }
   &.demo {
     background: $color-orange-lighter;
