@@ -1,0 +1,144 @@
+
+<%= library_item_caption 'Range Datepicker' %>
+<p>Первое поле - поле выбора даты начала выполнения задачи. Второе поле - дата окончания выполнения задачи.</p>
+<p>Дата начала может быть абсолютно любой, если параметр <span class="lib-prop">can_earlier_than_today: true</span>. Если же параметр <span class="lib-prop">can_earlier_than_today: false</span> , то в таком случае дата начала не может быть ранее сегодняшнего дня</p>
+
+<p>Дата окончания не может быть выбрана раньше даты начала и сегодняшней даты.</p>
+<p>Формат передаваемой даты может быть либо: <span class="lib-prop">"DD.MM.YYYY"</span> , либо в формате UTC: <span class="lib-prop">Sun Dec 01 1996 03:00:00 GMT+0300</span></p>
+<p>При наличии параметров <span class="lib-prop">start_date_min_date</span> и <span class="lib-prop">finish_date_max_date</span> устанавливаются "минимальная дата начала" и "максимальная дата окончания" соответственно.</p>
+<p>При этом дата начала не может быть установлена ранее "минимальной даты начала", а дата окончания не может быть установлена позже "максимальной даты окончания". </p>
+<p><span class="lib-prop">start_date_min_date</span> и <span class="lib-prop">finish_date_max_date</span> могут принимать значения <span class="lib-prop">null</span> .
+
+<%= library_example do %>
+<div id="react_RangeDatepicker_tutorial"></div>
+<% end %>
+<%= highlight_named_code JS: %Q{
+  var startDay = "15.06.2014";
+  var deadLineDay = "29.06.2014";
+
+  React.renderComponent(RangeDatepicker({
+          start_date_input_name: 'start_date_input_name',
+          finish_date_input_name: 'finish_date_input_name',
+          can_earlier_than_today: true,
+          start_date_min_date: startDay,
+          finish_date_max_date: deadLineDay
+      }),
+      document.getElementById("react_RangeDatepicker_tutorial")
+  );
+} %>
+<script type="text/javascript">
+/* var DatePicker = React.createClass({
+    displayName: 'DatePicker',
+
+    getDefaultProps: function(){
+      return{
+        start_date_input_name: 'start_date',
+        finish_date_input_name: 'finish_date',
+        can_earlier_than_today: true,
+        start_date_min_date: null,
+        finish_date_max_date: null
+      }
+    },
+
+    handleChange: function(e){
+
+      var today = new Date();
+      var todayDate = today.setHours(0); todayDate = today.setMinutes(0); today.setSeconds(0); today.setMilliseconds(0);
+      var startDateVal = this.refs.start_date.getDOMNode().value;
+      var finishDateVal = this.refs.finish_date.getDOMNode().value;
+      var startDate = moment(startDateVal, "DD.MM.YYYY");
+      var finishDate = moment(finishDateVal, "DD.MM.YYYY");
+      var startDateMINdate;
+      var finishDateMAXdate;
+      if (thedaybeforyesterday.length>10) {
+        startDateMINdate = moment(this.props.start_date_min_date);
+        finishDateMAXdate = moment(this.props.finish_date_max_date);
+      }
+      else {
+        startDateMINdate = moment(this.props.start_date_min_date, "DD.MM.YYYY");
+        finishDateMAXdate = moment(this.props.finish_date_max_date, "DD.MM.YYYY");
+      }
+
+      if (startDate > today) {
+        $(this.refs.finish_date.getDOMNode()).datepicker( "option", "minDate", startDate._d);
+      }
+
+      else if (((startDateMINdate > today) && (this.props.can_earlier_than_today == false)) || ((this.props.start_date_min_date != null) && (startDateVal == ''))) {
+        $(this.refs.start_date.getDOMNode()).datepicker( "option", "minDate", startDateMINdate._d);
+        $(this.refs.finish_date.getDOMNode()).datepicker( "option", "minDate", startDateMINdate._d);
+      }
+      else if ((startDate < today) && (this.props.can_earlier_than_today == false)) {
+        $(this.refs.start_date.getDOMNode()).datepicker( "option", "minDate", today);
+        $(this.refs.finish_date.getDOMNode()).datepicker( "option", "minDate", today);
+      }
+      else if ((startDateMINdate > today) && (this.props.can_earlier_than_today == true)) {
+        $(this.refs.start_date.getDOMNode()).datepicker( "option", "minDate", null);
+        $(this.refs.finish_date.getDOMNode()).datepicker( "option", "minDate", startDate._d);
+      }
+      else {
+        $(this.refs.finish_date.getDOMNode()).datepicker( "option", "minDate", today );
+        console.log("sdfsd");
+
+      }
+
+      if (startDateVal != "" && finishDateVal != "") {
+        if (finishDate < today) {
+        }
+        else if (startDate > finishDate) {
+          this.refs.finish_date.getDOMNode().value = '';
+        }
+        else {
+        }
+      }
+
+
+    },
+    componentDidMount: function(){
+      var _this = this;
+      $( ".js-react-datepicker" ).datepicker( _.extend(
+              global.datepicker, {
+                onSelect: function(){ _this.handleChange() }
+              })
+      );
+      this.handleChange();
+    },
+    renderStartEndDatePicker: function(className, inputName) {
+      return (
+          React.DOM.div({className: "col-sm-2"+" "+className},
+              React.DOM.div({className: "input-group"},
+                  React.DOM.div({className: "input-group-icon"},
+                      React.DOM.span({className: "fa fa-calendar"})
+                  ),
+                  React.DOM.input({className: "datepicker optional form-control js-react-datepicker form-control",
+                    name: inputName,
+                    ref: className,
+                    onChange: this.handleChange
+                  })
+              )
+          )
+          )
+    },
+    render: function() {
+      return  React.DOM.div({className: "row"},  [
+        this.renderStartEndDatePicker("start_date", this.props.start_date_input_name),
+        this.renderStartEndDatePicker("finish_date", this.props.finish_date_input_name),
+
+      ]);
+
+    }
+  });
+*/
+
+
+  var thedaybeforyesterday = "15.06.2014";
+  var deadLineDay = "29.06.2014";
+
+  React.renderComponent(RangeDatepicker({
+    start_date_input_name: 'start_date_input_name',
+    finish_date_input_name: 'finish_date_input_name',
+    can_earlier_than_today: true,
+    start_date_min_date: thedaybeforyesterday,
+    finish_date_max_date: deadLineDay
+  }), document.getElementById("react_RangeDatepicker_tutorial"));
+
+</script>

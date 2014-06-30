@@ -1,0 +1,47 @@
+
+<%= library_item_caption 'Datepicker Nested' %>
+
+<p>Компонент зависимого datepicker'а связан с компонентом выбора диапазона дат через событие с именем <span class="lib-prop">'nested-datepicker-' + уникальный постфикс</span> . Посфикс формируется в конкретный момент времени.</p>
+
+<%= library_example do %>
+  <div id="react_NestedDatepicker_tutorial1"></div>
+  <div id="react_NestedDatepicker_tutorial2" style="margin-top: 15px"></div>
+<% end %>
+<%= highlight_named_code JS: %Q{
+  var nested_name = 'nested-datepicker-'+(new Date().getTime());
+  React.renderComponent(RangeDatepicker({
+        start_date_input_name: 'start_date_input_name',
+        finish_date_input_name: 'finish_date_input_name',
+        can_earlier_than_today: true,
+        start_date_min_date: thedaybeforyesterday,
+        finish_date_max_date: deadLineDay,
+        nested_name: nested_name
+      }), document.getElementById("react_NestedDatepicker_tutorial1")
+  );
+  React.renderComponent(NestedDatepicker({
+        start_date_min_date: null,
+        finish_date_max_date: null,
+        nested_name: nested_name
+      }), document.getElementById("react_NestedDatepicker_tutorial2")
+  );
+} %>
+
+<script type="text/javascript">
+  var nested_name = 'nested-datepicker-'+(new Date().getTime());
+  React.renderComponent(RangeDatepicker({
+    start_date_input_name: 'start_date_input_name',
+    finish_date_input_name: 'finish_date_input_name',
+    can_earlier_than_today: false,
+    start_date_min_date: thedaybeforyesterday,
+    finish_date_max_date: deadLineDay,
+    nested_name: nested_name
+  }), document.getElementById("react_NestedDatepicker_tutorial1"));
+
+  React.renderComponent(NestedDatepicker({
+        start_date_min_date: null,
+        finish_date_max_date: null,
+        nested_name: nested_name
+      }), document.getElementById("react_NestedDatepicker_tutorial2")
+
+  );
+</script>
