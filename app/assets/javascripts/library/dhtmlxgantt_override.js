@@ -10,13 +10,42 @@ gantt._render_task_control = function(task,width) {
 gantt._render_task_notifications = function (task, width) {
 
     var notifications_container = document.createElement('div');
+    var today = new Date;
+    var key = 0;
+    if ((task.start_date - today )>0) {
+        key++
+    } else {
+        key--
+    }
+    if ((task.end_date - today )>0) {
+        key++
+    } else {
+        key--
+    }
 
+
+    switch (key) {
+        case 0:
+            notifications_container.style.left = (gantt.calculateDuration(task.start_date, today)-1) * gantt.config.min_column_width; //notifications_container.style.left;
+            break;
+
+        case 2:
+            notifications_container.style.left = 0;
+            break;
+
+        case -2:
+            notifications_container.style.right = 0;
+            break;
+
+//        default:
+
+    }
+
+//    console.log(width, gantt.config.min_column_width);
     var uniq_class_name = (new Date()).getTime()+'notification';
     notifications_container.className = task.state + " task_notifications_container " + uniq_class_name;
     notifications_container.innerHTML = task.notifications_count;
-//    notifications_container.innerHTML = 'task.notification_count';
-//    var summe = 26; //здесь надо добавить кол-во оповещений для каждого таска
-//    notifications_container.innerHTML = '';
+
     var parent_class_name = '.' + uniq_class_name;
     $('.js-popover-layout').append("<div id="+uniq_class_name+"></div>");
     var elem = $('#'+uniq_class_name)

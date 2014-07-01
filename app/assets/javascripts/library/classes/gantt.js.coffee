@@ -19,7 +19,7 @@ class Gantt
         gantt.parse({data: data})
         gantt.showDate(new Date());
 
-    #    @.createTimeline()
+    @.createTimeline()
 
     ########################################## далее обработчики событий ###############################################
 
