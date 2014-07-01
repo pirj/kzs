@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Document do
 
-  subject!(:document) { FactoryGirl.create(:approved_mail) }
+  subject!(:document) { FactoryGirl.create(:approved_mail).document }
   it_behaves_like 'notifiable object'
 
   context 'when have conformations and being updated' do
