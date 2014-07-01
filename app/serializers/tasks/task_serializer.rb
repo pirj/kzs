@@ -10,7 +10,6 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
             :description,
             :start_date,
             :duration,
-            :parent_id,
             :has_subtasks,
             :has_notification,
             :expired?,
@@ -50,11 +49,11 @@ class Tasks::TaskSerializer < ActiveModel::Serializer
   end
 
   def has_notification
-    object.has_notification_for?(current_user)
+    object.has_notification_for?(scope)
   end
 
   def notifications_count
-    object.notifications_count_for current_user
+    object.notifications_count_for scope
   end
 
   def parent
