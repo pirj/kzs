@@ -39,10 +39,6 @@ shared_examples_for 'notifiable object' do #|obj|
     expect {subject.notifications.create(user: user)}.to change {subject.has_notification_for? user}.from(false).to(true)
   end
 
-  it 'should have notification_count method' do
-    expect(subject.notifications_count).to be_kind_of Integer
-  end
-
   context 'in advanced mode' do
     it 'can create single notifications' do
       expect { subject.notifications.create(user: FactoryGirl.create(:user_with_organization)) }
