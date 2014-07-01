@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-FactoryGirl.factories.map(&:name).each do |factory_name|
+exclusions = ['document', 'tasks_plain_task', 'mail_without_recipient', 'simple_organization']
+
+FactoryGirl.factories.map(&:name).reject{|f| exclusions.include? f.to_s }.each do |factory_name|
   describe "factory #{factory_name}" do
     it 'is valid' do
       factory = FactoryGirl.build(factory_name)
