@@ -15,6 +15,13 @@ FactoryGirl.define do
         instance.inspector = FactoryGirl.create(:user, organization: organization)
         instance.executor = FactoryGirl.create(:user, organization: organization)
       end
+
+      factory :tasks_task_with_checklist, class: Tasks::Task do
+        after(:create) do |instance, ev|
+          checklist = instance.checklists.create(name: 'checklist')
+          checklist.checklist_items.create(name: 'item')
+        end
+      end
     end
   end
 end
