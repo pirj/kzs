@@ -19,11 +19,7 @@ class Gantt
         gantt.parse({data: data})
         gantt.showDate(new Date());
 
-
-
     #    @.createTimeline()
-
-    #    @.selected = []
 
     ########################################## далее обработчики событий ###############################################
 
@@ -58,14 +54,9 @@ class Gantt
     #        return
     #      e.preventDefault()
 
-    gantt.attachEvent "onAfterTaskDrag", (id, mode, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
-      console.log(item)
-      console.log('item')
-      console.log(mode)
+    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
       that.editTask(item)
 
-    #    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, все блокируется
-    #      return false
 
 
     $(document).on 'tasks_table:collection:change_checked', (e, data ) =>  #<------- Выделение тасков при отметках таблицы
@@ -280,8 +271,8 @@ class Gantt
       data:
         authenticity_token: $("meta[name=\"csrf-token\"]").attr("content")
         task:
-          finished_at: data.finished_at
-          started_at: data.started_at
+          started_at: data.start_date
+          finished_at: data.end_date
     )
 
     request.done (data) =>
