@@ -21,54 +21,55 @@ class Gantt
 
 
 
-    @.createTimeline()
+    #    @.createTimeline()
 
-    @.selected = []
+    #    @.selected = []
 
     ########################################## далее обработчики событий ###############################################
 
-    gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
-      request = $.ajax(
-        url: '/api/tasks/' + id
-        type: 'DELETE'
-      )
+    #    gantt.attachEvent "onAfterTaskDelete", (id, item) ->                                        #обработчик на удаление
+    #      request = $.ajax(
+    #        url: '/api/tasks/' + id
+    #        type: 'DELETE'
+    #      )
+    #
+    #      request.done (status) =>
+    #        console.log (status)
+    #        return
 
-      request.done (status) =>
-        console.log (status)
-        return
+    #    gantt.attachEvent "onTaskDblClick", (id, e) ->                        #двойной клик - раньше показывал подробное инфо, теперь ничего не делает
+    #
+    #      return false
 
-    gantt.attachEvent "onTaskDblClick", (id, e) ->                        #двойной клик - раньше показывал подробное инфо, теперь ничего не делает
+    #      e.preventDefault()
+    #      request = $.ajax(
+    #        url: "/tasks/#{id}/"
+    #        type: 'GET'
+    #        dataType: "script"
+    #      )
+    #
+    #      request.done (data, textStatus, jqXHR) =>
+    ##        window.app.GanttView.displayPage(data);
+    #        return
+    #
+    #      request.fail (jqXHR, textStatus, errorThrown) ->
+    #        console.log('request failed ' + textStatus)
+    #        console.log(errorThrown)
+    #        return
+    #      e.preventDefault()
 
-      return false
-
-      e.preventDefault()
-      request = $.ajax(
-        url: "/tasks/#{id}/"
-        type: 'GET'
-        dataType: "script"
-      )
-
-      request.done (data, textStatus, jqXHR) =>
-#        window.app.GanttView.displayPage(data);
-        return
-
-      request.fail (jqXHR, textStatus, errorThrown) ->
-        console.log('request failed ' + textStatus)
-        console.log(errorThrown)
-        return
-      e.preventDefault()
-
-    gantt.attachEvent "onAfterTaskUpdate", (id, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
+    gantt.attachEvent "onAfterTaskDrag", (id, mode, item) ->            #<-----обработчик для перетаскиваний и растягиваний TODO: доделать!
+      console.log(item)
+      console.log('item')
+      console.log(mode)
       that.editTask(item)
 
-    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, все блокируется
-      return false
+    #    gantt.attachEvent "onBeforeTaskSelected", (id,item) =>          #<------ событие перед выделением таска, все блокируется
+    #      return false
 
 
     $(document).on 'tasks_table:collection:change_checked', (e, data ) =>  #<------- Выделение тасков при отметках таблицы
-#      console.log 'чанж чекед'
       gantt.customSelect(data)
-#      console.log
 
 
 
@@ -92,31 +93,31 @@ class Gantt
             control.style.display = 'none'
             status = ''
 
-                                                               #----------------------------------------------- раздел для маштабирования
-    $(document).on "click", "#month", ->
-      gantt.config.step = 1;
-      gantt.config.show_grid = false;
-      gantt.config.date_scale = "%F %Y";
-      gantt.config.subscales = [
-        {unit:"day", step:1, date:"%d"}
-      ];
-      that.resizeGant('month')
-      return
-    $(document).on "click", "#year", ->
-
-      gantt.config.subscales = []
-      gantt.config.scale_unit = "month";
-      gantt.config.date_scale = "%Y"
-      that.resizeGant('year')
-      return
-    $(document).on "click", "#day", ->
-      gantt.config.step = 1;
-      gantt.config.date_scale = "%d %F"
-      gantt.config.subscales = [
-        {unit:"hour", step:1, date:"%h"}
-      ];
-      that.resizeGant('day')
-      return
+    #----------------------------------------------- раздел для маштабирования
+    #    $(document).on "click", "#month", ->
+    #      gantt.config.step = 1;
+    #      gantt.config.show_grid = false;
+    #      gantt.config.date_scale = "%F %Y";
+    #      gantt.config.subscales = [
+    #        {unit:"day", step:1, date:"%d"}
+    #      ];
+    #      that.resizeGant('month')
+    #      return
+    #    $(document).on "click", "#year", ->
+    #
+    #      gantt.config.subscales = []
+    #      gantt.config.scale_unit = "month";
+    #      gantt.config.date_scale = "%Y"
+    #      that.resizeGant('year')
+    #      return
+    #    $(document).on "click", "#day", ->
+    #      gantt.config.step = 1;
+    #      gantt.config.date_scale = "%d %F"
+    #      gantt.config.subscales = [
+    #        {unit:"hour", step:1, date:"%h"}
+    #      ];
+    #      that.resizeGant('day')
+    #      return
     $('#gantt_here .gantt_data_area').on 'scroll', (e) ->
       y = $(this)[0].scrollTop
       window.app.scrollTable(y)                                   #-------------------------------------- событие - при фильтрации
@@ -138,16 +139,20 @@ class Gantt
 
     gantt.attachEvent "onLinkDblClick", (id, e) ->
       e.preventDefault()
-                                                                                                  #------------------ реализация drag n drop
+    #------------------ реализация drag n drop
     dragObject = null   #переменная для записи перетаскиваемого объекта
 
-    scrollArea = document.getElementsByClassName('gantt_task')[0] #обьект, который мы "тянем"
+    scrollArea = document.getElementsByClassName('gantt_task')[0] #обьект, который мы "хватаем"
     vertcalArea = document.getElementsByClassName('gantt_data_area')[0]
     scrollArea.onmousedown = (e) ->
+#      console.log(e)
+      if e.target.classList.contains('gantt_task_cell')
 
-      dragObject  = this
-      dragObject.x = e.x
-      dragObject.y = e.y
+        dragObject  = this
+        dragObject.x = e.x
+        dragObject.y = e.y
+      else
+        return false
 
     scrollArea.onmousemove = (e) ->
       if dragObject
@@ -160,14 +165,12 @@ class Gantt
       # опустить переносимый объект
       dragObject = null
       return
-                                                                                                   #------------------ drag n drop end
+  #------------------ drag n drop end
 
 
-                  #------------------- костыль для правильного всплытия попапа по клику +
+  #------------------- костыль для правильного всплытия попапа по клику +
 
-    $('.gantt_task_content').on
-      click: =>
-        alert(123)
+
 
 
   ############################################ далее методы класса ####################################################
@@ -186,6 +189,8 @@ class Gantt
     gantt.config.scale_unit = "month";
     gantt.config.step = 1;
     gantt.config.show_grid = false;
+    gantt.config.details_on_dblclick = false
+    gantt.config.select_task  = false;
     gantt.config.date_scale = "%F %Y";
     gantt.config.subscales = [
       {unit:"day", step:1, date:"%d"}
@@ -266,7 +271,8 @@ class Gantt
       return
 
   editTask: (data) =>              #!!!
-#    console.log(data)
+    console.log(data)
+
     request = $.ajax(
       url: '/tasks/'+data.id
       type: 'PUT'
@@ -274,7 +280,7 @@ class Gantt
       data:
         authenticity_token: $("meta[name=\"csrf-token\"]").attr("content")
         task:
-          finished_at: '04.04.2014' #data.finished_at
+          finished_at: data.finished_at
           started_at: data.started_at
     )
 
@@ -290,22 +296,22 @@ class Gantt
     @.getTasks()                    #TODO: нужен ли повторный запрос?
     gantt.render
 
-  resizeGant: (scale) =>
-    gantt.config.scale_unit = scale
-    gantt.config.step = 1
-
-    switch scale
-      when 'year'
-        b = '%Y'
-      when 'month'
-        b = '%m'
-      when 'day'
-        b = '%d'
-      when 'hour'
-        b = '%H'
-      else
-
-    gantt.render()
+#  resizeGant: (scale) =>
+#    gantt.config.scale_unit = scale
+#    gantt.config.step = 1
+#
+#    switch scale
+#      when 'year'
+#        b = '%Y'
+#      when 'month'
+#        b = '%m'
+#      when 'day'
+#        b = '%d'
+#      when 'hour'
+#        b = '%H'
+#      else
+#
+#    gantt.render()
 
   addTask: (a) =>
     gantt.addTask(
@@ -366,7 +372,7 @@ class Gantt
     gantt.setSizes()
     return
 
-  updateSelectTask: (id, status) =>
+#  updateSelectTask: (id, status) =>
 #    console.log(status)
 #    console.log('----')
 #    console.log(id)
