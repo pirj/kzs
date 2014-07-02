@@ -9,13 +9,11 @@ R = React.DOM
     finish_date_input_name: "finish_date"
     can_earlier_than_today: true
     start_date_min_date: null
-    finish_date_max_date: null
 
   componentDidMount: ->
-    _this = this
     $(".js-react-datepicker").datepicker _.extend(global.datepicker,
-      onSelect: ->
-        _this.handleChange()
+      onSelect: =>
+        @.handleChange()
         return
     )
     @handleChange()
@@ -36,45 +34,82 @@ R = React.DOM
         ))
 
   handleChange: (e) ->
-    today = new Date()
-    todayDate = today.setHours(0)
-    todayDate = today.setMinutes(0)
-    today.setSeconds 0
-    today.setMilliseconds 0
-    startDateVal = @refs.start_date.getDOMNode().value
-    finishDateVal = @refs.finish_date.getDOMNode().value
-    startDate = moment(startDateVal, "DD.MM.YYYY")
-    finishDate = moment(finishDateVal, "DD.MM.YYYY")
-    startDateMINdate = undefined
-    finishDateMAXdate = undefined
-    if startDay.length > 10
-      startDateMINdate = moment(@props.start_date_min_date)
-      finishDateMAXdate = moment(@props.finish_date_max_date)
-    else
-      startDateMINdate = moment(@props.start_date_min_date, "DD.MM.YYYY")
-      finishDateMAXdate = moment(@props.finish_date_max_date, "DD.MM.YYYY")
-    if startDate > today
-      $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", startDate._d
-    else if ((startDateMINdate > today) and (@props.can_earlier_than_today is false)) or ((@props.start_date_min_date?) and (startDateVal is ""))
-      $(@refs.start_date.getDOMNode()).datepicker "option", "minDate", startDateMINdate._d
-      $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", startDateMINdate._d
-    else if (startDate < today) and (@props.can_earlier_than_today is false)
-      $(@refs.start_date.getDOMNode()).datepicker "option", "minDate", today
-      $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", today
-    else if (startDateMINdate > today) and (@props.can_earlier_than_today is true)
-      $(@refs.start_date.getDOMNode()).datepicker "option", "minDate", null
-      $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", startDate._d
-    else
-      $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", today
+    # что-то творим с датами
+    dates = @.calculateDates()
 
-    @refs.finish_date.getDOMNode().value = ""  if startDate > finishDate  if startDateVal isnt "" and finishDateVal isnt ""
+    # настраиваем datepicker
+    $(@refs.start_date.getDOMNode()).datepicker "option", "minDate", dates.start_date
+    $(@refs.finish_date.getDOMNode()).datepicker "option", "minDate", dates.finish_date
+
+    # посылаем связанному datepicker настройки
+    @.sendParamsToNestedDatepickers()
+
+    @
+
+  # создаем event для связанных datepicker
+  # отсылаем текущие даты начала и конца
+  sendParamsToNestedDatepickers: ->
     send_obj =
-      start_date: @refs.start_date.getDOMNode().value
-      finish_date: @refs.finish_date.getDOMNode().value
+      start_date: @.refs.start_date.getDOMNode().value
+      finish_date: @.refs.finish_date.getDOMNode().value
 
     event_name = @props.nested_name + ".date_selection.date_range_component"
     $(document).trigger event_name, send_obj
-    return
+
+    send_obj
+
+  # высчитываем даты, которыми будем настраивать datepicker
+  # возвращаем объект
+  # { start_date: Date, finish_date: Date }
+  calculateDates: ->
+    datepickerStartDate = null
+    datepickerStartDateOfFinishDate = null
+
+    # сегодняшнюю дату обнуляем до 00 часов 00 минут,
+    # чтобы верно работали 'if' в нашем методе
+    today = moment().hours(0).minutes(0).seconds(0).milliseconds(0)
+    currentStartDateInputVal = @refs.start_date.getDOMNode().value
+    currentFinishDateInputVal = @refs.finish_date.getDOMNode().value
+    currentStartDateInput = moment(currentStartDateInputVal, "DD.MM.YYYY")
+    currentFinishDateInput = moment(currentFinishDateInputVal, "DD.MM.YYYY")
+
+
+    # разный парсинг в зависимости от формата даты
+    # формат либо 24.10.2014 либо UTC формат
+    propsStartDateMinDate = @.parseIncomeDates().startDate
+
+    # создание для start_date
+    # если ее ничего не ограничивает,то в ней будет null и на datepicker это не повлияет
+    # установлено > сегодня ==> установлено
+    # установлено < сегодня ==> сегодня
+    # не установлено ==> сегодня
+    if @.props.can_earlier_than_today is false
+      datepickerStartDate = today
+      datepickerStartDate = propsStartDateMinDate if @.props.start_date_min_date? && propsStartDateMinDate > today
+
+    else
+      datepickerStartDate = propsStartDateMinDate if @.props.start_date_min_date?
+
+    # создание для finish_date для дэйтпикера
+    datepickerStartDateOfFinishDate = today
+    datepickerStartDateOfFinishDate = currentStartDateInput if currentStartDateInput > today
+
+
+    # все даты в объектах типа moment
+    {
+      start_date: datepickerStartDate._d
+      finish_date: datepickerStartDateOfFinishDate._d
+    }
+
+  # парсим параметры инициализации
+  # приводим к объектам Moment
+  parseIncomeDates: ->
+    parse_params = "DD.MM.YYYY" unless startDay.length > 10
+
+    {
+      startDate: moment(@.props.start_date_min_date, parse_params)
+    }
+
 
   render: ->
 

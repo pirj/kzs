@@ -12,20 +12,16 @@ R = React.DOM
     start_date_min_date: null
     finish_date_max_date: null
 
-  handleChange: ->
 
   componentDidMount: ->
-    _this = this
     $(".js-react-datepicker").datepicker _.extend(global.datepicker,
-      onSelect: ->
-        _this.handleChange()
+      onSelect: =>
+        @.handleChange()
         return
     )
-    @handleChange()
-    _this = this
     event_name = @props.nested_name + ".date_selection.date_range_component"
-    $(document).on event_name, (e, send_obj) ->
-      _this.setState
+    $(document).on event_name, (e, send_obj) =>
+      @.setState
         start_date_min_date: send_obj.start_date
         finish_date_max_date: send_obj.finish_date
 
@@ -44,7 +40,6 @@ R = React.DOM
           className: "datepicker optional form-control js-react-datepicker form-control"
           name: inputName
           ref: className
-          onChange: @handleChange
         ))
 
   componentDidUpdate: ->
