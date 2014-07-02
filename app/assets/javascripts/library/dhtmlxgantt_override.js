@@ -43,7 +43,7 @@ gantt._render_task_notifications = function (task, width) {
 
 //    console.log(width, gantt.config.min_column_width);
     var uniq_class_name = (new Date()).getTime()+'notification';
-    notifications_container.className = task.state + " task_notifications_container " + uniq_class_name;
+    notifications_container.className = task.state + " task_notifications_container " + uniq_class_name + ' ' + task.state;
     notifications_container.innerHTML = task.notifications_count;
 
     var parent_class_name = '.' + uniq_class_name;

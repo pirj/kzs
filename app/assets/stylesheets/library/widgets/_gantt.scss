@@ -1,5 +1,6 @@
 // подключаем спрайты через compass к диаграмме гантта
 @import "gantt-icons/*.png";
+@import "notification-icons/*.png";
 
 .gantt-main{
   width: 100%;
@@ -186,3 +187,36 @@
   background-repeat: no-repeat;
   width: 2px;
 }
+
+
+
+.task_notifications_container{
+
+  cursor: pointer;
+  position: absolute;
+  width: 25px;
+  height: 20px;
+  top: 0;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  margin-top: -7px; 
+  &.paused{
+    @include notification-icons-sprite(paused);
+    color: $color-silver-lighten;
+  }
+  &.formulated{
+    @include notification-icons-sprite(formulated);
+    color: rgb(204,55,0);
+  }
+  &.activated{
+    @include notification-icons-sprite(activated);
+    color: $color-blue-lighter;
+  }
+  &.canceled{
+    @include notification-icons-sprite(canceled);
+    color: $color-midnightblue-lighten;
+  }
+}
+
+
