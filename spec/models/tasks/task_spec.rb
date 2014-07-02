@@ -8,6 +8,15 @@ describe Tasks::Task do
 
   it_behaves_like 'notifiable object'
 
+  context "when using notifications" do
+    before :each do
+      task.clear_notifications
+    end
+    it 'can have multiple notifications per user' do
+      expect {2.times {task.notify_interesants(only: :inspector)}}.to change{task.notifications.where(user_id: task.inspector.id).count}.from(0).to(2)
+    end
+  end
+
   context('instantiate subtask'){
     it{ expect { Tasks::Task.new(parent_id: 1) }.not_to raise_error }
   }

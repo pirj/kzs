@@ -45,11 +45,6 @@ shared_examples_for 'notifiable object' do #|obj|
         .to change{subject.notifications.count}.from(0).to(1)
     end
 
-    it 'can create multiple notifications for the same object and same user' do
-      expect {2.times {subject.notifications.create(user: user)}}.not_to raise_error
-      expect(subject.reload).to have(2).notifications
-    end
-
     it 'can set/read notification message and modifier user id' do
       expect {subject.notifications.create(user: user, changer: user2, message: 'test')}.not_to raise_error
     end
@@ -63,12 +58,5 @@ shared_examples_for 'notifiable object' do #|obj|
     expect((subject.class.notifications_for user).count).to be == 1
   end
 
-  context "in single mode" do
-    it 'can\'t create 2 notifications for the same object' do
-      unless subject.class.multiple_notifications
-        expect {2.times {subject.notifications.create(user: user)}}.to change {subject.notifications.count}.from(0).to(1)
-      end
-    end
-  end
 
 end

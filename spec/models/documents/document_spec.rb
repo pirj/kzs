@@ -5,6 +5,23 @@ describe Document do
   subject!(:document) { FactoryGirl.create(:approved_mail).document }
   it_behaves_like 'notifiable object'
 
+  # context "when using notifications" do
+  #   it 'can have only one notification per user' do
+  #     unless subject.class.multiple_notifications
+  #       expect {2.times {subject.notifications.create(user: user)}}.to change {subject.notifications.count}.from(0).to(1)
+  #     end
+  #   end
+  # end
+
+  context "when using notifications" do
+    before :each do
+      document.clear_notifications
+    end
+    it 'can have only one notification per user' do
+      expect {2.times {document.notify_interesants(only: :executor)}}.to change{document.notifications.where(user_id: document.executor.id).count}.from(0).to(1)
+    end
+  end
+
   context 'when have conformations and being updated' do
     let(:mail) {FactoryGirl.create(:mail_with_direct_recipient_and_conformers)}
     let(:conformer) {mail.conformers.first}
