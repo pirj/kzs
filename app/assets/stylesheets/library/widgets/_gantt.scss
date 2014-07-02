@@ -219,4 +219,11 @@
   }
 }
 
+.gantt_task_cell{
+  cursor: url('/assets/cursors/grab.cur'), pointer;
+  &:active{
+    cursor: url('/assets/cursors/grabbing.cur'), pointer;
+  }
+}
+
 
