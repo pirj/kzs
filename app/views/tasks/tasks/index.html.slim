@@ -1,6 +1,6 @@
-= content_for :page_header do
+/= content_for :page_header do
 
-  = header_title do
+  /= header_title do
     .dropdown.header
       h1
         = link_to('Задачи',tasks_path)
@@ -29,7 +29,7 @@
         li = link_to 'Приостановенные', tasks_path(with_state:'paused')
         li = link_to 'Выполненные', tasks_path(with_state:'executed')
 
-  = content_for :page_header_search do
+  /= content_for :page_header_search do
     = render 'shared/quick_search_for'
 .row.b-offset-sm
   .col-sm-9

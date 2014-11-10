@@ -1,7 +1,7 @@
 class Tasks::TasksController < ApplicationController
   include Tasks::NotificationsController
 
-  layout 'base'
+  layout 'iframe'
 
   before_filter :subtask, only: [:show]
 

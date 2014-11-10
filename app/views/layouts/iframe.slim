@@ -1,0 +1,37 @@
+html
+  head
+
+    title
+
+    = stylesheet_link_tag "app", :media => "all"
+    = javascript_include_tag "library"
+    = csrf_meta_tags
+    = yield(:head)
+  body
+    /= render 'shared/server_title'
+    /- unless controller?('devise/sessions') || controller?('dashboard')
+      = render 'shared/left'
+
+    .page.m-iframe
+      .container-lefted
+        /= render 'shared/welcome_screen'
+        / ===============================================================
+        /.navbar
+        /  ul.nav.navbar-nav
+        /    = yield :page_header
+        /  = yield :page_header_search
+        /  = render 'application/header_user_bar'
+        / ===============================================================
+        /= bootstrap_flash
+        = yield
+
+
+    / область для рендеринга всплывающих окон
+    ._popover-backdrop.js-popover-layout = yield :popover_layout
+
+
+
+
+    /= render 'modal_window'
+    = render 'shared/modal_window'
+
