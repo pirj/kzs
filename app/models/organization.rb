@@ -1,6 +1,9 @@
 # encoding: utf-8
 # where is rspec???
 class Organization < ActiveRecord::Base
+  
+  establish_connection "sakeff"
+  
   attr_accessible :title, :short_title, :inn,
                   :lft, :rgt,
                   :phone, :mail,:tax_authority_that_registered,

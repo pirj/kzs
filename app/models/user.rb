@@ -45,9 +45,9 @@ class User < ActiveRecord::Base
 
   before_save :save_with_empty_password
 
-  validates :first_name, :last_name, :middle_name, :position, :username, presence: true
+  # validates :first_name, :last_name, :middle_name, :position, :username, presence: true
   #           :id_type, :id_sn, :id_issue_date, :id_issuer, :presence => true
-  validates :username, uniqueness: true
+  # validates :username, uniqueness: true
 
   # при решение вопроса курици-и-яйца, было решено, что пользователь является главным
   # и поэтому у него выключаем обязательную организацию

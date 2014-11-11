@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # before_filter :authenticate_user!
+  
+  def current_user
+    unless params[:user_id].blank?
+      if User.exists?(params[:user_id])
+        User.where(id: params[:user_id]).first
+      end
+    end
+  end
 
   helper_method :current_organization,
                 :can_apply_state?,
