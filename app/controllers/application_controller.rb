@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   # before_filter :authenticate_user!
   
   def current_user
-    unless params[:user_id].blank?
-      if User.exists?(params[:user_id])
-        User.where(id: params[:user_id]).first
-      end
+    if params[:user_id] && User.exists?(params[:user_id])
+      User.where(id: params[:user_id]).first
+    else
+      raise Exception::UserNotFound
     end
   end
 
