@@ -1,7 +1,7 @@
 html
   head
 
-    title
+    title = pageTitle
 
     = stylesheet_link_tag "app", :media => "all"
     = javascript_include_tag "library"
@@ -12,17 +12,17 @@ html
     /- unless controller?('devise/sessions') || controller?('dashboard')
       = render 'shared/left'
 
-    .page.m-iframe
+    .page
       .container-lefted
-        /= render 'shared/welcome_screen'
+        = render 'shared/welcome_screen'
         / ===============================================================
-        /.navbar
-        /  ul.nav.navbar-nav
-        /    = yield :page_header
-        /  = yield :page_header_search
-        /  = render 'application/header_user_bar'
+        .navbar
+          ul.nav.navbar-nav
+            = yield :page_header
+          = yield :page_header_search
+          = render 'application/header_user_bar'
         / ===============================================================
-        /= bootstrap_flash
+        = bootstrap_flash
         = yield
 
 
