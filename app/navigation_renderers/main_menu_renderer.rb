@@ -22,7 +22,7 @@ class MainMenuRenderer < SimpleNavigation::Renderer::Base
         notification_text: li_options.delete(:notification_text),
         notification_color: li_options.delete(:notification_color),
         id: li_options[:id]
-      }#.compact
+      }.reject { |k, v| v.blank? }#.compact
 
       # пребразовываем параметры для работы модуля нотификаций
       li_options['data-module'] = li_options.delete(:module)
