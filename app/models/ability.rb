@@ -89,29 +89,29 @@ class Ability
     ### Модуль «Задачи»
 
     # Инспектор может редактировать все аттрибуты задачи
-    can :edit_attributes, Tasks::Task, inspector_id: user.id
+    # can :edit_attributes, Tasks::Task, inspector_id: user.id
 
     # Инспектор или исполнитель могут редактировать контрольные списки (чеклисты)
-    can :edit_checklists, Tasks::Task, inspector_id: user.id
-    can :edit_checklists, Tasks::Task, executor_id: user.id
+    # can :edit_checklists, Tasks::Task, inspector_id: user.id
+    # can :edit_checklists, Tasks::Task, executor_id: user.id
 
     # Исполнитель может начать задачу
-    can :start, Tasks::Task, executor_id: user.id
+    # can :start, Tasks::Task, executor_id: user.id
 
     # Исполнитель может закончить задачу
-    can :finish, Tasks::Task, executor_id: user.id
+    # can :finish, Tasks::Task, executor_id: user.id
 
     # Исполнитель может поставить задачу на паузу
-    can :pause, Tasks::Task, executor_id: user.id
+    # can :pause, Tasks::Task, executor_id: user.id
 
     # Исполнитель может возобновить выполнение задачи
-    can :resume, Tasks::Task, executor_id: user.id
+    # can :resume, Tasks::Task, executor_id: user.id
 
     # Инспектор может переформулировать задачу
-    can :reformulate, Tasks::Task, inspector_id: user.id
+    # can :reformulate, Tasks::Task, inspector_id: user.id
 
     # Инспектор может отменить задачу
-    can :cancel, Tasks::Task, inspector_id: user.id
+    # can :cancel, Tasks::Task, inspector_id: user.id
 
     ### / Модуль «Задачи»
     
