@@ -4,7 +4,7 @@ class Tasks::TasksController < ApplicationController
   layout 'sakeff'
 
   before_filter :subtask, only: [:show]
-
+  before_filter :check_and_store_user_id
 
   # has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
@@ -52,6 +52,16 @@ class Tasks::TasksController < ApplicationController
     end
 
     super
+  end
+  
+  def check_and_store_user_id
+    unless session[:user_id]
+      if params[:user_id] && User.exists?(params[:user_id])
+        session[:user_id] = params[:user_id]
+      else
+        raise Exception::UserNotFound
+      end
+    end
   end
 
   private

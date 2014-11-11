@@ -4,12 +4,10 @@ class ApplicationController < ActionController::Base
   # before_filter :authenticate_user!
   
   def current_user
-    if params[:user_id] && User.exists?(params[:user_id])
-      User.where(id: params[:user_id]).first
-    else
-      raise Exception::UserNotFound
-    end
+    User.where(id: session[:user_id]).first
   end
+  
+  
 
   helper_method :current_organization,
                 :can_apply_state?,
