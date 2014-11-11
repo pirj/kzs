@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  
+  establish_connection "sakeff"
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
