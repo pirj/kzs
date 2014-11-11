@@ -326,6 +326,8 @@ GEM
       thor (~> 0.14)
     shoulda-matchers (2.6.1)
       activesupport (>= 3.0.0)
+    simple-navigation (3.13.0)
+      activesupport (>= 2.3.2)
     simple_form (2.1.1)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -452,6 +454,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.6)
   select2-rails
   shoulda-matchers
+  simple-navigation
   simple_form
   slim
   smt_rails

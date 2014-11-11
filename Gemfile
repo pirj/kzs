@@ -140,3 +140,7 @@ gem 'i18n-js'
 gem 'select2-rails'
 gem 'momentjs-rails'
 # gem 'yui-compressor'
+
+
+# for render main menu like SAKEFF
+gem 'simple-navigation'

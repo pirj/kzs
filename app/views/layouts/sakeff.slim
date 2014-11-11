@@ -25,6 +25,7 @@ html
         = bootstrap_flash
         = yield
 
+    = render_navigation context: :user, expand_all: true, renderer: :main_menu
 
     / область для рендеринга всплывающих окон
     ._popover-backdrop.js-popover-layout = yield :popover_layout
