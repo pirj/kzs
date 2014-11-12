@@ -3,6 +3,6 @@ class Tasks::NotificationSerializer < ActiveModel::Serializer
             :message,
 
   def user
-    object.user.first_name_with_last_name
+    object.user.first_name_with_last_name if object.user
   end
 end
