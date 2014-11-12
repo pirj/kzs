@@ -84,3 +84,8 @@ R = React.DOM
       TasksTableHeader({column_names: column_names, onChangeFilterParams: @.onChangeSearchParams, filter_opts: @.props.filter_opts}),
       TasksTableList({column_names: column_names, data: @.state.data})
     ])
+
+
+  # Unchecks all checkboxes on any action
+  componentDidUpdate : ->
+    $(".js-icheck-off").iCheck("uncheck")

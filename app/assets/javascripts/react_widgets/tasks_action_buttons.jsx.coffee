@@ -56,7 +56,6 @@ R = React.DOM
         task_ids: @.state.data.ids
         event: action
       success: (responce) ->
-        $(".js-icheck-off").iCheck("uncheck")
         $(document).trigger('tasks_actions:update_success')
       error: (responce) ->
         console.log responce
