@@ -5,6 +5,7 @@ class Tasks::TasksController < ApplicationController
 
   before_filter :subtask, only: [:show]
   before_filter :check_and_store_user_id
+  before_filter :check_and_store_notifications
 
   # has_scope :per, default: 10, only: [:index]
   has_scope :for_organization, only: [:index]
@@ -54,16 +55,6 @@ class Tasks::TasksController < ApplicationController
     super
   end
   
-  def check_and_store_user_id
-    unless session[:user_id]
-      if params[:user_id] && User.exists?(params[:user_id])
-        session[:user_id] = params[:user_id]
-      else
-        raise Exception::UserNotFound
-      end
-    end
-  end
-
   private
 
   def collection_url
@@ -82,5 +73,24 @@ class Tasks::TasksController < ApplicationController
     @subtask ||= Tasks::Task.new(:parent_id => resource.id)
   end
 
+  def check_and_store_user_id
+    unless session[:user_id]
+      if params[:user_id] && User.exists?(params[:user_id])
+        session[:user_id] = params[:user_id]
+      else
+        raise Exception::UserNotFound
+      end
+    end
+  end
+
+  def check_and_store_notifications
+    if params[:notifications]
+      session[:notifications] = params[:notifications].try(:split, ',')
+    elsif session[:notifications]
+      session[:notifications]
+    else
+      session[:notifications] = [1,0,0,0]
+    end
+  end
 
 end

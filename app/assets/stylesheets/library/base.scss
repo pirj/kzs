@@ -34,7 +34,8 @@
 @import "partials/pagination";
 //@import "partials/pager";
 @import "partials/labels";
-@import "partials/badges";
+// выключено для правильной работы с САКЭ
+//@import "partials/badges";
 //@import "partials/jumbotron";
 //@import "partials/thumbnails";
 @import "partials/alerts";
@@ -75,6 +76,7 @@
 // Widgets classes
 @import 'widgets/*';
 @import 'widgets/left-menu';
+@import 'widgets/left_menu_badges';
 
 
 // Debug classes

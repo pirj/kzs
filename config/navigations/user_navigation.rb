@@ -20,19 +20,19 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :dispatcher, 'Диспетчер', control_dashboard_path,
                  icon: 'm-dispatcher',
-                 notification_color: lambda { '-' }
+                 notification_color: lambda { left_menu_notification_for :control }
 
     primary.item :units, 'Объекты', units_path,
                  icon: 'm-units',
                  module: 'units',
                  name: 'all',
-                 notification_text: lambda { '-' }
+                 notification_text: lambda { left_menu_notification_for :units }
 
     primary.item :messages, 'Сообщения', '#',
                  icon: 'm-messages',
                  module: 'messages',
                  name: 'all',
-                 notification_text: lambda { '-' } \
+                 notification_text: lambda { left_menu_notification_for :messages } \
                 do |second_level|
 
       second_level.item :broadcast, 'Циркуляр',
@@ -64,12 +64,12 @@ SimpleNavigation::Configuration.run do |navigation|
     
     primary.item :permits, 'Документы', documents_path,
                  icon: 'm-documents',
-                 notification_text: proc { '-' }
+                 notification_text: proc { left_menu_notification_for :documents }
 
 
     primary.item :tasks, 'Задачи', tasks_module_path,
-                 icon: 'm-tasks',
-                 notification_text: proc { '-' }
+                 icon: 'm-tasks'
+                 # notification_text: proc { '-' }
 
   end
 end

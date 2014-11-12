@@ -11,10 +11,10 @@ html
     /= render 'shared/server_title'
     /- unless controller?('devise/sessions') || controller?('dashboard')
       = render 'shared/left'
-
-    .page
+    = render_navigation context: :user, expand_all: true, renderer: :main_menu
+    .page.m-sakeff
       .container-lefted
-        = render 'shared/welcome_screen'
+        /= render 'shared/welcome_screen'
         / ===============================================================
         .navbar
           ul.nav.navbar-nav
@@ -25,7 +25,7 @@ html
         = bootstrap_flash
         = yield
 
-    = render_navigation context: :user, expand_all: true, renderer: :main_menu
+
 
     / область для рендеринга всплывающих окон
     ._popover-backdrop.js-popover-layout = yield :popover_layout
