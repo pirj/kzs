@@ -74,12 +74,14 @@ class Tasks::TasksController < ApplicationController
   end
 
   def check_and_store_user_id
-    unless session[:user_id]
-      if params[:user_id] && User.exists?(params[:user_id])
+    if params[:user_id]
+      if User.exists?(params[:user_id])
         session[:user_id] = params[:user_id]
       else
         raise Exception::UserNotFound
       end
+    elsif session[:user_id].blank?
+      raise Exception::UserNotFound
     end
   end
 
