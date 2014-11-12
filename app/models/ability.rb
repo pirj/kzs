@@ -32,10 +32,10 @@ class Ability
     can :read, Document, :confidential => true, :conformers.outer => { id: user.id }
 
     # Директор может читать входящие и исходящие документы
-    if user.director?
-      can :read, Document, sender_organization_id: user.organization_id
-      can :read, Document, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
-    end
+    # if user.director?
+    #   can :read, Document, sender_organization_id: user.organization_id
+    #   can :read, Document, recipient_organization_id: user.organization_id, state: %w(sent accepted rejected)
+    # end
 
     # Только Составитель, Исполнитель, Контроллирующее лицо могут редактировать документ
     can :update, Document, creator_id: user.id
@@ -116,23 +116,23 @@ class Ability
     ### / Модуль «Задачи»
     
 
-    if user.sys_user
-      can :manage, User
-      can :manage, Group
-      can :manage, Permit
-      can :manage, Organization
-      can :manage, User
-      can :manage, Vehicle
-    else
-      if user.permissions.exists?('10')
-        can :manage, Organization
-      elsif user.organization_id
-        can :crud, Organization, id: user.organization_id
-        can :manage, User, organization_id: user.organization_id
-      else
-        cannot :read, Organization
-        cannot :read, User
-      end
-    end
+    # if user.sys_user
+    #      can :manage, User
+    #      can :manage, Group
+    #      can :manage, Permit
+    #      can :manage, Organization
+    #      can :manage, User
+    #      can :manage, Vehicle
+    #    else
+    #      if user.permissions.exists?('10')
+    #        can :manage, Organization
+    #      elsif user.organization_id
+    #        can :crud, Organization, id: user.organization_id
+    #        can :manage, User, organization_id: user.organization_id
+    #      else
+    #        cannot :read, Organization
+    #        cannot :read, User
+    #      end
+    #    end
   end
 end
