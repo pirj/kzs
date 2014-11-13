@@ -29,13 +29,13 @@ task :dev do
 
   set :user, "babrovka"
   set :application, "kzs"
-  set :deploy_to, "/srv/webdata/sakedev.cyclonelabs.com"
+  set :deploy_to, "/srv/webdata/sake3.cyclonelabs.com"
   set :deploy_via, :remote_cache
   set :use_sudo, false
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
-  set :branch, "dev"
+  set :branch, "iframe_mode"
 
   default_run_options[:pty] = true
   ssh_options[:forward_agent] = true
@@ -66,15 +66,16 @@ task :dev do
   
   namespace(:thin) do
     task :stop do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sakedev.cyclonelabs.com sakedev}
+      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin stop -C #{shared_path}/sake3.yml}
      end
 
     task :start do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage start sakedev.cyclonelabs.com sakedev}
+      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/sake3.yml}
     end
 
     task :restart do
-      run %Q{cd #{latest_release} && sudo /home/babrovka/scripts/thinManage stop sakedev.cyclonelabs.com sakedev && sudo /home/babrovka/scripts/thinManage start sakedev.cyclonelabs.com sakedev}
+      stop
+      start
     end
   end
   
@@ -97,6 +98,16 @@ task :dev do
     task :restart do
       stop
       start
+    end
+  end
+  
+  namespace(:log) do
+    task :rails do
+      run %Q{cd #{shared_path} && tailf -n 50 log/production.log }
+    end
+
+    task :thin do
+      run %Q{cd #{shared_path} && tailf -n 50 log/thin.log }
     end
   end
   
