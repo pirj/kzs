@@ -6,7 +6,9 @@
   color: $color-stern-blue-darker;
   font-size: 12px;
   line-height: 30px;
-  display: none;
+  display: block;
+  letter-spacing: 0.1px;
+  font-family: $font-family-sans-serif-semibold;
   a {
     color: $color-stern-blue-darker;
     text-decoration: underline;
@@ -14,18 +16,18 @@
       text-decoration: none;
     }
   }
-  &.pre-demo {
-    background: $color-blue-lighter;
+  &.m-pre-demo {
+    background: mix(#fff, $color-blue);
   }
-  &.dev {
-    background: #e6b0aa;
-    position: absolute;
+  &.m-dev {
+    background: mix(#fff, $color-red);
+    position: relative;
     z-index: 1500;
   }
-  &.demo {
-    background: $color-orange-lighter;
+  &.m-demo {
+    background: mix(#fff, $color-orange-lighter);
   }
-  &.work {
+  &.m-work {
     background: #ebdef0;
   }
 }

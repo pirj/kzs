@@ -469,14 +469,14 @@ ActiveRecord::Schema.define(:version => 20141112112443) do
     t.text     "text"
     t.datetime "started_at"
     t.datetime "finished_at"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "state"
     t.integer  "parent_id"
-    t.string   "organization_id"
-    t.string   "executor_id"
-    t.string   "inspector_id"
-    t.string   "updated_by"
+    t.string   "organization_id", :limit => nil
+    t.string   "executor_id",     :limit => nil
+    t.string   "inspector_id",    :limit => nil
+    t.string   "updated_by",      :limit => nil
   end
 
   create_table "user_desktop_configurations", :force => true do |t|

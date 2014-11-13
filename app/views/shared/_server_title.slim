@@ -1,28 +1,14 @@
-- if request.original_url.include?('sakedemo.cyclonelabs', )
-  .server-title.pre-demo
+- if Rails.env.demo?
+  .server-title.m-pre-demo.b-offset-xs
     .text-center
-      | Пред-демонстрационная версия. Перейти к&nbsp;
-      = link_to 'списку всех серверов САКЭ', '#'
+      ' Пред-демонстрационная версия.
 
-  - elsif request.original_url.include?('sakedev.cyclonelabs') || request.original_url.include?('kzs.dev')  || request.original_url.include?('localhost')
-  .server-title.dev
+- elsif Rails.env.development? || Rails.env.dev?
+  .server-title.m-dev.b-offset-xs
     .text-center
-      | Тестовый сервер для разработчиков. Перейти к
-      = link_to ' списку всех серверов САКЭ', '#'
+      ' Тестовый сервер для разработчиков.
 
-- elsif request.original_url.include?('sake.cyclonelabs')
-  .server-title.demo
+- elsif Rails.env.production?
+  .server-title.m-demo.b-offset-xs
     .text-center
-      | Демонстрационная версия. Перейти к
-      = link_to 'списку всех серверов САКЭ', '#'
-
-- elsif request.original_url.include?('sake.kzsspb')
-  .server-title.work
-    .text-center
-      | Тестовая версия. Перейти к
-      = link_to 'списку всех серверов САКЭ', '#'
-
-javascript:
-  $('.server-title').slideDown('slow');
-  $('.server-title.dev').delay(3000).slideUp('slow');
-
+      ' Демонстрационная версия.
