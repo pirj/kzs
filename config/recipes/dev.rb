@@ -70,7 +70,7 @@ task :dev do
      end
 
     task :start do
-      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/sake3.yml}
+      run %Q{cd #{latest_release} && RAILS_ENV=dev bundle exec thin start -C #{shared_path}/sake3.yml}
     end
 
     task :restart do
@@ -85,7 +85,7 @@ task :dev do
     task :start do
       # recipe from github
       # run "cd #{current_path};RAILS_ENV=production bundle exec rackup private_pub.ru -s thin -E production -D -P tmp/pids/private_pub.pid"
-      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin start -C #{shared_path}/private_pub.yml}
+      run %Q{cd #{latest_release} && RAILS_ENV=dev bundle exec thin start -C #{shared_path}/private_pub.yml}
     end
 
     # recipes from github
