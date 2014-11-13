@@ -8,3 +8,8 @@ production:
   server: "https://sakedev.kzsspb.ru/faye/"
   secret_token: "b0f794e260079a80536fe6765be4981b8894be628afa290ec0a0d80cf66a6a24"
   signature_expiration: 3600 # one hour
+
+dev:
+  server: "https://sake3.kzsspb.ru/faye/"
+  secret_token: "b0f794e260079a80536fe6765be4981b8894be628afa290ec0a0d80cf66a6a24"
+  signature_expiration: 3600 # one hour
