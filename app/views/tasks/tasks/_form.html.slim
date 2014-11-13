@@ -18,14 +18,14 @@
         .input-group
           .input-group-icon
             span.fa.fa-calendar
-          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи'
+          = f.text_field :started_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата начала исполнения задачи', value: DateFormatter.new(f.object.started_at, :full)
 
       = f.label :finished_at, t('activerecord.attributes.tasks/task.finished_at'), class: 'string required control-label col-sm-2'
       .col-sm-2
         .input-group
           .input-group-icon
             span.fa.fa-calendar
-          = f.text_field :finished_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата, к которой задача должна быть исполнена'
+          = f.text_field :finished_at, class: 'js-datepicker datepicker optional form-control ', data: { min_date: Date.today }, label_hint: 'Дата, к которой задача должна быть исполнена', value: DateFormatter.new(f.object.finished_at, :full)
 
     /= f.association :inspector, collection: current_organization_users, \
     /                            label_method: :first_name_with_last_name, \
