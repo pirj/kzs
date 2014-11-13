@@ -66,7 +66,7 @@ task :dev do
   
   namespace(:thin) do
     task :stop do
-      run %Q{cd #{latest_release} && RAILS_ENV=production bundle exec thin stop -C #{shared_path}/sake3.yml}
+      run %Q{cd #{latest_release} && RAILS_ENV=dev bundle exec thin stop -C #{shared_path}/sake3.yml}
      end
 
     task :start do
@@ -103,7 +103,7 @@ task :dev do
   
   namespace(:log) do
     task :rails do
-      run %Q{cd #{shared_path} && tailf -n 50 log/production.log }
+      run %Q{cd #{shared_path} && tailf -n 50 log/dev.log }
     end
 
     task :thin do
@@ -113,7 +113,7 @@ task :dev do
   
   namespace(:populate) do
     task :data do
-      run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=production}
+      run %Q{cd #{latest_release} && bundle exec rake db:seed RAILS_ENV=dev}
     end
   end
   
