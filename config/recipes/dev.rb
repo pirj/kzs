@@ -32,6 +32,7 @@ task :dev do
   set :deploy_to, "/srv/webdata/sake3.cyclonelabs.com"
   set :deploy_via, :remote_cache
   set :use_sudo, false
+  set :rails_env, "dev"
 
   set :scm, "git"
   set :repository, "git@github.com:babrovka/kzs.git"
