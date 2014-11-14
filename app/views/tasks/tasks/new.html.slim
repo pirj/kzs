@@ -13,13 +13,5 @@
 /- html = text_field_tag :test_component, 'hhh', class: 'vit-class'
 /= react_popover_component('LikeButton', {html: html} )
 
-= element_with_popover do
-  = link_to 'react component', '#', class: 'js-react-popover'
-
-
-= element_with_popover(popover: {body: '<input value="eee"/>'}) do
-  = link_to 'react component', '#', class: 'js-react-popover'
-
-
 = render 'form'
 

@@ -36,7 +36,7 @@ class Tasks::Task < ActiveRecord::Base
 
   validates :title, :executor_id, :inspector_id, :organization_id, presence: true
   validates :started_at, timeliness: {on_or_after: -> { DateTime.now }, type: :date}, on: :create, if: Proc.new {|task| task.parent.nil?}
-  validates :finished_at, timeliness: {type: :date}, if: Proc.new{|task| task.parent.nil?}
+  validates :finished_at, timeliness: {type: :date, on_or_after: -> { DateTime.now }}, if: Proc.new{|task| task.parent.nil?}
 
   # Если есть parent_id
   validates :started_at,  timeliness: {on_or_after: ->  { parent.started_at  } }, if: Proc.new {|task| task.parent}
@@ -100,7 +100,9 @@ private
   end
 
   def start_must_be_before_end_time
-      errors.add(:started_at, "не должна быть позже даты окончания задачи") unless (started_at <= finished_at) unless started_at.nil? && finished_at.nil?
+    if started_at.blank? || finished_at.blank? || started_at <= finished_at
+      errors.add(:started_at, "не должна быть позже даты окончания задачи")
+    end
   end
 
   def validate_parent_start_date
