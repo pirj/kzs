@@ -34,7 +34,7 @@ module LeftMenuSakeffHelper
   end
 
   def tasks_module_path
-    "tasks"
+    "/tasks"
   end
 
   def destroy_user_session_path
@@ -56,7 +56,11 @@ private
   end
 
   def domain_name
-    "http://localhost:3000/" if Rails.env.development?
+    if Rails.env.development?
+      "http://localhost:3000/"
+    else
+      "https://sakedev.cyclonelabs.com/"
+    end
   end
 
 end
