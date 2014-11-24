@@ -1,0 +1,7 @@
+user: user
+port: 8080
+pid: /srv/webdata/sake3.cyclonelabs.com/shared/thin.pid
+log: /srv/webdata/sake3.cyclonelabs.com/shared/log/thin.log
+chdir: /srv/webdata/sake3.cyclonelabs.com/current
+environment: dev
+daemonize: true

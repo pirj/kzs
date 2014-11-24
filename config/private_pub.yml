@@ -1,15 +1,8 @@
-development:
-  server: "http://localhost:9292/faye"
-  secret_token: "secret"
-test:
-  server: "http://localhost:9292/faye"
-  secret_token: "secret"
-production:
-  server: "https://sakedev.kzsspb.ru/faye/"
-  secret_token: "b0f794e260079a80536fe6765be4981b8894be628afa290ec0a0d80cf66a6a24"
-  signature_expiration: 3600 # one hour
+user: user
+chdir: /srv/webdata/sake3.cyclonelabs.com/current
+environment: dev
+daemonize: true
+port: 8081
+rackup: private_pub.ru
 
-dev:
-  server: "https://sake3.kzsspb.ru/faye/"
-  secret_token: "b0f794e260079a80536fe6765be4981b8894be628afa290ec0a0d80cf66a6a24"
-  signature_expiration: 3600 # one hour
+

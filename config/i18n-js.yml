@@ -1,22 +1,117 @@
-# Split context in several files.
-# By default only one file with all translations is exported and
-# no configuration is required. Your settings for asset pipeline
-# are automatically recognized.
-#
-# If you want to split translations into several files or specify
-# locale contexts that will be exported, just use this file to do
-# so.
-#
-# If you're going to use the Rails 3.1 asset pipeline, change
-# the following configuration to something like this:
-#
-#   translations:
-#     - file: "app/assets/javascripts/i18n/translations.js"
-#
-# If you're running an old version, you can use something
-# like this:
-#
-#   translations:
-#     - file: "public/javascripts/translations.js"
-#       only: "*"
-#
+---
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/actionview.yml": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/activemodel.yml": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/activerecord.yml": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/activesupport.yml": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/datetime.rb": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/datetime.yml": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/pluralization.rb": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/russian-0.6.0/lib/russian/locale/transliterator.rb": 1394786215
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activesupport-3.2.17/lib/active_support/locale/en.yml": 1395391259
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activemodel-3.2.17/lib/active_model/locale/en.yml": 1395391262
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activerecord-3.2.17/lib/active_record/locale/en.yml": 1395391277
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/actionpack-3.2.17/lib/action_view/locale/en.yml": 1395391268
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ransack-1.2.0/lib/ransack/locale/en.yml": 1403691389
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/de-at.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/de-ch.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/de.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-au.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-bork.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-ca.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-gb.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-ind.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-nep.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en-us.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/en.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/es.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/fa.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/fr.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/it.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/ja.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/ko.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/nb-no.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/nl.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/pl.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/pt-br.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/ru.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/sk.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/faker-1.3.0/lib/locales/vi.yml": 1395231932
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/meta_search-1.1.3/lib/meta_search/locale/en.yml": 1394785813
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/responders-0.9.3/lib/responders/locales/en.yml": 1395231897
+"/Users/babrovka/rails_projects/kzs/config/locales/activeadmin.ru.yml": 1367069007
+"/Users/babrovka/rails_projects/kzs/config/locales/cancan.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/dates.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/defaults.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/devise.en.yml": 1366019694
+"/Users/babrovka/rails_projects/kzs/config/locales/devise.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/en.yml": 1371538519
+"/Users/babrovka/rails_projects/kzs/config/locales/paginating.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/ransack.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/simple_form.ru.yml": 1401954214
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/paperclip-3.5.4/lib/paperclip/locales/en.yml": 1395231968
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/devise-3.2.4/config/locales/en.yml": 1395231893
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/kaminari-0.16.1/config/locales/kaminari.yml": 1403691283
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/bg.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/ca.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/cs.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/da.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/de-CH.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/de.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/el.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/en-GB.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/en.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/es.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/es_MX.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/fr.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/he.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/hr.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/hu.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/it.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/ja.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/ko.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/lt.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/lv.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/nl.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/no-NB.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/pl.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/pt-BR.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/pt-PT.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/ro.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/ru.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/sv-SE.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/tr.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/uk.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/vi.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/zh-CN.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/activeadmin-0.6.3/config/locales/zh-TW.yml": 1394785821
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/cs.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/de.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/el-GR.cdkeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/en.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/es.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/fr.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/hu.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/it.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/nl.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/pl.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/pt-BR.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/pt-PT.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/ru.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/sv-SE.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/uk.ckeditor.yml": 1397653315
+"/Users/babrovka/.rvm/gems/ruby-2.1.1@kzs/gems/ckeditor-4.0.11/config/locales/zh-CN.ckeditor.yml": 1397653315
+"/Users/babrovka/rails_projects/kzs/config/locales/models/daily_pass.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/models/document.ru.yml": 1403615166
+"/Users/babrovka/rails_projects/kzs/config/locales/models/document_state.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/models/official_mail.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/models/organization.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/models/report.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/models/task.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/models/task_state.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/views/documents/filter.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/views/documents/form.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/views/documents/table.ru.yml": 1403608172
+"/Users/babrovka/rails_projects/kzs/config/locales/views/organizations/list.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/views/shared/documents/menu_items.ru.yml": 1401954214
+"/Users/babrovka/rails_projects/kzs/config/locales/views/tasks/table.ru.yml": 1403608172
